@@ -1,15 +1,16 @@
 import Nav from "../Nav/Nav"
+import { StyledHeader } from "./Header.styled"
 
 const Header = () => {
   return (
-    <div className="Header">
+    <StyledHeader>
       <h1 className="Header__title">
         {/* Later add an image element within the link tag for a logo */}
         <a className="Header__logo" href="#">OptomRx</a>
       </h1>
       <Nav />
       
-    </div>
+    </StyledHeader>
   )
 }
 
