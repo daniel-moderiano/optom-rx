@@ -20,8 +20,8 @@ const RxForm = () => {
     suburb: '',
     postcode: '',
     state: '',
-    medicareNo: '',
-    medicareRefNo: '',
+    medicareNumber: '',
+    medicareRefNumber: '',
   });
 
   // Not all of this data will be required
@@ -68,6 +68,86 @@ const RxForm = () => {
       <fieldset className="patient">
         {/* Legal requirements include only the patient's name and address */}
         {/* Patient Medicare number is however required for ALL PBS Rx, and should be included in general so that the patient may claim under PBS where this price is cheaper. All Aus are valid private prescriptions however. */}
+        <FormField 
+          fieldType="text" 
+          name="firstName"
+          label="First name" 
+          placeholder="Enter first name"
+          value={patientData.firstName} 
+          onChange={(event) => handleChange(setPatientData, event)} 
+        />
+
+        <FormField 
+          fieldType="text" 
+          name="lastName"
+          label="Last name" 
+          placeholder="Enter last name"
+          value={patientData.lastName} 
+          onChange={(event) => handleChange(setPatientData, event)} 
+        />
+
+        <FormField 
+          fieldType="text" 
+          name="streetNumber"
+          label="Street number" 
+          placeholder="Enter street number"
+          value={patientData.streetNumber} 
+          onChange={(event) => handleChange(setPatientData, event)} 
+        />
+
+        <FormField 
+          fieldType="text" 
+          name="streetName"
+          label="Street name" 
+          placeholder="Enter street name"
+          value={patientData.streetName} 
+          onChange={(event) => handleChange(setPatientData, event)} 
+        />
+
+        <FormField 
+          fieldType="text" 
+          name="suburb"
+          label="Suburb" 
+          placeholder="Enter suburb"
+          value={patientData.suburb} 
+          onChange={(event) => handleChange(setPatientData, event)} 
+        />
+
+        <FormField 
+          fieldType="text" 
+          name="state"
+          label="State" 
+          placeholder="Enter state"
+          value={patientData.state} 
+          onChange={(event) => handleChange(setPatientData, event)} 
+        />
+
+        <FormField 
+          fieldType="text" 
+          name="postcode"
+          label="Postcode" 
+          placeholder="Enter postcode"
+          value={patientData.postcode} 
+          onChange={(event) => handleChange(setPatientData, event)} 
+        />
+
+        <FormField 
+          fieldType="text" 
+          name="medicareNumber"
+          label="Medicare number" 
+          placeholder="Enter medicare number"
+          value={patientData.medicareNumber} 
+          onChange={(event) => handleChange(setPatientData, event)} 
+        />
+
+        <FormField 
+          fieldType="text" 
+          name="medicareRefNumber"
+          label="Reference number" 
+          placeholder="Enter reference number"
+          value={patientData.medicareRefNumber} 
+          onChange={(event) => handleChange(setPatientData, event)} 
+        />
       </fieldset>
 
       {/* Enter the provider details */}
