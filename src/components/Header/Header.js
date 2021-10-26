@@ -6,10 +6,9 @@ const Header = () => {
     <StyledHeader>
       <h1 className="Header__title">
         {/* Later add an image element within the link tag for a logo */}
-        <a className="Header__logo" href="#">OptomRx</a>
+        OptomRx
       </h1>
       <Nav />
-      
     </StyledHeader>
   )
 }

@@ -1,4 +1,4 @@
-import { Switch, Route } from "react-router";
+// import { Switch, Route } from "react-router";
 import Header from "./components/Header/Header";
 import GlobalStyles from "./components/utils/globalStyles";
 
