@@ -7,7 +7,7 @@ const FormField = (props) => {
         {label}
         <input 
           className="form-field__input"
-          name={name} 
+          name={name}
           type={fieldType} 
           value={value} 
           placeholder={placeholder} 

@@ -3,15 +3,20 @@ import FormField from "../FormField/FormField";
 
 const RxForm = () => {
 
-  const [data, setData] = useState({
-    drug: "",
+  const [drugData, setDrugData] = useState({
+    name: '',
   });
+  const [patientData, setPatientData] = useState({});
+  const [providerData, setProviderData] = useState({});
 
-  const handleChange = (event) => {
-    setData((prevData) => {
-      return { ...prevData, [event.target.name]: event.target.value }
-    });
-  }
+  // Pass a set function to handle change, rather than hardcoding with a certain setState function
+  const handleChange = (set, event) => {
+    const { name, value } = event.target;
+    set((prevData) => ({
+      ...prevData, 
+      [name]: value 
+    }));
+  };
 
   return (
     <form className="rxform">
@@ -20,11 +25,11 @@ const RxForm = () => {
       <fieldset className="drug">
         <FormField 
           fieldType="text" 
-          name="drug" 
+          name="name"
           label="Medication" 
-          placeholder={"Enter medication name"} 
-          value={data.drug} 
-          onChange={handleChange} 
+          placeholder="Enter medication name"
+          value={drugData.name} 
+          onChange={(event) => handleChange(setDrugData, event)} 
         />
       </fieldset>
 
