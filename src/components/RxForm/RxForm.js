@@ -252,11 +252,38 @@ const RxForm = () => {
           value={providerData.prescriberNumber} 
           onChange={(event) => handleChange(setProviderData, event)} 
         />
+
       </fieldset>
 
       {/* Enter remaining details such as dosage, quantity, and repeats, plus PBS. This section might include the PBS authority code field */}
       <fieldset className="parameters">
         {/* Must include quantity and repeats to meet requirements */}
+        <FormField 
+          fieldType="text" 
+          name="dosage"
+          label="Dosage" 
+          placeholder="Enter dosage"
+          value={drugData.dosage} 
+          onChange={(event) => handleChange(setDrugData, event)} 
+        />
+
+        <FormField 
+          fieldType="text" 
+          name="quantity"
+          label="Quantity" 
+          placeholder="Enter quantity"
+          value={drugData.quantity} 
+          onChange={(event) => handleChange(setDrugData, event)} 
+        />
+
+        <FormField 
+          fieldType="text" 
+          name="repeats"
+          label="Repeats" 
+          placeholder="Enter repeats"
+          value={drugData.repeats} 
+          onChange={(event) => handleChange(setDrugData, event)} 
+        />
       </fieldset>
     </form>
   )

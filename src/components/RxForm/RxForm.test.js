@@ -46,3 +46,18 @@ describe('Provider data tests', () => {
     expect(firstNameInput.value).toBe('01234567');
   });
 });
+
+describe('Parameter data tests', () => {
+  test('Parameter data input initialises with empty string value', () => {
+    render(<RxForm />);
+    const firstNameInput = screen.getByLabelText(/quantity/i);
+    expect(firstNameInput.value).toBe('');
+  });
+
+  test("Parameter data input updates state and therefore it's own value when user types in input", () => {
+    render(<RxForm />);
+    const firstNameInput = screen.getByLabelText(/quantity/i);
+    fireEvent.change(firstNameInput, { target: { value: '3' } })
+    expect(firstNameInput.value).toBe('3');
+  });
+});
