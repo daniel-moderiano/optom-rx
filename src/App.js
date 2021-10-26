@@ -1,6 +1,7 @@
 // import { Switch, Route } from "react-router";
 import Header from "./components/Header/Header";
 import GlobalStyles from "./components/utils/globalStyles";
+import RxForm from './components/RxForm/RxForm'
 
 const App = () => {
   // <header>
@@ -40,6 +41,11 @@ const App = () => {
     <div className="App">
       <GlobalStyles />
       <Header />
+      <main>
+        <section className="rx-form">
+          <RxForm />
+        </section>
+      </main>
       {/* <Switch> */}
         {/* <Route exact path="/" render={() => <Home />}/> */}
         {/* <Route exact path="/cart" render={() => <Cart />}/> */}
