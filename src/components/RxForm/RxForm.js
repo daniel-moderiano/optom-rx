@@ -3,11 +3,42 @@ import FormField from "../FormField/FormField";
 
 const RxForm = () => {
 
+  // These states have been separated for better logic and avoiding too much nesting. Merge them on form submit
   const [drugData, setDrugData] = useState({
     name: '',
+    quantity: '',
+    repeats: '',
+    dosage: '',
   });
-  const [patientData, setPatientData] = useState({});
-  const [providerData, setProviderData] = useState({});
+
+  // Note this will eventually be modified to match the address autocomplete data returned
+  const [patientData, setPatientData] = useState({
+    firstName: '',
+    lastName: '',
+    streetNumber: '',
+    streetName: '',
+    suburb: '',
+    postcode: '',
+    state: '',
+    medicareNo: '',
+    medicareRefNo: '',
+  });
+
+  // Not all of this data will be required
+  const [providerData, setProviderData] = useState({
+    title: '',
+    firstName: '',
+    lastName: '',
+    qualifications: '',
+    streetNumber: '',
+    streetName: '',
+    suburb: '',
+    postcode: '',
+    state: '',
+    phoneNo: '',
+    faxNo: '',
+    prescriberNo: '',
+  });
 
   // Pass a set function to handle change, rather than hardcoding with a certain setState function
   const handleChange = (set, event) => {
