@@ -35,9 +35,9 @@ const RxForm = () => {
     suburb: '',
     postcode: '',
     state: '',
-    phoneNo: '',
-    faxNo: '',
-    prescriberNo: '',
+    phoneNumber: '',
+    faxNumber: '',
+    prescriberNumber: '',
   });
 
   // Pass a set function to handle change, rather than hardcoding with a certain setState function
@@ -154,6 +154,104 @@ const RxForm = () => {
       <fieldset className="provider">
         {/* Legal requirements include the prescriber's name, address, and contact details, and prescriber num
         You may also give them the option of adding qualifications */}
+        <FormField 
+          fieldType="text" 
+          name="title"
+          label="Title" 
+          placeholder="Mr/Mrs/Miss"
+          value={providerData.firstName} 
+          onChange={(event) => handleChange(setProviderData, event)} 
+        />
+
+        <FormField 
+          fieldType="text" 
+          name="firstName"
+          label="First name" 
+          placeholder="Enter first name"
+          value={providerData.firstName} 
+          onChange={(event) => handleChange(setProviderData, event)} 
+        />
+
+        <FormField 
+          fieldType="text" 
+          name="lastName"
+          label="Last name" 
+          placeholder="Enter last name"
+          value={providerData.lastName} 
+          onChange={(event) => handleChange(setProviderData, event)} 
+        />
+
+        <FormField 
+          fieldType="text" 
+          name="streetNumber"
+          label="Street number" 
+          placeholder="Enter street number"
+          value={providerData.streetNumber} 
+          onChange={(event) => handleChange(setProviderData, event)} 
+        />
+
+        <FormField 
+          fieldType="text" 
+          name="streetName"
+          label="Street name" 
+          placeholder="Enter street name"
+          value={providerData.streetName} 
+          onChange={(event) => handleChange(setProviderData, event)} 
+        />
+
+        <FormField 
+          fieldType="text" 
+          name="suburb"
+          label="Suburb" 
+          placeholder="Enter suburb"
+          value={providerData.suburb} 
+          onChange={(event) => handleChange(setProviderData, event)} 
+        />
+
+        <FormField 
+          fieldType="text" 
+          name="state"
+          label="State" 
+          placeholder="Enter state"
+          value={providerData.state} 
+          onChange={(event) => handleChange(setProviderData, event)} 
+        />
+
+        <FormField 
+          fieldType="text" 
+          name="postcode"
+          label="Postcode" 
+          placeholder="Enter postcode"
+          value={providerData.postcode} 
+          onChange={(event) => handleChange(setProviderData, event)} 
+        />
+
+        <FormField 
+          fieldType="text" 
+          name="phoneNumber"
+          label="Phone number" 
+          placeholder="Enter phone number"
+          value={providerData.phoneNumber} 
+          onChange={(event) => handleChange(setProviderData, event)} 
+        />
+
+        <FormField 
+          fieldType="text" 
+          name="faxNumber"
+          label="Fax number" 
+          placeholder="Enter fax number"
+          value={providerData.faxNumber} 
+          onChange={(event) => handleChange(setProviderData, event)} 
+        />
+
+        <FormField 
+          fieldType="text" 
+          name="prescriberNumber"
+          label="Prescriber number" 
+          placeholder="Enter prescriber number"
+          value={providerData.prescriberNumber} 
+          onChange={(event) => handleChange(setProviderData, event)} 
+        />
       </fieldset>
 
       {/* Enter remaining details such as dosage, quantity, and repeats, plus PBS. This section might include the PBS authority code field */}

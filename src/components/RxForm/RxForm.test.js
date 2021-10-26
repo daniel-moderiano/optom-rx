@@ -18,17 +18,31 @@ describe('Drug input tests', () => {
 });
 
 describe('Patient data tests', () => {
-  test('Patient first name input initialises with empty string value', () => {
+  test('Patient data input initialises with empty string value', () => {
     render(<RxForm />);
-    const firstNameInput = screen.getByLabelText(/first name/i);
+    const firstNameInput = screen.getByLabelText(/medicare number/i);
     expect(firstNameInput.value).toBe('');
   });
 
-  test("Patient first name input updates state and therefore it's own value when user types in input", () => {
+  test("Patient data input updates state and therefore it's own value when user types in input", () => {
     render(<RxForm />);
-    const firstNameInput = screen.getByLabelText(/first name/i);
-    fireEvent.change(firstNameInput, { target: { value: 'john' } })
-    expect(firstNameInput.value).toBe('john');
+    const firstNameInput = screen.getByLabelText(/medicare number/i);
+    fireEvent.change(firstNameInput, { target: { value: '01234567' } })
+    expect(firstNameInput.value).toBe('01234567');
+  });
+});
+
+describe('Provider data tests', () => {
+  test('Provider data input initialises with empty string value', () => {
+    render(<RxForm />);
+    const firstNameInput = screen.getByLabelText(/prescriber number/i);
+    expect(firstNameInput.value).toBe('');
   });
 
+  test("Provider data input updates state and therefore it's own value when user types in input", () => {
+    render(<RxForm />);
+    const firstNameInput = screen.getByLabelText(/prescriber number/i);
+    fireEvent.change(firstNameInput, { target: { value: '01234567' } })
+    expect(firstNameInput.value).toBe('01234567');
+  });
 });
