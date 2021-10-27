@@ -98,7 +98,7 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
       console.log(place);
       fillAddress(place);
       // Reset the address input (for now, in the future, use the original input as address line 1)
-      input.value = "";
+      // input.value = "";
       // Focus address subpremise input here to encourage user to add additional address info
       subpremiseInput.focus();
 
@@ -118,16 +118,22 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
       />}
 
       <label htmlFor="autocomplete">Street Address</label>
-      <input type="text" id={ provider ? 'autocomplete-provider' : 'autocomplete-patient' }/>
+      <input 
+      type="text" 
+      id={ provider ? 'autocomplete-provider' : 'autocomplete-patient'}
+      value={data.streetAddress}
+      onChange={handleChange} 
+      name="streetAddress"
+      />
 
-      <FormField 
+      {/* <FormField 
         fieldType="text" 
         name="streetAddress"
         label="Street address" 
         placeholder="Enter street address"
         value={data.streetAddress} 
         onChange={handleChange} 
-      />
+      /> */}
 
       <FormField 
         fieldType="text" 
