@@ -2,6 +2,7 @@
 // Additional API resources to consider include Bing, HERE, ArcGIS
 import FormField from "../FormField/FormField";
 import { useCallback, useEffect } from "react"
+import { StyledAddressAutocomplete } from "./AddressAutocomplete.styled";
 
 const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
   const fillAddress = useCallback((placeDetails) => {
@@ -115,7 +116,7 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
   }, [fillAddress, provider])
  
   return (
-    <fieldset>
+    <StyledAddressAutocomplete>
 
       {/* Practice name is only relevant for providers */}
       {provider && <FormField 
@@ -176,7 +177,7 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
         value={data.postcode} 
         onChange={handleChange} 
       />
-    </fieldset>
+    </StyledAddressAutocomplete>
   )
 }
 

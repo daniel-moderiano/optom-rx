@@ -1,8 +1,10 @@
 import { useState } from "react";
 import FormField from "../FormField/FormField";
 import AddressAutocomplete from "../AddressAutocomplete/AddressAutocomplete";
+import { StyledRxForm } from "./RxForm.styled";
 
 const RxForm = () => {
+  // TODO: Form validation; for address, only need to validate subpremise, as the rest will be validated by the Google API
 
   // These states have been separated for better logic and avoiding too much nesting. Merge them on form submit
   const [drugData, setDrugData] = useState({
@@ -52,7 +54,7 @@ const RxForm = () => {
   };
 
   return (
-    <form className="rxform">
+    <StyledRxForm className="rxform">
       {/* Single input to select the medication */}
       {/* Note there must be enough info to identify the medicine, including form and strength */}
       <fieldset className="drug">
@@ -213,7 +215,7 @@ const RxForm = () => {
           onChange={(event) => handleChange(setDrugData, event)} 
         />
       </fieldset>
-    </form>
+    </StyledRxForm>
   )
 }
 
