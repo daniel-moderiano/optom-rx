@@ -2,11 +2,12 @@
 import { useState, useEffect } from "react";
 
 // Requires DOM element reference to text input; the autocomplete functionality will be applied to this input
-const useAutocomplete = (inputRef) => {
-  console.log('running');
-  const [data, setData] = useState(null);
+const useAutocomplete = (inputDOMId) => {
+  console.log('running base');
+  const [data, setData] = useState('Yes');
 
   useEffect(() => {
+    console.log('running effect');
     // First create and append Google Places API script
     const googleScript = document.createElement('script');
 
@@ -16,7 +17,7 @@ const useAutocomplete = (inputRef) => {
     window.document.body.appendChild(googleScript);
     // Declare the autocomplete and input variable here; the latter of which will later be initialised to the autocomplete instance. Input gathered with useRef hook, and MUST be initialised inside useEffect, because the component will have been rendered then
     let autocomplete;
-    const input = inputRef.current;
+    const input = document.querySelector(`#${inputDOMId}`);
 
     // Using a load event listener ensures the script is loaded prior to trying to access the API
     googleScript.addEventListener('load', () => {
@@ -40,7 +41,7 @@ const useAutocomplete = (inputRef) => {
       input.value = "";
     }
  
-  }, [inputRef]);
+  }, [inputDOMId]);
 
   return { data }
 }
