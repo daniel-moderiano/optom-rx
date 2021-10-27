@@ -3,12 +3,12 @@
 import FormField from "../FormField/FormField";
 import { useCallback, useEffect } from "react"
 
-const AddressAutocomplete = ({ data, setData, handleChange, section }) => {
+const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
 
   const fillAddress = useCallback((placeDetails) => {
     let address = {
-      streetNumber: '',
-      streetName: '',
+      streetAddress: '',
+      subpremise: '',
       suburb: '',
       postcode: '',
       state: '',
@@ -20,12 +20,12 @@ const AddressAutocomplete = ({ data, setData, handleChange, section }) => {
     
       switch (componentType) {
         case "street_number": {
-          address.streetNumber = component.long_name
+          address.streetAddress = component.long_name
           break;
         }
     
         case "route": {
-          address.streetName = component.long_name;
+          address.streetAddress = `${address.streetAddress} ${component.long_name}`;
           break;
         }
     
@@ -76,7 +76,8 @@ const AddressAutocomplete = ({ data, setData, handleChange, section }) => {
 
     // Declare the autocomplete and input variable here; the latter of which will later be initialised to the autocomplete instance. Input gathered with useRef hook, and MUST be initialised inside useEffect, because the component will have been rendered then
     let autocomplete;
-    const input = document.querySelector(`#autocomplete-${section}`)
+    const input = document.querySelector(`#autocomplete-${provider ? 'provider' : 'patient'}`);
+    
 
     // Using a load event listener ensures the script is loaded prior to trying to access the API
     googleScript.addEventListener('load', () => {
@@ -95,19 +96,32 @@ const AddressAutocomplete = ({ data, setData, handleChange, section }) => {
     const onPlaceChanged = () => {
       // Get the information about the place that was selected, i.e. the fields specified in the Autocomplete instance
       let place = autocomplete.getPlace();
+      console.log(place);
       fillAddress(place);
       // Reset the address input (for now, in the future, use the original input as address line 1)
       input.value = "";
-    }
-  }, [fillAddress, section])
- 
+      // Focus address subpremise input here
 
+    }
+  }, [fillAddress, provider])
+ 
   return (
     <fieldset>
-      <label htmlFor="autocomplete">Address</label>
-      <input type="text" id={`autocomplete-${section}`}/>
 
-      <FormField 
+      {provider && <FormField 
+        fieldType="text" 
+        name="practiceName"
+        label="Practice name" 
+        placeholder="Enter practice name"
+        value={data.practiceName} 
+        onChange={handleChange} 
+      />}
+
+
+      <label htmlFor="autocomplete">Street Address</label>
+      <input type="text" id={ provider ? 'autocomplete-provider' : 'autocomplete-patient' }/>
+
+      {/* <FormField 
         fieldType="text" 
         name="streetNumber"
         label="Street number" 
@@ -122,6 +136,26 @@ const AddressAutocomplete = ({ data, setData, handleChange, section }) => {
         label="Street name" 
         placeholder="Enter street name"
         value={data.streetName} 
+        onChange={handleChange} 
+      /> */}
+
+      
+
+      <FormField 
+        fieldType="text" 
+        name="streetAddress"
+        label="Street address" 
+        placeholder="Enter street address"
+        value={data.streetAddress} 
+        onChange={handleChange} 
+      />
+
+      <FormField 
+        fieldType="text" 
+        name="subpremise"
+        label="Apartment, unit, shop, suite, or floor #" 
+        placeholder="Enter"
+        value={data.subpremise} 
         onChange={handleChange} 
       />
 
