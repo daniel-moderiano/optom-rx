@@ -104,20 +104,14 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
       } else {
         console.log(place);
         fillAddress(place);
-        // Reset the address input (for now, in the future, use the original input as address line 1)
-        // input.value = "";
-        // Focus address subpremise input here to encourage user to add additional address info
+           // Focus address subpremise input here to encourage user to add additional address info
         subpremiseInput.focus();
       }
-
-      
-
     }
   }, [fillAddress, provider])
  
   return (
     <StyledAddressAutocomplete>
-
       {/* Practice name is only relevant for providers */}
       {provider && <FormField 
         fieldType="text" 
@@ -128,17 +122,15 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
         onChange={handleChange} 
       />}
 
-      <label>
-        Street Address
-        <input 
-          type="text" 
-          id={ provider ? 'autocomplete-provider' : 'autocomplete-patient'}
-          value={data.streetAddress}
-          onChange={handleChange} 
-          name="streetAddress"
-        />
-      </label>
-      
+      <FormField
+        fieldType="text" 
+        name="streetAddress"
+        label="Street Address"
+        placeholder="Enter a location"
+        value={data.streetAddress}
+        onChange={handleChange} 
+        id={ provider ? 'autocomplete-provider' : 'autocomplete-patient'}
+      />
 
       <FormField 
         fieldType="text" 
