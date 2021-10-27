@@ -41,6 +41,7 @@ const App = () => {
     <div className="App">
       <GlobalStyles />
       <Header />
+      {/* Note prescriptions must contain date of issue, and prescriber signature */}
       <main>
         <section className="rx-form">
           <RxForm />

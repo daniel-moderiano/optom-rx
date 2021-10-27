@@ -1,5 +1,6 @@
 import { useState } from "react";
 import FormField from "../FormField/FormField";
+import Autocomplete from "../Autocomplete/Autocomplete";
 
 const RxForm = () => {
 
@@ -62,6 +63,7 @@ const RxForm = () => {
           value={drugData.name} 
           onChange={(event) => handleChange(setDrugData, event)} 
         />
+        <Autocomplete />
       </fieldset>
 
       {/* Enter the patient Rx details */}
@@ -159,7 +161,7 @@ const RxForm = () => {
           name="title"
           label="Title" 
           placeholder="Mr/Mrs/Miss"
-          value={providerData.firstName} 
+          value={providerData.title} 
           onChange={(event) => handleChange(setProviderData, event)} 
         />
 

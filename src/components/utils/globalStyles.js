@@ -8,6 +8,10 @@ const GlobalStyles = createGlobalStyle`
   * {
     box-sizing: border-box;
   }
+
+  input {
+    width: 400px;
+  }
 `
 
 export default GlobalStyles;
