@@ -76,8 +76,8 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
 
     // Declare the autocomplete and input variable here; the latter of which will later be initialised to the autocomplete instance. Input gathered with useRef hook, and MUST be initialised inside useEffect, because the component will have been rendered then
     let autocomplete;
-    const input = document.querySelector(`#autocomplete-${provider ? 'provider' : 'patient'}`);
-    const subpremiseInput = document.querySelector(`#subpremise-${provider ? 'provider' : 'patient'}`);    
+    const input = document.querySelector(`.autocomplete-${provider ? 'provider' : 'patient'}`);
+    const subpremiseInput = document.querySelector(`.subpremise-${provider ? 'provider' : 'patient'}`);    
 
     // Using a load event listener ensures the script is loaded prior to trying to access the API
     googleScript.addEventListener('load', () => {
@@ -129,7 +129,7 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
         placeholder="Enter a location"
         value={data.streetAddress}
         onChange={handleChange} 
-        id={ provider ? 'autocomplete-provider' : 'autocomplete-patient'}
+        className={ provider ? 'autocomplete-provider' : 'autocomplete-patient'}
       />
 
       <FormField 
@@ -139,7 +139,7 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
         placeholder="Enter"
         value={data.subpremise} 
         onChange={handleChange} 
-        id={provider ? 'subpremise-provider' : 'subpremise-patient'}
+        className={provider ? 'subpremise-provider' : 'subpremise-patient'}
       />
 
       <FormField 

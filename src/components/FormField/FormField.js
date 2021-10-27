@@ -1,20 +1,19 @@
 import { StyledFormField } from "./FormField.styled";
 
 const FormField = (props) => {
-  const { fieldType, name, label, value, placeholder, onChange, id } = props;
+  const { fieldType, name, label, value, placeholder, onChange, className } = props;
 
   return (
     <StyledFormField className="form-field">
       <label className="form-field__label">
         {label}
         <input 
-          className="form-field__input"
           name={name}
           type={fieldType} 
           value={value} 
           placeholder={placeholder} 
           onChange={onChange} 
-          id={id}
+          className={className}
         />
       </label>
       
@@ -23,7 +22,7 @@ const FormField = (props) => {
 }
 
 FormField.defaultProps = {
-  id: 'form-field__input',
+  className: 'form-field__input',
 }
 
 export default FormField;
