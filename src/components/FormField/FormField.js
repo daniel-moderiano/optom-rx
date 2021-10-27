@@ -1,8 +1,10 @@
+import { StyledFormField } from "./FormField.styled";
+
 const FormField = (props) => {
   const { fieldType, name, label, value, placeholder, onChange, id } = props;
 
   return (
-    <div className="form-field">
+    <StyledFormField className="form-field">
       <label className="form-field__label">
         {label}
         <input 
@@ -16,7 +18,7 @@ const FormField = (props) => {
         />
       </label>
       
-    </div> 
+    </StyledFormField> 
   );
 }
 
