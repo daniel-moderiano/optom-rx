@@ -98,7 +98,8 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
       
       if (!place.geometry) {
         // Occurs when user hits enter without selecting an option
-        // Show UI error here
+        console.log('Not a valid address!');
+        // TODO: Show UI error here
       } else {
         console.log(place);
         fillAddress(place);
@@ -116,6 +117,7 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
   return (
     <fieldset>
 
+      {/* Practice name is only relevant for providers */}
       {provider && <FormField 
         fieldType="text" 
         name="practiceName"
@@ -125,23 +127,17 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
         onChange={handleChange} 
       />}
 
-      <label htmlFor="autocomplete">Street Address</label>
-      <input 
-      type="text" 
-      id={ provider ? 'autocomplete-provider' : 'autocomplete-patient'}
-      value={data.streetAddress}
-      onChange={handleChange} 
-      name="streetAddress"
-      />
-
-      {/* <FormField 
-        fieldType="text" 
-        name="streetAddress"
-        label="Street address" 
-        placeholder="Enter street address"
-        value={data.streetAddress} 
-        onChange={handleChange} 
-      /> */}
+      <label>
+        Street Address
+        <input 
+          type="text" 
+          id={ provider ? 'autocomplete-provider' : 'autocomplete-patient'}
+          value={data.streetAddress}
+          onChange={handleChange} 
+          name="streetAddress"
+        />
+      </label>
+      
 
       <FormField 
         fieldType="text" 
