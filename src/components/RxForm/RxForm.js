@@ -1,6 +1,7 @@
 import { useState } from "react";
 import FormField from "../FormField/FormField";
 import Autocomplete from "../Autocomplete/Autocomplete";
+import PxFieldset from "../PxFieldset/PxFieldset";
 
 const RxForm = () => {
 
@@ -67,10 +68,17 @@ const RxForm = () => {
       </fieldset>
 
       {/* Enter the patient Rx details */}
-      <fieldset className="patient">
+      <PxFieldset 
+        data={patientData}
+        set={setPatientData}
+        handleChange={handleChange}
+      />
+
+      
+      {/* <fieldset className="patient"> */}
         {/* Legal requirements include only the patient's name and address */}
         {/* Patient Medicare number is however required for ALL PBS Rx, and should be included in general so that the patient may claim under PBS where this price is cheaper. All Aus are valid private prescriptions however. */}
-        <FormField 
+        {/* <FormField 
           fieldType="text" 
           name="firstName"
           label="First name" 
@@ -149,8 +157,8 @@ const RxForm = () => {
           placeholder="Enter reference number"
           value={patientData.medicareRefNumber} 
           onChange={(event) => handleChange(setPatientData, event)} 
-        />
-      </fieldset>
+        /> */}
+      {/* </fieldset> */}
 
       {/* Enter the provider details */}
       <fieldset className="provider">

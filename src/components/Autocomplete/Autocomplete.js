@@ -1,16 +1,14 @@
 /*global google*/ // Used to ignore the breaking 'google isn't defined' error
-// Addition API resources to consider include Bing, HERE, ArcGIS
+// Additional API resources to consider include Bing, HERE, ArcGIS
 
 import { useEffect } from "react"
-
-
-console.log();
 
 const Autocomplete = () => {
 
   useEffect(() => {
     const googleScript = document.createElement('script');
 
+    // This process.env system for hiding an API key is COMPLETELY INSECURE for a deployed build. This is purely to hide on Github. In the future, this should be secured on backend
     googleScript.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_API_KEY}&libraries=places`;
     googleScript.async = true;
 
