@@ -30,6 +30,13 @@ describe('Patient data tests', () => {
     fireEvent.change(firstNameInput, { target: { value: '01234567' } })
     expect(firstNameInput.value).toBe('01234567');
   });
+
+  test("Patient address data updates correctly on input", () => {
+    render(<RxForm />);
+    const suburbInput = screen.getByPlaceholderText(/patient suburb/i);
+    fireEvent.change(suburbInput, { target: { value: 'wynn vale' } })
+    expect(suburbInput.value).toBe('wynn vale');
+  });
 });
 
 describe('Provider data tests', () => {

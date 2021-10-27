@@ -1,7 +1,6 @@
 import { useState } from "react";
 import FormField from "../FormField/FormField";
-import Autocomplete from "../Autocomplete/Autocomplete";
-import PxFieldset from "../PxFieldset/PxFieldset";
+import AddressAutocomplete from "../AddressAutocomplete/AddressAutocomplete";
 
 const RxForm = () => {
 
@@ -64,101 +63,100 @@ const RxForm = () => {
           value={drugData.name} 
           onChange={(event) => handleChange(setDrugData, event)} 
         />
-        <Autocomplete />
       </fieldset>
 
       {/* Enter the patient Rx details */}
-      <PxFieldset 
-        data={patientData}
-        set={setPatientData}
-        handleChange={handleChange}
+      <fieldset className="patient">
+      {/* Legal requirements include only the patient's name and address */}
+      {/* Patient Medicare number is however required for ALL PBS Rx, and should be included in general so that the patient may claim under PBS where this price is cheaper. All Aus are valid private prescriptions however. */}
+
+      <FormField 
+        fieldType="text" 
+        name="firstName"
+        label="First name" 
+        placeholder="Enter first name"
+        value={patientData.firstName} 
+        onChange={(event) => handleChange(setPatientData, event)} 
       />
 
-      
-      {/* <fieldset className="patient"> */}
-        {/* Legal requirements include only the patient's name and address */}
-        {/* Patient Medicare number is however required for ALL PBS Rx, and should be included in general so that the patient may claim under PBS where this price is cheaper. All Aus are valid private prescriptions however. */}
-        {/* <FormField 
-          fieldType="text" 
-          name="firstName"
-          label="First name" 
-          placeholder="Enter first name"
-          value={patientData.firstName} 
-          onChange={(event) => handleChange(setPatientData, event)} 
-        />
+      <FormField 
+        fieldType="text" 
+        name="lastName"
+        label="Last name" 
+        placeholder="Enter last name"
+        value={patientData.lastName} 
+        onChange={(event) => handleChange(setPatientData, event)} 
+      />
 
-        <FormField 
-          fieldType="text" 
-          name="lastName"
-          label="Last name" 
-          placeholder="Enter last name"
-          value={patientData.lastName} 
-          onChange={(event) => handleChange(setPatientData, event)} 
-        />
+      <AddressAutocomplete 
+        data={patientData}
+        setData={setPatientData}
+        handleChange={(event) => handleChange(setPatientData, event)}      
+      />
+{/* 
+      <FormField 
+        fieldType="text" 
+        name="streetNumber"
+        label="Street number" 
+        placeholder="Enter street number"
+        value={data.streetNumber} 
+        onChange={(event) => handleChange(set, event)} 
+      />
 
-        <FormField 
-          fieldType="text" 
-          name="streetNumber"
-          label="Street number" 
-          placeholder="Enter street number"
-          value={patientData.streetNumber} 
-          onChange={(event) => handleChange(setPatientData, event)} 
-        />
+      <FormField 
+        fieldType="text" 
+        name="streetName"
+        label="Street name" 
+        placeholder="Enter street name"
+        value={data.streetName} 
+        onChange={(event) => handleChange(set, event)} 
+      />
 
-        <FormField 
-          fieldType="text" 
-          name="streetName"
-          label="Street name" 
-          placeholder="Enter street name"
-          value={patientData.streetName} 
-          onChange={(event) => handleChange(setPatientData, event)} 
-        />
+      <FormField 
+        fieldType="text" 
+        name="suburb"
+        label="Suburb" 
+        placeholder="Enter suburb"
+        value={data.suburb} 
+        onChange={(event) => handleChange(set, event)} 
+      />
 
-        <FormField 
-          fieldType="text" 
-          name="suburb"
-          label="Suburb" 
-          placeholder="Enter suburb"
-          value={patientData.suburb} 
-          onChange={(event) => handleChange(setPatientData, event)} 
-        />
+      <FormField 
+        fieldType="text" 
+        name="state"
+        label="State" 
+        placeholder="Enter state"
+        value={data.state} 
+        onChange={(event) => handleChange(set, event)} 
+      />
 
-        <FormField 
-          fieldType="text" 
-          name="state"
-          label="State" 
-          placeholder="Enter state"
-          value={patientData.state} 
-          onChange={(event) => handleChange(setPatientData, event)} 
-        />
+      <FormField 
+        fieldType="text" 
+        name="postcode"
+        label="Postcode" 
+        placeholder="Enter postcode"
+        value={data.postcode} 
+        onChange={(event) => handleChange(set, event)} 
+      /> */}
 
-        <FormField 
-          fieldType="text" 
-          name="postcode"
-          label="Postcode" 
-          placeholder="Enter postcode"
-          value={patientData.postcode} 
-          onChange={(event) => handleChange(setPatientData, event)} 
-        />
+      <FormField 
+        fieldType="text" 
+        name="medicareNumber"
+        label="Medicare number" 
+        placeholder="Enter medicare number"
+        value={patientData.medicareNumber} 
+        onChange={(event) => handleChange(setPatientData, event)} 
+      />
 
-        <FormField 
-          fieldType="text" 
-          name="medicareNumber"
-          label="Medicare number" 
-          placeholder="Enter medicare number"
-          value={patientData.medicareNumber} 
-          onChange={(event) => handleChange(setPatientData, event)} 
-        />
-
-        <FormField 
-          fieldType="text" 
-          name="medicareRefNumber"
-          label="Reference number" 
-          placeholder="Enter reference number"
-          value={patientData.medicareRefNumber} 
-          onChange={(event) => handleChange(setPatientData, event)} 
-        /> */}
-      {/* </fieldset> */}
+      <FormField 
+        fieldType="text" 
+        name="medicareRefNumber"
+        label="Reference number" 
+        placeholder="Enter reference number"
+        value={patientData.medicareRefNumber} 
+        onChange={(event) => handleChange(setPatientData, event)} 
+      />
+    </fieldset>
 
       {/* Enter the provider details */}
       <fieldset className="provider">
