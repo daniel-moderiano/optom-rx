@@ -1,10 +1,9 @@
 /*global google*/ // Used to ignore the breaking 'google isn't defined' error
 // Additional API resources to consider include Bing, HERE, ArcGIS
 import FormField from "../FormField/FormField";
-import { useCallback, useEffect, useRef } from "react"
-import useAutocomplete from "../utils/useAutocomplete";
+import { useCallback, useEffect } from "react"
 
-const AddressAutocomplete = ({ data, setData, handleChange }) => {
+const AddressAutocomplete = ({ data, setData, handleChange, section }) => {
 
   const fillAddress = useCallback((placeDetails) => {
     let address = {
@@ -15,6 +14,7 @@ const AddressAutocomplete = ({ data, setData, handleChange }) => {
       state: '',
     }
 
+    // For now this is hard coded to address_components, but can be modified as needed
     placeDetails['address_components'].forEach(component => {
       const componentType = component.types[0];
     
@@ -50,6 +50,7 @@ const AddressAutocomplete = ({ data, setData, handleChange }) => {
       }
     });
 
+    // MUST use the previous data to avoid resetting the state for all non-address input fields
     setData((prevData) => ({
       ...prevData,
       ...address,
@@ -63,7 +64,6 @@ const AddressAutocomplete = ({ data, setData, handleChange }) => {
     let googleScript = document.querySelector('#google-script')
 
     if (!googleScript) {
-      console.log('Require script');
       // First create and append Google Places API script
       googleScript = document.createElement('script');
       googleScript.id = 'google-script';
@@ -76,7 +76,7 @@ const AddressAutocomplete = ({ data, setData, handleChange }) => {
 
     // Declare the autocomplete and input variable here; the latter of which will later be initialised to the autocomplete instance. Input gathered with useRef hook, and MUST be initialised inside useEffect, because the component will have been rendered then
     let autocomplete;
-    const input = document.querySelector('#autocomplete')
+    const input = document.querySelector(`#autocomplete-${section}`)
 
     // Using a load event listener ensures the script is loaded prior to trying to access the API
     googleScript.addEventListener('load', () => {
@@ -99,39 +99,13 @@ const AddressAutocomplete = ({ data, setData, handleChange }) => {
       // Reset the address input (for now, in the future, use the original input as address line 1)
       input.value = "";
     }
- 
-    // const googleScript = document.createElement('script');
-
-  //   // This process.env system for hiding an API key is COMPLETELY INSECURE for a deployed build. This is purely to hide on Github. In the future, this should be secured on backend
-  //   googleScript.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_API_KEY}&libraries=places`;
-  //   googleScript.async = true;
-
-  //   window.document.body.appendChild(googleScript);
-
-  //   googleScript.addEventListener('load', () => {
-  //     let input = document.querySelector('#autocomplete');
-  //     let autocomplete = new google.maps.places.Autocomplete(input, {
-  //       componentRestrictions: { 'country': ['AU'] },
-  //       fields: ['address_components', 'name', 'formatted_address', 'adr_address'],
-  //     });
-  //     console.log('in func');
-  //     autocomplete.addListener('place_changed', () => {
-  //       let place = autocomplete.getPlace();
-  //       console.log(place);
-  //       fillAddress(place);
-  //       input.value = "";
-  //       console.log('address filled');
-  //     });
-  //     return autocomplete;
-  //   });
-
-  }, [fillAddress])
+  }, [fillAddress, section])
  
 
   return (
     <fieldset>
       <label htmlFor="autocomplete">Address</label>
-      <input type="text" id="autocomplete"/>
+      <input type="text" id={`autocomplete-${section}`}/>
 
       <FormField 
         fieldType="text" 

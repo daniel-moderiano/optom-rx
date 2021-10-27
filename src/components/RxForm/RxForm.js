@@ -92,52 +92,8 @@ const RxForm = () => {
         data={patientData}
         setData={setPatientData}
         handleChange={(event) => handleChange(setPatientData, event)}      
+        section="patient"    
       />
-{/* 
-      <FormField 
-        fieldType="text" 
-        name="streetNumber"
-        label="Street number" 
-        placeholder="Enter street number"
-        value={data.streetNumber} 
-        onChange={(event) => handleChange(set, event)} 
-      />
-
-      <FormField 
-        fieldType="text" 
-        name="streetName"
-        label="Street name" 
-        placeholder="Enter street name"
-        value={data.streetName} 
-        onChange={(event) => handleChange(set, event)} 
-      />
-
-      <FormField 
-        fieldType="text" 
-        name="suburb"
-        label="Suburb" 
-        placeholder="Enter suburb"
-        value={data.suburb} 
-        onChange={(event) => handleChange(set, event)} 
-      />
-
-      <FormField 
-        fieldType="text" 
-        name="state"
-        label="State" 
-        placeholder="Enter state"
-        value={data.state} 
-        onChange={(event) => handleChange(set, event)} 
-      />
-
-      <FormField 
-        fieldType="text" 
-        name="postcode"
-        label="Postcode" 
-        placeholder="Enter postcode"
-        value={data.postcode} 
-        onChange={(event) => handleChange(set, event)} 
-      /> */}
 
       <FormField 
         fieldType="text" 
@@ -187,6 +143,13 @@ const RxForm = () => {
           placeholder="Enter last name"
           value={providerData.lastName} 
           onChange={(event) => handleChange(setProviderData, event)} 
+        />
+
+        <AddressAutocomplete 
+          data={providerData}
+          setData={setProviderData}
+          handleChange={(event) => handleChange(setProviderData, event)}
+          section="provider"     
         />
 
         <FormField 
