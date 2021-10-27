@@ -4,7 +4,6 @@ import FormField from "../FormField/FormField";
 import { useCallback, useEffect } from "react"
 
 const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
-
   const fillAddress = useCallback((placeDetails) => {
     let address = {
       streetAddress: '',
@@ -77,7 +76,7 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
     // Declare the autocomplete and input variable here; the latter of which will later be initialised to the autocomplete instance. Input gathered with useRef hook, and MUST be initialised inside useEffect, because the component will have been rendered then
     let autocomplete;
     const input = document.querySelector(`#autocomplete-${provider ? 'provider' : 'patient'}`);
-    
+    const subpremiseInput = document.querySelector(`#subpremise-${provider ? 'provider' : 'patient'}`);    
 
     // Using a load event listener ensures the script is loaded prior to trying to access the API
     googleScript.addEventListener('load', () => {
@@ -100,7 +99,8 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
       fillAddress(place);
       // Reset the address input (for now, in the future, use the original input as address line 1)
       input.value = "";
-      // Focus address subpremise input here
+      // Focus address subpremise input here to encourage user to add additional address info
+      subpremiseInput.focus();
 
     }
   }, [fillAddress, provider])
@@ -117,29 +117,8 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
         onChange={handleChange} 
       />}
 
-
       <label htmlFor="autocomplete">Street Address</label>
       <input type="text" id={ provider ? 'autocomplete-provider' : 'autocomplete-patient' }/>
-
-      {/* <FormField 
-        fieldType="text" 
-        name="streetNumber"
-        label="Street number" 
-        placeholder="Enter street number"
-        value={data.streetNumber} 
-        onChange={handleChange} 
-      />
-
-      <FormField 
-        fieldType="text" 
-        name="streetName"
-        label="Street name" 
-        placeholder="Enter street name"
-        value={data.streetName} 
-        onChange={handleChange} 
-      /> */}
-
-      
 
       <FormField 
         fieldType="text" 
@@ -157,6 +136,7 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
         placeholder="Enter"
         value={data.subpremise} 
         onChange={handleChange} 
+        id={provider ? 'subpremise-provider' : 'subpremise-patient'}
       />
 
       <FormField 

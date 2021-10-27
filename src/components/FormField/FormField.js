@@ -1,5 +1,5 @@
 const FormField = (props) => {
-  const { fieldType, name, label, value, placeholder, onChange } = props;
+  const { fieldType, name, label, value, placeholder, onChange, id } = props;
 
   return (
     <div className="form-field">
@@ -12,11 +12,16 @@ const FormField = (props) => {
           value={value} 
           placeholder={placeholder} 
           onChange={onChange} 
+          id={id}
         />
       </label>
       
     </div> 
   );
+}
+
+FormField.defaultProps = {
+  id: 'form-field__input',
 }
 
 export default FormField;
