@@ -84,7 +84,7 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
         // Restrict search to Australian addresses only
         componentRestrictions: { 'country': ['AU'] },
         // Restrict to basic data only, which includes more than the below fields, just be wary to always restrict this
-        fields: ['address_components', 'name', 'formatted_address', 'adr_address'],
+        fields: ['address_components', 'name', 'formatted_address', 'adr_address', 'geometry'],
       });
 
       // Listen for the user to click on one of the suggested dropdown places
@@ -95,12 +95,20 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
     const onPlaceChanged = () => {
       // Get the information about the place that was selected, i.e. the fields specified in the Autocomplete instance
       let place = autocomplete.getPlace();
-      console.log(place);
-      fillAddress(place);
-      // Reset the address input (for now, in the future, use the original input as address line 1)
-      // input.value = "";
-      // Focus address subpremise input here to encourage user to add additional address info
-      subpremiseInput.focus();
+      
+      if (!place.geometry) {
+        // Occurs when user hits enter without selecting an option
+        // Show UI error here
+      } else {
+        console.log(place);
+        fillAddress(place);
+        // Reset the address input (for now, in the future, use the original input as address line 1)
+        // input.value = "";
+        // Focus address subpremise input here to encourage user to add additional address info
+        subpremiseInput.focus();
+      }
+
+      
 
     }
   }, [fillAddress, provider])
