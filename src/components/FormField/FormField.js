@@ -5,6 +5,7 @@ const FormField = (props) => {
 
   return (
     <StyledFormField className="form-field">
+      {/* Input nested in label to avoid the need for htmlFor + id. A <span> may be wrapped around the label text to add more styling options */}
       <label className="form-field__label">
         {label}
         <input 

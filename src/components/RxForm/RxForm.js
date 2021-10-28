@@ -53,11 +53,18 @@ const RxForm = () => {
     }));
   };
 
+  // TODO: handle submit
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    console.log('Submitted');
+  }
+
   return (
-    <StyledRxForm className="rxform">
+    <StyledRxForm className="rxform" onSubmit={handleSubmit}>
       {/* Single input to select the medication */}
       {/* Note there must be enough info to identify the medicine, including form and strength */}
       <fieldset className="drug">
+        <h2 className="drug__title">Medication</h2>
         <FormField 
           fieldType="text" 
           name="name"
@@ -66,10 +73,39 @@ const RxForm = () => {
           value={drugData.name} 
           onChange={(event) => handleChange(setDrugData, event)} 
         />
+
+        {/* Must include quantity and repeats to meet requirements */}
+        <FormField 
+          fieldType="text" 
+          name="dosage"
+          label="Dosage" 
+          placeholder="Enter dosage"
+          value={drugData.dosage} 
+          onChange={(event) => handleChange(setDrugData, event)} 
+        />
+
+        <FormField 
+          fieldType="text" 
+          name="quantity"
+          label="Quantity" 
+          placeholder="Enter quantity"
+          value={drugData.quantity} 
+          onChange={(event) => handleChange(setDrugData, event)} 
+        />
+
+        <FormField 
+          fieldType="text" 
+          name="repeats"
+          label="Repeats" 
+          placeholder="Enter repeats"
+          value={drugData.repeats} 
+          onChange={(event) => handleChange(setDrugData, event)} 
+        />
       </fieldset>
 
       {/* Enter the patient Rx details */}
       <fieldset className="patient">
+        <h2 className="patient__title">Patient Details</h2>
       {/* Legal requirements include only the patient's name and address */}
       {/* Patient Medicare number is however required for ALL PBS Rx, and should be included in general so that the patient may claim under PBS where this price is cheaper. All Aus are valid private prescriptions however. */}
 
@@ -119,6 +155,7 @@ const RxForm = () => {
 
       {/* Enter the provider details */}
       <fieldset className="provider">
+        <h2 className="provider__title">Provider Details</h2>
         {/* Legal requirements include the prescriber's name, address, and contact details, and prescriber num
         You may also give them the option of adding qualifications */}
         {/* Consider a separate practice name field in the address section for providers, or even a Shop/Building # field? */}
@@ -167,54 +204,14 @@ const RxForm = () => {
 
         <FormField 
           fieldType="text" 
-          name="faxNumber"
-          label="Fax number" 
-          placeholder="Enter fax number"
-          value={providerData.faxNumber} 
-          onChange={(event) => handleChange(setProviderData, event)} 
-        />
-
-        <FormField 
-          fieldType="text" 
           name="prescriberNumber"
           label="Prescriber number" 
           placeholder="Enter prescriber number"
           value={providerData.prescriberNumber} 
           onChange={(event) => handleChange(setProviderData, event)} 
         />
-
       </fieldset>
-
-      {/* Enter remaining details such as dosage, quantity, and repeats, plus PBS. This section might include the PBS authority code field */}
-      <fieldset className="parameters">
-        {/* Must include quantity and repeats to meet requirements */}
-        <FormField 
-          fieldType="text" 
-          name="dosage"
-          label="Dosage" 
-          placeholder="Enter dosage"
-          value={drugData.dosage} 
-          onChange={(event) => handleChange(setDrugData, event)} 
-        />
-
-        <FormField 
-          fieldType="text" 
-          name="quantity"
-          label="Quantity" 
-          placeholder="Enter quantity"
-          value={drugData.quantity} 
-          onChange={(event) => handleChange(setDrugData, event)} 
-        />
-
-        <FormField 
-          fieldType="text" 
-          name="repeats"
-          label="Repeats" 
-          placeholder="Enter repeats"
-          value={drugData.repeats} 
-          onChange={(event) => handleChange(setDrugData, event)} 
-        />
-      </fieldset>
+      <button type="submit">Generate Rx</button>
     </StyledRxForm>
   )
 }

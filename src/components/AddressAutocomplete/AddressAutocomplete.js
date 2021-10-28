@@ -90,7 +90,16 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
 
       // Listen for the user to click on one of the suggested dropdown places
       autocomplete.addListener('place_changed', onPlaceChanged);
+
+      // TODO: Listen for enter key press. This can be used to select autocomplete option by default, but also acts to submit the form. If the user presses enter to select a suggestion however, the default submit form should feature should NOT fire.
+      setTimeout(() => {
+        const suggestions = document.querySelector('.pac-container');
+        console.log(suggestions);
+
+      }, 1000)
     });
+
+  
 
     // When the user clicks one of the options in the autocomplete dropdown, this function should be called
     const onPlaceChanged = () => {
@@ -108,6 +117,9 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
         subpremiseInput.focus();
       }
     }
+
+    
+
   }, [fillAddress, provider])
  
   return (
