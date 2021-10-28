@@ -81,7 +81,14 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
     // Declare the autocomplete and input variable here; the latter of which will later be initialised to the autocomplete instance. Input gathered with useRef hook, and MUST be initialised inside useEffect, because the component will have been rendered then
     let autocomplete;
     const input = document.querySelector(`#autocomplete-${provider ? 'provider' : 'patient'}`);
-    const subpremiseInput = document.querySelector(`#subpremise-${provider ? 'provider' : 'patient'}`);    
+    const subpremiseInput = document.querySelector(`#subpremise-${provider ? 'provider' : 'patient'}`);  
+    
+    input.addEventListener('keydown', (event) => {
+      const selected = document.querySelector('.pac-item-selected');
+      if (event.keyCode === 13 && selected) {
+        event.preventDefault();
+      }
+    });
 
     // Using a load event listener ensures the script is loaded prior to trying to access the API
     googleScript.addEventListener('load', () => {
@@ -94,22 +101,15 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
 
       // Listen for the user to click on one of the suggested dropdown places
       autocomplete.addListener('place_changed', onPlaceChanged);
-
+      
       // TODO: Listen for enter key press. This can be used to select autocomplete option by default, but also acts to submit the form. If the user presses enter to select a suggestion however, the default submit form should feature should NOT fire.
-      setTimeout(() => {
-        const suggestions = document.querySelector('.pac-container');
-        console.log(suggestions);
-
-      }, 1000)
     });
-
-  
 
     // When the user clicks one of the options in the autocomplete dropdown, this function should be called
     const onPlaceChanged = () => {
       // Get the information about the place that was selected, i.e. the fields specified in the Autocomplete instance
       let place = autocomplete.getPlace();
-      
+
       if (!place.geometry) {
         // Occurs when user hits enter without selecting an option
         console.log('Not a valid address!');
@@ -117,10 +117,8 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
       } else {
         console.log(place);
         fillAddress(place);
-
          // Autofill, and toggle display of additional address fields
         setExpand(true);
-
         // Focus address subpremise input here to encourage user to add additional address info
         // Call after the setExpand function to ensure the subpremise field is set to display: block before attempting to focus
         subpremiseInput.focus();
@@ -183,9 +181,7 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
           value={data.postcode} 
           onChange={handleChange} 
         />
-
       </fieldset>
-      
     </StyledAddressAutocomplete>
   )
 }
