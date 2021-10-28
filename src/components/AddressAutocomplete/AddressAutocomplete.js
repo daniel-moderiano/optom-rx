@@ -150,7 +150,7 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
 
       <button type="button" onClick={() => setExpand(true)}>Address not listed?</button>
 
-      <fieldset className="address-collapse">
+      <fieldset className={`address-collapse ${expand ? 'show' : 'hide'}`}>
         <FormField 
           id={provider ? 'subpremise-provider' : 'subpremise-patient'}
           name="subpremise"
@@ -158,7 +158,6 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
           placeholder="Enter"
           value={data.subpremise} 
           onChange={handleChange} 
-          className={expand ? 'show' : 'hide'}
         />
 
         <FormField 
@@ -167,7 +166,6 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
           placeholder="patient suburb"
           value={data.suburb} 
           onChange={handleChange} 
-          className={expand ? 'show' : 'hide'}
         />
 
         <FormField 
@@ -176,7 +174,6 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
           placeholder="Enter state"
           value={data.state} 
           onChange={handleChange} 
-          className={expand ? 'show' : 'hide'}
         />
 
         <FormField 
@@ -185,7 +182,6 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
           placeholder="Enter postcode"
           value={data.postcode} 
           onChange={handleChange} 
-          className={expand ? 'show' : 'hide'}
         />
 
       </fieldset>
