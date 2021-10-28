@@ -3,8 +3,12 @@
 import FormField from "../FormField/FormField";
 import { useCallback, useEffect } from "react"
 import { StyledAddressAutocomplete } from "./AddressAutocomplete.styled";
+import { useState } from "react/cjs/react.development";
 
 const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
+  // Use this to control whether the additional address fields should be expanded or not
+  const [expand, setExpand] = useState(false);
+
   const fillAddress = useCallback((placeDetails) => {
     let address = {
       streetAddress: '',
@@ -58,7 +62,7 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
 
   }, [setData])
 
-  useEffect(() => {
+   useEffect(() => {
     console.log('Running use-effect');
     // Check for an exisitng API script on the page to avoid duplicating
     let googleScript = document.querySelector('#google-script')
@@ -76,8 +80,8 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
 
     // Declare the autocomplete and input variable here; the latter of which will later be initialised to the autocomplete instance. Input gathered with useRef hook, and MUST be initialised inside useEffect, because the component will have been rendered then
     let autocomplete;
-    const input = document.querySelector(`.autocomplete-${provider ? 'provider' : 'patient'}`);
-    const subpremiseInput = document.querySelector(`.subpremise-${provider ? 'provider' : 'patient'}`);    
+    const input = document.querySelector(`#autocomplete-${provider ? 'provider' : 'patient'}`);
+    const subpremiseInput = document.querySelector(`#subpremise-${provider ? 'provider' : 'patient'}`);    
 
     // Using a load event listener ensures the script is loaded prior to trying to access the API
     googleScript.addEventListener('load', () => {
@@ -113,24 +117,21 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
       } else {
         console.log(place);
         fillAddress(place);
-           // Focus address subpremise input here to encourage user to add additional address info
+
+         // Autofill, and toggle display of additional address fields
+        setExpand(true);
+
+        // Focus address subpremise input here to encourage user to add additional address info
+        // Call after the setExpand function to ensure the subpremise field is set to display: block before attempting to focus
         subpremiseInput.focus();
-        // Autofill, and toggle display of additional address fields
-        document.querySelector('.address-collapse').querySelectorAll('div').forEach((div) => {
-          div.classList.add('show');
-        });
       }
     }
-
-    
-
   }, [fillAddress, provider])
  
   return (
     <StyledAddressAutocomplete>
       {/* Practice name is only relevant for providers */}
       {provider && <FormField 
-        fieldType="text" 
         name="practiceName"
         label="Practice name" 
         placeholder="Enter practice name"
@@ -139,52 +140,52 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
       />}
 
       <FormField
-        fieldType="text" 
         name="streetAddress"
         label="Street Address"
         placeholder="Enter a location"
         value={data.streetAddress}
         onChange={handleChange} 
-        className={ provider ? 'autocomplete-provider' : 'autocomplete-patient'}
+        id={provider ? 'autocomplete-provider' : 'autocomplete-patient'}
       />
+
+      <button type="button" onClick={() => setExpand(true)}>Address not listed?</button>
 
       <fieldset className="address-collapse">
         <FormField 
-          fieldType="text" 
+          id={provider ? 'subpremise-provider' : 'subpremise-patient'}
           name="subpremise"
           label="Apartment, unit, shop, suite, or floor #" 
           placeholder="Enter"
           value={data.subpremise} 
           onChange={handleChange} 
-          className={provider ? 'subpremise-provider' : 'subpremise-patient'}
+          className={expand ? 'show' : 'hide'}
         />
 
         <FormField 
-          fieldType="text" 
           name="suburb"
           label="Suburb" 
           placeholder="patient suburb"
           value={data.suburb} 
           onChange={handleChange} 
-          data-testid="address"
+          className={expand ? 'show' : 'hide'}
         />
 
         <FormField 
-          fieldType="text" 
           name="state"
           label="State" 
           placeholder="Enter state"
           value={data.state} 
           onChange={handleChange} 
+          className={expand ? 'show' : 'hide'}
         />
 
         <FormField 
-          fieldType="text" 
           name="postcode"
           label="Postcode" 
           placeholder="Enter postcode"
           value={data.postcode} 
           onChange={handleChange} 
+          className={expand ? 'show' : 'hide'}
         />
 
       </fieldset>
