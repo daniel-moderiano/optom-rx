@@ -1,8 +1,14 @@
 import styled from "styled-components";
 
 const StyledAddressAutocomplete = styled.fieldset`
-  input {
-    /* padding: 0.2rem; */
+  .address-collapse {
+    div {
+      display: none;
+    }
+
+    .show {
+      display: block;
+    }
   }
 `
 

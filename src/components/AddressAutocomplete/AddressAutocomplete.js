@@ -115,6 +115,10 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
         fillAddress(place);
            // Focus address subpremise input here to encourage user to add additional address info
         subpremiseInput.focus();
+        // Autofill, and toggle display of additional address fields
+        document.querySelector('.address-collapse').querySelectorAll('div').forEach((div) => {
+          div.classList.add('show');
+        });
       }
     }
 
@@ -144,43 +148,47 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
         className={ provider ? 'autocomplete-provider' : 'autocomplete-patient'}
       />
 
-      <FormField 
-        fieldType="text" 
-        name="subpremise"
-        label="Apartment, unit, shop, suite, or floor #" 
-        placeholder="Enter"
-        value={data.subpremise} 
-        onChange={handleChange} 
-        className={provider ? 'subpremise-provider' : 'subpremise-patient'}
-      />
+      <fieldset className="address-collapse">
+        <FormField 
+          fieldType="text" 
+          name="subpremise"
+          label="Apartment, unit, shop, suite, or floor #" 
+          placeholder="Enter"
+          value={data.subpremise} 
+          onChange={handleChange} 
+          className={provider ? 'subpremise-provider' : 'subpremise-patient'}
+        />
 
-      <FormField 
-        fieldType="text" 
-        name="suburb"
-        label="Suburb" 
-        placeholder="patient suburb"
-        value={data.suburb} 
-        onChange={handleChange} 
-        data-testid="address"
-      />
+        <FormField 
+          fieldType="text" 
+          name="suburb"
+          label="Suburb" 
+          placeholder="patient suburb"
+          value={data.suburb} 
+          onChange={handleChange} 
+          data-testid="address"
+        />
 
-      <FormField 
-        fieldType="text" 
-        name="state"
-        label="State" 
-        placeholder="Enter state"
-        value={data.state} 
-        onChange={handleChange} 
-      />
+        <FormField 
+          fieldType="text" 
+          name="state"
+          label="State" 
+          placeholder="Enter state"
+          value={data.state} 
+          onChange={handleChange} 
+        />
 
-      <FormField 
-        fieldType="text" 
-        name="postcode"
-        label="Postcode" 
-        placeholder="Enter postcode"
-        value={data.postcode} 
-        onChange={handleChange} 
-      />
+        <FormField 
+          fieldType="text" 
+          name="postcode"
+          label="Postcode" 
+          placeholder="Enter postcode"
+          value={data.postcode} 
+          onChange={handleChange} 
+        />
+
+      </fieldset>
+      
     </StyledAddressAutocomplete>
   )
 }
