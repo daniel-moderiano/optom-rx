@@ -19,6 +19,7 @@ const FormField = (props) => {
       </label>
       {/* Pass the alert prop as an object only where alerts are required (default null) that contains both the message to display in the alert, and the type of alert, e.g. error, warning, success */}
       {Object.keys(alert).length > 0 && 
+      // Consider adding a cross icon above in the label for visually impaired users
         <span className={`alert alert--${alert.type}`}>{alert.message}</span>
       }
       

@@ -135,4 +135,13 @@ describe('Patient data validation', () => {
     const alert = screen.queryByText(/Medicare number must be exactly 10 digits long/i);
     expect(alert).not.toBeInTheDocument();
   });
+
+  test("Medicare number input rejects zero as leading digit", () => {
+    render(<RxForm />);
+    const input = screen.getByLabelText(/medicare number/i);
+    fireEvent.change(input, { target: { value: '0234567890' } });
+    fireEvent.focusOut(input);
+    const alert = screen.getByText(/Medicare number must not start with zero/i);
+    expect(alert).toBeInTheDocument();
+  });
 });

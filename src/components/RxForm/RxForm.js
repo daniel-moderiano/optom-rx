@@ -73,8 +73,16 @@ const RxForm = () => {
 
           case name === 'medicareNumber':
             // Check for exactly 10 digits
-            if (!(/^[0-9]{10}$/).test(value.trim())) {
-              // Sets an alert object in the state, which will immediately cause the component to render an alert message
+            if (value.trim()[0] === '0') {
+              setProviderAlerts((prevAlerts) => ({
+                ...prevAlerts,
+                medicareNumber: {
+                  message: 'Medicare number must not start with zero',
+                  type: 'error',
+                }
+              }));
+              event.target.classList.add('error');
+            } else if (!(/^[0-9]{10}$/).test(value.trim())) {
               setProviderAlerts((prevAlerts) => ({
                 ...prevAlerts,
                 medicareNumber: {
@@ -82,8 +90,15 @@ const RxForm = () => {
                   type: 'error',
                 }
               }));
+              event.target.classList.add('error');
             } else {
-              // Consider a positive feedback success class around input
+              // Positive feedback and remove errors
+              // TODO: Add green success class
+              event.target.classList.remove('error');
+              setProviderAlerts((prevAlerts) => ({
+                ...prevAlerts,
+                medicareNumber: {}
+              }));
             }
             break;
 
@@ -98,8 +113,15 @@ const RxForm = () => {
                   type: 'error',
                 }
               }));
+              event.target.classList.add('error');
             } else {
-              // Consider a positive feedback success class around input
+              // TODO: Positive feedback and remove errors
+              event.target.classList.remove('error');
+              setProviderAlerts((prevAlerts) => ({
+                ...prevAlerts,
+                medicareRefNumber: {}
+              }));
+              
             }
             break;
         
