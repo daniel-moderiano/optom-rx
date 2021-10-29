@@ -9,7 +9,7 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
   const [expand, setExpand] = useState(false);
 
   // Control field validation here
-  const [alert, setAlert] = useState({})
+  const [alert, setAlert] = useState({});
 
   const fillAddress = useCallback((placeDetails) => {
     let address = {
@@ -116,6 +116,7 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
         console.log('Not a valid address!');
         input.classList.add('error');
         // TODO: Show UI error here
+        setAlert({ message: "Invalid address selection", type: 'error' })
       } else {
         console.log(place);
         input.classList.remove('error');

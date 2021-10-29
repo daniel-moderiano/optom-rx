@@ -32,8 +32,8 @@ const StyledFormField = styled.div`
     flex-direction: column;
   }
 
-  .alert {
-    display: none;
+  .alert--error {
+    background-color: red;
   }
 `
 
