@@ -60,8 +60,8 @@ const RxForm = () => {
     <StyledRxForm className="rxform" onSubmit={handleSubmit}>
       {/* Single input to select the medication */}
       {/* Note there must be enough info to identify the medicine, including form and strength */}
-      <fieldset className="drug">
-        <h2 className="drug__title">Medication</h2>
+      <fieldset className="drug-form">
+        <legend className="drug-form__title">Medication</legend>
         <FormField 
           fieldType="text" 
           name="name"
@@ -101,8 +101,8 @@ const RxForm = () => {
       </fieldset>
 
       {/* Enter the patient Rx details */}
-      <fieldset className="patient">
-        <h2 className="patient__title">Patient Details</h2>
+      <fieldset className="patient-form">
+        <legend className="patient-form__title">Patient Details</legend>
       {/* Legal requirements include only the patient's name and address */}
       {/* Patient Medicare number is however required for ALL PBS Rx, and should be included in general so that the patient may claim under PBS where this price is cheaper. All Aus are valid private prescriptions however. */}
 
@@ -142,8 +142,8 @@ const RxForm = () => {
       </fieldset>
 
       {/* Enter the provider details */}
-      <fieldset className="provider">
-        <h2 className="provider__title">Provider Details</h2>
+      <fieldset className="provider-form">
+        <legend className="provider-form__title">Provider Details</legend>
         {/* Legal requirements include the prescriber's name, address, and contact details, and prescriber num
         You may also give them the option of adding qualifications */}
         {/* Consider a separate practice name field in the address section for providers, or even a Shop/Building # field? */}
