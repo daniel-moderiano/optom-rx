@@ -17,7 +17,11 @@ const FormField = (props) => {
           onChange={onChange} 
         />
       </label>
-      <span className="alert">{alert}</span>
+      {/* Pass the alert prop as an object only where alerts are required (default null) that contains both the message to display in the alert, and the type of alert, e.g. error, warning, success */}
+      {Object.keys(alert).length > 0 && 
+        <span className={`alert alert--${alert.type}`}>{alert.message}</span>
+      }
+      
     </StyledFormField> 
   );
 }
@@ -25,6 +29,8 @@ const FormField = (props) => {
 FormField.defaultProps = {
   fieldType: 'text',
   className: '',
+  alert: {},
 }
 
 export default FormField;
+

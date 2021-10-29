@@ -1,13 +1,15 @@
 /*global google*/ // Used to ignore the breaking 'google isn't defined' error
 // Additional API resources to consider include Bing, HERE, ArcGIS
 import FormField from "../FormField/FormField";
-import { useCallback, useEffect } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { StyledAddressAutocomplete } from "./AddressAutocomplete.styled";
-import { useState } from "react/cjs/react.development";
 
 const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
   // Use this to control whether the additional address fields should be expanded or not
   const [expand, setExpand] = useState(false);
+
+  // Control field validation here
+  const [alert, setAlert] = useState({})
 
   const fillAddress = useCallback((placeDetails) => {
     let address = {
@@ -108,7 +110,7 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
     const onPlaceChanged = () => {
       // Get the information about the place that was selected, i.e. the fields specified in the Autocomplete instance
       let place = autocomplete.getPlace();
-
+      
       if (!place.geometry) {
         // Occurs when user hits enter without selecting an option
         console.log('Not a valid address!');
@@ -145,6 +147,7 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
         value={data.streetAddress}
         onChange={handleChange} 
         id={provider ? 'autocomplete-provider' : 'autocomplete-patient'}
+        alert={alert}
       />
 
       <button type="button" onClick={() => setExpand(true)}>Address not listed?</button>

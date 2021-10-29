@@ -4,7 +4,7 @@ const StyledFormField = styled.div`
   margin-bottom: 0.5rem;
 
   input {
-    margin-top: 0.2rem;
+    margin-top: 0.5rem;
     margin-bottom: 0.8rem;
     padding: 0.375rem 0.75rem;   
     border: 1px solid #bdbdbd;
@@ -18,7 +18,7 @@ const StyledFormField = styled.div`
   }
 
   input::placeholder {
-    color: #adadad;
+    color: #808080;
   }
 
   input:focus {
@@ -27,7 +27,7 @@ const StyledFormField = styled.div`
   }
 
   label {
-    font-size: 1rem;
+    font-size: 0.9rem;
     display: flex;
     flex-direction: column;
   }
