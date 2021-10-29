@@ -72,12 +72,25 @@ const RxForm = () => {
             break;
 
           case name === 'medicareNumber':
-            // Validate full name here
+            // Check for exactly 10 digits
+            if (!(/^[0-9]{10}$/).test(value.trim())) {
+              // Sets an alert object in the state, which will immediately cause the component to render an alert message
+              setProviderAlerts((prevAlerts) => ({
+                ...prevAlerts,
+                medicareNumber: {
+                  message: 'Medicare number must be exactly 10 digits long',
+                  type: 'error',
+                }
+              }));
+            } else {
+              // Consider a positive feedback success class around input
+            }
             break;
 
           case name === 'medicareRefNumber':
-            const valid = /^[1-9]{1}$/.test(value.trim())
-            if (!valid) {
+            // Check for digits 1-9, and only a single digit
+            if (!(/^[1-9]{1}$/).test(value.trim())) {
+              // Sets an alert object in the state, which will immediately cause the component to render an alert message
               setProviderAlerts((prevAlerts) => ({
                 ...prevAlerts,
                 medicareRefNumber: {
@@ -85,6 +98,8 @@ const RxForm = () => {
                   type: 'error',
                 }
               }));
+            } else {
+              // Consider a positive feedback success class around input
             }
             break;
         
@@ -181,7 +196,7 @@ const RxForm = () => {
           placeholder="Enter medicare number"
           value={patientData.medicareNumber} 
           onChange={(event) => handleChange(setPatientData, event)} 
-          
+          alert={providerAlerts.medicareNumber}
         />
 
         {/* Validation dictates only a single digit from 1-9 */}

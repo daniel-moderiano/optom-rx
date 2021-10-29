@@ -90,4 +90,49 @@ describe('Patient data validation', () => {
     const alert = screen.queryByText(/IRN must be a single digit between 1 through 9/i);
     expect(alert).not.toBeInTheDocument();
   });
+
+  test('Medicare number input rejects empty value', () => {
+    render(<RxForm />);
+    const input = screen.getByLabelText(/medicare number/i);
+    fireEvent.change(input, { target: { value: '' } });
+    fireEvent.focusOut(input);
+    const alert = screen.getByText(/Medicare number must be exactly 10 digits long/i);
+    expect(alert).toBeInTheDocument();
+  });
+
+  test('Medicare number input rejects number < 10 digits', () => {
+    render(<RxForm />);
+    const input = screen.getByLabelText(/medicare number/i);
+    fireEvent.change(input, { target: { value: '12' } });
+    fireEvent.focusOut(input);
+    const alert = screen.getByText(/Medicare number must be exactly 10 digits long/i);
+    expect(alert).toBeInTheDocument();
+  });
+
+  test("Medicare number input rejects > 10 digits", () => {
+    render(<RxForm />);
+    const input = screen.getByLabelText(/medicare number/i);
+    fireEvent.change(input, { target: { value: '111111112222222' } });
+    fireEvent.focusOut(input);
+    const alert = screen.getByText(/Medicare number must be exactly 10 digits long/i);
+    expect(alert).toBeInTheDocument();
+  });
+
+  test("Medicare number input rejects non-digits", () => {
+    render(<RxForm />);
+    const input = screen.getByLabelText(/medicare number/i);
+    fireEvent.change(input, { target: { value: '5152677a01' } });
+    fireEvent.focusOut(input);
+    const alert = screen.getByText(/Medicare number must be exactly 10 digits long/i);
+    expect(alert).toBeInTheDocument();
+  });
+
+  test("Medicare number input accepts 10 digit valid number", () => {
+    render(<RxForm />);
+    const input = screen.getByLabelText(/medicare number/i);
+    fireEvent.change(input, { target: { value: '1234567890' } });
+    fireEvent.focusOut(input);
+    const alert = screen.queryByText(/Medicare number must be exactly 10 digits long/i);
+    expect(alert).not.toBeInTheDocument();
+  });
 });
