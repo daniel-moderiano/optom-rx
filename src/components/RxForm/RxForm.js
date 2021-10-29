@@ -38,7 +38,6 @@ const RxForm = () => {
     postcode: '',
     state: '',
     phoneNumber: '',
-    faxNumber: '',
     prescriberNumber: '',
   });
 
@@ -151,7 +150,7 @@ const RxForm = () => {
         <FormField 
           fieldType="text" 
           name="title"
-          label="Title" 
+          label="Title - optional" 
           placeholder="Mr/Mrs/Miss"
           value={providerData.title} 
           onChange={(event) => handleChange(setProviderData, event)} 

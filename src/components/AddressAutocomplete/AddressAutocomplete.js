@@ -8,7 +8,7 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
   // Use this to control whether the additional address fields should be expanded or not
   const [expand, setExpand] = useState(false);
 
-  // Control field validation here
+  // Control field validation here (set alert with object containing alert parameters when user makes error for example)
   const [alert, setAlert] = useState({});
 
   const fillAddress = useCallback((placeDetails) => {
@@ -113,9 +113,7 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
       
       if (!place.geometry) {
         // Occurs when user hits enter without selecting an option
-        console.log('Not a valid address!');
         input.classList.add('error');
-        // TODO: Show UI error here
         setAlert({ message: "Invalid address selection", type: 'error' })
       } else {
         console.log(place);
@@ -141,17 +139,20 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
         onChange={handleChange} 
       />}
 
-      <FormField
-        name="streetAddress"
-        label="Street Address"
-        placeholder="Enter a location"
-        value={data.streetAddress}
-        onChange={handleChange} 
-        id={provider ? 'autocomplete-provider' : 'autocomplete-patient'}
-        alert={alert}
-      />
-
-      <button type="button" onClick={() => setExpand(true)}>Address not listed?</button>
+      <div className="autocomplete-group">
+        <FormField
+          name="streetAddress"
+          label="Street Address"
+          placeholder="Enter a location"
+          value={data.streetAddress}
+          onChange={handleChange} 
+          id={provider ? 'autocomplete-provider' : 'autocomplete-patient'}
+          alert={alert}
+          className="street-address"
+        />
+        <button type="button" onClick={() => setExpand(true)}>Address not listed?</button>
+      </div>
+      
 
       <fieldset className={`address-collapse ${expand ? 'show' : 'hide'}`}>
         <FormField 

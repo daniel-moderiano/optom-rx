@@ -9,6 +9,33 @@ const StyledAddressAutocomplete = styled.fieldset`
   .hide {
     display: none;
   }
+
+  .autocomplete-group {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
+    .street-address {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  button {
+    /* position: absolute; */
+    place-self: flex-end;
+    right: 0;
+    bottom: 1rem;
+    background-color: #fff;
+    border: none;
+    margin: 0;
+    padding: 0;
+    font-size: 0.8rem;
+    text-decoration: underline;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
 `
 
 export { StyledAddressAutocomplete }

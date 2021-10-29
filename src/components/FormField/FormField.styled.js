@@ -1,13 +1,12 @@
 import styled from "styled-components";
 
 const StyledFormField = styled.div`
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 
   input {
     margin-top: 0.5rem;
-    margin-bottom: 0.8rem;
     padding: 0.375rem 0.75rem;   
-    border: 1px solid #bdbdbd;
+    border: 1px solid rgb(144, 147, 150);
     border-radius: 4px;
     font-size: 1rem;
     line-height: 1.5;
@@ -33,7 +32,10 @@ const StyledFormField = styled.div`
   }
 
   .alert--error {
-    background-color: red;
+    color: var(--error);
+    font-size: 0.8rem;
+    padding: 0;
+    margin: 0;
   }
 `
 
