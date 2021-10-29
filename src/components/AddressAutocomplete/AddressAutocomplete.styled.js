@@ -12,8 +12,10 @@ const StyledAddressAutocomplete = styled.fieldset`
 
   .autocomplete-group {
     position: relative;
-    display: flex;
-    flex-direction: column;
+    /* display: flex;
+    flex-direction: column; */
+    /* This will affect address not listed button placement */
+    height: 5.4rem;
 
     .street-address {
       margin-bottom: 0.5rem;
@@ -21,10 +23,9 @@ const StyledAddressAutocomplete = styled.fieldset`
   }
 
   button {
-    /* position: absolute; */
-    place-self: flex-end;
+    position: absolute;
     right: 0;
-    bottom: 1rem;
+    bottom: 0rem;
     background-color: #fff;
     border: none;
     margin: 0;

@@ -116,10 +116,13 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
       if (!place.geometry) {
         // Occurs when user hits enter without selecting an option
         input.classList.add('error');
+        input.classList.remove('success');
         setAlert({ message: "Invalid address selection", type: 'error' })
       } else {
         console.log(place);
         input.classList.remove('error');
+        input.classList.add('success');
+        setAlert({})
         fillAddress(place);
          // Autofill, and toggle display of additional address fields
         setExpand(true);
