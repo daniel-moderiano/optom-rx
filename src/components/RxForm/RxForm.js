@@ -13,6 +13,7 @@ const RxForm = () => {
   });
 
   const [providerAlerts, setProviderAlerts] = useState({
+    fullName: {},
     medicareNumber: {},
     medicareRefNumber: {}
   });
@@ -52,6 +53,16 @@ const RxForm = () => {
     prescriberNumber: '',
   });
 
+  const showErrorClass = (element) => {
+    element.classList.add('error');
+    element.classList.remove('success');
+  }
+
+  const showSuccessClass = (element) => {
+    element.classList.remove('error');
+    element.classList.add('success');
+  }
+
   // Pass a set function to handle change, rather than hardcoding with a certain setState function
   const handleChange = (set, event) => {
     const { name, value } = event.target;
@@ -69,6 +80,23 @@ const RxForm = () => {
         switch (true) {
           case name === 'fullName':
             // Validate full name here
+            if (value.trim().length === 0) {
+              setProviderAlerts((prevAlerts) => ({
+                ...prevAlerts,
+                fullName: {
+                  message: "This field cannot be left blank",
+                  type: 'error',
+                }
+              }));
+              showErrorClass(event.target);
+            } else {
+              // Positive feedback and remove errors
+              showSuccessClass(event.target);
+              setProviderAlerts((prevAlerts) => ({
+                ...prevAlerts,
+                fullName: {}
+              }));
+            }
             break;
 
           case name === 'medicareNumber':
@@ -81,7 +109,7 @@ const RxForm = () => {
                   type: 'error',
                 }
               }));
-              event.target.classList.add('error');
+              showErrorClass(event.target);
             } else if (!(/^[0-9]{10}$/).test(value.trim())) {
               setProviderAlerts((prevAlerts) => ({
                 ...prevAlerts,
@@ -90,11 +118,11 @@ const RxForm = () => {
                   type: 'error',
                 }
               }));
-              event.target.classList.add('error');
+              showErrorClass(event.target);
             } else {
               // Positive feedback and remove errors
-              // TODO: Add green success class
-              event.target.classList.remove('error');
+
+              showSuccessClass(event.target);
               setProviderAlerts((prevAlerts) => ({
                 ...prevAlerts,
                 medicareNumber: {}
@@ -113,15 +141,13 @@ const RxForm = () => {
                   type: 'error',
                 }
               }));
-              event.target.classList.add('error');
+              showErrorClass(event.target);
             } else {
-              // TODO: Positive feedback and remove errors
-              event.target.classList.remove('error');
               setProviderAlerts((prevAlerts) => ({
                 ...prevAlerts,
                 medicareRefNumber: {}
               }));
-              
+              showSuccessClass(event.target);
             }
             break;
         
@@ -200,6 +226,7 @@ const RxForm = () => {
           placeholder="Enter full name"
           value={patientData.fullName} 
           onChange={(event) => handleChange(setPatientData, event)} 
+          alert={providerAlerts.fullName}
         />
 
         {/* Validation done within component */}

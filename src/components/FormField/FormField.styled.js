@@ -14,6 +14,10 @@ const StyledFormField = styled.div`
     &.error {
       border: 2px solid var(--error);
     }
+
+    &.success {
+      border: 2px solid var(--success);
+    }
   }
 
   input::placeholder {

@@ -144,4 +144,23 @@ describe('Patient data validation', () => {
     const alert = screen.getByText(/Medicare number must not start with zero/i);
     expect(alert).toBeInTheDocument();
   });
+
+  // Below tests fail due to multiple full name inputs. Run later
+  // test("Full name input rejects empty string", () => {
+  //   render(<RxForm />);
+  //   const input = screen.getByLabelText(/full name/i);
+  //   fireEvent.change(input, { target: { value: '' } });
+  //   fireEvent.focusOut(input);
+  //   const alert = screen.getByText(/Please enter the patient's full name/i);
+  //   expect(alert).toBeInTheDocument();
+  // });
+
+  // test("Full name input accepts non-empty strings", () => {
+  //   render(<RxForm />);
+  //   const input = screen.getByLabelText(/full name/i);
+  //   fireEvent.change(input, { target: { value: 'John Smith' } });
+  //   fireEvent.focusOut(input);
+  //   const alert = screen.queryByText(/Please enter the patient's full name/i);
+  //   expect(alert).not.toBeInTheDocument();
+  // });
 });
