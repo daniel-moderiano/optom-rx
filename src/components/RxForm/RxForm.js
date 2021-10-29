@@ -1,10 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import FormField from "../FormField/FormField";
 import AddressAutocomplete from "../AddressAutocomplete/AddressAutocomplete";
 import { StyledRxForm } from "./RxForm.styled";
 
 const RxForm = () => {
-  // TODO: Form validation; for address, only need to validate subpremise, as the rest will be validated by the Google API
+  const [drugAlerts, setDrugAlerts] = useState({
+
+  });
+
+  const [patientAlerts, setPatientAlerts] = useState({
+
+  });
+
+  const [providerAlerts, setProviderAlerts] = useState({
+    medicareNumber: {},
+    medicareRefNumber: {}
+  });
 
   // These states have been separated for better logic and avoiding too much nesting. Merge them on form submit
   const [drugData, setDrugData] = useState({
@@ -49,6 +60,44 @@ const RxForm = () => {
       [name]: value 
     }));
   };
+
+  useEffect(() => {
+    // Event propagation will capture all focusout events from patient form
+    const patientDataValidation = () => {
+      document.querySelector('.patient-form').addEventListener('focusout', (event) => {
+        const { name, value } = event.target
+        switch (true) {
+          case name === 'fullName':
+            // Validate full name here
+            break;
+
+          case name === 'medicareNumber':
+            // Validate full name here
+            break;
+
+          case name === 'medicareRefNumber':
+            const valid = /^[1-9]{1}$/.test(value.trim())
+            if (!valid) {
+              setProviderAlerts((prevAlerts) => ({
+                ...prevAlerts,
+                medicareRefNumber: {
+                  message: 'IRN must be a single digit between 1 through 9',
+                  type: 'error',
+                }
+              }));
+            }
+            break;
+        
+          default:
+            break;
+        }
+      });
+    };
+
+    patientDataValidation();
+    
+  }, [])
+
 
   // TODO: handle submit
   const handleSubmit = (event) => {
@@ -106,6 +155,7 @@ const RxForm = () => {
       {/* Legal requirements include only the patient's name and address */}
       {/* Patient Medicare number is however required for ALL PBS Rx, and should be included in general so that the patient may claim under PBS where this price is cheaper. All Aus are valid private prescriptions however. */}
 
+        {/* Consider a max limit on this input based on physical Rx form constraints? */}
         <FormField 
           fieldType="text" 
           name="fullName"
@@ -115,6 +165,7 @@ const RxForm = () => {
           onChange={(event) => handleChange(setPatientData, event)} 
         />
 
+        {/* Validation done within component */}
         <AddressAutocomplete 
           data={patientData}
           setData={setPatientData}
@@ -122,6 +173,7 @@ const RxForm = () => {
           provider={false}    
         />
 
+        {/* Validation requires a 10-digit number. Further checks are beyond the scopy of this application */}
         <FormField 
           fieldType="text" 
           name="medicareNumber"
@@ -129,15 +181,18 @@ const RxForm = () => {
           placeholder="Enter medicare number"
           value={patientData.medicareNumber} 
           onChange={(event) => handleChange(setPatientData, event)} 
+          
         />
 
+        {/* Validation dictates only a single digit from 1-9 */}
         <FormField 
           fieldType="text" 
           name="medicareRefNumber"
-          label="Reference number" 
+          label="IRN" 
           placeholder="Enter reference number"
           value={patientData.medicareRefNumber} 
           onChange={(event) => handleChange(setPatientData, event)} 
+          alert={providerAlerts.medicareRefNumber}
         />
       </fieldset>
 

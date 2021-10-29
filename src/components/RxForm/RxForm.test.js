@@ -61,3 +61,33 @@ describe('Parameter data tests', () => {
     expect(firstNameInput.value).toBe('3');
   });
 });
+
+
+describe('Patient data validation', () => {
+  test('IRN rejects values > 1 digit long', () => {
+    render(<RxForm />);
+    const IRNInput = screen.getByLabelText(/irn/i);
+    fireEvent.change(IRNInput, { target: { value: '35' } });
+    fireEvent.focusOut(IRNInput);
+    const alert = screen.getByText(/IRN must be a single digit between 1 through 9/i);
+    expect(alert).toBeInTheDocument();
+  });
+
+  test('IRN rejects empty input', () => {
+    render(<RxForm />);
+    const IRNInput = screen.getByLabelText(/irn/i);
+    fireEvent.change(IRNInput, { target: { value: '' } });
+    fireEvent.focusOut(IRNInput);
+    const alert = screen.getByText(/IRN must be a single digit between 1 through 9/i);
+    expect(alert).toBeInTheDocument();
+  });
+
+  test("IRN field accepts single digit from 0-9 inclusive", () => {
+    render(<RxForm />);
+    const IRNInput = screen.getByLabelText(/irn/i);
+    fireEvent.change(IRNInput, { target: { value: '2' } });
+    fireEvent.focusOut(IRNInput);
+    const alert = screen.queryByText(/IRN must be a single digit between 1 through 9/i);
+    expect(alert).not.toBeInTheDocument();
+  });
+});
