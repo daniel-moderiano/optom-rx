@@ -83,6 +83,7 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
     const input = document.querySelector(`#autocomplete-${provider ? 'provider' : 'patient'}`);
     const subpremiseInput = document.querySelector(`#subpremise-${provider ? 'provider' : 'patient'}`);  
     
+    // Prevent the default action of submitting the form when enter key is pressed, but ONLY under the condition that the user is selecting an autocomplete suggestion. 
     input.addEventListener('keydown', (event) => {
       const selected = document.querySelector('.pac-item-selected');
       if (event.keyCode === 13 && selected) {

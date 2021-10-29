@@ -16,8 +16,7 @@ const RxForm = () => {
 
   // Note this will eventually be modified to match the address autocomplete data returned
   const [patientData, setPatientData] = useState({
-    firstName: '',
-    lastName: '',
+    fullName: '',
     streetAddress: '',
     subpremise: '',
     suburb: '',
@@ -30,8 +29,7 @@ const RxForm = () => {
   // Not all of this data will be required
   const [providerData, setProviderData] = useState({
     title: '',
-    firstName: '',
-    lastName: '',
+    fullName: '',
     qualifications: '',
     practiceName: '',
     streetAddress: '',
@@ -111,19 +109,10 @@ const RxForm = () => {
 
         <FormField 
           fieldType="text" 
-          name="firstName"
-          label="First name" 
-          placeholder="Enter first name"
-          value={patientData.firstName} 
-          onChange={(event) => handleChange(setPatientData, event)} 
-        />
-
-        <FormField 
-          fieldType="text" 
-          name="lastName"
-          label="Last name" 
-          placeholder="Enter last name"
-          value={patientData.lastName} 
+          name="fullName"
+          label="Full name" 
+          placeholder="Enter full name"
+          value={patientData.fullName} 
           onChange={(event) => handleChange(setPatientData, event)} 
         />
 
@@ -170,21 +159,11 @@ const RxForm = () => {
 
         <FormField 
           fieldType="text" 
-          name="firstName"
-          label="First name" 
-          placeholder="Enter first name"
-          value={providerData.firstName} 
+          name="fullName"
+          label="Full name" 
+          value={providerData.fullName} 
           onChange={(event) => handleChange(setProviderData, event)} 
-        />
-
-        <FormField 
-          fieldType="text" 
-          name="lastName"
-          label="Last name" 
-          placeholder="Enter last name"
-          value={providerData.lastName} 
-          onChange={(event) => handleChange(setProviderData, event)} 
-        />
+        />    
 
         <AddressAutocomplete 
           data={providerData}
