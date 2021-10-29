@@ -102,8 +102,6 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
 
       // Listen for the user to click on one of the suggested dropdown places
       autocomplete.addListener('place_changed', onPlaceChanged);
-      
-      // TODO: Listen for enter key press. This can be used to select autocomplete option by default, but also acts to submit the form. If the user presses enter to select a suggestion however, the default submit form should feature should NOT fire.
     });
 
     // When the user clicks one of the options in the autocomplete dropdown, this function should be called
@@ -114,9 +112,11 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
       if (!place.geometry) {
         // Occurs when user hits enter without selecting an option
         console.log('Not a valid address!');
+        input.classList.add('error');
         // TODO: Show UI error here
       } else {
         console.log(place);
+        input.classList.remove('error');
         fillAddress(place);
          // Autofill, and toggle display of additional address fields
         setExpand(true);

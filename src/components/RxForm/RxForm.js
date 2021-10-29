@@ -161,6 +161,7 @@ const RxForm = () => {
           fieldType="text" 
           name="fullName"
           label="Full name" 
+          placeholder="Enter full name"
           value={providerData.fullName} 
           onChange={(event) => handleChange(setProviderData, event)} 
         />    

@@ -1,7 +1,7 @@
 import { StyledFormField } from "./FormField.styled";
 
 const FormField = (props) => {
-  const { fieldType, id, name, label, value, placeholder, onChange, className } = props;
+  const { fieldType, id, name, label, value, placeholder, onChange, className, alert } = props;
 
   return (
     <StyledFormField className={className}>
@@ -17,7 +17,7 @@ const FormField = (props) => {
           onChange={onChange} 
         />
       </label>
-      
+      <span className="alert">{alert}</span>
     </StyledFormField> 
   );
 }

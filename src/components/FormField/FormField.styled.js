@@ -2,14 +2,6 @@ import styled from "styled-components";
 
 const StyledFormField = styled.div`
   margin-bottom: 0.5rem;
-/* 
-  &.show {
-    display: block;
-  }
-
-  &.hide {
-    display: none;
-  } */
 
   input {
     margin-top: 0.2rem;
@@ -19,16 +11,29 @@ const StyledFormField = styled.div`
     border-radius: 4px;
     font-size: 1rem;
     line-height: 1.5;
+
+    &.error {
+      border: 2px solid var(--error);
+    }
   }
 
   input::placeholder {
-    /* color: #adadad; */
+    color: #adadad;
+  }
+
+  input:focus {
+    outline: 2px solid #183052;
+    outline-offset: 2px;
   }
 
   label {
     font-size: 1rem;
     display: flex;
     flex-direction: column;
+  }
+
+  .alert {
+    display: none;
   }
 `
 
