@@ -67,6 +67,7 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
   }, [setData])
 
    useEffect(() => {
+    const inputs = document.querySelector('.address-collapse').querySelectorAll('input');
     console.log('Running use-effect');
     // Check for an exisitng API script on the page to avoid duplicating
     let googleScript = document.querySelector('#google-script')
@@ -122,6 +123,11 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
         console.log(place);
         input.classList.remove('error');
         input.classList.add('success');
+        inputs.forEach((input) => {
+          if (input.name !== 'subpremise') {
+            input.classList.add('success');
+          }
+        });
         setAlert({})
         fillAddress(place);
          // Autofill, and toggle display of additional address fields

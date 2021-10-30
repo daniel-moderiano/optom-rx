@@ -9,13 +9,15 @@ const RxForm = () => {
   });
 
   const [patientAlerts, setPatientAlerts] = useState({
-
+    fullName: {},
+    medicareNumber: {},
+    medicareRefNumber: {}
   });
 
   const [providerAlerts, setProviderAlerts] = useState({
     fullName: {},
-    medicareNumber: {},
-    medicareRefNumber: {}
+    phoneNumber: {},
+    prescriberNumber: {},
   });
 
   // These states have been separated for better logic and avoiding too much nesting. Merge them on form submit
@@ -81,6 +83,92 @@ const RxForm = () => {
           case name === 'fullName':
             // Validate full name here
             if (value.trim().length === 0) {
+              setPatientAlerts((prevAlerts) => ({
+                ...prevAlerts,
+                fullName: {
+                  message: "This field cannot be left blank",
+                  type: 'error',
+                }
+              }));
+              showErrorClass(event.target);
+            } else {
+              // Positive feedback and remove errors
+              showSuccessClass(event.target);
+              setPatientAlerts((prevAlerts) => ({
+                ...prevAlerts,
+                fullName: {}
+              }));
+            }
+            break;
+
+          case name === 'medicareNumber':
+            // Check for exactly 10 digits
+            if (value.trim()[0] === '0') {
+              setPatientAlerts((prevAlerts) => ({
+                ...prevAlerts,
+                medicareNumber: {
+                  message: 'Medicare number must not start with zero',
+                  type: 'error',
+                }
+              }));
+              showErrorClass(event.target);
+            } else if (!(/^[0-9]{10}$/).test(value.trim())) {
+              setPatientAlerts((prevAlerts) => ({
+                ...prevAlerts,
+                medicareNumber: {
+                  message: 'Medicare number must be exactly 10 digits long',
+                  type: 'error',
+                }
+              }));
+              showErrorClass(event.target);
+            } else {
+              // Positive feedback and remove errors
+
+              showSuccessClass(event.target);
+              setPatientAlerts((prevAlerts) => ({
+                ...prevAlerts,
+                medicareNumber: {}
+              }));
+            }
+            break;
+
+          case name === 'medicareRefNumber':
+            // Check for digits 1-9, and only a single digit
+            if (!(/^[1-9]{1}$/).test(value.trim())) {
+              // Sets an alert object in the state, which will immediately cause the component to render an alert message
+              setPatientAlerts((prevAlerts) => ({
+                ...prevAlerts,
+                medicareRefNumber: {
+                  message: 'IRN must be a single digit between 1 through 9',
+                  type: 'error',
+                }
+              }));
+              showErrorClass(event.target);
+            } else {
+              setPatientAlerts((prevAlerts) => ({
+                ...prevAlerts,
+                medicareRefNumber: {}
+              }));
+              showSuccessClass(event.target);
+            }
+            break;
+        
+          default:
+            break;
+        }
+      });
+    };
+
+    patientDataValidation();
+
+    // Event propagation will capture all focusout events from patient form
+    const providerDataValidation = () => {
+      document.querySelector('.provider-form').addEventListener('focusout', (event) => {
+        const { name, value } = event.target
+        switch (true) {
+          case name === 'fullName':
+            // Validate full name here
+            if (value.trim().length === 0) {
               setProviderAlerts((prevAlerts) => ({
                 ...prevAlerts,
                 fullName: {
@@ -98,46 +186,47 @@ const RxForm = () => {
               }));
             }
             break;
-
-          case name === 'medicareNumber':
+          
+          // TODO: Consider masking, or specialised phone number input
+          case name === 'phoneNumber':
             // Check for exactly 10 digits
-            if (value.trim()[0] === '0') {
-              setProviderAlerts((prevAlerts) => ({
-                ...prevAlerts,
-                medicareNumber: {
-                  message: 'Medicare number must not start with zero',
-                  type: 'error',
-                }
-              }));
-              showErrorClass(event.target);
-            } else if (!(/^[0-9]{10}$/).test(value.trim())) {
-              setProviderAlerts((prevAlerts) => ({
-                ...prevAlerts,
-                medicareNumber: {
-                  message: 'Medicare number must be exactly 10 digits long',
-                  type: 'error',
-                }
-              }));
-              showErrorClass(event.target);
-            } else {
-              // Positive feedback and remove errors
+            // if (value.trim()[0] === '0') {
+            //   setProviderAlerts((prevAlerts) => ({
+            //     ...prevAlerts,
+            //     medicareNumber: {
+            //       message: 'Medicare number must not start with zero',
+            //       type: 'error',
+            //     }
+            //   }));
+            //   showErrorClass(event.target);
+            // } else if (!(/^[0-9]{10}$/).test(value.trim())) {
+            //   setProviderAlerts((prevAlerts) => ({
+            //     ...prevAlerts,
+            //     medicareNumber: {
+            //       message: 'Medicare number must be exactly 10 digits long',
+            //       type: 'error',
+            //     }
+            //   }));
+            //   showErrorClass(event.target);
+            // } else {
+            //   // Positive feedback and remove errors
 
-              showSuccessClass(event.target);
-              setProviderAlerts((prevAlerts) => ({
-                ...prevAlerts,
-                medicareNumber: {}
-              }));
-            }
+            //   showSuccessClass(event.target);
+            //   setProviderAlerts((prevAlerts) => ({
+            //     ...prevAlerts,
+            //     medicareNumber: {}
+            //   }));
+            // }
             break;
 
-          case name === 'medicareRefNumber':
-            // Check for digits 1-9, and only a single digit
-            if (!(/^[1-9]{1}$/).test(value.trim())) {
+          case name === 'prescriberNumber':
+            // Check for digits only
+            if (!(/^[0-9]{7}$/).test(value.trim())) {
               // Sets an alert object in the state, which will immediately cause the component to render an alert message
               setProviderAlerts((prevAlerts) => ({
                 ...prevAlerts,
-                medicareRefNumber: {
-                  message: 'IRN must be a single digit between 1 through 9',
+                prescriberNumber: {
+                  message: 'Prescriber number must be a seven digit number',
                   type: 'error',
                 }
               }));
@@ -145,7 +234,7 @@ const RxForm = () => {
             } else {
               setProviderAlerts((prevAlerts) => ({
                 ...prevAlerts,
-                medicareRefNumber: {}
+                prescriberNumber: {}
               }));
               showSuccessClass(event.target);
             }
@@ -156,9 +245,8 @@ const RxForm = () => {
         }
       });
     };
-
-    patientDataValidation();
-    
+  
+    providerDataValidation();
   }, [])
 
 
@@ -226,7 +314,7 @@ const RxForm = () => {
           placeholder="Enter full name"
           value={patientData.fullName} 
           onChange={(event) => handleChange(setPatientData, event)} 
-          alert={providerAlerts.fullName}
+          alert={patientAlerts.fullName}
         />
 
         {/* Validation done within component */}
@@ -245,7 +333,7 @@ const RxForm = () => {
           placeholder="Enter medicare number"
           value={patientData.medicareNumber} 
           onChange={(event) => handleChange(setPatientData, event)} 
-          alert={providerAlerts.medicareNumber}
+          alert={patientAlerts.medicareNumber}
         />
 
         {/* Validation dictates only a single digit from 1-9 */}
@@ -256,7 +344,7 @@ const RxForm = () => {
           placeholder="Enter reference number"
           value={patientData.medicareRefNumber} 
           onChange={(event) => handleChange(setPatientData, event)} 
-          alert={providerAlerts.medicareRefNumber}
+          alert={patientAlerts.medicareRefNumber}
         />
       </fieldset>
 
@@ -282,6 +370,7 @@ const RxForm = () => {
           placeholder="Enter full name"
           value={providerData.fullName} 
           onChange={(event) => handleChange(setProviderData, event)} 
+          alert={providerAlerts.fullName}
         />    
 
         <AddressAutocomplete 
@@ -307,6 +396,7 @@ const RxForm = () => {
           placeholder="Enter prescriber number"
           value={providerData.prescriberNumber} 
           onChange={(event) => handleChange(setProviderData, event)} 
+          alert={providerAlerts.prescriberNumber}
         />
       </fieldset>
       <button type="submit">Generate Rx</button>
