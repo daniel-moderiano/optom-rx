@@ -243,4 +243,14 @@ describe('Patient data validation', () => {
     const alert = screen.getByText(/Please provide a valid Australian phone number/i);
     expect(alert).toBeInTheDocument();
   });
+
+  test("Phone number input rejects invalid 13 numbers", () => {
+    render(<RxForm />);
+    const input = screen.getByLabelText(/phone number/i);
+    fireEvent.change(input, { target: { value: '1324432112' } });
+    fireEvent.focusOut(input);
+    const alert = screen.getByText(/Please provide a valid Australian phone number/i);
+    expect(alert).toBeInTheDocument();
+  });
+
 });

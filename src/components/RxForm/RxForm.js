@@ -65,6 +65,10 @@ const RxForm = () => {
     element.classList.add('success');
   }
 
+  const validatePhoneFieldKeys = (event) => {
+    
+  };
+
   // Pass a set function to handle change, rather than hardcoding with a certain setState function
   const handleChange = (set, event) => {
     const { name, value } = event.target;
@@ -189,7 +193,7 @@ const RxForm = () => {
 
           case name === 'phoneNumber':
             // Consider trimming the input of any spaces, hyphens, or parens
-            if (!(/^((0[2-8]\d{8})|(13(\d{4}|\d{8})))$/).test(value.trim())) {
+            if (!(/^((0[2-8]\d{8})|(13(00|\d{4})(\d{6})?))$/).test(value.trim())) {
               setProviderAlerts((prevAlerts) => ({
                 ...prevAlerts,
                 phoneNumber: {
@@ -358,7 +362,7 @@ const RxForm = () => {
         <FormField 
           fieldType="checkbox" 
           name="prefix"
-          label="Select if you wish to include 'Dr' on the form" 
+          label="Select if you wish to be listed as 'Dr' on the form" 
           onChange={togglePrefix}
         />    
 
@@ -389,15 +393,24 @@ const RxForm = () => {
         />
 
         {/* Because this is intended for use only in Australia, present and validate phone numbers in national format, which includes 10 digits for landline and mobile numbers, as follows: 02 1234 4321 [telephone], or 0400 000 000 [mobile]. Note that 13 numbers may be 6 or 10 digits, and indicates an Australia wide number. This shouldn't be appropriate for any optical practices, but should be able to be inputted regardless */}
+        {/* Consider allowing the user to input any character at the beginning as many times as they like, but upon pressing any number, all preceding characters are replaced with said number. Then, do not allow any non digit inputs. Further, add spaces to auto format, and consider adding parens on landlines for final format  */}
         <FormField 
           fieldType="text" 
           name="phoneNumber"
           label="Phone number" 
           placeholder="Enter phone number"
           value={providerData.phoneNumber} 
-          onChange={(event) => handleChange(setProviderData, event)} 
+          onChange={(event) => {
+            validatePhoneFieldKeys();
+            handleChange(setProviderData, event)
+          }} 
           alert={providerAlerts.phoneNumber}
+          id="phoneNumber"
+          maxlength="10"
         />
+
+        {/* Australian mobile numbers contain 10 digits and begin with 04 */}
+        {/* Australian landline numbers contain 10 digits and begin with 02, 03, 07 or 08 */}
 
         <FormField 
           fieldType="text" 
