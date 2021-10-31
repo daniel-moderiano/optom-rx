@@ -243,5 +243,4 @@ describe('Patient data validation', () => {
     const alert = screen.getByText(/Please provide a valid Australian phone number/i);
     expect(alert).toBeInTheDocument();
   });
-
 });

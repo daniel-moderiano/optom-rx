@@ -42,7 +42,7 @@ const RxForm = () => {
 
   // Not all of this data will be required
   const [providerData, setProviderData] = useState({
-    title: '',
+    prefix: false,
     fullName: '',
     qualifications: '',
     practiceName: '',
@@ -186,9 +186,9 @@ const RxForm = () => {
               }));
             }
             break;
-          
-          // TODO: Consider masking, or specialised phone number input
+
           case name === 'phoneNumber':
+            // Consider trimming the input of any spaces, hyphens, or parens
             if (!(/^((0[2-8]\d{8})|(13(\d{4}|\d{8})))$/).test(value.trim())) {
               setProviderAlerts((prevAlerts) => ({
                 ...prevAlerts,
@@ -239,6 +239,16 @@ const RxForm = () => {
     providerDataValidation();
   }, [])
 
+  const togglePrefix = () => {
+    let newState = true;
+    if (providerData.prefix) {
+      newState = false;
+    }
+    setProviderData((prevData) => ({
+      ...prevData,
+      prefix: newState,
+    }));
+  }
 
   // TODO: handle submit
   const handleSubmit = (event) => {
@@ -344,14 +354,13 @@ const RxForm = () => {
         {/* Legal requirements include the prescriber's name, address, and contact details, and prescriber num
         You may also give them the option of adding qualifications */}
         {/* Consider a separate practice name field in the address section for providers, or even a Shop/Building # field? */}
+        
         <FormField 
-          fieldType="text" 
-          name="title"
-          label="Title - optional" 
-          placeholder="Mr/Mrs/Miss"
-          value={providerData.title} 
-          onChange={(event) => handleChange(setProviderData, event)} 
-        />
+          fieldType="checkbox" 
+          name="prefix"
+          label="Select if you wish to include 'Dr' on the form" 
+          onChange={togglePrefix}
+        />    
 
         <FormField 
           fieldType="text" 
@@ -362,6 +371,15 @@ const RxForm = () => {
           onChange={(event) => handleChange(setProviderData, event)} 
           alert={providerAlerts.fullName}
         />    
+
+        <FormField 
+          fieldType="text" 
+          name="qualifications"
+          label="Qualification/Degree - optional" 
+          placeholder="e.g. BMedSci"
+          value={providerData.qualifications} 
+          onChange={(event) => handleChange(setProviderData, event)} 
+        />
 
         <AddressAutocomplete 
           data={providerData}
