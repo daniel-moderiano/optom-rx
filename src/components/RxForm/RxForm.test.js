@@ -213,7 +213,7 @@ describe('Patient data validation', () => {
     const input = screen.getByLabelText(/phone number/i);
     fireEvent.change(input, { target: { value: '021234432' } });
     fireEvent.focusOut(input);
-    const alert = screen.getByText(/Please provide a valid Australian phone number/i);
+    const alert = screen.getByText(/Australian phone numbers contain 10 digits and begin with 02, 03, 04, 07 or 08/i);
     expect(alert).toBeInTheDocument();
   });
 
@@ -222,7 +222,7 @@ describe('Patient data validation', () => {
     const input = screen.getByLabelText(/phone number/i);
     fireEvent.change(input, { target: { value: '23133442345356' } });
     fireEvent.focusOut(input);
-    const alert = screen.getByText(/Please provide a valid Australian phone number/i);
+    const alert = screen.getByText(/Australian phone numbers contain 10 digits and begin with 02, 03, 04, 07 or 08/i);
     expect(alert).toBeInTheDocument();
   });
 
@@ -231,7 +231,7 @@ describe('Patient data validation', () => {
     const input = screen.getByLabelText(/phone number/i);
     fireEvent.change(input, { target: { value: '2345ac356' } });
     fireEvent.focusOut(input);
-    const alert = screen.getByText(/Please provide a valid Australian phone number/i);
+    const alert = screen.getByText(/Australian phone numbers contain 10 digits and begin with 02, 03, 04, 07 or 08/i);
     expect(alert).toBeInTheDocument();
   });
 
@@ -240,7 +240,7 @@ describe('Patient data validation', () => {
     const input = screen.getByLabelText(/phone number/i);
     fireEvent.change(input, { target: { value: '2345234523' } });
     fireEvent.focusOut(input);
-    const alert = screen.getByText(/Please provide a valid Australian phone number/i);
+    const alert = screen.getByText(/Australian phone numbers contain 10 digits and begin with 02, 03, 04, 07 or 08/i);
     expect(alert).toBeInTheDocument();
   });
 
@@ -249,7 +249,7 @@ describe('Patient data validation', () => {
     const input = screen.getByLabelText(/phone number/i);
     fireEvent.change(input, { target: { value: '1324432112' } });
     fireEvent.focusOut(input);
-    const alert = screen.getByText(/Please provide a valid Australian phone number/i);
+    const alert = screen.getByText(/Australian business numbers are either 6 digits and begin with 13, or 10 digits and begin with 1300/i);
     expect(alert).toBeInTheDocument();
   });
 

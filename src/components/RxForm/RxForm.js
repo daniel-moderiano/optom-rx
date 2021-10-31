@@ -194,17 +194,28 @@ const RxForm = () => {
           case name === 'phoneNumber':
             // Consider trimming the input of any spaces, hyphens, or parens
             if (!(/^((0[2-8]\d{8})|(13(00|\d{4})(\d{6})?))$/).test(value.trim())) {
-              setProviderAlerts((prevAlerts) => ({
-                ...prevAlerts,
-                phoneNumber: {
-                  message: 'Please provide a valid Australian phone number',
-                  type: 'error',
-                }
-              }));
+              if (value.substring(0, 2) === '13') {
+                // Provide business specific error message
+                setProviderAlerts((prevAlerts) => ({
+                  ...prevAlerts,
+                  phoneNumber: {
+                    message: 'Australian business numbers are either 6 digits and begin with 13, or 10 digits and begin with 1300',
+                    type: 'error',
+                  }
+                }));
+              } else {
+                // Provide general error message
+                setProviderAlerts((prevAlerts) => ({
+                  ...prevAlerts,
+                  phoneNumber: {
+                    message: 'Australian phone numbers contain 10 digits and begin with 02, 03, 04, 07 or 08',
+                    type: 'error',
+                  }
+                }));
+              }
               showErrorClass(event.target);
             } else {
               // Positive feedback and remove errors
-
               showSuccessClass(event.target);
               setProviderAlerts((prevAlerts) => ({
                 ...prevAlerts,
@@ -409,9 +420,7 @@ const RxForm = () => {
           maxlength="10"
         />
 
-        {/* Australian mobile numbers contain 10 digits and begin with 04 */}
-        {/* Australian landline numbers contain 10 digits and begin with 02, 03, 07 or 08 */}
-
+        
         <FormField 
           fieldType="text" 
           name="prescriberNumber"
