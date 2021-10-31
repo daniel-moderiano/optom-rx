@@ -189,34 +189,24 @@ const RxForm = () => {
           
           // TODO: Consider masking, or specialised phone number input
           case name === 'phoneNumber':
-            // Check for exactly 10 digits
-            // if (value.trim()[0] === '0') {
-            //   setProviderAlerts((prevAlerts) => ({
-            //     ...prevAlerts,
-            //     medicareNumber: {
-            //       message: 'Medicare number must not start with zero',
-            //       type: 'error',
-            //     }
-            //   }));
-            //   showErrorClass(event.target);
-            // } else if (!(/^[0-9]{10}$/).test(value.trim())) {
-            //   setProviderAlerts((prevAlerts) => ({
-            //     ...prevAlerts,
-            //     medicareNumber: {
-            //       message: 'Medicare number must be exactly 10 digits long',
-            //       type: 'error',
-            //     }
-            //   }));
-            //   showErrorClass(event.target);
-            // } else {
-            //   // Positive feedback and remove errors
+            if (!(/^((0[2-8]\d{8})|(13(\d{4}|\d{8})))$/).test(value.trim())) {
+              setProviderAlerts((prevAlerts) => ({
+                ...prevAlerts,
+                phoneNumber: {
+                  message: 'Please provide a valid Australian phone number',
+                  type: 'error',
+                }
+              }));
+              showErrorClass(event.target);
+            } else {
+              // Positive feedback and remove errors
 
-            //   showSuccessClass(event.target);
-            //   setProviderAlerts((prevAlerts) => ({
-            //     ...prevAlerts,
-            //     medicareNumber: {}
-            //   }));
-            // }
+              showSuccessClass(event.target);
+              setProviderAlerts((prevAlerts) => ({
+                ...prevAlerts,
+                phoneNumber: {}
+              }));
+            }
             break;
 
           case name === 'prescriberNumber':
@@ -380,6 +370,7 @@ const RxForm = () => {
           provider={true}   
         />
 
+        {/* Because this is intended for use only in Australia, present and validate phone numbers in national format, which includes 10 digits for landline and mobile numbers, as follows: 02 1234 4321 [telephone], or 0400 000 000 [mobile]. Note that 13 numbers may be 6 or 10 digits, and indicates an Australia wide number. This shouldn't be appropriate for any optical practices, but should be able to be inputted regardless */}
         <FormField 
           fieldType="text" 
           name="phoneNumber"
@@ -387,6 +378,7 @@ const RxForm = () => {
           placeholder="Enter phone number"
           value={providerData.phoneNumber} 
           onChange={(event) => handleChange(setProviderData, event)} 
+          alert={providerAlerts.phoneNumber}
         />
 
         <FormField 

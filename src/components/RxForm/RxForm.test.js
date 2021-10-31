@@ -154,7 +154,7 @@ describe('Patient data validation', () => {
     expect(alert).toBeInTheDocument();
   });
 
-  test("Prescriber number input single digit only", () => {
+  test("Prescriber number input rejects single digit only", () => {
     render(<RxForm />);
     const input = screen.getByLabelText(/prescriber number/i);
     fireEvent.change(input, { target: { value: '2' } });
@@ -171,4 +171,77 @@ describe('Patient data validation', () => {
     const alert = screen.queryByText(/Prescriber number must be a seven digit number/i);
     expect(alert).not.toBeInTheDocument();
   });
+
+  test("Phone number input validates mobile number", () => {
+    render(<RxForm />);
+    const input = screen.getByLabelText(/phone number/i);
+    fireEvent.change(input, { target: { value: '0400000000' } });
+    fireEvent.focusOut(input);
+    const alert = screen.queryByText(/Please enter a valid Australian phone number/i);
+    expect(alert).not.toBeInTheDocument();
+  });
+  
+  test("Phone number input validates state-specific landline number", () => {
+    render(<RxForm />);
+    const input = screen.getByLabelText(/phone number/i);
+    fireEvent.change(input, { target: { value: '0212344321' } });
+    fireEvent.focusOut(input);
+    const alert = screen.queryByText(/Please enter a valid Australian phone number/i);
+    expect(alert).not.toBeInTheDocument();
+  });
+
+  test("Phone number input validates Aus wide landline number", () => {
+    render(<RxForm />);
+    const input = screen.getByLabelText(/phone number/i);
+    fireEvent.change(input, { target: { value: '1300000000' } });
+    fireEvent.focusOut(input);
+    const alert = screen.queryByText(/Please provide a valid Australian phone number/i);
+    expect(alert).not.toBeInTheDocument();
+  });
+
+  test("Phone number input validates Aus wide 13 number (6 digit)", () => {
+    render(<RxForm />);
+    const input = screen.getByLabelText(/phone number/i);
+    fireEvent.change(input, { target: { value: '131316' } });
+    fireEvent.focusOut(input);
+    const alert = screen.queryByText(/Please provide a valid Australian phone number/i);
+    expect(alert).not.toBeInTheDocument();
+  });
+
+  test("Phone number input rejects numbers < 10 digits", () => {
+    render(<RxForm />);
+    const input = screen.getByLabelText(/phone number/i);
+    fireEvent.change(input, { target: { value: '021234432' } });
+    fireEvent.focusOut(input);
+    const alert = screen.getByText(/Please provide a valid Australian phone number/i);
+    expect(alert).toBeInTheDocument();
+  });
+
+  test("Phone number input rejects numbers > 10 digits", () => {
+    render(<RxForm />);
+    const input = screen.getByLabelText(/phone number/i);
+    fireEvent.change(input, { target: { value: '23133442345356' } });
+    fireEvent.focusOut(input);
+    const alert = screen.getByText(/Please provide a valid Australian phone number/i);
+    expect(alert).toBeInTheDocument();
+  });
+
+  test("Phone number input rejects numbers with non-digits", () => {
+    render(<RxForm />);
+    const input = screen.getByLabelText(/phone number/i);
+    fireEvent.change(input, { target: { value: '2345ac356' } });
+    fireEvent.focusOut(input);
+    const alert = screen.getByText(/Please provide a valid Australian phone number/i);
+    expect(alert).toBeInTheDocument();
+  });
+
+  test("Phone number input rejects numbers starting with neither 0 or 1", () => {
+    render(<RxForm />);
+    const input = screen.getByLabelText(/phone number/i);
+    fireEvent.change(input, { target: { value: '2345234523' } });
+    fireEvent.focusOut(input);
+    const alert = screen.getByText(/Please provide a valid Australian phone number/i);
+    expect(alert).toBeInTheDocument();
+  });
+
 });
