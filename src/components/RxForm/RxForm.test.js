@@ -253,4 +253,40 @@ describe('Patient data validation', () => {
     expect(alert).toBeInTheDocument();
   });
 
+  test('Drug name input rejects empty value', () => {
+    render(<RxForm />);
+    const input = screen.getByLabelText(/medication/i);
+    fireEvent.change(input, { target: { value: '' } });
+    fireEvent.focusOut(input);
+    const alert = screen.getByText(/This field cannot be left blank/i);
+    expect(alert).toBeInTheDocument();
+  });
+
+  test('Drug quantity input rejects empty value', () => {
+    render(<RxForm />);
+    const input = screen.getByLabelText(/quantity/i);
+    fireEvent.change(input, { target: { value: '' } });
+    fireEvent.focusOut(input);
+    const alert = screen.getByText(/This field cannot be left blank/i);
+    expect(alert).toBeInTheDocument();
+  });
+
+  test('Drug repeats input rejects empty value', () => {
+    render(<RxForm />);
+    const input = screen.getByLabelText(/repeats/i);
+    fireEvent.change(input, { target: { value: '' } });
+    fireEvent.focusOut(input);
+    const alert = screen.getByText(/This field cannot be left blank/i);
+    expect(alert).toBeInTheDocument();
+  });
+
+  test('Drug dosage input rejects empty value', () => {
+    render(<RxForm />);
+    const input = screen.getByLabelText(/dosage/i);
+    fireEvent.change(input, { target: { value: '' } });
+    fireEvent.focusOut(input);
+    const alert = screen.getByText(/This field cannot be left blank/i);
+    expect(alert).toBeInTheDocument();
+  });
+
 });

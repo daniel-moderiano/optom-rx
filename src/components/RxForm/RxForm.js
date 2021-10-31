@@ -5,7 +5,10 @@ import { StyledRxForm } from "./RxForm.styled";
 
 const RxForm = () => {
   const [drugAlerts, setDrugAlerts] = useState({
-
+    name: {},
+    quantity: {},
+    repeats: {},
+    dosage: {},
   });
 
   const [patientAlerts, setPatientAlerts] = useState({
@@ -64,10 +67,6 @@ const RxForm = () => {
     element.classList.remove('error');
     element.classList.add('success');
   }
-
-  const validatePhoneFieldKeys = (event) => {
-    
-  };
 
   // Pass a set function to handle change, rather than hardcoding with a certain setState function
   const handleChange = (set, event) => {
@@ -221,6 +220,7 @@ const RxForm = () => {
                 ...prevAlerts,
                 phoneNumber: {}
               }));
+              // TODO: consider input formatting phone numbers
             }
             break;
 
@@ -250,10 +250,105 @@ const RxForm = () => {
         }
       });
     };
-  
+
+    providerDataValidation();
+
+    // Event propagation will capture all focusout events from patient form
+    const drugDataValidation = () => {
+      document.querySelector('.drug-form').addEventListener('focusout', (event) => {
+        const { name, value } = event.target
+        switch (true) {
+          case name === 'name':
+            if (value.trim().length === 0) {
+              setDrugAlerts((prevAlerts) => ({
+                ...prevAlerts,
+                name: {
+                  message: "This field cannot be left blank",
+                  type: 'error',
+                }
+              }));
+              showErrorClass(event.target);
+            } else {
+              // Positive feedback and remove errors
+              showSuccessClass(event.target);
+              setDrugAlerts((prevAlerts) => ({
+                ...prevAlerts,
+                name: {}
+              }));
+            }
+            break;
+
+          case name === 'quantity':
+            if (value.trim().length === 0) {
+              setDrugAlerts((prevAlerts) => ({
+                ...prevAlerts,
+                quantity: {
+                  message: "This field cannot be left blank",
+                  type: 'error',
+                }
+              }));
+              showErrorClass(event.target);
+            } else {
+              // Positive feedback and remove errors
+              showSuccessClass(event.target);
+              setDrugAlerts((prevAlerts) => ({
+                ...prevAlerts,
+                quantity: {}
+              }));
+            }
+            break;
+
+          case name === 'repeats':
+            if (value.trim().length === 0) {
+              setDrugAlerts((prevAlerts) => ({
+                ...prevAlerts,
+                repeats: {
+                  message: "This field cannot be left blank",
+                  type: 'error',
+                }
+              }));
+              showErrorClass(event.target);
+            } else {
+              // Positive feedback and remove errors
+              showSuccessClass(event.target);
+              setDrugAlerts((prevAlerts) => ({
+                ...prevAlerts,
+                repeats: {}
+              }));
+            }
+            break;
+        
+          case name === 'dosage':
+            if (value.trim().length === 0) {
+              setDrugAlerts((prevAlerts) => ({
+                ...prevAlerts,
+                dosage: {
+                  message: "This field cannot be left blank",
+                  type: 'error',
+                }
+              }));
+              showErrorClass(event.target);
+            } else {
+              // Positive feedback and remove errors
+              showSuccessClass(event.target);
+              setDrugAlerts((prevAlerts) => ({
+                ...prevAlerts,
+                dosage: {}
+              }));
+            }
+            break;
+        
+          default:
+            break;
+        }
+      });
+    };
+
+    drugDataValidation();
     providerDataValidation();
   }, [])
 
+  // Used to toggle the Dr prefix state
   const togglePrefix = () => {
     let newState = true;
     if (providerData.prefix) {
@@ -284,6 +379,7 @@ const RxForm = () => {
           placeholder="Enter medication name"
           value={drugData.name} 
           onChange={(event) => handleChange(setDrugData, event)} 
+          alert={drugAlerts.name}
         />
 
         {/* Must include quantity and repeats to meet requirements */}
@@ -294,6 +390,7 @@ const RxForm = () => {
           placeholder="Enter dosage"
           value={drugData.dosage} 
           onChange={(event) => handleChange(setDrugData, event)} 
+          alert={drugAlerts.dosage}
         />
 
         <FormField 
@@ -303,6 +400,7 @@ const RxForm = () => {
           placeholder="Enter quantity"
           value={drugData.quantity} 
           onChange={(event) => handleChange(setDrugData, event)} 
+          alert={drugAlerts.quantity}
         />
 
         <FormField 
@@ -312,6 +410,7 @@ const RxForm = () => {
           placeholder="Enter repeats"
           value={drugData.repeats} 
           onChange={(event) => handleChange(setDrugData, event)} 
+          alert={drugAlerts.repeats}
         />
       </fieldset>
 
@@ -404,17 +503,14 @@ const RxForm = () => {
         />
 
         {/* Because this is intended for use only in Australia, present and validate phone numbers in national format, which includes 10 digits for landline and mobile numbers, as follows: 02 1234 4321 [telephone], or 0400 000 000 [mobile]. Note that 13 numbers may be 6 or 10 digits, and indicates an Australia wide number. This shouldn't be appropriate for any optical practices, but should be able to be inputted regardless */}
-        {/* Consider allowing the user to input any character at the beginning as many times as they like, but upon pressing any number, all preceding characters are replaced with said number. Then, do not allow any non digit inputs. Further, add spaces to auto format, and consider adding parens on landlines for final format  */}
+
         <FormField 
           fieldType="text" 
           name="phoneNumber"
           label="Phone number" 
           placeholder="Enter phone number"
           value={providerData.phoneNumber} 
-          onChange={(event) => {
-            validatePhoneFieldKeys();
-            handleChange(setProviderData, event)
-          }} 
+          onChange={(event) => handleChange(setProviderData, event)} 
           alert={providerAlerts.phoneNumber}
           id="phoneNumber"
           maxlength="10"
