@@ -267,7 +267,25 @@ describe('Patient data validation', () => {
     const input = screen.getByLabelText(/quantity/i);
     fireEvent.change(input, { target: { value: '' } });
     fireEvent.focusOut(input);
-    const alert = screen.getByText(/This field cannot be left blank/i);
+    const alert = screen.getByText(/Please enter a single digit medication quantity/i);
+    expect(alert).toBeInTheDocument();
+  });
+
+  test('Drug quantity input rejects input of 0', () => {
+    render(<RxForm />);
+    const input = screen.getByLabelText(/quantity/i);
+    fireEvent.change(input, { target: { value: '0' } });
+    fireEvent.focusOut(input);
+    const alert = screen.getByText(/Please enter a single digit medication quantity/i);
+    expect(alert).toBeInTheDocument();
+  });
+
+  test('Drug quantity input rejects value > 9', () => {
+    render(<RxForm />);
+    const input = screen.getByLabelText(/quantity/i);
+    fireEvent.change(input, { target: { value: '34' } });
+    fireEvent.focusOut(input);
+    const alert = screen.getByText(/Please enter a single digit medication quantity/i);
     expect(alert).toBeInTheDocument();
   });
 

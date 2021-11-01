@@ -278,12 +278,14 @@ const RxForm = () => {
             }
             break;
 
+          // TODO: validate numbers only
+          // Quantity must be greater than zero, but < 10
           case name === 'quantity':
-            if (value.trim().length === 0) {
+            if (!(/^[1-9]{1}$/).test(value.trim())) {
               setDrugAlerts((prevAlerts) => ({
                 ...prevAlerts,
                 quantity: {
-                  message: "This field cannot be left blank",
+                  message: "Medication quantity should be greater than one, and less than 10",
                   type: 'error',
                 }
               }));
@@ -298,8 +300,9 @@ const RxForm = () => {
             }
             break;
 
+            // TODO: validate numbers only
           case name === 'repeats':
-            if (value.trim().length === 0) {
+            if (!(/^\d{1,}$/).test(value.trim())) {
               setDrugAlerts((prevAlerts) => ({
                 ...prevAlerts,
                 repeats: {
@@ -345,7 +348,6 @@ const RxForm = () => {
     };
 
     drugDataValidation();
-    providerDataValidation();
   }, [])
 
   // Used to toggle the Dr prefix state
@@ -394,7 +396,7 @@ const RxForm = () => {
         />
 
         <FormField 
-          fieldType="text" 
+          fieldType="number" 
           name="quantity"
           label="Quantity" 
           placeholder="Enter quantity"
@@ -404,7 +406,7 @@ const RxForm = () => {
         />
 
         <FormField 
-          fieldType="text" 
+          fieldType="number" 
           name="repeats"
           label="Repeats" 
           placeholder="Enter repeats"
