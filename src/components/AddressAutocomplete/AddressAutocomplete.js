@@ -11,7 +11,7 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
   const [expand, setExpand] = useState(false);
 
   // Control field validation here (set alert with object containing alert parameters when user makes error for example)
-  const [alert, setAlert] = useState({});
+  const [autocompleteAlert, setAutocompleteAlert] = useState({});
 
   const [addressAlerts, setAddressAlerts] = useState({
     suburb: {},
@@ -184,6 +184,18 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
 
     addressDataValidation();
 
+    // Add similar validation for empty address field
+    input.addEventListener('focusout', () => {
+      if (input.value.trim().length === 0) {
+        setAutocompleteAlert({ message: "This field cannot be left blank", type: 'error' })
+        showErrorClass(input);
+      } else {
+        // While it is OK to remove the error alerts here, the entire address section must be validated before form is submitted (to prevent user only adding to the street address field).
+        showSuccessClass(input);
+        setAutocompleteAlert({});
+      }
+    })
+
     // Using a load event listener ensures the script is loaded prior to trying to access the API
     googleScript.addEventListener('load', () => {
       autocomplete = new google.maps.places.Autocomplete(input, {
@@ -206,7 +218,7 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
         // Occurs when user hits enter without selecting an option
         input.classList.add('error');
         input.classList.remove('success');
-        setAlert({ message: "Invalid address selection", type: 'error' })
+        setAutocompleteAlert({ message: "Invalid address selection", type: 'error' })
       } else {
         console.log(place);
         input.classList.remove('error');
@@ -216,7 +228,7 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
             input.classList.add('success');
           }
         });
-        setAlert({});
+        setAutocompleteAlert({});
         setAddressAlerts({
           suburb: {},
           postcode: {},
@@ -251,7 +263,7 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
           value={data.streetAddress}
           onChange={handleChange} 
           id={provider ? 'autocomplete-provider' : 'autocomplete-patient'}
-          alert={alert}
+          alert={autocompleteAlert}
           className="street-address"
         />
         <button type="button" onClick={() => setExpand(true)}>Address not listed?</button>
