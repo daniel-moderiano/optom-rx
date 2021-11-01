@@ -13,6 +13,22 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
   // Control field validation here (set alert with object containing alert parameters when user makes error for example)
   const [alert, setAlert] = useState({});
 
+  const [addressAlerts, setAddressAlerts] = useState({
+    suburb: {},
+    postcode: {},
+    state: {},
+  });
+
+  const showErrorClass = (element) => {
+    element.classList.add('error');
+    element.classList.remove('success');
+  }
+
+  const showSuccessClass = (element) => {
+    element.classList.remove('error');
+    element.classList.add('success');
+  }
+
   const fillAddress = useCallback((placeDetails) => {
     let address = {
       streetAddress: '',
@@ -96,6 +112,78 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
       }
     });
 
+    // Add form validation for address-collapse section(s)
+    // Event propagation will capture all focusout events from patient form
+    const addressDataValidation = () => {
+      document.querySelector('.address-collapse').addEventListener('focusout', (event) => {
+        const { name, value } = event.target;
+        switch (true) {
+          case name === 'suburb':
+            if (value.trim().length === 0) {
+              setAddressAlerts((prevAlerts) => ({
+                ...prevAlerts,
+                suburb: {
+                  message: "This field cannot be left blank",
+                  type: 'error',
+                }
+              }));
+              showErrorClass(event.target);
+            } else {
+              showSuccessClass(event.target);
+              setAddressAlerts((prevAlerts) => ({
+                ...prevAlerts,
+                suburb: {}
+              }));
+            }
+            break;
+    
+          case name === 'state':
+            if (value.trim().length === 0) {
+              setAddressAlerts((prevAlerts) => ({
+                ...prevAlerts,
+                state: {
+                  message: "This field cannot be left blank",
+                  type: 'error',
+                }
+              }));
+              showErrorClass(event.target);
+            } else {
+              showSuccessClass(event.target);
+              setAddressAlerts((prevAlerts) => ({
+                ...prevAlerts,
+                state: {}
+              }));
+            }
+            break;
+    
+          case name === 'postcode':
+            if (value.trim().length === 0) {
+              setAddressAlerts((prevAlerts) => ({
+                ...prevAlerts,
+                postcode: {
+                  message: "This field cannot be left blank",
+                  type: 'error',
+                }
+              }));
+              showErrorClass(event.target);
+            } else {
+              // Positive feedback and remove errors
+              showSuccessClass(event.target);
+              setAddressAlerts((prevAlerts) => ({
+                ...prevAlerts,
+                postcode: {}
+              }));
+            }
+            break;
+        
+          default:
+            break;
+        }
+      });
+    };
+
+    addressDataValidation();
+
     // Using a load event listener ensures the script is loaded prior to trying to access the API
     googleScript.addEventListener('load', () => {
       autocomplete = new google.maps.places.Autocomplete(input, {
@@ -128,7 +216,12 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
             input.classList.add('success');
           }
         });
-        setAlert({})
+        setAlert({});
+        setAddressAlerts({
+          suburb: {},
+          postcode: {},
+          state: {},
+        })
         fillAddress(place);
          // Autofill, and toggle display of additional address fields
         setExpand(true);
@@ -181,6 +274,7 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
           placeholder="patient suburb"
           value={data.suburb} 
           onChange={handleChange} 
+          alert={addressAlerts.suburb}
         />
 
         <FormField 
@@ -189,6 +283,7 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
           placeholder="Enter state"
           value={data.state} 
           onChange={handleChange} 
+          alert={addressAlerts.state}
         />
 
         <FormField 
@@ -197,6 +292,7 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
           placeholder="Enter postcode"
           value={data.postcode} 
           onChange={handleChange} 
+          alert={addressAlerts.postcode}
         />
       </fieldset>
     </StyledAddressAutocomplete>
