@@ -278,7 +278,6 @@ const RxForm = () => {
             }
             break;
 
-          // TODO: validate numbers only
           // Quantity must be greater than zero, but < 10
           case name === 'quantity':
             if (!(/^[1-9]{1}$/).test(value.trim())) {
@@ -300,13 +299,22 @@ const RxForm = () => {
             }
             break;
 
-            // TODO: validate numbers only
+          // Can be zero, and for non-PBS prescriptions, there is technically no upper limits
           case name === 'repeats':
-            if (!(/^\d{1,}$/).test(value.trim())) {
+            if (value.trim().length === 0) {
               setDrugAlerts((prevAlerts) => ({
                 ...prevAlerts,
                 repeats: {
                   message: "This field cannot be left blank",
+                  type: 'error',
+                }
+              }));
+              showErrorClass(event.target);
+            } else if (!(/^0$|^([1-9]{1,})$/).test(value.trim())) {
+              setDrugAlerts((prevAlerts) => ({
+                ...prevAlerts,
+                repeats: {
+                  message: "Please enter a valid number of repeats (may be zero)",
                   type: 'error',
                 }
               }));

@@ -267,7 +267,7 @@ describe('Patient data validation', () => {
     const input = screen.getByLabelText(/quantity/i);
     fireEvent.change(input, { target: { value: '' } });
     fireEvent.focusOut(input);
-    const alert = screen.getByText(/Please enter a single digit medication quantity/i);
+    const alert = screen.getByText(/Medication quantity should be greater than one, and less than 10/i);
     expect(alert).toBeInTheDocument();
   });
 
@@ -276,7 +276,7 @@ describe('Patient data validation', () => {
     const input = screen.getByLabelText(/quantity/i);
     fireEvent.change(input, { target: { value: '0' } });
     fireEvent.focusOut(input);
-    const alert = screen.getByText(/Please enter a single digit medication quantity/i);
+    const alert = screen.getByText(/Medication quantity should be greater than one, and less than 10/i);
     expect(alert).toBeInTheDocument();
   });
 
@@ -285,7 +285,7 @@ describe('Patient data validation', () => {
     const input = screen.getByLabelText(/quantity/i);
     fireEvent.change(input, { target: { value: '34' } });
     fireEvent.focusOut(input);
-    const alert = screen.getByText(/Please enter a single digit medication quantity/i);
+    const alert = screen.getByText(/Medication quantity should be greater than one, and less than 10/i);
     expect(alert).toBeInTheDocument();
   });
 
@@ -295,6 +295,15 @@ describe('Patient data validation', () => {
     fireEvent.change(input, { target: { value: '' } });
     fireEvent.focusOut(input);
     const alert = screen.getByText(/This field cannot be left blank/i);
+    expect(alert).toBeInTheDocument();
+  });
+
+  test('Drug repeats input rejects invalid number value', () => {
+    render(<RxForm />);
+    const input = screen.getByLabelText(/repeats/i);
+    fireEvent.change(input, { target: { value: '03' } });
+    fireEvent.focusOut(input);
+    const alert = screen.getByText(/Please enter a valid number of repeats \(may be zero\)/i);
     expect(alert).toBeInTheDocument();
   });
 
