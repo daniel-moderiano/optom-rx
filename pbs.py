@@ -1,4 +1,4 @@
-# PBS fields in drug.txt
+# All PBS data fields (including those not entirely relevant)
 all_fields = {
   'program-code': '',
   'atc-level-code': '',
@@ -47,6 +47,7 @@ pres_fields = [
 ]
 # This can be searched using the 'O' prescriber type, and then grabbing the item-codes to then look up more details in drug.txt and restrictions.txt
 
+# Global variables
 drugs = {}
 data = []
 
@@ -108,7 +109,6 @@ def remove_space(element):
 table_path = 'C:/Users/danie/Documents/Programming/work-projects/optom-rx/info/2021-11-01-v3extracts/Pharmacy_PBS_Item_Table_20211101.txt'
 with open(table_path) as f:
   table_lines = f.readlines()
-  columns = table_lines[0].strip().split('!')
   for line in table_lines:
     line_arr = line.strip().split('\t')
     if line_arr[0] in item_codes:
@@ -123,7 +123,24 @@ with open(table_path) as f:
       drugs[line_arr[0]]['caution-ids'] = caution_ids
 
 
+# Using the indication ID, finds the relevant indications for a particular drug restriction
+res_path = 'C:/Users/danie/Documents/Programming/work-projects/optom-rx/info/2021-11-01-v3extracts/RestrictionExtractDelimited_20211101.txt'
 
+# Produce a sub-dictionary containing only item-code: restriction-id key: value pairs for referencing
+id_match = {}
 for code in drugs.keys():
-  print(drugs[code]['brand-name'], drugs[code]['note-ids'], drugs[code]['caution-ids'])
+  id_match[code] = drugs[code]['indication-id']
+
+with open(res_path) as f:
+  res_lines = f.readlines()
+  for line in res_lines:
+    line_arr = line.strip().split('\t')
+    if line_arr[0] in id_match.values():
+      # There is incredibly large whitespace strings within the strings of some restrictions. The following code removes all of the duplicate whitespace
+      new_arr = list(map(lambda x: " ".join(x.split()), line_arr))
+      print(new_arr)
+      
+print(id_match)
+# for code in drugs.keys():
+#   print(drugs[code]['brand-name'], drugs[code]['note-ids'], drugs[code]['caution-ids'])
 
