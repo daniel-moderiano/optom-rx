@@ -115,10 +115,10 @@ with open(table_path) as f:
     if line_arr[0] in item_codes:
       filtered = list(filter(remove_space, line_arr))
       item = filtered[0]
-      # Extract sub-list of up to 15 note ids
-      note_ids = filtered[3:18]
+      # Extract sub-list of up to 15 note ids, and simplify list to only actual IDs (remove blank elements)
+      note_ids = list(filter(lambda x: x != '0', filtered[3:18]))
       # Extract sub-list of up to 5 caution ids
-      caution_ids = filtered[18:]
+      caution_ids = list(filter(lambda x: x != '0', filtered[18:]))
       
       drugs[line_arr[0]]['note-ids'] = note_ids
       drugs[line_arr[0]]['caution-ids'] = caution_ids
@@ -133,6 +133,7 @@ id_match = {}
 for code in drugs.keys():
   id_match[code] = drugs[code]['indication-id']
 
+# Extract all the restriction/indication details for only the relevant IDs in the ophthalmological drugs
 with open(res_path) as f:
   res_lines = f.readlines()
   columns = ['indication-id', 'description', 'misc-res-code', 'date-req', 'text-req']
@@ -152,16 +153,41 @@ with open(res_path) as f:
       
       res_dict[new_line_arr[0]] = res_item
 
-# print(id_match)
-
+# Add all the generated indication/restriction data to the main drugs dict
 for item_code in id_match:
   if id_match[item_code] in res_dict.keys():
     drugs[item_code]['indications'] = res_dict[id_match[item_code]]
 
-print(drugs)
-      
-# print(id_match)
-# print(res_list)
-# for code in drugs.keys():
-#   print(drugs[code]['brand-name'], drugs[code]['note-ids'], drugs[code]['caution-ids'])
 
+# Produce a sub-dictionary containing only item-code: note-id key: value pairs for referencing. Note the values will be arrays, and only those with length > 0 contain note IDs
+item_note = {}
+note_dict = {}
+for code in drugs.keys():
+  item_note[code] = drugs[code]['note-ids']
+
+print(item_note)
+
+# # Extract all the restriction/indication details for only the relevant IDs in the ophthalmological drugs
+# with open(res_path) as f:
+#   res_lines = f.readlines()
+#   columns = ['indication-id', 'description', 'misc-res-code', 'date-req', 'text-req']
+#   for line in res_lines:
+#     line_arr = line.strip().split('\t')
+#     if line_arr[0] in id_match.values():
+#       # There is incredibly large whitespace strings within the strings of some restrictions. The following code removes all of the duplicate whitespace
+#       new_line_arr = list(map(lambda x: " ".join(x.split()), line_arr))
+
+#       # Create an intermediary restriction dict to act as a joining database of sorts for drug dicts and indication/restriction details
+#       res_item = {}
+#       for i in range(len(columns)):
+#         if i == 0:
+#           res_dict[new_line_arr[i]] = {}
+#         else:
+#           res_item[columns[i]] = new_line_arr[i]
+      
+#       res_dict[new_line_arr[0]] = res_item
+
+# # Add all the generated indication/restriction data to the main drugs dict
+# for item_code in id_match:
+#   if id_match[item_code] in res_dict.keys():
+#     drugs[item_code]['indications'] = res_dict[id_match[item_code]]
