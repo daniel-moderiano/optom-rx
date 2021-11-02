@@ -1,34 +1,34 @@
 # PBS fields in drug.txt
-data = {
-  'program-code': '',
-  'atc-level-code': '',
-  'atc-type': '',
-  'atc-print-option': '',
-  'item-code': '',
-  'restriction-flag': '',
-  'has-caution': '',
-  'has-note': '',
-  'mq': '',    # maximum quantity
-  'repeats': '',
-  'manufacturer-code': '',
-  'pack-size': '',
-  'markup-band': '',
-  'fee-code',
-  'dangerous-drug-code',
-  'brand-premium',
-  'therapeutic-premium',
-  'cp2p',    # commonwealth price to pharmacy
-  'cdpmq',   # commonwealth dispensed price for maximum quantity
-  'lp2p',    # lowest price to pharmacist
-  'ldpmq',   # lowest dispensed price for maximum quantity
-  'mp2p',    # manufacturer price to pharmacist
-  'mdpmq',   # manufacturer dispensed price for maximum quantity
-  'mrvsn',   # maximum recordable value for safety net
-  'bioequivalence',
-  'brand-name',
-  'mp-pt',   # MP preferred term
-  'tpuu-or-mpp-pt'    #TPUU or MPP preferred term
-}
+# data = {
+#   'program-code': '',
+#   'atc-level-code': '',
+#   'atc-type': '',
+#   'atc-print-option': '',
+#   'item-code': '',
+#   'restriction-flag': '',
+#   'has-caution': '',
+#   'has-note': '',
+#   'mq': '',    # maximum quantity
+#   'repeats': '',
+#   'manufacturer-code': '',
+#   'pack-size': '',
+#   'markup-band': '',
+#   'fee-code': '',
+#   'dangerous-drug-code': '',
+#   'brand-premium': '',
+#   'therapeutic-premium': '',
+#   'cp2p': '',    # commonwealth price to pharmacy
+#   'cdpmq': '',   # commonwealth dispensed price for maximum quantity
+#   'lp2p': '',    # lowest price to pharmacist
+#   'ldpmq': '',   # lowest dispensed price for maximum quantity
+#   'mp2p': '',    # manufacturer price to pharmacist
+#   'mdpmq': '',   # manufacturer dispensed price for maximum quantity
+#   'mrvsn': '',   # maximum recordable value for safety net
+#   'bioequivalence': '',
+#   'brand-name': '',
+#   'mp-pt': '',   # MP preferred term
+#   'tpuu-or-mpp-pt': '',    #TPUU or MPP preferred term
+# }
 
 # Anatomical Therapeutic Chemical (ATC) classification index is used to classify drugs based on area of intended use. 
 # The ATC level code is a combination of flags that categorise a drug, e.g.
@@ -42,7 +42,7 @@ pres_fields = [
 ]
 # This can be searched using the 'O' prescriber type, and then grabbing the item-codes to then look up more details in drug.txt and restrictions.txt
 
-
+data = []
 
 # Isolate the optometry specific medications (by item code) from the PBS list
 # For reference, at the time of writing, there are 64 approved optometry PBS medications
@@ -64,13 +64,24 @@ print(item_codes)
 # Using the item codes obtained, search the drug.txt doc for pricing and quantity info
 drug_path = 'C:/Users/danie/Documents/Programming/work-projects/optom-rx/info/drug_20211101.txt'
 with open(drug_path) as f:
+  drug = {}
   drug_lines = f.readlines()
+  columns = drug_lines[0].strip().split('!')
   for line in drug_lines:
     # Drug.txt uses ! markers as delimmiters, and the fields are listed above in the drug fields array. Not all of these are important information in the context of this app, but all will be extracted for now
-    line_arr = line.split('!')
+    line_arr = line.strip().split('!')
     if line_arr[4] in item_codes:
-      print(f'item-code: {line_arr[4]}')
+      for i in range(len(columns)):
+        # Add all data columns under the respective names for every individual medication/drug
+        drug[columns[i]] = line_arr[i]
+      data.append(drug)
+      # Must reset drug variable
+      drug = {}
 
+for drug in data:
+  print(drug['brand-name'])
+
+# print(data[1]['item-code'])
 # Write mode (switch the 'w' to an 'a' for append mode)\
 # counter = 0
 # with open('C:/Users/danie/Documents/Programming/work-projects/optom-rx/info/pbs-format.txt', 'w') as f:
