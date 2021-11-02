@@ -32,6 +32,7 @@ all_fields = {
   'increase-code': '',    # Incidates whether the indication applies to normal and/or increased drug quantities
   'note-ids': [],    # Array of up to 15 note IDs; can be used to cross reference note list
   'caution_ids': [],    # Array of up to 5 caution IDs; can be used to cross reference caution list
+  'indications': {},
 }
 
 
@@ -127,20 +128,40 @@ with open(table_path) as f:
 res_path = 'C:/Users/danie/Documents/Programming/work-projects/optom-rx/info/2021-11-01-v3extracts/RestrictionExtractDelimited_20211101.txt'
 
 # Produce a sub-dictionary containing only item-code: restriction-id key: value pairs for referencing
+res_dict = {}
 id_match = {}
 for code in drugs.keys():
   id_match[code] = drugs[code]['indication-id']
 
 with open(res_path) as f:
   res_lines = f.readlines()
+  columns = ['indication-id', 'description', 'misc-res-code', 'date-req', 'text-req']
   for line in res_lines:
     line_arr = line.strip().split('\t')
     if line_arr[0] in id_match.values():
       # There is incredibly large whitespace strings within the strings of some restrictions. The following code removes all of the duplicate whitespace
-      new_arr = list(map(lambda x: " ".join(x.split()), line_arr))
-      print(new_arr)
+      new_line_arr = list(map(lambda x: " ".join(x.split()), line_arr))
+
+      # Create an intermediary restriction dict to act as a joining database of sorts for drug dicts and indication/restriction details
+      res_item = {}
+      for i in range(len(columns)):
+        if i == 0:
+          res_dict[new_line_arr[i]] = {}
+        else:
+          res_item[columns[i]] = new_line_arr[i]
       
-print(id_match)
+      res_dict[new_line_arr[0]] = res_item
+
+# print(id_match)
+
+for item_code in id_match:
+  if id_match[item_code] in res_dict.keys():
+    drugs[item_code]['indications'] = res_dict[id_match[item_code]]
+
+print(drugs)
+      
+# print(id_match)
+# print(res_list)
 # for code in drugs.keys():
 #   print(drugs[code]['brand-name'], drugs[code]['note-ids'], drugs[code]['caution-ids'])
 
