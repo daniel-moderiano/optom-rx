@@ -29,6 +29,9 @@ all_fields = {
   'mp-pt': '',   # MP preferred term
   'tpuu-or-mpp-pt': '',    #TPUU or MPP preferred term
   'indication-id': '',    # Used to find the indications of a restricted drug
+  'increase-code': '',    # Incidates whether the indication applies to normal and/or increased drug quantities
+  'note-ids': [],    # Array of up to 15 note IDs; can be used to cross reference note list
+  'caution_ids': [],    # Array of up to 5 caution IDs; can be used to cross reference caution list
 }
 
 
@@ -81,21 +84,46 @@ with open(drug_path) as f:
 
 
 # Using the item code, find the indication IDs for the restrictions on the meds. Note that only authorised medications will have indication IDs
-table_path = 'C:/Users/danie/Documents/Programming/work-projects/optom-rx/info/2021-11-01-v3extracts/LinkExtract_20211101.txt'
+link_path = 'C:/Users/danie/Documents/Programming/work-projects/optom-rx/info/2021-11-01-v3extracts/LinkExtract_20211101.txt'
+with open(link_path) as f:
+  link_lines = f.readlines()
+  columns = link_lines[0].strip().split('!')
+  for line in link_lines:
+    line_arr = line.strip().split('\t')
+    if line_arr[0] in item_codes:
+      # Grab only the required columns from this datasheet
+      drugs[line_arr[0]]['indication-id'] = line_arr[1]
+      drugs[line_arr[0]]['increase-code'] = line_arr[2]
+
+
+# Custom filtering function to remove unwanted whitespace from PBS item table text file
+def remove_space(element):
+  chars = ['', '\t', '        ']
+  if element not in chars:
+    return True
+  else:
+    return False
+
+# Using the item code, find the note and caution IDs, which may be singular or multiple
+table_path = 'C:/Users/danie/Documents/Programming/work-projects/optom-rx/info/2021-11-01-v3extracts/Pharmacy_PBS_Item_Table_20211101.txt'
 with open(table_path) as f:
   table_lines = f.readlines()
   columns = table_lines[0].strip().split('!')
   for line in table_lines:
-    # Drug.txt uses ! markers as delimmiters, and the fields are listed above in the drug fields array. Not all of these are important information in the context of this app, but all will be extracted for now
     line_arr = line.strip().split('\t')
     if line_arr[0] in item_codes:
-      # Must reset drug variable
-      # drug = {}
-      # for i in range(len(columns)):
-      #   # Add all data columns under the respective names for every individual medication/drug
-      #   drug[columns[i]] = line_arr[i]
-      # data.append(drug)
-      drugs[line_arr[0]]['indication-id'] = line_arr[1]
+      filtered = list(filter(remove_space, line_arr))
+      item = filtered[0]
+      # Extract sub-list of up to 15 note ids
+      note_ids = filtered[3:18]
+      # Extract sub-list of up to 5 caution ids
+      caution_ids = filtered[18:]
       
+      drugs[line_arr[0]]['note-ids'] = note_ids
+      drugs[line_arr[0]]['caution-ids'] = caution_ids
+
+
+
 for code in drugs.keys():
-  print(drugs[code]['brand-name'], drugs[code]['restriction-flag'], drugs[code]['indication-id'])
+  print(drugs[code]['brand-name'], drugs[code]['note-ids'], drugs[code]['caution-ids'])
+
