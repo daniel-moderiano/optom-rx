@@ -2669,6 +2669,9 @@ const data = {
       "If the maximum number of repeats stated in this listing is not requested in this application, further supplies can be obtained through this treatment phase listing to continue treatment for up to the first 180 days of treatment, but the OSDI score and CFS grade need not be re-stated. Alternatively, treatment may be continued under the 'Continuing treatment' phase listing, provided the patient meets all eligibility criteria specified in that treatment phase listing.",
       'Applications for authorisation under this restriction may be made in real time using the Online PBS Authorities system (see www.servicesaustralia.gov.au/HPOS) or by telephone by contacting Services Australia on 1800 888 333.'
     ],
+    cautions: [
+      'It is recommended that the potential for immunosuppression with long term use of this drug be clinically reviewed after at least 24 months of treatment, if not already reviewed.'
+    ],
     atc: 'S01XA18',
     'caution-ids': [ '27780' ]
   },
@@ -2719,3 +2722,4 @@ const data = {
     'caution-ids': []
   }
 }
+

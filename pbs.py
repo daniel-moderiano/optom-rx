@@ -34,7 +34,7 @@ all_fields = {
   'caution_ids': [],    # Array of up to 5 caution IDs; can be used to cross reference caution list
   'indications': {},
   'notes': [],
-
+  'cautions': [],
 }
 
 
@@ -169,8 +169,6 @@ for code in drugs.keys():
 
 notes_path = 'C:/Users/danie/Documents/Programming/work-projects/optom-rx/info/2021-11-01-v3extracts/NoteExtract_20211101.txt'
 
-# print(item_note.values())
-
 # Flatten values array
 flat_item_note = []
 for sublist in item_note.values():
@@ -179,7 +177,6 @@ for sublist in item_note.values():
 
 # Remove duplicate note IDs
 item_note_final = list(dict.fromkeys(flat_item_note))
-
 
 # Extract all the notes the relevant IDs in the ophthalmological drugs
 with open(notes_path) as f:
@@ -191,18 +188,52 @@ with open(notes_path) as f:
       # Add all relevant notes to the note_dict for later reference when adding to main drugs dict
       note_dict[line_arr[0]] = line_arr[1]
 
-# # Add all the generated indication/restriction data to the main drugs dict
+# # Add all the generated notes data to the main drugs dict
 for item_code in item_note:
-  # TODO: check array length for each item code, and if > 0, iterate through and append a note to data[item_code][notes] for each note-id
+  # Isolate only those item codes with notes
   if len(item_note[item_code]) > 0:
-    # Iterate through all the note IDs, and append each corresponding note to the drug notes array
+    # Iterate through all the note IDs, and append each corresponding note to the drug notes array by first forming a temp notes array, and reseting this each loop
     notes = []
     for note_id in item_note[item_code]:
       notes.append(note_dict[note_id])
       drugs[item_code]['notes'] = notes
 
-print(drugs)
 
+# Produce a sub-dictionary containing only item-code: caution-id key: value pairs for referencing. Note the values will be arrays, and only those with length > 0 contain caution IDs
+item_caution = {}
+caution_dict = {}
+for code in drugs.keys():
+  item_caution[code] = drugs[code]['caution-ids']
 
+caution_path = 'C:/Users/danie/Documents/Programming/work-projects/optom-rx/info/2021-11-01-v3extracts/CautionExtract_20211101.txt'
 
+# Flatten caution array
+flat_item_caution = []
+for sublist in item_caution.values():
+    for item in sublist:
+        flat_item_caution.append(item)
 
+# # Remove duplicate note IDs
+item_caution_final = list(dict.fromkeys(flat_item_caution))
+
+# # Extract all the caution messages for the relevant IDs in the ophthalmological drugs
+with open(caution_path) as f:
+  caution_lines = f.readlines()
+  columns = ['caution-id', 'caution']
+  for line in caution_lines:
+    line_arr = line.strip().split('\t')
+    if line_arr[0] in item_caution_final:
+      # Add all relevant notes to the note_dict for later reference when adding to main drugs dict
+      caution_dict[line_arr[0]] = line_arr[1]
+
+# Add all the generated caution data to the main drugs dict
+for item_code in item_caution:
+  # Isolate only those item codes with cautions
+  if len(item_caution[item_code]) > 0:
+    # Iterate through all the note IDs, and append each corresponding caution to the drug caution array by first forming a temp caution array, and reseting this each loop
+    cautions = []
+    for caution_id in item_caution[item_code]:
+      cautions.append(caution_dict[caution_id])
+      drugs[item_code]['cautions'] = cautions
+
+print(drugs['12663L'])
