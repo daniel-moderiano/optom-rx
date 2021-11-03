@@ -2848,6 +2848,24 @@ const data = {
     atc: 'S01BB02',
     'caution-ids': []
   }
-}
+};
 
+const dataFields = [
+  'item-code',
+  'brand-name',
+  'mp-pt',
+  'tpuu-or-mpp-pt'
+];
 
+const reducedData = [];
+
+Object.keys(data).forEach((code) => {
+  const entry = {};
+  dataFields.forEach((field) => {
+    entry[field] = data[code][field];
+  });
+  reducedData.push(entry);
+});
+
+const dataJSON = JSON.stringify(reducedData);
+console.log(dataJSON);
