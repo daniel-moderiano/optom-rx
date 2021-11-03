@@ -33,6 +33,8 @@ all_fields = {
   'note-ids': [],    # Array of up to 15 note IDs; can be used to cross reference note list
   'caution_ids': [],    # Array of up to 5 caution IDs; can be used to cross reference caution list
   'indications': {},
+  'notes': [],
+
 }
 
 
@@ -165,29 +167,42 @@ note_dict = {}
 for code in drugs.keys():
   item_note[code] = drugs[code]['note-ids']
 
-print(item_note)
+notes_path = 'C:/Users/danie/Documents/Programming/work-projects/optom-rx/info/2021-11-01-v3extracts/NoteExtract_20211101.txt'
 
-# # Extract all the restriction/indication details for only the relevant IDs in the ophthalmological drugs
-# with open(res_path) as f:
-#   res_lines = f.readlines()
-#   columns = ['indication-id', 'description', 'misc-res-code', 'date-req', 'text-req']
-#   for line in res_lines:
-#     line_arr = line.strip().split('\t')
-#     if line_arr[0] in id_match.values():
-#       # There is incredibly large whitespace strings within the strings of some restrictions. The following code removes all of the duplicate whitespace
-#       new_line_arr = list(map(lambda x: " ".join(x.split()), line_arr))
+# print(item_note.values())
 
-#       # Create an intermediary restriction dict to act as a joining database of sorts for drug dicts and indication/restriction details
-#       res_item = {}
-#       for i in range(len(columns)):
-#         if i == 0:
-#           res_dict[new_line_arr[i]] = {}
-#         else:
-#           res_item[columns[i]] = new_line_arr[i]
-      
-#       res_dict[new_line_arr[0]] = res_item
+# Flatten values array
+flat_item_note = []
+for sublist in item_note.values():
+    for item in sublist:
+        flat_item_note.append(item)
+
+# Remove duplicate note IDs
+item_note_final = list(dict.fromkeys(flat_item_note))
+
+
+# Extract all the notes the relevant IDs in the ophthalmological drugs
+with open(notes_path) as f:
+  notes_lines = f.readlines()
+  columns = ['note-id', 'note']
+  for line in notes_lines:
+    line_arr = line.strip().split('\t')
+    if line_arr[0] in item_note_final:
+      # Add all relevant notes to the note_dict for later reference when adding to main drugs dict
+      note_dict[line_arr[0]] = line_arr[1]
 
 # # Add all the generated indication/restriction data to the main drugs dict
-# for item_code in id_match:
-#   if id_match[item_code] in res_dict.keys():
-#     drugs[item_code]['indications'] = res_dict[id_match[item_code]]
+for item_code in item_note:
+  # TODO: check array length for each item code, and if > 0, iterate through and append a note to data[item_code][notes] for each note-id
+  if len(item_note[item_code]) > 0:
+    # Iterate through all the note IDs, and append each corresponding note to the drug notes array
+    notes = []
+    for note_id in item_note[item_code]:
+      notes.append(note_dict[note_id])
+      drugs[item_code]['notes'] = notes
+
+print(drugs)
+
+
+
+

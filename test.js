@@ -30,12 +30,7 @@ const data = {
     'tpuu-or-mpp-pt': 'aciclovir 3% eye ointment, 4.5 g',
     'indication-id': '5964',
     'increase-code': '2',
-    'note-ids': [
-      '0', '0', '0', '0',
-      '0', '0', '0', '0',
-      '0', '0', '0', '0',
-      '0', '0', '0'
-    ],
+    'note-ids': [],
     caution_ids: [],
     indications: {
       description: 'Herpes simplex keratitis',
@@ -43,8 +38,9 @@ const data = {
       'date-req': 'N',
       'text-req': 'N'
     },
+    notes: [],
     atc: 'S01AD03',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '5504Q': {
     'program-code': 'GE',
@@ -77,12 +73,7 @@ const data = {
     'tpuu-or-mpp-pt': 'carbomer-980 0.2% eye drops, 30 x 0.6 mL unit doses',
     'indication-id': '6172',
     'increase-code': '2',
-    'note-ids': [
-      '0', '0', '0', '0',
-      '0', '0', '0', '0',
-      '0', '0', '0', '0',
-      '0', '0', '0'
-    ],
+    'note-ids': [],
     caution_ids: [],
     indications: {
       description: 'Severe dry eye syndrome Clinical criteria: * Patient must be sensitive to preservatives in multi-dose eye drops.',
@@ -90,8 +81,9 @@ const data = {
       'date-req': 'N',
       'text-req': 'N'
     },
+    notes: [],
     atc: 'S01XA20',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '5502N': {
     'program-code': 'GE',
@@ -124,12 +116,7 @@ const data = {
     'tpuu-or-mpp-pt': 'carbomer-974P 0.3% eye gel, 30 x 500 mg unit doses',
     'indication-id': '6172',
     'increase-code': '2',
-    'note-ids': [
-      '0', '0', '0', '0',
-      '0', '0', '0', '0',
-      '0', '0', '0', '0',
-      '0', '0', '0'
-    ],
+    'note-ids': [],
     caution_ids: [],
     indications: {
       description: 'Severe dry eye syndrome Clinical criteria: * Patient must be sensitive to preservatives in multi-dose eye drops.',
@@ -137,8 +124,9 @@ const data = {
       'date-req': 'N',
       'text-req': 'N'
     },
+    notes: [],
     atc: 'S01XA20',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '5503P': {
     'program-code': 'GE',
@@ -171,12 +159,7 @@ const data = {
     'tpuu-or-mpp-pt': 'carbomer-980 0.2% eye gel, 10 g',
     'indication-id': '6153',
     'increase-code': '2',
-    'note-ids': [
-      '0', '0', '0', '0',
-      '0', '0', '0', '0',
-      '0', '0', '0', '0',
-      '0', '0', '0'
-    ],
+    'note-ids': [],
     caution_ids: [],
     indications: {
       description: "Severe dry eye syndrome, including Sjogren's syndrome",
@@ -184,8 +167,9 @@ const data = {
       'date-req': 'N',
       'text-req': 'N'
     },
+    notes: [],
     atc: 'S01XA20',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '5544T': {
     'program-code': 'GE',
@@ -218,17 +202,14 @@ const data = {
     'tpuu-or-mpp-pt': 'betaxolol 0.5% eye drops, 5 mL',
     'indication-id': '',
     'increase-code': '',
-    'note-ids': [
-      '14807', '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0'
-    ],
+    'note-ids': [ '14807' ],
     caution_ids: [],
     indications: {},
+    notes: [
+      ' For prescribing in accordance with Optometry Board of Australia guidelines.'
+    ],
     atc: 'S01ED02',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '5564W': {
     'program-code': 'GE',
@@ -261,12 +242,7 @@ const data = {
     'tpuu-or-mpp-pt': 'ciprofloxacin 0.3% eye drops, 5 mL',
     'indication-id': '4181',
     'increase-code': '2',
-    'note-ids': [
-      '0', '0', '0', '0',
-      '0', '0', '0', '0',
-      '0', '0', '0', '0',
-      '0', '0', '0'
-    ],
+    'note-ids': [],
     caution_ids: [],
     indications: {
       description: 'Bacterial keratitis Treatment criteria: * Must be treated by an ophthalmologist or in consultation with an ophthalmologist.',
@@ -274,8 +250,9 @@ const data = {
       'date-req': 'N',
       'text-req': 'N'
     },
+    notes: [],
     atc: 'S01AE03',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '5565X': {
     'program-code': 'GE',
@@ -308,17 +285,15 @@ const data = {
     'tpuu-or-mpp-pt': 'dexamethasone 0.1% eye drops, 5 mL',
     'indication-id': '',
     'increase-code': '',
-    'note-ids': [
-      '13615', '13290', '0',
-      '0',     '0',     '0',
-      '0',     '0',     '0',
-      '0',     '0',     '0',
-      '0',     '0',     '0'
-    ],
+    'note-ids': [ '13615', '13290' ],
     caution_ids: [],
     indications: {},
+    notes: [
+      'No applications for increased maximum quantities will be authorised.',
+      'No applications for increased repeats will be authorised.'
+    ],
     atc: 'S01BA01',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '5513E': {
     'program-code': 'GE',
@@ -351,17 +326,15 @@ const data = {
     'tpuu-or-mpp-pt': 'fluorometholone 0.1% eye drops, 5 mL',
     'indication-id': '',
     'increase-code': '',
-    'note-ids': [
-      '13615', '13290', '0',
-      '0',     '0',     '0',
-      '0',     '0',     '0',
-      '0',     '0',     '0',
-      '0',     '0',     '0'
-    ],
+    'note-ids': [ '13615', '13290' ],
     caution_ids: [],
     indications: {},
+    notes: [
+      'No applications for increased maximum quantities will be authorised.',
+      'No applications for increased repeats will be authorised.'
+    ],
     atc: 'S01BA07',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '5533F': {
     'program-code': 'GE',
@@ -394,17 +367,15 @@ const data = {
     'tpuu-or-mpp-pt': 'fluorometholone acetate 0.1% eye drops, 5 mL',
     'indication-id': '',
     'increase-code': '',
-    'note-ids': [
-      '13615', '13290', '0',
-      '0',     '0',     '0',
-      '0',     '0',     '0',
-      '0',     '0',     '0',
-      '0',     '0',     '0'
-    ],
+    'note-ids': [ '13615', '13290' ],
     caution_ids: [],
     indications: {},
+    notes: [
+      'No applications for increased maximum quantities will be authorised.',
+      'No applications for increased repeats will be authorised.'
+    ],
     atc: 'S01BA07',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '5557L': {
     'program-code': 'GE',
@@ -437,16 +408,12 @@ const data = {
     'tpuu-or-mpp-pt': 'framycetin sulfate 0.5% eye/ear drops, 8 mL',
     'indication-id': '',
     'increase-code': '',
-    'note-ids': [
-      '0', '0', '0', '0',
-      '0', '0', '0', '0',
-      '0', '0', '0', '0',
-      '0', '0', '0'
-    ],
+    'note-ids': [],
     caution_ids: [],
     indications: {},
+    notes: [],
     atc: 'S03AA',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '5566Y': {
     'program-code': 'GE',
@@ -479,12 +446,7 @@ const data = {
     'tpuu-or-mpp-pt': 'gentamicin 0.3% eye drops, 5 mL',
     'indication-id': '5477',
     'increase-code': '2',
-    'note-ids': [
-      '0', '0', '0', '0',
-      '0', '0', '0', '0',
-      '0', '0', '0', '0',
-      '0', '0', '0'
-    ],
+    'note-ids': [],
     caution_ids: [],
     indications: {
       description: 'Suspected Pseudomonal eye infection',
@@ -492,8 +454,9 @@ const data = {
       'date-req': 'N',
       'text-req': 'N'
     },
+    notes: [],
     atc: 'S01AA11',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '5516H': {
     'program-code': 'GE',
@@ -526,17 +489,15 @@ const data = {
     'tpuu-or-mpp-pt': 'hydrocortisone acetate 1% eye ointment, 5 g',
     'indication-id': '',
     'increase-code': '',
-    'note-ids': [
-      '13615', '13290', '0',
-      '0',     '0',     '0',
-      '0',     '0',     '0',
-      '0',     '0',     '0',
-      '0',     '0',     '0'
-    ],
+    'note-ids': [ '13615', '13290' ],
     caution_ids: [],
     indications: {},
+    notes: [
+      'No applications for increased maximum quantities will be authorised.',
+      'No applications for increased repeats will be authorised.'
+    ],
     atc: 'S01BA02',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '5517J': {
     'program-code': 'GE',
@@ -569,12 +530,7 @@ const data = {
     'tpuu-or-mpp-pt': 'hypromellose 0.5% eye drops, 15 mL',
     'indication-id': '6120',
     'increase-code': '2',
-    'note-ids': [
-      '0', '0', '0', '0',
-      '0', '0', '0', '0',
-      '0', '0', '0', '0',
-      '0', '0', '0'
-    ],
+    'note-ids': [],
     caution_ids: [],
     indications: {
       description: "Severe dry eye syndrome, including Sjogren's syndrome",
@@ -582,8 +538,9 @@ const data = {
       'date-req': 'N',
       'text-req': 'N'
     },
+    notes: [],
     atc: 'S01XA20',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '5520M': {
     'program-code': 'GE',
@@ -616,12 +573,7 @@ const data = {
     'tpuu-or-mpp-pt': 'dextran-70 0.1% + hypromellose 0.3% eye drops, 15 mL',
     'indication-id': '6120',
     'increase-code': '2',
-    'note-ids': [
-      '0', '0', '0', '0',
-      '0', '0', '0', '0',
-      '0', '0', '0', '0',
-      '0', '0', '0'
-    ],
+    'note-ids': [],
     caution_ids: [],
     indications: {
       description: "Severe dry eye syndrome, including Sjogren's syndrome",
@@ -629,8 +581,9 @@ const data = {
       'date-req': 'N',
       'text-req': 'N'
     },
+    notes: [],
     atc: 'S01XA20',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '5521N': {
     'program-code': 'GE',
@@ -663,12 +616,7 @@ const data = {
     'tpuu-or-mpp-pt': 'dextran-70 0.1% + hypromellose 0.3% eye drops, 28 x 0.4 mL unit doses',
     'indication-id': '6172',
     'increase-code': '2',
-    'note-ids': [
-      '0', '0', '0', '0',
-      '0', '0', '0', '0',
-      '0', '0', '0', '0',
-      '0', '0', '0'
-    ],
+    'note-ids': [],
     caution_ids: [],
     indications: {
       description: 'Severe dry eye syndrome Clinical criteria: * Patient must be sensitive to preservatives in multi-dose eye drops.',
@@ -676,8 +624,9 @@ const data = {
       'date-req': 'N',
       'text-req': 'N'
     },
+    notes: [],
     atc: 'S01XA20',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '5523Q': {
     'program-code': 'GE',
@@ -710,16 +659,12 @@ const data = {
     'tpuu-or-mpp-pt': 'paraffin 1 g/g eye ointment, 3.5 g',
     'indication-id': '',
     'increase-code': '',
-    'note-ids': [
-      '0', '0', '0', '0',
-      '0', '0', '0', '0',
-      '0', '0', '0', '0',
-      '0', '0', '0'
-    ],
+    'note-ids': [],
     caution_ids: [],
     indications: {},
+    notes: [],
     atc: 'S01XA20',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '5536J': {
     'program-code': 'GE',
@@ -752,17 +697,14 @@ const data = {
     'tpuu-or-mpp-pt': 'pilocarpine hydrochloride 1% eye drops, 15 mL',
     'indication-id': '',
     'increase-code': '',
-    'note-ids': [
-      '14807', '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0'
-    ],
+    'note-ids': [ '14807' ],
     caution_ids: [],
     indications: {},
+    notes: [
+      ' For prescribing in accordance with Optometry Board of Australia guidelines.'
+    ],
     atc: 'S01EB01',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '5537K': {
     'program-code': 'GE',
@@ -795,17 +737,14 @@ const data = {
     'tpuu-or-mpp-pt': 'pilocarpine hydrochloride 2% eye drops, 15 mL',
     'indication-id': '',
     'increase-code': '',
-    'note-ids': [
-      '14807', '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0'
-    ],
+    'note-ids': [ '14807' ],
     caution_ids: [],
     indications: {},
+    notes: [
+      ' For prescribing in accordance with Optometry Board of Australia guidelines.'
+    ],
     atc: 'S01EB01',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '5538L': {
     'program-code': 'GE',
@@ -838,17 +777,14 @@ const data = {
     'tpuu-or-mpp-pt': 'pilocarpine hydrochloride 4% eye drops, 15 mL',
     'indication-id': '',
     'increase-code': '',
-    'note-ids': [
-      '14807', '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0'
-    ],
+    'note-ids': [ '14807' ],
     caution_ids: [],
     indications: {},
+    notes: [
+      ' For prescribing in accordance with Optometry Board of Australia guidelines.'
+    ],
     atc: 'S01EB01',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '5568C': {
     'program-code': 'GE',
@@ -881,13 +817,7 @@ const data = {
     'tpuu-or-mpp-pt': 'prednisolone acetate 1% + phenylephrine hydrochloride 0.12% eye drops, 10 mL',
     'indication-id': '6087',
     'increase-code': '3',
-    'note-ids': [
-      '7606', '7607', '0',
-      '0',    '0',    '0',
-      '0',    '0',    '0',
-      '0',    '0',    '0',
-      '0',    '0',    '0'
-    ],
+    'note-ids': [ '7606', '7607' ],
     caution_ids: [],
     indications: {
       description: 'Uveitis',
@@ -895,8 +825,12 @@ const data = {
       'date-req': 'N',
       'text-req': 'N'
     },
+    notes: [
+      'No increase in the maximum quantity or number of units may be authorised.',
+      'No increase in the maximum number of repeats may be authorised.'
+    ],
     atc: 'S01BB02',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '5550D': {
     'program-code': 'GE',
@@ -929,17 +863,14 @@ const data = {
     'tpuu-or-mpp-pt': 'timolol 0.5% eye drops, 2.5 mL',
     'indication-id': '',
     'increase-code': '',
-    'note-ids': [
-      '14807', '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0'
-    ],
+    'note-ids': [ '14807' ],
     caution_ids: [],
     indications: {},
+    notes: [
+      ' For prescribing in accordance with Optometry Board of Australia guidelines.'
+    ],
     atc: 'S01ED01',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '5548B': {
     'program-code': 'GE',
@@ -972,17 +903,14 @@ const data = {
     'tpuu-or-mpp-pt': 'timolol 0.5% eye drops, 5 mL',
     'indication-id': '',
     'increase-code': '',
-    'note-ids': [
-      '14807', '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0'
-    ],
+    'note-ids': [ '14807' ],
     caution_ids: [],
     indications: {},
+    notes: [
+      ' For prescribing in accordance with Optometry Board of Australia guidelines.'
+    ],
     atc: 'S01ED01',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '5569D': {
     'program-code': 'GE',
@@ -1015,12 +943,7 @@ const data = {
     'tpuu-or-mpp-pt': 'tobramycin 0.3% eye drops, 5 mL',
     'indication-id': '5477',
     'increase-code': '2',
-    'note-ids': [
-      '0', '0', '0', '0',
-      '0', '0', '0', '0',
-      '0', '0', '0', '0',
-      '0', '0', '0'
-    ],
+    'note-ids': [],
     caution_ids: [],
     indications: {
       description: 'Suspected Pseudomonal eye infection',
@@ -1028,8 +951,9 @@ const data = {
       'date-req': 'N',
       'text-req': 'N'
     },
+    notes: [],
     atc: 'S01AA12',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '5570E': {
     'program-code': 'GE',
@@ -1062,12 +986,7 @@ const data = {
     'tpuu-or-mpp-pt': 'tobramycin 0.3% eye ointment, 3.5 g',
     'indication-id': '5477',
     'increase-code': '2',
-    'note-ids': [
-      '0', '0', '0', '0',
-      '0', '0', '0', '0',
-      '0', '0', '0', '0',
-      '0', '0', '0'
-    ],
+    'note-ids': [],
     caution_ids: [],
     indications: {
       description: 'Suspected Pseudomonal eye infection',
@@ -1075,8 +994,9 @@ const data = {
       'date-req': 'N',
       'text-req': 'N'
     },
+    notes: [],
     atc: 'S01AA12',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '5508X': {
     'program-code': 'GE',
@@ -1109,12 +1029,7 @@ const data = {
     'tpuu-or-mpp-pt': 'carmellose sodium 1% eye drops, 15 mL',
     'indication-id': '6120',
     'increase-code': '2',
-    'note-ids': [
-      '0', '0', '0', '0',
-      '0', '0', '0', '0',
-      '0', '0', '0', '0',
-      '0', '0', '0'
-    ],
+    'note-ids': [],
     caution_ids: [],
     indications: {
       description: "Severe dry eye syndrome, including Sjogren's syndrome",
@@ -1122,8 +1037,9 @@ const data = {
       'date-req': 'N',
       'text-req': 'N'
     },
+    notes: [],
     atc: 'S01XA20',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '5505R': {
     'program-code': 'GE',
@@ -1156,12 +1072,7 @@ const data = {
     'tpuu-or-mpp-pt': 'carmellose sodium 1% eye drops, 30 x 0.4 mL unit doses',
     'indication-id': '6172',
     'increase-code': '2',
-    'note-ids': [
-      '0', '0', '0', '0',
-      '0', '0', '0', '0',
-      '0', '0', '0', '0',
-      '0', '0', '0'
-    ],
+    'note-ids': [],
     caution_ids: [],
     indications: {
       description: 'Severe dry eye syndrome Clinical criteria: * Patient must be sensitive to preservatives in multi-dose eye drops.',
@@ -1169,8 +1080,9 @@ const data = {
       'date-req': 'N',
       'text-req': 'N'
     },
+    notes: [],
     atc: 'S01XA20',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '5507W': {
     'program-code': 'GE',
@@ -1203,12 +1115,7 @@ const data = {
     'tpuu-or-mpp-pt': 'carmellose sodium 0.5% eye drops, 15 mL',
     'indication-id': '6120',
     'increase-code': '2',
-    'note-ids': [
-      '0', '0', '0', '0',
-      '0', '0', '0', '0',
-      '0', '0', '0', '0',
-      '0', '0', '0'
-    ],
+    'note-ids': [],
     caution_ids: [],
     indications: {
       description: "Severe dry eye syndrome, including Sjogren's syndrome",
@@ -1216,8 +1123,9 @@ const data = {
       'date-req': 'N',
       'text-req': 'N'
     },
+    notes: [],
     atc: 'S01XA20',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '5506T': {
     'program-code': 'GE',
@@ -1250,12 +1158,7 @@ const data = {
     'tpuu-or-mpp-pt': 'carmellose sodium 0.5% eye drops, 30 x 0.4 mL unit doses',
     'indication-id': '6172',
     'increase-code': '2',
-    'note-ids': [
-      '0', '0', '0', '0',
-      '0', '0', '0', '0',
-      '0', '0', '0', '0',
-      '0', '0', '0'
-    ],
+    'note-ids': [],
     caution_ids: [],
     indications: {
       description: 'Severe dry eye syndrome Clinical criteria: * Patient must be sensitive to preservatives in multi-dose eye drops.',
@@ -1263,8 +1166,9 @@ const data = {
       'date-req': 'N',
       'text-req': 'N'
     },
+    notes: [],
     atc: 'S01XA20',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '5567B': {
     'program-code': 'GE',
@@ -1297,12 +1201,7 @@ const data = {
     'tpuu-or-mpp-pt': 'ofloxacin 0.3% eye drops, 5 mL',
     'indication-id': '4181',
     'increase-code': '2',
-    'note-ids': [
-      '0', '0', '0', '0',
-      '0', '0', '0', '0',
-      '0', '0', '0', '0',
-      '0', '0', '0'
-    ],
+    'note-ids': [],
     caution_ids: [],
     indications: {
       description: 'Bacterial keratitis Treatment criteria: * Must be treated by an ophthalmologist or in consultation with an ophthalmologist.',
@@ -1310,8 +1209,9 @@ const data = {
       'date-req': 'N',
       'text-req': 'N'
     },
+    notes: [],
     atc: 'S01AE01',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '5552F': {
     'program-code': 'GE',
@@ -1344,17 +1244,14 @@ const data = {
     'tpuu-or-mpp-pt': 'latanoprost 0.005% eye drops, 2.5 mL',
     'indication-id': '',
     'increase-code': '',
-    'note-ids': [
-      '14807', '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0'
-    ],
+    'note-ids': [ '14807' ],
     caution_ids: [],
     indications: {},
+    notes: [
+      ' For prescribing in accordance with Optometry Board of Australia guidelines.'
+    ],
     atc: 'S01EE01',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '5563T': {
     'program-code': 'GE',
@@ -1387,17 +1284,14 @@ const data = {
     'tpuu-or-mpp-pt': 'brimonidine tartrate 0.15% eye drops, 5 mL',
     'indication-id': '',
     'increase-code': '',
-    'note-ids': [
-      '14807', '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0'
-    ],
+    'note-ids': [ '14807' ],
     caution_ids: [],
     indications: {},
+    notes: [
+      ' For prescribing in accordance with Optometry Board of Australia guidelines.'
+    ],
     atc: 'S01EA05',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '5534G': {
     'program-code': 'GE',
@@ -1430,17 +1324,14 @@ const data = {
     'tpuu-or-mpp-pt': 'brimonidine tartrate 0.2% eye drops, 5 mL',
     'indication-id': '',
     'increase-code': '',
-    'note-ids': [
-      '14807', '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0'
-    ],
+    'note-ids': [ '14807' ],
     caution_ids: [],
     indications: {},
+    notes: [
+      ' For prescribing in accordance with Optometry Board of Australia guidelines.'
+    ],
     atc: 'S01EA05',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '5540N': {
     'program-code': 'GE',
@@ -1473,17 +1364,14 @@ const data = {
     'tpuu-or-mpp-pt': 'brinzolamide 1% eye drops, 5 mL',
     'indication-id': '',
     'increase-code': '',
-    'note-ids': [
-      '14807', '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0'
-    ],
+    'note-ids': [ '14807' ],
     caution_ids: [],
     indications: {},
+    notes: [
+      ' For prescribing in accordance with Optometry Board of Australia guidelines.'
+    ],
     atc: 'S01EC04',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '5519L': {
     'program-code': 'GE',
@@ -1516,12 +1404,7 @@ const data = {
     'tpuu-or-mpp-pt': 'hypromellose 0.3% + carbomer-980 0.2% eye gel, 10 g',
     'indication-id': '6120',
     'increase-code': '2',
-    'note-ids': [
-      '0', '0', '0', '0',
-      '0', '0', '0', '0',
-      '0', '0', '0', '0',
-      '0', '0', '0'
-    ],
+    'note-ids': [],
     caution_ids: [],
     indications: {
       description: "Severe dry eye syndrome, including Sjogren's syndrome",
@@ -1529,8 +1412,9 @@ const data = {
       'date-req': 'N',
       'text-req': 'N'
     },
+    notes: [],
     atc: 'S01XA20',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '5542Q': {
     'program-code': 'GE',
@@ -1563,13 +1447,7 @@ const data = {
     'tpuu-or-mpp-pt': 'dorzolamide 2% + timolol 0.5% eye drops, 5 mL',
     'indication-id': '5038',
     'increase-code': '2',
-    'note-ids': [
-      '14807', '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0'
-    ],
+    'note-ids': [ '14807' ],
     caution_ids: [],
     indications: {
       description: 'Elevated intra-ocular pressure Clinical criteria: * The condition must have been inadequately controlled with monotherapy, AND * Patient must have open-angle glaucoma; OR * Patient must have ocular hypertension.',
@@ -1577,8 +1455,11 @@ const data = {
       'date-req': 'N',
       'text-req': 'N'
     },
+    notes: [
+      ' For prescribing in accordance with Optometry Board of Australia guidelines.'
+    ],
     atc: 'S01EC',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '5554H': {
     'program-code': 'GE',
@@ -1611,17 +1492,14 @@ const data = {
     'tpuu-or-mpp-pt': 'travoprost 0.004% eye drops, 2.5 mL',
     'indication-id': '',
     'increase-code': '',
-    'note-ids': [
-      '14807', '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0'
-    ],
+    'note-ids': [ '14807' ],
     caution_ids: [],
     indications: {},
+    notes: [
+      ' For prescribing in accordance with Optometry Board of Australia guidelines.'
+    ],
     atc: 'S01EE04',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '5553G': {
     'program-code': 'GE',
@@ -1654,13 +1532,7 @@ const data = {
     'tpuu-or-mpp-pt': 'latanoprost 0.005% + timolol 0.5% eye drops, 2.5 mL',
     'indication-id': '5038',
     'increase-code': '2',
-    'note-ids': [
-      '14807', '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0'
-    ],
+    'note-ids': [ '14807' ],
     caution_ids: [],
     indications: {
       description: 'Elevated intra-ocular pressure Clinical criteria: * The condition must have been inadequately controlled with monotherapy, AND * Patient must have open-angle glaucoma; OR * Patient must have ocular hypertension.',
@@ -1668,8 +1540,11 @@ const data = {
       'date-req': 'N',
       'text-req': 'N'
     },
+    notes: [
+      ' For prescribing in accordance with Optometry Board of Australia guidelines.'
+    ],
     atc: 'S01EE',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '5551E': {
     'program-code': 'GE',
@@ -1702,17 +1577,14 @@ const data = {
     'tpuu-or-mpp-pt': 'bimatoprost 0.03% eye drops, 3 mL',
     'indication-id': '',
     'increase-code': '',
-    'note-ids': [
-      '14807', '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0'
-    ],
+    'note-ids': [ '14807' ],
     caution_ids: [],
     indications: {},
+    notes: [
+      ' For prescribing in accordance with Optometry Board of Australia guidelines.'
+    ],
     atc: 'S01EE03',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '5524R': {
     'program-code': 'GE',
@@ -1745,12 +1617,7 @@ const data = {
     'tpuu-or-mpp-pt': 'polyethylene glycol-400 0.4% + propylene glycol 0.3% eye drops, 15 mL',
     'indication-id': '6120',
     'increase-code': '2',
-    'note-ids': [
-      '0', '0', '0', '0',
-      '0', '0', '0', '0',
-      '0', '0', '0', '0',
-      '0', '0', '0'
-    ],
+    'note-ids': [],
     caution_ids: [],
     indications: {
       description: "Severe dry eye syndrome, including Sjogren's syndrome",
@@ -1758,8 +1625,9 @@ const data = {
       'date-req': 'N',
       'text-req': 'N'
     },
+    notes: [],
     atc: 'S01XA20',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '5535H': {
     'program-code': 'GE',
@@ -1792,13 +1660,7 @@ const data = {
     'tpuu-or-mpp-pt': 'brimonidine tartrate 0.2% + timolol 0.5% eye drops, 5 mL',
     'indication-id': '5038',
     'increase-code': '2',
-    'note-ids': [
-      '14807', '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0'
-    ],
+    'note-ids': [ '14807' ],
     caution_ids: [],
     indications: {
       description: 'Elevated intra-ocular pressure Clinical criteria: * The condition must have been inadequately controlled with monotherapy, AND * Patient must have open-angle glaucoma; OR * Patient must have ocular hypertension.',
@@ -1806,8 +1668,11 @@ const data = {
       'date-req': 'N',
       'text-req': 'N'
     },
+    notes: [
+      ' For prescribing in accordance with Optometry Board of Australia guidelines.'
+    ],
     atc: 'S01EA',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '5555J': {
     'program-code': 'GE',
@@ -1840,13 +1705,7 @@ const data = {
     'tpuu-or-mpp-pt': 'travoprost 0.004% + timolol 0.5% eye drops, 2.5 mL',
     'indication-id': '5038',
     'increase-code': '2',
-    'note-ids': [
-      '14807', '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0'
-    ],
+    'note-ids': [ '14807' ],
     caution_ids: [],
     indications: {
       description: 'Elevated intra-ocular pressure Clinical criteria: * The condition must have been inadequately controlled with monotherapy, AND * Patient must have open-angle glaucoma; OR * Patient must have ocular hypertension.',
@@ -1854,8 +1713,11 @@ const data = {
       'date-req': 'N',
       'text-req': 'N'
     },
+    notes: [
+      ' For prescribing in accordance with Optometry Board of Australia guidelines.'
+    ],
     atc: 'S01EE',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '5556K': {
     'program-code': 'GE',
@@ -1888,12 +1750,7 @@ const data = {
     'tpuu-or-mpp-pt': 'carmellose sodium 0.5% + glycerol 0.9% eye drops, 15 mL',
     'indication-id': '6097',
     'increase-code': '2',
-    'note-ids': [
-      '0', '0', '0', '0',
-      '0', '0', '0', '0',
-      '0', '0', '0', '0',
-      '0', '0', '0'
-    ],
+    'note-ids': [],
     caution_ids: [],
     indications: {
       description: "Severe dry eye syndrome, including Sjogren's syndrome",
@@ -1901,8 +1758,9 @@ const data = {
       'date-req': 'N',
       'text-req': 'N'
     },
+    notes: [],
     atc: 'S01XA20',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '5545W': {
     'program-code': 'GE',
@@ -1935,12 +1793,7 @@ const data = {
     'tpuu-or-mpp-pt': 'soy lecithin 1% + tocopherol 0.002% + vitamin A palmitate 0.025% spray, 100 actuations',
     'indication-id': '6172',
     'increase-code': '2',
-    'note-ids': [
-      '0', '0', '0', '0',
-      '0', '0', '0', '0',
-      '0', '0', '0', '0',
-      '0', '0', '0'
-    ],
+    'note-ids': [],
     caution_ids: [],
     indications: {
       description: 'Severe dry eye syndrome Clinical criteria: * Patient must be sensitive to preservatives in multi-dose eye drops.',
@@ -1948,8 +1801,9 @@ const data = {
       'date-req': 'N',
       'text-req': 'N'
     },
+    notes: [],
     atc: 'S01XA20',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '5558M': {
     'program-code': 'GE',
@@ -1982,13 +1836,7 @@ const data = {
     'tpuu-or-mpp-pt': 'bimatoprost 0.03% + timolol 0.5% eye drops, 3 mL',
     'indication-id': '5038',
     'increase-code': '2',
-    'note-ids': [
-      '14807', '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0'
-    ],
+    'note-ids': [ '14807' ],
     caution_ids: [],
     indications: {
       description: 'Elevated intra-ocular pressure Clinical criteria: * The condition must have been inadequately controlled with monotherapy, AND * Patient must have open-angle glaucoma; OR * Patient must have ocular hypertension.',
@@ -1996,8 +1844,11 @@ const data = {
       'date-req': 'N',
       'text-req': 'N'
     },
+    notes: [
+      ' For prescribing in accordance with Optometry Board of Australia guidelines.'
+    ],
     atc: 'S01EE',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '5562R': {
     'program-code': 'GE',
@@ -2030,13 +1881,7 @@ const data = {
     'tpuu-or-mpp-pt': 'brinzolamide 1% + timolol 0.5% eye drops, 5 mL',
     'indication-id': '5038',
     'increase-code': '2',
-    'note-ids': [
-      '14807', '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0'
-    ],
+    'note-ids': [ '14807' ],
     caution_ids: [],
     indications: {
       description: 'Elevated intra-ocular pressure Clinical criteria: * The condition must have been inadequately controlled with monotherapy, AND * Patient must have open-angle glaucoma; OR * Patient must have ocular hypertension.',
@@ -2044,8 +1889,11 @@ const data = {
       'date-req': 'N',
       'text-req': 'N'
     },
+    notes: [
+      ' For prescribing in accordance with Optometry Board of Australia guidelines.'
+    ],
     atc: 'S01EC54',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '5522P': {
     'program-code': 'GE',
@@ -2078,16 +1926,12 @@ const data = {
     'tpuu-or-mpp-pt': 'paraffin 1 g/g eye ointment, 2 x 3.5 g',
     'indication-id': '',
     'increase-code': '',
-    'note-ids': [
-      '0', '0', '0', '0',
-      '0', '0', '0', '0',
-      '0', '0', '0', '0',
-      '0', '0', '0'
-    ],
+    'note-ids': [],
     caution_ids: [],
     indications: {},
+    notes: [],
     atc: 'S01XA20',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '5532E': {
     'program-code': 'GE',
@@ -2120,12 +1964,7 @@ const data = {
     'tpuu-or-mpp-pt': 'polyethylene glycol-400 0.4% + propylene glycol 0.3% eye drops, 28 x 0.8 mL unit doses',
     'indication-id': '6172',
     'increase-code': '2',
-    'note-ids': [
-      '0', '0', '0', '0',
-      '0', '0', '0', '0',
-      '0', '0', '0', '0',
-      '0', '0', '0'
-    ],
+    'note-ids': [],
     caution_ids: [],
     indications: {
       description: 'Severe dry eye syndrome Clinical criteria: * Patient must be sensitive to preservatives in multi-dose eye drops.',
@@ -2133,8 +1972,9 @@ const data = {
       'date-req': 'N',
       'text-req': 'N'
     },
+    notes: [],
     atc: 'S01XA20',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '5541P': {
     'program-code': 'GE',
@@ -2167,17 +2007,14 @@ const data = {
     'tpuu-or-mpp-pt': 'dorzolamide 2% eye drops, 5 mL',
     'indication-id': '',
     'increase-code': '',
-    'note-ids': [
-      '14807', '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0'
-    ],
+    'note-ids': [ '14807' ],
     caution_ids: [],
     indications: {},
+    notes: [
+      ' For prescribing in accordance with Optometry Board of Australia guidelines.'
+    ],
     atc: 'S01EC03',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '5526W': {
     'program-code': 'GE',
@@ -2210,12 +2047,7 @@ const data = {
     'tpuu-or-mpp-pt': 'polyvinyl alcohol 1.4% eye drops, 15 mL',
     'indication-id': '6120',
     'increase-code': '2',
-    'note-ids': [
-      '0', '0', '0', '0',
-      '0', '0', '0', '0',
-      '0', '0', '0', '0',
-      '0', '0', '0'
-    ],
+    'note-ids': [],
     caution_ids: [],
     indications: {
       description: "Severe dry eye syndrome, including Sjogren's syndrome",
@@ -2223,8 +2055,9 @@ const data = {
       'date-req': 'N',
       'text-req': 'N'
     },
+    notes: [],
     atc: 'S01XA20',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '2184Y': {
     'program-code': 'GE',
@@ -2257,13 +2090,7 @@ const data = {
     'tpuu-or-mpp-pt': 'hyaluronate sodium 0.1% eye drops, 10 mL',
     'indication-id': '4105',
     'increase-code': '2',
-    'note-ids': [
-      '7873', '0', '0',
-      '0',    '0', '0',
-      '0',    '0', '0',
-      '0',    '0', '0',
-      '0',    '0', '0'
-    ],
+    'note-ids': [ '7873' ],
     caution_ids: [],
     indications: {
       description: 'Severe dry eye syndrome Clinical criteria: * Patient must be sensitive to preservatives in multi-dose eye drops.',
@@ -2271,8 +2098,11 @@ const data = {
       'date-req': 'N',
       'text-req': 'N'
     },
+    notes: [
+      'The in-use shelf life of Hylo-Fresh and Hylo-Forte is 6 months from the date of opening.'
+    ],
     atc: 'S01XA20',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '2171G': {
     'program-code': 'GE',
@@ -2305,13 +2135,7 @@ const data = {
     'tpuu-or-mpp-pt': 'hyaluronate sodium 0.2% eye drops, 10 mL',
     'indication-id': '4105',
     'increase-code': '2',
-    'note-ids': [
-      '7873', '0', '0',
-      '0',    '0', '0',
-      '0',    '0', '0',
-      '0',    '0', '0',
-      '0',    '0', '0'
-    ],
+    'note-ids': [ '7873' ],
     caution_ids: [],
     indications: {
       description: 'Severe dry eye syndrome Clinical criteria: * Patient must be sensitive to preservatives in multi-dose eye drops.',
@@ -2319,8 +2143,11 @@ const data = {
       'date-req': 'N',
       'text-req': 'N'
     },
+    notes: [
+      'The in-use shelf life of Hylo-Fresh and Hylo-Forte is 6 months from the date of opening.'
+    ],
     atc: 'S01XA20',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '2167C': {
     'program-code': 'GE',
@@ -2353,17 +2180,14 @@ const data = {
     'tpuu-or-mpp-pt': 'retinol palmitate 0.0138% + paraffin eye ointment, 5 g',
     'indication-id': '',
     'increase-code': '',
-    'note-ids': [
-      '8019', '0', '0',
-      '0',    '0', '0',
-      '0',    '0', '0',
-      '0',    '0', '0',
-      '0',    '0', '0'
-    ],
+    'note-ids': [ '8019' ],
     caution_ids: [],
     indications: {},
+    notes: [
+      'The in-use shelf life of VitA-POS is 6 months from the date of opening.'
+    ],
     atc: 'S01XA20',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '2748P': {
     'program-code': 'GE',
@@ -2396,17 +2220,14 @@ const data = {
     'tpuu-or-mpp-pt': 'tafluprost 0.0015% eye drops, 30 x 0.3 mL unit doses',
     'indication-id': '',
     'increase-code': '',
-    'note-ids': [
-      '14807', '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0'
-    ],
+    'note-ids': [ '14807' ],
     caution_ids: [],
     indications: {},
+    notes: [
+      ' For prescribing in accordance with Optometry Board of Australia guidelines.'
+    ],
     atc: 'S01EE05',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '10053D': {
     'program-code': 'GE',
@@ -2439,17 +2260,14 @@ const data = {
     'tpuu-or-mpp-pt': 'bimatoprost 0.03% eye drops, 30 x 0.4 mL unit doses',
     'indication-id': '',
     'increase-code': '',
-    'note-ids': [
-      '14807', '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0'
-    ],
+    'note-ids': [ '14807' ],
     caution_ids: [],
     indications: {},
+    notes: [
+      ' For prescribing in accordance with Optometry Board of Australia guidelines.'
+    ],
     atc: 'S01EE03',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '10108B': {
     'program-code': 'GE',
@@ -2482,13 +2300,7 @@ const data = {
     'tpuu-or-mpp-pt': 'bimatoprost 0.03% + timolol 0.5% eye drops, 30 x 0.4 mL unit doses',
     'indication-id': '5038',
     'increase-code': '2',
-    'note-ids': [
-      '14807', '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0'
-    ],
+    'note-ids': [ '14807' ],
     caution_ids: [],
     indications: {
       description: 'Elevated intra-ocular pressure Clinical criteria: * The condition must have been inadequately controlled with monotherapy, AND * Patient must have open-angle glaucoma; OR * Patient must have ocular hypertension.',
@@ -2496,8 +2308,11 @@ const data = {
       'date-req': 'N',
       'text-req': 'N'
     },
+    notes: [
+      ' For prescribing in accordance with Optometry Board of Australia guidelines.'
+    ],
     atc: 'S01EE',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '11112W': {
     'program-code': 'GE',
@@ -2530,12 +2345,7 @@ const data = {
     'tpuu-or-mpp-pt': 'chloramphenicol 0.5% eye drops, 10 mL',
     'indication-id': '5835',
     'increase-code': '2',
-    'note-ids': [
-      '0', '0', '0', '0',
-      '0', '0', '0', '0',
-      '0', '0', '0', '0',
-      '0', '0', '0'
-    ],
+    'note-ids': [],
     caution_ids: [],
     indications: {
       description: 'For treatment of a patient identifying as Aboriginal or Torres Strait Islander',
@@ -2543,8 +2353,9 @@ const data = {
       'date-req': 'N',
       'text-req': 'N'
     },
+    notes: [],
     atc: 'S01AA01',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '10547D': {
     'program-code': 'GE',
@@ -2577,13 +2388,7 @@ const data = {
     'tpuu-or-mpp-pt': 'brinzolamide 1% + brimonidine tartrate 0.2% eye drops, 5 mL',
     'indication-id': '5038',
     'increase-code': '2',
-    'note-ids': [
-      '14807', '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0'
-    ],
+    'note-ids': [ '14807' ],
     caution_ids: [],
     indications: {
       description: 'Elevated intra-ocular pressure Clinical criteria: * The condition must have been inadequately controlled with monotherapy, AND * Patient must have open-angle glaucoma; OR * Patient must have ocular hypertension.',
@@ -2591,8 +2396,11 @@ const data = {
       'date-req': 'N',
       'text-req': 'N'
     },
+    notes: [
+      ' For prescribing in accordance with Optometry Board of Australia guidelines.'
+    ],
     atc: 'S01EC54',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '11439C': {
     'program-code': 'GE',
@@ -2625,13 +2433,7 @@ const data = {
     'tpuu-or-mpp-pt': 'perfluorohexyloctane 100% eye drops, 3 mL',
     'indication-id': '6172',
     'increase-code': '2',
-    'note-ids': [
-      '21971', '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0'
-    ],
+    'note-ids': [ '21971' ],
     caution_ids: [],
     indications: {
       description: 'Severe dry eye syndrome Clinical criteria: * Patient must be sensitive to preservatives in multi-dose eye drops.',
@@ -2639,8 +2441,11 @@ const data = {
       'date-req': 'N',
       'text-req': 'N'
     },
+    notes: [
+      'The in-use shelf life of Novatears is 6 months from the date of opening.'
+    ],
     atc: 'S01XA20',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '11634H': {
     'program-code': 'GE',
@@ -2673,12 +2478,7 @@ const data = {
     'tpuu-or-mpp-pt': 'hypromellose 0.3% w/w eye drops, 10 mL',
     'indication-id': '6120',
     'increase-code': '2',
-    'note-ids': [
-      '0', '0', '0', '0',
-      '0', '0', '0', '0',
-      '0', '0', '0', '0',
-      '0', '0', '0'
-    ],
+    'note-ids': [],
     caution_ids: [],
     indications: {
       description: "Severe dry eye syndrome, including Sjogren's syndrome",
@@ -2686,8 +2486,9 @@ const data = {
       'date-req': 'N',
       'text-req': 'N'
     },
+    notes: [],
     atc: 'S01XA20',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '11853W': {
     'program-code': 'GE',
@@ -2720,13 +2521,7 @@ const data = {
     'tpuu-or-mpp-pt': 'carmellose sodium 0.5% eye drops, 10 mL',
     'indication-id': '6172',
     'increase-code': '2',
-    'note-ids': [
-      '22372', '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0'
-    ],
+    'note-ids': [ '22372' ],
     caution_ids: [],
     indications: {
       description: 'Severe dry eye syndrome Clinical criteria: * Patient must be sensitive to preservatives in multi-dose eye drops.',
@@ -2734,8 +2529,11 @@ const data = {
       'date-req': 'N',
       'text-req': 'N'
     },
+    notes: [
+      'The in-use shelf life of Evolve carmellose 0.5% and Evolve hypromellose 0.3% is 3 months from the date of opening.'
+    ],
     atc: 'S01XA20',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '11849P': {
     'program-code': 'GE',
@@ -2768,13 +2566,7 @@ const data = {
     'tpuu-or-mpp-pt': 'hypromellose 0.3% w/v eye drops, 10 mL',
     'indication-id': '6172',
     'increase-code': '2',
-    'note-ids': [
-      '22372', '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0'
-    ],
+    'note-ids': [ '22372' ],
     caution_ids: [],
     indications: {
       description: 'Severe dry eye syndrome Clinical criteria: * Patient must be sensitive to preservatives in multi-dose eye drops.',
@@ -2782,8 +2574,11 @@ const data = {
       'date-req': 'N',
       'text-req': 'N'
     },
+    notes: [
+      'The in-use shelf life of Evolve carmellose 0.5% and Evolve hypromellose 0.3% is 3 months from the date of opening.'
+    ],
     atc: 'S01XA20',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '12612T': {
     'program-code': 'GE',
@@ -2816,13 +2611,7 @@ const data = {
     'tpuu-or-mpp-pt': 'liquid paraffin + glycerol + tyloxapol + poloxamer-188 + trometamol hydrochloride + trometamol + cetalkonium chloride eye drops, 10 mL',
     'indication-id': '6172',
     'increase-code': '2',
-    'note-ids': [
-      '26237', '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0',
-      '0',     '0', '0'
-    ],
+    'note-ids': [ '26237' ],
     caution_ids: [],
     indications: {
       description: 'Severe dry eye syndrome Clinical criteria: * Patient must be sensitive to preservatives in multi-dose eye drops.',
@@ -2830,8 +2619,11 @@ const data = {
       'date-req': 'N',
       'text-req': 'N'
     },
+    notes: [
+      'The in-use shelf life of Cationorm is 3 months from the date of opening.'
+    ],
     atc: 'S01XA20',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   },
   '12663L': {
     'program-code': 'GE',
@@ -2864,13 +2656,7 @@ const data = {
     'tpuu-or-mpp-pt': 'ciclosporin 0.1% eye drops, 30 x 0.3 mL unit doses',
     'indication-id': '12284',
     'increase-code': '2',
-    'note-ids': [
-      '27773', '27774', '25796',
-      '0',     '0',     '0',
-      '0',     '0',     '0',
-      '0',     '0',     '0',
-      '0',     '0',     '0'
-    ],
+    'note-ids': [ '27773', '27774', '25796' ],
     caution_ids: [],
     indications: {
       description: "Chronic severe dry eye disease with keratitis Treatment Phase: Continuing treatment Clinical criteria: * Patient must have received PBS-subsidised treatment with this drug for this condition, AND * The condition must have improved to an extent that corneal fluorescein staining, using the same scale used at the time of the first authority application, shows an improvement (reduction) by at least 3 grades from baseline (the grade stated in the first authority application) - the improvement need only be demonstrated by staining once only with the first Continuing treatment authority application, AND * The condition must have improved to an extent that the patient's ocular surface disease index score at the time of this authority application, has improved (reduced) by at least 30% compared to the value stated in the first authority application (i.e. baseline). Treatment criteria: * Must be treated by an ophthalmologist or by an accredited ophthalmology registrar in consultation with an ophthalmologist; OR * Must be treated by an optometrist in accordance with Optometry Board of Australia guidelines. Prescribing instructions: State in the first continuing treatment authority application for this drug: (i) an improved corneal fluorescein staining grade (a numerical value that has improved by 3 grades from that provided in the first Initial 1 treatment authority application). State in all continuing treatment authority applications: (ii) the ocular surface disease index score at the time of this authority application (a numerical value that is at least 30% lower than that stated in the first Initial 1 treatment authority application).",
@@ -2878,8 +2664,13 @@ const data = {
       'date-req': 'N',
       'text-req': 'N'
     },
+    notes: [
+      "The Oxford scale, modified Oxford scale and Ocular Surface Disease Index (OSDI) were relied upon in the submission supporting initial PBS listing.The Oxford scale uses a chart system consisting of a series of panels, labelled A to E in order of increasing severity. In each chart, staining is represented by dots. To grade staining, comparisons are made between the panels and the appearance of staining on the exposed interpalpebral conjunctiva and cornea of the patient. The details of the chart are presented in Figure 1 and, in a simplified form in Figure 4 (where the criteria, dot count and log columns are not displayed), in the following literature article: Bron A, Evans V, Smith, J. Grading of corneal and conjunctival staining in the context of other dry eye tests. Cornea. 2003;22(7):640-650.The modified Oxford scale is as above, but with the first grade depiction (Grade 0), termed 'Grade 0.5'.A list of equivalent scales to the Oxford scale is not provided. Prescribers should be satisfied that a scale other than the Oxford scale, if used, is equivalent to the Oxford scale.The Ocular Surface Disease Index (OSDI) is a 12-item questionnaire created by the Outcomes Research Group at Allergan Inc, Irvine, CA, USA, to assess dry eye symptoms and the effects on vision-related function.The questionnaire has 3 subscales: ocular symptoms, vision-related function, and environmental triggers. Patients rate their responses on a 0 to 4 scale with 0 corresponding to 'none of the time' and 4 corresponding to 'all of the time'. A final score is calculated which ranges from 0 to 100 with scores 0 to 12 representing normal, 13 to 22 representing mild dry eye disease, 23 to 32 representing moderate dry eye disease, and greater than 33 representing severe dry eye disease.The OSDI questionnaire asks the following:Presence of ocular symptoms - Have you experienced any of the following during the last week?1. Eyes that are sensitive to light2. Eyes that feel gritty3. Painful or sore eyes4. Blurred vision5. Poor visionImpact on daily activities - Have you had problems with your eyes limited you in performing any of the following during the last week?1. Reading2. Driving at night3. Working with a computer or bank machine (ATM)4. Watching TVEnvironmental factors - Have your eyes felt uncomfortable in any of the following situations during the last week?1. Windy conditions2. Places or areas with low humidity (very dry)3. Areas that are airconditionedRate responses on a scale of 0 to 4; 0 = none of the time, 1 = some of the time, 2 = half of the time, 3 = most of the time, and 4 = all of the time.Further information on this index is in the following literature article: Walt J, Rowe M, Stern K. Evaluating the functional impact of dry eye: the Ocular Surface Disease Index. Drug Information Journal. 1997;31:1436The 'Dry Eye OSDI 'Questionnaire' app developed by Allergan Inc is available to download for iPhone.",
+      "If the maximum number of repeats stated in this listing is not requested in this application, further supplies can be obtained through this treatment phase listing to continue treatment for up to the first 180 days of treatment, but the OSDI score and CFS grade need not be re-stated. Alternatively, treatment may be continued under the 'Continuing treatment' phase listing, provided the patient meets all eligibility criteria specified in that treatment phase listing.",
+      'Applications for authorisation under this restriction may be made in real time using the Online PBS Authorities system (see www.servicesaustralia.gov.au/HPOS) or by telephone by contacting Services Australia on 1800 888 333.'
+    ],
     atc: 'S01XA18',
-    'caution-ids': [ '27780', '0', '0', '0', '0' ]
+    'caution-ids': [ '27780' ]
   },
   '12572Q': {
     'program-code': 'GE',
@@ -2912,13 +2703,7 @@ const data = {
     'tpuu-or-mpp-pt': 'prednisolone acetate 1% eye drops, 10 mL',
     'indication-id': '6087',
     'increase-code': '3',
-    'note-ids': [
-      '7606', '7607', '0',
-      '0',    '0',    '0',
-      '0',    '0',    '0',
-      '0',    '0',    '0',
-      '0',    '0',    '0'
-    ],
+    'note-ids': [ '7606', '7607' ],
     caution_ids: [],
     indications: {
       description: 'Uveitis',
@@ -2926,8 +2711,11 @@ const data = {
       'date-req': 'N',
       'text-req': 'N'
     },
+    notes: [
+      'No increase in the maximum quantity or number of units may be authorised.',
+      'No increase in the maximum number of repeats may be authorised.'
+    ],
     atc: 'S01BB02',
-    'caution-ids': [ '0', '0', '0', '0', '0' ]
+    'caution-ids': []
   }
 }
-
