@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import FormField from "../FormField/FormField";
 import AddressAutocomplete from "../AddressAutocomplete/AddressAutocomplete";
 import { StyledRxForm } from "./RxForm.styled";
+import DrugAutocomplete from "../DrugAutocomplete/DrugAutocomplete";
 
 const RxForm = () => {
   const [drugAlerts, setDrugAlerts] = useState({
@@ -391,7 +392,9 @@ const RxForm = () => {
           onChange={(event) => handleChange(setDrugData, event)} 
           alert={drugAlerts.name}
         />
+        {/* TODO: add input checkbox to include brand name on prescription, and for brand name substitution not permitted */}
 
+        <DrugAutocomplete/>
         {/* Must include quantity and repeats to meet requirements */}
         <FormField 
           fieldType="text" 

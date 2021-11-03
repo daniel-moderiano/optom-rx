@@ -2850,22 +2850,22 @@ const data = {
   }
 };
 
-const dataFields = [
-  'item-code',
-  'brand-name',
-  'mp-pt',
-  'tpuu-or-mpp-pt'
-];
+// const dataFields = [
+//   'item-code',
+//   'brand-name',
+//   'mp-pt',
+//   'tpuu-or-mpp-pt'
+// ];
 
-const reducedData = [];
+// const reducedData = [];
 
-Object.keys(data).forEach((code) => {
-  const entry = {};
-  dataFields.forEach((field) => {
-    entry[field] = data[code][field];
-  });
-  reducedData.push(entry);
-});
+// Object.keys(data).forEach((code) => {
+//   const entry = {};
+//   dataFields.forEach((field) => {
+//     entry[field] = data[code][field];
+//   });
+//   reducedData.push(entry);
+// });
 
-const dataJSON = JSON.stringify(reducedData);
-console.log(dataJSON);
+// const dataJSON = JSON.stringify(reducedData);
+

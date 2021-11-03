@@ -1,6 +1,7 @@
 # Global variables
 drugs = {}
 data = []
+brand_names = {}
 base_path = 'C:/Users/danie/Documents/Programming/work-projects/optom-rx/info/2021-11-01-v3extracts/'
 
 # All PBS data fields (including those not entirely relevant)
@@ -57,7 +58,7 @@ with open(pres_path) as f:
     if line_arr[-1] == 'O':
       item_codes.add(line_arr[-2])
       drugs[line_arr[-2]] = {}
-
+      brand_names[line_arr[-2]] = []
 
 # Using the item codes obtained, search the drug.txt doc for pricing and quantity info
 drug_path = base_path + 'drug_20211101.txt'
@@ -69,12 +70,21 @@ with open(drug_path) as f:
     # Drug.txt uses ! markers as delimmiters, and the fields are listed above in the drug fields array. Not all of these are important information in the context of this app, but all will be extracted for now
     line_arr = line.strip().split('!')
     if line_arr[4] in item_codes:
+      # print(line_arr[4], line_arr[-3])
+      brand_names[line_arr[4]].append(line_arr[-3])
       # Must reset drug variable
       drug = { **all_fields }
       for i in range(len(columns)):
         # Add all data columns under the respective names for every individual medication/drug
         drug[columns[i]] = line_arr[i]
       drugs[line_arr[4]] = drug
+
+
+# Add all the alternative brand names to each drug
+for item_code in brand_names:
+  drugs[item_code]['brand-name'] = brand_names[item_code]
+
+print(drugs)
 
 
 # Using the item code, find the indication IDs for the restrictions on the meds. Note that only authorised medications will have indication IDs
