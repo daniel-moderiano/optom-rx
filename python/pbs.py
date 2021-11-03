@@ -1,4 +1,10 @@
+# Global variables
+drugs = {}
+data = []
+base_path = 'C:/Users/danie/Documents/Programming/work-projects/optom-rx/info/2021-11-01-v3extracts/'
+
 # All PBS data fields (including those not entirely relevant)
+# Anatomical Therapeutic Chemical (ATC) classification index is used to classify drugs based on area of intended use. # The ATC level code is a combination of flags that categorisea drug. Program code - mainly/all will be GE => 'Generally available pharmaceutical benefits'
 all_fields = {
   'program-code': '',
   'atc-level-code': '',
@@ -38,28 +44,9 @@ all_fields = {
   'streamline-code': '',    #If streamline authority is available, the streamline code required will be here
 }
 
-
-# Anatomical Therapeutic Chemical (ATC) classification index is used to classify drugs based on area of intended use. 
-# The ATC level code is a combination of flags that categorise a drug, e.g.
-# Program code - mainly/all will be GE => 'Generally available pharmaceutical benefits'
-
-# For the prescriber_type.txt
-pres_fields = [
-  'drug-name',
-  'item-code',
-  'prescriber-type'
-]
-
-# Global variables
-drugs = {}
-data = []
-base_path = 'C:/Users/danie/Documents/Programming/work-projects/optom-rx/info/2021-11-01-v3extracts/'
-
 # Isolate the optometry specific medications (by item code) from the PBS list
 # For reference, at the time of writing, there are 64 approved optometry PBS medications
 item_codes = set()
-
-# Modify path as necessary, e.g. each new month with new release of PBS data
 pres_path = base_path + 'Prescriber_type_20211101.txt'
 
 with open(pres_path) as f:
@@ -159,11 +146,11 @@ with open(res_path) as f:
       
       res_dict[new_line_arr[0]] = res_item
 
+
 # Add all the generated indication/restriction data to the main drugs dict
 for item_code in id_match:
   if id_match[item_code] in res_dict.keys():
     drugs[item_code]['indications'] = res_dict[id_match[item_code]]
-
 
 # Produce a sub-dictionary containing only item-code: note-id key: value pairs for referencing. Note the values will be arrays, and only those with length > 0 contain note IDs
 item_note = {}
