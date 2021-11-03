@@ -39,6 +39,8 @@ const data = {
       'text-req': 'N'
     },
     notes: [],
+    cautions: [],
+    'streamline-code': '',
     atc: 'S01AD03',
     'caution-ids': []
   },
@@ -82,6 +84,8 @@ const data = {
       'text-req': 'N'
     },
     notes: [],
+    cautions: [],
+    'streamline-code': '6172',
     atc: 'S01XA20',
     'caution-ids': []
   },
@@ -125,6 +129,8 @@ const data = {
       'text-req': 'N'
     },
     notes: [],
+    cautions: [],
+    'streamline-code': '6172',
     atc: 'S01XA20',
     'caution-ids': []
   },
@@ -168,6 +174,8 @@ const data = {
       'text-req': 'N'
     },
     notes: [],
+    cautions: [],
+    'streamline-code': '',
     atc: 'S01XA20',
     'caution-ids': []
   },
@@ -208,6 +216,8 @@ const data = {
     notes: [
       ' For prescribing in accordance with Optometry Board of Australia guidelines.'
     ],
+    cautions: [],
+    'streamline-code': '',
     atc: 'S01ED02',
     'caution-ids': []
   },
@@ -251,6 +261,8 @@ const data = {
       'text-req': 'N'
     },
     notes: [],
+    cautions: [],
+    'streamline-code': '',
     atc: 'S01AE03',
     'caution-ids': []
   },
@@ -292,6 +304,8 @@ const data = {
       'No applications for increased maximum quantities will be authorised.',
       'No applications for increased repeats will be authorised.'
     ],
+    cautions: [],
+    'streamline-code': '',
     atc: 'S01BA01',
     'caution-ids': []
   },
@@ -333,6 +347,8 @@ const data = {
       'No applications for increased maximum quantities will be authorised.',
       'No applications for increased repeats will be authorised.'
     ],
+    cautions: [],
+    'streamline-code': '',
     atc: 'S01BA07',
     'caution-ids': []
   },
@@ -374,6 +390,8 @@ const data = {
       'No applications for increased maximum quantities will be authorised.',
       'No applications for increased repeats will be authorised.'
     ],
+    cautions: [],
+    'streamline-code': '',
     atc: 'S01BA07',
     'caution-ids': []
   },
@@ -412,6 +430,8 @@ const data = {
     caution_ids: [],
     indications: {},
     notes: [],
+    cautions: [],
+    'streamline-code': '',
     atc: 'S03AA',
     'caution-ids': []
   },
@@ -455,6 +475,8 @@ const data = {
       'text-req': 'N'
     },
     notes: [],
+    cautions: [],
+    'streamline-code': '',
     atc: 'S01AA11',
     'caution-ids': []
   },
@@ -496,6 +518,8 @@ const data = {
       'No applications for increased maximum quantities will be authorised.',
       'No applications for increased repeats will be authorised.'
     ],
+    cautions: [],
+    'streamline-code': '',
     atc: 'S01BA02',
     'caution-ids': []
   },
@@ -539,6 +563,8 @@ const data = {
       'text-req': 'N'
     },
     notes: [],
+    cautions: [],
+    'streamline-code': '',
     atc: 'S01XA20',
     'caution-ids': []
   },
@@ -582,6 +608,8 @@ const data = {
       'text-req': 'N'
     },
     notes: [],
+    cautions: [],
+    'streamline-code': '',
     atc: 'S01XA20',
     'caution-ids': []
   },
@@ -625,6 +653,8 @@ const data = {
       'text-req': 'N'
     },
     notes: [],
+    cautions: [],
+    'streamline-code': '6172',
     atc: 'S01XA20',
     'caution-ids': []
   },
@@ -663,6 +693,8 @@ const data = {
     caution_ids: [],
     indications: {},
     notes: [],
+    cautions: [],
+    'streamline-code': '',
     atc: 'S01XA20',
     'caution-ids': []
   },
@@ -703,6 +735,8 @@ const data = {
     notes: [
       ' For prescribing in accordance with Optometry Board of Australia guidelines.'
     ],
+    cautions: [],
+    'streamline-code': '',
     atc: 'S01EB01',
     'caution-ids': []
   },
@@ -743,6 +777,8 @@ const data = {
     notes: [
       ' For prescribing in accordance with Optometry Board of Australia guidelines.'
     ],
+    cautions: [],
+    'streamline-code': '',
     atc: 'S01EB01',
     'caution-ids': []
   },
@@ -783,6 +819,8 @@ const data = {
     notes: [
       ' For prescribing in accordance with Optometry Board of Australia guidelines.'
     ],
+    cautions: [],
+    'streamline-code': '',
     atc: 'S01EB01',
     'caution-ids': []
   },
@@ -829,6 +867,8 @@ const data = {
       'No increase in the maximum quantity or number of units may be authorised.',
       'No increase in the maximum number of repeats may be authorised.'
     ],
+    cautions: [],
+    'streamline-code': '',
     atc: 'S01BB02',
     'caution-ids': []
   },
@@ -869,6 +909,8 @@ const data = {
     notes: [
       ' For prescribing in accordance with Optometry Board of Australia guidelines.'
     ],
+    cautions: [],
+    'streamline-code': '',
     atc: 'S01ED01',
     'caution-ids': []
   },
@@ -909,6 +951,8 @@ const data = {
     notes: [
       ' For prescribing in accordance with Optometry Board of Australia guidelines.'
     ],
+    cautions: [],
+    'streamline-code': '',
     atc: 'S01ED01',
     'caution-ids': []
   },
@@ -952,6 +996,8 @@ const data = {
       'text-req': 'N'
     },
     notes: [],
+    cautions: [],
+    'streamline-code': '',
     atc: 'S01AA12',
     'caution-ids': []
   },
@@ -995,6 +1041,8 @@ const data = {
       'text-req': 'N'
     },
     notes: [],
+    cautions: [],
+    'streamline-code': '',
     atc: 'S01AA12',
     'caution-ids': []
   },
@@ -1038,6 +1086,8 @@ const data = {
       'text-req': 'N'
     },
     notes: [],
+    cautions: [],
+    'streamline-code': '',
     atc: 'S01XA20',
     'caution-ids': []
   },
@@ -1081,6 +1131,8 @@ const data = {
       'text-req': 'N'
     },
     notes: [],
+    cautions: [],
+    'streamline-code': '6172',
     atc: 'S01XA20',
     'caution-ids': []
   },
@@ -1124,6 +1176,8 @@ const data = {
       'text-req': 'N'
     },
     notes: [],
+    cautions: [],
+    'streamline-code': '',
     atc: 'S01XA20',
     'caution-ids': []
   },
@@ -1167,6 +1221,8 @@ const data = {
       'text-req': 'N'
     },
     notes: [],
+    cautions: [],
+    'streamline-code': '6172',
     atc: 'S01XA20',
     'caution-ids': []
   },
@@ -1210,6 +1266,8 @@ const data = {
       'text-req': 'N'
     },
     notes: [],
+    cautions: [],
+    'streamline-code': '',
     atc: 'S01AE01',
     'caution-ids': []
   },
@@ -1250,6 +1308,8 @@ const data = {
     notes: [
       ' For prescribing in accordance with Optometry Board of Australia guidelines.'
     ],
+    cautions: [],
+    'streamline-code': '',
     atc: 'S01EE01',
     'caution-ids': []
   },
@@ -1290,6 +1350,8 @@ const data = {
     notes: [
       ' For prescribing in accordance with Optometry Board of Australia guidelines.'
     ],
+    cautions: [],
+    'streamline-code': '',
     atc: 'S01EA05',
     'caution-ids': []
   },
@@ -1330,6 +1392,8 @@ const data = {
     notes: [
       ' For prescribing in accordance with Optometry Board of Australia guidelines.'
     ],
+    cautions: [],
+    'streamline-code': '',
     atc: 'S01EA05',
     'caution-ids': []
   },
@@ -1370,6 +1434,8 @@ const data = {
     notes: [
       ' For prescribing in accordance with Optometry Board of Australia guidelines.'
     ],
+    cautions: [],
+    'streamline-code': '',
     atc: 'S01EC04',
     'caution-ids': []
   },
@@ -1413,6 +1479,8 @@ const data = {
       'text-req': 'N'
     },
     notes: [],
+    cautions: [],
+    'streamline-code': '',
     atc: 'S01XA20',
     'caution-ids': []
   },
@@ -1458,6 +1526,8 @@ const data = {
     notes: [
       ' For prescribing in accordance with Optometry Board of Australia guidelines.'
     ],
+    cautions: [],
+    'streamline-code': '',
     atc: 'S01EC',
     'caution-ids': []
   },
@@ -1498,6 +1568,8 @@ const data = {
     notes: [
       ' For prescribing in accordance with Optometry Board of Australia guidelines.'
     ],
+    cautions: [],
+    'streamline-code': '',
     atc: 'S01EE04',
     'caution-ids': []
   },
@@ -1543,6 +1615,8 @@ const data = {
     notes: [
       ' For prescribing in accordance with Optometry Board of Australia guidelines.'
     ],
+    cautions: [],
+    'streamline-code': '',
     atc: 'S01EE',
     'caution-ids': []
   },
@@ -1583,6 +1657,8 @@ const data = {
     notes: [
       ' For prescribing in accordance with Optometry Board of Australia guidelines.'
     ],
+    cautions: [],
+    'streamline-code': '',
     atc: 'S01EE03',
     'caution-ids': []
   },
@@ -1626,6 +1702,8 @@ const data = {
       'text-req': 'N'
     },
     notes: [],
+    cautions: [],
+    'streamline-code': '',
     atc: 'S01XA20',
     'caution-ids': []
   },
@@ -1671,6 +1749,8 @@ const data = {
     notes: [
       ' For prescribing in accordance with Optometry Board of Australia guidelines.'
     ],
+    cautions: [],
+    'streamline-code': '',
     atc: 'S01EA',
     'caution-ids': []
   },
@@ -1716,6 +1796,8 @@ const data = {
     notes: [
       ' For prescribing in accordance with Optometry Board of Australia guidelines.'
     ],
+    cautions: [],
+    'streamline-code': '',
     atc: 'S01EE',
     'caution-ids': []
   },
@@ -1759,6 +1841,8 @@ const data = {
       'text-req': 'N'
     },
     notes: [],
+    cautions: [],
+    'streamline-code': '',
     atc: 'S01XA20',
     'caution-ids': []
   },
@@ -1802,6 +1886,8 @@ const data = {
       'text-req': 'N'
     },
     notes: [],
+    cautions: [],
+    'streamline-code': '6172',
     atc: 'S01XA20',
     'caution-ids': []
   },
@@ -1847,6 +1933,8 @@ const data = {
     notes: [
       ' For prescribing in accordance with Optometry Board of Australia guidelines.'
     ],
+    cautions: [],
+    'streamline-code': '',
     atc: 'S01EE',
     'caution-ids': []
   },
@@ -1892,6 +1980,8 @@ const data = {
     notes: [
       ' For prescribing in accordance with Optometry Board of Australia guidelines.'
     ],
+    cautions: [],
+    'streamline-code': '',
     atc: 'S01EC54',
     'caution-ids': []
   },
@@ -1930,6 +2020,8 @@ const data = {
     caution_ids: [],
     indications: {},
     notes: [],
+    cautions: [],
+    'streamline-code': '',
     atc: 'S01XA20',
     'caution-ids': []
   },
@@ -1973,6 +2065,8 @@ const data = {
       'text-req': 'N'
     },
     notes: [],
+    cautions: [],
+    'streamline-code': '6172',
     atc: 'S01XA20',
     'caution-ids': []
   },
@@ -2013,6 +2107,8 @@ const data = {
     notes: [
       ' For prescribing in accordance with Optometry Board of Australia guidelines.'
     ],
+    cautions: [],
+    'streamline-code': '',
     atc: 'S01EC03',
     'caution-ids': []
   },
@@ -2056,6 +2152,8 @@ const data = {
       'text-req': 'N'
     },
     notes: [],
+    cautions: [],
+    'streamline-code': '',
     atc: 'S01XA20',
     'caution-ids': []
   },
@@ -2101,6 +2199,8 @@ const data = {
     notes: [
       'The in-use shelf life of Hylo-Fresh and Hylo-Forte is 6 months from the date of opening.'
     ],
+    cautions: [],
+    'streamline-code': '4105',
     atc: 'S01XA20',
     'caution-ids': []
   },
@@ -2146,6 +2246,8 @@ const data = {
     notes: [
       'The in-use shelf life of Hylo-Fresh and Hylo-Forte is 6 months from the date of opening.'
     ],
+    cautions: [],
+    'streamline-code': '4105',
     atc: 'S01XA20',
     'caution-ids': []
   },
@@ -2186,6 +2288,8 @@ const data = {
     notes: [
       'The in-use shelf life of VitA-POS is 6 months from the date of opening.'
     ],
+    cautions: [],
+    'streamline-code': '',
     atc: 'S01XA20',
     'caution-ids': []
   },
@@ -2226,6 +2330,8 @@ const data = {
     notes: [
       ' For prescribing in accordance with Optometry Board of Australia guidelines.'
     ],
+    cautions: [],
+    'streamline-code': '',
     atc: 'S01EE05',
     'caution-ids': []
   },
@@ -2266,6 +2372,8 @@ const data = {
     notes: [
       ' For prescribing in accordance with Optometry Board of Australia guidelines.'
     ],
+    cautions: [],
+    'streamline-code': '',
     atc: 'S01EE03',
     'caution-ids': []
   },
@@ -2311,6 +2419,8 @@ const data = {
     notes: [
       ' For prescribing in accordance with Optometry Board of Australia guidelines.'
     ],
+    cautions: [],
+    'streamline-code': '',
     atc: 'S01EE',
     'caution-ids': []
   },
@@ -2354,6 +2464,8 @@ const data = {
       'text-req': 'N'
     },
     notes: [],
+    cautions: [],
+    'streamline-code': '',
     atc: 'S01AA01',
     'caution-ids': []
   },
@@ -2399,6 +2511,8 @@ const data = {
     notes: [
       ' For prescribing in accordance with Optometry Board of Australia guidelines.'
     ],
+    cautions: [],
+    'streamline-code': '',
     atc: 'S01EC54',
     'caution-ids': []
   },
@@ -2444,6 +2558,8 @@ const data = {
     notes: [
       'The in-use shelf life of Novatears is 6 months from the date of opening.'
     ],
+    cautions: [],
+    'streamline-code': '6172',
     atc: 'S01XA20',
     'caution-ids': []
   },
@@ -2487,6 +2603,8 @@ const data = {
       'text-req': 'N'
     },
     notes: [],
+    cautions: [],
+    'streamline-code': '',
     atc: 'S01XA20',
     'caution-ids': []
   },
@@ -2532,6 +2650,8 @@ const data = {
     notes: [
       'The in-use shelf life of Evolve carmellose 0.5% and Evolve hypromellose 0.3% is 3 months from the date of opening.'
     ],
+    cautions: [],
+    'streamline-code': '6172',
     atc: 'S01XA20',
     'caution-ids': []
   },
@@ -2577,6 +2697,8 @@ const data = {
     notes: [
       'The in-use shelf life of Evolve carmellose 0.5% and Evolve hypromellose 0.3% is 3 months from the date of opening.'
     ],
+    cautions: [],
+    'streamline-code': '6172',
     atc: 'S01XA20',
     'caution-ids': []
   },
@@ -2622,6 +2744,8 @@ const data = {
     notes: [
       'The in-use shelf life of Cationorm is 3 months from the date of opening.'
     ],
+    cautions: [],
+    'streamline-code': '6172',
     atc: 'S01XA20',
     'caution-ids': []
   },
@@ -2672,6 +2796,7 @@ const data = {
     cautions: [
       'It is recommended that the potential for immunosuppression with long term use of this drug be clinically reviewed after at least 24 months of treatment, if not already reviewed.'
     ],
+    'streamline-code': '',
     atc: 'S01XA18',
     'caution-ids': [ '27780' ]
   },
@@ -2718,8 +2843,9 @@ const data = {
       'No increase in the maximum quantity or number of units may be authorised.',
       'No increase in the maximum number of repeats may be authorised.'
     ],
+    cautions: [],
+    'streamline-code': '',
     atc: 'S01BB02',
     'caution-ids': []
   }
 }
-

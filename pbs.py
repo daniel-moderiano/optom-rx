@@ -35,6 +35,7 @@ all_fields = {
   'indications': {},
   'notes': [],
   'cautions': [],
+  'streamline-code': '',    #If streamline authority is available, the streamline code required will be here
 }
 
 
@@ -57,10 +58,10 @@ data = []
 # Isolate the optometry specific medications (by item code) from the PBS list
 # For reference, at the time of writing, there are 64 approved optometry PBS medications
 item_codes = set()
-# item_set = set(item_codes)
 
 # Modify path as necessary, e.g. each new month with new release of PBS data
-pres_path = 'C:/Users/danie/Documents/Programming/work-projects/optom-rx/info/Prescriber_type_20211101.txt'
+pres_path = 'C:/Users/danie/Documents/Programming/work-projects/optom-rx/info/2021-11-01-v3extracts\Prescriber_type_20211101.txt'
+
 with open(pres_path) as f:
   pres_lines = f.readlines()
   for line in pres_lines:
@@ -236,4 +237,17 @@ for item_code in item_caution:
       cautions.append(caution_dict[caution_id])
       drugs[item_code]['cautions'] = cautions
 
-print(drugs['12663L'])
+
+# Data on which drugs are available with streamlined authority
+stream_path = 'C:/Users/danie/Documents/Programming/work-projects/optom-rx/info/2021-11-01-v3extracts\streamlined_20211101.txt'
+
+with open(stream_path) as f:
+  stream_lines = f.readlines()
+  for line in stream_lines:
+    # This PBS text file is always of the format "drug-name item-code indication-code"
+    line_arr = line.strip().split()
+    if line_arr[-2] in item_codes:
+      drugs[line_arr[-2]]['streamline-code'] = line_arr[-1]
+
+print(drugs)
+
