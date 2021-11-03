@@ -84,9 +84,6 @@ with open(drug_path) as f:
 for item_code in brand_names:
   drugs[item_code]['brand-name'] = brand_names[item_code]
 
-print(drugs)
-
-
 # Using the item code, find the indication IDs for the restrictions on the meds. Note that only authorised medications will have indication IDs
 link_path = base_path + 'LinkExtract_20211101.txt'
 with open(link_path) as f:
@@ -249,3 +246,4 @@ with open(stream_path) as f:
     if line_arr[-2] in item_codes:
       drugs[line_arr[-2]]['streamline-code'] = line_arr[-1]
 
+print(drugs)
