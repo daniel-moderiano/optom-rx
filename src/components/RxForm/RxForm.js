@@ -378,7 +378,7 @@ const RxForm = () => {
   }
 
   return (
-    <StyledRxForm className="rxform" onSubmit={handleSubmit}>
+    <StyledRxForm className="rxform" onSubmit={handleSubmit} autoComplete="off">
       {/* Single input to select the medication */}
       {/* Note there must be enough info to identify the medicine, including form and strength */}
       <fieldset className="drug-form">
