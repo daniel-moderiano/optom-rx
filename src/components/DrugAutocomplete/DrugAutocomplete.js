@@ -26,7 +26,7 @@ const DrugAutocomplete = () => {
 
 
     const createList = () => {
-      // Firs remove any lists preset
+      // First remove any lists preset
       removeList()
       const itemsList = document.createElement('div');
       itemsList.classList.add('items-list');
@@ -37,6 +37,15 @@ const DrugAutocomplete = () => {
         item.textContent = match['mp-pt'];
         item.classList.add('item');
         itemsList.appendChild(item);
+      })
+
+      // Event propagation for items in list
+      itemsList.addEventListener('click', (event) => {
+        if (event.target.classList.contains('item')) {
+          // Set input field value to selected item
+          document.querySelector('#drugAutocomplete').value = event.target.textContent;
+          removeList();
+        }
       })
     }
 
