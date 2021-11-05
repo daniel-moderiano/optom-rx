@@ -1,20 +1,19 @@
-import data from '../../pbs/pbsData.json'
+import data from '../../pbs/pbsDataOrdered.json'
 import { useEffect, useState, useCallback, useRef } from "react";
 import { StyledDrugAutocomplete } from './DrugAutocompleteStyled';
 
 const DrugAutocomplete = () => {
   const [searchText, setSearchText] = useState('');
-  // const [currentFocus, setCurrentFocus] = useState(-1);
-  let currentFocus = useRef(-1);
+  // useRef allows us to store the equivalent of a 'global' component variable without losing data on re-render, but avoiding the async problems that can arise with state
+  const currentFocus = useRef(-1);
+  // TODO: Add a 'selected drug' object state or similar that is updated when the user selects a drug. 
 
-  // TODO: USE MULTIPLE useEFFECT HOOKS!!! Use one with a blank dependency array to set event listeners, as we only want this running on initial component mount. For the create list/calculate matches functions we need update on every state change/re-render, so these should be in a useEffect hook with searchText as a dependency
-
+  // Remove any currently displayed itemLists
   const removeList = useCallback(() => {
-    const list = document.querySelector('.items-list');
-    // Reset the currentFocus variable
+    const itemsList = document.querySelector('.items-list');
     currentFocus.current = -1;
-    if (list) {
-      list.remove();
+    if (itemsList) {
+      itemsList.remove();
     }
   }, []);
 
@@ -38,39 +37,65 @@ const DrugAutocomplete = () => {
     document.querySelector('.DrugAutocomplete').appendChild(itemsList);
     // Append each list item from the source array
     matchArr.forEach((match) => {
-      const item = document.createElement('div');
-      item.textContent = match['mp-pt'];    // Choose here which name to display
-      item.classList.add('item');
-      itemsList.appendChild(item);
+      
+      
+      // For those drugs with multiple brand names and the same active ingredient, instead iterate through the array of brandnames and generate a new item for each
+      if (match['brand-name'].length > 1) {
+        match['brand-name'].forEach((name) => {
+          const item = document.createElement('div');
+          item.textContent = `${match['tpuu-or-mpp-pt']} / ${name}`;    // Choose here which name to display
+          item.classList.add('item');
+          itemsList.appendChild(item);
+        });
+      } else {
+        const item = document.createElement('div');
+        item.textContent = `${match['tpuu-or-mpp-pt']} / ${match['brand-name']}`;    // Choose here which name to display: ;
+        item.classList.add('item');
+        itemsList.appendChild(item);
+      }
+      
+     
       // TODO: Bold letters as you type them when appending items 
     }); 
 
     itemsList.addEventListener('click', clickSuggestion);
   }, [removeList, clickSuggestion]);
 
+  // Perform the autocomplete logic here
   useEffect(() => {
-    // Must put the logic for finding matches in useEffect, or else it won't capture the first input typed in
-    let matches = data.filter((drug) => {
-      const regex = new RegExp(`^${searchText}`, 'i');
-      return drug['brand-name'].some((name) => name.match(regex)) || drug['tpuu-or-mpp-pt'].match(regex);
+    // Must put the logic for finding matches in useEffect, or else it won't capture the first input typed in  
+    // Two regex to match search text in different parts of the string. Split-up to allow custom ordering of matches in final UI list
+    const regexFirst = new RegExp(`^${searchText}`, 'i');
+    const regexSecond = new RegExp(`\\+ ${searchText}`, 'i');
+
+    // Match first at the start of a string (e.g. 'tim' matches 'timolol' but not 'latanoprost + timolol')
+    let firstMatches = data.filter((drug) => {
+      return drug['brand-name'].some((name) => name.match(regexFirst)) || drug['tpuu-or-mpp-pt'].match(regexFirst);
     });
+
+    // Match a second drug (e.g. 'tim' matches 'latanoprost + timolol' but not 'timolol'). These are lower priority and should be displayed second in a list
+    let secondMatches = data.filter((drug) => {
+      return drug['brand-name'].some((name) => name.match(regexSecond)) || drug['tpuu-or-mpp-pt'].match(regexSecond);
+    });
+
+    // Remove any duplicates (only relevant for the first typed char)
+    let filteredSecondMatches = secondMatches.filter((drug) => !firstMatches.includes(drug))
+
+    // Combine all the results into a single pseudo-ordered array
+    let matches = firstMatches.concat(filteredSecondMatches);
 
     // Reset the search results when the user clears the field
     if (searchText.length === 0) {
       matches = [];
     }
 
-    // Call the createList function on each user input change
     createList(matches);
-    // console.log(matches);
   }, [searchText, createList]);
 
   // Leave this dependency array empty to ensure this runs only once on first mount
   useEffect(() => {
     const input = document.querySelector('#drug-input');
     const itemsList = document.querySelector('.items-list'); 
-    // let currentFocus = -1;
-
 
     // Remove the active class from all autocomplete items
     const removeActive = (itemsArr) => {
@@ -87,12 +112,10 @@ const DrugAutocomplete = () => {
       if (currentFocus.current >= itemsArr.length) {
         currentFocus.current = 0;
       }
-
       // Similarly, if the user presses up too many times, cycle to the bottom of the list
-      if (currentFocus < 0) {
+      if (currentFocus.current < 0) {
         currentFocus.current = itemsArr.length - 1;
       }
-
       itemsArr[currentFocus.current].classList.add('active');
     };
 
