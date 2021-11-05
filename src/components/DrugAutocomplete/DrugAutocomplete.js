@@ -4,11 +4,14 @@ import { StyledDrugAutocomplete } from './DrugAutocompleteStyled';
 
 const DrugAutocomplete = () => {
   const [searchText, setSearchText] = useState('');
+  // const [currentFocus, setCurrentFocus] = useState(-1);
 
   // TODO: USE MULTIPLE useEFFECT HOOKS!!! Use one with a blank dependency array to set event listeners, as we only want this running on initial component mount. For the create list/calculate matches functions we need update on every state change/re-render, so these should be in a useEffect hook with searchText as a dependency
 
   const removeList = useCallback(() => {
     const list = document.querySelector('.items-list');
+    // Reset the currentFocus variable
+    // setCurrentFocus(-1);
     if (list) {
       list.remove();
     }
@@ -58,17 +61,72 @@ const DrugAutocomplete = () => {
 
     // Call the createList function on each user input change
     createList(matches);
-    console.log(matches);
+    // console.log(matches);
   }, [searchText, createList]);
 
   // Leave this dependency array empty to ensure this runs only once on first mount
   useEffect(() => {
     const input = document.querySelector('#drug-input');
+    const itemsList = document.querySelector('.items-list'); 
+    let currentFocus = -1;
 
-    const keyItemNav = (event) => {
-      console.log(event.keyCode);
+
+    // Remove the active class from all autocomplete items
+    const removeActive = (itemsArr) => {
+      itemsArr.forEach((item) => {
+        item.classList.remove('active');
+      })
     }
 
+    // Add the active class to a specified item in the autocomplete list
+    const addActive = (itemsArr) => {
+      // First remove any active classes
+      removeActive(itemsArr);
+      // If the user has pressed down more than the current length of the autocomplete list, or presses down on the last item, cycle back to the top of the list
+      if (currentFocus >= itemsArr.length) {
+        currentFocus = 0;
+      }
+
+      // Similarly, if the user presses up too many times, cycle to the bottom of the list
+      if (currentFocus < 0) {
+        currentFocus = itemsArr.length - 1;
+      }
+
+      itemsArr[currentFocus].classList.add('active');
+    };
+
+    // The currentFocus variable will be used as an index when adding an active class to an item in the itemsList list
+    const keyItemNav = (e) => {
+      // Check that there is an itemsList present before allowing the user to navigate through it
+      if (itemsList) {
+        const items = document.querySelectorAll('.item');
+        console.log(items.length);
+        if (items.length > 0) {
+          if (e.keyCode === 40) {
+            
+            /*If the arrow DOWN key is pressed,
+            increase the currentFocus variable:*/
+            currentFocus++;
+            console.log(items.length, currentFocus);
+            /*and and make the current item more visible:*/
+            addActive(items);
+          } else if (e.keyCode === 38) { //up
+            /*If the arrow UP key is pressed,
+            decrease the currentFocus variable:*/
+            currentFocus--;
+            /*and and make the current item more visible:*/
+            addActive(items);
+          } else if (e.keyCode === 13) {
+            // /*If the ENTER key is pressed, prevent the form from being submitted,*/
+            e.preventDefault();
+            if (currentFocus > -1) {
+            /*and simulate a click on the "active" item:*/
+              // if (x) x[currentFocus].click();
+            }
+          }
+        }
+      }
+    }
     input.addEventListener('keydown', keyItemNav);
 
     return () => {
