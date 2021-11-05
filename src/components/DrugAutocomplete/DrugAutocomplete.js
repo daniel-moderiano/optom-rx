@@ -14,9 +14,9 @@ const DrugAutocomplete = () => {
     }
   }, []);
 
+  // Capture the selection made in the items list via event propagation
   const clickSuggestion = useCallback((event) => {
     const input = document.querySelector('#drug-input');
-    console.log('firing click event');
     if (event.target.classList.contains('item')) {
       // Set input field value to selected item
       input.value = event.target.textContent;
@@ -60,6 +60,22 @@ const DrugAutocomplete = () => {
     createList(matches);
     console.log(matches);
   }, [searchText, createList]);
+
+  // Leave this dependency array empty to ensure this runs only once on first mount
+  useEffect(() => {
+    const input = document.querySelector('#drug-input');
+
+    const keyItemNav = (event) => {
+      console.log(event.keyCode);
+    }
+
+    input.addEventListener('keydown', keyItemNav);
+
+    return () => {
+      // Remove event listener here
+      input.removeEventListener('keydown', keyItemNav);
+    }
+  }, [])
 
   const handleChange = (event) => {
     setSearchText(event.target.value);
