@@ -5,58 +5,44 @@ import { StyledDrugAutocomplete } from './DrugAutocompleteStyled';
 const DrugAutocomplete = () => {
   const [searchText, setSearchText] = useState('');
 
-  // Instead of relying on awkard useEffect organisation, set this bool to true whenever an item list is rendered on the page (i.e. user is using autocorrect)
-  const [listActive, setListActive] = useState(false);
-
   // TODO: USE MULTIPLE useEFFECT HOOKS!!! Use one with a blank dependency array to set event listeners, as we only want this running on initial component mount. For the create list/calculate matches functions we need update on every state change/re-render, so these should be in a useEffect hook with searchText as a dependency
 
   const removeList = useCallback(() => {
     const list = document.querySelector('.items-list');
     if (list) {
       list.remove();
-      setListActive(false)
     }
   }, []);
 
+  const clickSuggestion = useCallback((event) => {
+    const input = document.querySelector('#drug-input');
+    console.log('firing click event');
+    if (event.target.classList.contains('item')) {
+      // Set input field value to selected item
+      input.value = event.target.textContent;
+      removeList();
+    }
+  }, [removeList])
+
+  // Creates list of autocomplete items using an array of relevant suggestions (matchArr)
   const createList = useCallback((matchArr) => {
-    // First remove any lists preset
-    removeList()
+    // First remove any lists present to ensure the list if refreshed on each new input
+    removeList();
+    // Create the new list container
     const itemsList = document.createElement('div');
     itemsList.classList.add('items-list');
     document.querySelector('.DrugAutocomplete').appendChild(itemsList);
+    // Append each list item from the source array
     matchArr.forEach((match) => {
-      // Create and append item to itemsList div
       const item = document.createElement('div');
-      item.textContent = match['mp-pt'];
+      item.textContent = match['mp-pt'];    // Choose here which name to display
       item.classList.add('item');
       itemsList.appendChild(item);
+      // TODO: Bold letters as you type them when appending items 
     }); 
-  }, [removeList]);
 
-  // Dependency is the listActive bool, to avoid calling this an excessive amount of times
-  // useEffect(() => {
-  //   console.log('Run click effect');
-  //   const input = document.querySelector('#drugAutocomplete');
-
-  //   const clickSuggestion = (event) => {
-  //     if (event.target.classList.contains('item')) {
-  //       // Set input field value to selected item
-  //       input.value = event.target.textContent;
-  //       removeList();
-  //       console.log('click');
-  //     }
-  //   }
-
-  //   if (listActive) {
-  //     // Event propagation for items in list
-  //     const itemsList = document.querySelector('.items-list')
-  //     itemsList.addEventListener('click', clickSuggestion);
-  //   }
-    
-  //   return () => {
-  //     // Remove event listeners here
-  //   }
-  // }, [removeList, listActive])
+    itemsList.addEventListener('click', clickSuggestion);
+  }, [removeList, clickSuggestion]);
 
   useEffect(() => {
     // Must put the logic for finding matches in useEffect, or else it won't capture the first input typed in
@@ -70,6 +56,7 @@ const DrugAutocomplete = () => {
       matches = [];
     }
 
+    // Call the createList function on each user input change
     createList(matches);
     console.log(matches);
   }, [searchText, createList]);
