@@ -1,0 +1,82 @@
+[
+  {
+    "item-code": "",
+    "brand-name": [
+      "Atropt"
+    ],
+    "mp-pt": "atropine sulphate monohydrate",
+    "tpuu-or-mpp-pt": "atropine sulphate monohydrate 1% eye drops, 15 mL"
+  },
+  {
+    "item-code": "",
+    "brand-name": [
+      "Eikance"
+    ],
+    "mp-pt": "atropine sulphate monohydrate",
+    "tpuu-or-mpp-pt": "atropine sulphate monohydrate 0.01% eye drops, 5 x 0.3 mL unit doses"
+  },
+  {
+    "item-code": "",
+    "brand-name": [
+      "Eikance"
+    ],
+    "mp-pt": "atropine sulphate monohydrate",
+    "tpuu-or-mpp-pt": "atropine sulphate monohydrate 0.01% eye drops, 30 x 0.3 mL unit doses"
+  },
+  {
+    "item-code": "",
+    "brand-name": [
+      "Eikance"
+    ],
+    "mp-pt": "atropine sulphate monohydrate",
+    "tpuu-or-mpp-pt": "atropine sulphate monohydrate 0.01% eye drops, 60 x 0.3 mL unit doses"
+  },
+  {
+    "item-code": "",
+    "brand-name": [
+      "Minims Atropine"
+    ],
+    "mp-pt": "atropine sulphate monohydrate",
+    "tpuu-or-mpp-pt": "atropine sulphate monohydrate 0.01% eye drops, 5 x 0.3 mL unit doses"
+  },
+  {
+    "schedule-two": [
+      "dibromopropamidine",
+      "propamidine",
+      "antazoline",
+      "azelastine",
+      "levocabastine",
+      "lodoxamide",
+      "naphazoline",
+      "pheniramine",
+      "sodium cromoglycate",
+      "phenylephrine < 2.5%"
+    ],
+    "schedule-four": [
+      "azithromycin",
+      "bacitracin",
+      "cephazolin",
+      "ganciclovir",
+      "gramicidin",
+      "neomycin",
+      "polymyxin",
+      "tetracycline",
+      "diclofenac",
+      "flubriprofen",
+      "ketorolac",
+      "loteprednol",
+      "prednisolone sodium phosphate",
+      "olopatadine",
+      "apraclonidine",
+      "atropine",
+      "cyclopentolate",
+      "homatropine",
+      "phenylephrine",
+      "tropicamide",
+      "amethocaine",
+      "lignocaine",
+      "oxybuprocaine",
+      "proxymetacaine"
+    ]
+  }
+]

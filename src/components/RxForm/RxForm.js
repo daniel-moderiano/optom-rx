@@ -393,6 +393,7 @@ const RxForm = () => {
           alert={drugAlerts.name}
         />
         {/* TODO: add input checkbox to include brand name on prescription, and for brand name substitution not permitted */}
+        {/* TODO: Add 'to be compounded' checkbox */}
 
         <DrugAutocomplete/>
         {/* Must include quantity and repeats to meet requirements */}
