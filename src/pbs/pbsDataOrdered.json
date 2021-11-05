@@ -540,5 +540,174 @@
     ],
     "mp-pt": "prednisolone acetate",
     "tpuu-or-mpp-pt": "prednisolone acetate 1% eye drops, 10 mL"
+  },
+  {
+    "item-code": "",
+    "brand-name": [
+      "Atropt"
+    ],
+    "mp-pt": "atropine",
+    "tpuu-or-mpp-pt": "atropine sulphate monohydrate 1% eye drops, 15 mL"
+  },
+  {
+    "item-code": "",
+    "brand-name": [
+      "Minims Atropine"
+    ],
+    "mp-pt": "atropine",
+    "tpuu-or-mpp-pt": "atropine sulphate monohydrate 1% eye drops, 20 x 0.5 mL unit doses"
+  },
+  {
+    "item-code": "",
+    "brand-name": [
+      "Voltaren Ophtha"
+    ],
+    "mp-pt": "diclofenac",
+    "tpuu-or-mpp-pt": "diclofenac sodium 0.1% eye drops, 5 mL"
+  },
+  {
+    "item-code": "",
+    "brand-name": [
+      "Acular"
+    ],
+    "mp-pt": "ketorolac",
+    "tpuu-or-mpp-pt": "ketorolac trometamol 0.5% eye drops, 5 mL"
+  },
+  {
+    "item-code": "",
+    "brand-name": [
+      "Minims Prednisolone"
+    ],
+    "mp-pt": "prednisolone sodium phosphate",
+    "tpuu-or-mpp-pt": "prednisolone sodium phosphate 0.5% eye drops, 20 x 0.5 mL unit doses"
+  },
+  {
+    "item-code": "",
+    "brand-name": [
+      "Patanol",
+      "Paladopt"
+    ],
+    "mp-pt": "olopatadine",
+    "tpuu-or-mpp-pt": "olopatadine hydrochloride 0.1% eye drops, 5 mL"
+  },
+  {
+    "item-code": "",
+    "brand-name": [
+      "Iopidine"
+    ],
+    "mp-pt": "apraclonidine",
+    "tpuu-or-mpp-pt": "apraclonidine hydrochloride 0.5% eye drops, 10 mL"
+  },
+  {
+    "item-code": "",
+    "brand-name": [
+      "Cyclogyl"
+    ],
+    "mp-pt": "cyclopentolate",
+    "tpuu-or-mpp-pt": "cyclopentolate hydrochloride 1.0% eye drops, 15 mL"
+  },
+  {
+    "item-code": "",
+    "brand-name": [
+      "Minims Cyclopentolate"
+    ],
+    "mp-pt": "cyclopentolate",
+    "tpuu-or-mpp-pt": "cyclopentolate hydrochloride 0.5% eye drops, 20 x 0.5 mL unit doses"
+  },
+  {
+    "item-code": "",
+    "brand-name": [
+      "Minims Cyclopentolate"
+    ],
+    "mp-pt": "cyclopentolate",
+    "tpuu-or-mpp-pt": "cyclopentolate hydrochloride 1.0% eye drops, 20 x 0.5 mL unit doses"
+  },
+  {
+    "item-code": "",
+    "brand-name": [
+      "Mydriacyl"
+    ],
+    "mp-pt": "tropicamide",
+    "tpuu-or-mpp-pt": "tropicamide 0.5% eye drops, 15 mL"
+  },
+  {
+    "item-code": "",
+    "brand-name": [
+      "Mydriacyl"
+    ],
+    "mp-pt": "tropicamide",
+    "tpuu-or-mpp-pt": "tropicamide 1.0% eye drops, 15 mL"
+  },
+  {
+    "item-code": "",
+    "brand-name": [
+      "Minims Tropicamide"
+    ],
+    "mp-pt": "tropicamide",
+    "tpuu-or-mpp-pt": "tropicamide 0.5% eye drops, 20 x 0.5 mL unit doses"
+  },
+  {
+    "item-code": "",
+    "brand-name": [
+      "Minims Tropicamide"
+    ],
+    "mp-pt": "tropicamide",
+    "tpuu-or-mpp-pt": "tropicamide 1.0% eye drops, 20 x 0.5 mL unit doses"
+  },
+  {
+    "item-code": "",
+    "brand-name": [
+      "Minims Amethocaine (Tetracaine)"
+    ],
+    "mp-pt": "amethocaine (tetracaine)",
+    "tpuu-or-mpp-pt": "amethocaine (tetracaine) hydrochloride 0.5% eye drops, 20 x 0.5 mL unit doses"
+  },
+  {
+    "item-code": "",
+    "brand-name": [
+      "Minims Amethocaine (Tetracaine)"
+    ],
+    "mp-pt": "amethocaine (tetracaine)",
+    "tpuu-or-mpp-pt": "amethocaine (tetracaine) hydrochloride 1.0% eye drops, 20 x 0.5 mL unit doses"
+  },
+  {
+    "item-code": "",
+    "brand-name": [
+      "Minims Lignocaine (Lidocaine) and Fluorescein Sodium"
+    ],
+    "mp-pt": "lignocaine (lidocaine) and fluorescein sodium",
+    "tpuu-or-mpp-pt": "lignocaine (lidocaine) 4% and fluorescein sodium 0.25% eye drops, 20 x 0.5 mL unit doses"
+  },
+  {
+    "item-code": "",
+    "brand-name": [
+      "Minims Oxybuprocaine"
+    ],
+    "mp-pt": "oxybuprocaine",
+    "tpuu-or-mpp-pt": "oxybuprocaine hydrochloride 0.4% eye drops, 20 x 0.5 mL unit doses"
+  },
+  {
+    "item-code": "",
+    "brand-name": [
+      "Alcaine"
+    ],
+    "mp-pt": "proxymetacaine",
+    "tpuu-or-mpp-pt": "proxymetacaine hydrochloride 0.5% eye drops, 15 mL"
+  },
+  {
+    "item-code": "",
+    "brand-name": [
+      "Minims Phenylephrine"
+    ],
+    "mp-pt": "phenylephrine",
+    "tpuu-or-mpp-pt": "phenylephrine hydrochloride 2.5% eye drops, 20 x 0.5 mL unit doses"
+  },
+  {
+    "item-code": "",
+    "brand-name": [
+      "Minims Phenylephrine"
+    ],
+    "mp-pt": "phenylephrine",
+    "tpuu-or-mpp-pt": "phenylephrine hydrochloride 10% eye drops, 20 x 0.5 mL unit doses"
   }
 ]

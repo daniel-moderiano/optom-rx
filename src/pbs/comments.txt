@@ -1,0 +1,36 @@
+NONE = not available in any form in Australia
+OPNONE = no commercial ophthalmological preparations available, but other formulations exist. Potentially compoundable
+DISC = discontinued
+DONE = added to JSON database
+
+**Alcaine is the only chemist avaiable anaesthetic
+**Mydriacyl is seemingly the only chemist available tropicamide and/or cyclpentolate formulation available
+
+Not yet available below
+{
+    "item-code": "",
+    "brand-name": [
+      "Eikance"
+    ],
+    "mp-pt": "atropine",
+    "tpuu-or-mpp-pt": "atropine sulphate monohydrate 0.01% eye drops, 5 x 0.3 mL unit doses"
+  },
+  {
+    "item-code": "",
+    "brand-name": [
+      "Eikance"
+    ],
+    "mp-pt": "atropine",
+    "tpuu-or-mpp-pt": "atropine sulphate monohydrate 0.01% eye drops, 30 x 0.3 mL unit doses"
+  },
+  {
+    "item-code": "",
+    "brand-name": [
+      "Eikance"
+    ],
+    "mp-pt": "atropine",
+    "tpuu-or-mpp-pt": "atropine sulphate monohydrate 0.01% eye drops, 60 x 0.3 mL unit doses"
+  },
+  Loteprednol (lotemax)
+
+PBS brands not available (manually or automatically remove from JSON data set)

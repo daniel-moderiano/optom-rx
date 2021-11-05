@@ -3,7 +3,7 @@ import styled from "styled-components";
 const StyledDrugAutocomplete = styled.div`
   position: relative;
   background-color: #fff;
-  width: 400px;
+  width: 600px;
 
   input {
     width: 100%;
@@ -13,6 +13,7 @@ const StyledDrugAutocomplete = styled.div`
     position: absolute;
     z-index: 10;
     width: 100%;
+    font-size: 0.9rem;
 
     div {
       cursor: pointer;

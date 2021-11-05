@@ -1,82 +1,42 @@
 [
   {
-    "item-code": "",
-    "brand-name": [
-      "Atropt"
-    ],
-    "mp-pt": "atropine sulphate monohydrate",
-    "tpuu-or-mpp-pt": "atropine sulphate monohydrate 1% eye drops, 15 mL"
-  },
-  {
-    "item-code": "",
-    "brand-name": [
-      "Eikance"
-    ],
-    "mp-pt": "atropine sulphate monohydrate",
-    "tpuu-or-mpp-pt": "atropine sulphate monohydrate 0.01% eye drops, 5 x 0.3 mL unit doses"
-  },
-  {
-    "item-code": "",
-    "brand-name": [
-      "Eikance"
-    ],
-    "mp-pt": "atropine sulphate monohydrate",
-    "tpuu-or-mpp-pt": "atropine sulphate monohydrate 0.01% eye drops, 30 x 0.3 mL unit doses"
-  },
-  {
-    "item-code": "",
-    "brand-name": [
-      "Eikance"
-    ],
-    "mp-pt": "atropine sulphate monohydrate",
-    "tpuu-or-mpp-pt": "atropine sulphate monohydrate 0.01% eye drops, 60 x 0.3 mL unit doses"
-  },
-  {
-    "item-code": "",
-    "brand-name": [
-      "Minims Atropine"
-    ],
-    "mp-pt": "atropine sulphate monohydrate",
-    "tpuu-or-mpp-pt": "atropine sulphate monohydrate 0.01% eye drops, 5 x 0.3 mL unit doses"
-  },
-  {
     "schedule-two": [
-      "dibromopropamidine",
-      "propamidine",
-      "antazoline",
-      "azelastine",
-      "levocabastine",
-      "lodoxamide",
+      "dibromopropamidineOPNONE",
+      "propamidineDONE",
+      "antazolineDONE",
+      "azelastineDONE",
+      "levocabastineDONE",
+      "lodoxamideDONE",
       "naphazoline",
-      "pheniramine",
-      "sodium cromoglycate",
+      "pheniramineDONE",
+      "sodium cromoglycateDONE",
       "phenylephrine < 2.5%"
     ],
     "schedule-four": [
-      "azithromycin",
-      "bacitracin",
-      "cephazolin",
-      "ganciclovir",
-      "gramicidin",
-      "neomycin",
-      "polymyxin",
-      "tetracycline",
-      "diclofenac",
-      "flubriprofen",
-      "ketorolac",
-      "loteprednol",
-      "prednisolone sodium phosphate",
-      "olopatadine",
-      "apraclonidine",
-      "atropine",
-      "cyclopentolate",
-      "homatropine",
-      "phenylephrine",
-      "tropicamide",
-      "amethocaine",
-      "lignocaine",
-      "oxybuprocaine",
-      "proxymetacaine"
+      "azithromycinNONE",
+      "bacitracinNONE",
+      "cephazolinOPNONE",
+      "ganciclovirOPNONE",
+      "gramicidinOPNONE",
+      "neomycinOPNONE",
+      "polymyxinNONE",
+      "tetracyclineNONE",
+      "diclofenacDONE",
+      "flurbiprofenDISC",
+      "ketorolacNONE",
+      "loteprednolOPNONE",
+      "prednisolone sodium phosphateDONE",
+      "olopatadineDONE",
+      "apraclonidineDONE",
+      "atropineDONE",
+      "cyclopentolateDONE",
+      "homatropineDISC",
+      "phenylephrineDONE",
+      "tropicamideDONE",
+      "amethocaineDONE",
+      "lignocaineDONE",
+      "oxybuprocaineDONE",
+      "proxymetacaineDONE"
     ]
   }
 ]
