@@ -121,7 +121,7 @@ const DrugAutocomplete = () => {
             e.preventDefault();
             if (currentFocus > -1) {
             /*and simulate a click on the "active" item:*/
-              // if (x) x[currentFocus].click();
+              items[currentFocus].click();
             }
           }
         }
