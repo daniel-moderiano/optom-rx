@@ -100,28 +100,23 @@ const DrugAutocomplete = () => {
     const keyItemNav = (e) => {
       // Check that there is an itemsList present before allowing the user to navigate through it
       if (itemsList) {
+        // This is the array of list items that will be moved through using the currentFocus variable
         const items = document.querySelectorAll('.item');
-        console.log(items.length);
         if (items.length > 0) {
-          if (e.keyCode === 40) {
-            
-            /*If the arrow DOWN key is pressed,
-            increase the currentFocus variable:*/
+          if (e.keyCode === 40) {  
             currentFocus.current++;
-            console.log(items.length, currentFocus.current);
             /*and and make the current item more visible:*/
             addActive(items);
           } else if (e.keyCode === 38) { //up
-            /*If the arrow UP key is pressed,
-            decrease the currentFocus variable:*/
+            // Decrease the currentFocus variable when the DOWN key is pressed
             currentFocus.current--;
             /*and and make the current item more visible:*/
             addActive(items);
           } else if (e.keyCode === 13) {
-            // /*If the ENTER key is pressed, prevent the form from being submitted,*/
+            // Ensure the form isn't submitted when simply selecting an option
             e.preventDefault();
             if (currentFocus.current > -1) {
-            /*and simulate a click on the "active" item:*/
+              // Simulated a click on the currently 'focused' item
               items[currentFocus.current].click();
             }
           }
