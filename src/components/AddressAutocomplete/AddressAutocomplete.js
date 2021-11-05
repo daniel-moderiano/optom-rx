@@ -266,7 +266,7 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
           alert={autocompleteAlert}
           className="street-address"
         />
-        <button type="button" onClick={() => setExpand(true)}>Address not listed?</button>
+        <button type="button" onClick={() => setExpand(true)}>Enter manually</button>
       </div>
       
 
