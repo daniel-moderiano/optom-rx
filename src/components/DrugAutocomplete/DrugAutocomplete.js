@@ -1,17 +1,18 @@
 import data from '../../pbs/pbsData.json'
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { StyledDrugAutocomplete } from './DrugAutocompleteStyled';
 
 const DrugAutocomplete = () => {
   const [searchText, setSearchText] = useState('');
   // const [currentFocus, setCurrentFocus] = useState(-1);
+  let currentFocus = useRef(-1);
 
   // TODO: USE MULTIPLE useEFFECT HOOKS!!! Use one with a blank dependency array to set event listeners, as we only want this running on initial component mount. For the create list/calculate matches functions we need update on every state change/re-render, so these should be in a useEffect hook with searchText as a dependency
 
   const removeList = useCallback(() => {
     const list = document.querySelector('.items-list');
     // Reset the currentFocus variable
-    // setCurrentFocus(-1);
+    currentFocus.current = -1;
     if (list) {
       list.remove();
     }
@@ -68,7 +69,7 @@ const DrugAutocomplete = () => {
   useEffect(() => {
     const input = document.querySelector('#drug-input');
     const itemsList = document.querySelector('.items-list'); 
-    let currentFocus = -1;
+    // let currentFocus = -1;
 
 
     // Remove the active class from all autocomplete items
@@ -83,16 +84,16 @@ const DrugAutocomplete = () => {
       // First remove any active classes
       removeActive(itemsArr);
       // If the user has pressed down more than the current length of the autocomplete list, or presses down on the last item, cycle back to the top of the list
-      if (currentFocus >= itemsArr.length) {
-        currentFocus = 0;
+      if (currentFocus.current >= itemsArr.length) {
+        currentFocus.current = 0;
       }
 
       // Similarly, if the user presses up too many times, cycle to the bottom of the list
       if (currentFocus < 0) {
-        currentFocus = itemsArr.length - 1;
+        currentFocus.current = itemsArr.length - 1;
       }
 
-      itemsArr[currentFocus].classList.add('active');
+      itemsArr[currentFocus.current].classList.add('active');
     };
 
     // The currentFocus variable will be used as an index when adding an active class to an item in the itemsList list
@@ -106,22 +107,22 @@ const DrugAutocomplete = () => {
             
             /*If the arrow DOWN key is pressed,
             increase the currentFocus variable:*/
-            currentFocus++;
-            console.log(items.length, currentFocus);
+            currentFocus.current++;
+            console.log(items.length, currentFocus.current);
             /*and and make the current item more visible:*/
             addActive(items);
           } else if (e.keyCode === 38) { //up
             /*If the arrow UP key is pressed,
             decrease the currentFocus variable:*/
-            currentFocus--;
+            currentFocus.current--;
             /*and and make the current item more visible:*/
             addActive(items);
           } else if (e.keyCode === 13) {
             // /*If the ENTER key is pressed, prevent the form from being submitted,*/
             e.preventDefault();
-            if (currentFocus > -1) {
+            if (currentFocus.current > -1) {
             /*and simulate a click on the "active" item:*/
-              items[currentFocus].click();
+              items[currentFocus.current].click();
             }
           }
         }
