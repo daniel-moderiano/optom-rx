@@ -25,7 +25,28 @@ const DrugAutocomplete = () => {
       input.value = event.target.textContent;
       removeList();
     }
-  }, [removeList])
+  }, [removeList]);
+
+  const boldLetters = useCallback((string) => {
+    let regexFirst = new RegExp(`^${searchText}`, 'i');
+    // Must add capturing group to this regex for later extraction
+    let regexSecond = new RegExp(`\\+ (${searchText})`, 'i');
+    let firstMatch = string.match(regexFirst);
+    let secondMatch = string.match(regexSecond);
+    let matches = [];
+    
+    // If there is a regex match, the match function returns an array, otherwise is null
+    if (firstMatch) {
+      // Oth index returns the subtring that matches
+      matches.push([firstMatch[0], { 'index': firstMatch['index'] }])
+      return `<strong>${string.substr(firstMatch['index'], firstMatch[0].length)}</strong>${string.substr((firstMatch['index'] + firstMatch[0].length))}`;
+    } else if (secondMatch) {
+      // Use a capturing group in regexSecond, which will appear as index 1 in the match array
+      return `${string.substr(0, secondMatch['index'])}<strong>${string.substr(secondMatch['index'] + 2, secondMatch[1].length)}</strong>${string.substr((secondMatch['index'] + secondMatch[1].length + 2))}`;
+    } else {
+      return string;
+    }
+  }, [searchText])
 
   // Creates list of autocomplete items using an array of relevant suggestions (matchArr)
   const createList = useCallback((matchArr) => {
@@ -37,25 +58,19 @@ const DrugAutocomplete = () => {
     document.querySelector('.DrugAutocomplete').appendChild(itemsList);
     // Append each list item from the source array
     matchArr.forEach((match) => {
-      // For those drugs with multiple brand names and the same active ingredient, instead iterate through the array of brandnames and generate a new item for each
-      // if (match['brand-name'].length > 1) {
-      //   match['brand-name'].forEach((name) => {
-      //     const item = document.createElement('div');
-      //     item.textContent = `${match['tpuu-or-mpp-pt']} / ${name}`;    // Choose here which name to display
-      //     item.classList.add('item');
-      //     itemsList.appendChild(item);
-      //   });
-      // } else {
+      // TODO: decide whether this bolding is helpful or hinders
+      const boldActiveName = boldLetters(`${match['tpuu-or-mpp-pt']}`);
+      const boldBrandName = boldLetters(`${match['brand-name']}`);
       const item = document.createElement('div');
-      item.textContent = `${match['tpuu-or-mpp-pt']} / ${match['brand-name']}`;    // Choose here which name to display: ;
+      item.innerHTML = `${boldActiveName} / ${boldBrandName}`;
+      // item.textContent = `${match['tpuu-or-mpp-pt']} / ${match['brand-name']}`;    // Choose here which name to display: ;
       item.classList.add('item');
       itemsList.appendChild(item);     
-     
-      // TODO: Bold letters as you type them when appending items 
     }); 
 
     itemsList.addEventListener('click', clickSuggestion);
-  }, [removeList, clickSuggestion]);
+  }, [removeList, clickSuggestion, boldLetters]);
+
 
   // Perform the autocomplete logic here
   useEffect(() => {
@@ -65,6 +80,7 @@ const DrugAutocomplete = () => {
     let regexSecond;
     let matches;
 
+    // Handle user typing in special characters, which would otherwise crash the app here
     try {
       regexFirst = new RegExp(`^${searchText}`, 'i');
       regexSecond = new RegExp(`\\+ ${searchText}`, 'i');
@@ -92,8 +108,6 @@ const DrugAutocomplete = () => {
       // Combine all the results into a single pseudo-ordered array
       matches = firstMatches.concat(filteredSecondMatches);
     }
-
-    // TODO: Consider the current setup where if the user types 'Xalatan', search results will display all Latanoprost results due to a central brand name array. This may or may not be intended result
 
     // Reset the search results when the user clears the field
     if (searchText.length === 0) {
