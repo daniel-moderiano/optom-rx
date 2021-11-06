@@ -1,9 +1,8 @@
-import data from '../../pbs/pbsDataUnique.json'
-import { useEffect, useState, useCallback, useRef } from "react";
+import PBSData from '../../pbs/pbsDataUnique.json'
+import { useEffect, useCallback, useRef } from "react";
 import { StyledDrugAutocomplete } from './DrugAutocompleteStyled';
 
-const DrugAutocomplete = ({ onSelect }) => {
-  const [searchText, setSearchText] = useState('');
+const DrugAutocomplete = ({ data, setData, handleChange }) => {
   // useRef allows us to store the equivalent of a 'global' component variable without losing data on re-render, but avoiding the async problems that can arise with state
   const currentFocus = useRef(-1);
   // TODO: Add a 'selected drug' object state or similar that is updated when the user selects a drug. 
@@ -19,21 +18,26 @@ const DrugAutocomplete = ({ onSelect }) => {
 
   // Capture the selection made in the items list via event propagation
   const clickSuggestion = useCallback((event) => {
-    const input = document.querySelector('#drug-input');
     if (event.target.classList.contains('item')) {
       // Set input field value to selected item
-      input.value = event.target.textContent;
-      setSearchText(event.target.textContent);
-      onSelect(event.target.dataset.code);
+      // input.value = event.target.textContent;
+      // Prevent the input value from changing on re-render
+      setData((prevData) => ({
+        ...prevData,
+        activeIngredient: event.target.textContent,
+        itemCode: event.target.dataset.code,
+      }));
+      // TODO: Consider adding some functionality here to pre-fill RxForm state with name/brand name etc.
+      // TODO: consider an expandable menu set similar to address autocomplete that breaks up active ingredient and brand name, with a checkbox to ask if brand name should be included, and potentially a select menu on the brand input
       removeList();
     }
-  }, [removeList, onSelect]);
+  }, [removeList, setData]);
 
   // Given a string, use the current search text and regex to bold the segment of text being searched for (using HTML)
   const boldLetters = useCallback((string) => {
-    let regexFirst = new RegExp(`^${searchText}`, 'i');
+    let regexFirst = new RegExp(`^${data.activeIngredient}`, 'i');
     // Must add capturing group to this regex for later extraction
-    let regexSecond = new RegExp(`\\+ (${searchText})`, 'i');
+    let regexSecond = new RegExp(`\\+ (${data.activeIngredient})`, 'i');
     let firstMatch = string.match(regexFirst);
     let secondMatch = string.match(regexSecond);
     let matches = [];
@@ -50,7 +54,7 @@ const DrugAutocomplete = ({ onSelect }) => {
       // If no matches, return all non-bold
       return string;
     }
-  }, [searchText])
+  }, [data])
 
   // Creates list of autocomplete items using an array of relevant suggestions (matchArr)
   const createList = useCallback((matchArr) => {
@@ -87,8 +91,8 @@ const DrugAutocomplete = ({ onSelect }) => {
 
     // Handle user typing in special characters, which would otherwise crash the app here
     try {
-      regexFirst = new RegExp(`^${searchText}`, 'i');
-      regexSecond = new RegExp(`\\+ ${searchText}`, 'i');
+      regexFirst = new RegExp(`^${data.activeIngredient}`, 'i');
+      regexSecond = new RegExp(`\\+ ${data.activeIngredient}`, 'i');
     } catch (error) {
       // TODO: error message handling in UI
       console.log(error.message);
@@ -98,12 +102,12 @@ const DrugAutocomplete = ({ onSelect }) => {
       matches = [];
     } else {
       // Match first at the start of a string (e.g. 'tim' matches 'timolol' but not 'latanoprost + timolol')
-      let firstMatches = data.filter((drug) => {
+      let firstMatches = PBSData.filter((drug) => {
         return drug['brand-name'].some((name) => name.match(regexFirst)) || drug['tpuu-or-mpp-pt'].match(regexFirst);
       });
 
       // Match a second drug (e.g. 'tim' matches 'latanoprost + timolol' but not 'timolol'). These are lower priority and should be displayed second in a list
-      let secondMatches = data.filter((drug) => {
+      let secondMatches = PBSData.filter((drug) => {
         return drug['brand-name'].some((name) => name.match(regexSecond)) || drug['tpuu-or-mpp-pt'].match(regexSecond);
       });
 
@@ -115,12 +119,12 @@ const DrugAutocomplete = ({ onSelect }) => {
     }
 
     // Reset the search results when the user clears the field
-    if (searchText.length === 0) {
+    if (data.activeIngredient.length === 0) {
       matches = [];
     }
 
     createList(matches);
-  }, [searchText, createList]);
+  }, [data, createList]);
 
   // Leave this dependency array empty to ensure this runs only once on first mount
   useEffect(() => {
@@ -184,9 +188,9 @@ const DrugAutocomplete = ({ onSelect }) => {
     }
   }, [])
 
-  const handleChange = (event) => {
-    setSearchText(event.target.value);
-  }
+  // const handleLocalChange = (event) => {
+  //   setSearchText(event.target.value);
+  // }
 
   return (
     <StyledDrugAutocomplete className="DrugAutocomplete">
@@ -194,8 +198,12 @@ const DrugAutocomplete = ({ onSelect }) => {
         <input 
           type="text" 
           id="drug-input"
-          onChange={handleChange}
-          value={searchText}
+          onChange={(event) => {
+            handleChange(event);
+            // handleLocalChange(event);
+          }}
+          value={data.activeIngredient}
+          name="activeIngredient"
         />
       </label>
     </StyledDrugAutocomplete>
