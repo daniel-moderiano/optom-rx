@@ -365,6 +365,15 @@
     "tpuu-or-mpp-pt": "aciclovir 3% eye ointment, 4.5 g"
   },
   {
+    "item-code": "",
+    "brand-name": [
+      "Patanol",
+      "Paladopt"
+    ],
+    "mp-pt": "olopatadine",
+    "tpuu-or-mpp-pt": "olopatadine hydrochloride 0.1% eye drops, 5 mL"
+  },
+  {
     "item-code": "5517J",
     "brand-name": [
       "Methopt"
@@ -580,15 +589,6 @@
     ],
     "mp-pt": "prednisolone sodium phosphate",
     "tpuu-or-mpp-pt": "prednisolone sodium phosphate 0.5% eye drops, 20 x 0.5 mL unit doses"
-  },
-  {
-    "item-code": "",
-    "brand-name": [
-      "Patanol",
-      "Paladopt"
-    ],
-    "mp-pt": "olopatadine",
-    "tpuu-or-mpp-pt": "olopatadine hydrochloride 0.1% eye drops, 5 mL"
   },
   {
     "item-code": "",

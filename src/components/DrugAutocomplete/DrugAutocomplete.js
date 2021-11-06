@@ -65,25 +65,39 @@ const DrugAutocomplete = () => {
   useEffect(() => {
     // Must put the logic for finding matches in useEffect, or else it won't capture the first input typed in  
     // Two regex to match search text in different parts of the string. Split-up to allow custom ordering of matches in final UI list
-    const regexFirst = new RegExp(`^${searchText}`, 'i');
-    const regexSecond = new RegExp(`\\+ ${searchText}`, 'i');
+    let regexFirst;
+    let regexSecond;
+    let matches;
 
-    // Match first at the start of a string (e.g. 'tim' matches 'timolol' but not 'latanoprost + timolol')
-    let firstMatches = data.filter((drug) => {
-      return drug['brand-name'].some((name) => name.match(regexFirst)) || drug['tpuu-or-mpp-pt'].match(regexFirst);
-    });
+    try {
+      regexFirst = new RegExp(`^${searchText}`, 'i');
+      regexSecond = new RegExp(`\\+ ${searchText}`, 'i');
+    } catch (error) {
+      // TODO: error message handling in UI
+      console.log(error.message);
+    }
+    
+    if (!regexFirst || !regexSecond) {
+      matches = [];
+    } else {
+      // Match first at the start of a string (e.g. 'tim' matches 'timolol' but not 'latanoprost + timolol')
+      let firstMatches = data.filter((drug) => {
+        return drug['brand-name'].some((name) => name.match(regexFirst)) || drug['tpuu-or-mpp-pt'].match(regexFirst);
+      });
 
-    // Match a second drug (e.g. 'tim' matches 'latanoprost + timolol' but not 'timolol'). These are lower priority and should be displayed second in a list
-    let secondMatches = data.filter((drug) => {
-      return drug['brand-name'].some((name) => name.match(regexSecond)) || drug['tpuu-or-mpp-pt'].match(regexSecond);
-    });
+      // Match a second drug (e.g. 'tim' matches 'latanoprost + timolol' but not 'timolol'). These are lower priority and should be displayed second in a list
+      let secondMatches = data.filter((drug) => {
+        return drug['brand-name'].some((name) => name.match(regexSecond)) || drug['tpuu-or-mpp-pt'].match(regexSecond);
+      });
 
-    // Remove any duplicates (only relevant for the first typed char)
-    let filteredSecondMatches = secondMatches.filter((drug) => !firstMatches.includes(drug))
+      // Remove any duplicates (only relevant for the first typed char)
+      let filteredSecondMatches = secondMatches.filter((drug) => !firstMatches.includes(drug))
 
-    // Combine all the results into a single pseudo-ordered array
-    let matches = firstMatches.concat(filteredSecondMatches);
+      // Combine all the results into a single pseudo-ordered array
+      matches = firstMatches.concat(filteredSecondMatches);
+    }
 
+    
     // TODO: Consider the current setup where if the user types 'Xalatan', search results will display all Latanoprost results due to a central brand name array. This may or may not be intended result
 
     // Reset the search results when the user clears the field
