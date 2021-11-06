@@ -2,10 +2,10 @@
   {
     "item-code": "5552F",
     "brand-name": [
-      "Xalaprost",
       "Xalatan",
-      "Latanoprost Actavis",
       "Latanoprost Sandoz",
+      "Latanoprost Actavis",
+      "Xalaprost",
       "APO-Latanoprost"
     ],
     "mp-pt": "latanoprost",
@@ -22,9 +22,9 @@
   {
     "item-code": "5553G",
     "brand-name": [
-      "Xalamol 50/5",
       "Xalacom",
       "Latanoprost/Timolol Sandoz 50/5",
+      "Xalamol 50/5",
       "APO-Latanoprost/Timolol 0.05/5"
     ],
     "mp-pt": "latanoprost + timolol",
@@ -179,9 +179,9 @@
   {
     "item-code": "5503P",
     "brand-name": [
+      "Viscotears",
       "Optifresh eye gel",
-      "PAA",
-      "Viscotears"
+      "PAA"
     ],
     "mp-pt": "carbomer-980",
     "tpuu-or-mpp-pt": "carbomer-980 0.2% eye gel, 10 g"
@@ -213,8 +213,8 @@
   {
     "item-code": "5542Q",
     "brand-name": [
-      "Cosdor",
       "Cosopt",
+      "Cosdor",
       "APO-Dorzolamide/Timolol 20/5"
     ],
     "mp-pt": "dorzolamide + timolol",
@@ -231,9 +231,9 @@
   {
     "item-code": "5551E",
     "brand-name": [
-      "Bimtop",
       "Lumigan",
       "Bimatoprost Sandoz",
+      "Bimtop",
       "APO-Bimatoprost",
       "Bimprozt"
     ],
@@ -317,8 +317,8 @@
   {
     "item-code": "5520M",
     "brand-name": [
-      "Tears Naturale",
-      "Poly-Tears"
+      "Poly-Tears",
+      "Tears Naturale"
     ],
     "mp-pt": "dextran-70 + hypromellose",
     "tpuu-or-mpp-pt": "dextran-70 0.1% + hypromellose 0.3% eye drops, 15 mL"
@@ -392,8 +392,8 @@
   {
     "item-code": "5522P",
     "brand-name": [
-      "Refresh Night Time",
       "Poly Visc",
+      "Refresh Night Time",
       "Ircal"
     ],
     "mp-pt": "paraffin",
@@ -411,8 +411,8 @@
   {
     "item-code": "5526W",
     "brand-name": [
-      "Liquifilm Tears",
-      "PVA Tears"
+      "PVA Tears",
+      "Liquifilm Tears"
     ],
     "mp-pt": "polyvinyl alcohol",
     "tpuu-or-mpp-pt": "polyvinyl alcohol 1.4% eye drops, 15 mL"
@@ -428,8 +428,8 @@
   {
     "item-code": "5541P",
     "brand-name": [
-      "Trusamide",
       "Trusopt",
+      "Trusamide",
       "APO-Dorzolamide"
     ],
     "mp-pt": "dorzolamide",

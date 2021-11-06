@@ -37,23 +37,19 @@ const DrugAutocomplete = () => {
     document.querySelector('.DrugAutocomplete').appendChild(itemsList);
     // Append each list item from the source array
     matchArr.forEach((match) => {
-      
-      
       // For those drugs with multiple brand names and the same active ingredient, instead iterate through the array of brandnames and generate a new item for each
-      if (match['brand-name'].length > 1) {
-        match['brand-name'].forEach((name) => {
-          const item = document.createElement('div');
-          item.textContent = `${match['tpuu-or-mpp-pt']} / ${name}`;    // Choose here which name to display
-          item.classList.add('item');
-          itemsList.appendChild(item);
-        });
-      } else {
-        const item = document.createElement('div');
-        item.textContent = `${match['tpuu-or-mpp-pt']} / ${match['brand-name']}`;    // Choose here which name to display: ;
-        item.classList.add('item');
-        itemsList.appendChild(item);
-      }
-      
+      // if (match['brand-name'].length > 1) {
+      //   match['brand-name'].forEach((name) => {
+      //     const item = document.createElement('div');
+      //     item.textContent = `${match['tpuu-or-mpp-pt']} / ${name}`;    // Choose here which name to display
+      //     item.classList.add('item');
+      //     itemsList.appendChild(item);
+      //   });
+      // } else {
+      const item = document.createElement('div');
+      item.textContent = `${match['tpuu-or-mpp-pt']} / ${match['brand-name']}`;    // Choose here which name to display: ;
+      item.classList.add('item');
+      itemsList.appendChild(item);     
      
       // TODO: Bold letters as you type them when appending items 
     }); 

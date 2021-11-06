@@ -2,10 +2,10 @@ const JSONdata = [
   {
     "item-code": "5552F",
     "brand-name": [
-      "Xalaprost",
       "Xalatan",
-      "Latanoprost Actavis",
       "Latanoprost Sandoz",
+      "Latanoprost Actavis",
+      "Xalaprost",
       "APO-Latanoprost"
     ],
     "mp-pt": "latanoprost",
@@ -22,9 +22,9 @@ const JSONdata = [
   {
     "item-code": "5553G",
     "brand-name": [
-      "Xalamol 50/5",
       "Xalacom",
       "Latanoprost/Timolol Sandoz 50/5",
+      "Xalamol 50/5",
       "APO-Latanoprost/Timolol 0.05/5"
     ],
     "mp-pt": "latanoprost + timolol",
@@ -179,9 +179,9 @@ const JSONdata = [
   {
     "item-code": "5503P",
     "brand-name": [
+      "Viscotears",
       "Optifresh eye gel",
-      "PAA",
-      "Viscotears"
+      "PAA"
     ],
     "mp-pt": "carbomer-980",
     "tpuu-or-mpp-pt": "carbomer-980 0.2% eye gel, 10 g"
@@ -213,8 +213,8 @@ const JSONdata = [
   {
     "item-code": "5542Q",
     "brand-name": [
-      "Cosdor",
       "Cosopt",
+      "Cosdor",
       "APO-Dorzolamide/Timolol 20/5"
     ],
     "mp-pt": "dorzolamide + timolol",
@@ -231,9 +231,9 @@ const JSONdata = [
   {
     "item-code": "5551E",
     "brand-name": [
-      "Bimtop",
       "Lumigan",
       "Bimatoprost Sandoz",
+      "Bimtop",
       "APO-Bimatoprost",
       "Bimprozt"
     ],
@@ -317,8 +317,8 @@ const JSONdata = [
   {
     "item-code": "5520M",
     "brand-name": [
-      "Tears Naturale",
-      "Poly-Tears"
+      "Poly-Tears",
+      "Tears Naturale"
     ],
     "mp-pt": "dextran-70 + hypromellose",
     "tpuu-or-mpp-pt": "dextran-70 0.1% + hypromellose 0.3% eye drops, 15 mL"
@@ -392,8 +392,8 @@ const JSONdata = [
   {
     "item-code": "5522P",
     "brand-name": [
-      "Refresh Night Time",
       "Poly Visc",
+      "Refresh Night Time",
       "Ircal"
     ],
     "mp-pt": "paraffin",
@@ -411,8 +411,8 @@ const JSONdata = [
   {
     "item-code": "5526W",
     "brand-name": [
-      "Liquifilm Tears",
-      "PVA Tears"
+      "PVA Tears",
+      "Liquifilm Tears"
     ],
     "mp-pt": "polyvinyl alcohol",
     "tpuu-or-mpp-pt": "polyvinyl alcohol 1.4% eye drops, 15 mL"
@@ -428,8 +428,8 @@ const JSONdata = [
   {
     "item-code": "5541P",
     "brand-name": [
-      "Trusamide",
       "Trusopt",
+      "Trusamide",
       "APO-Dorzolamide"
     ],
     "mp-pt": "dorzolamide",
@@ -710,13 +710,13 @@ const JSONdata = [
     "mp-pt": "phenylephrine",
     "tpuu-or-mpp-pt": "phenylephrine hydrochloride 10% eye drops, 20 x 0.5 mL unit doses"
   }
-];
+]
 
 const dataSpread = [
   {
       "item-code": "5552F",
       "brand-name": [
-          "Xalaprost"
+          "Xalatan"
       ],
       "mp-pt": "latanoprost",
       "tpuu-or-mpp-pt": "latanoprost 0.005% eye drops, 2.5 mL"
@@ -724,7 +724,7 @@ const dataSpread = [
   {
       "item-code": "5552F",
       "brand-name": [
-          "Xalatan"
+          "Latanoprost Sandoz"
       ],
       "mp-pt": "latanoprost",
       "tpuu-or-mpp-pt": "latanoprost 0.005% eye drops, 2.5 mL"
@@ -740,7 +740,7 @@ const dataSpread = [
   {
       "item-code": "5552F",
       "brand-name": [
-          "Latanoprost Sandoz"
+          "Xalaprost"
       ],
       "mp-pt": "latanoprost",
       "tpuu-or-mpp-pt": "latanoprost 0.005% eye drops, 2.5 mL"
@@ -764,14 +764,6 @@ const dataSpread = [
   {
       "item-code": "5553G",
       "brand-name": [
-          "Xalamol 50/5"
-      ],
-      "mp-pt": "latanoprost + timolol",
-      "tpuu-or-mpp-pt": "latanoprost 0.005% + timolol 0.5% eye drops, 2.5 mL"
-  },
-  {
-      "item-code": "5553G",
-      "brand-name": [
           "Xalacom"
       ],
       "mp-pt": "latanoprost + timolol",
@@ -781,6 +773,14 @@ const dataSpread = [
       "item-code": "5553G",
       "brand-name": [
           "Latanoprost/Timolol Sandoz 50/5"
+      ],
+      "mp-pt": "latanoprost + timolol",
+      "tpuu-or-mpp-pt": "latanoprost 0.005% + timolol 0.5% eye drops, 2.5 mL"
+  },
+  {
+      "item-code": "5553G",
+      "brand-name": [
+          "Xalamol 50/5"
       ],
       "mp-pt": "latanoprost + timolol",
       "tpuu-or-mpp-pt": "latanoprost 0.005% + timolol 0.5% eye drops, 2.5 mL"
@@ -956,6 +956,14 @@ const dataSpread = [
   {
       "item-code": "5503P",
       "brand-name": [
+          "Viscotears"
+      ],
+      "mp-pt": "carbomer-980",
+      "tpuu-or-mpp-pt": "carbomer-980 0.2% eye gel, 10 g"
+  },
+  {
+      "item-code": "5503P",
+      "brand-name": [
           "Optifresh eye gel"
       ],
       "mp-pt": "carbomer-980",
@@ -965,14 +973,6 @@ const dataSpread = [
       "item-code": "5503P",
       "brand-name": [
           "PAA"
-      ],
-      "mp-pt": "carbomer-980",
-      "tpuu-or-mpp-pt": "carbomer-980 0.2% eye gel, 10 g"
-  },
-  {
-      "item-code": "5503P",
-      "brand-name": [
-          "Viscotears"
       ],
       "mp-pt": "carbomer-980",
       "tpuu-or-mpp-pt": "carbomer-980 0.2% eye gel, 10 g"
@@ -1004,7 +1004,7 @@ const dataSpread = [
   {
       "item-code": "5542Q",
       "brand-name": [
-          "Cosdor"
+          "Cosopt"
       ],
       "mp-pt": "dorzolamide + timolol",
       "tpuu-or-mpp-pt": "dorzolamide 2% + timolol 0.5% eye drops, 5 mL"
@@ -1012,7 +1012,7 @@ const dataSpread = [
   {
       "item-code": "5542Q",
       "brand-name": [
-          "Cosopt"
+          "Cosdor"
       ],
       "mp-pt": "dorzolamide + timolol",
       "tpuu-or-mpp-pt": "dorzolamide 2% + timolol 0.5% eye drops, 5 mL"
@@ -1036,14 +1036,6 @@ const dataSpread = [
   {
       "item-code": "5551E",
       "brand-name": [
-          "Bimtop"
-      ],
-      "mp-pt": "bimatoprost",
-      "tpuu-or-mpp-pt": "bimatoprost 0.03% eye drops, 3 mL"
-  },
-  {
-      "item-code": "5551E",
-      "brand-name": [
           "Lumigan"
       ],
       "mp-pt": "bimatoprost",
@@ -1053,6 +1045,14 @@ const dataSpread = [
       "item-code": "5551E",
       "brand-name": [
           "Bimatoprost Sandoz"
+      ],
+      "mp-pt": "bimatoprost",
+      "tpuu-or-mpp-pt": "bimatoprost 0.03% eye drops, 3 mL"
+  },
+  {
+      "item-code": "5551E",
+      "brand-name": [
+          "Bimtop"
       ],
       "mp-pt": "bimatoprost",
       "tpuu-or-mpp-pt": "bimatoprost 0.03% eye drops, 3 mL"
@@ -1164,7 +1164,7 @@ const dataSpread = [
   {
       "item-code": "5520M",
       "brand-name": [
-          "Tears Naturale"
+          "Poly-Tears"
       ],
       "mp-pt": "dextran-70 + hypromellose",
       "tpuu-or-mpp-pt": "dextran-70 0.1% + hypromellose 0.3% eye drops, 15 mL"
@@ -1172,7 +1172,7 @@ const dataSpread = [
   {
       "item-code": "5520M",
       "brand-name": [
-          "Poly-Tears"
+          "Tears Naturale"
       ],
       "mp-pt": "dextran-70 + hypromellose",
       "tpuu-or-mpp-pt": "dextran-70 0.1% + hypromellose 0.3% eye drops, 15 mL"
@@ -1260,7 +1260,7 @@ const dataSpread = [
   {
       "item-code": "5522P",
       "brand-name": [
-          "Refresh Night Time"
+          "Poly Visc"
       ],
       "mp-pt": "paraffin",
       "tpuu-or-mpp-pt": "paraffin 1 g/g eye ointment, 2 x 3.5 g"
@@ -1268,7 +1268,7 @@ const dataSpread = [
   {
       "item-code": "5522P",
       "brand-name": [
-          "Poly Visc"
+          "Refresh Night Time"
       ],
       "mp-pt": "paraffin",
       "tpuu-or-mpp-pt": "paraffin 1 g/g eye ointment, 2 x 3.5 g"
@@ -1300,7 +1300,7 @@ const dataSpread = [
   {
       "item-code": "5526W",
       "brand-name": [
-          "Liquifilm Tears"
+          "PVA Tears"
       ],
       "mp-pt": "polyvinyl alcohol",
       "tpuu-or-mpp-pt": "polyvinyl alcohol 1.4% eye drops, 15 mL"
@@ -1308,7 +1308,7 @@ const dataSpread = [
   {
       "item-code": "5526W",
       "brand-name": [
-          "PVA Tears"
+          "Liquifilm Tears"
       ],
       "mp-pt": "polyvinyl alcohol",
       "tpuu-or-mpp-pt": "polyvinyl alcohol 1.4% eye drops, 15 mL"
@@ -1324,7 +1324,7 @@ const dataSpread = [
   {
       "item-code": "5541P",
       "brand-name": [
-          "Trusamide"
+          "Trusopt"
       ],
       "mp-pt": "dorzolamide",
       "tpuu-or-mpp-pt": "dorzolamide 2% eye drops, 5 mL"
@@ -1332,7 +1332,7 @@ const dataSpread = [
   {
       "item-code": "5541P",
       "brand-name": [
-          "Trusopt"
+          "Trusamide"
       ],
       "mp-pt": "dorzolamide",
       "tpuu-or-mpp-pt": "dorzolamide 2% eye drops, 5 mL"
@@ -1654,5 +1654,7 @@ JSONdata.forEach((drug) => {
     dataSpread.push(drug);
   }
 })
+
+console.log(dataSpread);
 
 

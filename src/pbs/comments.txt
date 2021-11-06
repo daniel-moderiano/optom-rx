@@ -36,3 +36,85 @@ Not yet available below
 WARNINGS
 Paladopt drops are currently in shortage. Supply is not expected to resume until well into 2022
 Aciclovir is currently very difficult to acquire under any commercial brand name. Recommend oral Rx.
+
+BRAND NAME CHANGES TO ORDERING
+Recommended order @ 06/11/2021
+
+Latanoprost: [
+  "Xalatan",
+  "Latanoprost Sandoz",
+  "Latanoprost Actavis",
+  "Xalaprost",
+  "APO-Latanoprost"
+]
+
+Latanoprost + timolol: [
+  "Xalacom",
+  "Latanoprost/Timolol Sandoz 50/5",
+  "Xalamol 50/5",
+  "APO-Latanoprost/Timolol 0.05/5"
+]
+
+Cellufresh and Celluvisc before alternatives for carmellose sodium
+
+Carbomer-980: [
+  "Viscotears",
+  "Optifresh eye gel",
+  "PAA"
+]
+
+Dorzolamide + timolol: [
+  "Cosopt",
+  "Cosdor",
+  "APO-Dorzolamide/Timolol 20/5"
+]
+
+Bimatoprost: "brand-name": [
+  "Lumigan",
+  "Bimatoprost Sandoz",
+  "Bimtop",
+  "APO-Bimatoprost",
+  "Bimprozt"
+]
+
+Brimonidine: [
+  "Alphagan",
+  "Enidin"
+],
+
+Brinzolamide: [
+  "BrinzoQuin",
+  "Azopt"
+]
+
+dextran-70 + hypromellose: [
+  "Poly-Tears",
+  "Tears Naturale"
+]
+
+Olopatadine: [
+  "Patanol",
+  "Paladopt"
+]
+
+Paraffin: [
+  "Poly Visc",
+  "Refresh Night Time",
+  "Ircal"
+],
+
+hypromellose + carbomer-980: [
+  "Genteal gel",
+  "HPMC PAA"
+]
+
+Polyvinyl alcohol: [
+  "PVA Tears",
+  "Liquifilm Tears"
+]
+
+Dorzolamide: [
+  "Trusopt",
+  "Trusamide",
+  "APO-Dorzolamide"
+]
