@@ -10,6 +10,7 @@ const RxForm = () => {
     quantity: {},
     repeats: {},
     dosage: {},
+    itemCode: {}
   });
 
   const [patientAlerts, setPatientAlerts] = useState({
@@ -371,6 +372,13 @@ const RxForm = () => {
     }));
   }
 
+  const handleSelect = (code) => {
+    setDrugData((prevData) => ({
+      ...prevData,
+      itemCode: code,
+    }));
+  }
+
   // TODO: handle submit
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -395,7 +403,7 @@ const RxForm = () => {
         {/* TODO: add input checkbox to include brand name on prescription, and for brand name substitution not permitted */}
         {/* TODO: Add 'to be compounded' checkbox */}
 
-        <DrugAutocomplete/>
+        <DrugAutocomplete onSelect={handleSelect}/>
         {/* Must include quantity and repeats to meet requirements */}
         <FormField 
           fieldType="text" 

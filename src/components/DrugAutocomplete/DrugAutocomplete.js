@@ -2,7 +2,7 @@ import data from '../../pbs/pbsDataUnique.json'
 import { useEffect, useState, useCallback, useRef } from "react";
 import { StyledDrugAutocomplete } from './DrugAutocompleteStyled';
 
-const DrugAutocomplete = () => {
+const DrugAutocomplete = ({ onSelect }) => {
   const [searchText, setSearchText] = useState('');
   // useRef allows us to store the equivalent of a 'global' component variable without losing data on re-render, but avoiding the async problems that can arise with state
   const currentFocus = useRef(-1);
@@ -23,10 +23,13 @@ const DrugAutocomplete = () => {
     if (event.target.classList.contains('item')) {
       // Set input field value to selected item
       input.value = event.target.textContent;
+      setSearchText(event.target.textContent);
+      onSelect(event.target.dataset.code);
       removeList();
     }
-  }, [removeList]);
+  }, [removeList, onSelect]);
 
+  // Given a string, use the current search text and regex to bold the segment of text being searched for (using HTML)
   const boldLetters = useCallback((string) => {
     let regexFirst = new RegExp(`^${searchText}`, 'i');
     // Must add capturing group to this regex for later extraction
@@ -44,6 +47,7 @@ const DrugAutocomplete = () => {
       // Use a capturing group in regexSecond, which will appear as index 1 in the match array
       return `${string.substr(0, secondMatch['index'])}<strong>${string.substr(secondMatch['index'] + 2, secondMatch[1].length)}</strong>${string.substr((secondMatch['index'] + secondMatch[1].length + 2))}`;
     } else {
+      // If no matches, return all non-bold
       return string;
     }
   }, [searchText])
@@ -63,6 +67,7 @@ const DrugAutocomplete = () => {
       const boldBrandName = boldLetters(`${match['brand-name']}`);
       const item = document.createElement('div');
       item.innerHTML = `${boldActiveName} / ${boldBrandName}`;
+      item.dataset.code = match['item-code'];
       // item.textContent = `${match['tpuu-or-mpp-pt']} / ${match['brand-name']}`;    // Choose here which name to display: ;
       item.classList.add('item');
       itemsList.appendChild(item);     
