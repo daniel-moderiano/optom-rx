@@ -1,4 +1,4 @@
-import data from '../../pbs/pbsDataOrdered.json'
+import data from '../../pbs/pbsDataUnique.json'
 import { useEffect, useState, useCallback, useRef } from "react";
 import { StyledDrugAutocomplete } from './DrugAutocompleteStyled';
 
@@ -97,7 +97,6 @@ const DrugAutocomplete = () => {
       matches = firstMatches.concat(filteredSecondMatches);
     }
 
-    
     // TODO: Consider the current setup where if the user types 'Xalatan', search results will display all Latanoprost results due to a central brand name array. This may or may not be intended result
 
     // Reset the search results when the user clears the field

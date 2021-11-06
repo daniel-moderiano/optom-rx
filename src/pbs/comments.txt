@@ -33,4 +33,6 @@ Not yet available below
   },
   Loteprednol (lotemax)
 
-PBS brands not available (manually or automatically remove from JSON data set)
+WARNINGS
+Paladopt drops are currently in shortage. Supply is not expected to resume until well into 2022
+Aciclovir is currently very difficult to acquire under any commercial brand name. Recommend oral Rx.
