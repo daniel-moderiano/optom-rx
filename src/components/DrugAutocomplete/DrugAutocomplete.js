@@ -11,11 +11,14 @@ const DrugAutocomplete = ({ data, setData, handleChange }) => {
 
   // Remove any currently displayed itemLists
   const removeList = useCallback(() => {
-    const itemsList = document.querySelector('.items-list');
+    // const itemsList = document.querySelector('.items-list');
     currentFocus.current = -1;
-    if (itemsList) {
-      itemsList.remove();
-    }
+    // if (itemsList) {
+    //   itemsList.remove();
+    // }
+    document.querySelectorAll('.item').forEach((item) => {
+      item.remove();
+    })
   }, []);
 
   // Capture the selection made in the items list via event propagation
@@ -24,12 +27,15 @@ const DrugAutocomplete = ({ data, setData, handleChange }) => {
       // Set state onclick - do NOT set input.value as this will not work as intended. Always adjust state and have input.value set to state
       setData((prevData) => ({
         ...prevData,
-        activeIngredient: event.target.textContent,
+        activeIngredient: event.target.dataset.activeIngredient,
+        brandName: event.target.dataset.brandName,
         itemCode: event.target.dataset.code,
       }));
       // TODO: Consider adding some functionality here to pre-fill RxForm state with name/brand name etc.
-      // TODO: consider an expandable menu set similar to address autocomplete that breaks up active ingredient and brand name, with a checkbox to ask if brand name should be included, and potentially a select menu on the brand input
+      
       removeList();
+      setExpand(true);
+      document.querySelector('#brandName').focus();
     }
   }, [removeList, setData]);
 
@@ -54,16 +60,17 @@ const DrugAutocomplete = ({ data, setData, handleChange }) => {
       // If no matches, return all non-bold
       return string;
     }
-  }, [data])
+  }, [data.activeIngredient])
 
   // Creates list of autocomplete items using an array of relevant suggestions (matchArr)
   const createList = useCallback((matchArr) => {
     // First remove any lists present to ensure the list if refreshed on each new input
     removeList();
     // Create the new list container
-    const itemsList = document.createElement('div');
-    itemsList.classList.add('items-list');
-    document.querySelector('.DrugAutocomplete').appendChild(itemsList);
+    // const itemsList = document.createElement('div');
+    // itemsList.classList.add('items-list');
+    // document.querySelector('.DrugAutocomplete').appendChild(itemsList);
+    const itemsList = document.querySelector('.items-list');
     // Append each list item from the source array
     matchArr.forEach((match) => {
       // TODO: decide whether this bolding is helpful or hinders
@@ -72,6 +79,8 @@ const DrugAutocomplete = ({ data, setData, handleChange }) => {
       const item = document.createElement('div');
       item.innerHTML = `${boldActiveName} / ${boldBrandName}`;
       item.dataset.code = match['item-code'];
+      item.dataset.activeIngredient = match['tpuu-or-mpp-pt'];
+      item.dataset.brandName = match['brand-name'];
       // item.textContent = `${match['tpuu-or-mpp-pt']} / ${match['brand-name']}`;    // Choose here which name to display: ;
       item.classList.add('item');
       itemsList.appendChild(item);     
@@ -81,56 +90,63 @@ const DrugAutocomplete = ({ data, setData, handleChange }) => {
   }, [removeList, clickSuggestion, boldLetters]);
 
 
-  // Perform the autocomplete logic here
-  useEffect(() => {
-    // Must put the logic for finding matches in useEffect, or else it won't capture the first input typed in  
-    // Two regex to match search text in different parts of the string. Split-up to allow custom ordering of matches in final UI list
-    let regexFirst;
-    let regexSecond;
-    let matches;
+  // // Perform the autocomplete logic here
+  // useEffect(() => {
+  //   // Must put the logic for finding matches in useEffect, or else it won't capture the first input typed in  
+  //   // Two regex to match search text in different parts of the string. Split-up to allow custom ordering of matches in final UI list
+  //   let regexFirst;
+  //   let regexSecond;
+  //   let matches;
 
-    // Handle user typing in special characters, which would otherwise crash the app here
-    try {
-      regexFirst = new RegExp(`^${data.activeIngredient}`, 'i');
-      regexSecond = new RegExp(`\\+ ${data.activeIngredient}`, 'i');
-    } catch (error) {
-      // TODO: error message handling in UI
-      console.log(error.message);
-    }
+  //   // Handle user typing in special characters, which would otherwise crash the app here
+  //   try {
+  //     regexFirst = new RegExp(`^${data.activeIngredient}`, 'i');
+  //     regexSecond = new RegExp(`\\+ ${data.activeIngredient}`, 'i');
+  //   } catch (error) {
+  //     // TODO: error message handling in UI
+  //     console.log(error.message);
+  //   }
     
-    if (!regexFirst || !regexSecond) {
-      matches = [];
-    } else {
-      // Match first at the start of a string (e.g. 'tim' matches 'timolol' but not 'latanoprost + timolol')
-      let firstMatches = PBSData.filter((drug) => {
-        return drug['brand-name'].some((name) => name.match(regexFirst)) || drug['tpuu-or-mpp-pt'].match(regexFirst);
-      });
+  //   if (!regexFirst || !regexSecond) {
+  //     matches = [];
+  //   } else {
+  //     // Match first at the start of a string (e.g. 'tim' matches 'timolol' but not 'latanoprost + timolol')
+  //     let firstMatches = PBSData.filter((drug) => {
+  //       return drug['brand-name'].some((name) => name.match(regexFirst)) || drug['tpuu-or-mpp-pt'].match(regexFirst);
+  //     });
 
-      // Match a second drug (e.g. 'tim' matches 'latanoprost + timolol' but not 'timolol'). These are lower priority and should be displayed second in a list
-      let secondMatches = PBSData.filter((drug) => {
-        return drug['brand-name'].some((name) => name.match(regexSecond)) || drug['tpuu-or-mpp-pt'].match(regexSecond);
-      });
+  //     // Match a second drug (e.g. 'tim' matches 'latanoprost + timolol' but not 'timolol'). These are lower priority and should be displayed second in a list
+  //     let secondMatches = PBSData.filter((drug) => {
+  //       return drug['brand-name'].some((name) => name.match(regexSecond)) || drug['tpuu-or-mpp-pt'].match(regexSecond);
+  //     });
 
-      // Remove any duplicates (only relevant for the first typed char)
-      let filteredSecondMatches = secondMatches.filter((drug) => !firstMatches.includes(drug))
+  //     // Remove any duplicates (only relevant for the first typed char)
+  //     let filteredSecondMatches = secondMatches.filter((drug) => !firstMatches.includes(drug))
 
-      // Combine all the results into a single pseudo-ordered array
-      matches = firstMatches.concat(filteredSecondMatches);
-    }
+  //     // Combine all the results into a single pseudo-ordered array
+  //     matches = firstMatches.concat(filteredSecondMatches);
+  //   }
 
-    // Reset the search results when the user clears the field
-    if (data.activeIngredient.length === 0) {
-      matches = [];
-    }
+  //   // Reset the search results when the user clears the field
+  //   if (data.activeIngredient.length === 0) {
+  //     matches = [];
+  //   }
 
-    createList(matches);
-  }, [data, createList]);
+  //   createList(matches);
+  // }, [data.activeIngredient, createList]);
+
+
+  
 
   // Leave this dependency array empty to ensure this runs only once on first mount
   useEffect(() => {
     const input = document.querySelector('#activeIngredient');
-    const itemsList = document.querySelector('.items-list'); 
-
+    // const itemsList = document.querySelector('.items-list'); 
+    const itemsList = document.createElement('div');
+    itemsList.classList.add('items-list');
+    document.querySelector('.DrugAutocomplete').appendChild(itemsList);
+// TODO itemsList no longer defined on render so keyNav not working as intended. Need to pre-define to allow this to work properly
+    console.log(itemsList);
     // Remove the active class from all autocomplete items
     const removeActive = (itemsArr) => {
       itemsArr.forEach((item) => {
@@ -188,6 +204,50 @@ const DrugAutocomplete = ({ data, setData, handleChange }) => {
     }
   }, [])
 
+  const handleSearch = (event) => {
+        // Must put the logic for finding matches in useEffect, or else it won't capture the first input typed in  
+    // Two regex to match search text in different parts of the string. Split-up to allow custom ordering of matches in final UI list
+    let regexFirst;
+    let regexSecond;
+    let matches;
+
+    // Handle user typing in special characters, which would otherwise crash the app here
+    try {
+      regexFirst = new RegExp(`^${event.target.value}`, 'i');
+      regexSecond = new RegExp(`\\+ ${event.target.value}`, 'i');
+    } catch (error) {
+      // TODO: error message handling in UI
+      console.log(error.message);
+    }
+    
+    if (!regexFirst || !regexSecond) {
+      matches = [];
+    } else {
+      // Match first at the start of a string (e.g. 'tim' matches 'timolol' but not 'latanoprost + timolol')
+      let firstMatches = PBSData.filter((drug) => {
+        return drug['brand-name'].some((name) => name.match(regexFirst)) || drug['tpuu-or-mpp-pt'].match(regexFirst);
+      });
+
+      // Match a second drug (e.g. 'tim' matches 'latanoprost + timolol' but not 'timolol'). These are lower priority and should be displayed second in a list
+      let secondMatches = PBSData.filter((drug) => {
+        return drug['brand-name'].some((name) => name.match(regexSecond)) || drug['tpuu-or-mpp-pt'].match(regexSecond);
+      });
+
+      // Remove any duplicates (only relevant for the first typed char)
+      let filteredSecondMatches = secondMatches.filter((drug) => !firstMatches.includes(drug))
+
+      // Combine all the results into a single pseudo-ordered array
+      matches = firstMatches.concat(filteredSecondMatches);
+    }
+
+    // Reset the search results when the user clears the field
+    if (event.target.value === "") {
+      matches = [];
+    }
+
+    createList(matches);
+  }
+
   // const handleLocalChange = (event) => {
   //   setSearchText(event.target.value);
   // }
@@ -202,10 +262,14 @@ const DrugAutocomplete = ({ data, setData, handleChange }) => {
           label="Medication" 
           placeholder="Enter active ingredient or brand name"
           value={data.activeIngredient} 
-          onChange={handleChange} 
+          onChange={(event) => {
+            handleChange(event);
+            handleSearch(event);
+          }} 
         />
         <button type="button" onClick={() => setExpand(true)}>Enter manually</button>
       </div>
+      {/* TODO: consider an expandable menu set similar to address autocomplete that breaks up active ingredient and brand name, with a checkbox to ask if brand name should be included, and potentially a select menu on the brand input */}
       <fieldset className={`drug-collapse ${expand ? 'show' : 'hide'}`}>
         <FormField 
           id="brandName"
