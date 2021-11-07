@@ -39,10 +39,16 @@ const StyledDrugAutocomplete = styled.div`
     display: none;
   }
 
+  .autocomplete-group {
+    position: relative;
+    /* This will affect 'Enter Manually' button placement */
+    height: 5.4rem;
+  }
+
   button {
     position: absolute;
     right: 0;
-    top: 2rem;
+    bottom: 0;
     background-color: #fff;
     border: none;
     margin: 0;

@@ -128,7 +128,7 @@ const DrugAutocomplete = ({ data, setData, handleChange }) => {
 
   // Leave this dependency array empty to ensure this runs only once on first mount
   useEffect(() => {
-    const input = document.querySelector('#drug-input');
+    const input = document.querySelector('#activeIngredient');
     const itemsList = document.querySelector('.items-list'); 
 
     // Remove the active class from all autocomplete items
@@ -194,16 +194,16 @@ const DrugAutocomplete = ({ data, setData, handleChange }) => {
 
   return (
     <StyledDrugAutocomplete>
-      <div className="DrugAutocomplete">
-        <label htmlFor="drug-input">
-          <input 
-            type="text" 
-            id="drug-input"
-            onChange={handleChange}
-            value={data.activeIngredient}
-            name="activeIngredient"
-          />
-        </label>
+      <div className="autocomplete-group">
+        <FormField 
+          className="DrugAutocomplete"
+          id="activeIngredient"
+          name="activeIngredient"
+          label="Medication" 
+          placeholder="Enter active ingredient or brand name"
+          value={data.activeIngredient} 
+          onChange={handleChange} 
+        />
         <button type="button" onClick={() => setExpand(true)}>Enter manually</button>
       </div>
       <fieldset className={`drug-collapse ${expand ? 'show' : 'hide'}`}>
