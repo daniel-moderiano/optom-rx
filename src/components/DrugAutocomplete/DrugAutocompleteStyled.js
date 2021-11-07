@@ -29,6 +29,31 @@ const StyledDrugAutocomplete = styled.div`
       color: #fff;
     }
   }
+
+  /* Show and hide classes control the sub-fields display (i.e. fields other than autocomplete) */
+  .show {
+    display: block;
+  }
+
+  .hide {
+    display: none;
+  }
+
+  button {
+    position: absolute;
+    right: 0;
+    top: 2rem;
+    background-color: #fff;
+    border: none;
+    margin: 0;
+    padding: 0;
+    font-size: 0.8rem;
+    text-decoration: underline;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
 `
 
 export { StyledDrugAutocomplete }

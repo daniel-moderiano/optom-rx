@@ -1,11 +1,13 @@
 import PBSData from '../../pbs/pbsDataUnique.json'
-import { useEffect, useCallback, useRef } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { StyledDrugAutocomplete } from './DrugAutocompleteStyled';
+import FormField from '../FormField/FormField';
 
 const DrugAutocomplete = ({ data, setData, handleChange }) => {
   // useRef allows us to store the equivalent of a 'global' component variable without losing data on re-render, but avoiding the async problems that can arise with state
   const currentFocus = useRef(-1);
-  // TODO: Add a 'selected drug' object state or similar that is updated when the user selects a drug. 
+
+  const [expand, setExpand] = useState(false);
 
   // Remove any currently displayed itemLists
   const removeList = useCallback(() => {
@@ -19,9 +21,7 @@ const DrugAutocomplete = ({ data, setData, handleChange }) => {
   // Capture the selection made in the items list via event propagation
   const clickSuggestion = useCallback((event) => {
     if (event.target.classList.contains('item')) {
-      // Set input field value to selected item
-      // input.value = event.target.textContent;
-      // Prevent the input value from changing on re-render
+      // Set state onclick - do NOT set input.value as this will not work as intended. Always adjust state and have input.value set to state
       setData((prevData) => ({
         ...prevData,
         activeIngredient: event.target.textContent,
@@ -193,19 +193,29 @@ const DrugAutocomplete = ({ data, setData, handleChange }) => {
   // }
 
   return (
-    <StyledDrugAutocomplete className="DrugAutocomplete">
-      <label htmlFor="drug-input">
-        <input 
-          type="text" 
-          id="drug-input"
-          onChange={(event) => {
-            handleChange(event);
-            // handleLocalChange(event);
-          }}
-          value={data.activeIngredient}
-          name="activeIngredient"
+    <StyledDrugAutocomplete>
+      <div className="DrugAutocomplete">
+        <label htmlFor="drug-input">
+          <input 
+            type="text" 
+            id="drug-input"
+            onChange={handleChange}
+            value={data.activeIngredient}
+            name="activeIngredient"
+          />
+        </label>
+        <button type="button" onClick={() => setExpand(true)}>Enter manually</button>
+      </div>
+      <fieldset className={`drug-collapse ${expand ? 'show' : 'hide'}`}>
+        <FormField 
+          id="brandName"
+          name="brandName"
+          label="Brand name" 
+          placeholder="Enter brand name"
+          value={data.brandName} 
+          onChange={handleChange} 
         />
-      </label>
+      </fieldset>
     </StyledDrugAutocomplete>
   );
 };
