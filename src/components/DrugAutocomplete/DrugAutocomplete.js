@@ -41,9 +41,10 @@ const DrugAutocomplete = ({ data, setData, handleChange }) => {
 
   // Given a string, use the current search text and regex to bold the segment of text being searched for (using HTML)
   const boldLetters = useCallback((string) => {
-    let regexFirst = new RegExp(`^${data.activeIngredient}`, 'i');
+    const currentSearchTerm = document.querySelector('#activeIngredient').value;
+    let regexFirst = new RegExp(`^${currentSearchTerm}`, 'i');
     // Must add capturing group to this regex for later extraction
-    let regexSecond = new RegExp(`\\+ (${data.activeIngredient})`, 'i');
+    let regexSecond = new RegExp(`\\+ (${currentSearchTerm})`, 'i');
     let firstMatch = string.match(regexFirst);
     let secondMatch = string.match(regexSecond);
     let matches = [];
