@@ -35,7 +35,6 @@ const DrugAutocomplete = ({ data, setData, handleChange }) => {
       
       removeList();
       setExpand(true);
-      document.querySelector('#brandName').focus();
     }
   }, [removeList, setData]);
 
@@ -61,7 +60,7 @@ const DrugAutocomplete = ({ data, setData, handleChange }) => {
       // If no matches, return all non-bold
       return string;
     }
-  }, [data.activeIngredient])
+  }, []);
 
   // Creates list of autocomplete items using an array of relevant suggestions (matchArr)
   const createList = useCallback((matchArr) => {
