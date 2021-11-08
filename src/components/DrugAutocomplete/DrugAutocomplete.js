@@ -4,15 +4,15 @@ import { StyledDrugAutocomplete } from './DrugAutocompleteStyled';
 import FormField from '../FormField/FormField';
 
 const DrugAutocomplete = ({ data, setData, handleChange }) => {
-
   // useRef allows us to store the equivalent of a 'global' component variable without losing data on re-render, but avoiding the async problems that can arise with state
   const currentFocus = useRef(-1);
+  // Controls the UI state of the collapsed input fields
   const [expand, setExpand] = useState(false);
 
-  // Remove any currently displayed items in the item list
+  // Remove all items within the list, rather than the list itself
   const removeList = () => {
+    // Must reset focus here to avoid starting halway down a list on first arrow key press
     currentFocus.current = -1;
-    // Remove all items within the list, rather than the list itself
     document.querySelectorAll('.item').forEach((item) => {
       item.remove();
     })
@@ -20,15 +20,15 @@ const DrugAutocomplete = ({ data, setData, handleChange }) => {
 
   // Capture the selection made in the items list via event propagation
   const clickSuggestion = (event) => {
-    if (event.target.classList.contains('item')) {
+    const { classList, dataset } = event.target;
+    if (classList.contains('item')) {
       // Set state onclick - do NOT set input.value as this will not work as intended. Always adjust state and have input.value set to state
       setData((prevData) => ({
         ...prevData,
-        activeIngredient: event.target.dataset.activeIngredient,
-        brandName: event.target.dataset.brandName,
-        itemCode: event.target.dataset.code,
+        activeIngredient: dataset.activeIngredient,
+        brandName: dataset.brandName,
+        itemCode: dataset.code,
       }));
-      
       removeList();
       setExpand(true);
     }
@@ -40,6 +40,7 @@ const DrugAutocomplete = ({ data, setData, handleChange }) => {
     let regexFirst = new RegExp(`^${currentSearchTerm}`, 'i');
     // Must add capturing group to this regex for later extraction
     let regexSecond = new RegExp(`\\+ (${currentSearchTerm})`, 'i');
+
     let firstMatch = string.match(regexFirst);
     let secondMatch = string.match(regexSecond);
     let matches = [];
@@ -64,12 +65,15 @@ const DrugAutocomplete = ({ data, setData, handleChange }) => {
     removeList();
 
     const itemsList = document.querySelector('.items-list');
-    // Append each list item from the source array
+
+    // Append each list item from the source array of matches
     matchArr.forEach((match) => {
       const boldActiveName = boldLetters(`${match['tpuu-or-mpp-pt']}`);
       const boldBrandName = boldLetters(`${match['brand-name']}`);
+
       const item = document.createElement('div');
       item.innerHTML = `${boldActiveName} (${boldBrandName})`;
+      // Add dataset information here to update state when the user selects an item
       item.dataset.code = match['item-code'];
       item.dataset.activeIngredient = match['tpuu-or-mpp-pt'];
       item.dataset.brandName = match['brand-name'];
