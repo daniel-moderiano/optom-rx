@@ -3,7 +3,7 @@ import Header from "./components/Header/Header";
 import GlobalStyles from "./components/utils/globalStyles";
 import RxForm from './components/RxForm/RxForm'
 import RxTemplate from "./components/RxTemplate/RxTemplate";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const App = () => {
   const [data, setData] = useState({
@@ -27,6 +27,44 @@ const App = () => {
     }));
   }
 
+  useEffect(() => {
+    setData({
+      "drugData": {
+          "activeIngredient":"latanoprost 0.005% eye drops, 2.5 mL",
+          "brandName":"Xalatan",
+          "quantity":"1",
+          "repeats":"4",
+          "dosage":"Once nightly both eyes",
+          "itemCode":"5552F"
+      },
+        "patientData": {
+          "fullName":"Sarah Smoker",
+          "streetAddress":"6 Old Tawny Close",
+          "subpremise":"",
+          "suburb":"Wynn Vale",
+          "postcode":"5127",
+          "state":"SA",
+          "medicareNumber":"5151515151",
+          "medicareRefNumber":"3"
+      },
+        "providerData": {
+          "prefix":true,
+          "fullName":"Daniel Moderiano",
+          "qualifications":"BMedSc(VisSc), MOpt",
+          "practiceName":"OPSM",
+          "streetAddress":"976 North East Road",
+          "subpremise":"Shop 112, Westfield Tea Tree Plaza",
+          "suburb":"Modbury",
+          "postcode":"5092",
+          "state":"SA",
+          "phoneNumber":"0882345678",
+          "prescriberNumber":"7033149"
+      }
+    });
+    
+  }, [])
+  
+
   return (
     <div className="App">
       <GlobalStyles />
@@ -37,7 +75,7 @@ const App = () => {
           <RxForm handleSubmit={handleSubmit}/>
         </section>
         <section className="rx-template">
-          <RxTemplate />
+          <RxTemplate data={data}/>
         </section>
       </main>
       <footer className="footer"></footer>

@@ -64,7 +64,7 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
         }
     
         case "administrative_area_level_1": {
-          address.state = component.long_name;
+          address.state = component.short_name;
           break;
         }
     
