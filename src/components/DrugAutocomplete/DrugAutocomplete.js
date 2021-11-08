@@ -172,6 +172,7 @@ const DrugAutocomplete = ({ data, setData, handleChange }) => {
     }
   }, [])
 
+  // Validation
   useEffect(() => {
     // Event propagation will capture all focusout events from fields within this component
     const drugDataValidation = () => {
@@ -197,6 +198,7 @@ const DrugAutocomplete = ({ data, setData, handleChange }) => {
             }
             break;
 
+            // TODO: any further validation here
           default: 
             break;
         };
