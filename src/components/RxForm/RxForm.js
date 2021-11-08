@@ -4,7 +4,7 @@ import AddressAutocomplete from "../AddressAutocomplete/AddressAutocomplete";
 import { StyledRxForm } from "./RxForm.styled";
 import DrugAutocomplete from "../DrugAutocomplete/DrugAutocomplete";
 
-const RxForm = () => {
+const RxForm = ({ handleSubmit }) => {
   const [drugAlerts, setDrugAlerts] = useState({
     name: {},
     quantity: {},
@@ -373,14 +373,8 @@ const RxForm = () => {
     }));
   }
 
-  // TODO: handle submit
-  const handleSubmit = (event) => {
-    event.preventDefault()
-    console.log('Submitted');
-  }
-
   return (
-    <StyledRxForm className="rxform" onSubmit={handleSubmit} autoComplete="off">
+    <StyledRxForm className="rxform" onSubmit={(e) => {e.preventDefault(); handleSubmit(drugData, patientData, providerData)}} autoComplete="off">
       {/* Single input to select the medication */}
       {/* Note there must be enough info to identify the medicine, including form and strength */}
       <fieldset className="drug-form">
