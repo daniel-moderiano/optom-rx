@@ -385,15 +385,7 @@ const RxForm = () => {
       {/* Note there must be enough info to identify the medicine, including form and strength */}
       <fieldset className="drug-form">
         <legend className="drug-form__title">Medication</legend>
-        <FormField 
-          fieldType="text" 
-          name="name"
-          label="Medication" 
-          placeholder="Enter medication name"
-          value={drugData.name} 
-          onChange={(event) => handleChange(setDrugData, event)} 
-          alert={drugAlerts.name}
-        />
+
         {/* TODO: add input checkbox to include brand name on prescription, and for brand name substitution not permitted */}
         {/* TODO: Add 'to be compounded' checkbox */}
 

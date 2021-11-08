@@ -6,16 +6,12 @@ import FormField from '../FormField/FormField';
 const DrugAutocomplete = ({ data, setData, handleChange }) => {
   // useRef allows us to store the equivalent of a 'global' component variable without losing data on re-render, but avoiding the async problems that can arise with state
   const currentFocus = useRef(-1);
-
   const [expand, setExpand] = useState(false);
 
-  // Remove any currently displayed itemLists
+  // Remove any currently displayed items in the item list
   const removeList = useCallback(() => {
-    // const itemsList = document.querySelector('.items-list');
     currentFocus.current = -1;
-    // if (itemsList) {
-    //   itemsList.remove();
-    // }
+    // Remove all items within the list, rather than the list itself
     document.querySelectorAll('.item').forEach((item) => {
       item.remove();
     })
@@ -31,7 +27,6 @@ const DrugAutocomplete = ({ data, setData, handleChange }) => {
         brandName: event.target.dataset.brandName,
         itemCode: event.target.dataset.code,
       }));
-      // TODO: Consider adding some functionality here to pre-fill RxForm state with name/brand name etc.
       
       removeList();
       setExpand(true);
@@ -66,14 +61,10 @@ const DrugAutocomplete = ({ data, setData, handleChange }) => {
   const createList = useCallback((matchArr) => {
     // First remove any lists present to ensure the list if refreshed on each new input
     removeList();
-    // Create the new list container
-    // const itemsList = document.createElement('div');
-    // itemsList.classList.add('items-list');
-    // document.querySelector('.DrugAutocomplete').appendChild(itemsList);
+
     const itemsList = document.querySelector('.items-list');
     // Append each list item from the source array
     matchArr.forEach((match) => {
-      // TODO: decide whether this bolding is helpful or hinders
       const boldActiveName = boldLetters(`${match['tpuu-or-mpp-pt']}`);
       const boldBrandName = boldLetters(`${match['brand-name']}`);
       const item = document.createElement('div');
@@ -81,7 +72,6 @@ const DrugAutocomplete = ({ data, setData, handleChange }) => {
       item.dataset.code = match['item-code'];
       item.dataset.activeIngredient = match['tpuu-or-mpp-pt'];
       item.dataset.brandName = match['brand-name'];
-      // item.textContent = `${match['tpuu-or-mpp-pt']} / ${match['brand-name']}`;    // Choose here which name to display: ;
       item.classList.add('item');
       itemsList.appendChild(item);     
     }); 
@@ -90,64 +80,16 @@ const DrugAutocomplete = ({ data, setData, handleChange }) => {
   }, [removeList, clickSuggestion, boldLetters]);
 
 
-  // // Perform the autocomplete logic here
-  // useEffect(() => {
-  //   // Must put the logic for finding matches in useEffect, or else it won't capture the first input typed in  
-  //   // Two regex to match search text in different parts of the string. Split-up to allow custom ordering of matches in final UI list
-  //   let regexFirst;
-  //   let regexSecond;
-  //   let matches;
-
-  //   // Handle user typing in special characters, which would otherwise crash the app here
-  //   try {
-  //     regexFirst = new RegExp(`^${data.activeIngredient}`, 'i');
-  //     regexSecond = new RegExp(`\\+ ${data.activeIngredient}`, 'i');
-  //   } catch (error) {
-  //     // TODO: error message handling in UI
-  //     console.log(error.message);
-  //   }
-    
-  //   if (!regexFirst || !regexSecond) {
-  //     matches = [];
-  //   } else {
-  //     // Match first at the start of a string (e.g. 'tim' matches 'timolol' but not 'latanoprost + timolol')
-  //     let firstMatches = PBSData.filter((drug) => {
-  //       return drug['brand-name'].some((name) => name.match(regexFirst)) || drug['tpuu-or-mpp-pt'].match(regexFirst);
-  //     });
-
-  //     // Match a second drug (e.g. 'tim' matches 'latanoprost + timolol' but not 'timolol'). These are lower priority and should be displayed second in a list
-  //     let secondMatches = PBSData.filter((drug) => {
-  //       return drug['brand-name'].some((name) => name.match(regexSecond)) || drug['tpuu-or-mpp-pt'].match(regexSecond);
-  //     });
-
-  //     // Remove any duplicates (only relevant for the first typed char)
-  //     let filteredSecondMatches = secondMatches.filter((drug) => !firstMatches.includes(drug))
-
-  //     // Combine all the results into a single pseudo-ordered array
-  //     matches = firstMatches.concat(filteredSecondMatches);
-  //   }
-
-  //   // Reset the search results when the user clears the field
-  //   if (data.activeIngredient.length === 0) {
-  //     matches = [];
-  //   }
-
-  //   createList(matches);
-  // }, [data.activeIngredient, createList]);
-
-
-  
-
   // Leave this dependency array empty to ensure this runs only once on first mount
   useEffect(() => {
     const input = document.querySelector('#activeIngredient');
-    // const itemsList = document.querySelector('.items-list'); 
+
+    // Create the item list once only here, but it remains invisible until items are added. This ensures it will always be present for adding event listeners below
     const itemsList = document.createElement('div');
     itemsList.classList.add('items-list');
     document.querySelector('.DrugAutocomplete').appendChild(itemsList);
-// TODO itemsList no longer defined on render so keyNav not working as intended. Need to pre-define to allow this to work properly
-    console.log(itemsList);
-    // Remove the active class from all autocomplete items
+
+    // Removes the active class from all autocomplete items
     const removeActive = (itemsArr) => {
       itemsArr.forEach((item) => {
         item.classList.remove('active');
@@ -171,8 +113,8 @@ const DrugAutocomplete = ({ data, setData, handleChange }) => {
 
     // The currentFocus variable will be used as an index when adding an active class to an item in the itemsList list
     const keyItemNav = (e) => {
-      // Check that there is an itemsList present before allowing the user to navigate through it
-      if (itemsList) {
+      // // Check that there is an itemsList present before allowing the user to navigate through it
+      // if (itemsList) {
         // This is the array of list items that will be moved through using the currentFocus variable
         const items = document.querySelectorAll('.item');
         if (items.length > 0) {
@@ -194,7 +136,7 @@ const DrugAutocomplete = ({ data, setData, handleChange }) => {
             }
           }
         }
-      }
+      // }
     }
     input.addEventListener('keydown', keyItemNav);
 
@@ -248,10 +190,6 @@ const DrugAutocomplete = ({ data, setData, handleChange }) => {
     createList(matches);
   }
 
-  // const handleLocalChange = (event) => {
-  //   setSearchText(event.target.value);
-  // }
-
   return (
     <StyledDrugAutocomplete>
       <div className="autocomplete-group">
@@ -279,6 +217,13 @@ const DrugAutocomplete = ({ data, setData, handleChange }) => {
           value={data.brandName} 
           onChange={handleChange} 
         />
+
+        <FormField 
+          fieldType="checkbox" 
+          name="includeBrand"
+          label="Include brand name on the Rx" 
+          // onChange={togglePrefix}
+        />    
       </fieldset>
     </StyledDrugAutocomplete>
   );
