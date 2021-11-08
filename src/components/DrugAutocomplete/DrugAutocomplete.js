@@ -1,24 +1,25 @@
 import PBSData from '../../pbs/pbsDataUnique.json'
-import { useEffect, useState, useCallback, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { StyledDrugAutocomplete } from './DrugAutocompleteStyled';
 import FormField from '../FormField/FormField';
 
 const DrugAutocomplete = ({ data, setData, handleChange }) => {
+
   // useRef allows us to store the equivalent of a 'global' component variable without losing data on re-render, but avoiding the async problems that can arise with state
   const currentFocus = useRef(-1);
   const [expand, setExpand] = useState(false);
 
   // Remove any currently displayed items in the item list
-  const removeList = useCallback(() => {
+  const removeList = () => {
     currentFocus.current = -1;
     // Remove all items within the list, rather than the list itself
     document.querySelectorAll('.item').forEach((item) => {
       item.remove();
     })
-  }, []);
+  };
 
   // Capture the selection made in the items list via event propagation
-  const clickSuggestion = useCallback((event) => {
+  const clickSuggestion = (event) => {
     if (event.target.classList.contains('item')) {
       // Set state onclick - do NOT set input.value as this will not work as intended. Always adjust state and have input.value set to state
       setData((prevData) => ({
@@ -31,10 +32,10 @@ const DrugAutocomplete = ({ data, setData, handleChange }) => {
       removeList();
       setExpand(true);
     }
-  }, [removeList, setData]);
+  };
 
   // Given a string, use the current search text and regex to bold the segment of text being searched for (using HTML)
-  const boldLetters = useCallback((string) => {
+  const boldLetters = (string) => {
     const currentSearchTerm = document.querySelector('#activeIngredient').value;
     let regexFirst = new RegExp(`^${currentSearchTerm}`, 'i');
     // Must add capturing group to this regex for later extraction
@@ -55,10 +56,10 @@ const DrugAutocomplete = ({ data, setData, handleChange }) => {
       // If no matches, return all non-bold
       return string;
     }
-  }, []);
+  };
 
   // Creates list of autocomplete items using an array of relevant suggestions (matchArr)
-  const createList = useCallback((matchArr) => {
+  const createList = (matchArr) => {
     // First remove any lists present to ensure the list if refreshed on each new input
     removeList();
 
@@ -68,7 +69,7 @@ const DrugAutocomplete = ({ data, setData, handleChange }) => {
       const boldActiveName = boldLetters(`${match['tpuu-or-mpp-pt']}`);
       const boldBrandName = boldLetters(`${match['brand-name']}`);
       const item = document.createElement('div');
-      item.innerHTML = `${boldActiveName} / ${boldBrandName}`;
+      item.innerHTML = `${boldActiveName} (${boldBrandName})`;
       item.dataset.code = match['item-code'];
       item.dataset.activeIngredient = match['tpuu-or-mpp-pt'];
       item.dataset.brandName = match['brand-name'];
@@ -77,7 +78,7 @@ const DrugAutocomplete = ({ data, setData, handleChange }) => {
     }); 
 
     itemsList.addEventListener('click', clickSuggestion);
-  }, [removeList, clickSuggestion, boldLetters]);
+  };
 
 
   // Leave this dependency array empty to ensure this runs only once on first mount
@@ -113,41 +114,39 @@ const DrugAutocomplete = ({ data, setData, handleChange }) => {
 
     // The currentFocus variable will be used as an index when adding an active class to an item in the itemsList list
     const keyItemNav = (e) => {
-      // // Check that there is an itemsList present before allowing the user to navigate through it
-      // if (itemsList) {
-        // This is the array of list items that will be moved through using the currentFocus variable
-        const items = document.querySelectorAll('.item');
-        if (items.length > 0) {
-          if (e.keyCode === 40) {  
-            currentFocus.current++;
-            /*and and make the current item more visible:*/
-            addActive(items);
-          } else if (e.keyCode === 38) { //up
-            // Decrease the currentFocus variable when the DOWN key is pressed
-            currentFocus.current--;
-            /*and and make the current item more visible:*/
-            addActive(items);
-          } else if (e.keyCode === 13) {
-            // Ensure the form isn't submitted when simply selecting an option
-            e.preventDefault();
-            if (currentFocus.current > -1) {
-              // Simulated a click on the currently 'focused' item
-              items[currentFocus.current].click();
-            }
+      // This is the array of list items that will be moved through using the currentFocus variable
+      const items = document.querySelectorAll('.item');
+      if (items.length > 0) {
+        if (e.keyCode === 40) {  
+          currentFocus.current++;
+          /*and and make the current item more visible:*/
+          addActive(items);
+        } else if (e.keyCode === 38) { //up
+          // Decrease the currentFocus variable when the DOWN key is pressed
+          currentFocus.current--;
+          /*and and make the current item more visible:*/
+          addActive(items);
+        } else if (e.keyCode === 13) {
+          // Ensure the form isn't submitted when simply selecting an option
+          e.preventDefault();
+          if (currentFocus.current > -1) {
+            // Simulated a click on the currently 'focused' item
+            items[currentFocus.current].click();
           }
         }
-      // }
+      }
     }
+
     input.addEventListener('keydown', keyItemNav);
 
     return () => {
-      // Remove event listener here
+      // Remove event listener on dismount
       input.removeEventListener('keydown', keyItemNav);
     }
   }, [])
 
+  // Runs on every input change, which provides a better solution than running within useEffect hook
   const handleSearch = (event) => {
-        // Must put the logic for finding matches in useEffect, or else it won't capture the first input typed in  
     // Two regex to match search text in different parts of the string. Split-up to allow custom ordering of matches in final UI list
     let regexFirst;
     let regexSecond;
@@ -162,6 +161,7 @@ const DrugAutocomplete = ({ data, setData, handleChange }) => {
       console.log(error.message);
     }
     
+    // At least one regEx should match, otherwise there are no medications under the searched term
     if (!regexFirst || !regexSecond) {
       matches = [];
     } else {
