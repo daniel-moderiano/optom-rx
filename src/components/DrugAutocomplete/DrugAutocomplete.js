@@ -9,6 +9,23 @@ const DrugAutocomplete = ({ data, setData, handleChange }) => {
   // Controls the UI state of the collapsed input fields
   const [expand, setExpand] = useState(false);
 
+  // Alerts for input validation
+  const [alerts, setAlerts] = useState({
+    activeIngredient: {},
+    brandName: {},
+  });
+
+  // UI error class handling
+  const showErrorClass = (element) => {
+    element.classList.add('error');
+    element.classList.remove('success');
+  }
+
+  const showSuccessClass = (element) => {
+    element.classList.remove('error');
+    element.classList.add('success');
+  }
+
   // Remove all items within the list, rather than the list itself
   const removeList = () => {
     // Must reset focus here to avoid starting halway down a list on first arrow key press
@@ -32,6 +49,12 @@ const DrugAutocomplete = ({ data, setData, handleChange }) => {
       removeList();
       setExpand(true);
     }
+    // Remove errors
+    showSuccessClass(document.querySelector('#activeIngredient'));
+    setAlerts((prevAlerts) => ({
+      ...prevAlerts,
+      activeIngredient: {}
+    }));
   };
 
   // Given a string, use the current search text and regex to bold the segment of text being searched for (using HTML)
@@ -149,6 +172,40 @@ const DrugAutocomplete = ({ data, setData, handleChange }) => {
     }
   }, [])
 
+  useEffect(() => {
+    // Event propagation will capture all focusout events from fields within this component
+    const drugDataValidation = () => {
+      document.querySelector('.autocomplete-container').addEventListener('focusout', (event) => {
+        const { name, value } = event.target;
+        switch (true) {
+          case name === 'activeIngredient':
+            if (value.trim().length === 0) {
+              setAlerts((prevAlerts) => ({
+                ...prevAlerts,
+                activeIngredient: {
+                  message: "This field cannot be left blank",
+                  type: 'error',
+                }
+              }));
+              showErrorClass(event.target);
+            } else {
+              showSuccessClass(event.target);
+              setAlerts((prevAlerts) => ({
+                ...prevAlerts,
+                activeIngredient: {}
+              }));
+            }
+            break;
+
+          default: 
+            break;
+        };
+      });
+    }
+    drugDataValidation();
+
+  }, [])
+
   // Runs on every input change, which provides a better solution than running within useEffect hook
   const handleSearch = (event) => {
     // Two regex to match search text in different parts of the string. Split-up to allow custom ordering of matches in final UI list
@@ -195,7 +252,7 @@ const DrugAutocomplete = ({ data, setData, handleChange }) => {
   }
 
   return (
-    <StyledDrugAutocomplete>
+    <StyledDrugAutocomplete className="autocomplete-container">
       <div className="autocomplete-group">
         <FormField 
           className="DrugAutocomplete"
@@ -207,7 +264,8 @@ const DrugAutocomplete = ({ data, setData, handleChange }) => {
           onChange={(event) => {
             handleChange(event);
             handleSearch(event);
-          }} 
+          }}
+          alert={alerts.activeIngredient}
         />
         <button type="button" onClick={() => setExpand(true)}>Enter manually</button>
       </div>
