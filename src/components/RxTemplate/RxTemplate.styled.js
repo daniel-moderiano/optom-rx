@@ -1,7 +1,11 @@
 import styled from "styled-components";
 
 const StyledRxTemplate = styled.div`
+  font-family: Arial, Helvetica, sans-serif;
+
   position: relative;
+  margin: 0;
+  padding: 0;
 
   img {
     position: absolute;
@@ -10,7 +14,7 @@ const StyledRxTemplate = styled.div`
     z-index: -1;
     /* This pixel value is specific for the image in question, and is a veyr close approximation to a real PBS form */
     width: 902px;
-    opacity: 0.5;
+    /* opacity: 0.5; */
     border: 1px solid black;
     margin: 0;
     padding: 0;
@@ -72,6 +76,14 @@ const StyledRxTemplate = styled.div`
 
   .provider__fullName {
     font-weight: bold;
+  }
+
+  @media print {
+    @page {
+      size: auto;
+      margin: 0mm;
+    }
+    border: 1px solid red;
   }
 `
 

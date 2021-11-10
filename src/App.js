@@ -4,6 +4,7 @@ import GlobalStyles from "./components/utils/globalStyles";
 import RxForm from './components/RxForm/RxForm'
 import RxTemplate from "./components/RxTemplate/RxTemplate";
 import { useState, useEffect } from "react";
+import './App.css';
 
 const App = () => {
   const [data, setData] = useState({
@@ -67,10 +68,11 @@ const App = () => {
 
   return (
     <div className="App">
-      <GlobalStyles />
-      <Header />
+      <RxTemplate data={data}/>
+      {/* <GlobalStyles />
+      <Header /> */}
       {/* Note prescriptions must contain date of issue, and prescriber signature */}
-      <main>
+      {/* <main>
         <section className="rx-form">
           <RxForm handleSubmit={handleSubmit}/>
         </section>
@@ -78,7 +80,7 @@ const App = () => {
           <RxTemplate data={data}/>
         </section>
       </main>
-      <footer className="footer"></footer>
+      <footer className="footer"></footer> */}
     </div>
     
     
