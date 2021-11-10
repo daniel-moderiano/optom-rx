@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const StyledRxTemplate = styled.div`
   font-family: Arial, Helvetica, sans-serif;
-
+  font-size: 15px;
   position: relative;
   margin: 0;
   padding: 0;
@@ -29,26 +29,27 @@ const StyledRxTemplate = styled.div`
   .container {
     position: relative;
     width: 100%;
+    height: 100%;
   }
-
 
   .provider-upper {
     position: absolute;
     width: 100%;
+    /* display: none; */
   }
 
   .provider__contact-upper {
     position: absolute;
     left: 90px;
     top: 20px;
-    font-size: 15px;
+
   }
 
   .provider__contact-lower {
     position: absolute;
     left: 90px;
     top: 102px;
-    font-size: 15px;
+    
     display: flex;
     justify-content: space-between;
     width: 300px;
@@ -56,12 +57,38 @@ const StyledRxTemplate = styled.div`
 
   .patient {
     position: absolute;
-    display: none;
+    /* display: none; */
   }
+
+  .patient__contactDetails {
+    position: absolute;
+    left: 100px;
+    top: 241px;
+    width: 300px;
+    font-weight: bold;
+  }
+
+  .patient__medicareNumber {
+    position: absolute;
+    top: 138px;
+    left: 140px;
+    width: 200px;
+    font-weight: bold;
+  }
+
+  /* .patient__streetAddress {
+    position: absolute;
+  }
+
+  .patient__addressLine2 {
+    position: absolute;
+  } */
 
   .miscellaneous {
     position: absolute;
-    display: none;
+    /* display: none; */
+    top: 311px;
+    left: 40px;
   }
 
   .medication {

@@ -1,13 +1,13 @@
 import { StyledRxTemplate } from "./RxTemplate.styled";
 import Rx from '../../assets/template-sized.jpg';
 
-const RxTemplate = ({ data }) => {
+const RxTemplate = ({ data, date }) => {
   // Deconstructing for cleanliness of code and easier-to-understand operations
   const { drugData, patientData, providerData } = data;
 
   return (
     <StyledRxTemplate className="RxTemplate">
-      <img src={Rx} alt="" />
+      {/* <img src={Rx} alt="" /> */}
 
       <section className="provider-upper">
         <div className="container">
@@ -34,19 +34,27 @@ const RxTemplate = ({ data }) => {
       </section>
 
       <section className="patient">
-        <div className="patient__medicareNumber">{patientData.medicareNumber}</div>
-        <div className="patient__medicareIRN">{patientData.medicareRefNumber}</div>
-        <div className="patient__fullName">{patientData.fullName}</div>
-        <div className="patient__subpremise">{patientData.subpremise}</div>
-        <div className="patient__streetAddress">{patientData.streetAddress}</div>
-        {/* Consider a conditional here for combining subpremise and streetAddress into addressLine1, which is then split into 1 or two lines dpending on length */}
-        <div className="patient__addressLine2">{`${patientData.suburb} ${patientData.state} ${patientData.postcode}`}</div>
-        {/* <div className="patient__suburb">{patientData.suburb}</div>
-        <div className="patient__state">{patientData.state}</div>
-        <div className="patient__postcode">{patientData.postcode}</div> */}
+        <div className="container">
+          <div className="patient__medicareNumber">{`${patientData.medicareNumber}-${patientData.medicareRefNumber}`}</div>
+          {/* <div className="patient__medicareIRN">{patientData.medicareRefNumber}</div> */}
+          <div className="patient__contactDetails">
+            <div className="patient__fullName">{patientData.fullName}</div>
+            <div className="patient__subpremise">{patientData.subpremise}</div>
+            <div className="patient__streetAddress">{patientData.streetAddress}</div>
+            <div className="patient__addressLine2">{`${patientData.suburb} ${patientData.state} ${patientData.postcode}`}</div>
+            {/* <div className="patient__suburb">{patientData.suburb}</div>
+          <div className="patient__state">{patientData.state}</div>
+          <div className="patient__postcode">{patientData.postcode}</div> */}
+          </div>
+         
+          {/* Consider a conditional here for combining subpremise and streetAddress into addressLine1, which is then split into 1 or two lines dpending on length */}
+          
+          
+        </div>
       </section>
       <section className="miscellaneous">
         {/* Include date and potentially Script ID here. Consider also the PBS yes/no, and brand substitution yes/no here */}
+        <div className="date">{`${date.getDate()}-${date.getMonth()}-${date.getFullYear()}`}</div>
       </section>
       <section className="medication">
         {/* Active ingredient should be capitalised */}

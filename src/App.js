@@ -13,6 +13,8 @@ const App = () => {
     providerData: {},
   });
 
+  const today = new Date();
+
   const handleSubmit = (drugData, patientData, providerData) => {
     setData((prevData) => ({
       ...prevData,
@@ -39,7 +41,7 @@ const App = () => {
           "itemCode":"5552F"
       },
         "patientData": {
-          "fullName":"Sarah Smoker",
+          "fullName":"Daniel Moderiano",
           "streetAddress":"6 Old Tawny Close",
           "subpremise":"",
           "suburb":"Wynn Vale",
@@ -50,7 +52,7 @@ const App = () => {
       },
         "providerData": {
           "prefix":true,
-          "fullName":"Daniel Moderiano",
+          "fullName":"Sarah Smoker",
           "qualifications":"BMedSc(VisSc), MOpt",
           "practiceName":"OPSM",
           "streetAddress":"976 North East Road",
@@ -68,7 +70,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <RxTemplate data={data}/>
+      <RxTemplate data={data} date={today}/>
       {/* <GlobalStyles />
       <Header /> */}
       {/* Note prescriptions must contain date of issue, and prescriber signature */}
