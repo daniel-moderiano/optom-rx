@@ -93,12 +93,29 @@ const StyledRxTemplate = styled.div`
 
   .medication {
     position: absolute;
-    display: none;
+    /* display: none; */
+    left: 112px;
+    top: 370px;
+  }
+
+  .medication__activeIngredient {
+    font-weight: bold;
+  }
+
+  .medication__brandName {
+    font-weight: bold;
+  }
+
+  .quantityRepeats {
+    display: flex;
+    justify-content: space-between;
+    width: 160px;
   }
 
   .provider-lower {
     position: absolute;
-    display: none;
+    left: 112px;
+    top: 502px;
   }
 
   .provider__fullName {

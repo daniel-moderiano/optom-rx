@@ -5,9 +5,11 @@ const RxTemplate = ({ data, date }) => {
   // Deconstructing for cleanliness of code and easier-to-understand operations
   const { drugData, patientData, providerData } = data;
 
+  // TODO: adjust date for Australia (currently US)
+
   return (
     <StyledRxTemplate className="RxTemplate">
-      {/* <img src={Rx} alt="" /> */}
+      <img src={Rx} alt="" />
 
       <section className="provider-upper">
         <div className="container">
@@ -58,11 +60,14 @@ const RxTemplate = ({ data, date }) => {
       </section>
       <section className="medication">
         {/* Active ingredient should be capitalised */}
-        <div className="medication__activeIngredient">{drugData.activeIngredient}</div>
+        <div className="medication__activeIngredient">{drugData.activeIngredient[0].toUpperCase() + drugData.activeIngredient.substring(1)}</div>
         <div className="medication__brandName">{drugData.brandName}</div>
         <div className="medication__dosage">{drugData.dosage}</div>
-        <div className="medication__quantity">{drugData.quantity}</div>
-        <div className="medication__repeats">{drugData.repeats}</div>
+        <div className="quantityRepeats">
+          <div className="medication__quantity">{`Quantity: ${drugData.quantity}`}</div>
+          <div className="medication__repeats">{`${drugData.repeats} repeats`}</div>
+        </div>
+        
 
       </section>
       <section className="provider-lower">
