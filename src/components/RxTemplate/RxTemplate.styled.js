@@ -86,6 +86,19 @@ const StyledRxTemplate = styled.div`
     /* display: none; */
     top: 311px;
     left: 40px;
+
+    .pbsSelected {
+      width: 18px;
+      height: 18px;
+      display: block;
+      position: absolute;
+      top: 20px;
+
+      img {
+        height: 100%;
+        width: 100%;
+      }
+    }
   }
 
   .medication {

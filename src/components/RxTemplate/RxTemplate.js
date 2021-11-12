@@ -1,5 +1,6 @@
 import { StyledRxTemplate } from "./RxTemplate.styled";
 import Rx from '../../assets/template-sized.jpg';
+import tickbox from '../../assets/tickbox.png';
 
 const RxTemplate = ({ data, date }) => {
   // Deconstructing for cleanliness of code and easier-to-understand operations
@@ -43,7 +44,7 @@ const RxTemplate = ({ data, date }) => {
   return (
     <StyledRxTemplate className="RxTemplate">
       <img src={Rx} alt="" />
-
+      
       <section className="provider-upper">
         <div className="container">
           <div className="provider__contact-upper">
@@ -90,8 +91,9 @@ const RxTemplate = ({ data, date }) => {
       </section>
       <section className="miscellaneous">
         {/* Include date and potentially Script ID here. Consider also the PBS yes/no, and brand substitution yes/no here */}
-        {/* <div className="date">{`${date.getDate()}-${date.getMonth()}-${date.getFullYear()}`}</div> */}
         <div className="date">{date}</div>
+        <div className="pbsSelected"><img src={tickbox} alt="" /></div>
+        
       </section>
       <section className="medication">
         {/* Active ingredient should be capitalised */}
