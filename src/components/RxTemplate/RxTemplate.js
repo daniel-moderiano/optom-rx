@@ -1,6 +1,6 @@
 import { StyledRxTemplate } from "./RxTemplate.styled";
 import Rx from '../../assets/template-sized.jpg';
-import tickbox from '../../assets/tickbox.png';
+import tickbox from '../../assets/tickbox.svg';
 
 const RxTemplate = ({ data, date }) => {
   // Deconstructing for cleanliness of code and easier-to-understand operations
@@ -92,7 +92,12 @@ const RxTemplate = ({ data, date }) => {
       <section className="miscellaneous">
         {/* Include date and potentially Script ID here. Consider also the PBS yes/no, and brand substitution yes/no here */}
         <div className="date">{date}</div>
-        <div className="pbsSelected"><img src={tickbox} alt="" /></div>
+        <div className="pbsSelected"><img src={tickbox} alt="" />
+          
+        </div>
+        
+        <div className="brandSub">X</div>
+        
         
       </section>
       <section className="medication">
@@ -113,6 +118,7 @@ const RxTemplate = ({ data, date }) => {
         <div className="provider__fullName">{`${providerData.prefix && 'Dr'} ${providerData.fullName}`}</div>
         {/* Qualifications should only be included in the lower section */}
         <div className="provider__qualifications">{providerData.qualifications}</div>
+        <div className="practitionerTick">🗸</div>
       </section>
     </StyledRxTemplate>
   );

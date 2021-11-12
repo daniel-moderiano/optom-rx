@@ -88,9 +88,10 @@ const StyledRxTemplate = styled.div`
     left: 40px;
 
     .pbsSelected {
-      width: 18px;
-      height: 18px;
+      width: 17px;
+      height: 17px;
       display: block;
+      /* Without position the img will size relative to the miscellaneous div above */
       position: absolute;
       top: 20px;
 
@@ -98,6 +99,15 @@ const StyledRxTemplate = styled.div`
         height: 100%;
         width: 100%;
       }
+
+    }
+    
+    .brandSub {
+      position: absolute;
+      left: 151px;
+      top: 20px;
+      font-size: 16px;
+      
     }
   }
 
@@ -127,6 +137,15 @@ const StyledRxTemplate = styled.div`
     position: absolute;
     left: 112px;
     top: 502px;
+
+    
+    .practitionerTick {
+      position: absolute;
+      left: 315px;
+      top: 134px;
+      font-size: 26px;
+      font-weight: bold;
+    }
   }
 
   .provider__fullName {
