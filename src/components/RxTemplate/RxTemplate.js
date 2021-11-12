@@ -7,6 +7,31 @@ const RxTemplate = ({ data, date }) => {
 
   // TODO: adjust date for Australia (currently US)
 
+  const formatPhoneNumber = (phoneNumber) => {
+    if (phoneNumber.substring(0, 2) === '04') {
+      // Format as mobile phone number
+      return `${phoneNumber.substring(0, 4)} ${phoneNumber.substring(4, 7)} ${phoneNumber.substring(7, 10)}`;
+    } else if (phoneNumber.substring(0, 2) === '13') {
+      // Format as business number, depending on total length
+      if (phoneNumber.length === 6) {
+        // Format as 6 digit '13' number
+        return `${phoneNumber.substring(0, 2)} ${phoneNumber.substring(2, 4)} ${phoneNumber.substring(4, 6)}`;
+      } else {
+        // Format as 1300 number
+        return `${phoneNumber.substring(0, 4)} ${phoneNumber.substring(4, 7)} ${phoneNumber.substring(7, 10)}`;
+      }
+    } else {
+      // Format as standard 10 digit landline number
+      return `(${phoneNumber.substring(0, 2)}) ${phoneNumber.substring(2, 6)} ${phoneNumber.substring(6, 10)}`;
+    }
+  };
+
+  const formatMedicareNumber = (medicareNumber) => {
+
+  };
+
+  console.log(formatPhoneNumber('0427779650'));
+
   return (
     <StyledRxTemplate className="RxTemplate">
       <img src={Rx} alt="" />
@@ -27,7 +52,7 @@ const RxTemplate = ({ data, date }) => {
           </div>
           <div className="provider__contact-lower">
             <div className="provider__prescriberNumber">{providerData.prescriberNumber}</div>
-            <div className="provider__phoneNumber">{`Phone: ${providerData.phoneNumber}`}</div>
+            <div data-testid="phone" className="provider__phoneNumber">{`Phone: ${formatPhoneNumber(providerData.phoneNumber)}`}</div>
           </div>
         
           

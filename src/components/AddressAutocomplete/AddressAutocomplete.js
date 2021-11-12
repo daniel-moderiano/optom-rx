@@ -84,7 +84,6 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider }) => {
 
    useEffect(() => {
     const inputs = document.querySelector('.address-collapse').querySelectorAll('input');
-    console.log('Running use-effect');
     // Check for an exisitng API script on the page to avoid duplicating
     let googleScript = document.querySelector('#google-script')
 
