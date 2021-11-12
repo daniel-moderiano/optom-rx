@@ -94,6 +94,7 @@ const StyledRxTemplate = styled.div`
     /* display: none; */
     left: 112px;
     top: 370px;
+    max-width: 300px;
   }
 
   .medication__activeIngredient {

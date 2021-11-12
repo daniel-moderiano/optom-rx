@@ -26,10 +26,19 @@ const RxTemplate = ({ data, date }) => {
     }
   };
 
-  const formatMedicareNumber = (medicareNumber) => {
-
+  const formatMedicareNumber = (medicareNumber, IRN) => {
+    return `${medicareNumber.substring(0, 4)} ${medicareNumber.substring(4, 9)} ${medicareNumber.substring(9, 10)} ${IRN}`;
   };
-
+  
+  const formatDrug = (activeIngredient, brandName) => {
+    const capitalised = activeIngredient[0].toUpperCase() + activeIngredient.substring(1);
+    if (!capitalised.includes('eye')) {
+      return `${capitalised.replace(',', ` (${brandName}),`)}`;
+    } else {
+      return `${capitalised.replace('eye', `(${brandName}) eye`)}`;
+    }
+    
+  }
 
   return (
     <StyledRxTemplate className="RxTemplate">
@@ -61,7 +70,8 @@ const RxTemplate = ({ data, date }) => {
 
       <section className="patient">
         <div className="container">
-          <div className="patient__medicareNumber">{`${patientData.medicareNumber}-${patientData.medicareRefNumber}`}</div>
+          {/* <div className="patient__medicareNumber">{`${patientData.medicareNumber}-${patientData.medicareRefNumber}`}</div> */}
+          <div className="patient__medicareNumber">{`${formatMedicareNumber(patientData.medicareNumber, patientData.medicareRefNumber)}`}</div>
           {/* <div className="patient__medicareIRN">{patientData.medicareRefNumber}</div> */}
           <div className="patient__contactDetails">
             <div className="patient__fullName">{patientData.fullName}</div>
@@ -84,8 +94,9 @@ const RxTemplate = ({ data, date }) => {
       </section>
       <section className="medication">
         {/* Active ingredient should be capitalised */}
-        <div className="medication__activeIngredient">{drugData.activeIngredient[0].toUpperCase() + drugData.activeIngredient.substring(1)}</div>
-        <div className="medication__brandName">{drugData.brandName}</div>
+        {/* <div className="medication__activeIngredient">{drugData.activeIngredient[0].toUpperCase() + drugData.activeIngredient.substring(1)}</div>
+        <div className="medication__brandName">{drugData.brandName}</div> */}
+        <div className="medication__activeIngredient">{formatDrug(drugData.activeIngredient, drugData.brandName)}</div>
         <div className="medication__dosage">{drugData.dosage}</div>
         <div className="quantityRepeats">
           <div className="medication__quantity">{`Quantity: ${drugData.quantity}`}</div>
