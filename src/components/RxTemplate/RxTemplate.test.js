@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import RxTemplate from './RxTemplate';
 
 const dataMobile = {
@@ -86,7 +86,20 @@ const dataBusinessTen = {
 }
 };
 
-const today = new Date();
+const dataDrug = {
+  ...dataMobile,
+  "drugData": {
+      "activeIngredient":"prednisolone acetate 1% + phenylephrine hydrochloride 0.12% eye drops, 10 mL",
+      "brandName":"Prednefrin forte",
+      "quantity":"1",
+      "repeats":"0",
+      "dosage":"4x per day both eyes, for two weeks",
+      "itemCode":"5552F"
+  },
+  
+};
+
+const today = new Date().toLocaleString("en-AU", { timeZone: "Australia/Adelaide" }).substring(0, 10);
 
 describe('Data formatting tests', () => {
   test('Correctly formats mobile numbers', () => {
@@ -113,6 +126,11 @@ describe('Data formatting tests', () => {
     expect(phoneNumber.textContent).toBe('Phone: 1300 667 667');
   });
 
+  test('Correctly formats drug name', () => {
+    render(<RxTemplate data={dataDrug} date={today}/>);
+    const drugName = screen.getByTestId(/drugName/i);
+    expect(drugName.textContent).toBe('Prednisolone acetate 1% + phenylephrine hydrochloride 0.12% (Prednefrin forte) eye drops, 10 mL');
+  });
 
 
 });

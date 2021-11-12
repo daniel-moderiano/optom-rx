@@ -90,13 +90,14 @@ const RxTemplate = ({ data, date }) => {
       </section>
       <section className="miscellaneous">
         {/* Include date and potentially Script ID here. Consider also the PBS yes/no, and brand substitution yes/no here */}
-        <div className="date">{`${date.getDate()}-${date.getMonth()}-${date.getFullYear()}`}</div>
+        {/* <div className="date">{`${date.getDate()}-${date.getMonth()}-${date.getFullYear()}`}</div> */}
+        <div className="date">{date}</div>
       </section>
       <section className="medication">
         {/* Active ingredient should be capitalised */}
         {/* <div className="medication__activeIngredient">{drugData.activeIngredient[0].toUpperCase() + drugData.activeIngredient.substring(1)}</div>
         <div className="medication__brandName">{drugData.brandName}</div> */}
-        <div className="medication__activeIngredient">{formatDrug(drugData.activeIngredient, drugData.brandName)}</div>
+        <div data-testid="drugName" className="medication__activeIngredient">{formatDrug(drugData.activeIngredient, drugData.brandName)}</div>
         <div className="medication__dosage">{drugData.dosage}</div>
         <div className="quantityRepeats">
           <div className="medication__quantity">{`Quantity: ${drugData.quantity}`}</div>

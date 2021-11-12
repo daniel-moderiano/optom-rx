@@ -71,7 +71,6 @@ const StyledRxTemplate = styled.div`
     top: 138px;
     left: 140px;
     width: 200px;
-    font-weight: bold;
   }
 
   /* .patient__streetAddress {

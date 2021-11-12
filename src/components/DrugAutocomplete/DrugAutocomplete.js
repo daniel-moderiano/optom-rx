@@ -9,14 +9,6 @@ const DrugAutocomplete = ({ data, setData, handleChange }) => {
   // Controls the UI state of the collapsed input fields
   const [expand, setExpand] = useState(false);
 
-  const drugTypes = (activeIng) => {
-    if (activeIng.includes('drops') || activeIng.includes('ointment') || activeIng.includes('gel')) {
-      return true;
-    }
-  }
-  const actives = PBSData.filter((drug) => (drug['tpuu-or-mpp-pt'].includes('eye')));
-  console.log(actives);
-
   // Alerts for input validation
   const [alerts, setAlerts] = useState({
     activeIngredient: {},

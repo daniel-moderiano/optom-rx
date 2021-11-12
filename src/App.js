@@ -13,7 +13,7 @@ const App = () => {
     providerData: {},
   });
 
-  const today = new Date();
+  const AuDate = new Date().toLocaleString("en-AU", { timeZone: "Australia/Adelaide" }).substring(0, 10);
 
   const handleSubmit = (drugData, patientData, providerData) => {
     setData((prevData) => ({
@@ -104,7 +104,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <RxTemplate data={dummyData} date={today}/>
+      <RxTemplate data={dummyData} date={AuDate}/>
       {/* <GlobalStyles />
       <Header /> */}
       {/* Note prescriptions must contain date of issue, and prescriber signature */}
