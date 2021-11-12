@@ -9,11 +9,78 @@ const DrugAutocomplete = ({ data, setData, handleChange }) => {
   // Controls the UI state of the collapsed input fields
   const [expand, setExpand] = useState(false);
 
+  const drugTypes = (activeIng) => {
+    if (activeIng.includes('drops') || activeIng.includes('ointment') || activeIng.includes('gel')) {
+      return true;
+    }
+  }
+  const actives = PBSData.filter((drug) => !drugTypes(drug['tpuu-or-mpp-pt']));
+  console.log(actives);
+
   // Alerts for input validation
   const [alerts, setAlerts] = useState({
     activeIngredient: {},
     brandName: {},
   });
+
+//   [
+//     {
+//         "item-code": "5502N",
+//         "brand-name": [
+//             "Poly Gel"
+//         ],
+//         "mp-pt": "carbomer-974P",
+//         "tpuu-or-mpp-pt": "carbomer-974P 0.3% eye gel, 30 x 500 mg unit doses"
+//     },
+//     {
+//         "item-code": "5503P",
+//         "brand-name": [
+//             "Viscotears"
+//         ],
+//         "mp-pt": "carbomer-980",
+//         "tpuu-or-mpp-pt": "carbomer-980 0.2% eye gel, 10 g"
+//     },
+//     {
+//         "item-code": "5503P",
+//         "brand-name": [
+//             "Optifresh eye gel"
+//         ],
+//         "mp-pt": "carbomer-980",
+//         "tpuu-or-mpp-pt": "carbomer-980 0.2% eye gel, 10 g"
+//     },
+//     {
+//         "item-code": "5503P",
+//         "brand-name": [
+//             "PAA"
+//         ],
+//         "mp-pt": "carbomer-980",
+//         "tpuu-or-mpp-pt": "carbomer-980 0.2% eye gel, 10 g"
+//     },
+//     {
+//         "item-code": "5545W",
+//         "brand-name": [
+//             "tearsagain"
+//         ],
+//         "mp-pt": "soy lecithin + tocopherol + vitamin A",
+//         "tpuu-or-mpp-pt": "soy lecithin 1% + tocopherol 0.002% + vitamin A palmitate 0.025% spray, 100 actuations"
+//     },
+//     {
+//         "item-code": "5519L",
+//         "brand-name": [
+//             "Genteal gel"
+//         ],
+//         "mp-pt": "hypromellose + carbomer-980",
+//         "tpuu-or-mpp-pt": "hypromellose 0.3% + carbomer-980 0.2% eye gel, 10 g"
+//     },
+//     {
+//         "item-code": "5519L",
+//         "brand-name": [
+//             "HPMC PAA"
+//         ],
+//         "mp-pt": "hypromellose + carbomer-980",
+//         "tpuu-or-mpp-pt": "hypromellose 0.3% + carbomer-980 0.2% eye gel, 10 g"
+//     }
+// ]
 
   // UI error class handling
   const showErrorClass = (element) => {

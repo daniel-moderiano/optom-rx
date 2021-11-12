@@ -30,7 +30,6 @@ const RxTemplate = ({ data, date }) => {
 
   };
 
-  console.log(formatPhoneNumber('0427779650'));
 
   return (
     <StyledRxTemplate className="RxTemplate">

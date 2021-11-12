@@ -926,5 +926,13 @@
       ],
       "mp-pt": "phenylephrine",
       "tpuu-or-mpp-pt": "phenylephrine hydrochloride 10% eye drops, 20 x 0.5 mL unit doses"
+  },
+  {
+    "item-code": "",
+    "brand-name": [
+        "Optrex Actimist"
+    ],
+    "mp-pt": "soy lecithin + tocopherol + vitamin A",
+    "tpuu-or-mpp-pt": "soy lecithin 1% + tocopherol 0.002% + vitamin A palmitate 0.025% spray, 100 actuations"
   }
 ]
