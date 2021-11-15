@@ -4,7 +4,7 @@ import tickbox from '../../assets/tickbox.svg';
 
 const RxTemplate = ({ data, date }) => {
   // Deconstructing for cleanliness of code and easier-to-understand operations
-  const { drugData, patientData, providerData } = data;
+  const { drugData, patientData, providerData, miscData } = data;
 
   // TODO: adjust date for Australia (currently US)
 
@@ -28,7 +28,16 @@ const RxTemplate = ({ data, date }) => {
   };
 
   const formatMedicareNumber = (medicareNumber, IRN) => {
-    return `${medicareNumber.substring(0, 4)} ${medicareNumber.substring(4, 9)} ${medicareNumber.substring(9, 10)} ${IRN}`;
+    return (<>
+      <div className="medicareNumber__main">
+        {`${medicareNumber.substring(0, 4)} ${medicareNumber.substring(4, 9)} ${medicareNumber.substring(9, 10)}`}
+      </div>
+      <div className="medicareNumber__IRN">
+        {`${IRN}`}
+      </div>
+    </>)
+    
+    // `${medicareNumber.substring(0, 4)} ${medicareNumber.substring(4, 9)} ${medicareNumber.substring(9, 10)} ${IRN}`;
   };
   
   const formatDrug = (activeIngredient, brandName) => {
@@ -72,7 +81,10 @@ const RxTemplate = ({ data, date }) => {
       <section className="patient">
         <div className="container">
           {/* <div className="patient__medicareNumber">{`${patientData.medicareNumber}-${patientData.medicareRefNumber}`}</div> */}
-          <div className="patient__medicareNumber">{`${formatMedicareNumber(patientData.medicareNumber, patientData.medicareRefNumber)}`}</div>
+          <div className="patient__medicareNumber">
+            {/* {`${formatMedicareNumber(patientData.medicareNumber, patientData.medicareRefNumber)}`} */}
+            {formatMedicareNumber(patientData.medicareNumber, patientData.medicareRefNumber)}
+          </div>
           {/* <div className="patient__medicareIRN">{patientData.medicareRefNumber}</div> */}
           <div className="patient__contactDetails">
             <div className="patient__fullName">{patientData.fullName}</div>
@@ -120,6 +132,11 @@ const RxTemplate = ({ data, date }) => {
         <div className="provider__qualifications">{providerData.qualifications}</div>
         <div className="practitionerTick">🗸</div>
       </section>
+      {/* Wasted space to render authority section for non-authority required scripts */}
+      {miscData.authRequired && <section className="authority">
+        <div className="authority__approvalCode">{`Authority Approval No: ${miscData.authCode}`}</div>
+      </section>}
+      
     </StyledRxTemplate>
   );
 };

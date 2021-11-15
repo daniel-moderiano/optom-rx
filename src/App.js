@@ -61,7 +61,17 @@ const App = () => {
         "state":"SA",
         "phoneNumber":"0882345678",
         "prescriberNumber":"7033149"
-    }
+    },
+      "miscData": {
+        substitutePermitted: true,   
+        brandOnly: false, 
+        includeBrand: false,    
+        pbsRx: true,  
+        authRxNumber: '',   
+        date: '', 
+        authRequired: true,
+        authCode: '7979',
+      }
   }
 
   // useEffect(() => {

@@ -68,9 +68,12 @@ const StyledRxTemplate = styled.div`
 
   .patient__medicareNumber {
     position: absolute;
+    display: flex;
+    justify-content: space-between;
     top: 138px;
     left: 140px;
-    width: 200px;
+    width: 110px;
+    font-weight: bold;
   }
 
   /* .patient__streetAddress {
@@ -137,7 +140,8 @@ const StyledRxTemplate = styled.div`
     position: absolute;
     left: 112px;
     top: 502px;
-
+    border-bottom: 1px solid #000;
+    width: 330px;
     
     .practitionerTick {
       position: absolute;
@@ -146,6 +150,12 @@ const StyledRxTemplate = styled.div`
       font-size: 26px;
       font-weight: bold;
     }
+  }
+
+  .authority {
+    position: absolute;
+    left: 112px;
+    top: 542px;
   }
 
   .provider__fullName {
