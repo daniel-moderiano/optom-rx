@@ -46,7 +46,7 @@ const StyledRxTemplate = styled.div`
   .provider__contact-lower {
     position: absolute;
     left: 90px;
-    top: 102px;
+    top: 103px;
     
     display: flex;
     justify-content: space-between;
@@ -61,7 +61,7 @@ const StyledRxTemplate = styled.div`
   .patient__contactDetails {
     position: absolute;
     left: 100px;
-    top: 241px;
+    top: 240px;
     width: 300px;
     font-weight: bold;
   }
@@ -104,13 +104,34 @@ const StyledRxTemplate = styled.div`
       }
 
     }
+
+    .nonPbs {
+      position: absolute;
+      top: 27px;
+      left: -18px;
+      /* font-weight: bold; */
+      /* border-top: 2px solid #000; */
+      padding-top: 12px;
+      width: 80px;
+      box-sizing: border-box;
+
+      .nonPbs-marker {
+        bottom: 17px;
+        left: -16px;
+        position: absolute;
+        /* border-top: 2px dashed #000; */
+        /* height: 2px; */
+        width: 150px;
+        font-size: 17px;
+      }
+    }
     
     .brandSub {
       position: absolute;
-      left: 151px;
-      top: 20px;
-      font-size: 16px;
-      
+      left: 148px;
+      top: 12px;
+      font-size: 24px;
+      /* font-weight: bold; */
     }
   }
 

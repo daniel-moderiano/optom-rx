@@ -98,16 +98,15 @@ const RxForm = ({ handleSubmit }) => {
 
   // Take any seven digit base number and convert it to a valid PBS authority prescription number
   const generateAuthRxNumber = (baseNumber) => {
-   
     if (typeof baseNumber === 'number') {
       baseNumber = baseNumber.toString()
     }
+    // AuthNo format must be a 7 digit number followed by a check digit that is the remainder of dividing the sum of the digits of the base number by 9
     const reducer = (previousValue, currentValue) => parseInt(previousValue) + parseInt(currentValue);
     const sum = baseNumber.split('').reduce(reducer)
     const checkDigit = sum % 9;
 
     return `${baseNumber}${checkDigit}`;
-
   }
 
   useEffect(() => {

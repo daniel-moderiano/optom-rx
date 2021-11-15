@@ -41,9 +41,9 @@ const App = () => {
     },
       "patientData": {
         "fullName":"Daniel Moderiano",
-        "streetAddress":"6 Old Tawny Close",
-        "subpremise":"",
-        "suburb":"Wynn Vale",
+        "streetAddress":"6 Carragarmungee Estate Long Road Name",
+        "subpremise":"Unit 12",
+        "suburb":"Port Bonython",
         "postcode":"5127",
         "state":"SA",
         "medicareNumber":"5151515151",
@@ -54,7 +54,7 @@ const App = () => {
         "fullName":"Sarah Smoker",
         "qualifications":"BMedSc(VisSc), MOpt",
         "practiceName":"OPSM",
-        "streetAddress":"976 North East Road",
+        "streetAddress":"976 Carragarmungee Estate Long Road Name",
         "subpremise":"Shop 112, Westfield Tea Tree Plaza",
         "suburb":"Modbury",
         "postcode":"5092",
@@ -66,51 +66,13 @@ const App = () => {
         substitutePermitted: true,   
         brandOnly: false, 
         includeBrand: false,    
-        pbsRx: true,  
+        pbsRx: false,  
         authRxNumber: '',   
         date: '', 
         authRequired: true,
         authCode: '7979',
       }
   }
-
-  // useEffect(() => {
-  //   setData({
-  //     "drugData": {
-  //         "activeIngredient":"latanoprost 0.005% eye drops, 2.5 mL",
-  //         "brandName":"Xalatan",
-  //         "quantity":"1",
-  //         "repeats":"4",
-  //         "dosage":"Once nightly both eyes",
-  //         "itemCode":"5552F"
-  //     },
-  //       "patientData": {
-  //         "fullName":"Daniel Moderiano",
-  //         "streetAddress":"6 Old Tawny Close",
-  //         "subpremise":"",
-  //         "suburb":"Wynn Vale",
-  //         "postcode":"5127",
-  //         "state":"SA",
-  //         "medicareNumber":"5151515151",
-  //         "medicareRefNumber":"3"
-  //     },
-  //       "providerData": {
-  //         "prefix":true,
-  //         "fullName":"Sarah Smoker",
-  //         "qualifications":"BMedSc(VisSc), MOpt",
-  //         "practiceName":"OPSM",
-  //         "streetAddress":"976 North East Road",
-  //         "subpremise":"Shop 112, Westfield Tea Tree Plaza",
-  //         "suburb":"Modbury",
-  //         "postcode":"5092",
-  //         "state":"SA",
-  //         "phoneNumber":"0882345678",
-  //         "prescriberNumber":"7033149"
-  //     }
-  //   });
-    
-  // }, [])
-  
 
   return (
     <div className="App">
