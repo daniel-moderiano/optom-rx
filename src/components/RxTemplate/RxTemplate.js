@@ -122,9 +122,9 @@ const RxTemplate = ({ data, date }) => {
           <div className="medication__quantity">{`Quantity: ${drugData.quantity}`}</div>
           <div className="medication__repeats">{`${drugData.repeats} repeats`}</div>
         </div>
-        
-
       </section>
+      {/* Will only ever be 1 item printed, so consider omitting this */}
+      <span className="item-printed">1 item printed</span>
       <section className="provider-lower">
         {/* Used to display provider details next to, or below signature space */}
         <div className="provider__fullName">{`${providerData.prefix && 'Dr'} ${providerData.fullName}`}</div>

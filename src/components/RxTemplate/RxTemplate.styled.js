@@ -118,30 +118,41 @@ const StyledRxTemplate = styled.div`
     position: absolute;
     /* display: none; */
     left: 112px;
-    top: 370px;
-    max-width: 300px;
+    top: 366px;
+    width: 330px;
+    border-bottom: 1px solid #b8b8b8;
+    /* border-top: 1px solid #000; */
+    padding: 2px 0;
+
+    .medication__activeIngredient {
+      font-weight: bold;
+      max-width: 300px;
+    }
+
+    .medication__brandName {
+      font-weight: bold;
+    }
+
+    .quantityRepeats {
+      display: flex;
+      justify-content: space-between;
+      width: 160px;
+    }
   }
 
-  .medication__activeIngredient {
-    font-weight: bold;
-  }
-
-  .medication__brandName {
-    font-weight: bold;
-  }
-
-  .quantityRepeats {
-    display: flex;
-    justify-content: space-between;
-    width: 160px;
+  .item-printed {
+    position: absolute;
+    left: 350px;
+    top: 444px;
   }
 
   .provider-lower {
     position: absolute;
     left: 112px;
     top: 502px;
-    border-bottom: 1px solid #000;
+    border-bottom: 1px solid #b8b8b8;
     width: 330px;
+    padding-bottom: 2px;
     
     .practitionerTick {
       position: absolute;
@@ -153,6 +164,7 @@ const StyledRxTemplate = styled.div`
   }
 
   .authority {
+    padding-top: 2px;
     position: absolute;
     left: 112px;
     top: 542px;
