@@ -76,6 +76,7 @@ const RxForm = ({ handleSubmit }) => {
 
   // TODO: function to generate Authority prescription numbers
   // TODO: function to generate and add Data data on form load
+  // TODO: limit qualifications field to 40 chars, and indicate that input should be in abbreviated form
 
   const showErrorClass = (element) => {
     element.classList.add('error');

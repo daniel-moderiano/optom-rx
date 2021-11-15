@@ -2,6 +2,8 @@ import { StyledRxTemplate } from "./RxTemplate.styled";
 import Rx from '../../assets/template-sized.jpg';
 import tickbox from '../../assets/tickbox.svg';
 
+// ! Unicode display is dependent on OS font support, and so may not be rendered correctly in all environments. May need to use images/SVG instead to ensure compatibility
+
 const RxTemplate = ({ data, date }) => {
   // Deconstructing for cleanliness of code and easier-to-understand operations
   const { drugData, patientData, providerData, miscData } = data;
@@ -36,10 +38,33 @@ const RxTemplate = ({ data, date }) => {
     </>)
   };
   
+  // Finalised drug format is dependant on whether the Rx has brand name included/only selected
   const formatDrug = (activeIngredient, brandName) => {
     const capitalised = activeIngredient[0].toUpperCase() + activeIngredient.substring(1);
+    console.log();
+    // Brand name only
+    if (miscData.brandOnly) {
+      if (!capitalised.includes('eye')) {
+        if (capitalised.includes('spray')) {
+          return `${brandName} ${capitalised.substr(capitalised.indexOf('spray'), 5)}`;
+        } else {
+          return brandName;
+        }
+      } else {
+        return `${brandName} ${capitalised.substr(capitalised.indexOf('eye'))}`;
+      }
+    }    
+    // Brand name NOT to be included
+    if (!miscData.includeBrand) {
+      return capitalised;
+    }
+    // Brand name included in addition to active ingredient
     if (!capitalised.includes('eye')) {
-      return `${capitalised.replace(',', ` (${brandName}),`)}`;
+      if (capitalised.includes('spray')) {
+        return `${capitalised.replace('spray', `(${brandName}) spray`)}`;
+      } else {
+        return `${capitalised.replace(',', ` (${brandName}),`)}`;
+      }
     } else {
       return `${capitalised.replace('eye', `(${brandName}) eye`)}`;
     }
@@ -95,12 +120,13 @@ const RxTemplate = ({ data, date }) => {
         <div className="date">{date}</div>
         {miscData.pbsRx 
           ? <div className="pbsSelected"><img src={tickbox} alt="" /></div>
-          : <div className="nonPbs"><span className="nonPbs-marker">⨉⨉⨉⨉⨉⨉⨉⨉⨉</span>Non-PBS</div>
+          : <div className="nonPbs"><span className="nonPbs-marker">XXXXXXXXXXX</span>Non-PBS</div>
         }
+        {!miscData.substitutePermitted && <div className="brandSub">✓</div>}
         
-        <div className="brandSub">✓</div>
       </section>
 
+      {/* Script ID or authority Rx number should go above the medication once finalised, and perhaps with a border bottom */}
       <section className="medication">
         <div data-testid="drugName" className="medication__activeIngredient">
           {formatDrug(drugData.activeIngredient, drugData.brandName)}
@@ -110,10 +136,11 @@ const RxTemplate = ({ data, date }) => {
           <div className="medication__quantity">{`Quantity: ${drugData.quantity}`}</div>
           <div className="medication__repeats">{`${drugData.repeats} repeats`}</div>
         </div>
+        <span className="item-printed">1 item printed</span>
       </section>
       {/* Will only ever be 1 item printed, so consider omitting this */}
 
-      <span className="item-printed">1 item printed</span>
+     
 
       <section className="provider-lower">
         {/* Used to display provider details next to, or below signature space */}

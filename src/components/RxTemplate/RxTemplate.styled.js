@@ -90,6 +90,11 @@ const StyledRxTemplate = styled.div`
     top: 311px;
     left: 40px;
 
+    /* Consider date reduced font size */
+    /* .date {
+      font-size: 14px;
+    } */
+
     .pbsSelected {
       width: 17px;
       height: 17px;
@@ -123,6 +128,8 @@ const StyledRxTemplate = styled.div`
         /* height: 2px; */
         width: 150px;
         font-size: 17px;
+        /* font-weight: 500; */
+        /* font-family: 'Times New Roma', Courier, monospace; */
       }
     }
     
@@ -147,7 +154,7 @@ const StyledRxTemplate = styled.div`
 
     .medication__activeIngredient {
       font-weight: bold;
-      max-width: 300px;
+      max-width: 330px;
     }
 
     .medication__brandName {
@@ -157,23 +164,23 @@ const StyledRxTemplate = styled.div`
     .quantityRepeats {
       display: flex;
       justify-content: space-between;
-      width: 160px;
+      width: 170px;
+    }
+
+    .item-printed {
+      position: absolute;
+      bottom: -22px;
+      right: 2px;
     }
   }
 
-  .item-printed {
-    position: absolute;
-    left: 350px;
-    top: 444px;
-  }
+  
 
   .provider-lower {
     position: absolute;
     left: 112px;
     top: 502px;
-    border-bottom: 1px solid #b8b8b8;
     width: 330px;
-    padding-bottom: 2px;
     
     .practitionerTick {
       position: absolute;
@@ -185,10 +192,12 @@ const StyledRxTemplate = styled.div`
   }
 
   .authority {
+    border-top: 1px solid #b8b8b8;
     padding-top: 2px;
     position: absolute;
     left: 112px;
-    top: 542px;
+    top: 540px;
+    width: 330px;
   }
 
   .provider__fullName {

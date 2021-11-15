@@ -32,7 +32,7 @@ const App = () => {
 
   const dummyData = {
     "drugData": {
-        "activeIngredient":"latanoprost 0.005% eye drops, 2.5 mL",
+        activeIngredient: "latanoprost 0.005% eye drops, 5 mL",
         "brandName":"Xalatan",
         "quantity":"1",
         "repeats":"4",
@@ -50,7 +50,7 @@ const App = () => {
         "medicareRefNumber":"3"
     },
       "providerData": {
-        "prefix":true,
+        "prefix": true,
         "fullName":"Sarah Smoker",
         "qualifications":"BMedSc(VisSc), MOpt",
         "practiceName":"OPSM",
@@ -65,11 +65,11 @@ const App = () => {
       "miscData": {
         substitutePermitted: true,   
         brandOnly: false, 
-        includeBrand: false,    
-        pbsRx: false,  
+        includeBrand: true,    
+        pbsRx: true,  
         authRxNumber: '',   
         date: '', 
-        authRequired: true,
+        authRequired: false,
         authCode: '7979',
       }
   }

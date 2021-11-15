@@ -198,7 +198,7 @@ const DrugAutocomplete = ({ data, setData, handleChange }) => {
             }
             break;
 
-            // TODO: any further validation here
+            // TODO: any further validation here - PBS limitation on quantity/repeats
           default: 
             break;
         };
