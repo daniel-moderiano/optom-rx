@@ -78,7 +78,6 @@ const RxForm = ({ handleSubmit }) => {
   });
 
   // TODO: function to generate Authority prescription numbers
-  // TODO: function to generate and add Data data on form load
   // TODO: limit qualifications field to 40 chars, and indicate that input should be in abbreviated form
 
   const showErrorClass = (element) => {
@@ -315,11 +314,11 @@ const RxForm = ({ handleSubmit }) => {
 
           // Quantity must be greater than zero, but < 10
           case name === 'quantity':
-            if (!(/^[1-9]{1}$/).test(value.trim())) {
+            if (value.trim().length === 0) {
               setDrugAlerts((prevAlerts) => ({
                 ...prevAlerts,
                 quantity: {
-                  message: "Medication quantity should be greater than one, and less than 10",
+                  message: "This field cannot be left blank",
                   type: 'error',
                 }
               }));
@@ -497,6 +496,7 @@ const RxForm = ({ handleSubmit }) => {
           value={patientData.medicareNumber} 
           onChange={(event) => handleChange(setPatientData, event)} 
           alert={patientAlerts.medicareNumber}
+          maxlength="10"
         />
 
         {/* Validation dictates only a single digit from 1-9 */}
@@ -508,6 +508,7 @@ const RxForm = ({ handleSubmit }) => {
           value={patientData.medicareRefNumber} 
           onChange={(event) => handleChange(setPatientData, event)} 
           alert={patientAlerts.medicareRefNumber}
+          maxlength="1"
         />
       </fieldset>
 
@@ -538,10 +539,11 @@ const RxForm = ({ handleSubmit }) => {
         <FormField 
           fieldType="text" 
           name="qualifications"
-          label="Qualification/Degree - optional" 
-          placeholder="e.g. BMedSci"
+          label="Abbreviated qualifications - optional" 
+          placeholder="e.g. BMedSci(VisSc), MOpt"
           value={providerData.qualifications} 
           onChange={(event) => handleChange(setProviderData, event)} 
+          maxlength="40"
         />
 
         <AddressAutocomplete 
@@ -574,6 +576,7 @@ const RxForm = ({ handleSubmit }) => {
           value={providerData.prescriberNumber} 
           onChange={(event) => handleChange(setProviderData, event)} 
           alert={providerAlerts.prescriberNumber}
+          maxlength="7"
         />
       </fieldset>
       <button type="submit">Generate Rx</button>
