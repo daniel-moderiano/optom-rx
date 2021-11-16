@@ -2,8 +2,6 @@ import { StyledRxTemplate } from "./RxTemplate.styled";
 import Rx from '../../assets/template-sized.jpg';
 import tickbox from '../../assets/tickbox.svg';
 
-// ! Unicode display is dependent on OS font support, and so may not be rendered correctly in all environments. May need to use images/SVG instead to ensure compatibility
-
 const RxTemplate = ({ data, date }) => {
   // Deconstructing for cleanliness of code and easier-to-understand operations
   const { drugData, patientData, providerData, miscData } = data;
@@ -27,6 +25,7 @@ const RxTemplate = ({ data, date }) => {
     }
   };
 
+  // Controls when to split a line to ensure the address is displayed as well as practicable
   const formatProvAddress = () => {
     if (providerData.subpremise.length > 20) {
       return (<>
@@ -35,7 +34,7 @@ const RxTemplate = ({ data, date }) => {
       </>);
     } else {
       return (<div className="provider__streetAddress">
-        {`${providerData.subpremise}  ${providerData.streetAddress}`}
+        {`${providerData.subpremise} ${providerData.streetAddress}`}
       </div>);
     }
   }
@@ -80,7 +79,6 @@ const RxTemplate = ({ data, date }) => {
         <div className="container">
           <div className="provider__contact-upper">
             <div className="provider__fullName">{`${providerData.prefix && 'Dr'} ${providerData.fullName}`}</div>
-            {/* <div className="provider__streetAddress">{`${providerData.subpremise} ${providerData.streetAddress}`}</div> */}
             {formatProvAddress()}
             <div className="provider__addressLine2">
               {`${providerData.suburb} ${providerData.state} ${providerData.postcode}`}
@@ -97,7 +95,6 @@ const RxTemplate = ({ data, date }) => {
 
       <section className="patient">
         <div className="container">
-          {/* <div className="patient__medicareNumber">{`${patientData.medicareNumber}-${patientData.medicareRefNumber}`}</div> */}
           <div className="patient__medicareNumber">
             {`${patientData.medicareNumber.substring(0, 4)} ${patientData.medicareNumber.substring(4, 9)} ${patientData.medicareNumber.substring(9, 10)}-${patientData.medicareRefNumber}`}
           </div>
@@ -105,11 +102,7 @@ const RxTemplate = ({ data, date }) => {
             <div className="patient__fullName">{patientData.fullName}</div>
             <div className="patient__streetAddress">{`${patientData.subpremise} ${patientData.streetAddress}`}</div>
             <div className="patient__addressLine2">{`${patientData.suburb} ${patientData.state} ${patientData.postcode}`}</div>
-            {/* <div className="patient__suburb">{patientData.suburb}</div>
-          <div className="patient__state">{patientData.state}</div>
-          <div className="patient__postcode">{patientData.postcode}</div> */}
           </div>
-          {/* Consider a conditional here for combining subpremise and streetAddress into addressLine1, which is then split into 1 or two lines dpending on length */}
         </div>
       </section>
 
@@ -137,8 +130,6 @@ const RxTemplate = ({ data, date }) => {
         <span className="item-printed">1 item printed</span>
       </section>
       {/* Will only ever be 1 item printed, so consider omitting this */}
-
-     
 
       <section className="provider-lower">
         {/* Used to display provider details next to, or below signature space */}

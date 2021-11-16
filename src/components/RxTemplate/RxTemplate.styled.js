@@ -12,13 +12,12 @@ const StyledRxTemplate = styled.div`
     left: 0;
     top: 0;
     z-index: -1;
-    /* This pixel value is specific for the image in question, and is a veyr close approximation to a real PBS form */
+    /* This pixel value is specific for the image in question, and is a very close approximation to a real PBS form */
     width: 902px;
-    /* opacity: 0.5; */
     margin: 0;
     padding: 0;
   }
-  /* box-sizing: border-box; */
+
   padding: 0;
   margin: 0;
   width: 902px;
@@ -33,7 +32,6 @@ const StyledRxTemplate = styled.div`
   .provider-upper {
     position: absolute;
     width: 100%;
-    /* display: none; */
   }
 
   .provider__contact-upper {
@@ -44,14 +42,12 @@ const StyledRxTemplate = styled.div`
     .provider__streetAddress {
       max-width: 330px;
     }
-
   }
 
   .provider__contact-lower {
     position: absolute;
     left: 90px;
     top: 103px;
-    
     display: flex;
     justify-content: space-between;
     width: 300px;
@@ -59,7 +55,6 @@ const StyledRxTemplate = styled.div`
 
   .patient {
     position: absolute;
-    /* display: none; */
   }
 
   .patient__contactDetails {
@@ -80,17 +75,8 @@ const StyledRxTemplate = styled.div`
     font-weight: bold;
   }
 
-  /* .patient__streetAddress {
-    position: absolute;
-  }
-
-  .patient__addressLine2 {
-    position: absolute;
-  } */
-
   .miscellaneous {
     position: absolute;
-    /* display: none; */
     top: 311px;
     left: 40px;
 
@@ -111,15 +97,12 @@ const StyledRxTemplate = styled.div`
         height: 100%;
         width: 100%;
       }
-
     }
 
     .nonPbs {
       position: absolute;
       top: 27px;
       left: -18px;
-      /* font-weight: bold; */
-      /* border-top: 2px solid #000; */
       padding-top: 12px;
       width: 80px;
       box-sizing: border-box;
@@ -128,12 +111,8 @@ const StyledRxTemplate = styled.div`
         bottom: 17px;
         left: -16px;
         position: absolute;
-        /* border-top: 2px dashed #000; */
-        /* height: 2px; */
         width: 150px;
         font-size: 17px;
-        /* font-weight: 500; */
-        /* font-family: 'Times New Roma', Courier, monospace; */
       }
     }
     
@@ -142,18 +121,15 @@ const StyledRxTemplate = styled.div`
       left: 148px;
       top: 12px;
       font-size: 24px;
-      /* font-weight: bold; */
     }
   }
 
   .medication {
     position: absolute;
-    /* display: none; */
     left: 112px;
     top: 366px;
     width: 330px;
     border-bottom: 1px solid #b8b8b8;
-    /* border-top: 1px solid #000; */
     padding: 2px 0;
 
     .medication__activeIngredient {
@@ -177,8 +153,6 @@ const StyledRxTemplate = styled.div`
       right: 2px;
     }
   }
-
-  
 
   .provider-lower {
     position: absolute;
@@ -208,16 +182,12 @@ const StyledRxTemplate = styled.div`
     font-weight: bold;
   }
 
-
   @media print {
     @page {
       size: auto;
       margin: 0mm;
     }
-
   }
-
-  
 `
 
 export { StyledRxTemplate }

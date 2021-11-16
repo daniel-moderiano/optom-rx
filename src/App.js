@@ -13,9 +13,7 @@ const App = () => {
     providerData: {},
   });
 
-  const AuDate = new Date().toLocaleString("en-AU", { timeZone: "Australia/Adelaide" }).substring(0, 10);
-
-  const handleSubmit = (drugData, patientData, providerData) => {
+  const handleSubmit = (drugData, patientData, providerData, miscData) => {
     setData((prevData) => ({
       ...prevData,
       drugData: {
@@ -27,58 +25,61 @@ const App = () => {
       providerData: {
         ...providerData
       },
+      miscData: {
+        ...miscData
+      },
     }));
   }
 
-  const dummyData = {
-    "drugData": {
-        activeIngredient: "latanoprost 0.005% eye drops, 5 mL",
-        "brandName":"Xalatan",
-        "quantity":"1",
-        "repeats":"4",
-        "dosage":"Once nightly both eyes",
-        "itemCode":"5552F"
-    },
-      "patientData": {
-        "fullName":"Daniel Moderiano",
-        "streetAddress":"6 Carragarmungee Estate Long Road Name",
-        "subpremise":"Unit 12",
-        "suburb":"Port Bonython",
-        "postcode":"5127",
-        "state":"SA",
-        "medicareNumber":"5151515151",
-        "medicareRefNumber":"3"
-    },
-      "providerData": {
-        "prefix": true,
-        "fullName":"Sarah Smoker",
-        "qualifications":"BMedSc(VisSc), MOpt",
-        "practiceName":"OPSM",
-        "streetAddress":"111 West Lakes Boulevard",
-        "subpremise":"Shop 218",
-        "suburb":"Modbury",
-        "postcode":"5092",
-        "state":"SA",
-        "phoneNumber":"0882345678",
-        "prescriberNumber":"7033149"
-    },
-      "miscData": {
-        substitutePermitted: false,   
-        brandOnly: false, 
-        includeBrand: true,    
-        pbsRx: true,  
-        authRxNumber: '',   
-        date: '', 
-        authRequired: true,
-        authCode: '7979',
-      }
-  }
+  // const dummyData = {
+  //   "drugData": {
+  //       activeIngredient: "latanoprost 0.005% eye drops, 5 mL",
+  //       "brandName":"Xalatan",
+  //       "quantity":"1",
+  //       "repeats":"4",
+  //       "dosage":"Once nightly both eyes",
+  //       "itemCode":"5552F"
+  //   },
+  //     "patientData": {
+  //       "fullName":"Daniel Moderiano",
+  //       "streetAddress":"6 Carragarmungee Estate Long Road Name",
+  //       "subpremise":"Unit 12",
+  //       "suburb":"Port Bonython",
+  //       "postcode":"5127",
+  //       "state":"SA",
+  //       "medicareNumber":"5151515151",
+  //       "medicareRefNumber":"3"
+  //   },
+  //     "providerData": {
+  //       "prefix": true,
+  //       "fullName":"Sarah Smoker",
+  //       "qualifications":"BMedSc(VisSc), MOpt",
+  //       "practiceName":"OPSM",
+  //       "streetAddress":"111 West Lakes Boulevard",
+  //       "subpremise":"Shop 218",
+  //       "suburb":"Modbury",
+  //       "postcode":"5092",
+  //       "state":"SA",
+  //       "phoneNumber":"0882345678",
+  //       "prescriberNumber":"7033149"
+  //   },
+  //     "miscData": {
+  //       substitutePermitted: false,   
+  //       brandOnly: false, 
+  //       includeBrand: true,    
+  //       pbsRx: true,  
+  //       authRxNumber: '',   
+  //       date: '', 
+  //       authRequired: true,
+  //       authCode: '7979',
+  //     }
+  // }
 
   return (
     <div className="App">
-      <RxTemplate data={dummyData} date={AuDate}/>
-      {/* <GlobalStyles />
-      <Header /> */}
+      {/* <RxTemplate data={dummyData} date={AuDate}/> */}
+      <GlobalStyles />
+      <Header />
       {/* Note prescriptions must contain date of issue, and prescriber signature */}
       <main>
         <section className="rx-form">
