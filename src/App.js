@@ -54,8 +54,8 @@ const App = () => {
         "fullName":"Sarah Smoker",
         "qualifications":"BMedSc(VisSc), MOpt",
         "practiceName":"OPSM",
-        "streetAddress":"976 Carragarmungee Estate Long Road Name",
-        "subpremise":"Shop 112, Westfield Tea Tree Plaza",
+        "streetAddress":"111 West Lakes Boulevard",
+        "subpremise":"Shop 218",
         "suburb":"Modbury",
         "postcode":"5092",
         "state":"SA",
@@ -63,13 +63,13 @@ const App = () => {
         "prescriberNumber":"7033149"
     },
       "miscData": {
-        substitutePermitted: true,   
+        substitutePermitted: false,   
         brandOnly: false, 
         includeBrand: true,    
         pbsRx: true,  
         authRxNumber: '',   
         date: '', 
-        authRequired: false,
+        authRequired: true,
         authCode: '7979',
       }
   }

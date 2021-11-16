@@ -27,16 +27,18 @@ const RxTemplate = ({ data, date }) => {
     }
   };
 
-  const formatMedicareNumber = (medicareNumber, IRN) => {
-    return (<>
-      <div className="medicareNumber__main">
-        {`${medicareNumber.substring(0, 4)} ${medicareNumber.substring(4, 9)} ${medicareNumber.substring(9, 10)}`}
-      </div>
-      <div className="medicareNumber__IRN">
-        {`${IRN}`}
-      </div>
-    </>)
-  };
+  const formatProvAddress = () => {
+    if (providerData.subpremise.length > 20) {
+      return (<>
+        <div className="provider__subpremise">{providerData.subpremise}</div>
+        <div className="provider__streetAddress">{providerData.streetAddress}</div>
+      </>);
+    } else {
+      return (<div className="provider__streetAddress">
+        {`${providerData.subpremise}  ${providerData.streetAddress}`}
+      </div>);
+    }
+  }
   
   // Finalised drug format is dependant on whether the Rx has brand name included/only selected
   const formatDrug = (activeIngredient, brandName) => {
@@ -78,11 +80,8 @@ const RxTemplate = ({ data, date }) => {
         <div className="container">
           <div className="provider__contact-upper">
             <div className="provider__fullName">{`${providerData.prefix && 'Dr'} ${providerData.fullName}`}</div>
-            <div className="provider__subpremise">{providerData.subpremise}</div>
-            <div className="provider__streetAddress">{providerData.streetAddress}</div>
-            {/* <div className="provider__suburb">{providerData.suburb}</div>
-            <div className="provider__state">{providerData.state}</div>
-            <div className="provider__postcode">{providerData.postcode}</div> */}
+            {/* <div className="provider__streetAddress">{`${providerData.subpremise} ${providerData.streetAddress}`}</div> */}
+            {formatProvAddress()}
             <div className="provider__addressLine2">
               {`${providerData.suburb} ${providerData.state} ${providerData.postcode}`}
             </div>
@@ -100,11 +99,10 @@ const RxTemplate = ({ data, date }) => {
         <div className="container">
           {/* <div className="patient__medicareNumber">{`${patientData.medicareNumber}-${patientData.medicareRefNumber}`}</div> */}
           <div className="patient__medicareNumber">
-            {formatMedicareNumber(patientData.medicareNumber, patientData.medicareRefNumber)}
+            {`${patientData.medicareNumber.substring(0, 4)} ${patientData.medicareNumber.substring(4, 9)} ${patientData.medicareNumber.substring(9, 10)}-${patientData.medicareRefNumber}`}
           </div>
           <div className="patient__contactDetails">
             <div className="patient__fullName">{patientData.fullName}</div>
-            {/* <div className="patient__subpremise">{patientData.subpremise}</div> */}
             <div className="patient__streetAddress">{`${patientData.subpremise} ${patientData.streetAddress}`}</div>
             <div className="patient__addressLine2">{`${patientData.suburb} ${patientData.state} ${patientData.postcode}`}</div>
             {/* <div className="patient__suburb">{patientData.suburb}</div>
