@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from "react";
 import { StyledDrugAutocomplete } from './DrugAutocompleteStyled';
 import FormField from '../FormField/FormField';
 
-const DrugAutocomplete = ({ data, setData, handleChange }) => {
+const DrugAutocomplete = ({ data, setData, handleChange, toggle }) => {
   // useRef allows us to store the equivalent of a 'global' component variable without losing data on re-render, but avoiding the async problems that can arise with state
   const currentFocus = useRef(-1);
   // Controls the UI state of the collapsed input fields
@@ -253,6 +253,16 @@ const DrugAutocomplete = ({ data, setData, handleChange }) => {
     createList(matches);
   }
 
+  // const toggleRequiredField = (event) => {
+  //   // Where either brand name is required, or prescribing by brand name only, brand name must be set to a required field
+  //   if (event.target.checked) {
+  //     setData((prevData) => ({
+  //       ...prevData,
+  //       prefix: newState,
+  //     }));
+  //   }
+  // }
+
   return (
     <StyledDrugAutocomplete className="autocomplete-container">
       <div className="autocomplete-group">
@@ -286,7 +296,7 @@ const DrugAutocomplete = ({ data, setData, handleChange }) => {
           fieldType="checkbox" 
           name="includeBrand"
           label="Include brand name on the Rx" 
-          // onChange={togglePrefix}
+          onChange={() => toggle(setData, data, 'includeBrand')}
         />    
       </fieldset>
     </StyledDrugAutocomplete>
