@@ -402,10 +402,25 @@ const RxForm = ({ handleSubmit }) => {
       ...prevData,
       prefix: newState,
     }));
+  };
+
+  // Ensure form is validated before calling form submission function (to generate Rx)
+  const checkFormValidation = () => {
+    // TODO: validate form here
+    const valid = true;
+    return valid;
   }
 
   return (
-    <StyledRxForm className="rxform" onSubmit={(e) => {e.preventDefault(); handleSubmit(drugData, patientData, providerData)}} autoComplete="off">
+    <StyledRxForm 
+      className="rxform" 
+      onSubmit={(e) => {
+        e.preventDefault(); 
+        if (checkFormValidation()) {
+          handleSubmit(drugData, patientData, providerData)
+        }
+      }} 
+      autoComplete="off">
       {/* Single input to select the medication */}
       {/* Note there must be enough info to identify the medicine, including form and strength */}
 
@@ -579,6 +594,7 @@ const RxForm = ({ handleSubmit }) => {
           maxlength="7"
         />
       </fieldset>
+      {/* TODO: submit form should act as a link to the template route, which can only be accessed if all required forms are complete */}
       <button type="submit">Generate Rx</button>
     </StyledRxForm>
   )

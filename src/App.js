@@ -2,10 +2,9 @@
 import Header from "./components/Header/Header";
 import GlobalStyles from "./components/utils/globalStyles";
 import RxForm from './components/RxForm/RxForm'
-import RxTemplate from "./components/RxTemplate/RxTemplate";
 import About from './components/About/About';
-import { useState, useEffect } from "react";
-import { Switch, Route } from "react-router";
+import { useState } from "react";
+import { Switch, Route, useHistory } from "react-router-dom";
 import './App.css';
 
 const App = () => {
@@ -15,6 +14,8 @@ const App = () => {
     providerData: {},
     miscData: {},
   });
+
+  let history = useHistory();
 
   const handleSubmit = (drugData, patientData, providerData, miscData) => {
     setData((prevData) => ({
@@ -32,6 +33,9 @@ const App = () => {
         ...miscData
       },
     }));
+
+    history.push("/about")    
+
     console.log(data);
   }
 
@@ -87,6 +91,7 @@ const App = () => {
       <main>
         <Switch>
           <Route exact path="/" render={() => <RxForm handleSubmit={handleSubmit}/>}/>
+          <Route exact path="/home" render={() => <RxForm handleSubmit={handleSubmit}/>}/>
           <Route exact path="/about" render={() => <About />}/>
         </Switch>
       </main>
