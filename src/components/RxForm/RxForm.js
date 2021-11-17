@@ -476,18 +476,6 @@ const RxForm = ({ handleSubmit }) => {
     drugDataValidation();
   }, [])
 
-  // // Used to toggle the Dr prefix state
-  // const togglePrefix = () => {
-  //   let newState = true;
-  //   if (providerData.prefix) {
-  //     newState = false;
-  //   }
-  //   setProviderData((prevData) => ({
-  //     ...prevData,
-  //     prefix: newState,
-  //   }));
-  // };
-
   const toggleBooleanState = (setFunc, data, boolToChange) => {
     let newState = true;
     if (data[boolToChange]) {
@@ -542,6 +530,14 @@ const RxForm = ({ handleSubmit }) => {
           handleChange={(event) => handleChange(setDrugData, event)}  
           toggle={toggleBooleanState}
         />
+
+        <FormField 
+          fieldType="checkbox" 
+          name="pbsRx"
+          label="PBS" 
+          onChange={() => toggleBooleanState(setDrugData, drugData, 'pbsRx')}
+          checked={drugData.pbsRx}
+        />  
         {/* Must include quantity and repeats to meet requirements */}
         <FormField 
           fieldType="text" 
