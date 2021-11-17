@@ -1,7 +1,7 @@
 import { StyledFormField } from "./FormField.styled";
 
 const FormField = (props) => {
-  const { fieldType, id, name, label, value, placeholder, onChange, className, alert, maxlength } = props;
+  const { fieldType, id, name, label, value, placeholder, onChange, className, alert, maxlength, checked } = props;
 
   return (
     <StyledFormField className={className}>
@@ -16,6 +16,7 @@ const FormField = (props) => {
           placeholder={placeholder} 
           onChange={onChange} 
           maxLength={maxlength}
+          checked={checked}
         />
       </label>
       {/* Pass the alert prop as an object only where alerts are required (default null) that contains both the message to display in the alert, and the type of alert, e.g. error, warning, success */}

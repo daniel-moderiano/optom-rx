@@ -297,7 +297,24 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle }) => {
           name="includeBrand"
           label="Include brand name on the Rx" 
           onChange={() => toggle(setData, data, 'includeBrand')}
-        />    
+          checked={data.includeBrand}
+        /> 
+
+        <FormField 
+          fieldType="checkbox" 
+          name="brandOnly"
+          label="Prescribe this medication by brand name only" 
+          onChange={() => toggle(setData, data, 'brandOnly')}
+          checked={data.brandOnly}
+        />       
+
+        <FormField 
+          fieldType="checkbox" 
+          name="substitutePermitted"
+          label="Allow brand substitution" 
+          onChange={() => toggle(setData, data, 'substitutePermitted')}
+          checked={data.substitutePermitted}
+        />     
       </fieldset>
     </StyledDrugAutocomplete>
   );
