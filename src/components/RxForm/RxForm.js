@@ -509,6 +509,17 @@ const RxForm = ({ handleSubmit }) => {
             }
             break;
 
+          case name === 'brandName':
+            if (value.trim().length > 0) {
+              event.target.classList.remove('error')
+              setDrugAlerts((prevAlerts) => ({
+                ...prevAlerts,
+                brandName: {}
+              }));
+            }
+            break;
+            
+
           // Quantity must be greater than zero, but < 10
           case name === 'quantity':
             if (value.trim().length === 0) {
@@ -653,6 +664,12 @@ const RxForm = ({ handleSubmit }) => {
       }
     });
 
+    if (drugData.brandOnly || drugData.includeBrand) {
+      if(!validateFieldForEmpty(setDrugAlerts, document.querySelector('#brandName'))) {
+        valid = false;
+      }
+    }
+
     return valid;
   }
 
@@ -681,9 +698,6 @@ const RxForm = ({ handleSubmit }) => {
 
       <fieldset className="drug-form">
         <legend className="drug-form__title">Medication</legend>
-
-        {/* TODO: add input checkbox to include brand name on prescription, and for brand name substitution not permitted */}
-        {/* TODO: Add 'to be compounded' checkbox */}
 
         <DrugAutocomplete 
           data={drugData}

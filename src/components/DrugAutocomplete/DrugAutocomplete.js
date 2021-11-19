@@ -233,6 +233,7 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
           placeholder="Enter brand name"
           value={data.brandName} 
           onChange={handleChange} 
+          alert={alerts.brandName}
         />
 
         <FormField 

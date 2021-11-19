@@ -4,8 +4,6 @@ import FormField from "../FormField/FormField";
 import { useCallback, useEffect, useState } from "react"
 import { StyledAddressAutocomplete } from "./AddressAutocomplete.styled";
 
-// TODO: Form validation; for address, only need to validate subpremise, as the rest will be validated by the Google API
-
 const AddressAutocomplete = ({ data, setData, handleChange, provider, alerts, setAlerts }) => {
   // Use this to control whether the additional address fields should be expanded or not
   const [expand, setExpand] = useState(false);
