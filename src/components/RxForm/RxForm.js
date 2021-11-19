@@ -19,12 +19,18 @@ const RxForm = ({ handleSubmit }) => {
 
   const [patientAlerts, setPatientAlerts] = useState({
     fullName: {},
+    suburb: {},
+    postcode: {},
+    state: {},
     medicareNumber: {},
     medicareRefNumber: {}
   });
 
   const [providerAlerts, setProviderAlerts] = useState({
     fullName: {},
+    suburb: {},
+    postcode: {},
+    state: {},
     phoneNumber: {},
     prescriberNumber: {},
   });
@@ -412,6 +418,29 @@ const RxForm = ({ handleSubmit }) => {
               }));
             }
             break;
+          
+          case name === 'brandName':
+            // Check first if the field is required
+            if (value.trim().length === 0 && (drugData.brandOnly || drugData.includeBrand)) {
+              setDrugAlerts((prevAlerts) => ({
+                ...prevAlerts,
+                brandName: {
+                  message: "This field cannot be left blank",
+                  type: 'error',
+                }
+              }));
+              showErrorClass(event.target);
+            } else {
+              // Positive feedback and remove errors
+              console.log('remove error');
+              showSuccessClass(event.target);
+              setDrugAlerts((prevAlerts) => ({
+                ...prevAlerts,
+                brandName: {}
+              }));
+            }
+
+            break;
         
           default:
             break;
@@ -420,7 +449,7 @@ const RxForm = ({ handleSubmit }) => {
     };
 
     drugDataValidation();
-  }, [])
+  }, [drugData.brandOnly, drugData.includeBrand])
 
   const toggleBooleanState = (setFunc, data, boolToChange) => {
     let newState = true;
@@ -456,6 +485,8 @@ const RxForm = ({ handleSubmit }) => {
     }
   }
 
+  // TODO: Add brand name to required fields when any of the relevant checkboxes are marked
+
   // Ensure form is validated before calling form submission function (to generate Rx)
   const checkFormValidation = () => {
     let valid = true;
@@ -484,8 +515,6 @@ const RxForm = ({ handleSubmit }) => {
         valid = false;
       }
     });
-
-    
 
     return valid;
   }
@@ -590,7 +619,9 @@ const RxForm = ({ handleSubmit }) => {
           data={patientData}
           setData={setPatientData}
           handleChange={(event) => handleChange(setPatientData, event)}      
-          provider={false}    
+          provider={false}   
+          alerts={patientAlerts}
+          setAlerts={setPatientAlerts} 
         />
 
         {/* Validation requires a 10-digit number. Further checks are beyond the scopy of this application */}
@@ -657,6 +688,8 @@ const RxForm = ({ handleSubmit }) => {
           setData={setProviderData}
           handleChange={(event) => handleChange(setProviderData, event)}
           provider={true}   
+          alerts={providerAlerts}
+          setAlerts={setProviderAlerts} 
         />
 
         {/* Because this is intended for use only in Australia, present and validate phone numbers in national format, which includes 10 digits for landline and mobile numbers, as follows: 02 1234 4321 [telephone], or 0400 000 000 [mobile]. Note that 13 numbers may be 6 or 10 digits, and indicates an Australia wide number. This shouldn't be appropriate for any optical practices, but should be able to be inputted regardless */}
