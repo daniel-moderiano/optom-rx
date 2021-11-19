@@ -311,10 +311,20 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle }) => {
         <FormField 
           fieldType="checkbox" 
           name="substitutePermitted"
-          label="Allow brand substitution" 
+          label="Select to allow brand substitution" 
           onChange={() => toggle(setData, data, 'substitutePermitted')}
           checked={data.substitutePermitted}
         />     
+
+        <FormField 
+          fieldType="checkbox" 
+          name="compounded"
+          label="Select if this medication needs to be compounded" 
+          onChange={() => toggle(setData, data, 'compounded')}
+          checked={data.compounded}
+        />  
+
+        {/* TODO: PBS integration to identify which medications require authority */}
       </fieldset>
     </StyledDrugAutocomplete>
   );

@@ -42,6 +42,7 @@ const RxForm = ({ handleSubmit }) => {
     brandOnly: false,    // Indicates whether the Rx should list brand name only (only permitted for certain drugs)
     includeBrand: false,    // Indicates whether brand name should be included on the Rx
     pbsRx: true,    // Indicates whether this is a PBS prescription 
+    compounded: false,
   });
 
   // Note this will eventually be modified to match the address autocomplete data returned
@@ -107,62 +108,7 @@ const RxForm = ({ handleSubmit }) => {
     ],
   });
 
-  const requiredFieldNames = () => {
-    // Fields that must be completed regardless of any outside selectors
-    const baseFields = {
-      drug: [
-        'activeIngredient',
-        'quantity',
-        'repeats',
-        'dosage',
-      ],
-      patient: [
-        'fullName',
-        'streetAddress',
-        'suburb',
-        'postcode',
-        'state',
-        'medicareNumber',
-        'medicareRefNumber',
-      ],
-      provider: [
-        'fullName',
-        'streetAddress',
-        'suburb',
-        'postcode',
-        'state',
-        'phoneNumber',
-        'prescriberNumber',
-      ],
-      misc: [
-        'date'
-      ],
-    };
-
-    const drugForm = document.querySelector('.drug-form')
-    const patientForm = document.querySelector('.patient-form')
-    const providerForm = document.querySelector('.provider-form')
-
-    baseFields.drug.forEach((field) => {
-      console.log(drugForm.querySelector(`[name="${field}"]`));
-    });
-
-    baseFields.patient.forEach((field) => {
-      console.log(patientForm.querySelector(`[name="${field}"]`));
-    });
-
-    baseFields.provider.forEach((field) => {
-      console.log(providerForm.querySelector(`[name="${field}"]`));
-    });
-
-    if (miscData.includeBrand || miscData.brandOnly) {
-      baseFields.drug.push('brandName');
-    }
-
-    return baseFields;
-  };
   // TODO: function to generate Authority prescription numbers
-  // TODO: limit qualifications field to 40 chars, and indicate that input should be in abbreviated form
 
   const showErrorClass = (element) => {
     element.classList.add('error');
@@ -487,10 +433,52 @@ const RxForm = ({ handleSubmit }) => {
     }));
   };
 
+  const validateFieldForEmpty = (setFunc, field) => {
+    // Validate full name here
+    if (field.value.trim().length === 0) {
+      setFunc((prevAlerts) => ({
+        ...prevAlerts,
+        [field.name]: {
+          message: "This field cannot be left blank",
+          type: 'error',
+        }
+      }));
+      showErrorClass(field);
+    } else {
+      // Positive feedback and remove errors
+      showSuccessClass(field);
+      setFunc((prevAlerts) => ({
+        ...prevAlerts,
+        [field.name]: {}
+      }));
+    }
+  }
+
   // Ensure form is validated before calling form submission function (to generate Rx)
-  const checkFormValidation = (requiredFields) => {
-    // TODO: validate form here
+  const checkFormValidation = () => {
     const valid = true;
+
+    const drugForm = document.querySelector('.drug-form')
+    const patientForm = document.querySelector('.patient-form')
+    const providerForm = document.querySelector('.provider-form')
+
+    requiredFields.drug.forEach((field) => {
+      const input = drugForm.querySelector(`[name="${field}"]`);
+      validateFieldForEmpty(setDrugAlerts, input);
+    });
+
+    requiredFields.patient.forEach((field) => {
+      const input = patientForm.querySelector(`[name="${field}"]`);
+      validateFieldForEmpty(setPatientAlerts, input);
+    });
+
+    requiredFields.provider.forEach((field) => {
+      const input = providerForm.querySelector(`[name="${field}"]`);
+      validateFieldForEmpty(setProviderAlerts, input);
+    });
+
+    
+
     return valid;
   }
 
@@ -499,7 +487,6 @@ const RxForm = ({ handleSubmit }) => {
       className="rxform" 
       onSubmit={(e) => {
         e.preventDefault(); 
-        console.log(requiredFieldNames());
         if (checkFormValidation()) {
           handleSubmit(drugData, patientData, providerData)
         }
@@ -531,6 +518,7 @@ const RxForm = ({ handleSubmit }) => {
           toggle={toggleBooleanState}
         />
 
+        {/* TODO: PBS integration to identify which medications require authority, and auto-filling. Should appear while PBS Rx is true */}
         <FormField 
           fieldType="checkbox" 
           name="pbsRx"
@@ -568,6 +556,8 @@ const RxForm = ({ handleSubmit }) => {
           onChange={(event) => handleChange(setDrugData, event)} 
           alert={drugAlerts.repeats}
         />
+
+        
       </fieldset>
 
       {/* Enter the patient Rx details */}
