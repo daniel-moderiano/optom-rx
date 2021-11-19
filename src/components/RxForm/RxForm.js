@@ -444,6 +444,7 @@ const RxForm = ({ handleSubmit }) => {
         }
       }));
       showErrorClass(field);
+      return false;
     } else {
       // Positive feedback and remove errors
       showSuccessClass(field);
@@ -451,12 +452,13 @@ const RxForm = ({ handleSubmit }) => {
         ...prevAlerts,
         [field.name]: {}
       }));
+      return true;
     }
   }
 
   // Ensure form is validated before calling form submission function (to generate Rx)
   const checkFormValidation = () => {
-    const valid = true;
+    let valid = true;
 
     const drugForm = document.querySelector('.drug-form')
     const patientForm = document.querySelector('.patient-form')
@@ -464,17 +466,23 @@ const RxForm = ({ handleSubmit }) => {
 
     requiredFields.drug.forEach((field) => {
       const input = drugForm.querySelector(`[name="${field}"]`);
-      validateFieldForEmpty(setDrugAlerts, input);
+      if (!validateFieldForEmpty(setDrugAlerts, input)) {
+        valid = false;
+      }
     });
 
     requiredFields.patient.forEach((field) => {
       const input = patientForm.querySelector(`[name="${field}"]`);
-      validateFieldForEmpty(setPatientAlerts, input);
+      if (!validateFieldForEmpty(setPatientAlerts, input)) {
+        valid = false;
+      }
     });
 
     requiredFields.provider.forEach((field) => {
       const input = providerForm.querySelector(`[name="${field}"]`);
-      validateFieldForEmpty(setProviderAlerts, input);
+      if (!validateFieldForEmpty(setProviderAlerts, input)) {
+        valid = false;
+      }
     });
 
     

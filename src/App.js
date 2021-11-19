@@ -34,7 +34,7 @@ const App = () => {
       },
     }));
 
-    // history.push("/about")    
+    history.push("/about");   
 
     console.log(data);
   }
