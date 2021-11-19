@@ -62,7 +62,7 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider, alerts, se
   }, [setData])
 
    useEffect(() => {
-    const inputs = document.querySelector('.address-collapse').querySelectorAll('input');
+    const inputs = document.querySelector(`.address-collapse${provider ? '--provider' : ''}`).querySelectorAll('input');
     // Check for an exisitng API script on the page to avoid duplicating
     let googleScript = document.querySelector('#google-script')
 
@@ -124,6 +124,7 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider, alerts, se
         input.classList.add('success');
         inputs.forEach((input) => {
           if (input.name !== 'subpremise') {
+            input.classList.remove('error');
             input.classList.add('success');
           }
         });
