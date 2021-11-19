@@ -9,12 +9,6 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
   // Controls the UI state of the collapsed input fields
   const [expand, setExpand] = useState(false);
 
-  // UI error class handling
-  const showErrorClass = (element) => {
-    element.classList.add('error');
-    element.classList.remove('success');
-  }
-
   const showSuccessClass = (element) => {
     element.classList.remove('error');
     element.classList.add('success');
@@ -45,7 +39,6 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
     }
     // Remove errors
     showSuccessClass(document.querySelector('#activeIngredient'));
-    // showSuccessClass(document.querySelector('#brandName'));
     setAlerts((prevAlerts) => ({
       ...prevAlerts,
       activeIngredient: {},

@@ -177,6 +177,85 @@ const RxForm = ({ handleSubmit }) => {
             }
             break;
 
+            
+          case name === 'streetAddress':
+            if (value.trim().length === 0) {
+              setPatientAlerts((prevAlerts) => ({
+                ...prevAlerts,
+                streetAddress: {
+                  message: "This field cannot be left blank",
+                  type: 'error',
+                }
+              }));
+              showErrorClass(event.target);
+            } else {
+              showSuccessClass(event.target);
+              setPatientAlerts((prevAlerts) => ({
+                ...prevAlerts,
+                streetAddress: {}
+              }));
+            }
+            break;
+          
+          
+          case name === 'suburb':
+            if (value.trim().length === 0) {
+              setPatientAlerts((prevAlerts) => ({
+                ...prevAlerts,
+                suburb: {
+                  message: "This field cannot be left blank",
+                  type: 'error',
+                }
+              }));
+              showErrorClass(event.target);
+            } else {
+              showSuccessClass(event.target);
+              setPatientAlerts((prevAlerts) => ({
+                ...prevAlerts,
+                suburb: {}
+              }));
+            }
+            break;
+    
+          case name === 'state':
+            if (value.trim().length === 0) {
+              setPatientAlerts((prevAlerts) => ({
+                ...prevAlerts,
+                state: {
+                  message: "This field cannot be left blank",
+                  type: 'error',
+                }
+              }));
+              showErrorClass(event.target);
+            } else {
+              showSuccessClass(event.target);
+              setPatientAlerts((prevAlerts) => ({
+                ...prevAlerts,
+                state: {}
+              }));
+            }
+            break;
+    
+          case name === 'postcode':
+            if (value.trim().length === 0) {
+              setPatientAlerts((prevAlerts) => ({
+                ...prevAlerts,
+                postcode: {
+                  message: "This field cannot be left blank",
+                  type: 'error',
+                }
+              }));
+              showErrorClass(event.target);
+            } else {
+              // Positive feedback and remove errors
+              showSuccessClass(event.target);
+              setPatientAlerts((prevAlerts) => ({
+                ...prevAlerts,
+                postcode: {}
+              }));
+            }
+            break;
+
           case name === 'medicareNumber':
             // Check for exactly 10 digits
             if (value.trim()[0] === '0') {
@@ -263,6 +342,85 @@ const RxForm = ({ handleSubmit }) => {
             }
             break;
 
+          case name === 'streetAddress':
+            if (value.trim().length === 0) {
+              setProviderAlerts((prevAlerts) => ({
+                ...prevAlerts,
+                streetAddress: {
+                  message: "This field cannot be left blank",
+                  type: 'error',
+                }
+              }));
+              showErrorClass(event.target);
+            } else {
+              showSuccessClass(event.target);
+              setProviderAlerts((prevAlerts) => ({
+                ...prevAlerts,
+                streetAddress: {}
+              }));
+            }
+            break;
+          
+          
+          case name === 'suburb':
+            if (value.trim().length === 0) {
+              setProviderAlerts((prevAlerts) => ({
+                ...prevAlerts,
+                suburb: {
+                  message: "This field cannot be left blank",
+                  type: 'error',
+                }
+              }));
+              showErrorClass(event.target);
+            } else {
+              showSuccessClass(event.target);
+              setProviderAlerts((prevAlerts) => ({
+                ...prevAlerts,
+                suburb: {}
+              }));
+            }
+            break;
+    
+          case name === 'state':
+            if (value.trim().length === 0) {
+              setProviderAlerts((prevAlerts) => ({
+                ...prevAlerts,
+                state: {
+                  message: "This field cannot be left blank",
+                  type: 'error',
+                }
+              }));
+              showErrorClass(event.target);
+            } else {
+              showSuccessClass(event.target);
+              setProviderAlerts((prevAlerts) => ({
+                ...prevAlerts,
+                state: {}
+              }));
+            }
+            break;
+    
+          case name === 'postcode':
+            if (value.trim().length === 0) {
+              setProviderAlerts((prevAlerts) => ({
+                ...prevAlerts,
+                postcode: {
+                  message: "This field cannot be left blank",
+                  type: 'error',
+                }
+              }));
+              showErrorClass(event.target);
+            } else {
+              // Positive feedback and remove errors
+              showSuccessClass(event.target);
+              setProviderAlerts((prevAlerts) => ({
+                ...prevAlerts,
+                postcode: {}
+              }));
+            }
+            break;
+          
+
           case name === 'phoneNumber':
             // Consider trimming the input of any spaces, hyphens, or parens
             if (!(/^((0[2-8]\d{8})|(13(00|\d{4})(\d{6})?))$/).test(value.trim())) {
@@ -326,6 +484,7 @@ const RxForm = ({ handleSubmit }) => {
     providerDataValidation();
 
     // Event propagation will capture all focusout events from patient form
+    // TODO: decide whether it is worth implementing inline validation for the brand name field
     const drugDataValidation = () => {
       document.querySelector('.drug-form').addEventListener('focusout', (event) => {
         console.log('focusout');

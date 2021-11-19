@@ -10,16 +10,6 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider, alerts, se
   // Use this to control whether the additional address fields should be expanded or not
   const [expand, setExpand] = useState(false);
 
-  const showErrorClass = (element) => {
-    element.classList.add('error');
-    element.classList.remove('success');
-  }
-
-  const showSuccessClass = (element) => {
-    element.classList.remove('error');
-    element.classList.add('success');
-  }
-
   const fillAddress = useCallback((placeDetails) => {
     let address = {
       streetAddress: '',
@@ -102,99 +92,6 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider, alerts, se
       }
     });
 
-    // Add form validation for address-collapse section(s)
-    // Event propagation will capture all focusout events from patient form
-    const addressDataValidation = () => {
-      document.querySelector(`.address-collapse${provider ? '--provider' : ''}`).addEventListener('focusout', (event) => {
-        const { name, value } = event.target;
-        switch (true) {
-          case name === 'suburb':
-            if (value.trim().length === 0) {
-              setAlerts((prevAlerts) => ({
-                ...prevAlerts,
-                suburb: {
-                  message: "This field cannot be left blank",
-                  type: 'error',
-                }
-              }));
-              showErrorClass(event.target);
-            } else {
-              showSuccessClass(event.target);
-              setAlerts((prevAlerts) => ({
-                ...prevAlerts,
-                suburb: {}
-              }));
-            }
-            break;
-    
-          case name === 'state':
-            if (value.trim().length === 0) {
-              setAlerts((prevAlerts) => ({
-                ...prevAlerts,
-                state: {
-                  message: "This field cannot be left blank",
-                  type: 'error',
-                }
-              }));
-              showErrorClass(event.target);
-            } else {
-              showSuccessClass(event.target);
-              setAlerts((prevAlerts) => ({
-                ...prevAlerts,
-                state: {}
-              }));
-            }
-            break;
-    
-          case name === 'postcode':
-            if (value.trim().length === 0) {
-              setAlerts((prevAlerts) => ({
-                ...prevAlerts,
-                postcode: {
-                  message: "This field cannot be left blank",
-                  type: 'error',
-                }
-              }));
-              showErrorClass(event.target);
-            } else {
-              // Positive feedback and remove errors
-              showSuccessClass(event.target);
-              setAlerts((prevAlerts) => ({
-                ...prevAlerts,
-                postcode: {}
-              }));
-            }
-            break;
-        
-          default:
-            break;
-        }
-      });
-    };
-
-    addressDataValidation();
-
-    // Add similar validation for empty address field
-    input.addEventListener('focusout', () => {
-      if (input.value.trim().length === 0) {
-        setAlerts((prevAlerts) => ({
-          ...prevAlerts,
-          streetAddress: {
-            message: "This field cannot be left blank",
-            type: 'error',
-          }
-        }));
-        showErrorClass(input);
-      } else {
-        // While it is OK to remove the error alerts here, the entire address section must be validated before form is submitted (to prevent user only adding to the street address field).
-        showSuccessClass(input);
-        setAlerts((prevAlerts) => ({
-          ...prevAlerts,
-          streetAddress: {}
-        }));
-      }
-    })
-
     // Using a load event listener ensures the script is loaded prior to trying to access the API
     googleScript.addEventListener('load', () => {
       autocomplete = new google.maps.places.Autocomplete(input, {
@@ -225,7 +122,6 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider, alerts, se
           }
         }));
       } else {
-        console.log(place);
         input.classList.remove('error');
         input.classList.add('success');
         inputs.forEach((input) => {
@@ -235,13 +131,10 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider, alerts, se
         });
         setAlerts((prevAlerts) => ({
           ...prevAlerts,
-          streetAddress: {
-            message: "This field cannot be left blank",
-            type: 'error',
-            suburb: {},
-            postcode: {},
-            state: {},
-          }
+          streetAddress: {},
+          suburb: {},
+          postcode: {},
+          state: {},
         }));
         fillAddress(place);
          // Autofill, and toggle display of additional address fields
