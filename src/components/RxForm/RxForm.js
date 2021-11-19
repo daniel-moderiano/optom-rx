@@ -19,6 +19,7 @@ const RxForm = ({ handleSubmit }) => {
 
   const [patientAlerts, setPatientAlerts] = useState({
     fullName: {},
+    streetAddress: {},
     suburb: {},
     postcode: {},
     state: {},
@@ -28,6 +29,7 @@ const RxForm = ({ handleSubmit }) => {
 
   const [providerAlerts, setProviderAlerts] = useState({
     fullName: {},
+    streetAddress: {},
     suburb: {},
     postcode: {},
     state: {},
