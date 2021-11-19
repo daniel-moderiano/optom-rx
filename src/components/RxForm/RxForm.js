@@ -487,7 +487,6 @@ const RxForm = ({ handleSubmit }) => {
     // TODO: decide whether it is worth implementing inline validation for the brand name field
     const drugDataValidation = () => {
       document.querySelector('.drug-form').addEventListener('focusout', (event) => {
-        console.log('focusout');
         const { name, value } = event.target
         switch (true) {
           case name === 'activeIngredient':
@@ -597,7 +596,19 @@ const RxForm = ({ handleSubmit }) => {
     };
 
     drugDataValidation();
-  }, [])
+  }, []);
+
+  // Check remove a visible error or alert from the brand name input where it changes from being required to not
+  useEffect(() => {
+    if (!drugData.includeBrand && !drugData.brandOnly) {
+      document.querySelector('#brandName').classList.remove('error');
+      setDrugAlerts((prevAlerts) => ({
+        ...prevAlerts,
+        brandName: {}
+      }));
+    };
+    // It is optional to include a function here that provides a warning when one of these are checked to true and the brand name input is empty, but this is opposite to expected user flow and will likely cause annoyance more than anything else
+  }, [drugData.includeBrand, drugData.brandOnly]);
 
   const toggleBooleanState = (setFunc, data, boolToChange) => {
     let newState = true;
