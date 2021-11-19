@@ -328,24 +328,24 @@ const RxForm = ({ handleSubmit }) => {
     // Event propagation will capture all focusout events from patient form
     const drugDataValidation = () => {
       document.querySelector('.drug-form').addEventListener('focusout', (event) => {
+        console.log('focusout');
         const { name, value } = event.target
         switch (true) {
-          case name === 'name':
+          case name === 'activeIngredient':
             if (value.trim().length === 0) {
               setDrugAlerts((prevAlerts) => ({
                 ...prevAlerts,
-                name: {
+                activeIngredient: {
                   message: "This field cannot be left blank",
                   type: 'error',
                 }
               }));
               showErrorClass(event.target);
             } else {
-              // Positive feedback and remove errors
               showSuccessClass(event.target);
               setDrugAlerts((prevAlerts) => ({
                 ...prevAlerts,
-                name: {}
+                activeIngredient: {}
               }));
             }
             break;
@@ -419,31 +419,7 @@ const RxForm = ({ handleSubmit }) => {
                 dosage: {}
               }));
             }
-            break;
-          
-          case name === 'brandName':
-            // Check first if the field is required
-            if (value.trim().length === 0 && (drugData.brandOnly || drugData.includeBrand)) {
-              setDrugAlerts((prevAlerts) => ({
-                ...prevAlerts,
-                brandName: {
-                  message: "This field cannot be left blank",
-                  type: 'error',
-                }
-              }));
-              showErrorClass(event.target);
-            } else {
-              // Positive feedback and remove errors
-              console.log('remove error');
-              showSuccessClass(event.target);
-              setDrugAlerts((prevAlerts) => ({
-                ...prevAlerts,
-                brandName: {}
-              }));
-            }
-
-            break;
-        
+            break;        
           default:
             break;
         }
@@ -451,7 +427,7 @@ const RxForm = ({ handleSubmit }) => {
     };
 
     drugDataValidation();
-  }, [drugData.brandOnly, drugData.includeBrand])
+  }, [])
 
   const toggleBooleanState = (setFunc, data, boolToChange) => {
     let newState = true;
@@ -555,6 +531,8 @@ const RxForm = ({ handleSubmit }) => {
           setData={setDrugData}
           handleChange={(event) => handleChange(setDrugData, event)}  
           toggle={toggleBooleanState}
+          alerts={drugAlerts}
+          setAlerts={setDrugAlerts}
         />
 
         {/* TODO: PBS integration to identify which medications require authority, and auto-filling. Should appear while PBS Rx is true */}

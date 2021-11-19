@@ -3,17 +3,11 @@ import { useEffect, useState, useRef } from "react";
 import { StyledDrugAutocomplete } from './DrugAutocompleteStyled';
 import FormField from '../FormField/FormField';
 
-const DrugAutocomplete = ({ data, setData, handleChange, toggle }) => {
+const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAlerts }) => {
   // useRef allows us to store the equivalent of a 'global' component variable without losing data on re-render, but avoiding the async problems that can arise with state
   const currentFocus = useRef(-1);
   // Controls the UI state of the collapsed input fields
   const [expand, setExpand] = useState(false);
-
-  // Alerts for input validation
-  const [alerts, setAlerts] = useState({
-    activeIngredient: {},
-    brandName: {},
-  });
 
   // UI error class handling
   const showErrorClass = (element) => {
@@ -51,9 +45,11 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle }) => {
     }
     // Remove errors
     showSuccessClass(document.querySelector('#activeIngredient'));
+    // showSuccessClass(document.querySelector('#brandName'));
     setAlerts((prevAlerts) => ({
       ...prevAlerts,
-      activeIngredient: {}
+      activeIngredient: {},
+      brandName: {}
     }));
   };
 
@@ -172,42 +168,6 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle }) => {
     }
   }, [])
 
-  // Validation
-  useEffect(() => {
-    // Event propagation will capture all focusout events from fields within this component
-    const drugDataValidation = () => {
-      document.querySelector('.autocomplete-container').addEventListener('focusout', (event) => {
-        const { name, value } = event.target;
-        switch (true) {
-          case name === 'activeIngredient':
-            if (value.trim().length === 0) {
-              setAlerts((prevAlerts) => ({
-                ...prevAlerts,
-                activeIngredient: {
-                  message: "This field cannot be left blank",
-                  type: 'error',
-                }
-              }));
-              showErrorClass(event.target);
-            } else {
-              showSuccessClass(event.target);
-              setAlerts((prevAlerts) => ({
-                ...prevAlerts,
-                activeIngredient: {}
-              }));
-            }
-            break;
-
-            // TODO: any further validation here - PBS limitation on quantity/repeats
-          default: 
-            break;
-        };
-      });
-    }
-    drugDataValidation();
-
-  }, [])
-
   // Runs on every input change, which provides a better solution than running within useEffect hook
   const handleSearch = (event) => {
     // Two regex to match search text in different parts of the string. Split-up to allow custom ordering of matches in final UI list
@@ -252,16 +212,6 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle }) => {
 
     createList(matches);
   }
-
-  // const toggleRequiredField = (event) => {
-  //   // Where either brand name is required, or prescribing by brand name only, brand name must be set to a required field
-  //   if (event.target.checked) {
-  //     setData((prevData) => ({
-  //       ...prevData,
-  //       prefix: newState,
-  //     }));
-  //   }
-  // }
 
   return (
     <StyledDrugAutocomplete className="autocomplete-container">
@@ -324,7 +274,7 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle }) => {
           checked={data.compounded}
         />  
 
-        {/* TODO: PBS integration to identify which medications require authority */}
+        
       </fieldset>
     </StyledDrugAutocomplete>
   );
