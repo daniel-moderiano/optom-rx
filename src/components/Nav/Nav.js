@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
 
 const Nav = () => {
-  const history = useHistory();
 
   return (
     <nav className="Nav">

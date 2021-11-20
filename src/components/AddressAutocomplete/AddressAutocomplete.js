@@ -149,7 +149,7 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider, alerts, se
  
   return (
     <StyledAddressAutocomplete>
-      {/* Practice name is only relevant for providers */}
+      {/* Practice name is only relevant for providers, and even then you might consider omitting this, as there is really no room on the computerised for for practice name */}
       {provider && <FormField 
         name="practiceName"
         label="Practice name" 

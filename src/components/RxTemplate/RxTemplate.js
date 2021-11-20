@@ -71,6 +71,10 @@ const RxTemplate = ({ data, date }) => {
     }
   };
 
+  const formatDate = () => {
+    return `${miscData.date.substring(8)}/${miscData.date.substring(5, 7)}/${miscData.date.substring(0, 4)}`;
+  }
+
   return (
     <StyledRxTemplate className="RxTemplate">
       <img src={Rx} alt="" />
@@ -108,7 +112,7 @@ const RxTemplate = ({ data, date }) => {
 
       <section className="miscellaneous">
         {/* Include Script ID and Authority Rx number here */}
-        <div className="date">{miscData.date}</div>
+        <div className="date">{formatDate()}</div>
         {drugData.pbsRx 
           ? <div className="pbsSelected"><img src={tickbox} alt="" /></div>
           : <div className="nonPbs"><span className="nonPbs-marker">XXXXXXXXXXX</span>Non-PBS</div>
@@ -133,7 +137,7 @@ const RxTemplate = ({ data, date }) => {
 
       <section className="provider-lower">
         {/* Used to display provider details next to, or below signature space */}
-        <div className="provider__fullName">{`${providerData.prefix && 'Dr'} ${providerData.fullName}`}</div>
+        <div className="provider__fullName">{`${providerData.prefix ? 'Dr' : ''} ${providerData.fullName}`}</div>
         {/* Qualifications should only be included in the lower section */}
         <div className="provider__qualifications">{providerData.qualifications}</div>
         <div className="practitionerTick">🗸</div>
@@ -141,7 +145,7 @@ const RxTemplate = ({ data, date }) => {
 
       {/* Wastes space to render authority section for non-authority required scripts, so render only as needed */}
       {drugData.authRequired && <section className="authority">
-        <div className="authority__approvalCode">{`Authority Approval No: ${drugData.authCode}`}</div>
+        <div className="authority__approvalCode">{`Authority Approval No: ${miscData.authCode}`}</div>
         {/* Optional sections below - not sure how useful these are in this day and age */}
         {/* <div className="authority__authorised">Authorised:</div>
         <div className="authority__delegate">Delegate...............</div> */}

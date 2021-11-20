@@ -5,6 +5,7 @@ import { StyledRxForm } from "./RxForm.styled";
 import DrugAutocomplete from "../DrugAutocomplete/DrugAutocomplete";
 
 // ! Multiple optometrist items are not permitted to be prescribed on the same form; each must use an individual form
+// TODO: consider producing a modal with the Rx template when user clicks generate Rx. Than have buttons for print or edit. This avoids changing routes which affects the google API
 
 const RxForm = ({ handleSubmit }) => {
   // en-CA format provides date as YYYY-MM-DD consistent with HTML input to allow setting of the initial state with the current date
@@ -67,17 +68,28 @@ const RxForm = ({ handleSubmit }) => {
 
   // Not all of this data will be required
   const [providerData, setProviderData] = useState({
-    prefix: false,
-    fullName: '',
-    qualifications: '',
-    practiceName: '',
-    streetAddress: '',
-    subpremise: '',
-    suburb: '',
-    postcode: '',
-    state: '',
-    phoneNumber: '',
-    prescriberNumber: '',
+    // prefix: false,
+    // fullName: '',
+    // qualifications: '',
+    // practiceName: '',
+    // streetAddress: '',
+    // subpremise: '',
+    // suburb: '',
+    // postcode: '',
+    // state: '',
+    // phoneNumber: '',
+    // prescriberNumber: '',
+    "prefix": true,
+    "fullName":"Daniel Moderiano",
+    "qualifications":"BMedSc(VisSc), MOpt",
+    "practiceName":"Specsavers West Lakes",
+    "streetAddress":"111 West Lakes Boulevard",
+    "subpremise":"Shop 218",
+    "suburb":"Modbury",
+    "postcode":"5092",
+    "state":"SA",
+    "phoneNumber":"0882345678",
+    "prescriberNumber":"7033149"
   });
 
   const [miscData, setMiscData] = useState({
@@ -86,7 +98,7 @@ const RxForm = ({ handleSubmit }) => {
     authCode: '',    // Either a streamline authority code, or a code obtained via telephone or online approval
   });
 
-  const [requiredFields, setRequiredFields] = useState({
+  const [requiredFields] = useState({
     drug: [
       'activeIngredient',
       'quantity',
@@ -634,17 +646,9 @@ const RxForm = ({ handleSubmit }) => {
       showErrorClass(field);
       return false;
     } else {
-      // Positive feedback and remove errors
-      showSuccessClass(field);
-      setFunc((prevAlerts) => ({
-        ...prevAlerts,
-        [field.name]: {}
-      }));
       return true;
     }
   }
-
-  // TODO: Add brand name to required fields when any of the relevant checkboxes are marked
 
   // Ensure form is validated before calling form submission function (to generate Rx)
   const checkFormValidation = () => {
@@ -690,7 +694,7 @@ const RxForm = ({ handleSubmit }) => {
       onSubmit={(e) => {
         e.preventDefault(); 
         if (checkFormValidation()) {
-          handleSubmit(drugData, patientData, providerData)
+          handleSubmit(drugData, patientData, providerData, miscData)
         }
       }} 
       autoComplete="off">
@@ -767,7 +771,7 @@ const RxForm = ({ handleSubmit }) => {
       {/* Legal requirements include only the patient's name and address */}
       {/* Patient Medicare number is however required for ALL PBS Rx, and should be included in general so that the patient may claim under PBS where this price is cheaper. All Aus are valid private prescriptions however. */}
 
-        {/* Consider a max limit on this input based on physical Rx form constraints? */}
+        {/* A max length for these fields based on the physical space available on the Rx pad is possible, however there should be virtually no cases where this is a problem. If anything, a warning alert could be added for fields such as full name, and street address/suburb where the char length exceeds 40 */}
         <FormField 
           fieldType="text" 
           name="fullName"
@@ -778,7 +782,6 @@ const RxForm = ({ handleSubmit }) => {
           alert={patientAlerts.fullName}
         />
 
-        {/* Validation done within component */}
         <AddressAutocomplete 
           data={patientData}
           setData={setPatientData}
@@ -882,7 +885,7 @@ const RxForm = ({ handleSubmit }) => {
           maxlength="7"
         />
       </fieldset>
-      {/* TODO: submit form should act as a link to the template route, which can only be accessed if all required forms are complete */}
+
       <button type="submit">Generate Rx</button>
     </StyledRxForm>
   )
