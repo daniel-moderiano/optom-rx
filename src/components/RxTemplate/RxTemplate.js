@@ -213,7 +213,7 @@ const RxTemplate = ({ data, date }) => {
           <div className="provider__fullName">{`${providerData.prefix ? 'Dr' : ''} ${providerData.fullName}`}</div>
           {/* Qualifications should only be included in the lower section */}
           <div className="provider__qualifications">{providerData.qualifications}</div>
-          <div className="practitionerTick">🗸</div>
+          {/* <div className="practitionerTick">🗸</div> */}
         </section>
 
         {/* Wastes space to render authority section for non-authority required scripts, so render only as needed */}
