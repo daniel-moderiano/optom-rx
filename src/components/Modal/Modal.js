@@ -1,6 +1,9 @@
 import StyledModal from "./Modal.styled"
 
 const Modal = (props) => {
+
+  // TODO: Open/close modal functions
+
   return (
     <StyledModal className="Modal">
       <div className="Modal__content">

@@ -84,16 +84,11 @@ const StyledModal = styled.div`
     left: 0;
     top: 0;
     display: block;
-    /* width: 902px;
-    height: 1275px; */
-    /* height: 0;
-    width: 0; */
     overflow: visible;
 
     .Modal__content {
       margin: 0;
       padding: 0;
-      /* display: none; */
     }
 
     .Modal__header, .Modal__close, .Modal__btn, .Modal__icon {
