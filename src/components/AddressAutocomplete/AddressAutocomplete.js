@@ -4,6 +4,8 @@ import FormField from "../FormField/FormField";
 import { useCallback, useEffect, useState } from "react"
 import { StyledAddressAutocomplete } from "./AddressAutocomplete.styled";
 
+// ! Google places API does not work when the page is changed via React router DOM, page must be reloaded when switching to form
+
 const AddressAutocomplete = ({ data, setData, handleChange, provider, alerts, setAlerts }) => {
   // Use this to control whether the additional address fields should be expanded or not
   const [expand, setExpand] = useState(false);

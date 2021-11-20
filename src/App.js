@@ -1,7 +1,8 @@
 // import { Switch, Route } from "react-router";
 import Header from "./components/Header/Header";
 import GlobalStyles from "./components/utils/globalStyles";
-import RxForm from './components/RxForm/RxForm'
+import RxForm from './components/RxForm/RxForm';
+import RxTemplate from './components/RxTemplate/RxTemplate'
 import About from './components/About/About';
 import { useState } from "react";
 import { Switch, Route, useHistory } from "react-router-dom";
@@ -14,6 +15,8 @@ const App = () => {
     providerData: {},
     miscData: {},
   });
+
+  const [showTemplate, setShowTemplate] = useState(false);
 
   let history = useHistory();
 
@@ -34,7 +37,11 @@ const App = () => {
       },
     }));
 
-    history.push("/about");   
+    // history.push("/about");
+    // Show template Rx on form submission
+    if (!showTemplate) {
+      setShowTemplate(showTemplate => !showTemplate);
+    }
 
     console.log(data);
   }
@@ -89,11 +96,13 @@ const App = () => {
       <Header />
       {/* Note prescriptions must contain date of issue, and prescriber signature */}
       <main>
-        <Switch>
+        <RxForm handleSubmit={handleSubmit} />
+        {showTemplate && <RxTemplate data={data} />}
+        {/* <Switch>
           <Route exact path="/" render={() => <RxForm handleSubmit={handleSubmit}/>}/>
           <Route exact path="/home" render={() => <RxForm handleSubmit={handleSubmit}/>}/>
           <Route exact path="/about" render={() => <About />}/>
-        </Switch>
+        </Switch> */}
       </main>
       <footer className="footer"></footer>
     </div>
