@@ -44,7 +44,7 @@ const RxTemplate = ({ data, date }) => {
     const capitalised = activeIngredient[0].toUpperCase() + activeIngredient.substring(1);
     console.log();
     // Brand name only
-    if (miscData.brandOnly) {
+    if (drugData.brandOnly) {
       if (!capitalised.includes('eye')) {
         if (capitalised.includes('spray')) {
           return `${brandName} ${capitalised.substr(capitalised.indexOf('spray'), 5)}`;
@@ -56,7 +56,7 @@ const RxTemplate = ({ data, date }) => {
       }
     }    
     // Brand name NOT to be included
-    if (!miscData.includeBrand) {
+    if (!drugData.includeBrand) {
       return capitalised;
     }
     // Brand name included in addition to active ingredient
@@ -78,7 +78,7 @@ const RxTemplate = ({ data, date }) => {
       <section className="provider-upper">
         <div className="container">
           <div className="provider__contact-upper">
-            <div className="provider__fullName">{`${providerData.prefix && 'Dr'} ${providerData.fullName}`}</div>
+            <div className="provider__fullName">{`${providerData.prefix ? 'Dr' : ''} ${providerData.fullName}`}</div>
             {formatProvAddress()}
             <div className="provider__addressLine2">
               {`${providerData.suburb} ${providerData.state} ${providerData.postcode}`}
@@ -108,12 +108,12 @@ const RxTemplate = ({ data, date }) => {
 
       <section className="miscellaneous">
         {/* Include Script ID and Authority Rx number here */}
-        <div className="date">{date}</div>
-        {miscData.pbsRx 
+        <div className="date">{miscData.date}</div>
+        {drugData.pbsRx 
           ? <div className="pbsSelected"><img src={tickbox} alt="" /></div>
           : <div className="nonPbs"><span className="nonPbs-marker">XXXXXXXXXXX</span>Non-PBS</div>
         }
-        {!miscData.substitutePermitted && <div className="brandSub">✓</div>}
+        {!drugData.substitutePermitted && <div className="brandSub">✓</div>}
         
       </section>
 
@@ -140,8 +140,8 @@ const RxTemplate = ({ data, date }) => {
       </section>
 
       {/* Wastes space to render authority section for non-authority required scripts, so render only as needed */}
-      {miscData.authRequired && <section className="authority">
-        <div className="authority__approvalCode">{`Authority Approval No: ${miscData.authCode}`}</div>
+      {drugData.authRequired && <section className="authority">
+        <div className="authority__approvalCode">{`Authority Approval No: ${drugData.authCode}`}</div>
         {/* Optional sections below - not sure how useful these are in this day and age */}
         {/* <div className="authority__authorised">Authorised:</div>
         <div className="authority__delegate">Delegate...............</div> */}

@@ -96,7 +96,6 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
     itemsList.addEventListener('click', clickSuggestion);
   };
 
-
   // Leave this dependency array empty to ensure this runs only once on first mount
   useEffect(() => {
     const input = document.querySelector('#activeIngredient');
