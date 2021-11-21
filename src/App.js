@@ -4,7 +4,9 @@ import GlobalStyles from "./components/utils/globalStyles";
 import RxForm from './components/RxForm/RxForm';
 import RxTemplate from './components/RxTemplate/RxTemplate'
 import Modal from "./components/Modal/Modal";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Switch, Route } from "react-router";
+import About from './components/About/About'
 import './App.css';
 
 const App = () => {
@@ -16,6 +18,33 @@ const App = () => {
   });
 
   const [showModal, setShowModal] = useState(false);
+
+  const [googleLoaded, setGoogleLoaded] = useState(false);
+  const [googleAPI, setGoogleAPI] = useState(null);
+
+  useEffect(() => {
+    console.log('Running app effect');
+    // Check for an exisitng API script on the page to avoid duplicating
+    let googleScript = document.querySelector('#google-script')
+
+    if (!googleScript) {
+      // First create and append Google Places API script
+      googleScript = document.createElement('script');
+      googleScript.id = 'google-script';
+
+      // This process.env system for hiding an API key is COMPLETELY INSECURE for a deployed build. This is purely to hide on Github. In the future, this should be secured on backend
+      googleScript.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_API_KEY}&libraries=places`;
+      googleScript.async = true;
+      window.document.body.appendChild(googleScript);
+    } 
+
+    googleScript.addEventListener('load', () => {
+      if (!googleLoaded) {
+        setGoogleLoaded(googleLoaded => !googleLoaded);
+      }
+      // setGoogleAPI(google);
+    })
+  }, [googleLoaded])
 
   const handleSubmit = (drugData, patientData, providerData, miscData) => {
     setData((prevData) => ({
@@ -92,7 +121,11 @@ const App = () => {
       <Header />
       {/* Note prescriptions must contain date of issue, and prescriber signature */}
       <main className="main">
-        <RxForm handleSubmit={handleSubmit} />
+        {/* {googleLoaded && <RxForm handleSubmit={handleSubmit}/>} */}
+        <Switch>
+          {googleLoaded && <Route exact path="/" render={() => <RxForm handleSubmit={handleSubmit}/>}/>}
+          <Route exact path="/about" render={() => <About />}/>
+        </Switch>
       
       </main>
       <footer className="footer"></footer>
