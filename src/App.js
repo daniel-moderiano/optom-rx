@@ -1,4 +1,4 @@
-// import { Switch, Route } from "react-router";
+/*global google*/ // Used to ignore the breaking 'google isn't defined' error
 import Header from "./components/Header/Header";
 import GlobalStyles from "./components/utils/globalStyles";
 import RxForm from './components/RxForm/RxForm';
@@ -18,12 +18,20 @@ const App = () => {
   });
 
   const [showModal, setShowModal] = useState(false);
-
   const [googleLoaded, setGoogleLoaded] = useState(false);
-  const [googleAPI, setGoogleAPI] = useState(null);
 
   useEffect(() => {
-    console.log('Running app effect');
+    // Check for the existence of the google maps API to judge whether it has loaded at any given time. Used where the onload script event won't re-fire (i.e. any other point from initial load)
+    if (typeof google === 'undefined') {
+      if (googleLoaded) {
+        setGoogleLoaded(googleLoaded => !googleLoaded);
+      }
+    } else {
+      if (!googleLoaded) {
+        setGoogleLoaded(googleLoaded => !googleLoaded);
+      }
+    }
+
     // Check for an exisitng API script on the page to avoid duplicating
     let googleScript = document.querySelector('#google-script')
 
@@ -36,14 +44,16 @@ const App = () => {
       googleScript.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_API_KEY}&libraries=places`;
       googleScript.async = true;
       window.document.body.appendChild(googleScript);
-    } 
+    }
 
+    // Used to listen for the initial load only
     googleScript.addEventListener('load', () => {
+      console.log('Initial load');
       if (!googleLoaded) {
         setGoogleLoaded(googleLoaded => !googleLoaded);
       }
-      // setGoogleAPI(google);
-    })
+    });
+    
   }, [googleLoaded])
 
   const handleSubmit = (drugData, patientData, providerData, miscData) => {
