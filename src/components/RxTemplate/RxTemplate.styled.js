@@ -55,8 +55,8 @@ const StyledRxTemplate = styled.div`
 
 
   .RxTemplate__btns {
-    margin-left: 4rem;
-    margin-bottom: 2rem;
+    place-self: flex-end;
+    margin-right: 10%;
 
     .RxTemplate__btn {
       border-radius: 4px;
