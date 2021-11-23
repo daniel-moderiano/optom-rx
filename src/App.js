@@ -9,9 +9,32 @@ import About from './components/About/About'
 import './App.css';
 
 const App = () => {
+  const ausDate = new Date().toLocaleString("en-CA", { timeZone: "Australia/Adelaide" }).substring(0, 10);
+  
   const [data, setData] = useState({
-    drugData: {},
-    patientData: {},
+    drugData: {
+      activeIngredient: "latanoprost 0.005% eye drops, 5 mL",
+      "brandName":"Xalatan",
+      "quantity":"1",
+      "repeats":"4",
+      "dosage":"Once nightly both eyes",
+      "itemCode":"5552F",
+      substitutePermitted: true,    // Indicates if brand substitution is permitted
+      brandOnly: false,    // Indicates whether the Rx should list brand name only (only permitted for certain drugs)
+      includeBrand: true,    // Indicates whether brand name should be included on the Rx
+      pbsRx: true,    // Indicates whether this is a PBS prescription 
+      compounded: false,
+    },
+    patientData: {
+      "fullName":"Daniel Moderiano",
+      "streetAddress":"6 Carragarmungee Estate Long Road Name",
+      "subpremise":"Unit 12",
+      "suburb":"Port Bonython",
+      "postcode":"5127",
+      "state":"SA",
+      "medicareNumber":"5151515151",
+      "medicareRefNumber":"3"
+    },
     providerData: {
       "prefix": true,
       "fullName":"Daniel Moderiano",
@@ -25,7 +48,12 @@ const App = () => {
       "phoneNumber":"0882345678",
       "prescriberNumber":"7033149",
     },
-    miscData: {},
+    miscData: {
+      authRxNumber: '',   
+      date: ausDate, 
+      authCode: '7979',
+      scriptID: '',
+    },
   });
 
   let history = useHistory();
@@ -102,49 +130,6 @@ const App = () => {
     history.push(location);
   }
 
-  // const dummyData = {
-  //   "drugData": {
-  //       activeIngredient: "latanoprost 0.005% eye drops, 5 mL",
-  //       "brandName":"Xalatan",
-  //       "quantity":"1",
-  //       "repeats":"4",
-  //       "dosage":"Once nightly both eyes",
-  //       "itemCode":"5552F"
-  //   },
-  //     "patientData": {
-  //       "fullName":"Daniel Moderiano",
-  //       "streetAddress":"6 Carragarmungee Estate Long Road Name",
-  //       "subpremise":"Unit 12",
-  //       "suburb":"Port Bonython",
-  //       "postcode":"5127",
-  //       "state":"SA",
-  //       "medicareNumber":"5151515151",
-  //       "medicareRefNumber":"3"
-  //   },
-  //     "providerData": {
-  //       "prefix": true,
-  //       "fullName":"Sarah Smoker",
-  //       "qualifications":"BMedSc(VisSc), MOpt",
-  //       "practiceName":"OPSM",
-  //       "streetAddress":"111 West Lakes Boulevard",
-  //       "subpremise":"Shop 218",
-  //       "suburb":"Modbury",
-  //       "postcode":"5092",
-  //       "state":"SA",
-  //       "phoneNumber":"0882345678",
-  //       "prescriberNumber":"7033149"
-  //   },
-  //     "miscData": {
-  //       substitutePermitted: false,   
-  //       brandOnly: false, 
-  //       includeBrand: true,    
-  //       pbsRx: true,  
-  //       authRxNumber: '',   
-  //       date: '', 
-  //       authRequired: true,
-  //       authCode: '7979',
-  //     }
-  // }
 
   return (
     <div className="App">

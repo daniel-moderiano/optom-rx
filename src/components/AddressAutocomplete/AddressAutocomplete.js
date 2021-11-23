@@ -133,6 +133,14 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider, alerts, se
       // Listen for the user to click on one of the suggested dropdown places
       autocomplete.addListener('place_changed', onPlaceChanged);
     }
+
+    return  () => {
+      console.log('Remove autocomplete');
+      autocomplete.removeListener(onPlaceChanged)
+      google.maps.event.clearInstanceListeners(input);
+      document.querySelectorAll('.pac-container').forEach((container) => container.remove())
+    }
+
   }, [fillAddress, provider, setAlerts, googleLoaded])
  
   return (
