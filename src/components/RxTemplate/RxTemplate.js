@@ -92,6 +92,7 @@ const RxTemplate = ({ data }) => {
         <img src={Rx} alt="" />
         <div className="left-container">
           <section className="provider-upper">
+            <h4 className="provider__title">Provider</h4>
             <div className="container">
               <div className="provider__contact-upper">
                 <div className="provider__fullName">{`${providerData.prefix ? 'Dr' : ''} ${providerData.fullName}`}</div>
@@ -110,6 +111,7 @@ const RxTemplate = ({ data }) => {
           </section>
 
           <section className="patient">
+            <h4 className="patient__title">Patient</h4>
             <div className="container">
               <div className="patient__medicareNumber">
                 {`${patientData.medicareNumber.substring(0, 4)} ${patientData.medicareNumber.substring(4, 9)} ${patientData.medicareNumber.substring(9, 10)}-${patientData.medicareRefNumber}`}
@@ -135,6 +137,7 @@ const RxTemplate = ({ data }) => {
 
           {/* Script ID or authority Rx number should go above the medication once finalised, and perhaps with a border bottom */}
           <section className="medication">
+            <h4 className="medication__title">Medication</h4>
             <div data-testid="drugName" className="medication__activeIngredient">
               {formatDrug(drugData.activeIngredient, drugData.brandName)}
             </div>
@@ -237,8 +240,8 @@ const RxTemplate = ({ data }) => {
           </section>}
         </div>
         <div className="RxTemplate__btns">
-          <button className="RxTemplate__btn" onClick={editForm}>Make changes</button>
-          <button className="RxTemplate__btn" onClick={() => window.print()}>Print</button>
+          <button className="RxTemplate__btn btn-editRx" onClick={editForm}>Make changes</button>
+          <button className="RxTemplate__btn btn-print" onClick={() => window.print()}>Print</button>
         </div>
       </> : <h3 className="RxTemplate__subtitle">Fill out the form to generate Rx</h3>}
       

@@ -13,6 +13,9 @@ const StyledRxTemplate = styled.div`
   }
 
   .left-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
     .pbsSelected, 
     .nonPbs-marker, 
@@ -26,12 +29,53 @@ const StyledRxTemplate = styled.div`
       margin-bottom: 1rem;
     }
 
-    h3 {
+    h4 {
       border-bottom: 1px solid #000;
       padding-bottom: 0.3rem;
-      width: 100%;
+      width: 50%;
+      font-size: 1.4rem;
     }
   }
+
+
+
+  .RxTemplate__btns {
+    margin-left: 4rem;
+
+    .RxTemplate__btn {
+      border-radius: 4px;
+      border: 1px solid white;
+      font-size: 1rem;
+      padding: 0.5rem;
+    }
+
+    .RxTemplate__btn:hover {
+      cursor: pointer;
+      transform: scale(0.98);
+      
+    }
+
+    .RxTemplate__btn:active {}
+
+    .btn-print {
+      background-color: #259c5b;
+      color: white;
+      font-size: 1rem;
+      padding: 0.5rem;
+      width: 6rem;
+    }
+
+    .btn-editRx {
+      background-color: #f3f3f3;
+      color: #3b3b3b;
+      font-size: 1rem;
+      padding: 0.5rem;
+      width: 10rem;
+      margin-right: 2rem;
+    }
+  }
+
+ 
 
   .right-container {
     display: none;
@@ -47,7 +91,7 @@ const StyledRxTemplate = styled.div`
     /* width: 902px;
     height: 1275px; */
 
-    h2, h3, .RxTemplate__btns {
+    h2, h3, h4, button, .RxTemplate__btns {
       display: none;
     }
 

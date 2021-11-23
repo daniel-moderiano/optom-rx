@@ -135,8 +135,6 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider, alerts, se
     }
 
     return  () => {
-      console.log('Remove autocomplete');
-      autocomplete.removeListener(onPlaceChanged)
       google.maps.event.clearInstanceListeners(input);
       document.querySelectorAll('.pac-container').forEach((container) => container.remove())
     }
