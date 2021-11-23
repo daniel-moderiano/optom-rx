@@ -44,6 +44,9 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
       activeIngredient: {},
       brandName: {}
     }));
+
+    // Finally, set focus to next typable field (currently dosage)
+    document.querySelector('[name="dosage"]').focus();
   };
 
   // Given a string, use the current search text and regex to bold the segment of text being searched for (using HTML)

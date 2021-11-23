@@ -90,6 +90,10 @@ const App = () => {
     history.push(location);
   }
 
+  const dataTransfer = () => {
+
+  }
+
   // const dummyData = {
   //   "drugData": {
   //       activeIngredient: "latanoprost 0.005% eye drops, 5 mL",
@@ -141,7 +145,7 @@ const App = () => {
       {/* Note prescriptions must contain date of issue, and prescriber signature */}
       <main className="main">
         <Switch>
-          <Route exact path="/" render={() => <RxForm handleSubmit={handleSubmit} googleLoaded={googleLoaded}/>}/>
+          <Route exact path="/" render={() => <RxForm handleSubmit={handleSubmit} googleLoaded={googleLoaded} existingData={data}/>}/>
           <Route exact path="/about" render={() => <About />}/>
           <Route exact path="/template" render={() => <RxTemplate data={data} />}/>
         </Switch>

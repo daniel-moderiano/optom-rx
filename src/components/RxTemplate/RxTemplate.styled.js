@@ -1,15 +1,16 @@
 import styled from "styled-components";
 
 const StyledRxTemplate = styled.div`
+  /* All screen display styling here */
+
   font-family: Arial, Helvetica, sans-serif;
   font-size: 15px;
   width: 100%;
 
+  /* Remove this in prod (img element will be removed) */
   img {
     display: none;
   }
-
-/* ##### LEFT CONTAINER ##### */
 
   .left-container {
 
@@ -32,7 +33,6 @@ const StyledRxTemplate = styled.div`
     }
   }
 
-/* ##### RIGHT CONTAINER ##### */
   .right-container {
     display: none;
   }
@@ -50,8 +50,6 @@ const StyledRxTemplate = styled.div`
     h2, h3, .RxTemplate__btns {
       display: none;
     }
-
-
 
     img {
       position: absolute;

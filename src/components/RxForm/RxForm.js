@@ -7,7 +7,7 @@ import DrugAutocomplete from "../DrugAutocomplete/DrugAutocomplete";
 // ! Multiple optometrist items are not permitted to be prescribed on the same form; each must use an individual form
 // TODO: consider producing a modal with the Rx template when user clicks generate Rx. Than have buttons for print or edit. This avoids changing routes which affects the google API
 
-const RxForm = ({ handleSubmit, googleLoaded }) => {
+const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
   // en-CA format provides date as YYYY-MM-DD consistent with HTML input to allow setting of the initial state with the current date
   const AuDate = new Date().toLocaleString("en-CA", { timeZone: "Australia/Adelaide" }).substring(0, 10);
 
