@@ -5,7 +5,7 @@ import RxForm from './components/RxForm/RxForm';
 import RxTemplate from './components/RxTemplate/RxTemplate'
 import Modal from "./components/Modal/Modal";
 import { useState, useEffect } from "react";
-import { Switch, Route } from "react-router";
+import { Switch, Route, useHistory } from "react-router";
 import About from './components/About/About'
 import './App.css';
 
@@ -17,9 +17,13 @@ const App = () => {
     miscData: {},
   });
 
-  const [showModal, setShowModal] = useState(false);
+  let history = useHistory();
+
+  const [validData, setValidData] = useState(false);
+
   const [googleLoaded, setGoogleLoaded] = useState(false);
 
+  // Handle google places API loading and script HTML appendment
   useEffect(() => {
     // Check for the existence of the google maps API to judge whether it has loaded at any given time. Used where the onload script event won't re-fire (i.e. any other point from initial load)
     if (typeof google === 'undefined') {
@@ -73,12 +77,18 @@ const App = () => {
       },
     }));
 
-    // Show template Rx on form submission
-    if (!showModal) {
-      setShowModal(showTemplate => !showTemplate);
+    // Data must be valid (client side) to reach this point and attempt to display template
+    if (!validData) {
+      setValidData(validData => !validData);
     }
 
-    console.log(data);
+    // Redirect to template page on successful form submit
+    const location = {
+      pathname: '/template',
+      state: { validData: true }
+    }
+
+    history.push(location);
   }
 
   // const dummyData = {
@@ -131,17 +141,14 @@ const App = () => {
       <Header />
       {/* Note prescriptions must contain date of issue, and prescriber signature */}
       <main className="main">
-        {/* {googleLoaded && <RxForm handleSubmit={handleSubmit}/>} */}
         <Switch>
-          {/* {googleLoaded && <Route exact path="/" render={() => <RxForm handleSubmit={handleSubmit}/>}/>} */}
           <Route exact path="/" render={() => <RxForm handleSubmit={handleSubmit} googleLoaded={googleLoaded}/>}/>
           <Route exact path="/about" render={() => <About />}/>
+          <Route exact path="/template" render={() => <RxTemplate data={data} />}/>
         </Switch>
       
       </main>
       <footer className="footer"></footer>
-      {showModal && <Modal><RxTemplate data={data} /></Modal>}
-
     </div>
     
     

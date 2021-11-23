@@ -1,10 +1,14 @@
 import { StyledRxTemplate } from "./RxTemplate.styled";
 import Rx from '../../assets/template-sized.jpg';
 import tickbox from '../../assets/tickbox.svg';
+import { useLocation } from "react-router";
 
-const RxTemplate = ({ data, date }) => {
+const RxTemplate = ({ data }) => {
   // Deconstructing for cleanliness of code and easier-to-understand operations
   const { drugData, patientData, providerData, miscData } = data;
+
+  const { state } = useLocation();
+  
 
   const formatPhoneNumber = (phoneNumber) => {
     if (phoneNumber.substring(0, 2) === '04') {
@@ -75,156 +79,161 @@ const RxTemplate = ({ data, date }) => {
     return `${miscData.date.substring(8)}/${miscData.date.substring(5, 7)}/${miscData.date.substring(0, 4)}`;
   }
 
+
+
   return (
     <StyledRxTemplate className="RxTemplate">
-      <img src={Rx} alt="" />
-      <div className="left-container">
-        <section className="provider-upper">
-          <div className="container">
-            <div className="provider__contact-upper">
-              <div className="provider__fullName">{`${providerData.prefix ? 'Dr' : ''} ${providerData.fullName}`}</div>
-              {formatProvAddress()}
-              <div className="provider__addressLine2">
-                {`${providerData.suburb} ${providerData.state} ${providerData.postcode}`}
+      <h1 className="RxTemplate__title">Review your prescription</h1>
+      {/* If the template is rendered without a full set of data, many functions will fail. Hence this is rendered conditionally */}
+      {state.validData ? <>
+        <img src={Rx} alt="" />
+        <div className="left-container">
+          <section className="provider-upper">
+            <div className="container">
+              <div className="provider__contact-upper">
+                <div className="provider__fullName">{`${providerData.prefix ? 'Dr' : ''} ${providerData.fullName}`}</div>
+                {formatProvAddress()}
+                <div className="provider__addressLine2">
+                  {`${providerData.suburb} ${providerData.state} ${providerData.postcode}`}
+                </div>
+              </div>
+              <div className="provider__contact-lower">
+                <div className="provider__prescriberNumber">{providerData.prescriberNumber}</div>
+                <div data-testid="phone" className="provider__phoneNumber">
+                  {`Phone: ${formatPhoneNumber(providerData.phoneNumber)}`}
+                </div>
               </div>
             </div>
-            <div className="provider__contact-lower">
-              <div className="provider__prescriberNumber">{providerData.prescriberNumber}</div>
-              <div data-testid="phone" className="provider__phoneNumber">
-                {`Phone: ${formatPhoneNumber(providerData.phoneNumber)}`}
+          </section>
+
+          <section className="patient">
+            <div className="container">
+              <div className="patient__medicareNumber">
+                {`${patientData.medicareNumber.substring(0, 4)} ${patientData.medicareNumber.substring(4, 9)} ${patientData.medicareNumber.substring(9, 10)}-${patientData.medicareRefNumber}`}
+              </div>
+              <div className="patient__contactDetails">
+                <div className="patient__fullName">{patientData.fullName}</div>
+                <div className="patient__streetAddress">{`${patientData.subpremise} ${patientData.streetAddress}`}</div>
+                <div className="patient__addressLine2">{`${patientData.suburb} ${patientData.state} ${patientData.postcode}`}</div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <section className="patient">
-          <div className="container">
-            <div className="patient__medicareNumber">
-              {`${patientData.medicareNumber.substring(0, 4)} ${patientData.medicareNumber.substring(4, 9)} ${patientData.medicareNumber.substring(9, 10)}-${patientData.medicareRefNumber}`}
+          <section className="miscellaneous">
+            {/* Include Script ID and Authority Rx number here */}
+            <div className="date">{formatDate()}</div>
+            {drugData.pbsRx 
+              ? <div className="pbsSelected"><img src={tickbox} alt="" /></div>
+              : <div className="nonPbs"><span className="nonPbs-marker">XXXXXXXXXXX</span>Non-PBS</div>
+            }
+            {!drugData.substitutePermitted && <div className="brandSub">✓</div>}
+            
+          </section>
+
+          {/* Script ID or authority Rx number should go above the medication once finalised, and perhaps with a border bottom */}
+          <section className="medication">
+            <div data-testid="drugName" className="medication__activeIngredient">
+              {formatDrug(drugData.activeIngredient, drugData.brandName)}
             </div>
-            <div className="patient__contactDetails">
-              <div className="patient__fullName">{patientData.fullName}</div>
-              <div className="patient__streetAddress">{`${patientData.subpremise} ${patientData.streetAddress}`}</div>
-              <div className="patient__addressLine2">{`${patientData.suburb} ${patientData.state} ${patientData.postcode}`}</div>
+            <div className="medication__dosage">{drugData.dosage}</div>
+            <div className="quantityRepeats">
+              <div className="medication__quantity">{`Quantity: ${drugData.quantity}`}</div>
+              <div className="medication__repeats">{`${drugData.repeats} repeats`}</div>
             </div>
-          </div>
-        </section>
+            <span className="item-printed">1 item printed</span>
+          </section>
+          {/* Will only ever be 1 item printed, so consider omitting this */}
 
-        <section className="miscellaneous">
-          {/* Include Script ID and Authority Rx number here */}
-          <div className="date">{formatDate()}</div>
-          {drugData.pbsRx 
-            ? <div className="pbsSelected"><img src={tickbox} alt="" /></div>
-            : <div className="nonPbs"><span className="nonPbs-marker">XXXXXXXXXXX</span>Non-PBS</div>
-          }
-          {!drugData.substitutePermitted && <div className="brandSub">✓</div>}
-          
-        </section>
+          <section className="provider-lower">
+            {/* Used to display provider details next to, or below signature space */}
+            <div className="provider__fullName">{`${providerData.prefix ? 'Dr' : ''} ${providerData.fullName}`}</div>
+            {/* Qualifications should only be included in the lower section */}
+            <div className="provider__qualifications">{providerData.qualifications}</div>
+            <div className="practitionerTick">🗸</div>
+          </section>
 
-        {/* Script ID or authority Rx number should go above the medication once finalised, and perhaps with a border bottom */}
-        <section className="medication">
-          <div data-testid="drugName" className="medication__activeIngredient">
-            {formatDrug(drugData.activeIngredient, drugData.brandName)}
-          </div>
-          <div className="medication__dosage">{drugData.dosage}</div>
-          <div className="quantityRepeats">
-            <div className="medication__quantity">{`Quantity: ${drugData.quantity}`}</div>
-            <div className="medication__repeats">{`${drugData.repeats} repeats`}</div>
-          </div>
-          <span className="item-printed">1 item printed</span>
-        </section>
-        {/* Will only ever be 1 item printed, so consider omitting this */}
-
-        <section className="provider-lower">
-          {/* Used to display provider details next to, or below signature space */}
-          <div className="provider__fullName">{`${providerData.prefix ? 'Dr' : ''} ${providerData.fullName}`}</div>
-          {/* Qualifications should only be included in the lower section */}
-          <div className="provider__qualifications">{providerData.qualifications}</div>
-          <div className="practitionerTick">🗸</div>
-        </section>
-
-        {/* Wastes space to render authority section for non-authority required scripts, so render only as needed */}
-        {drugData.authRequired && <section className="authority">
-          <div className="authority__approvalCode">{`Authority Approval No: ${miscData.authCode}`}</div>
-          {/* Optional sections below - not sure how useful these are in this day and age */}
-          {/* <div className="authority__authorised">Authorised:</div>
-          <div className="authority__delegate">Delegate...............</div> */}
-        </section>}
-      </div>
-      <div className="right-container">
-        <section className="provider-upper">
-          <div className="container">
-            <div className="provider__contact-upper">
-              <div className="provider__fullName">{`${providerData.prefix ? 'Dr' : ''} ${providerData.fullName}`}</div>
-              {formatProvAddress()}
-              <div className="provider__addressLine2">
-                {`${providerData.suburb} ${providerData.state} ${providerData.postcode}`}
+          {/* Wastes space to render authority section for non-authority required scripts, so render only as needed */}
+          {drugData.authRequired && <section className="authority">
+            <div className="authority__approvalCode">{`Authority Approval No: ${miscData.authCode}`}</div>
+            {/* Optional sections below - not sure how useful these are in this day and age */}
+            {/* <div className="authority__authorised">Authorised:</div>
+            <div className="authority__delegate">Delegate...............</div> */}
+          </section>}
+        </div>
+        <div className="right-container">
+          <section className="provider-upper">
+            <div className="container">
+              <div className="provider__contact-upper">
+                <div className="provider__fullName">{`${providerData.prefix ? 'Dr' : ''} ${providerData.fullName}`}</div>
+                {formatProvAddress()}
+                <div className="provider__addressLine2">
+                  {`${providerData.suburb} ${providerData.state} ${providerData.postcode}`}
+                </div>
+              </div>
+              <div className="provider__contact-lower">
+                <div className="provider__prescriberNumber">{providerData.prescriberNumber}</div>
+                <div data-testid="phone" className="provider__phoneNumber">
+                  {`Phone: ${formatPhoneNumber(providerData.phoneNumber)}`}
+                </div>
               </div>
             </div>
-            <div className="provider__contact-lower">
-              <div className="provider__prescriberNumber">{providerData.prescriberNumber}</div>
-              <div data-testid="phone" className="provider__phoneNumber">
-                {`Phone: ${formatPhoneNumber(providerData.phoneNumber)}`}
+          </section>
+
+          <section className="patient">
+            <div className="container">
+              <div className="patient__medicareNumber">
+                {`${patientData.medicareNumber.substring(0, 4)} ${patientData.medicareNumber.substring(4, 9)} ${patientData.medicareNumber.substring(9, 10)}-${patientData.medicareRefNumber}`}
+              </div>
+              <div className="patient__contactDetails">
+                <div className="patient__fullName">{patientData.fullName}</div>
+                <div className="patient__streetAddress">{`${patientData.subpremise} ${patientData.streetAddress}`}</div>
+                <div className="patient__addressLine2">{`${patientData.suburb} ${patientData.state} ${patientData.postcode}`}</div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <section className="patient">
-          <div className="container">
-            <div className="patient__medicareNumber">
-              {`${patientData.medicareNumber.substring(0, 4)} ${patientData.medicareNumber.substring(4, 9)} ${patientData.medicareNumber.substring(9, 10)}-${patientData.medicareRefNumber}`}
+          <section className="miscellaneous">
+            {/* Include Script ID and Authority Rx number here */}
+            <div className="date">{formatDate()}</div>
+            {drugData.pbsRx 
+              ? <div className="pbsSelected"><img src={tickbox} alt="" /></div>
+              : <div className="nonPbs"><span className="nonPbs-marker">XXXXXXXXXXX</span>Non-PBS</div>
+            }
+            {!drugData.substitutePermitted && <div className="brandSub">✓</div>}
+            
+          </section>
+
+          {/* Script ID or authority Rx number should go above the medication once finalised, and perhaps with a border bottom */}
+          <section className="medication">
+            <div data-testid="drugName" className="medication__activeIngredient">
+              {formatDrug(drugData.activeIngredient, drugData.brandName)}
             </div>
-            <div className="patient__contactDetails">
-              <div className="patient__fullName">{patientData.fullName}</div>
-              <div className="patient__streetAddress">{`${patientData.subpremise} ${patientData.streetAddress}`}</div>
-              <div className="patient__addressLine2">{`${patientData.suburb} ${patientData.state} ${patientData.postcode}`}</div>
+            <div className="medication__dosage">{drugData.dosage}</div>
+            <div className="quantityRepeats">
+              <div className="medication__quantity">{`Quantity: ${drugData.quantity}`}</div>
+              <div className="medication__repeats">{`${drugData.repeats} repeats`}</div>
             </div>
-          </div>
-        </section>
+            <span className="item-printed">1 item printed</span>
+          </section>
+          {/* Will only ever be 1 item printed, so consider omitting this */}
 
-        <section className="miscellaneous">
-          {/* Include Script ID and Authority Rx number here */}
-          <div className="date">{formatDate()}</div>
-          {drugData.pbsRx 
-            ? <div className="pbsSelected"><img src={tickbox} alt="" /></div>
-            : <div className="nonPbs"><span className="nonPbs-marker">XXXXXXXXXXX</span>Non-PBS</div>
-          }
-          {!drugData.substitutePermitted && <div className="brandSub">✓</div>}
-          
-        </section>
+          <section className="provider-lower">
+            {/* Used to display provider details next to, or below signature space */}
+            <div className="provider__fullName">{`${providerData.prefix ? 'Dr' : ''} ${providerData.fullName}`}</div>
+            {/* Qualifications should only be included in the lower section */}
+            <div className="provider__qualifications">{providerData.qualifications}</div>
+            {/* <div className="practitionerTick">🗸</div> */}
+          </section>
 
-        {/* Script ID or authority Rx number should go above the medication once finalised, and perhaps with a border bottom */}
-        <section className="medication">
-          <div data-testid="drugName" className="medication__activeIngredient">
-            {formatDrug(drugData.activeIngredient, drugData.brandName)}
-          </div>
-          <div className="medication__dosage">{drugData.dosage}</div>
-          <div className="quantityRepeats">
-            <div className="medication__quantity">{`Quantity: ${drugData.quantity}`}</div>
-            <div className="medication__repeats">{`${drugData.repeats} repeats`}</div>
-          </div>
-          <span className="item-printed">1 item printed</span>
-        </section>
-        {/* Will only ever be 1 item printed, so consider omitting this */}
-
-        <section className="provider-lower">
-          {/* Used to display provider details next to, or below signature space */}
-          <div className="provider__fullName">{`${providerData.prefix ? 'Dr' : ''} ${providerData.fullName}`}</div>
-          {/* Qualifications should only be included in the lower section */}
-          <div className="provider__qualifications">{providerData.qualifications}</div>
-          {/* <div className="practitionerTick">🗸</div> */}
-        </section>
-
-        {/* Wastes space to render authority section for non-authority required scripts, so render only as needed */}
-        {drugData.authRequired && <section className="authority">
-          <div className="authority__approvalCode">{`Authority Approval No: ${miscData.authCode}`}</div>
-          {/* Optional sections below - not sure how useful these are in this day and age */}
-          {/* <div className="authority__authorised">Authorised:</div>
-          <div className="authority__delegate">Delegate...............</div> */}
-        </section>}
-      </div>
-      
+          {/* Wastes space to render authority section for non-authority required scripts, so render only as needed */}
+          {drugData.authRequired && <section className="authority">
+            <div className="authority__approvalCode">{`Authority Approval No: ${miscData.authCode}`}</div>
+            {/* Optional sections below - not sure how useful these are in this day and age */}
+            {/* <div className="authority__authorised">Authorised:</div>
+            <div className="authority__delegate">Delegate...............</div> */}
+          </section>}
+        </div>
+      </> : <h3 className="RxTemplate__subtitle">Fill out the form to generate Rx</h3>}
       
     </StyledRxTemplate>
   );
