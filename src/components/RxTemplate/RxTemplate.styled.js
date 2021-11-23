@@ -6,6 +6,16 @@ const StyledRxTemplate = styled.div`
   font-family: Arial, Helvetica, sans-serif;
   font-size: 15px;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .RxTemplate__title {
+    font-size: 1.8rem;
+    margin: 1.5rem 0 1rem 0;
+    padding: 0;
+  }
 
   /* Remove this in prod (img element will be removed) */
   img {
@@ -16,6 +26,9 @@ const StyledRxTemplate = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    width: 80%;
+    margin-bottom: 2rem;
+    line-height: 1.3rem;
 
     .pbsSelected, 
     .nonPbs-marker, 
@@ -25,15 +38,17 @@ const StyledRxTemplate = styled.div`
         display: none;
     }
 
-    .medication {
-      margin-bottom: 1rem;
+    .medication, .patient, .provider-upper {
+      
     }
+  
 
     h4 {
-      border-bottom: 1px solid #000;
+      border-bottom: 1px solid #cecece;
       padding-bottom: 0.3rem;
-      width: 50%;
       font-size: 1.4rem;
+      margin-bottom: 1rem;
+      color: #142d53;
     }
   }
 
@@ -41,6 +56,7 @@ const StyledRxTemplate = styled.div`
 
   .RxTemplate__btns {
     margin-left: 4rem;
+    margin-bottom: 2rem;
 
     .RxTemplate__btn {
       border-radius: 4px;
