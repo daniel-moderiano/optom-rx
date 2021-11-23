@@ -13,6 +13,10 @@ const StyledHeader = styled.header`
     }
   }
 
+  @media print {
+    display: none;
+  }
+
   /* Can also include nav styling here */
 `
 

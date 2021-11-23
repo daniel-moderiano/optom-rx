@@ -1,13 +1,14 @@
 import { StyledRxTemplate } from "./RxTemplate.styled";
 import Rx from '../../assets/template-sized.jpg';
 import tickbox from '../../assets/tickbox.svg';
-import { useLocation } from "react-router";
+import { useLocation, useHistory } from "react-router";
 
 const RxTemplate = ({ data }) => {
   // Deconstructing for cleanliness of code and easier-to-understand operations
   const { drugData, patientData, providerData, miscData } = data;
 
   const { state } = useLocation();
+  let history = useHistory();
   
 
   const formatPhoneNumber = (phoneNumber) => {
@@ -79,11 +80,13 @@ const RxTemplate = ({ data }) => {
     return `${miscData.date.substring(8)}/${miscData.date.substring(5, 7)}/${miscData.date.substring(0, 4)}`;
   }
 
-
+  const editForm = () => {
+    history.push('/');
+  }
 
   return (
     <StyledRxTemplate className="RxTemplate">
-      <h1 className="RxTemplate__title">Review your prescription</h1>
+      <h2 className="RxTemplate__title">Review your prescription</h2>
       {/* If the template is rendered without a full set of data, many functions will fail. Hence this is rendered conditionally */}
       {state.validData ? <>
         <img src={Rx} alt="" />
@@ -232,6 +235,10 @@ const RxTemplate = ({ data }) => {
             {/* <div className="authority__authorised">Authorised:</div>
             <div className="authority__delegate">Delegate...............</div> */}
           </section>}
+        </div>
+        <div className="RxTemplate__btns">
+          <button className="RxTemplate__btn" onClick={editForm}>Make changes</button>
+          <button className="RxTemplate__btn" onClick={() => window.print()}>Print</button>
         </div>
       </> : <h3 className="RxTemplate__subtitle">Fill out the form to generate Rx</h3>}
       

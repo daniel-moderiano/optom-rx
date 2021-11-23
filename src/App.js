@@ -3,7 +3,6 @@ import Header from "./components/Header/Header";
 import GlobalStyles from "./components/utils/globalStyles";
 import RxForm from './components/RxForm/RxForm';
 import RxTemplate from './components/RxTemplate/RxTemplate'
-import Modal from "./components/Modal/Modal";
 import { useState, useEffect } from "react";
 import { Switch, Route, useHistory } from "react-router";
 import About from './components/About/About'

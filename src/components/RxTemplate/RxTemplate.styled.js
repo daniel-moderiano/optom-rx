@@ -47,9 +47,11 @@ const StyledRxTemplate = styled.div`
     /* width: 902px;
     height: 1275px; */
 
-    h3 {
+    h2, h3, .RxTemplate__btns {
       display: none;
     }
+
+
 
     img {
       position: absolute;

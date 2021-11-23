@@ -5,11 +5,6 @@ body {
 
 @media print {
 
-  /* Ensures only the Rx template is visible when printing. This is modifiable list as more elements are added to App.js */
-  .Header, .main, .footer {
-    display: none;
-  }
-
   * {
     margin: 0;
     padding: 0;
