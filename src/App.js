@@ -12,7 +12,19 @@ const App = () => {
   const [data, setData] = useState({
     drugData: {},
     patientData: {},
-    providerData: {},
+    providerData: {
+      "prefix": true,
+      "fullName":"Daniel Moderiano",
+      "qualifications":"BMedSc(VisSc), MOpt",
+      "practiceName":"Specsavers West Lakes",
+      "streetAddress":"111 West Lakes Boulevard",
+      "subpremise":"Shop 218",
+      "suburb":"Modbury",
+      "postcode":"5092",
+      "state":"SA",
+      "phoneNumber":"0882345678",
+      "prescriberNumber":"7033149",
+    },
     miscData: {},
   });
 
@@ -88,10 +100,6 @@ const App = () => {
     }
 
     history.push(location);
-  }
-
-  const dataTransfer = () => {
-
   }
 
   // const dummyData = {

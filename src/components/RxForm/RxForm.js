@@ -52,6 +52,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
     includeBrand: false,    // Indicates whether brand name should be included on the Rx
     pbsRx: true,    // Indicates whether this is a PBS prescription 
     compounded: false,
+    ...existingData.drugData,
   });
 
   // Note this will eventually be modified to match the address autocomplete data returned
@@ -64,32 +65,23 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
     state: '',
     medicareNumber: '',
     medicareRefNumber: '',
+    ...existingData.patientData,
   });
 
   // Not all of this data will be required
   const [providerData, setProviderData] = useState({
-    // prefix: false,
-    // fullName: '',
-    // qualifications: '',
-    // practiceName: '',
-    // streetAddress: '',
-    // subpremise: '',
-    // suburb: '',
-    // postcode: '',
-    // state: '',
-    // phoneNumber: '',
-    // prescriberNumber: '',
-    "prefix": true,
-    "fullName":"Daniel Moderiano",
-    "qualifications":"BMedSc(VisSc), MOpt",
-    "practiceName":"Specsavers West Lakes",
-    "streetAddress":"111 West Lakes Boulevard",
-    "subpremise":"Shop 218",
-    "suburb":"Modbury",
-    "postcode":"5092",
-    "state":"SA",
-    "phoneNumber":"0882345678",
-    "prescriberNumber":"7033149"
+    prefix: false,
+    fullName: '',
+    qualifications: '',
+    practiceName: '',
+    streetAddress: '',
+    subpremise: '',
+    suburb: '',
+    postcode: '',
+    state: '',
+    phoneNumber: '',
+    prescriberNumber: '',
+    ...existingData.providerData,
   });
 
   const [miscData, setMiscData] = useState({
