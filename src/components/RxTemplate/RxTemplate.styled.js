@@ -104,11 +104,14 @@ const StyledRxTemplate = styled.div`
     position: relative;
     margin: 0;
     padding: 0;
+    display: block;
     /* width: 902px;
     height: 1275px; */
 
     h2, h3, h4, button, .RxTemplate__btns {
       display: none;
+      margin: 0;
+      padding: 0;
     }
 
     img {
@@ -124,6 +127,9 @@ const StyledRxTemplate = styled.div`
     }
 
     .left-container {
+      display: block;
+      margin: 0;
+      line-height: normal;
       
       .container {
         position: relative;
