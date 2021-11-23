@@ -492,23 +492,25 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
         />
 
         <FormField 
-          fieldType="number" 
+          fieldType="text" 
           name="quantity"
           label="Quantity" 
           placeholder="Enter quantity"
           value={drugData.quantity} 
           onChange={(event) => handleChange(setDrugData, event)} 
           alert={drugAlerts.quantity}
+          className="quantity-field form-field"
         />
 
         <FormField 
-          fieldType="number" 
+          fieldType="text" 
           name="repeats"
           label="Repeats" 
           placeholder="Enter repeats"
           value={drugData.repeats} 
           onChange={(event) => handleChange(setDrugData, event)} 
           alert={drugAlerts.repeats}
+          className="repeats-field form-field"
         />
 
         
@@ -551,6 +553,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
           onChange={(event) => handleChange(setPatientData, event)} 
           alert={patientAlerts.medicareNumber}
           maxlength="10"
+          className="medicareNumber-field form-field"
         />
 
         {/* Validation dictates only a single digit from 1-9 */}
@@ -563,6 +566,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
           onChange={(event) => handleChange(setPatientData, event)} 
           alert={patientAlerts.medicareRefNumber}
           maxlength="1"
+          className="irn-field form-field"
         />
       </fieldset>
 

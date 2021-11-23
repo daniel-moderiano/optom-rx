@@ -31,7 +31,7 @@ const FormField = (props) => {
 
 FormField.defaultProps = {
   fieldType: 'text',
-  className: '',
+  className: 'form-field',
   alert: {},
 }
 

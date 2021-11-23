@@ -212,7 +212,7 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
     <StyledDrugAutocomplete className="autocomplete-container">
       <div className="autocomplete-group">
         <FormField 
-          className="DrugAutocomplete"
+          className="DrugAutocomplete form-field"
           id="activeIngredient"
           name="activeIngredient"
           label="Medication" 

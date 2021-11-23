@@ -161,7 +161,7 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider, alerts, se
           onChange={handleChange} 
           id={provider ? 'autocomplete-provider' : 'autocomplete-patient'}
           alert={alerts.streetAddress}
-          className="street-address"
+          className="street-address form-field"
         />
         <button type="button" onClick={() => setExpand(true)}>Enter manually</button>
       </div>
@@ -193,6 +193,7 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider, alerts, se
           value={data.state} 
           onChange={handleChange} 
           alert={alerts.state}
+          className="state-field form-field"
         />
 
         <FormField 
@@ -202,6 +203,7 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider, alerts, se
           value={data.postcode} 
           onChange={handleChange} 
           alert={alerts.postcode}
+          className="postcode-field form-field"
         />
       </fieldset>
     </StyledAddressAutocomplete>
