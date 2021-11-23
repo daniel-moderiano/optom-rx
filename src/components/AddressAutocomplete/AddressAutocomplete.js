@@ -6,7 +6,7 @@ import { StyledAddressAutocomplete } from "./AddressAutocomplete.styled";
 
 // ! Google places API does not work when the page is changed via React router DOM, page must be reloaded when switching to form
 
-const AddressAutocomplete = ({ data, setData, handleChange, provider, alerts, setAlerts }) => {
+const AddressAutocomplete = ({ data, setData, handleChange, provider, alerts, setAlerts, googleLoaded }) => {
   // Use this to control whether the additional address fields should be expanded or not
   const [expand, setExpand] = useState(false);
 
@@ -120,17 +120,20 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider, alerts, se
       }
     }
 
-    // Add new autocomplete capability/session to input
-    autocomplete = new google.maps.places.Autocomplete(input, {
-      // Restrict search to Australian addresses only
-      componentRestrictions: { 'country': ['AU'] },
-      // Restrict to basic data only, which includes more than the below fields, just be wary to always restrict this
-      fields: ['address_components', 'name', 'formatted_address', 'adr_address', 'geometry'],
-    });
+    if (googleLoaded) {
+      console.log('Adding autocomplete');
+      // Add new autocomplete capability/session to input
+      autocomplete = new google.maps.places.Autocomplete(input, {
+        // Restrict search to Australian addresses only
+        componentRestrictions: { 'country': ['AU'] },
+        // Restrict to basic data only, which includes more than the below fields, just be wary to always restrict this
+        fields: ['address_components', 'name', 'formatted_address', 'adr_address', 'geometry'],
+      });
 
-    // Listen for the user to click on one of the suggested dropdown places
-    autocomplete.addListener('place_changed', onPlaceChanged);
-  }, [fillAddress, provider, setAlerts])
+      // Listen for the user to click on one of the suggested dropdown places
+      autocomplete.addListener('place_changed', onPlaceChanged);
+    }
+  }, [fillAddress, provider, setAlerts, googleLoaded])
  
   return (
     <StyledAddressAutocomplete>

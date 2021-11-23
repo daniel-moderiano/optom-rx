@@ -7,7 +7,7 @@ import DrugAutocomplete from "../DrugAutocomplete/DrugAutocomplete";
 // ! Multiple optometrist items are not permitted to be prescribed on the same form; each must use an individual form
 // TODO: consider producing a modal with the Rx template when user clicks generate Rx. Than have buttons for print or edit. This avoids changing routes which affects the google API
 
-const RxForm = ({ handleSubmit }) => {
+const RxForm = ({ handleSubmit, googleLoaded }) => {
   // en-CA format provides date as YYYY-MM-DD consistent with HTML input to allow setting of the initial state with the current date
   const AuDate = new Date().toLocaleString("en-CA", { timeZone: "Australia/Adelaide" }).substring(0, 10);
 
@@ -789,6 +789,7 @@ const RxForm = ({ handleSubmit }) => {
           provider={false}   
           alerts={patientAlerts}
           setAlerts={setPatientAlerts} 
+          googleLoaded={googleLoaded}
         />
 
         {/* Validation requires a 10-digit number. Further checks are beyond the scopy of this application */}
@@ -857,6 +858,7 @@ const RxForm = ({ handleSubmit }) => {
           provider={true}   
           alerts={providerAlerts}
           setAlerts={setProviderAlerts} 
+          googleLoaded={googleLoaded}
         />
 
         {/* Because this is intended for use only in Australia, present and validate phone numbers in national format, which includes 10 digits for landline and mobile numbers, as follows: 02 1234 4321 [telephone], or 0400 000 000 [mobile]. Note that 13 numbers may be 6 or 10 digits, and indicates an Australia wide number. This shouldn't be appropriate for any optical practices, but should be able to be inputted regardless */}

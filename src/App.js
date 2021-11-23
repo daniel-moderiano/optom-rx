@@ -133,7 +133,8 @@ const App = () => {
       <main className="main">
         {/* {googleLoaded && <RxForm handleSubmit={handleSubmit}/>} */}
         <Switch>
-          {googleLoaded && <Route exact path="/" render={() => <RxForm handleSubmit={handleSubmit}/>}/>}
+          {/* {googleLoaded && <Route exact path="/" render={() => <RxForm handleSubmit={handleSubmit}/>}/>} */}
+          <Route exact path="/" render={() => <RxForm handleSubmit={handleSubmit} googleLoaded={googleLoaded}/>}/>
           <Route exact path="/about" render={() => <About />}/>
         </Switch>
       
