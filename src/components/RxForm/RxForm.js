@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import FormField from "../FormField/FormField";
 import AddressAutocomplete from "../AddressAutocomplete/AddressAutocomplete";
 import { StyledRxForm } from "./RxForm.styled";
@@ -38,8 +38,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
     prescriberNumber: {},
   });
 
-  // These states have been separated for better logic and avoiding too much nesting. Merge them on form submit
-  
+  // These states have been separated for better logic and avoiding too much nesting. However they still draw on any existing submitted data. Merge them on form submit
   const [drugData, setDrugData] = useState({
     activeIngredient: '',
     brandName: '',
@@ -120,8 +119,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
     ],
   });
 
-  // TODO: function to generate Authority prescription numbers
-
+  // UI functions
   const showErrorClass = (element) => {
     element.classList.add('error');
     element.classList.remove('success');
@@ -141,494 +139,11 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
     }));
   };
 
-  // Take any seven digit base number and convert it to a valid PBS authority prescription number
-  const generateAuthRxNumber = (baseNumber) => {
-    if (typeof baseNumber === 'number') {
-      baseNumber = baseNumber.toString()
-    }
-    // AuthNo format must be a 7 digit number followed by a check digit that is the remainder of dividing the sum of the digits of the base number by 9
-    const reducer = (previousValue, currentValue) => parseInt(previousValue) + parseInt(currentValue);
-    const sum = baseNumber.split('').reduce(reducer)
-    const checkDigit = sum % 9;
-
-    return `${baseNumber}${checkDigit}`;
-  }
-
-  useEffect(() => {
-    // Event propagation will capture all focusout events from patient form
-    const patientDataValidation = () => {
-      document.querySelector('.patient-form').addEventListener('focusout', (event) => {
-        const { name, value } = event.target
-        switch (true) {
-          case name === 'fullName':
-            // Validate full name here
-            if (value.trim().length === 0) {
-              setPatientAlerts((prevAlerts) => ({
-                ...prevAlerts,
-                fullName: {
-                  message: "This field cannot be left blank",
-                  type: 'error',
-                }
-              }));
-              showErrorClass(event.target);
-            } else {
-              // Positive feedback and remove errors
-              showSuccessClass(event.target);
-              setPatientAlerts((prevAlerts) => ({
-                ...prevAlerts,
-                fullName: {}
-              }));
-            }
-            break;
-
-            
-          case name === 'streetAddress':
-            if (value.trim().length === 0) {
-              setPatientAlerts((prevAlerts) => ({
-                ...prevAlerts,
-                streetAddress: {
-                  message: "This field cannot be left blank",
-                  type: 'error',
-                }
-              }));
-              showErrorClass(event.target);
-            } else {
-              showSuccessClass(event.target);
-              setPatientAlerts((prevAlerts) => ({
-                ...prevAlerts,
-                streetAddress: {}
-              }));
-            }
-            break;
-          
-          
-          case name === 'suburb':
-            if (value.trim().length === 0) {
-              setPatientAlerts((prevAlerts) => ({
-                ...prevAlerts,
-                suburb: {
-                  message: "This field cannot be left blank",
-                  type: 'error',
-                }
-              }));
-              showErrorClass(event.target);
-            } else {
-              showSuccessClass(event.target);
-              setPatientAlerts((prevAlerts) => ({
-                ...prevAlerts,
-                suburb: {}
-              }));
-            }
-            break;
-    
-          case name === 'state':
-            if (value.trim().length === 0) {
-              setPatientAlerts((prevAlerts) => ({
-                ...prevAlerts,
-                state: {
-                  message: "This field cannot be left blank",
-                  type: 'error',
-                }
-              }));
-              showErrorClass(event.target);
-            } else {
-              showSuccessClass(event.target);
-              setPatientAlerts((prevAlerts) => ({
-                ...prevAlerts,
-                state: {}
-              }));
-            }
-            break;
-    
-          case name === 'postcode':
-            if (value.trim().length === 0) {
-              setPatientAlerts((prevAlerts) => ({
-                ...prevAlerts,
-                postcode: {
-                  message: "This field cannot be left blank",
-                  type: 'error',
-                }
-              }));
-              showErrorClass(event.target);
-            } else {
-              // Positive feedback and remove errors
-              showSuccessClass(event.target);
-              setPatientAlerts((prevAlerts) => ({
-                ...prevAlerts,
-                postcode: {}
-              }));
-            }
-            break;
-
-          case name === 'medicareNumber':
-            // Check for exactly 10 digits
-            if (value.trim()[0] === '0') {
-              setPatientAlerts((prevAlerts) => ({
-                ...prevAlerts,
-                medicareNumber: {
-                  message: 'Medicare number must not start with zero',
-                  type: 'error',
-                }
-              }));
-              showErrorClass(event.target);
-            } else if (!(/^[0-9]{10}$/).test(value.trim())) {
-              setPatientAlerts((prevAlerts) => ({
-                ...prevAlerts,
-                medicareNumber: {
-                  message: 'Medicare number must be exactly 10 digits long',
-                  type: 'error',
-                }
-              }));
-              showErrorClass(event.target);
-            } else {
-              // Positive feedback and remove errors
-
-              showSuccessClass(event.target);
-              setPatientAlerts((prevAlerts) => ({
-                ...prevAlerts,
-                medicareNumber: {}
-              }));
-            }
-            break;
-
-          case name === 'medicareRefNumber':
-            // Check for digits 1-9, and only a single digit
-            if (!(/^[1-9]{1}$/).test(value.trim())) {
-              // Sets an alert object in the state, which will immediately cause the component to render an alert message
-              setPatientAlerts((prevAlerts) => ({
-                ...prevAlerts,
-                medicareRefNumber: {
-                  message: 'IRN must be a single digit between 1 through 9',
-                  type: 'error',
-                }
-              }));
-              showErrorClass(event.target);
-            } else {
-              setPatientAlerts((prevAlerts) => ({
-                ...prevAlerts,
-                medicareRefNumber: {}
-              }));
-              showSuccessClass(event.target);
-            }
-            break;
-        
-          default:
-            break;
-        }
-      });
-    };
-
-    patientDataValidation();
-
-    // Event propagation will capture all focusout events from patient form
-    const providerDataValidation = () => {
-      document.querySelector('.provider-form').addEventListener('focusout', (event) => {
-        const { name, value } = event.target
-        switch (true) {
-          case name === 'fullName':
-            // Validate full name here
-            if (value.trim().length === 0) {
-              setProviderAlerts((prevAlerts) => ({
-                ...prevAlerts,
-                fullName: {
-                  message: "This field cannot be left blank",
-                  type: 'error',
-                }
-              }));
-              showErrorClass(event.target);
-            } else {
-              // Positive feedback and remove errors
-              showSuccessClass(event.target);
-              setProviderAlerts((prevAlerts) => ({
-                ...prevAlerts,
-                fullName: {}
-              }));
-            }
-            break;
-
-          case name === 'streetAddress':
-            if (value.trim().length === 0) {
-              setProviderAlerts((prevAlerts) => ({
-                ...prevAlerts,
-                streetAddress: {
-                  message: "This field cannot be left blank",
-                  type: 'error',
-                }
-              }));
-              showErrorClass(event.target);
-            } else {
-              showSuccessClass(event.target);
-              setProviderAlerts((prevAlerts) => ({
-                ...prevAlerts,
-                streetAddress: {}
-              }));
-            }
-            break;
-          
-          
-          case name === 'suburb':
-            if (value.trim().length === 0) {
-              setProviderAlerts((prevAlerts) => ({
-                ...prevAlerts,
-                suburb: {
-                  message: "This field cannot be left blank",
-                  type: 'error',
-                }
-              }));
-              showErrorClass(event.target);
-            } else {
-              showSuccessClass(event.target);
-              setProviderAlerts((prevAlerts) => ({
-                ...prevAlerts,
-                suburb: {}
-              }));
-            }
-            break;
-    
-          case name === 'state':
-            if (value.trim().length === 0) {
-              setProviderAlerts((prevAlerts) => ({
-                ...prevAlerts,
-                state: {
-                  message: "This field cannot be left blank",
-                  type: 'error',
-                }
-              }));
-              showErrorClass(event.target);
-            } else {
-              showSuccessClass(event.target);
-              setProviderAlerts((prevAlerts) => ({
-                ...prevAlerts,
-                state: {}
-              }));
-            }
-            break;
-    
-          case name === 'postcode':
-            if (value.trim().length === 0) {
-              setProviderAlerts((prevAlerts) => ({
-                ...prevAlerts,
-                postcode: {
-                  message: "This field cannot be left blank",
-                  type: 'error',
-                }
-              }));
-              showErrorClass(event.target);
-            } else {
-              // Positive feedback and remove errors
-              showSuccessClass(event.target);
-              setProviderAlerts((prevAlerts) => ({
-                ...prevAlerts,
-                postcode: {}
-              }));
-            }
-            break;
-          
-
-          case name === 'phoneNumber':
-            // Consider trimming the input of any spaces, hyphens, or parens
-            if (!(/^((0[2-8]\d{8})|(13(00|\d{4})(\d{6})?))$/).test(value.trim())) {
-              if (value.substring(0, 2) === '13') {
-                // Provide business specific error message
-                setProviderAlerts((prevAlerts) => ({
-                  ...prevAlerts,
-                  phoneNumber: {
-                    message: 'Australian business numbers are either 6 digits and begin with 13, or 10 digits and begin with 1300',
-                    type: 'error',
-                  }
-                }));
-              } else {
-                // Provide general error message
-                setProviderAlerts((prevAlerts) => ({
-                  ...prevAlerts,
-                  phoneNumber: {
-                    message: 'Australian phone numbers contain 10 digits and begin with 02, 03, 04, 07 or 08',
-                    type: 'error',
-                  }
-                }));
-              }
-              showErrorClass(event.target);
-            } else {
-              // Positive feedback and remove errors
-              showSuccessClass(event.target);
-              setProviderAlerts((prevAlerts) => ({
-                ...prevAlerts,
-                phoneNumber: {}
-              }));
-            }
-            break;
-
-          case name === 'prescriberNumber':
-            // Check for digits only
-            if (!(/^[0-9]{7}$/).test(value.trim())) {
-              // Sets an alert object in the state, which will immediately cause the component to render an alert message
-              setProviderAlerts((prevAlerts) => ({
-                ...prevAlerts,
-                prescriberNumber: {
-                  message: 'Prescriber number must be a seven digit number',
-                  type: 'error',
-                }
-              }));
-              showErrorClass(event.target);
-            } else {
-              setProviderAlerts((prevAlerts) => ({
-                ...prevAlerts,
-                prescriberNumber: {}
-              }));
-              showSuccessClass(event.target);
-            }
-            break;
-        
-          default:
-            break;
-        }
-      });
-    };
-
-    providerDataValidation();
-
-    // Event propagation will capture all focusout events from patient form
-    // TODO: decide whether it is worth implementing inline validation for the brand name field
-    const drugDataValidation = () => {
-      document.querySelector('.drug-form').addEventListener('focusout', (event) => {
-        const { name, value } = event.target
-        switch (true) {
-          case name === 'activeIngredient':
-            if (value.trim().length === 0) {
-              setDrugAlerts((prevAlerts) => ({
-                ...prevAlerts,
-                activeIngredient: {
-                  message: "This field cannot be left blank",
-                  type: 'error',
-                }
-              }));
-              showErrorClass(event.target);
-            } else {
-              showSuccessClass(event.target);
-              setDrugAlerts((prevAlerts) => ({
-                ...prevAlerts,
-                activeIngredient: {}
-              }));
-            }
-            break;
-
-          case name === 'brandName':
-            if (value.trim().length > 0) {
-              event.target.classList.remove('error')
-              setDrugAlerts((prevAlerts) => ({
-                ...prevAlerts,
-                brandName: {}
-              }));
-            }
-            break;
-            
-
-          // Quantity must be greater than zero, but < 10
-          case name === 'quantity':
-            if (value.trim().length === 0) {
-              setDrugAlerts((prevAlerts) => ({
-                ...prevAlerts,
-                quantity: {
-                  message: "This field cannot be left blank",
-                  type: 'error',
-                }
-              }));
-              showErrorClass(event.target);
-            } else {
-              // Positive feedback and remove errors
-              showSuccessClass(event.target);
-              setDrugAlerts((prevAlerts) => ({
-                ...prevAlerts,
-                quantity: {}
-              }));
-            }
-            break;
-
-          // Can be zero, and for non-PBS prescriptions, there is technically no upper limits
-          case name === 'repeats':
-            if (value.trim().length === 0) {
-              setDrugAlerts((prevAlerts) => ({
-                ...prevAlerts,
-                repeats: {
-                  message: "This field cannot be left blank",
-                  type: 'error',
-                }
-              }));
-              showErrorClass(event.target);
-            } else if (!(/^0$|^([1-9]{1,})$/).test(value.trim())) {
-              setDrugAlerts((prevAlerts) => ({
-                ...prevAlerts,
-                repeats: {
-                  message: "Please enter a valid number of repeats (may be zero)",
-                  type: 'error',
-                }
-              }));
-              showErrorClass(event.target);
-            } else {
-              // Positive feedback and remove errors
-              showSuccessClass(event.target);
-              setDrugAlerts((prevAlerts) => ({
-                ...prevAlerts,
-                repeats: {}
-              }));
-            }
-            break;
-        
-          case name === 'dosage':
-            if (value.trim().length === 0) {
-              setDrugAlerts((prevAlerts) => ({
-                ...prevAlerts,
-                dosage: {
-                  message: "This field cannot be left blank",
-                  type: 'error',
-                }
-              }));
-              showErrorClass(event.target);
-            } else {
-              // Positive feedback and remove errors
-              showSuccessClass(event.target);
-              setDrugAlerts((prevAlerts) => ({
-                ...prevAlerts,
-                dosage: {}
-              }));
-            }
-            break;        
-          default:
-            break;
-        }
-      });
-    };
-
-    drugDataValidation();
-  }, []);
-
-  // Check remove a visible error or alert from the brand name input where it changes from being required to not
-  useEffect(() => {
-    if (!drugData.includeBrand && !drugData.brandOnly) {
-      document.querySelector('#brandName').classList.remove('error');
-      setDrugAlerts((prevAlerts) => ({
-        ...prevAlerts,
-        brandName: {}
-      }));
-    };
-    // It is optional to include a function here that provides a warning when one of these are checked to true and the brand name input is empty, but this is opposite to expected user flow and will likely cause annoyance more than anything else
-  }, [drugData.includeBrand, drugData.brandOnly]);
-
-  const toggleBooleanState = (setFunc, data, boolToChange) => {
-    let newState = true;
-    if (data[boolToChange]) {
-      newState = false;
-    }
-    setFunc((prevData) => ({
-      ...prevData,
-      [boolToChange]: newState,
-    }));
-  };
-
-  const validateFieldForEmpty = (setFunc, field) => {
+  // Will return true or false depending on whether the validated field is empty (not valid/false) or not
+  const validateFieldForEmpty = (setFuncAlert, field) => {
     // Validate full name here
     if (field.value.trim().length === 0) {
-      setFunc((prevAlerts) => ({
+      setFuncAlert((prevAlerts) => ({
         ...prevAlerts,
         [field.name]: {
           message: "This field cannot be left blank",
@@ -642,6 +157,244 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
     }
   }
 
+  // Show positive feedback once a validation requirements are met
+  const positiveInlineValidation = useCallback((setAlertFunc, field) => {
+    showSuccessClass(field);
+    setAlertFunc((prevAlerts) => ({
+      ...prevAlerts,
+      [field.name]: {}
+    }));
+  }, []);
+
+  // Show positive feedback once a validation requirements are met
+  const negativeInlineValidation = useCallback((setAlertFunc, alertMsg, field) => {
+    showErrorClass(field);
+    setAlertFunc((prevAlerts) => ({
+      ...prevAlerts,
+      [field.name]: {
+        message: alertMsg,
+        type: 'error',
+      }
+    }));
+  }, []);
+
+  // Provide positive and negative feedback for a field requiring any non-empty input
+  const validateRequiredField = useCallback((setAlertFunc, field) => {
+    // Validate full name here
+    if (field.value.trim().length === 0) {
+      setAlertFunc((prevAlerts) => ({
+        ...prevAlerts,
+        [field.name]: {
+          message: "This field cannot be left blank",
+          type: 'error',
+        }
+      }));
+      showErrorClass(field);
+    } else {
+      showSuccessClass(field);
+      setAlertFunc((prevAlerts) => ({
+        ...prevAlerts,
+        [field.name]: {}
+      }));
+    }
+  }, []);
+
+
+
+  // TODO: function to generate Authority prescription numbers
+  // Take any seven digit base number and convert it to a valid PBS authority prescription number
+  const generateAuthRxNumber = (baseNumber) => {
+    if (typeof baseNumber === 'number') {
+      baseNumber = baseNumber.toString()
+    }
+    // AuthNo format must be a 7 digit number followed by a check digit that is the remainder of dividing the sum of the digits of the base number by 9
+    const reducer = (previousValue, currentValue) => parseInt(previousValue) + parseInt(currentValue);
+    const sum = baseNumber.split('').reduce(reducer)
+    const checkDigit = sum % 9;
+
+    return `${baseNumber}${checkDigit}`;
+  }
+
+  // Inline form validation
+  useEffect(() => {
+    // Event propagation will capture all focusout events from patient form
+    const drugDataValidation = () => {
+      document.querySelector('.drug-form').addEventListener('focusout', (event) => {
+        const { name, value } = event.target
+        switch (true) {
+          case name === 'activeIngredient':
+            validateRequiredField(setDrugAlerts, event.target);
+            break;
+
+          case name === 'brandName':
+            if (value.trim().length > 0) {
+              event.target.classList.remove('error')
+              setDrugAlerts((prevAlerts) => ({
+                ...prevAlerts,
+                brandName: {}
+              }));
+            }
+            break;
+
+          case name === 'quantity':
+            validateRequiredField(setDrugAlerts, event.target);
+            break;
+
+          // Can be zero, and for non-PBS prescriptions, there is technically no upper limits
+          case name === 'repeats':
+            if (value.trim().length === 0) {
+              negativeInlineValidation(setDrugAlerts, 'This field cannot be left blank', event.target);
+            } else if (!(/^0$|^([1-9]{1,})$/).test(value.trim())) {
+              negativeInlineValidation(setDrugAlerts, 'Please enter a valid number of repeats (may be zero)', event.target);
+            } else {
+              positiveInlineValidation(setDrugAlerts, event.target);
+            }
+            break;
+        
+          case name === 'dosage':
+            validateRequiredField(setDrugAlerts, event.target);
+            break;        
+          default:
+            break;
+        }
+      });
+    };
+
+    const patientDataValidation = () => {
+      document.querySelector('.patient-form').addEventListener('focusout', (event) => {
+        const { name, value } = event.target
+        switch (true) {
+          case name === 'fullName':
+            validateRequiredField(setPatientAlerts, event.target);
+            break;
+
+          case name === 'streetAddress':
+            validateRequiredField(setPatientAlerts, event.target);
+            break;
+          
+          case name === 'suburb':
+            validateRequiredField(setPatientAlerts, event.target);
+            break;
+    
+          case name === 'state':
+            validateRequiredField(setPatientAlerts, event.target);
+            break;
+    
+          case name === 'postcode':
+            validateRequiredField(setPatientAlerts, event.target);
+            break;
+
+          case name === 'medicareNumber':
+            // Check for exactly 10 digits
+            if (value.trim()[0] === '0') {
+              negativeInlineValidation(setPatientAlerts, 'Medicare number cannot start with zero', event.target);
+              showErrorClass(event.target);
+            } else if (!(/^[0-9]{10}$/).test(value.trim())) {
+              negativeInlineValidation(setPatientAlerts, 'Medicare number must be exactly 10 digits long', event.target);
+            } else {
+              positiveInlineValidation(setPatientAlerts, event.target);
+            }
+            break;
+
+          case name === 'medicareRefNumber':
+            // Check for digits 1-9, and only a single digit
+            if (!(/^[1-9]{1}$/).test(value.trim())) {
+              negativeInlineValidation(setPatientAlerts, 'IRN must be a single digit between 1 through 9', event.target);
+            } else {
+              positiveInlineValidation(setPatientAlerts, event.target);
+            }
+            break;
+        
+          default:
+            break;
+        }
+      });
+    };
+
+    const providerDataValidation = () => {
+      document.querySelector('.provider-form').addEventListener('focusout', (event) => {
+        const { name, value } = event.target
+        switch (true) {
+          case name === 'fullName':
+            validateRequiredField(setProviderAlerts, event.target);
+            break;
+
+          case name === 'streetAddress':
+            validateRequiredField(setProviderAlerts, event.target);
+            break;
+          
+          case name === 'suburb':
+            validateRequiredField(setProviderAlerts, event.target);
+            break;
+    
+          case name === 'state':
+            validateRequiredField(setProviderAlerts, event.target);
+            break;
+    
+          case name === 'postcode':
+            validateRequiredField(setProviderAlerts, event.target);
+            break;
+
+          case name === 'phoneNumber':
+            // Consider trimming the input of any spaces, hyphens, or parens
+            if (!(/^((0[2-8]\d{8})|(13(00|\d{4})(\d{6})?))$/).test(value.trim())) {
+              if (value.substring(0, 2) === '13') {
+                // Provide business specific error message
+                negativeInlineValidation(setProviderAlerts, 'Australian business numbers are either 6 digits and begin with 13, or 10 digits and begin with 1300', event.target);
+              } else {
+                // Provide general error message
+                negativeInlineValidation(setProviderAlerts, 'Australian phone numbers contain 10 digits and begin with 02, 03, 04, 07 or 08', event.target);
+              }
+            } else {
+              positiveInlineValidation(setProviderAlerts, event.target);
+            }
+            break;
+
+          case name === 'prescriberNumber':
+            // Check for digits only
+            if (!(/^[0-9]{7}$/).test(value.trim())) {
+              // Sets an alert object in the state, which will immediately cause the component to render an alert message
+              negativeInlineValidation(setProviderAlerts, 'Prescriber number must be a seven digit number', event.target);
+            } else {
+              positiveInlineValidation(setProviderAlerts, event.target);
+            }
+            break;
+        
+          default:
+            break;
+        }
+      });
+    };
+
+    patientDataValidation();
+    providerDataValidation();
+    drugDataValidation();
+  }, [validateRequiredField, positiveInlineValidation, negativeInlineValidation]);
+
+  // Check remove a visible error or alert from the brand name input where it changes from being required to not
+  useEffect(() => {
+    if (!drugData.includeBrand && !drugData.brandOnly) {
+      document.querySelector('#brandName').classList.remove('error');
+      setDrugAlerts((prevAlerts) => ({
+        ...prevAlerts,
+        brandName: {}
+      }));
+    };
+    // It is optional to include a function here that provides a warning when one of these are checked to true and the brand name input is empty, but this is opposite to expected user flow and will likely cause annoyance more than anything else
+  }, [drugData.includeBrand, drugData.brandOnly]);
+
+  // Used to toggle any boolean data in the data states
+  const toggleBooleanState = (setFunc, data, boolToChange) => {
+    let newState = true;
+    if (data[boolToChange]) {
+      newState = false;
+    }
+    setFunc((prevData) => ({
+      ...prevData,
+      [boolToChange]: newState,
+    }));
+  };
+
   // Ensure form is validated before calling form submission function (to generate Rx)
   const checkFormValidation = () => {
     let valid = true;
@@ -652,22 +405,25 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
 
     requiredFields.drug.forEach((field) => {
       const input = drugForm.querySelector(`[name="${field}"]`);
-      if (!validateFieldForEmpty(setDrugAlerts, input)) {
+      if (input.value.trim().length === 0) {
         valid = false;
+        negativeInlineValidation(setDrugAlerts, 'This field cannot be left blank', input);
       }
     });
 
     requiredFields.patient.forEach((field) => {
       const input = patientForm.querySelector(`[name="${field}"]`);
-      if (!validateFieldForEmpty(setPatientAlerts, input)) {
+      if (input.value.trim().length === 0) {
         valid = false;
+        negativeInlineValidation(setPatientAlerts, 'This field cannot be left blank', input);
       }
     });
 
     requiredFields.provider.forEach((field) => {
       const input = providerForm.querySelector(`[name="${field}"]`);
-      if (!validateFieldForEmpty(setProviderAlerts, input)) {
+      if (input.value.trim().length === 0) {
         valid = false;
+        negativeInlineValidation(setProviderAlerts, 'This field cannot be left blank', input);
       }
     });
 
