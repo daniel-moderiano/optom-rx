@@ -200,7 +200,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
   }, []);
 
 
-
   // TODO: function to generate Authority prescription numbers
   // Take any seven digit base number and convert it to a valid PBS authority prescription number
   const generateAuthRxNumber = (baseNumber) => {
@@ -369,6 +368,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
     patientDataValidation();
     providerDataValidation();
     drugDataValidation();
+
   }, [validateRequiredField, positiveInlineValidation, negativeInlineValidation]);
 
   // Check remove a visible error or alert from the brand name input where it changes from being required to not
