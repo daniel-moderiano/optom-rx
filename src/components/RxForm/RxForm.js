@@ -503,8 +503,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
       />
 
 
-      <Fieldset className="drug-form">
-        <legend className="drug-form__title">Medication</legend>
+      <Fieldset className="drug-form" legend="Medication Details">
 
         <DrugAutocomplete 
           data={drugData}
@@ -558,8 +557,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
       </Fieldset>
 
       {/* Enter the patient Rx details */}
-      <Fieldset className="patient-form">
-        <legend className="patient-form__title">Patient Details</legend>
+      <Fieldset className="patient-form" legend="Patient Details">
       {/* Legal requirements include only the patient's name and address */}
       {/* Patient Medicare number is however required for ALL PBS Rx, and should be included in general so that the patient may claim under PBS where this price is cheaper. All Aus are valid private prescriptions however. */}
 
@@ -614,14 +612,12 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
       </Fieldset>
 
       {/* Enter the provider details */}
-      <Fieldset className="provider-form">
-        <legend className="provider-form__title">Provider Details</legend>
+      <Fieldset className="provider-form" legend="Provider Details">
+
         {/* ! Legal requirements include the prescriber's name, address, and contact details, and prescriber num
         You may also give them the option of adding qualifications */}
         {/* Consider a separate practice name field in the address section for providers, or even a Shop/Building # field? */}
-        
-          
-
+      
         <FormField 
           fieldType="text" 
           name="fullName"

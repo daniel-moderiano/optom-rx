@@ -11,11 +11,11 @@ const StyledFormField = styled.div`
     font-size: 1rem;
 
     &.error {
-      border: 2px solid var(--error);
+      border: 0.1rem solid var(--error);
     }
 
     &.success {
-      border: 2px solid var(--success);
+      border: 0.1rem solid var(--success);
     }
   }
 
@@ -24,7 +24,7 @@ const StyledFormField = styled.div`
   }
 
   input:focus {
-    outline: 2px solid #183052;
+    outline: 2px solid #c675d1;
     outline-offset: 2px;
   }
 
@@ -53,19 +53,20 @@ const StyledFormField = styled.div`
     label {
       display: grid;
       grid-template-areas: "checkbox label";
-      grid-template-columns: 1.5rem auto;
+      grid-template-columns: 1.8rem auto;
       align-items: center;
       
       .label-text {
         grid-area: label;
+        padding-top: 0.05rem;
       }
 
       input {
         grid-area: checkbox;
         margin: 0;
         padding: 0;
-        height: 19px;
-        width: 19px;
+        height: 18px;
+        width: 18px;
         appearance: none;
         -webkit-appearance: none;
 	      -moz-appearance: none;
@@ -92,10 +93,10 @@ const StyledFormField = styled.div`
         position: absolute;
         width: 5px;
         height: 10px;
-        top: 4px;
+        top: 3px;
         left: 7px;
         border: solid white;
-        border-width: 0 3px 3px 0;
+        border-width: 0 2px 2px 0;
         -webkit-transform: rotate(45deg);
         -ms-transform: rotate(45deg);
         transform: rotate(45deg);

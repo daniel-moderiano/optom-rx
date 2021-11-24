@@ -3,7 +3,7 @@ import styled from "styled-components";
 const StyledFieldset = styled.fieldset`
   border: none;
   margin: 0;
-  padding: 1rem;
+  padding: 3rem 1rem 2.5rem 4rem;
   background-color: #fff;
   display: flex;
   flex-direction: column;
@@ -12,8 +12,8 @@ const StyledFieldset = styled.fieldset`
   legend {
     float: left;    // Moves the legend within the fieldset
     padding: 0;
-    margin-bottom: 1rem;
     font-size: 1.4rem;
+    margin-bottom: 0.7rem;
   }
 
 `

@@ -29,7 +29,12 @@ const FormField = (props) => {
       {Object.keys(alert).length > 0 && 
       // Consider adding a cross icon above in the label for visually impaired users
         <div className="alert-container">
-          <svg className="alert-icon alert-icon-error" xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 0 24 24" width="18px" fill="#c40000"><path d="M11 15h2v2h-2v-2zm0-8h2v6h-2V7zm.99-5C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" className="alert-icon alert-icon--error" viewBox="0 0 512 512" width="16px">
+            <title>Warning</title>
+            <path d="M85.57 446.25h340.86a32 32 0 0028.17-47.17L284.18 82.58c-12.09-22.44-44.27-22.44-56.36 0L57.4 399.08a32 32 0 0028.17 47.17z" fill="none" stroke="#c40000" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32"/>
+            <path d="M250.26 195.39l5.74 122 5.73-121.95a5.74 5.74 0 00-5.79-6h0a5.74 5.74 0 00-5.68 5.95z" fill="none" stroke="#c40000" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32"/>
+            <path fill="#c40000" d="M256 397.25a20 20 0 1120-20 20 20 0 01-20 20z"/>
+          </svg>
           <span className={`alert alert--${alert.type}`}>{alert.message}</span>
         </div>
       }
