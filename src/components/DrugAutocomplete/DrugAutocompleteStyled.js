@@ -3,10 +3,10 @@ import styled from "styled-components";
 const StyledDrugAutocomplete = styled.fieldset`
   position: relative;
   background-color: #fff;
-  width: 600px;
   border: none;
   margin: 0;
   padding: 0;
+  width: 24rem;
 
   input {
     width: 100%;
@@ -45,12 +45,12 @@ const StyledDrugAutocomplete = styled.fieldset`
   .autocomplete-group {
     position: relative;
     /* This will affect 'Enter Manually' button placement */
-    height: 5.4rem;
+    height: 5.8rem;
   }
 
   button {
     position: absolute;
-    right: 0;
+    right: 0.3rem;
     bottom: 0;
     background-color: #fff;
     border: none;

@@ -157,6 +157,41 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
     }
   }
 
+  const formatAddressState = (stateInput) => {
+    let formatted = '';
+    switch (true) {
+      case (/South Australia/i).test(stateInput):
+        formatted = 'SA'
+        break;
+      
+      case (/Queensland/i).test(stateInput):
+      formatted = 'QLD'
+      break;
+
+      case (/New South Wales/i).test(stateInput):
+        formatted = 'NSW'
+        break;
+
+      case (/Tasmania/i).test(stateInput):
+        formatted = 'TAS'
+        break;
+
+      case (/Victoria/i).test(stateInput):
+        formatted = 'VIC'
+        break;
+
+      case (/Western Australia/i).test(stateInput):
+        formatted = 'WA'
+        break;
+
+      default:
+        formatted = stateInput;
+        break;
+    }
+
+    return formatted;
+  }
+
   // Show positive feedback once a validation requirements are met
   const positiveInlineValidation = useCallback((setAlertFunc, field) => {
     showSuccessClass(field);
@@ -276,6 +311,10 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
             break;
     
           case name === 'state':
+            setPatientData((prevData) => ({
+              ...prevData, 
+              [name]: formatAddressState(value), 
+            }));
             validateRequiredField(setPatientAlerts, event.target);
             break;
     
@@ -327,6 +366,10 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
             break;
     
           case name === 'state':
+            setProviderData((prevData) => ({
+              ...prevData, 
+              [name]: formatAddressState(value), 
+            }));
             validateRequiredField(setProviderAlerts, event.target);
             break;
     
