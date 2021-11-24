@@ -193,7 +193,7 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider, alerts, se
           value={data.state} 
           onChange={handleChange} 
           alert={alerts.state}
-          className="state-field form-field"
+          className="form-field"
         />
 
         <FormField 
@@ -203,7 +203,7 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider, alerts, se
           value={data.postcode} 
           onChange={handleChange} 
           alert={alerts.postcode}
-          className="postcode-field form-field"
+          className="postcode-field"
         />
       </div>
     </StyledAddressAutocomplete>
