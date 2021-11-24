@@ -157,6 +157,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
     }
   }
 
+  // Ensure final address entered is formatted with abbreviated state code
   const formatAddressState = (stateInput) => {
     let formatted = '';
     switch (true) {
@@ -521,13 +522,13 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
           label="PBS" 
           onChange={() => toggleBooleanState(setDrugData, drugData, 'pbsRx')}
           checked={drugData.pbsRx}
+          className="checkbox"
         />  
         {/* Must include quantity and repeats to meet requirements */}
         <FormField 
           fieldType="text" 
           name="dosage"
-          label="Dosage" 
-          placeholder="Enter dosage"
+          label="Dosage directions" 
           value={drugData.dosage} 
           onChange={(event) => handleChange(setDrugData, event)} 
           alert={drugAlerts.dosage}
@@ -537,7 +538,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
           fieldType="number" 
           name="quantity"
           label="Quantity" 
-          placeholder="Enter quantity"
           value={drugData.quantity} 
           onChange={(event) => handleChange(setDrugData, event)} 
           alert={drugAlerts.quantity}
@@ -548,7 +548,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
           fieldType="number" 
           name="repeats"
           label="Repeats" 
-          placeholder="Enter repeats"
           value={drugData.repeats} 
           onChange={(event) => handleChange(setDrugData, event)} 
           alert={drugAlerts.repeats}
@@ -569,7 +568,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
           fieldType="text" 
           name="fullName"
           label="Full name" 
-          placeholder="Enter full name"
           value={patientData.fullName} 
           onChange={(event) => handleChange(setPatientData, event)} 
           alert={patientAlerts.fullName}
@@ -592,7 +590,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
             fieldType="text" 
             name="medicareNumber"
             label="Medicare number" 
-            placeholder="Enter medicare number"
             value={patientData.medicareNumber} 
             onChange={(event) => handleChange(setPatientData, event)} 
             alert={patientAlerts.medicareNumber}
@@ -605,7 +602,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
             fieldType="text" 
             name="medicareRefNumber"
             label="IRN" 
-            placeholder="Enter reference number"
             value={patientData.medicareRefNumber} 
             onChange={(event) => handleChange(setPatientData, event)} 
             alert={patientAlerts.medicareRefNumber}
@@ -624,27 +620,29 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
         You may also give them the option of adding qualifications */}
         {/* Consider a separate practice name field in the address section for providers, or even a Shop/Building # field? */}
         
-        <FormField 
-          fieldType="checkbox" 
-          name="prefix"
-          label="Select if you wish to be listed as 'Dr' on the form" 
-          onChange={() => toggleBooleanState(setProviderData, providerData, 'prefix')}
-        />    
+          
 
         <FormField 
           fieldType="text" 
           name="fullName"
           label="Full name" 
-          placeholder="Enter full name"
           value={providerData.fullName} 
           onChange={(event) => handleChange(setProviderData, event)} 
           alert={providerAlerts.fullName}
         />    
 
         <FormField 
+          fieldType="checkbox" 
+          name="prefix"
+          label="Include 'Dr' in provider name" 
+          onChange={() => toggleBooleanState(setProviderData, providerData, 'prefix')}
+          className="checkbox"
+        />  
+
+        <FormField 
           fieldType="text" 
           name="qualifications"
-          label="Abbreviated qualifications - optional" 
+          label="Abbreviated qualifications (optional)" 
           placeholder="e.g. BMedSci(VisSc), MOpt"
           value={providerData.qualifications} 
           onChange={(event) => handleChange(setProviderData, event)} 
@@ -667,7 +665,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
           fieldType="text" 
           name="phoneNumber"
           label="Phone number" 
-          placeholder="Enter phone number"
           value={providerData.phoneNumber} 
           onChange={(event) => handleChange(setProviderData, event)} 
           alert={providerAlerts.phoneNumber}
@@ -680,7 +677,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
           fieldType="text" 
           name="prescriberNumber"
           label="Prescriber number" 
-          placeholder="Enter prescriber number"
           value={providerData.prescriberNumber} 
           onChange={(event) => handleChange(setProviderData, event)} 
           alert={providerAlerts.prescriberNumber}

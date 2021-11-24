@@ -241,33 +241,37 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
         <FormField 
           fieldType="checkbox" 
           name="includeBrand"
-          label="Include brand name on the Rx" 
+          label="Include brand name on prescription" 
           onChange={() => toggle(setData, data, 'includeBrand')}
           checked={data.includeBrand}
+          className="checkbox"
         /> 
 
         <FormField 
           fieldType="checkbox" 
           name="brandOnly"
-          label="Prescribe this medication by brand name only" 
+          label="Prescribe by brand name only" 
           onChange={() => toggle(setData, data, 'brandOnly')}
           checked={data.brandOnly}
+          className="checkbox"
         />       
 
         <FormField 
           fieldType="checkbox" 
           name="substitutePermitted"
-          label="Select to allow brand substitution" 
+          label="Brand substitution not permitted" 
           onChange={() => toggle(setData, data, 'substitutePermitted')}
           checked={data.substitutePermitted}
+          className="checkbox"
         />     
 
         <FormField 
           fieldType="checkbox" 
           name="compounded"
-          label="Select if this medication needs to be compounded" 
+          label="To be compounded" 
           onChange={() => toggle(setData, data, 'compounded')}
           checked={data.compounded}
+          className="checkbox"
         />  
 
         

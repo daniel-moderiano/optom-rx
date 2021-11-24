@@ -147,7 +147,6 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider, alerts, se
       {provider && <FormField 
         name="practiceName"
         label="Practice name" 
-        placeholder="Enter practice name"
         value={data.practiceName} 
         onChange={handleChange} 
       />}
@@ -172,7 +171,6 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider, alerts, se
           id={provider ? 'subpremise-provider' : 'subpremise-patient'}
           name="subpremise"
           label="Apartment, unit, shop, suite, or floor #" 
-          placeholder="Enter"
           value={data.subpremise} 
           onChange={handleChange} 
         />
@@ -180,7 +178,6 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider, alerts, se
         <FormField 
           name="suburb"
           label="Suburb" 
-          placeholder="patient suburb"
           value={data.suburb} 
           onChange={handleChange} 
           alert={alerts.suburb}
@@ -189,7 +186,6 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider, alerts, se
         <FormField 
           name="state"
           label="State" 
-          placeholder="Enter state"
           value={data.state} 
           onChange={handleChange} 
           alert={alerts.state}
@@ -199,7 +195,6 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider, alerts, se
         <FormField 
           name="postcode"
           label="Postcode" 
-          placeholder="Enter postcode"
           value={data.postcode} 
           onChange={handleChange} 
           alert={alerts.postcode}
