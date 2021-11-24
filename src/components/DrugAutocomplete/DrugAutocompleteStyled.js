@@ -4,6 +4,9 @@ const StyledDrugAutocomplete = styled.fieldset`
   position: relative;
   background-color: #fff;
   width: 600px;
+  border: none;
+  margin: 0;
+  padding: 0;
 
   input {
     width: 100%;

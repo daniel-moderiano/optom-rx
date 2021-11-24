@@ -1,9 +1,16 @@
 import styled from "styled-components";
 
 const StyledAddressAutocomplete = styled.fieldset`
+
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: 24rem;
+  
+
   /* Show and hide classes control the sub-fields display (i.e. fields other than autocomplete) */
   .show {
-    display: block;
+    display: flex;
   }
 
   .hide {
@@ -12,12 +19,12 @@ const StyledAddressAutocomplete = styled.fieldset`
 
   .autocomplete-group {
     position: relative;
-    /* This will affect address not listed button placement */
-    height: 5.4rem;
+    /* This will affect 'Enter manually' button placement */
+    height: 5.6rem;
+  }
 
-    .street-address {
-      margin-bottom: 0.5rem;
-    }
+  .address-collapse {
+    flex-direction: column;
   }
 
   button {
