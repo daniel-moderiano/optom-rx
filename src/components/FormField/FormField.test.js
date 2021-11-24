@@ -1,5 +1,16 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import FormField from './FormField'
+
+beforeEach(() => {
+  jest.spyOn(console, 'error')
+  // @ts-ignore jest.spyOn adds this functionallity
+  console.error.mockImplementation(() => null);
+});
+
+afterEach(() => {
+  // @ts-ignore jest.spyOn adds this functionallity
+  console.error.mockRestore()
+})
 
 describe('Alert tests', () => {
   test('Alert is not rendered by default', () => {

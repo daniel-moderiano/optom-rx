@@ -215,7 +215,7 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
           className="DrugAutocomplete form-field"
           id="activeIngredient"
           name="activeIngredient"
-          label="Medication" 
+          label="Active ingredient" 
           placeholder="Enter active ingredient or brand name"
           value={data.activeIngredient} 
           onChange={(event) => {

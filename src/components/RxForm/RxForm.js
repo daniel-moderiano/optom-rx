@@ -1,3 +1,4 @@
+/*global google*/ // Used to ignore the breaking 'google isn't defined' error
 import { useState, useEffect, useCallback } from "react";
 import FormField from "../FormField/FormField";
 import AddressAutocomplete from "../AddressAutocomplete/AddressAutocomplete";
@@ -7,8 +8,6 @@ import DrugAutocomplete from "../DrugAutocomplete/DrugAutocomplete";
 // ! Multiple optometrist items are not permitted to be prescribed on the same form; each must use an individual form
 
 const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
-  // en-CA format provides date as YYYY-MM-DD consistent with HTML input to allow setting of the initial state with the current date
-  
 
   const [drugAlerts, setDrugAlerts] = useState({
     name: {},
@@ -287,7 +286,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
           case name === 'medicareNumber':
             // Check for exactly 10 digits
             if (value.trim()[0] === '0') {
-              negativeInlineValidation(setPatientAlerts, 'Medicare number cannot start with zero', event.target);
+              negativeInlineValidation(setPatientAlerts, 'Medicare number must not start with zero', event.target);
               showErrorClass(event.target);
             } else if (!(/^[0-9]{10}$/).test(value.trim())) {
               negativeInlineValidation(setPatientAlerts, 'Medicare number must be exactly 10 digits long', event.target);
@@ -492,7 +491,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
         />
 
         <FormField 
-          fieldType="text" 
+          fieldType="number" 
           name="quantity"
           label="Quantity" 
           placeholder="Enter quantity"
@@ -503,7 +502,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
         />
 
         <FormField 
-          fieldType="text" 
+          fieldType="number" 
           name="repeats"
           label="Repeats" 
           placeholder="Enter repeats"
