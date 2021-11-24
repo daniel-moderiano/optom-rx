@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
 const StyledFormField = styled.div`
-  margin-bottom: 1rem;
+  margin: 1rem 0;
 
   input {
-    margin-top: 0.5rem 0 0 0;
+    margin-top: 0.5rem;
     padding: 0.75rem 0.85rem 0.7rem 0.85rem;   
     border: 1px solid rgb(144, 147, 150);
     border-radius: 4px;

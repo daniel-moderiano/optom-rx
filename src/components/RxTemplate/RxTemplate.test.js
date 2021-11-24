@@ -1,6 +1,17 @@
 import { render, screen } from "@testing-library/react";
 import RxTemplate from './RxTemplate';
 
+beforeEach(() => {
+  jest.spyOn(console, 'error')
+  // @ts-ignore jest.spyOn adds this functionallity
+  console.error.mockImplementation(() => null);
+});
+
+afterEach(() => {
+  // @ts-ignore jest.spyOn adds this functionallity
+  console.error.mockRestore()
+})
+
 const dataMobile = {
   "drugData": {
       "activeIngredient":"latanoprost 0.005% eye drops, 2.5 mL",

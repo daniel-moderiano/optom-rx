@@ -227,7 +227,7 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
         <button type="button" onClick={() => setExpand(true)}>Enter manually</button>
       </div>
       {/* TODO: consider an expandable menu set similar to address autocomplete that breaks up active ingredient and brand name, with a checkbox to ask if brand name should be included, and potentially a select menu on the brand input */}
-      <fieldset className={`drug-collapse ${expand ? 'show' : 'hide'}`}>
+      <div className={`drug-collapse ${expand ? 'show' : 'hide'}`}>
         <FormField 
           id="brandName"
           name="brandName"
@@ -271,7 +271,7 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
         />  
 
         
-      </fieldset>
+      </div>
     </StyledDrugAutocomplete>
   );
 };

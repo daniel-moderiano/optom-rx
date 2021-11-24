@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const StyledDrugAutocomplete = styled.div`
+const StyledDrugAutocomplete = styled.fieldset`
   position: relative;
   background-color: #fff;
   width: 600px;

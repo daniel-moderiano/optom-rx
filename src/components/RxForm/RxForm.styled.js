@@ -5,18 +5,27 @@ const StyledRxForm = styled.form`
   display: flex;
   justify-content: center;
   flex-direction: column;
+  max-width: 880px;
+  width: 90%;
 
-  fieldset {
-    border: none;
-    margin: 0;
-    padding: 0;
+  .medicareFields {
+    display: flex;
+
+    .medicareNumber-field {
+      width: 9rem;
+      margin-right: 1rem;
+    }
+
+    .irn-field {
+      width: 4rem;
+    }
   }
 
   .form-field {
     width: 24rem;
   }
 
-  .quantity-field, .repeats-field, .irn-field {
+  .quantity-field, .repeats-field {
     width: 5rem;
   }
 

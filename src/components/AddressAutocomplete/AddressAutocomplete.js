@@ -167,7 +167,7 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider, alerts, se
       </div>
       
 
-      <fieldset className={`address-collapse ${expand ? 'show' : 'hide'} ${provider ? 'address-collapse--provider' : ''}`}>
+      <div className={`address-collapse ${expand ? 'show' : 'hide'} ${provider ? 'address-collapse--provider' : ''}`}>
         <FormField 
           id={provider ? 'subpremise-provider' : 'subpremise-patient'}
           name="subpremise"
@@ -205,7 +205,7 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider, alerts, se
           alert={alerts.postcode}
           className="postcode-field form-field"
         />
-      </fieldset>
+      </div>
     </StyledAddressAutocomplete>
   )
 }

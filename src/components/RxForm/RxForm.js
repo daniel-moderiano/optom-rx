@@ -1,9 +1,9 @@
-/*global google*/ // Used to ignore the breaking 'google isn't defined' error
 import { useState, useEffect, useCallback } from "react";
 import FormField from "../FormField/FormField";
 import AddressAutocomplete from "../AddressAutocomplete/AddressAutocomplete";
 import { StyledRxForm } from "./RxForm.styled";
 import DrugAutocomplete from "../DrugAutocomplete/DrugAutocomplete";
+import Fieldset from "../utils/Fieldset/Fieldset";
 
 // ! Multiple optometrist items are not permitted to be prescribed on the same form; each must use an individual form
 
@@ -459,7 +459,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
       />
 
 
-      <fieldset className="drug-form">
+      <Fieldset className="drug-form">
         <legend className="drug-form__title">Medication</legend>
 
         <DrugAutocomplete 
@@ -513,10 +513,10 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
         />
 
         
-      </fieldset>
+      </Fieldset>
 
       {/* Enter the patient Rx details */}
-      <fieldset className="patient-form">
+      <Fieldset className="patient-form">
         <legend className="patient-form__title">Patient Details</legend>
       {/* Legal requirements include only the patient's name and address */}
       {/* Patient Medicare number is however required for ALL PBS Rx, and should be included in general so that the patient may claim under PBS where this price is cheaper. All Aus are valid private prescriptions however. */}
@@ -542,35 +542,40 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
           googleLoaded={googleLoaded}
         />
 
-        {/* Validation requires a 10-digit number. Further checks are beyond the scopy of this application */}
-        <FormField 
-          fieldType="text" 
-          name="medicareNumber"
-          label="Medicare number" 
-          placeholder="Enter medicare number"
-          value={patientData.medicareNumber} 
-          onChange={(event) => handleChange(setPatientData, event)} 
-          alert={patientAlerts.medicareNumber}
-          maxlength="10"
-          className="medicareNumber-field form-field"
-        />
+        {/* Fieldset may be more appropriate here? */}
+        <div className="medicareFields">
+          {/* Validation requires a 10-digit number. Further checks are beyond the scopy of this application */}
+          <FormField 
+            fieldType="text" 
+            name="medicareNumber"
+            label="Medicare number" 
+            placeholder="Enter medicare number"
+            value={patientData.medicareNumber} 
+            onChange={(event) => handleChange(setPatientData, event)} 
+            alert={patientAlerts.medicareNumber}
+            maxlength="10"
+            className="medicareNumber-field form-field"
+          />
 
-        {/* Validation dictates only a single digit from 1-9 */}
-        <FormField 
-          fieldType="text" 
-          name="medicareRefNumber"
-          label="IRN" 
-          placeholder="Enter reference number"
-          value={patientData.medicareRefNumber} 
-          onChange={(event) => handleChange(setPatientData, event)} 
-          alert={patientAlerts.medicareRefNumber}
-          maxlength="1"
-          className="irn-field form-field"
-        />
-      </fieldset>
+          {/* Validation dictates only a single digit from 1-9 */}
+          <FormField 
+            fieldType="text" 
+            name="medicareRefNumber"
+            label="IRN" 
+            placeholder="Enter reference number"
+            value={patientData.medicareRefNumber} 
+            onChange={(event) => handleChange(setPatientData, event)} 
+            alert={patientAlerts.medicareRefNumber}
+            maxlength="1"
+            className="irn-field form-field"
+          />
+        </div>
+
+        
+      </Fieldset>
 
       {/* Enter the provider details */}
-      <fieldset className="provider-form">
+      <Fieldset className="provider-form">
         <legend className="provider-form__title">Provider Details</legend>
         {/* ! Legal requirements include the prescriber's name, address, and contact details, and prescriber num
         You may also give them the option of adding qualifications */}
@@ -638,7 +643,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
           alert={providerAlerts.prescriberNumber}
           maxlength="7"
         />
-      </fieldset>
+      </Fieldset>
 
       <button type="submit">Generate Rx</button>
     </StyledRxForm>
