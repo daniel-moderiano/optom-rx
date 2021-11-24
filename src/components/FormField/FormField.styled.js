@@ -100,6 +100,14 @@ const StyledFormField = styled.div`
         -ms-transform: rotate(45deg);
         transform: rotate(45deg);
       }
+
+      .show {
+        display: block;
+      }
+
+      .hide {
+        display: none;
+      }
     }
 
     label:hover {
@@ -107,12 +115,29 @@ const StyledFormField = styled.div`
     }
   }
 
-  .alert--error {
-    color: var(--error);
-    font-size: 0.8rem;
-    padding: 0;
-    margin: 0;
+  .alert-container {
+    display: flex;
+    align-items: center;
+    margin-top: 0.3rem;
+
+    .alert {
+      padding-top: 2px;
+    }
+
+    .alert--error {
+      color: var(--error);
+      font-size: 0.8rem;
+    }
+
+    .alert-icon {
+      margin-right: 0.2rem;
+    }
+
+    
   }
+
+  
+
 `
 
 export { StyledFormField }
