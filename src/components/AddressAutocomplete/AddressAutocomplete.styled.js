@@ -39,6 +39,7 @@ const StyledAddressAutocomplete = styled.fieldset`
     padding: 0;
     font-size: 0.8rem;
     text-decoration: underline;
+    font-family: var(--font-stack);
 
     &:hover {
       cursor: pointer;

@@ -1,6 +1,27 @@
+@font-face {
+  font-family: 'Myriad Pro Light';
+  src: local('Myriad Pro Light'), url(./assets/myriad-pro/MyriadPro-Light.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Myriad Pro Bold';
+  src: local('Myriad Pro Bold'), url(./assets/myriad-pro/MYRIADPRO-BOLD.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Myriad Pro Regular';
+  src: local('Myriad Pro Regular'), url(./assets/myriad-pro/MYRIADPRO-REGULAR.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Segoe UI';
+  src: local('Segoe UI'), url(./assets/SEGOEUI.TTF) format('truetype');
+}
+
 body {
   margin: 0;
   padding: 0;
+  font-family: var(--font-stack);
 }
 
 .main {

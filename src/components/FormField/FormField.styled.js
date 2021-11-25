@@ -3,6 +3,7 @@ import styled from "styled-components";
 const StyledFormField = styled.div`
   margin: 1rem 0;
   position: relative;
+
   input {
     margin-top: 0.5rem;
     padding: 0.75rem 0.85rem 0.7rem 0.85rem;   
@@ -21,6 +22,7 @@ const StyledFormField = styled.div`
 
   input::placeholder {
     color: #808080;
+    font-family: var(--font-stack);
   }
 
   input:focus {
@@ -120,10 +122,6 @@ const StyledFormField = styled.div`
     display: flex;
     align-items: center;
     margin-top: 0.3rem;
-
-    .alert {
-      padding-top: 2px;
-    }
 
     .alert--error {
       color: var(--error);

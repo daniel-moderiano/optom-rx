@@ -12,8 +12,9 @@ const StyledFieldset = styled.fieldset`
   legend {
     float: left;    // Moves the legend within the fieldset
     padding: 0;
-    font-size: 1.4rem;
+    font-size: 1.8rem;
     margin-bottom: 0.7rem;
+    font-family: var(--font-title);
   }
 
 `
