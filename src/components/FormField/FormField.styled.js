@@ -4,9 +4,13 @@ const StyledFormField = styled.div`
   margin: 1rem 0;
   position: relative;
 
+  &.medicare-field {
+    
+  }
+
   input {
     margin-top: 0.5rem;
-    padding: 0.75rem 0.85rem 0.7rem 0.85rem;   
+    padding: 0.7rem 0.85rem 0.75rem 0.85rem;   
     border: 1px solid rgb(144, 147, 150);
     border-radius: 4px;
     font-size: 1rem;
@@ -133,6 +137,8 @@ const StyledFormField = styled.div`
       margin-right: 0.2rem;
     }
   }
+
+ 
 
   .tickCircle {
     position: absolute;

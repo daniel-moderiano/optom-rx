@@ -588,8 +588,9 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
             value={patientData.medicareNumber} 
             onChange={(event) => handleChange(setPatientData, event)} 
             alert={patientAlerts.medicareNumber}
+            subAlert={patientAlerts.medicareRefNumber}
             maxlength="10"
-            className="medicareNumber-field form-field"
+            className="medicareNumber-field medicare-field form-field"
           />
 
           {/* Validation dictates only a single digit from 1-9 */}
@@ -599,11 +600,11 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
             label="IRN" 
             value={patientData.medicareRefNumber} 
             onChange={(event) => handleChange(setPatientData, event)} 
-            alert={patientAlerts.medicareRefNumber}
+            // alert={patientAlerts.medicareRefNumber}
             maxlength="1"
-            className="irn-field form-field"
+            className="irn-field medicare-field form-field"
           />
-        </div>        
+        </div>     
       </Fieldset>
 
       {/* Enter the provider details */}

@@ -10,10 +10,14 @@ const StyledRxForm = styled.form`
 
   .medicareFields {
     display: flex;
+    position: relative;
 
     .medicareNumber-field {
       width: 9rem;
       margin-right: 1rem;
+      .alert-container {
+        width: 24rem;
+      }
     }
 
     .irn-field {
