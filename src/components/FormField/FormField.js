@@ -21,15 +21,15 @@ const FormField = (props) => {
               className={checked ? 'checked' : 'unchecked'}
             />
             {fieldType === ('checkbox') && <span className={`checkmark ${checked ? 'show' : 'hide'}`}></span>}
-
+            <svg xmlns="http://www.w3.org/2000/svg" className="tickCircle hide" viewBox="0 0 512 512">
+              <title>Checkmark Circle</title>
+              <path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" fill="#219653" stroke="#219653" strokeMiterlimit="10" strokeWidth="32"/>
+              <path fill="#219653" stroke="#fff" strokeLinecap="round" strokeLinejoin="round" strokeWidth="36" d="M352 176L217.6 336 160 272"/>
+            </svg>
         </label>
       </div>
 
-      {/* <svg xmlns="http://www.w3.org/2000/svg" className="tickCircle" viewBox="0 0 512 512">
-        <title>Checkmark Circle</title>
-        <path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" fill="#219653" stroke="#219653" stroke-miterlimit="10" stroke-width="32"/>
-        <path fill="#219653" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="36" d="M352 176L217.6 336 160 272"/>
-      </svg> */}
+      
 
       
       {/* Pass the alert prop as an object only where alerts are required (default null) that contains both the message to display in the alert, and the type of alert, e.g. error, warning, success */}

@@ -108,14 +108,6 @@ const StyledFormField = styled.div`
         -ms-transform: rotate(45deg);
         transform: rotate(45deg);
       }
-
-      .show {
-        display: block;
-      }
-
-      .hide {
-        display: none;
-      }
     }
 
     label:hover {
@@ -127,6 +119,7 @@ const StyledFormField = styled.div`
     display: flex;
     align-items: center;
     margin-top: 0.3rem;
+    width: 24rem;
 
     .alert--error {
       color: var(--error);
@@ -138,13 +131,19 @@ const StyledFormField = styled.div`
     }
   }
 
- 
+  .show {
+    display: block;
+  }
+
+  .hide {
+    display: none;
+  }
 
   .tickCircle {
     position: absolute;
     width: 15px;
     top: 21px;
-    left: 23.4rem;
+    right: -0.35rem;
   }
 `
 

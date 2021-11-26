@@ -102,6 +102,11 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider, alerts, se
           if (input.name !== 'subpremise') {
             input.classList.remove('error');
             input.classList.add('success');
+
+            // Add the tick icon
+            const tick = input.parentNode.querySelector('.tickCircle');
+            tick.classList.remove('hide');
+            tick.classList.add("show");
           }
         });
         setAlerts((prevAlerts) => ({

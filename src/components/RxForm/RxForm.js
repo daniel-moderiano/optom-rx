@@ -123,11 +123,21 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
   const showErrorClass = (element) => {
     element.classList.add('error');
     element.classList.remove('success');
+
+    // Remove the tick icon
+    const tick = element.parentNode.querySelector('.tickCircle');
+    tick.classList.remove('show');
+    tick.classList.add("hide");
   }
 
   const showSuccessClass = (element) => {
     element.classList.remove('error');
     element.classList.add('success');
+
+    // Add the tick icon
+    const tick = element.parentNode.querySelector('.tickCircle');
+    tick.classList.remove('hide');
+    tick.classList.add("show");
   }
 
   // Pass a set function to handle change, rather than hardcoding with a certain setState function
@@ -457,6 +467,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
 
     requiredFields.patient.forEach((field) => {
       const input = patientForm.querySelector(`[name="${field}"]`);
+
       if (input.value.trim().length === 0) {
         valid = false;
         negativeInlineValidation(setPatientAlerts, 'This field cannot be left blank', input);

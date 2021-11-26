@@ -15,9 +15,6 @@ const StyledRxForm = styled.form`
     .medicareNumber-field {
       width: 9rem;
       margin-right: 1rem;
-      .alert-container {
-        width: 24rem;
-      }
     }
 
     .irn-field {
