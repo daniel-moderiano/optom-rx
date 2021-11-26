@@ -20,10 +20,17 @@ const FormField = (props) => {
               checked={checked}
               className={checked ? 'checked' : 'unchecked'}
             />
-            {className.includes('checkbox') && <span className={`checkmark ${checked ? 'show' : 'hide'}`}></span>}
+            {fieldType === ('checkbox') && <span className={`checkmark ${checked ? 'show' : 'hide'}`}></span>}
+
         </label>
-        {/* <svg className="tick" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm4.59-12.42L10 14.17l-2.59-2.58L6 13l4 4 8-8z"/></svg> */}
       </div>
+
+      {/* <svg xmlns="http://www.w3.org/2000/svg" className="tickCircle" viewBox="0 0 512 512">
+        <title>Checkmark Circle</title>
+        <path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" fill="#219653" stroke="#219653" stroke-miterlimit="10" stroke-width="32"/>
+        <path fill="#219653" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="36" d="M352 176L217.6 336 160 272"/>
+      </svg> */}
+
       
       {/* Pass the alert prop as an object only where alerts are required (default null) that contains both the message to display in the alert, and the type of alert, e.g. error, warning, success */}
       {Object.keys(alert).length > 0 && 

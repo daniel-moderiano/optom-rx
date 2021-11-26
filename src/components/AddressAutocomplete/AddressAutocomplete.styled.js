@@ -5,6 +5,7 @@ const StyledAddressAutocomplete = styled.fieldset`
   margin: 0;
   padding: 0;
   width: 24rem;
+  position: relative;
 
   /* Show and hide classes control the sub-fields display (i.e. fields other than autocomplete) */
   .show {
@@ -13,12 +14,6 @@ const StyledAddressAutocomplete = styled.fieldset`
 
   .hide {
     display: none;
-  }
-
-  .autocomplete-group {
-    position: relative;
-    /* This will affect 'Enter manually' button placement */
-    height: 5.8rem;
   }
 
   .address-collapse {
@@ -32,14 +27,15 @@ const StyledAddressAutocomplete = styled.fieldset`
   button {
     position: absolute;
     right: 0.3rem;
-    bottom: 0rem;
+    top: 6rem;
     background-color: #fff;
     border: none;
     margin: 0;
     padding: 0;
     font-size: 0.8rem;
     text-decoration: underline;
-    font-family: var(--font-stack);
+    font-family: var(--font-stack-segoe);
+    line-height: 0.8rem;
 
     &:hover {
       cursor: pointer;

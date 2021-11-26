@@ -10,6 +10,7 @@ const StyledFormField = styled.div`
     border: 1px solid rgb(144, 147, 150);
     border-radius: 4px;
     font-size: 1rem;
+    font-family: var(--font-stack-segoe);
 
     &.error {
       border: 0.1rem solid var(--error);
@@ -22,11 +23,11 @@ const StyledFormField = styled.div`
 
   input::placeholder {
     color: #808080;
-    font-family: var(--font-stack);
+    font-family: var(--font-stack-segoe);
   }
 
   input:focus {
-    outline: 2px solid #c675d1;
+    outline: 2px solid #a360ac;
     outline-offset: 2px;
   }
 
@@ -131,12 +132,14 @@ const StyledFormField = styled.div`
     .alert-icon {
       margin-right: 0.2rem;
     }
-
-    
   }
 
-  
-
+  .tickCircle {
+    position: absolute;
+    width: 15px;
+    top: 21px;
+    left: 23.4rem;
+  }
 `
 
 export { StyledFormField }

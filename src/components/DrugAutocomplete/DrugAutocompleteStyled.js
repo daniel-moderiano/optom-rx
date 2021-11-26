@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 const StyledDrugAutocomplete = styled.fieldset`
   position: relative;
-  background-color: #fff;
   border: none;
   margin: 0;
   padding: 0;
@@ -42,16 +41,11 @@ const StyledDrugAutocomplete = styled.fieldset`
     display: none;
   }
 
-  .autocomplete-group {
-    position: relative;
-    /* This will affect 'Enter Manually' button placement */
-    height: 5.8rem;
-  }
 
   button {
     position: absolute;
     right: 0.3rem;
-    bottom: 0;
+    top: 6rem;
     background-color: #fff;
     border: none;
     margin: 0;
@@ -59,6 +53,7 @@ const StyledDrugAutocomplete = styled.fieldset`
     font-size: 0.8rem;
     text-decoration: underline;
     font-family: var(--font-stack);
+    line-height: 0.8rem;
 
     &:hover {
       cursor: pointer;

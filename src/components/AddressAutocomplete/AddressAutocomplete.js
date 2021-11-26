@@ -143,18 +143,11 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider, alerts, se
  
   return (
     <StyledAddressAutocomplete>
-      {/* Practice name is only relevant for providers, and even then you might consider omitting this, as there is really no room on the computerised for for practice name */}
-      {provider && <FormField 
-        name="practiceName"
-        label="Practice name" 
-        value={data.practiceName} 
-        onChange={handleChange} 
-      />}
-
-      <div className="autocomplete-group">
+      
+      {/* <div className="autocomplete-group"> */}
         <FormField
           name="streetAddress"
-          label="Street Address"
+          label="Street address"
           placeholder="Enter a location"
           value={data.streetAddress}
           onChange={handleChange} 
@@ -163,7 +156,7 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider, alerts, se
           className="street-address form-field"
         />
         <button type="button" onClick={() => setExpand(true)}>Enter manually</button>
-      </div>
+      {/* </div> */}
       
 
       <div className={`address-collapse ${expand ? 'show' : 'hide'} ${provider ? 'address-collapse--provider' : ''}`}>

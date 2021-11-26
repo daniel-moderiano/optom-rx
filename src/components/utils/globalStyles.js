@@ -5,7 +5,8 @@ const GlobalStyles = createGlobalStyle`
     --primary-color: #95c9e0;
     --error: #c40000;
     --success: #219653;
-    --font-stack: 'Segoe UI', Arial, Helvetica, sans-serif;
+    --font-stack-segoe: 'Segoe UI', Arial, Helvetica, sans-serif;
+    --font-stack-myriad: 'Myriad Pro Regular', Arial, Helvetica, sans-serif;
     --font-title: 'Myriad Pro Light', Arial, Helvetica, sans-serif;
   }
 

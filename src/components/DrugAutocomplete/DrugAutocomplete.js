@@ -210,7 +210,6 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
 
   return (
     <StyledDrugAutocomplete className="autocomplete-container">
-      <div className="autocomplete-group">
         <FormField 
           className="DrugAutocomplete form-field"
           id="activeIngredient"
@@ -225,7 +224,6 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
           alert={alerts.activeIngredient}
         />
         <button type="button" onClick={() => setExpand(true)}>Enter manually</button>
-      </div>
       {/* TODO: consider an expandable menu set similar to address autocomplete that breaks up active ingredient and brand name, with a checkbox to ask if brand name should be included, and potentially a select menu on the brand input */}
       <div className={`drug-collapse ${expand ? 'show' : 'hide'}`}>
         <FormField 

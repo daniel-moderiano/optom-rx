@@ -502,7 +502,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
         // alert={drugAlerts.dosage}
       />
 
-
       <Fieldset className="drug-form" legend="Medication Details">
 
         <DrugAutocomplete 
@@ -551,9 +550,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
           onChange={(event) => handleChange(setDrugData, event)} 
           alert={drugAlerts.repeats}
           className="repeats-field form-field"
-        />
-
-        
+        /> 
       </Fieldset>
 
       {/* Enter the patient Rx details */}
@@ -606,14 +603,11 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
             maxlength="1"
             className="irn-field form-field"
           />
-        </div>
-
-        
+        </div>        
       </Fieldset>
 
       {/* Enter the provider details */}
       <Fieldset className="provider-form" legend="Provider Details">
-
         {/* ! Legal requirements include the prescriber's name, address, and contact details, and prescriber num
         You may also give them the option of adding qualifications */}
         {/* Consider a separate practice name field in the address section for providers, or even a Shop/Building # field? */}
@@ -645,6 +639,14 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
           maxlength="40"
         />
 
+        {/* Practice name is only relevant for providers, and even then you might consider omitting this, as there is really no room on the computerised for for practice name */}
+        <FormField 
+          name="practiceName"
+          label="Practice name (optional)" 
+          value={providerData.practiceName} 
+          onChange={handleChange} 
+        />
+
         <AddressAutocomplete 
           data={providerData}
           setData={setProviderData}
@@ -668,7 +670,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
           maxlength="10"
         />
 
-        
         <FormField 
           fieldType="text" 
           name="prescriberNumber"
@@ -679,8 +680,10 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
           maxlength="7"
         />
       </Fieldset>
-
+      
       <button type="submit">Generate Rx</button>
+      
+      
     </StyledRxForm>
   )
 }
