@@ -36,6 +36,13 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
     prescriberNumber: {},
   });
 
+  const [miscAlerts, setMiscAlerts] = useState({
+    date: {},   
+    authRxNumber: {},    
+    authCode: {},    
+    scriptID: {},
+  });
+
   // These states have been separated for better logic and avoiding too much nesting. However they still draw on any existing submitted data. Merge them on form submit
   const [drugData, setDrugData] = useState({
     activeIngredient: '',
@@ -305,6 +312,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
       });
     };
 
+    // ! Medicare card validation should be dependent on PBS Rx yes/no. Not required if Rx is non PBS
     const patientDataValidation = () => {
       document.querySelector('.patient-form').addEventListener('focusout', (event) => {
         const { name, value } = event.target
@@ -419,6 +427,22 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
       });
     };
 
+    const miscDataValidation = () => {
+      document.querySelector('.pbs-form').addEventListener('focusout', (event) => {
+        const { name, value } = event.target
+        switch (true) {
+          case name === 'date':
+            validateRequiredField(setDrugAlerts, event.target);
+            break;
+
+          // TODO: validation for authority code where applicable. Potentially enable fields on auto-detect of restricted benefits, or make required on same criteria, but enable at all times
+
+          default:
+            break;
+        }
+      });
+    };
+
     patientDataValidation();
     providerDataValidation();
     drugDataValidation();
@@ -501,18 +525,8 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
         }
       }} 
       autoComplete="off">
-
       
-
-      <FormField 
-        fieldType="date" 
-        name="date"
-        label="Date" 
-        value={miscData.date} 
-        onChange={(event) => handleChange(setMiscData, event)} 
-        // alert={drugAlerts.dosage}
-      />
-
+      {/* Final product will provide only a dropdown to select provider, then prefill all info, with an edit button available */}
        <Fieldset className="provider-form" legend="Provider Details">
         {/* ! Legal requirements include the prescriber's name, address, and contact details, and prescriber num
         You may also give them the option of adding qualifications */}
@@ -655,15 +669,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
           setAlerts={setDrugAlerts}
         />
 
-        {/* TODO: PBS integration to identify which medications require authority, and auto-filling. Should appear while PBS Rx is true */}
-        <FormField 
-          fieldType="checkbox" 
-          name="pbsRx"
-          label="PBS prescription" 
-          onChange={() => toggleBooleanState(setDrugData, drugData, 'pbsRx')}
-          checked={drugData.pbsRx}
-          className="checkbox"
-        />  
         {/* Must include quantity and repeats to meet requirements */}
         <FormField 
           fieldType="text" 
@@ -693,6 +698,31 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
           alert={drugAlerts.repeats}
           className="repeats-field form-field"
         /> 
+
+      </Fieldset>
+
+      {/* Note there must be enough info to identify the medicine, including form and strength */}
+      <Fieldset className="misc-form" legend="PBS and Other Details">
+
+        <FormField 
+          fieldType="checkbox" 
+          name="pbsRx"
+          label="PBS prescription" 
+          onChange={() => toggleBooleanState(setDrugData, drugData, 'pbsRx')}
+          checked={drugData.pbsRx}
+          className="checkbox"
+        />  
+
+        <FormField 
+          fieldType="date" 
+          name="date"
+          label="Date" 
+          value={miscData.date} 
+          onChange={(event) => handleChange(setMiscData, event)} 
+          alert={miscAlerts.date}
+        />
+
+        {/* Authority information here */}
 
       </Fieldset>
 

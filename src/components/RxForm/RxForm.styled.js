@@ -7,6 +7,7 @@ const StyledRxForm = styled.form`
   flex-direction: column;
   max-width: 880px;
   width: 90%;
+  margin-top: 2rem;
 
   .medicareFields {
     display: flex;
