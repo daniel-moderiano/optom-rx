@@ -22,8 +22,12 @@ const StyledRxForm = styled.form`
     }
   }
 
-  .form-field {
-    width: 24rem;
+  .prefix-field {
+    margin: 0 0 1.5rem 0;
+  }
+
+  .prescriberNo-field, .phoneNo-field {
+    width: 10rem;
   }
 
   .quantity-field, .repeats-field {

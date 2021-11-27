@@ -24,6 +24,10 @@ const StyledAddressAutocomplete = styled.fieldset`
     width: 6rem;
   }
 
+  .street-address {
+    margin-bottom: 1.5rem;
+  }
+
   button {
     position: absolute;
     right: 0.3rem;

@@ -3,10 +3,7 @@ import styled from "styled-components";
 const StyledFormField = styled.div`
   margin: 1rem 0;
   position: relative;
-
-  &.medicare-field {
-    
-  }
+  width: 24rem;
 
   input {
     margin-top: 0.5rem;
@@ -60,30 +57,29 @@ const StyledFormField = styled.div`
     label {
       display: grid;
       grid-template-areas: "checkbox label";
-      grid-template-columns: 1.8rem auto;
+      grid-template-columns: 1.7rem auto;
       align-items: center;
       
       .label-text {
         grid-area: label;
-        padding-top: 0.05rem;
+        padding-bottom: 0.1rem;
       }
 
       input {
         grid-area: checkbox;
         margin: 0;
         padding: 0;
-        height: 18px;
-        width: 18px;
+        height: 16px;
+        width: 16px;
         appearance: none;
         -webkit-appearance: none;
 	      -moz-appearance: none;
-        border: 1px solid #eee;
-        border-radius: 0;
-        background-color: #eee;
+        border: 2px solid rgb(105,118,132);
+        border-radius: 2px;
       }
 
       .checked {
-        background-color: #2196F3;
+        background-color: #333f48;
         border: none;
       }
 
@@ -93,15 +89,15 @@ const StyledFormField = styled.div`
 
       .unchecked:hover {
         cursor: pointer;
-        background-color: #ccc;
+        /* background-color: #ccc; */
       }
 
       .checkmark {
         position: absolute;
         width: 5px;
         height: 10px;
-        top: 3px;
-        left: 7px;
+        top: 4px;
+        left: 0.35rem;
         border: solid white;
         border-width: 0 2px 2px 0;
         -webkit-transform: rotate(45deg);
@@ -128,6 +124,7 @@ const StyledFormField = styled.div`
 
     .alert-icon {
       margin-right: 0.2rem;
+      flex-shrink: 0;
     }
   }
 

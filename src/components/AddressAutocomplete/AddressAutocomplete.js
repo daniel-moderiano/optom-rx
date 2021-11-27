@@ -149,7 +149,6 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider, alerts, se
   return (
     <StyledAddressAutocomplete>
       
-      {/* <div className="autocomplete-group"> */}
         <FormField
           name="streetAddress"
           label="Street address"
@@ -160,9 +159,7 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider, alerts, se
           alert={alerts.streetAddress}
           className="street-address form-field"
         />
-        <button type="button" onClick={() => setExpand(true)}>Enter manually</button>
-      {/* </div> */}
-      
+        <button type="button" onClick={() => setExpand(true)}>Enter manually</button>      
 
       <div className={`address-collapse ${expand ? 'show' : 'hide'} ${provider ? 'address-collapse--provider' : ''}`}>
         <FormField 

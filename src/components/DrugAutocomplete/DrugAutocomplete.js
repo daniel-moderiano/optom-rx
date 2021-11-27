@@ -106,7 +106,7 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
     // Create the item list once only here, but it remains invisible until items are added. This ensures it will always be present for adding event listeners below
     const itemsList = document.createElement('div');
     itemsList.classList.add('items-list');
-    document.querySelector('.DrugAutocomplete').appendChild(itemsList);
+    document.querySelector('#activeIngredient').appendChild(itemsList);
 
     // Removes the active class from all autocomplete items
     const removeActive = (itemsArr) => {
@@ -210,8 +210,8 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
 
   return (
     <StyledDrugAutocomplete className="autocomplete-container">
+
         <FormField 
-          className="DrugAutocomplete form-field"
           id="activeIngredient"
           name="activeIngredient"
           label="Active ingredient" 
@@ -222,9 +222,10 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
             handleSearch(event);
           }}
           alert={alerts.activeIngredient}
+          className="activeIngredient form-field"
         />
         <button type="button" onClick={() => setExpand(true)}>Enter manually</button>
-      {/* TODO: consider an expandable menu set similar to address autocomplete that breaks up active ingredient and brand name, with a checkbox to ask if brand name should be included, and potentially a select menu on the brand input */}
+
       <div className={`drug-collapse ${expand ? 'show' : 'hide'}`}>
         <FormField 
           id="brandName"

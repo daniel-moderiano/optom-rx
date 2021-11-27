@@ -7,10 +7,6 @@ const StyledDrugAutocomplete = styled.fieldset`
   padding: 0;
   width: 24rem;
 
-  input {
-    width: 100%;
-  }
- 
   .items-list {
     position: absolute;
     z-index: 10;
@@ -34,13 +30,24 @@ const StyledDrugAutocomplete = styled.fieldset`
 
   /* Show and hide classes control the sub-fields display (i.e. fields other than autocomplete) */
   .show {
-    display: block;
+    display: flex;
   }
 
   .hide {
     display: none;
   }
 
+  .drug-collapse {
+    flex-direction: column;
+  }
+
+  .activeIngredient {
+    margin-bottom: 1.5rem;
+  }
+
+  .checkbox {
+    margin: 0.5rem 0;
+  }
 
   button {
     position: absolute;
@@ -52,7 +59,7 @@ const StyledDrugAutocomplete = styled.fieldset`
     padding: 0;
     font-size: 0.8rem;
     text-decoration: underline;
-    font-family: var(--font-stack);
+    font-family: var(--font-stack-segoe);
     line-height: 0.8rem;
 
     &:hover {

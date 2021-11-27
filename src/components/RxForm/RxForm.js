@@ -501,8 +501,8 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
         }
       }} 
       autoComplete="off">
-      {/* Single input to select the medication */}
-      {/* Note there must be enough info to identify the medicine, including form and strength */}
+
+      
 
       <FormField 
         fieldType="date" 
@@ -513,58 +513,83 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
         // alert={drugAlerts.dosage}
       />
 
-      <Fieldset className="drug-form" legend="Medication Details">
-
-        <DrugAutocomplete 
-          data={drugData}
-          setData={setDrugData}
-          handleChange={(event) => handleChange(setDrugData, event)}  
-          toggle={toggleBooleanState}
-          alerts={drugAlerts}
-          setAlerts={setDrugAlerts}
-        />
-
-        {/* TODO: PBS integration to identify which medications require authority, and auto-filling. Should appear while PBS Rx is true */}
-        <FormField 
-          fieldType="checkbox" 
-          name="pbsRx"
-          label="PBS" 
-          onChange={() => toggleBooleanState(setDrugData, drugData, 'pbsRx')}
-          checked={drugData.pbsRx}
-          className="checkbox"
-        />  
-        {/* Must include quantity and repeats to meet requirements */}
+       <Fieldset className="provider-form" legend="Provider Details">
+        {/* ! Legal requirements include the prescriber's name, address, and contact details, and prescriber num
+        You may also give them the option of adding qualifications */}
+        {/* Consider a separate practice name field in the address section for providers, or even a Shop/Building # field? */}
+      
         <FormField 
           fieldType="text" 
-          name="dosage"
-          label="Dosage directions" 
-          value={drugData.dosage} 
-          onChange={(event) => handleChange(setDrugData, event)} 
-          alert={drugAlerts.dosage}
+          name="fullName"
+          label="Full name" 
+          value={providerData.fullName} 
+          onChange={(event) => handleChange(setProviderData, event)} 
+          alert={providerAlerts.fullName}
+        />    
+
+        <FormField 
+          fieldType="checkbox" 
+          name="prefix"
+          label="Include 'Dr' in provider name" 
+          onChange={() => toggleBooleanState(setProviderData, providerData, 'prefix')}
+          checked={providerData.prefix}
+          className="checkbox prefix-field"
+        />  
+
+        <FormField 
+          fieldType="text" 
+          name="qualifications"
+          label="Abbreviated qualifications (optional)" 
+          placeholder="e.g. BMedSci(VisSc), MOpt"
+          value={providerData.qualifications} 
+          onChange={(event) => handleChange(setProviderData, event)} 
+          maxlength="40"
+        />
+
+        {/* Practice name is only relevant for providers, and even then you might consider omitting this, as there is really no room on the computerised for for practice name */}
+        <FormField 
+          name="practiceName"
+          label="Practice name (optional)" 
+          value={providerData.practiceName} 
+          onChange={handleChange} 
+        />
+
+        <AddressAutocomplete 
+          data={providerData}
+          setData={setProviderData}
+          handleChange={(event) => handleChange(setProviderData, event)}
+          provider={true}   
+          alerts={providerAlerts}
+          setAlerts={setProviderAlerts} 
+          googleLoaded={googleLoaded}
+        />
+
+        {/* Because this is intended for use only in Australia, present and validate phone numbers in national format, which includes 10 digits for landline and mobile numbers, as follows: 02 1234 4321 [telephone], or 0400 000 000 [mobile]. Note that 13 numbers may be 6 or 10 digits, and indicates an Australia wide number. This shouldn't be appropriate for any optical practices, but should be able to be inputted regardless */}
+
+        <FormField 
+          fieldType="text" 
+          name="phoneNumber"
+          label="Phone number" 
+          value={providerData.phoneNumber} 
+          onChange={(event) => handleChange(setProviderData, event)} 
+          alert={providerAlerts.phoneNumber}
+          id="phoneNumber"
+          maxlength="10"
+          className="phoneNo-field form-field"
         />
 
         <FormField 
-          fieldType="number" 
-          name="quantity"
-          label="Quantity" 
-          value={drugData.quantity} 
-          onChange={(event) => handleChange(setDrugData, event)} 
-          alert={drugAlerts.quantity}
-          className="quantity-field form-field"
+          fieldType="text" 
+          name="prescriberNumber"
+          label="Prescriber number" 
+          value={providerData.prescriberNumber} 
+          onChange={(event) => handleChange(setProviderData, event)} 
+          alert={providerAlerts.prescriberNumber}
+          maxlength="7"
+          className="prescriberNo-field form-field"
         />
-
-        <FormField 
-          fieldType="number" 
-          name="repeats"
-          label="Repeats" 
-          value={drugData.repeats} 
-          onChange={(event) => handleChange(setDrugData, event)} 
-          alert={drugAlerts.repeats}
-          className="repeats-field form-field"
-        /> 
       </Fieldset>
 
-      {/* Enter the patient Rx details */}
       <Fieldset className="patient-form" legend="Patient Details">
       {/* Legal requirements include only the patient's name and address */}
       {/* Patient Medicare number is however required for ALL PBS Rx, and should be included in general so that the patient may claim under PBS where this price is cheaper. All Aus are valid private prescriptions however. */}
@@ -618,80 +643,62 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
         </div>     
       </Fieldset>
 
-      {/* Enter the provider details */}
-      <Fieldset className="provider-form" legend="Provider Details">
-        {/* ! Legal requirements include the prescriber's name, address, and contact details, and prescriber num
-        You may also give them the option of adding qualifications */}
-        {/* Consider a separate practice name field in the address section for providers, or even a Shop/Building # field? */}
-      
-        <FormField 
-          fieldType="text" 
-          name="fullName"
-          label="Full name" 
-          value={providerData.fullName} 
-          onChange={(event) => handleChange(setProviderData, event)} 
-          alert={providerAlerts.fullName}
-        />    
+      {/* Note there must be enough info to identify the medicine, including form and strength */}
+      <Fieldset className="drug-form" legend="Medication Details">
 
+        <DrugAutocomplete 
+          data={drugData}
+          setData={setDrugData}
+          handleChange={(event) => handleChange(setDrugData, event)}  
+          toggle={toggleBooleanState}
+          alerts={drugAlerts}
+          setAlerts={setDrugAlerts}
+        />
+
+        {/* TODO: PBS integration to identify which medications require authority, and auto-filling. Should appear while PBS Rx is true */}
         <FormField 
           fieldType="checkbox" 
-          name="prefix"
-          label="Include 'Dr' in provider name" 
-          onChange={() => toggleBooleanState(setProviderData, providerData, 'prefix')}
+          name="pbsRx"
+          label="PBS prescription" 
+          onChange={() => toggleBooleanState(setDrugData, drugData, 'pbsRx')}
+          checked={drugData.pbsRx}
           className="checkbox"
         />  
-
+        {/* Must include quantity and repeats to meet requirements */}
         <FormField 
           fieldType="text" 
-          name="qualifications"
-          label="Abbreviated qualifications (optional)" 
-          placeholder="e.g. BMedSci(VisSc), MOpt"
-          value={providerData.qualifications} 
-          onChange={(event) => handleChange(setProviderData, event)} 
-          maxlength="40"
-        />
-
-        {/* Practice name is only relevant for providers, and even then you might consider omitting this, as there is really no room on the computerised for for practice name */}
-        <FormField 
-          name="practiceName"
-          label="Practice name (optional)" 
-          value={providerData.practiceName} 
-          onChange={handleChange} 
-        />
-
-        <AddressAutocomplete 
-          data={providerData}
-          setData={setProviderData}
-          handleChange={(event) => handleChange(setProviderData, event)}
-          provider={true}   
-          alerts={providerAlerts}
-          setAlerts={setProviderAlerts} 
-          googleLoaded={googleLoaded}
-        />
-
-        {/* Because this is intended for use only in Australia, present and validate phone numbers in national format, which includes 10 digits for landline and mobile numbers, as follows: 02 1234 4321 [telephone], or 0400 000 000 [mobile]. Note that 13 numbers may be 6 or 10 digits, and indicates an Australia wide number. This shouldn't be appropriate for any optical practices, but should be able to be inputted regardless */}
-
-        <FormField 
-          fieldType="text" 
-          name="phoneNumber"
-          label="Phone number" 
-          value={providerData.phoneNumber} 
-          onChange={(event) => handleChange(setProviderData, event)} 
-          alert={providerAlerts.phoneNumber}
-          id="phoneNumber"
-          maxlength="10"
+          name="dosage"
+          label="Dosage directions" 
+          value={drugData.dosage} 
+          onChange={(event) => handleChange(setDrugData, event)} 
+          alert={drugAlerts.dosage}
         />
 
         <FormField 
-          fieldType="text" 
-          name="prescriberNumber"
-          label="Prescriber number" 
-          value={providerData.prescriberNumber} 
-          onChange={(event) => handleChange(setProviderData, event)} 
-          alert={providerAlerts.prescriberNumber}
-          maxlength="7"
+          fieldType="number" 
+          name="quantity"
+          label="Quantity" 
+          value={drugData.quantity} 
+          onChange={(event) => handleChange(setDrugData, event)} 
+          alert={drugAlerts.quantity}
+          className="quantity-field form-field"
         />
+
+        <FormField 
+          fieldType="number" 
+          name="repeats"
+          label="Repeats" 
+          value={drugData.repeats} 
+          onChange={(event) => handleChange(setDrugData, event)} 
+          alert={drugAlerts.repeats}
+          className="repeats-field form-field"
+        /> 
+
       </Fieldset>
+
+      
+
+     
       
       <button type="submit">Generate Rx</button>
       
