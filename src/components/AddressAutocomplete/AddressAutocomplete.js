@@ -64,8 +64,8 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider, alerts, se
   }, [setData])
 
    useEffect(() => {
-    const inputs = document.querySelector(`.address-collapse${provider ? '--provider' : ''}`).querySelectorAll('input');
-
+    const inputs = document.querySelector(`.address-collapse${provider ? '--provider' : '--patient'}`).querySelectorAll('input');
+    console.log(inputs, provider);
     // Declare the autocomplete and input variable here; the latter of which will later be initialised to the autocomplete instance. Input gathered with useRef hook, and MUST be initialised inside useEffect, because the component will have been rendered then
     let autocomplete;
     const input = document.querySelector(`#autocomplete-${provider ? 'provider' : 'patient'}`);
@@ -161,7 +161,7 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider, alerts, se
         />
         <button type="button" onClick={() => setExpand(true)}>Enter manually</button>      
 
-      <div className={`address-collapse ${expand ? 'show' : 'hide'} ${provider ? 'address-collapse--provider' : ''}`}>
+      <div className={`address-collapse ${expand ? 'show' : 'hide'} ${provider ? 'address-collapse--provider' : 'address-collapse--patient'}`}>
         <FormField 
           id={provider ? 'subpremise-provider' : 'subpremise-patient'}
           name="subpremise"
