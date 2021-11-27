@@ -24,7 +24,7 @@ const StyledRxForm = styled.form`
   }
 
   .prefix-field {
-    margin: 0 0 1.5rem 0;
+    margin: 0 0 1.25rem 0;
   }
 
   .prescriberNo-field, .phoneNo-field {
@@ -33,6 +33,10 @@ const StyledRxForm = styled.form`
 
   .quantity-field, .repeats-field {
     width: 5rem;
+  }
+
+  .pbsRx {
+    margin: 1.25rem 0;
   }
 
 `

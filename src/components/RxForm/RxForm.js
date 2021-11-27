@@ -710,8 +710,18 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
           label="PBS prescription" 
           onChange={() => toggleBooleanState(setDrugData, drugData, 'pbsRx')}
           checked={drugData.pbsRx}
-          className="checkbox"
+          className="checkbox pbsRx"
         />  
+
+        {/* Consider a variable message beside or below this saying 'not required for this medication' or similar */}
+        <FormField 
+          fieldType="text" 
+          name="authCode"
+          label="Authority code (where applicable)" 
+          value={miscData.authCode} 
+          onChange={(event) => handleChange(setMiscData, event)} 
+          alert={miscAlerts.authCode}
+        />
 
         <FormField 
           fieldType="date" 

@@ -39,6 +39,11 @@ const StyledDrugAutocomplete = styled.fieldset`
 
   .drug-collapse {
     flex-direction: column;
+    padding-bottom: 0.75rem;
+
+    #brandName {
+      margin-bottom: 0.75rem;
+    }
   }
 
   .activeIngredient {

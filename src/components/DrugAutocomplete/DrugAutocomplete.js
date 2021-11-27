@@ -270,7 +270,7 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
           label="To be compounded" 
           onChange={() => toggle(setData, data, 'compounded')}
           checked={data.compounded}
-          className="checkbox"
+          className="checkbox compounded"
         />  
 
         
