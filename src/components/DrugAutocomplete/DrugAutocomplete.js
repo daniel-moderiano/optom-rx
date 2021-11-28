@@ -36,11 +36,13 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
     })
   };
 
+  // TODO: refactor this bullshit
   // Capture the selection made in the items list via event propagation
   const clickSuggestion = useCallback((event) => {
-    const { classList, dataset } = event.target;
-    // Because of the use of spans within the items list, we must look for target and parent nodes to capture the item info
     const parent = event.target.parentNode;
+    const { classList, dataset } = event.target;
+    
+    // Because of the use of spans within the items list, we must look for a variety of potential valid click targets
     if (classList.contains('item')) {
       // Set state onclick - do NOT set input.value as this will not work as intended. Always adjust state and have input.value set to state
       setData((prevData) => ({
@@ -58,6 +60,16 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
         activeIngredient: parent.dataset.activeIngredient,
         brandName: parent.dataset.brandName,
         itemCode: parent.dataset.code,
+      }));
+      removeList();
+      setExpand(true);
+    } else if (parent.parentNode.classList.contains('item')) {
+      // Set state onclick - do NOT set input.value as this will not work as intended. Always adjust state and have input.value set to state
+      setData((prevData) => ({
+        ...prevData,
+        activeIngredient: parent.parentNode.dataset.activeIngredient,
+        brandName: parent.parentNode.dataset.brandName,
+        itemCode: parent.parentNode.dataset.code,
       }));
       removeList();
       setExpand(true);
@@ -89,10 +101,10 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
     if (firstMatch) {
       // Oth index returns the subtring that matches
       matches.push([firstMatch[0], { 'index': firstMatch['index'] }])
-      return `<strong>${string.substr(firstMatch['index'], firstMatch[0].length)}</strong>${string.substr((firstMatch['index'] + firstMatch[0].length))}`;
+      return `<strong class="item-bold item-click">${string.substr(firstMatch['index'], firstMatch[0].length)}</strong>${string.substr((firstMatch['index'] + firstMatch[0].length))}`;
     } else if (secondMatch) {
       // Use a capturing group in regexSecond, which will appear as index 1 in the match array
-      return `${string.substr(0, secondMatch['index'])}<strong>${string.substr(secondMatch['index'] + 2, secondMatch[1].length)}</strong>${string.substr((secondMatch['index'] + secondMatch[1].length + 2))}`;
+      return `${string.substr(0, secondMatch['index'])}<strong class="item-bold item-click">${string.substr(secondMatch['index'] + 2, secondMatch[1].length)}</strong>${string.substr((secondMatch['index'] + secondMatch[1].length + 2))}`;
     } else {
       // If no matches, return all non-bold
       return string;
@@ -101,7 +113,6 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
 
   // Creates list of autocomplete items using an array of relevant suggestions (matchArr)
   const createList = useCallback((matchArr) => {
-    console.log('called create list');
     // First remove any lists present to ensure the list if refreshed on each new input
     removeList();
 
@@ -116,24 +127,25 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
 
       const item = document.createElement('div');
       // Using spans will allow alternate styling of active ingredient and brand name if desired
-      item.innerHTML = `<span class="item-active">${boldActiveName}</span> <span class="item-brand">(${boldBrandName})</span>`;
+      item.innerHTML = `<span class="item-active item-click">${boldActiveName}</span> <span class="item-brand item-click">(${boldBrandName})</span>`;
       // Add dataset information here to update state when the user selects an item
       item.dataset.code = match['item-code'];
       item.dataset.activeIngredient = match['tpuu-or-mpp-pt'];
       item.dataset.brandName = match['brand-name'];
       item.classList.add('item');
+      item.classList.add('item-click');
       itemsList.appendChild(item);     
     }); 
   }, []);
 
   // Leave this dependency array empty to ensure this runs only once on first mount
   useEffect(() => {
-    console.log('Called main useEffect');
     const input = document.querySelector('#activeIngredient');
 
     // Create the item list once only here, but it remains invisible until items are added. This ensures it will always be present for adding event listeners below
     const itemsList = document.createElement('div');
     itemsList.classList.add('items-list');
+    itemsList.classList.add('item-click');
     document.querySelector('.activeIngredient').appendChild(itemsList);
     itemsList.addEventListener('click', clickSuggestion);
 
@@ -187,9 +199,9 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
  
     // Ensure the items list closes on outside click
     const itemsListOutsideClick = (e) => {
-      console.log(e.target.classList);
-      if (!e.target.classList.contains('item') || !e.target.classList.contains('items-list') || !e.target.id === 'activeIngredient') {
-        hideItemsList();
+      if (e.target.classList.contains('item-click')) {
+        console.log('item related');
+        // hideItemsList();
       }
     };
 
