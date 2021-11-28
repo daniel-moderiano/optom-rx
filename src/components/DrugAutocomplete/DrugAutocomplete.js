@@ -141,6 +141,8 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
   // Leave this dependency array empty to ensure this runs only once on first mount
   useEffect(() => {
     const input = document.querySelector('#activeIngredient');
+    // add item-click class to disable hiding of items list on outside click
+    input.classList.add('item-click');
 
     // Create the item list once only here, but it remains invisible until items are added. This ensures it will always be present for adding event listeners below
     const itemsList = document.createElement('div');
@@ -199,10 +201,12 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
  
     // Ensure the items list closes on outside click
     const itemsListOutsideClick = (e) => {
-      if (e.target.classList.contains('item-click')) {
-        console.log('item related');
-        // hideItemsList();
+      if (!e.target.classList.contains('item-click')) {
+        hideItemsList();
       }
+
+      // For some unknown reason, it seems impossible
+      
     };
 
     // Check for non-whitespace character to indicate a valid value to create an autocomplete list from. Note this will only occur if the user performs tab out of the input, or an outside click
