@@ -14,6 +14,19 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
     element.classList.add('success');
   }
 
+  // Simply hide the items list but don't alter the items on the list
+  const hideItemsList = (e) => {
+    document.querySelector('.items-list').classList.add('hide');
+    document.querySelector('.items-list').classList.remove('show-list');
+  };
+
+  // Simply show the items list but don't alter the items on the list
+  const showItemsList = (e) => {
+    document.querySelector('.items-list').classList.remove('hide');
+    document.querySelector('.items-list').classList.add('show-list');
+  };
+
+
   // Remove all items within the list, rather than the list itself
   const removeList = () => {
     // Must reset focus here to avoid starting halway down a list on first arrow key press
@@ -25,8 +38,9 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
 
   // Capture the selection made in the items list via event propagation
   const clickSuggestion = useCallback((event) => {
-    console.log(event.target.parentNode);
     const { classList, dataset } = event.target;
+    // Because of the use of spans within the items list, we must look for target and parent nodes to capture the item info
+    const parent = event.target.parentNode;
     if (classList.contains('item')) {
       // Set state onclick - do NOT set input.value as this will not work as intended. Always adjust state and have input.value set to state
       setData((prevData) => ({
@@ -37,7 +51,17 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
       }));
       removeList();
       setExpand(true);
-    } else if (event.target.parentNode.classList.contains('item'))
+    } else if (parent.classList.contains('item')) {
+      // Set state onclick - do NOT set input.value as this will not work as intended. Always adjust state and have input.value set to state
+      setData((prevData) => ({
+        ...prevData,
+        activeIngredient: parent.dataset.activeIngredient,
+        brandName: parent.dataset.brandName,
+        itemCode: parent.dataset.code,
+      }));
+      removeList();
+      setExpand(true);
+    }
     // Remove errors
     showSuccessClass(document.querySelector('#activeIngredient'));
     setAlerts((prevAlerts) => ({
@@ -76,19 +100,23 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
   };
 
   // Creates list of autocomplete items using an array of relevant suggestions (matchArr)
-  const createList = (matchArr) => {
+  const createList = useCallback((matchArr) => {
+    console.log('called create list');
     // First remove any lists present to ensure the list if refreshed on each new input
     removeList();
 
-    const itemsList = document.querySelector('.items-list');
+    // Also ensure the list does not have a hide class active
+    showItemsList();
 
+    const itemsList = document.querySelector('.items-list');
     // Append each list item from the source array of matches
     matchArr.forEach((match) => {
       const boldActiveName = boldLetters(`${match['tpuu-or-mpp-pt']}`);
       const boldBrandName = boldLetters(`${match['brand-name']}`);
 
       const item = document.createElement('div');
-      item.innerHTML = `<span>${boldActiveName}</span> (<span>${boldBrandName}</span>)`;
+      // Using spans will allow alternate styling of active ingredient and brand name if desired
+      item.innerHTML = `<span class="item-active">${boldActiveName}</span> <span class="item-brand">(${boldBrandName})</span>`;
       // Add dataset information here to update state when the user selects an item
       item.dataset.code = match['item-code'];
       item.dataset.activeIngredient = match['tpuu-or-mpp-pt'];
@@ -96,12 +124,11 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
       item.classList.add('item');
       itemsList.appendChild(item);     
     }); 
-
-    // itemsList.addEventListener('click', clickSuggestion);
-  };
+  }, []);
 
   // Leave this dependency array empty to ensure this runs only once on first mount
   useEffect(() => {
+    console.log('Called main useEffect');
     const input = document.querySelector('#activeIngredient');
 
     // Create the item list once only here, but it remains invisible until items are added. This ensures it will always be present for adding event listeners below
@@ -157,32 +184,42 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
       }
     }
 
+ 
     // Ensure the items list closes on outside click
-    const closeItemsList = (e) => {
-      if (!e.target.classList.contains('item') || !e.target.classList.contains('items-list')) {
-        removeList();
+    const itemsListOutsideClick = (e) => {
+      console.log(e.target.classList);
+      if (!e.target.classList.contains('item') || !e.target.classList.contains('items-list') || !e.target.id === 'activeIngredient') {
+        hideItemsList();
       }
     };
 
-    // TODO: when use focuses in input and there exists a non whitespace value, display the items list
+    // Check for non-whitespace character to indicate a valid value to create an autocomplete list from. Note this will only occur if the user performs tab out of the input, or an outside click
+    const checkForListCreate = () => {
+      if (input.value.trim().length > 0) {
+        showItemsList();
+      }
+    }
 
-    // const checkForListCreate = () => {
-    //   if (input.value.trim().length > 0) {
-    //     createList();
-    //   }
-    // }
+    // Listen for tab out specficially, and hide the itemsList in response
+    const tabOut = (e) => {
+      if (e.keyCode === 9) {
+        hideItemsList();
+      }
+    }
 
-    // input.addEventListener('focus', checkForListCreate);
-
+    input.addEventListener('focus', checkForListCreate);
     input.addEventListener('keydown', keyItemNav);
-    window.addEventListener('click', closeItemsList);
+    input.addEventListener('keydown', tabOut);
+    window.addEventListener('click', itemsListOutsideClick);
 
     return () => {
       // Remove event listeners on dismount
+      input.removeEventListener('focus', checkForListCreate);
       input.removeEventListener('keydown', keyItemNav);
-      window.removeEventListener('click', closeItemsList);
+      input.removeEventListener('keydown', tabOut);
+      window.removeEventListener('click', itemsListOutsideClick);
     }
-  }, [clickSuggestion])
+  }, [clickSuggestion, createList])
 
   // Runs on every input change, which provides a better solution than running within useEffect hook
   const handleSearch = (event) => {

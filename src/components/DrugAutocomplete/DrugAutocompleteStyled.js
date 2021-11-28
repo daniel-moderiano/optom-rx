@@ -54,6 +54,10 @@ const StyledDrugAutocomplete = styled.fieldset`
     display: none;
   }
 
+  .show-list {
+    display: block;
+  }
+
   .drug-collapse {
     flex-direction: column;
     padding-bottom: 0.75rem;
