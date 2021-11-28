@@ -12,19 +12,34 @@ const StyledDrugAutocomplete = styled.fieldset`
     z-index: 10;
     width: 100%;
     font-size: 0.9rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    border-radius: 2px;
 
-    div {
+    .item {
       cursor: pointer;
       background-color: #fff;
+      padding: 0 4px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      border-top: 1px solid #e6e6e6;
+      width: 100%;
+      height: 2rem;
+      text-align: left;
+      line-height: 1.9rem;
     }
 
-    div:hover {
+    .item:hover {
       background-color: #e9e9e9;
     }
 
     .active {
       background-color: dodgerblue;
       color: #fff;
+    }
+
+    .list-footer {
+      height: 1rem;
     }
   }
 
@@ -71,6 +86,8 @@ const StyledDrugAutocomplete = styled.fieldset`
       cursor: pointer;
     }
   }
+
+ 
 `
 
 export { StyledDrugAutocomplete }

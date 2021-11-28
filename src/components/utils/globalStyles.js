@@ -14,6 +14,18 @@ const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
   }
 
+  /* Autocomplete dropdown styling */
+  .pac-container {
+    /* font-family: var(--font-stack-myriad); */
+    .pac-item {
+      /* font-size: 2rem; */
+    }
+
+    .pac-item-query {
+      font-size: 0.875rem;
+    }
+  }
+
 `
 
 export default GlobalStyles;

@@ -65,7 +65,6 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider, alerts, se
 
    useEffect(() => {
     const inputs = document.querySelector(`.address-collapse${provider ? '--provider' : '--patient'}`).querySelectorAll('input');
-    console.log(inputs, provider);
     // Declare the autocomplete and input variable here; the latter of which will later be initialised to the autocomplete instance. Input gathered with useRef hook, and MUST be initialised inside useEffect, because the component will have been rendered then
     let autocomplete;
     const input = document.querySelector(`#autocomplete-${provider ? 'provider' : 'patient'}`);

@@ -2,6 +2,7 @@ import PBSData from '../../pbs/pbsDataUnique.json'
 import { useEffect, useState, useRef } from "react";
 import { StyledDrugAutocomplete } from './DrugAutocompleteStyled';
 import FormField from '../FormField/FormField';
+import { useCallback } from 'react/cjs/react.development';
 
 const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAlerts }) => {
   // useRef allows us to store the equivalent of a 'global' component variable without losing data on re-render, but avoiding the async problems that can arise with state
@@ -106,7 +107,7 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
     // Create the item list once only here, but it remains invisible until items are added. This ensures it will always be present for adding event listeners below
     const itemsList = document.createElement('div');
     itemsList.classList.add('items-list');
-    document.querySelector('#activeIngredient').appendChild(itemsList);
+    document.querySelector('.activeIngredient').appendChild(itemsList);
 
     // Removes the active class from all autocomplete items
     const removeActive = (itemsArr) => {
@@ -155,11 +156,28 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
       }
     }
 
+    // Ensure the items list closes on outside click
+    const closeItemsList = (e) => {
+      if (!e.target.classList.contains('item') || !e.target.classList.contains('items-list')) {
+        removeList();
+      }
+    };
+
+    // const checkForListCreate = () => {
+    //   if (input.value.trim().length > 0) {
+    //     createList();
+    //   }
+    // }
+
+    // input.addEventListener('focus', checkForListCreate);
+
     input.addEventListener('keydown', keyItemNav);
+    window.addEventListener('click', closeItemsList);
 
     return () => {
-      // Remove event listener on dismount
+      // Remove event listeners on dismount
       input.removeEventListener('keydown', keyItemNav);
+      window.removeEventListener('click', closeItemsList);
     }
   }, [])
 
