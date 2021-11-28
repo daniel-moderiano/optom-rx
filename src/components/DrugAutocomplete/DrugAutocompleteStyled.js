@@ -14,6 +14,8 @@ const StyledDrugAutocomplete = styled.fieldset`
     font-size: 0.9rem;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
     border-radius: 2px;
+    max-height: 16rem;  // Use multiples of 2rem while the item height remains 2rem
+    overflow-y: scroll;  // Scroll or hidden, need to decide which is more appropriate
 
     .item {
       cursor: pointer;

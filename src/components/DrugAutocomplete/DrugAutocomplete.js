@@ -1,8 +1,7 @@
 import PBSData from '../../pbs/pbsDataUnique.json'
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { StyledDrugAutocomplete } from './DrugAutocompleteStyled';
 import FormField from '../FormField/FormField';
-import { useCallback } from 'react/cjs/react.development';
 
 const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAlerts }) => {
   // useRef allows us to store the equivalent of a 'global' component variable without losing data on re-render, but avoiding the async problems that can arise with state
@@ -25,7 +24,8 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
   };
 
   // Capture the selection made in the items list via event propagation
-  const clickSuggestion = (event) => {
+  const clickSuggestion = useCallback((event) => {
+    console.log(event.target.parentNode);
     const { classList, dataset } = event.target;
     if (classList.contains('item')) {
       // Set state onclick - do NOT set input.value as this will not work as intended. Always adjust state and have input.value set to state
@@ -37,7 +37,7 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
       }));
       removeList();
       setExpand(true);
-    }
+    } else if (event.target.parentNode.classList.contains('item'))
     // Remove errors
     showSuccessClass(document.querySelector('#activeIngredient'));
     setAlerts((prevAlerts) => ({
@@ -48,7 +48,7 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
 
     // Finally, set focus to next typable field (currently dosage)
     document.querySelector('[name="dosage"]').focus();
-  };
+  }, [setAlerts, setData]);
 
   // Given a string, use the current search text and regex to bold the segment of text being searched for (using HTML)
   const boldLetters = (string) => {
@@ -88,7 +88,7 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
       const boldBrandName = boldLetters(`${match['brand-name']}`);
 
       const item = document.createElement('div');
-      item.innerHTML = `${boldActiveName} (${boldBrandName})`;
+      item.innerHTML = `<span>${boldActiveName}</span> (<span>${boldBrandName}</span>)`;
       // Add dataset information here to update state when the user selects an item
       item.dataset.code = match['item-code'];
       item.dataset.activeIngredient = match['tpuu-or-mpp-pt'];
@@ -97,7 +97,7 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
       itemsList.appendChild(item);     
     }); 
 
-    itemsList.addEventListener('click', clickSuggestion);
+    // itemsList.addEventListener('click', clickSuggestion);
   };
 
   // Leave this dependency array empty to ensure this runs only once on first mount
@@ -108,6 +108,7 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
     const itemsList = document.createElement('div');
     itemsList.classList.add('items-list');
     document.querySelector('.activeIngredient').appendChild(itemsList);
+    itemsList.addEventListener('click', clickSuggestion);
 
     // Removes the active class from all autocomplete items
     const removeActive = (itemsArr) => {
@@ -163,6 +164,8 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
       }
     };
 
+    // TODO: when use focuses in input and there exists a non whitespace value, display the items list
+
     // const checkForListCreate = () => {
     //   if (input.value.trim().length > 0) {
     //     createList();
@@ -179,7 +182,7 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
       input.removeEventListener('keydown', keyItemNav);
       window.removeEventListener('click', closeItemsList);
     }
-  }, [])
+  }, [clickSuggestion])
 
   // Runs on every input change, which provides a better solution than running within useEffect hook
   const handleSearch = (event) => {
