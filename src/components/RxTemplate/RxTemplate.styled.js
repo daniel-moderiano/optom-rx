@@ -22,7 +22,7 @@ const StyledRxTemplate = styled.div`
     display: none;
   }
 
-  .left-container {
+  .ui-main-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -30,30 +30,34 @@ const StyledRxTemplate = styled.div`
     margin-bottom: 2rem;
     line-height: 1.3rem;
 
-    .pbsSelected, 
-    .nonPbs-marker, 
-    .brandSub, 
-    .item-printed, 
-    .provider-lower {
-        display: none;
+    .ui-container {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 2rem;
     }
-
-    .medication, .patient, .provider-upper {
-      
-    }
-  
 
     h4 {
       border-bottom: 1px solid #142d53;
       font-family: var(--font-title);
       padding-bottom: 0.8rem;
       font-size: 1.8rem;
-      margin-bottom: 1rem;
+      margin: 0 0 1rem 0;
       color: #142d53;
       font-weight: normal;
     }
-  }
 
+    .ui-medicare {
+      display: flex;
+      justify-content: space-between;
+      width: 17rem;
+    }
+
+    section {
+      padding: 0;
+      margin: 0;
+      height: auto;
+    }
+  }
 
 
   .RxTemplate__btns {
@@ -94,9 +98,7 @@ const StyledRxTemplate = styled.div`
     }
   }
 
- 
-
-  .right-container {
+  .right-container, .left-container {
     display: none;
   }
 
@@ -110,6 +112,10 @@ const StyledRxTemplate = styled.div`
     display: block;
     /* width: 902px;
     height: 1275px; */
+
+    .ui-container {
+      display: none;
+    }
 
     h2, h3, h4, button, .RxTemplate__btns {
       display: none;

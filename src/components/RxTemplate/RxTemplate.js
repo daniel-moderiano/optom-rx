@@ -90,7 +90,7 @@ const RxTemplate = ({ data }) => {
       {/* If the template is rendered without a full set of data, many functions will fail. Hence this is rendered conditionally */}
       {state.validData ? <>
         <img src={Rx} alt="" />
-        <div className="ui-container">
+        <div className="ui-main-container">
           <section className="ui-provider-upper">
             <h4 className="ui-provider__title">Provider</h4>
             <div className="ui-container">
@@ -100,39 +100,50 @@ const RxTemplate = ({ data }) => {
                 <div className="ui-provider__addressLine2">
                   {`${providerData.suburb} ${providerData.state} ${providerData.postcode}`}
                 </div>
-              </div>
-              <div className="ui-provider__contact-lower">
-                <div className="ui-provider__prescriberNumber">{providerData.prescriberNumber}</div>
                 <div data-testid="phone" className="ui-provider__phoneNumber">
                   {`Phone: ${formatPhoneNumber(providerData.phoneNumber)}`}
                 </div>
               </div>
+              <div className="ui-provider__prescriberNumber">Prescriber number: {providerData.prescriberNumber}</div>
             </div>
           </section>
 
           <section className="ui-patient">
             <h4 className="ui-patient__title">Patient</h4>
             <div className="ui-container">
-              <div className="ui-patient__medicareNumber">
-                {`${patientData.medicareNumber.substring(0, 4)} ${patientData.medicareNumber.substring(4, 9)} ${patientData.medicareNumber.substring(9, 10)}-${patientData.medicareRefNumber}`}
-              </div>
+              
               <div className="ui-patient__contactDetails">
                 <div className="ui-patient__fullName">{patientData.fullName}</div>
                 <div className="ui-patient__streetAddress">{`${patientData.subpremise} ${patientData.streetAddress}`}</div>
                 <div className="ui-patient__addressLine2">{`${patientData.suburb} ${patientData.state} ${patientData.postcode}`}</div>
+              </div>
+
+              <div className="ui-medicare">
+                <div className="ui-patient__medicareNumber">Medicare number: {`${patientData.medicareNumber.substring(0, 4)} ${patientData.medicareNumber.substring(4, 9)} ${patientData.medicareNumber.substring(9, 10)}`}
+                </div>
+                <div className="ui-patient__medicareRefNumber">IRN: {patientData.medicareRefNumber}</div>
               </div>
             </div>
           </section>
 
           <section className="ui-miscellaneous">
             {/* Include Script ID and Authority Rx number here */}
-            <div className="ui-date">{formatDate()}</div>
-            {drugData.pbsRx 
-              ? <div className="ui-pbsSelected"><img src={tickbox} alt="" /></div>
-              : <div className="ui-nonPbs"><span className="ui-nonPbs-marker">XXXXXXXXXXX</span>Non-PBS</div>
-            }
-            {!drugData.substitutePermitted && <div className="ui-brandSub">✓</div>}
-            
+            <h4 className="ui-provider__title">PBS and Other</h4>
+            <div className="ui-container">
+              
+              {drugData.pbsRx 
+                ? <div className="ui-pbsSelected">PBS prescription</div>
+                : <div className="ui-nonPbs">Private (non-PBS) prescription</div>
+              }
+              {drugData.substitutePermitted 
+                ? <div className="ui-brandSub--yes">Brand substitution permitted</div>
+                : <div className="ui-brandSub--no">Brand substitution not allowed</div>
+              }
+              {drugData.authRequired 
+                && <div className="ui-authCode">{`Authority Approval No: ${miscData.authCode}`}</div>
+              }
+              <div className="ui-date">Prescription date: {formatDate()}</div>
+            </div>
           </section>
 
           {/* Script ID or authority Rx number should go above the medication once finalised, and perhaps with a border bottom */}
@@ -146,15 +157,11 @@ const RxTemplate = ({ data }) => {
               <div className="ui-medication__quantity">{`Quantity: ${drugData.quantity}`}</div>
               <div className="ui-medication__repeats">{`${drugData.repeats} repeats`}</div>
             </div>
+            {drugData.compounded 
+              && <div className="ui-compounded">To be compounded</div>
+            }
           </section>
 
-          {/* Wastes space to render authority section for non-authority required scripts, so render only as needed */}
-          {drugData.authRequired && <section className="ui-authority">
-            <div className="ui-authority__approvalCode">{`Authority Approval No: ${miscData.authCode}`}</div>
-            {/* Optional sections below - not sure how useful these are in this day and age */}
-            {/* <div className="authority__authorised">Authorised:</div>
-            <div className="authority__delegate">Delegate...............</div> */}
-          </section>}
         </div>
 
 
