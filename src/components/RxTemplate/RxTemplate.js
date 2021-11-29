@@ -126,14 +126,33 @@ const RxTemplate = ({ data }) => {
             </div>
           </section>
 
+           {/* Script ID or authority Rx number should go above the medication once finalised, and perhaps with a border bottom */}
+           <section className="ui-medication">
+            <h4 className="ui-medication__title">Medication</h4>
+            <div className="ui-container">
+              <div data-testid="drugName" className="ui-medication__name">
+                {formatDrug(drugData.activeIngredient, drugData.brandName)}
+              </div>
+              <div className="ui-medication__dosage">{drugData.dosage}</div>
+              <div className="ui-quantityRepeats">
+                <div className="ui-medication__quantity">{`Quantity: ${drugData.quantity}`}</div>
+                <div className="ui-medication__repeats">{`Repeats: ${drugData.repeats}`}</div>
+              </div>
+              {drugData.compounded 
+                && <div className="ui-compounded">To be compounded</div>
+              }
+            </div>
+            
+          </section>
+
           <section className="ui-miscellaneous">
             {/* Include Script ID and Authority Rx number here */}
             <h4 className="ui-provider__title">PBS and Other</h4>
             <div className="ui-container">
               
               {drugData.pbsRx 
-                ? <div className="ui-pbsSelected">PBS prescription</div>
-                : <div className="ui-nonPbs">Private (non-PBS) prescription</div>
+                ? <div className="ui-pbsRx ui-pbsRx--selected">PBS prescription</div>
+                : <div className="ui-pbsRx ui-pbsRx">Private (non-PBS) prescription</div>
               }
               {drugData.substitutePermitted 
                 ? <div className="ui-brandSub--yes">Brand substitution permitted</div>
@@ -146,21 +165,7 @@ const RxTemplate = ({ data }) => {
             </div>
           </section>
 
-          {/* Script ID or authority Rx number should go above the medication once finalised, and perhaps with a border bottom */}
-          <section className="ui-medication">
-            <h4 className="ui-medication__title">Medication</h4>
-            <div data-testid="drugName" className="ui-medication__activeIngredient">
-              {formatDrug(drugData.activeIngredient, drugData.brandName)}
-            </div>
-            <div className="ui-medication__dosage">{drugData.dosage}</div>
-            <div className="ui-quantityRepeats">
-              <div className="ui-medication__quantity">{`Quantity: ${drugData.quantity}`}</div>
-              <div className="ui-medication__repeats">{`${drugData.repeats} repeats`}</div>
-            </div>
-            {drugData.compounded 
-              && <div className="ui-compounded">To be compounded</div>
-            }
-          </section>
+         
 
         </div>
 

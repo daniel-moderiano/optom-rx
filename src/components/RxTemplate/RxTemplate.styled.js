@@ -12,9 +12,10 @@ const StyledRxTemplate = styled.div`
   font-family: var(--font-stack-segoe);
 
   .RxTemplate__title {
-    font-size: 1.8rem;
-    margin: 1.5rem 0 1rem 0;
+    font-size: 2rem;
+    margin: 1.5rem 0 3rem 0;
     padding: 0;
+    color: #142d53;
   }
 
   /* Remove this in prod (img element will be removed) */
@@ -50,6 +51,23 @@ const StyledRxTemplate = styled.div`
       display: flex;
       justify-content: space-between;
       width: 17rem;
+      margin-top: 0.5rem;
+    }
+
+    /* .ui-medication__name, .ui-patient__fullName, .ui-provider__fullName {
+      font-weight: bold;
+    } */
+
+    .ui-provider__prescriberNumber {
+      margin-top: 0.5rem;
+    }
+
+    .ui-pbsRx {
+      margin-bottom: 0.5rem;
+    }
+
+    .ui-date, .ui-quantityRepeats {
+      margin: 0.5rem 0;
     }
 
     section {
@@ -113,7 +131,7 @@ const StyledRxTemplate = styled.div`
     /* width: 902px;
     height: 1275px; */
 
-    .ui-container {
+    .ui-main-container {
       display: none;
     }
 
