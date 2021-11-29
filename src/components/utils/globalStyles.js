@@ -14,6 +14,11 @@ const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
   }
 
+  body {
+    height: 100vh;
+    width: 100%;
+  }
+
   /* Autocomplete dropdown styling */
   .pac-container {
     /* font-family: var(--font-stack-myriad); */

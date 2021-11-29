@@ -24,13 +24,20 @@ body {
   font-family: var(--font-stack-segoe);
 }
 
+.App {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 .main {
   display: flex;
+  flex-grow: 1;
   flex-direction: column;
   align-items: center;
   background-color: #F3F4F6;
+  height: auto;
 }
-
 
 @media print {
 

@@ -4,12 +4,15 @@ const StyledRxTemplate = styled.div`
   /* All screen display styling here */
   background-color: #fff;
   font-size: 15px;
-  width: 100%;
+  width: 90%;
+  max-width: 880px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-family: var(--font-stack-segoe);
+  margin-top: 2rem;
+  padding-bottom: 2.5rem;
 
   .RxTemplate__title {
     font-size: 2rem;
