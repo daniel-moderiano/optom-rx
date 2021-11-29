@@ -15,13 +15,16 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
   }
 
   // Simply hide the items list but don't alter the items on the list
-  const hideItemsList = (e) => {
-    document.querySelector('.items-list').classList.add('hide');
-    document.querySelector('.items-list').classList.remove('show-list');
+  const hideItemsList = () => {
+    // Check for null in cases where component is dismounting/ed
+    if (document.querySelector('.items-list')) {
+      document.querySelector('.items-list').classList.add('hide');
+      document.querySelector('.items-list').classList.remove('show-list');
+    }
   };
 
   // Simply show the items list but don't alter the items on the list
-  const showItemsList = (e) => {
+  const showItemsList = () => {
     document.querySelector('.items-list').classList.remove('hide');
     document.querySelector('.items-list').classList.add('show-list');
   };
@@ -174,6 +177,7 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
       itemsArr[currentFocus.current].classList.add('active');
     };
 
+    // TODO: Readjust this function based on the visible height of the autocomplete menu, whatever the final value chosen if. Otherwise you will key nav through items not visible in the UI before cycling back to top
     // The currentFocus variable will be used as an index when adding an active class to an item in the itemsList list
     const keyItemNav = (e) => {
       // This is the array of list items that will be moved through using the currentFocus variable
@@ -305,7 +309,6 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
           id="brandName"
           name="brandName"
           label="Brand name" 
-          placeholder="Enter brand name"
           value={data.brandName} 
           onChange={handleChange} 
           alert={alerts.brandName}
@@ -317,7 +320,7 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
           label="Include brand name on prescription" 
           onChange={() => toggle(setData, data, 'includeBrand')}
           checked={data.includeBrand}
-          className="checkbox"
+          className="checkbox brand-checkbox"
         /> 
 
         <FormField 

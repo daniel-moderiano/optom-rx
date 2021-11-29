@@ -10,12 +10,12 @@ const StyledDrugAutocomplete = styled.fieldset`
   .items-list {
     position: absolute;
     z-index: 10;
-    width: 100%;
+    width: 47rem;
     font-size: 0.9rem;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
     border-radius: 2px;
     max-height: 16rem;  // Use multiples of 2rem while the item height remains 2rem
-    overflow-y: scroll;  // Scroll or hidden, need to decide which is more appropriate
+    overflow-y: hidden;  // Scroll or hidden, need to decide which is more appropriate
 
     .item {
       cursor: pointer;
@@ -33,11 +33,15 @@ const StyledDrugAutocomplete = styled.fieldset`
 
     .item:hover {
       background-color: #e9e9e9;
+      overflow: visible;
+      white-space: normal;
     }
 
     .active {
       background-color: dodgerblue;
       color: #fff;
+      overflow: visible;
+      white-space: normal;
     }
 
     .list-footer {
@@ -62,8 +66,8 @@ const StyledDrugAutocomplete = styled.fieldset`
     flex-direction: column;
     padding-bottom: 0.75rem;
 
-    #brandName {
-      margin-bottom: 0.75rem;
+    .brand-checkbox {
+      margin-top: 1.25rem;
     }
   }
 
