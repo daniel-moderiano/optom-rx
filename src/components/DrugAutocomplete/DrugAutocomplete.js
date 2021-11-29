@@ -122,7 +122,8 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
     const itemsList = document.querySelector('.items-list');
     // Append each list item from the source array of matches
     matchArr.forEach((match) => {
-      const boldActiveName = boldLetters(`${match['tpuu-or-mpp-pt']}`);
+      // Operation in template literal is capitalising first letter
+      const boldActiveName = boldLetters(`${(match['tpuu-or-mpp-pt'][0].toUpperCase() + match['tpuu-or-mpp-pt'].substring(1))}`);
       const boldBrandName = boldLetters(`${match['brand-name']}`);
 
       const item = document.createElement('div');
@@ -201,12 +202,10 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
  
     // Ensure the items list closes on outside click
     const itemsListOutsideClick = (e) => {
+      // All items within the autocomplete input and items list will contain this class as a marker of sorts
       if (!e.target.classList.contains('item-click')) {
         hideItemsList();
-      }
-
-      // For some unknown reason, it seems impossible
-      
+      }      
     };
 
     // Check for non-whitespace character to indicate a valid value to create an autocomplete list from. Note this will only occur if the user performs tab out of the input, or an outside click
@@ -234,6 +233,7 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
       input.removeEventListener('keydown', keyItemNav);
       input.removeEventListener('keydown', tabOut);
       window.removeEventListener('click', itemsListOutsideClick);
+      itemsList.removeEventListener('click', clickSuggestion);
     }
   }, [clickSuggestion, createList])
 
