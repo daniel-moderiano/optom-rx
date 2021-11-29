@@ -90,6 +90,74 @@ const RxTemplate = ({ data }) => {
       {/* If the template is rendered without a full set of data, many functions will fail. Hence this is rendered conditionally */}
       {state.validData ? <>
         <img src={Rx} alt="" />
+        <div className="ui-container">
+          <section className="ui-provider-upper">
+            <h4 className="ui-provider__title">Provider</h4>
+            <div className="ui-container">
+              <div className="ui-provider__contact-upper">
+                <div className="ui-provider__fullName">{`${providerData.prefix ? 'Dr' : ''} ${providerData.fullName}`}</div>
+                {formatProvAddress()}
+                <div className="ui-provider__addressLine2">
+                  {`${providerData.suburb} ${providerData.state} ${providerData.postcode}`}
+                </div>
+              </div>
+              <div className="ui-provider__contact-lower">
+                <div className="ui-provider__prescriberNumber">{providerData.prescriberNumber}</div>
+                <div data-testid="phone" className="ui-provider__phoneNumber">
+                  {`Phone: ${formatPhoneNumber(providerData.phoneNumber)}`}
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section className="ui-patient">
+            <h4 className="ui-patient__title">Patient</h4>
+            <div className="ui-container">
+              <div className="ui-patient__medicareNumber">
+                {`${patientData.medicareNumber.substring(0, 4)} ${patientData.medicareNumber.substring(4, 9)} ${patientData.medicareNumber.substring(9, 10)}-${patientData.medicareRefNumber}`}
+              </div>
+              <div className="ui-patient__contactDetails">
+                <div className="ui-patient__fullName">{patientData.fullName}</div>
+                <div className="ui-patient__streetAddress">{`${patientData.subpremise} ${patientData.streetAddress}`}</div>
+                <div className="ui-patient__addressLine2">{`${patientData.suburb} ${patientData.state} ${patientData.postcode}`}</div>
+              </div>
+            </div>
+          </section>
+
+          <section className="ui-miscellaneous">
+            {/* Include Script ID and Authority Rx number here */}
+            <div className="ui-date">{formatDate()}</div>
+            {drugData.pbsRx 
+              ? <div className="ui-pbsSelected"><img src={tickbox} alt="" /></div>
+              : <div className="ui-nonPbs"><span className="ui-nonPbs-marker">XXXXXXXXXXX</span>Non-PBS</div>
+            }
+            {!drugData.substitutePermitted && <div className="ui-brandSub">✓</div>}
+            
+          </section>
+
+          {/* Script ID or authority Rx number should go above the medication once finalised, and perhaps with a border bottom */}
+          <section className="ui-medication">
+            <h4 className="ui-medication__title">Medication</h4>
+            <div data-testid="drugName" className="ui-medication__activeIngredient">
+              {formatDrug(drugData.activeIngredient, drugData.brandName)}
+            </div>
+            <div className="ui-medication__dosage">{drugData.dosage}</div>
+            <div className="ui-quantityRepeats">
+              <div className="ui-medication__quantity">{`Quantity: ${drugData.quantity}`}</div>
+              <div className="ui-medication__repeats">{`${drugData.repeats} repeats`}</div>
+            </div>
+          </section>
+
+          {/* Wastes space to render authority section for non-authority required scripts, so render only as needed */}
+          {drugData.authRequired && <section className="ui-authority">
+            <div className="ui-authority__approvalCode">{`Authority Approval No: ${miscData.authCode}`}</div>
+            {/* Optional sections below - not sure how useful these are in this day and age */}
+            {/* <div className="authority__authorised">Authorised:</div>
+            <div className="authority__delegate">Delegate...............</div> */}
+          </section>}
+        </div>
+
+
         <div className="left-container">
           <section className="provider-upper">
             <h4 className="provider__title">Provider</h4>

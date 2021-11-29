@@ -2,14 +2,14 @@ import styled from "styled-components";
 
 const StyledRxTemplate = styled.div`
   /* All screen display styling here */
-
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #fff;
   font-size: 15px;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  font-family: var(--font-stack-segoe);
 
   .RxTemplate__title {
     font-size: 1.8rem;
@@ -44,11 +44,13 @@ const StyledRxTemplate = styled.div`
   
 
     h4 {
-      border-bottom: 1px solid #cecece;
-      padding-bottom: 0.3rem;
-      font-size: 1.4rem;
+      border-bottom: 1px solid #142d53;
+      font-family: var(--font-title);
+      padding-bottom: 0.8rem;
+      font-size: 1.8rem;
       margin-bottom: 1rem;
       color: #142d53;
+      font-weight: normal;
     }
   }
 
@@ -59,35 +61,36 @@ const StyledRxTemplate = styled.div`
     margin-right: 10%;
 
     .RxTemplate__btn {
-      border-radius: 4px;
-      border: 1px solid white;
       font-size: 1rem;
-      padding: 0.5rem;
-    }
-
-    .RxTemplate__btn:hover {
+      font-family: var(--font-stack-segoe);
+      box-sizing: border-box;
       cursor: pointer;
-      transform: scale(0.98);
-      
+      padding: 8px 16px 10px 16px;
+      border-radius: 2px;
     }
-
-    .RxTemplate__btn:active {}
 
     .btn-print {
-      background-color: #259c5b;
-      color: white;
-      font-size: 1rem;
-      padding: 0.5rem;
-      width: 6rem;
+      min-width: 80px;
+      background-color: rgb(0, 120, 212);
+      color: rgb(255, 255, 255);
+      border: 1px solid rgb(0, 120, 212);         
     }
-
+    
+    .btn-print:hover {
+      background-color: rgb(16, 110, 190);
+      border: 1px solid rgb(16, 110, 190);
+    }
+          
     .btn-editRx {
-      background-color: #f3f3f3;
-      color: #3b3b3b;
-      font-size: 1rem;
-      padding: 0.5rem;
-      width: 10rem;
       margin-right: 2rem;
+      min-width: 80px;
+      background-color: rgb(255, 255, 255);
+      color: rgb(50, 49, 48);
+      border: 1px solid rgb(138, 136, 134);                
+    }
+    .btn-editRx:hover {
+      background-color: rgb(243, 242, 241);
+      color: rgb(32, 31, 30);
     }
   }
 

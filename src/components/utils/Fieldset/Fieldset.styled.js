@@ -8,6 +8,7 @@ const StyledFieldset = styled.fieldset`
   display: flex;
   flex-direction: column;
   margin-bottom: 2rem;
+  width: 100%;
 
   legend {
     float: left;    // Moves the legend within the fieldset

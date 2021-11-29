@@ -13,12 +13,12 @@ const App = () => {
   
   const [data, setData] = useState({
     drugData: {
-      // activeIngredient: "latanoprost 0.005% eye drops, 5 mL",
-      // "brandName":"Xalatan",
-      // "quantity":"1",
-      // "repeats":"4",
-      // "dosage":"Once nightly both eyes",
-      // "itemCode":"5552F",
+      activeIngredient: "latanoprost 0.005% eye drops, 5 mL",
+      "brandName":"Xalatan",
+      "quantity":"1",
+      "repeats":"4",
+      "dosage":"Once nightly both eyes",
+      "itemCode":"5552F",
       substitutePermitted: true,    // Indicates if brand substitution is permitted
       brandOnly: false,    // Indicates whether the Rx should list brand name only (only permitted for certain drugs)
       includeBrand: true,    // Indicates whether brand name should be included on the Rx
@@ -26,33 +26,33 @@ const App = () => {
       compounded: false,
     },
     patientData: {
-      // "fullName":"Daniel Moderiano",
-      // "streetAddress":"6 Carragarmungee Estate Long Road Name",
-      // "subpremise":"Unit 12",
-      // "suburb":"Port Bonython",
-      // "postcode":"5127",
-      // "state":"SA",
-      // "medicareNumber":"5151515151",
-      // "medicareRefNumber":"3"
+      "fullName":"Daniel Moderiano",
+      "streetAddress":"6 Carragarmungee Estate Long Road Name",
+      "subpremise":"Unit 12",
+      "suburb":"Port Bonython",
+      "postcode":"5127",
+      "state":"SA",
+      "medicareNumber":"5151515151",
+      "medicareRefNumber":"3"
     },
     providerData: {
-      // "prefix": true,
-      // "fullName":"Daniel Moderiano",
-      // "qualifications":"BMedSc(VisSc), MOpt",
-      // "practiceName":"Specsavers West Lakes",
-      // "streetAddress":"111 West Lakes Boulevard",
-      // "subpremise":"Shop 218",
-      // "suburb":"Modbury",
-      // "postcode":"5092",
-      // "state":"SA",
-      // "phoneNumber":"0882345678",
-      // "prescriberNumber":"7033149",
+      "prefix": true,
+      "fullName":"Daniel Moderiano",
+      "qualifications":"BMedSc(VisSc), MOpt",
+      "practiceName":"Specsavers West Lakes",
+      "streetAddress":"111 West Lakes Boulevard",
+      "subpremise":"Shop 218",
+      "suburb":"Modbury",
+      "postcode":"5092",
+      "state":"SA",
+      "phoneNumber":"0882345678",
+      "prescriberNumber":"7033149",
     },
     miscData: {
-      // authRxNumber: '',   
+      authRxNumber: '',   
       date: ausDate, 
-      // authCode: '7979',
-      // scriptID: '',
+      authCode: '7979',
+      scriptID: '',
     },
   });
 

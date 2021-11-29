@@ -740,7 +740,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
 
      
       
-      <button type="submit">Generate Rx</button>
+      <button type="submit" className="btn btn-generate">Generate prescription</button>
       
       
     </StyledRxForm>
