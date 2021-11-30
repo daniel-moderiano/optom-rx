@@ -5,7 +5,8 @@ import RxForm from './components/RxForm/RxForm';
 import RxTemplate from './components/RxTemplate/RxTemplate'
 import { useState, useEffect } from "react";
 import { Switch, Route, useHistory } from "react-router";
-import About from './components/About/About'
+import Signup from "./components/Signup/Signup";
+import Login from "./components/Login/Login";
 import './App.css';
 
 const App = () => {
@@ -140,7 +141,7 @@ const App = () => {
         <Switch>
           <Route exact path="/" render={() => <RxForm handleSubmit={handleSubmit} googleLoaded={googleLoaded} existingData={data}/>}/>
           <Route exact path="/signup" render={() => <Signup />}/>
-          <Route exact path="/signup" render={() => <Login />}/>
+          <Route exact path="/login" render={() => <Login />}/>
           <Route exact path="/template" render={() => <RxTemplate data={data} />}/>
         </Switch>
       
