@@ -4,10 +4,11 @@ import GlobalStyles from "./components/utils/globalStyles";
 import RxForm from './components/RxForm/RxForm';
 import RxTemplate from './components/RxTemplate/RxTemplate'
 import { useState, useEffect } from "react";
-import { Switch, Route, useHistory } from "react-router";
+import { Switch, Route, useHistory, Redirect } from "react-router";
 import Signup from "./components/Signup/Signup";
 import Login from "./components/Login/Login";
 import { useAuthContext } from './hooks/useAuthContext';
+import Home from './components/Home/Home';
 import './App.css';
 
 const App = () => {
@@ -143,9 +144,21 @@ const App = () => {
       {/* Note prescriptions must contain date of issue, and prescriber signature */}
       <main className="main">
         <Switch>
-          <Route exact path="/" render={() => <RxForm handleSubmit={handleSubmit} googleLoaded={googleLoaded} existingData={data}/>}/>
-          <Route exact path="/signup" render={() => <Signup />}/>
-          <Route exact path="/login" render={() => <Login />}/>
+          <Route exact path="/">
+            {user && <Home />}
+            {!user && <Redirect to="/login" />}
+          </Route>
+          <Route exact path="/form">
+            <RxForm handleSubmit={handleSubmit} googleLoaded={googleLoaded} existingData={data}/>
+          </Route>
+          <Route exact path="/signup">
+            {!user && <Signup />}
+            {user && <Redirect to="/" />}
+          </Route>
+          <Route exact path="/login">
+            {!user && <Login />}
+            {user && <Redirect to="/" />}
+          </Route>
           <Route exact path="/template" render={() => <RxTemplate data={data} />}/>
         </Switch>
       
