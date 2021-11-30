@@ -6,7 +6,7 @@ const AuthForm = ({ handleSubmit, buttonLabel }) => {
   const [password, setPassword] = useState('');
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={(event) => handleSubmit(event, email, password)}>
 
       <FormField 
         fieldType="email" 

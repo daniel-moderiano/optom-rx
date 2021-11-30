@@ -1,10 +1,12 @@
 import AuthForm from "../AuthForm/AuthForm";
+import { useSignup } from "../../hooks/useSignup";
 
 const Signup = () => {
+  const { error, signup } = useSignup();
 
-  const handleSubmit = (event) => {
-    event.preventDefault()
-    console.log('User signed up');
+  const handleSubmit = (event, email, password) => {
+    event.preventDefault();
+    signup(email, password);
   }
 
   return (
@@ -14,6 +16,8 @@ const Signup = () => {
         handleSubmit={handleSubmit}
         buttonLabel="Sign up"
       />
+      {/* Conditionally render a UI error message */}
+      {error && <p>{error}</p>}
     </div>
   )
 }
