@@ -144,21 +144,21 @@ const App = () => {
       {/* Note prescriptions must contain date of issue, and prescriber signature */}
       <main className="main">
         <Switch>
-          {/* <Route exact path="/">
+          <Route exact path="/">
             {user && <Home />}
             {!user && <Redirect to="/login" />}
-          </Route> */}
+          </Route>
           <Route exact path="/form">
             <RxForm handleSubmit={handleSubmit} googleLoaded={googleLoaded} existingData={data}/>
           </Route>
-          {/* <Route exact path="/signup">
+          <Route exact path="/signup">
             {!user && <Signup />}
             {user && <Redirect to="/" />}
           </Route>
           <Route exact path="/login">
             {!user && <Login />}
             {user && <Redirect to="/" />}
-          </Route> */}
+          </Route>
           <Route exact path="/template" render={() => <RxTemplate data={data} />}/>
         </Switch>
       

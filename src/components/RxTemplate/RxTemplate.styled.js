@@ -131,15 +131,9 @@ const StyledRxTemplate = styled.div`
     margin: 0;
     padding: 0;
     display: block;
-    /* width: 100%; */
 
     .ui-main-container {
       display: none;
-    }
-
-    .main {
-      
-      
     }
 
     h2, h3, h4, button, .RxTemplate__btns {

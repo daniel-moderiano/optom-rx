@@ -34,6 +34,9 @@ const Nav = () => {
         <li className="Nav__list-item">
           <Link className="Nav__link" to={templateLocation}>Template</Link>
         </li>
+        <li className="Nav__list-item">
+          <Link className="Nav__link" to="/providers">Providers</Link>
+        </li>
       </ul>
     </StyledNav>
   )
