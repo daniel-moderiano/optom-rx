@@ -9,6 +9,7 @@ import Signup from "./components/Signup/Signup";
 import Login from "./components/Login/Login";
 import { useAuthContext } from './hooks/useAuthContext';
 import Home from './components/Home/Home';
+import Providers from "./components/Providers/Providers";
 import './App.css';
 
 const App = () => {
@@ -160,6 +161,10 @@ const App = () => {
             {user && <Redirect to="/" />}
           </Route>
           <Route exact path="/template" render={() => <RxTemplate data={data} />}/>
+          <Route exact path="/providers">
+            {user && <Providers />}
+            {!user && <Redirect to="/login" />}
+          </Route>
         </Switch>
       
       </main>
