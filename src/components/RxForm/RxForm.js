@@ -428,7 +428,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
     };
 
     const miscDataValidation = () => {
-      document.querySelector('.pbs-form').addEventListener('focusout', (event) => {
+      document.querySelector('.misc-form').addEventListener('focusout', (event) => {
         const { name, value } = event.target
         switch (true) {
           case name === 'date':
@@ -446,6 +446,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
     patientDataValidation();
     providerDataValidation();
     drugDataValidation();
+    miscDataValidation();
 
   }, [validateRequiredField, positiveInlineValidation, negativeInlineValidation]);
 

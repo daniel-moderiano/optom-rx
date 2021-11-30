@@ -137,7 +137,6 @@ const App = () => {
     history.push(location);
   }
 
-
   return (
     <div className="App">
       <GlobalStyles />

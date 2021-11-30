@@ -47,7 +47,6 @@ const RxTemplate = ({ data }) => {
   // Finalised drug format is dependant on whether the Rx has brand name included/only selected
   const formatDrug = (activeIngredient, brandName) => {
     const capitalised = activeIngredient[0].toUpperCase() + activeIngredient.substring(1);
-    console.log();
     // Brand name only
     if (drugData.brandOnly) {
       if (!capitalised.includes('eye')) {
@@ -100,7 +99,7 @@ const RxTemplate = ({ data }) => {
                 <div className="ui-provider__addressLine2">
                   {`${providerData.suburb} ${providerData.state} ${providerData.postcode}`}
                 </div>
-                <div data-testid="phone" className="ui-provider__phoneNumber">
+                <div className="ui-provider__phoneNumber">
                   {`Phone: ${formatPhoneNumber(providerData.phoneNumber)}`}
                 </div>
               </div>
@@ -130,7 +129,7 @@ const RxTemplate = ({ data }) => {
            <section className="ui-medication">
             <h4 className="ui-medication__title">Medication</h4>
             <div className="ui-container">
-              <div data-testid="drugName" className="ui-medication__name">
+              <div className="ui-medication__name">
                 {formatDrug(drugData.activeIngredient, drugData.brandName)}
               </div>
               <div className="ui-medication__dosage">{drugData.dosage}</div>
@@ -168,7 +167,6 @@ const RxTemplate = ({ data }) => {
          
 
         </div>
-
 
         <div className="left-container">
           <section className="provider-upper">
@@ -258,7 +256,7 @@ const RxTemplate = ({ data }) => {
               </div>
               <div className="provider__contact-lower">
                 <div className="provider__prescriberNumber">{providerData.prescriberNumber}</div>
-                <div data-testid="phone" className="provider__phoneNumber">
+                <div className="provider__phoneNumber">
                   {`Phone: ${formatPhoneNumber(providerData.phoneNumber)}`}
                 </div>
               </div>
@@ -291,7 +289,7 @@ const RxTemplate = ({ data }) => {
 
           {/* Script ID or authority Rx number should go above the medication once finalised, and perhaps with a border bottom */}
           <section className="medication">
-            <div data-testid="drugName" className="medication__activeIngredient">
+            <div className="medication__activeIngredient">
               {formatDrug(drugData.activeIngredient, drugData.brandName)}
             </div>
             <div className="medication__dosage">{drugData.dosage}</div>
