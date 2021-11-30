@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { StyledNav } from "./Nav.styled";
 
 
 const Nav = () => {
@@ -15,7 +16,7 @@ const Nav = () => {
   }
 
   return (
-    <nav className="Nav">
+    <StyledNav className="Nav">
       <ul className="Nav__list">
         <li className="Nav__list-item">
           <Link className="Nav__link" to="/">Home</Link>
@@ -26,12 +27,14 @@ const Nav = () => {
         <li className="Nav__list-item">
           <Link className="Nav__link" to="/login">Login</Link>
         </li>
-        <li className="Nav__list-item" onClick={logout}>Logout</li>
+        <li className="Nav__list-item" onClick={logout}>
+          <button className="Nav__logout-btn">Logout</button>
+        </li>
         <li className="Nav__list-item">
           <Link className="Nav__link" to={templateLocation}>Template</Link>
         </li>
       </ul>
-    </nav>
+    </StyledNav>
   )
 }
 
