@@ -46,6 +46,10 @@ body {
     padding: 0;
   }
 
+  .main {
+    display: block;
+  }
+
   @page {
     size: auto;
     margin: 0mm;

@@ -20,6 +20,9 @@ const Nav = () => {
           <Link className="Nav__link" to="/">Home</Link>
         </li>
         <li className="Nav__list-item">
+          <Link className="Nav__link" to="/form">Form</Link>
+        </li>
+        <li className="Nav__list-item">
           <Link className="Nav__link" to="/signup">Sign up</Link>
         </li>
         <li className="Nav__list-item">

@@ -131,11 +131,15 @@ const StyledRxTemplate = styled.div`
     margin: 0;
     padding: 0;
     display: block;
-    /* width: 902px;
-    height: 1275px; */
+    /* width: 100%; */
 
     .ui-main-container {
       display: none;
+    }
+
+    .main {
+      
+      
     }
 
     h2, h3, h4, button, .RxTemplate__btns {
@@ -148,7 +152,8 @@ const StyledRxTemplate = styled.div`
       position: absolute;
       left: 0;
       top: 0;
-      z-index: -1;
+      z-index: 1;
+      opacity: 0.5;
       /* This pixel value is specific for the image in question, and is a very close approximation to a real PBS form */
       width: 902px;
       margin: 0;
