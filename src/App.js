@@ -139,7 +139,8 @@ const App = () => {
       <main className="main">
         <Switch>
           <Route exact path="/" render={() => <RxForm handleSubmit={handleSubmit} googleLoaded={googleLoaded} existingData={data}/>}/>
-          <Route exact path="/about" render={() => <About />}/>
+          <Route exact path="/signup" render={() => <Signup />}/>
+          <Route exact path="/signup" render={() => <Login />}/>
           <Route exact path="/template" render={() => <RxTemplate data={data} />}/>
         </Switch>
       
