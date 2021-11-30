@@ -1,12 +1,17 @@
 import { useState } from "react";
 import FormField from "../FormField/FormField";
 
-const AuthForm = ({ handleSubmit, buttonLabel }) => {
+const AuthForm = ({ submitFunc, buttonLabel }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    submitFunc(email, password);
+  }
+
   return (
-    <form onSubmit={(event) => handleSubmit(event, email, password)}>
+    <form onSubmit={handleSubmit}>
 
       <FormField 
         fieldType="email" 

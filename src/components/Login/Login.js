@@ -1,19 +1,17 @@
 import AuthForm from "../AuthForm/AuthForm";
+import { useLogin } from '../../hooks/useLogin';
 
 const Login = () => {
-
-  const handleSubmit = (event) => {
-    event.preventDefault()
-    console.log('User logged in');
-  }
+  const { error, login } = useLogin();
 
   return (
     <div className="Login">
       <h2 className="Login__title">Login</h2>
       <AuthForm 
-        handleSubmit={handleSubmit}
+        submitFunc={login}
         buttonLabel="Login"
       />
+      {error && <p>{error}</p>}
     </div>
   )
 }
