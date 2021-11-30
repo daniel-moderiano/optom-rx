@@ -7,9 +7,13 @@ import { useState, useEffect } from "react";
 import { Switch, Route, useHistory } from "react-router";
 import Signup from "./components/Signup/Signup";
 import Login from "./components/Login/Login";
+import { useAuthContext } from './hooks/useAuthContext';
 import './App.css';
 
 const App = () => {
+  // Can user the user state to conditionally render or redirect routes (logged in vs out for example)
+  const { user } = useAuthContext();
+
   const ausDate = new Date().toLocaleString("en-CA", { timeZone: "Australia/Adelaide" }).substring(0, 10);
   
   const [data, setData] = useState({

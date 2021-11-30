@@ -1,18 +1,16 @@
 import { Link } from "react-router-dom";
 import { StyledNav } from "./Nav.styled";
+import { useLogout } from '../../hooks/useLogout';
 
 
 const Nav = () => {
+  // Bring in the logout function from the custom hook so that it can be called on click via Logout btn
+  const { logout } = useLogout();
 
   // Ensures that navigating to template route via Nav does not try to display a template with no data
   const templateLocation = {
     pathname: '/template',
     state: { validData: false }
-  }
-
-  // TODO: logout implementation, but draw from external hook rather than define functions here in Nav component
-  const logout = () => {
-    console.log('User logged out');
   }
 
   return (

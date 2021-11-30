@@ -2,7 +2,7 @@ import { createContext, useEffect, useReducer } from "react";
 import { auth } from '../firebase/config';
 import { onAuthStateChanged } from "firebase/auth";
 
-// Exports the context object itself
+// Exports the context object itself. This context object is retrieved with the useContext react hook, and allows use to destructure certain state props (such as user)
 export const AuthContext = createContext();
 
 // A reducer function for handling different modifications to the same state
