@@ -80,7 +80,7 @@ const RxTemplate = ({ data }) => {
   }
 
   const editForm = () => {
-    history.push('/');
+    history.push('/form');
   }
 
   return (

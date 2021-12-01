@@ -14,10 +14,10 @@ afterEach(() => {
 })
 
 describe('Provider data input tests', () => {
-  test('Provider data input initialises with existing data', () => {
-    render(<ProviderForm existingData={{ providerData: { prescriberNumber: '7033149' } }} standalone={false} />);
+  test('Provider data input initialises with blank values', () => {
+    render(<ProviderForm />);
     const presNo = screen.getByLabelText(/prescriber number/i);
-    expect(presNo.value).toBe('7033149');
+    expect(presNo.value).toBe('');
   });
 
   test("Provider data input updates state and therefore it's own value when user types in input", () => {
@@ -31,17 +31,3 @@ describe('Provider data input tests', () => {
 describe('Form submit testing', () => {
   // Form submission tests here
 });
-
-describe('Macro component tests', () => {
-  test('Submit button not visible in integrated form', () => {
-    render(<ProviderForm existingData={{}} standalone={false} />);
-    const btn = screen.queryByRole('button', { name: 'Save' });
-    expect(btn).not.toBeInTheDocument();
-  });
-
-  test('Submit button visible in standalone form', () => {
-    render(<ProviderForm existingData={{}} standalone={true} />);
-    const btn = screen.getByRole('button', { name: 'Save' });
-    expect(btn).toBeInTheDocument();
-  });
-})

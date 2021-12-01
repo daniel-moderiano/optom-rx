@@ -1,11 +1,11 @@
 import Fieldset from "../utils/Fieldset/Fieldset";
 import FormField from "../FormField/FormField";
 import AddressAutocomplete from "../AddressAutocomplete/AddressAutocomplete";
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 // ! Legal requirements include the prescriber's name, address, and contact details, and prescriber number
 
-const ProviderForm = ({ existingData, googleLoaded, handleSubmit, standalone }) => {
+const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBooleanState, googleLoaded, handleSubmit, standalone }) => {
   const [providerData, setProviderData] = useState({
     prefix: false,
     fullName: '',
@@ -18,7 +18,6 @@ const ProviderForm = ({ existingData, googleLoaded, handleSubmit, standalone }) 
     state: '',
     phoneNumber: '',
     prescriberNumber: '',
-    ...existingData.providerData,
   });
 
   const [providerAlerts, setProviderAlerts] = useState({
@@ -31,8 +30,8 @@ const ProviderForm = ({ existingData, googleLoaded, handleSubmit, standalone }) 
     prescriberNumber: {},
   });
 
-  // Pass a set function to handle change, rather than hardcoding with a certain setState function
-  const handleChange = (event) => {
+  // Allows local state update within the component
+  const handleStandaloneChange = (event) => {
     const { name, value } = event.target;
     setProviderData((prevData) => ({
       ...prevData, 
@@ -40,8 +39,8 @@ const ProviderForm = ({ existingData, googleLoaded, handleSubmit, standalone }) 
     }));
   };
 
-  // Used to toggle any boolean data in the data states
-  const toggleBooleanState = (data, boolToChange) => {
+  // Used to toggle any boolean data in the data state (locally within component)
+  const toggleStandaloneBooleanState = (data, boolToChange) => {
     let newState = true;
     if (data[boolToChange]) {
       newState = false;
@@ -51,86 +50,320 @@ const ProviderForm = ({ existingData, googleLoaded, handleSubmit, standalone }) 
       [boolToChange]: newState,
     }));
   };
+
+  // UI functions
+  const showErrorClass = (element) => {
+    element.classList.add('error');
+    element.classList.remove('success');
+
+    // Remove the tick icon
+    const tick = element.parentNode.querySelector('.tickCircle');
+    tick.classList.remove('show');
+    tick.classList.add("hide");
+  }
+
+  const showSuccessClass = (element) => {
+    element.classList.remove('error');
+    element.classList.add('success');
+
+    // Add the tick icon
+    const tick = element.parentNode.querySelector('.tickCircle');
+    tick.classList.remove('hide');
+    tick.classList.add("show");
+  }
+
+   // Show positive feedback once a validation requirements are met
+   const positiveInlineValidation = useCallback((setAlertFunc, field) => {
+    showSuccessClass(field);
+    setAlertFunc((prevAlerts) => ({
+      ...prevAlerts,
+      [field.name]: {}
+    }));
+  }, []);
+
+  // Show positive feedback once a validation requirements are met
+  const negativeInlineValidation = useCallback((setAlertFunc, alertMsg, field) => {
+    showErrorClass(field);
+    setAlertFunc((prevAlerts) => ({
+      ...prevAlerts,
+      [field.name]: {
+        message: alertMsg,
+        type: 'error',
+      }
+    }));
+  }, []);
+
+  // Provide positive and negative feedback for a field requiring any non-empty input
+  const validateRequiredField = useCallback((setAlertFunc, field) => {
+    // Validate full name here
+    if (field.value.trim().length === 0) {
+      setAlertFunc((prevAlerts) => ({
+        ...prevAlerts,
+        [field.name]: {
+          message: "This field cannot be left blank",
+          type: 'error',
+        }
+      }));
+      showErrorClass(field);
+    } else {
+      showSuccessClass(field);
+      setAlertFunc((prevAlerts) => ({
+        ...prevAlerts,
+        [field.name]: {}
+      }));
+    }
+  }, []);
+
+  // Ensure final address entered is formatted with abbreviated state code
+  const formatAddressState = (stateInput) => {
+    let formatted = '';
+    switch (true) {
+      case (/South Australia/i).test(stateInput):
+        formatted = 'SA'
+        break;
+      
+      case (/Queensland/i).test(stateInput):
+      formatted = 'QLD'
+      break;
+
+      case (/New South Wales/i).test(stateInput):
+        formatted = 'NSW'
+        break;
+
+      case (/Tasmania/i).test(stateInput):
+        formatted = 'TAS'
+        break;
+
+      case (/Victoria/i).test(stateInput):
+        formatted = 'VIC'
+        break;
+
+      case (/Western Australia/i).test(stateInput):
+        formatted = 'WA'
+        break;
+
+      default:
+        formatted = stateInput;
+        break;
+      }
+
+    return formatted;
+  }
+
+  // Standlone form validation on focusout events
+  useEffect(() => {
+    document.querySelector('.ProviderForm--standalone').addEventListener('focusout', (event) => {
+      const { name, value } = event.target
+      switch (true) {
+        case name === 'fullName':
+          validateRequiredField(setProviderAlerts, event.target);
+          break;
+
+        case name === 'streetAddress':
+          validateRequiredField(setProviderAlerts, event.target);
+          break;
+        
+        case name === 'suburb':
+          validateRequiredField(setProviderAlerts, event.target);
+          break;
   
+        case name === 'state':
+          setProviderData((prevData) => ({
+            ...prevData, 
+            [name]: formatAddressState(value), 
+          }));
+          validateRequiredField(setProviderAlerts, event.target);
+          break;
+  
+        case name === 'postcode':
+          validateRequiredField(setProviderAlerts, event.target);
+          break;
+
+        case name === 'phoneNumber':
+          // Consider trimming the input of any spaces, hyphens, or parens
+          if (!(/^((0[2-8]\d{8})|(13(00|\d{4})(\d{6})?))$/).test(value.trim())) {
+            if (value.substring(0, 2) === '13') {
+              // Provide business specific error message
+              negativeInlineValidation(setProviderAlerts, 'Australian business numbers are either 6 digits and begin with 13, or 10 digits and begin with 1300', event.target);
+            } else {
+              // Provide general error message
+              negativeInlineValidation(setProviderAlerts, 'Australian phone numbers contain 10 digits and begin with 02, 03, 04, 07 or 08', event.target);
+            }
+          } else {
+            positiveInlineValidation(setProviderAlerts, event.target);
+          }
+          break;
+
+        case name === 'prescriberNumber':
+          // Check for digits only
+          if (!(/^[0-9]{7}$/).test(value.trim())) {
+            // Sets an alert object in the state, which will immediately cause the component to render an alert message
+            negativeInlineValidation(setProviderAlerts, 'Prescriber number must be a seven digit number', event.target);
+          } else {
+            positiveInlineValidation(setProviderAlerts, event.target);
+          }
+          break;
+      
+        default:
+          break;
+      }
+    });
+  }, [negativeInlineValidation, positiveInlineValidation, validateRequiredField])
 
   return (
-    <Fieldset className="ProviderForm" legend="Provider Details">
+    <>
+      {/* The standalone form allows all 'in house' state management and validation */}
+      {standalone &&  <div className="ProviderForm ProviderForm--standalone">
+        <FormField 
+          fieldType="text" 
+          name="fullName"
+          label="Full name" 
+          value={providerData.fullName} 
+          onChange={(event) => handleStandaloneChange(event)} 
+          alert={providerAlerts.fullName}
+        />    
 
-      <FormField 
-        fieldType="text" 
-        name="fullName"
-        label="Full name" 
-        value={providerData.fullName} 
-        onChange={(event) => handleChange(event)} 
-        alert={providerAlerts.fullName}
-      />    
+        <FormField 
+          fieldType="checkbox" 
+          name="prefix"
+          label="Include 'Dr' in provider name" 
+          onChange={() => toggleStandaloneBooleanState(providerData, 'prefix')}
+          checked={providerData.prefix}
+          className="checkbox prefix-field"
+        />  
 
-      <FormField 
-        fieldType="checkbox" 
-        name="prefix"
-        label="Include 'Dr' in provider name" 
-        onChange={() => toggleBooleanState(providerData, 'prefix')}
-        checked={providerData.prefix}
-        className="checkbox prefix-field"
-      />  
+        <FormField 
+          fieldType="text" 
+          name="qualifications"
+          label="Abbreviated qualifications (optional)" 
+          placeholder="e.g. BMedSci(VisSc), MOpt"
+          value={providerData.qualifications} 
+          onChange={(event) => handleStandaloneChange(event)} 
+          maxlength="40"
+        />
 
-      <FormField 
-        fieldType="text" 
-        name="qualifications"
-        label="Abbreviated qualifications (optional)" 
-        placeholder="e.g. BMedSci(VisSc), MOpt"
-        value={providerData.qualifications} 
-        onChange={(event) => handleChange(event)} 
-        maxlength="40"
-      />
+        {/* Practice name is only relevant for providers, and even then you might consider omitting this, as there is really no room on the computerised for for practice name */}
+        <FormField 
+          name="practiceName"
+          label="Practice name (optional)" 
+          value={providerData.practiceName} 
+          onChange={handleChange} 
+        />
 
-      {/* Practice name is only relevant for providers, and even then you might consider omitting this, as there is really no room on the computerised for for practice name */}
-      <FormField 
-        name="practiceName"
-        label="Practice name (optional)" 
-        value={providerData.practiceName} 
-        onChange={handleChange} 
-      />
+        <AddressAutocomplete 
+          data={providerData}
+          setData={setProviderData}
+          handleChange={(event) => handleStandaloneChange(event)}
+          provider={true}   
+          alerts={providerAlerts}
+          setAlerts={setProviderAlerts} 
+          googleLoaded={googleLoaded}
+        />
 
-      <AddressAutocomplete 
-        data={providerData}
-        setData={setProviderData}
-        handleChange={(event) => handleChange(event)}
-        provider={true}   
-        alerts={providerAlerts}
-        setAlerts={setProviderAlerts} 
-        googleLoaded={googleLoaded}
-      />
+        {/* Because this is intended for use only in Australia, present and validate phone numbers in national format, which includes 10 digits for landline and mobile numbers, as follows: 02 1234 4321 [telephone], or 0400 000 000 [mobile]. Note that 13 numbers may be 6 or 10 digits, and indicates an Australia wide number. This shouldn't be appropriate for any optical practices, but should be able to be inputted regardless */}
 
-      {/* Because this is intended for use only in Australia, present and validate phone numbers in national format, which includes 10 digits for landline and mobile numbers, as follows: 02 1234 4321 [telephone], or 0400 000 000 [mobile]. Note that 13 numbers may be 6 or 10 digits, and indicates an Australia wide number. This shouldn't be appropriate for any optical practices, but should be able to be inputted regardless */}
+        <FormField 
+          fieldType="text" 
+          name="phoneNumber"
+          label="Phone number" 
+          value={providerData.phoneNumber} 
+          onChange={(event) => handleStandaloneChange(event)} 
+          alert={providerAlerts.phoneNumber}
+          id="phoneNumber"
+          maxlength="10"
+          className="phoneNo-field form-field"
+        />
 
-      <FormField 
-        fieldType="text" 
-        name="phoneNumber"
-        label="Phone number" 
-        value={providerData.phoneNumber} 
-        onChange={(event) => handleChange(event)} 
-        alert={providerAlerts.phoneNumber}
-        id="phoneNumber"
-        maxlength="10"
-        className="phoneNo-field form-field"
-      />
+        <FormField 
+          fieldType="text" 
+          name="prescriberNumber"
+          label="Prescriber number" 
+          value={providerData.prescriberNumber} 
+          onChange={(event) => handleStandaloneChange(event)} 
+          alert={providerAlerts.prescriberNumber}
+          maxlength="7"
+          className="prescriberNo-field form-field"
+        />
 
-      <FormField 
-        fieldType="text" 
-        name="prescriberNumber"
-        label="Prescriber number" 
-        value={providerData.prescriberNumber} 
-        onChange={(event) => handleChange(event)} 
-        alert={providerAlerts.prescriberNumber}
-        maxlength="7"
-        className="prescriberNo-field form-field"
-      />
+        {/* Only visible on standalone forms */}
+        <button onClick={handleSubmit}>Save</button>
+      </div>}
 
-      {/* Only visible on standalone forms */}
-      {standalone && <button onClick={handleSubmit}>Save</button>}
+      {/* The non standalone form uses the App/RxForm state instead of local state, and is intedend to integrate within the RxForm component */}
+      {!standalone && <div className="ProviderForm ProviderForm--standalone">
+        <FormField 
+          fieldType="text" 
+          name="fullName"
+          label="Full name" 
+          value={data.fullName} 
+          onChange={(event) => handleChange(event)} 
+          alert={alerts.fullName}
+        />    
+
+        <FormField 
+          fieldType="checkbox" 
+          name="prefix"
+          label="Include 'Dr' in provider name" 
+          onChange={() => toggleBooleanState(providerData, 'prefix')}
+          checked={data.prefix}
+          className="checkbox prefix-field"
+        />  
+
+        <FormField 
+          fieldType="text" 
+          name="qualifications"
+          label="Abbreviated qualifications (optional)" 
+          placeholder="e.g. BMedSci(VisSc), MOpt"
+          value={data.qualifications} 
+          onChange={(event) => handleChange(event)} 
+          maxlength="40"
+        />
+
+        {/* Practice name is only relevant for providers, and even then you might consider omitting this, as there is really no room on the computerised for for practice name */}
+        <FormField 
+          name="practiceName"
+          label="Practice name (optional)" 
+          value={data.practiceName} 
+          onChange={handleChange} 
+        />
+
+        <AddressAutocomplete 
+          data={data}
+          setData={setData}
+          handleChange={(event) => handleChange(event)}
+          provider={true}   
+          alerts={alerts}
+          setAlerts={setAlerts} 
+          googleLoaded={googleLoaded}
+        />
+
+        {/* Because this is intended for use only in Australia, present and validate phone numbers in national format, which includes 10 digits for landline and mobile numbers, as follows: 02 1234 4321 [telephone], or 0400 000 000 [mobile]. Note that 13 numbers may be 6 or 10 digits, and indicates an Australia wide number. This shouldn't be appropriate for any optical practices, but should be able to be inputted regardless */}
+
+        <FormField 
+          fieldType="text" 
+          name="phoneNumber"
+          label="Phone number" 
+          value={data.phoneNumber} 
+          onChange={(event) => handleChange(event)} 
+          alert={alerts.phoneNumber}
+          id="phoneNumber"
+          maxlength="10"
+          className="phoneNo-field form-field"
+        />
+
+        <FormField 
+          fieldType="text" 
+          name="prescriberNumber"
+          label="Prescriber number" 
+          value={data.prescriberNumber} 
+          onChange={(event) => handleChange(event)} 
+          alert={alerts.prescriberNumber}
+          maxlength="7"
+          className="prescriberNo-field form-field"
+        />
+      </div>}
+    </>
       
-    </Fieldset>
   )
 }
 
