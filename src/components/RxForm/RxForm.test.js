@@ -120,10 +120,10 @@ describe('Drug input tests', () => {
 });
 
 describe('Patient data tests', () => {
-  test('Patient data input initialises with empty string value', () => {
-    render(<RxForm existingData={{}}/>);
-    const firstNameInput = screen.getByLabelText(/medicare number/i);
-    expect(firstNameInput.value).toBe('');
+  test('Patient data input initialises with existing data', () => {
+    render(<RxForm existingData={{ patientData: { medicareNumber: '5151515151' } }}/>);
+    const medicare = screen.getByLabelText(/medicare number/i);
+    expect(medicare.value).toBe('5151515151');
   });
 
   test("Patient data input updates state and therefore it's own value when user types in input", () => {
@@ -134,11 +134,11 @@ describe('Patient data tests', () => {
   });
 });
 
-describe('Provider data tests', () => {
-  test('Provider data input initialises with empty string value', () => {
-    render(<RxForm existingData={{}}/>);
-    const firstNameInput = screen.getByLabelText(/prescriber number/i);
-    expect(firstNameInput.value).toBe('');
+describe('Provider data input tests', () => {
+  test('Provider data input initialises with existing data', () => {
+    render(<RxForm existingData={{ providerData: { prescriberNumber: '7033149' } }}/>);
+    const presNo = screen.getByLabelText(/prescriber number/i);
+    expect(presNo.value).toBe('7033149');
   });
 
   test("Provider data input updates state and therefore it's own value when user types in input", () => {
@@ -150,7 +150,7 @@ describe('Provider data tests', () => {
 });
 
 describe('Parameter data tests', () => {
-  test('Parameter data input initialises with empty string value', () => {
+  test('Parameter data input initialises with existing data', () => {
     render(<RxForm existingData={{}}/>);
     const firstNameInput = screen.getByLabelText(/quantity/i);
     expect(firstNameInput.value).toBe('');
@@ -392,6 +392,16 @@ describe('Patient data validation', () => {
 });
 
 describe('Form validation on submit', () => {
+  test('Identifies invalid field on submission attempt (provider section)', () => {
+    render(<RxForm existingData={data}/>);
+    const input = screen.getByLabelText(/prescriber number/i);
+    const submit = screen.getByRole('button', { name: 'Generate prescription' });
+    fireEvent.change(input, { target: { value: '' } });
+    fireEvent.click(submit);
+    const alert = screen.getByText(/This field cannot be left blank/i);
+    expect(alert).toBeInTheDocument();
+  });
+
   test('Identifies invalid field on submission attempt (patient section)', () => {
     render(<RxForm existingData={data}/>);
     const input = screen.getByLabelText(/medicare number/i);

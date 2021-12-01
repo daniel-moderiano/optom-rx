@@ -72,7 +72,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
     ...existingData.patientData,
   });
 
-  // Not all of this data will be required
   const [providerData, setProviderData] = useState({
     prefix: false,
     fullName: '',
@@ -155,6 +154,15 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
       [name]: value 
     }));
   };
+
+  // Handle submit of provider form within the context of the Rx form
+  const handleProviderSubmit = (event, data) => {
+    event.preventDefault();
+    setProviderData((prevData) => ({
+      ...prevData, 
+      ...data,
+    }));
+  }
 
   // Will return true or false depending on whether the validated field is empty (not valid/false) or not
   const validateFieldForEmpty = (setFuncAlert, field) => {

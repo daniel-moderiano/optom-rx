@@ -1,10 +1,58 @@
 import Fieldset from "../utils/Fieldset/Fieldset";
 import FormField from "../FormField/FormField";
 import AddressAutocomplete from "../AddressAutocomplete/AddressAutocomplete";
+import { useState } from "react";
 
 // ! Legal requirements include the prescriber's name, address, and contact details, and prescriber number
 
-const ProviderForm = () => {
+const ProviderForm = ({ existingData, googleLoaded, handleSubmit, standalone }) => {
+  const [providerData, setProviderData] = useState({
+    prefix: false,
+    fullName: '',
+    qualifications: '',
+    practiceName: '',
+    streetAddress: '',
+    subpremise: '',
+    suburb: '',
+    postcode: '',
+    state: '',
+    phoneNumber: '',
+    prescriberNumber: '',
+    ...existingData.providerData,
+  });
+
+  const [providerAlerts, setProviderAlerts] = useState({
+    fullName: {},
+    streetAddress: {},
+    suburb: {},
+    postcode: {},
+    state: {},
+    phoneNumber: {},
+    prescriberNumber: {},
+  });
+
+  // Pass a set function to handle change, rather than hardcoding with a certain setState function
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setProviderData((prevData) => ({
+      ...prevData, 
+      [name]: value 
+    }));
+  };
+
+  // Used to toggle any boolean data in the data states
+  const toggleBooleanState = (data, boolToChange) => {
+    let newState = true;
+    if (data[boolToChange]) {
+      newState = false;
+    }
+    setProviderData((prevData) => ({
+      ...prevData,
+      [boolToChange]: newState,
+    }));
+  };
+  
+
   return (
     <Fieldset className="ProviderForm" legend="Provider Details">
 
@@ -13,7 +61,7 @@ const ProviderForm = () => {
         name="fullName"
         label="Full name" 
         value={providerData.fullName} 
-        onChange={(event) => handleChange(setProviderData, event)} 
+        onChange={(event) => handleChange(event)} 
         alert={providerAlerts.fullName}
       />    
 
@@ -21,7 +69,7 @@ const ProviderForm = () => {
         fieldType="checkbox" 
         name="prefix"
         label="Include 'Dr' in provider name" 
-        onChange={() => toggleBooleanState(setProviderData, providerData, 'prefix')}
+        onChange={() => toggleBooleanState(providerData, 'prefix')}
         checked={providerData.prefix}
         className="checkbox prefix-field"
       />  
@@ -32,7 +80,7 @@ const ProviderForm = () => {
         label="Abbreviated qualifications (optional)" 
         placeholder="e.g. BMedSci(VisSc), MOpt"
         value={providerData.qualifications} 
-        onChange={(event) => handleChange(setProviderData, event)} 
+        onChange={(event) => handleChange(event)} 
         maxlength="40"
       />
 
@@ -47,7 +95,7 @@ const ProviderForm = () => {
       <AddressAutocomplete 
         data={providerData}
         setData={setProviderData}
-        handleChange={(event) => handleChange(setProviderData, event)}
+        handleChange={(event) => handleChange(event)}
         provider={true}   
         alerts={providerAlerts}
         setAlerts={setProviderAlerts} 
@@ -61,7 +109,7 @@ const ProviderForm = () => {
         name="phoneNumber"
         label="Phone number" 
         value={providerData.phoneNumber} 
-        onChange={(event) => handleChange(setProviderData, event)} 
+        onChange={(event) => handleChange(event)} 
         alert={providerAlerts.phoneNumber}
         id="phoneNumber"
         maxlength="10"
@@ -73,13 +121,17 @@ const ProviderForm = () => {
         name="prescriberNumber"
         label="Prescriber number" 
         value={providerData.prescriberNumber} 
-        onChange={(event) => handleChange(setProviderData, event)} 
+        onChange={(event) => handleChange(event)} 
         alert={providerAlerts.prescriberNumber}
         maxlength="7"
         className="prescriberNo-field form-field"
       />
+
+      {/* Only visible on standalone forms */}
+      {standalone && <button onClick={handleSubmit}>Save</button>}
+      
     </Fieldset>
   )
 }
 
-export default ProviderForm
+export default ProviderForm;
