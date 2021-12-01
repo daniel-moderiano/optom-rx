@@ -38,6 +38,12 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
     }));
   };
 
+  // Add provider to firestore database when submitting from standalone form
+  const handleStandaloneSubmit = (event, formData) => {
+    // TODO: async addDoc function
+    console.log('Form submitted');
+  }
+
   // Used to toggle any boolean data in the data state (locally within component)
   const toggleStandaloneBooleanState = (data, boolToChange) => {
     let newState = true;
@@ -267,11 +273,38 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
       });
     }
     
-  }, [negativeInlineValidation, positiveInlineValidation, validateRequiredField, standalone, setAlerts])
+  }, [negativeInlineValidation, positiveInlineValidation, validateRequiredField, standalone, setAlerts]);
+
+  // Ensure form is validated before calling form submission function (standalone form only)
+  const checkFormValidation = () => {
+    let valid = true;
+    const requiredFields = [
+      'fullName',
+      'streetAddress',
+      'suburb',
+      'postcode',
+      'state',
+      'phoneNumber',
+      'prescriberNumber',
+    ];
+
+    const form = document.querySelector('.ProviderForm--standalone');
+
+    requiredFields.forEach((field) => {
+      const input = form.querySelector(`[name="${field}"]`);
+      if (input.value.trim().length === 0) {
+        valid = false;
+        negativeInlineValidation(setProviderAlerts, 'This field cannot be left blank', input);
+      }
+    });
+
+    return valid;
+  }
 
   return (
     <>
       {/* The standalone form allows all 'in house' state management and validation */}
+      {/* Standalone form should submit providers to firebase using user ID as document ID */}
       {standalone &&  <div className="ProviderForm ProviderForm--standalone">
         <FormField 
           fieldType="text" 
@@ -345,7 +378,13 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
         />
 
         {/* Only visible on standalone forms */}
-        <button onClick={handleSubmit}>Save</button>
+        <button onClick={(event) => {
+          event.preventDefault(); 
+          if (checkFormValidation()) {
+            handleStandaloneSubmit(event, providerData)
+          }
+        }}>Save</button>
+       
       </div>}
 
       {/* The non standalone form uses the App/RxForm state instead of local state, and is intedend to integrate within the RxForm component */}

@@ -1,9 +1,13 @@
 import ProviderForm from "../ProviderForm/ProviderForm";
-import { useCollection } from '../../hooks/useCollection'
+import { useCollection } from '../../hooks/useCollection';
+import { useAuthContext } from '../../hooks/useAuthContext';
 
 const Providers = () => {
+  const { user } = useAuthContext();
+  // This should be called using the curernt user ID to query the collection
+  // Query should be ('providers', ['uid', '==', user.uid])
   const { documents: providers } = useCollection('providers');
-  console.log(providers);
+  
 
   return (
     <div className="Providers">

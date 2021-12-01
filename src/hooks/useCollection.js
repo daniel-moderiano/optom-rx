@@ -2,19 +2,22 @@ import { db } from "../firebase/config";
 import { useState, useEffect, useRef } from "react";
 
 // Firebase imports
-import { collection, onSnapshot } from "firebase/firestore";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
 
 // A hook that retrieves all documents in real time from a specifid collection. Can be upgraded to support queries at a later date
-export const useCollection = (collectionName) => {
+export const useCollection = (collectionName, docQuery) => {
   const [documents, setDocuments] = useState(null);
 
-  useEffect(() => {
-    let ref = collection(db, collectionName)
+  // Avoid an infinite loops via useRef (since query is an array)
+  const docQueryCurrent = useRef(docQuery).current
 
-    // Add query support 'q" here
-    // if (q) {
-    //   ref = query(ref, where(...q));
-    // }
+  useEffect(() => {
+    let ref = collection(db, collectionName);
+
+    // Query is optional in this hook
+    if (docQueryCurrent) {
+      ref = query(ref, where(...docQueryCurrent));
+    }
 
     // Written as an unsub function to unsubscribe once component dismounts
     const unsub = onSnapshot(ref, (snapshot) => {
@@ -27,7 +30,7 @@ export const useCollection = (collectionName) => {
 
     return () => unsub()
 
-  }, [collectionName])
+  }, [collectionName, docQueryCurrent])
 
   // Reference the documents using destructuring in any component
   return { documents }
