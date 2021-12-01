@@ -57,7 +57,7 @@ const App = () => {
     },
     miscData: {
       authRxNumber: '',   
-      date: ausDate, 
+      date: '2021-10-10', 
       authCode: '7979',
       scriptID: '',
     },

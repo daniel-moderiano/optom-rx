@@ -432,7 +432,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
         const { name, value } = event.target
         switch (true) {
           case name === 'date':
-            validateRequiredField(setDrugAlerts, event.target);
+            validateRequiredField(setMiscAlerts, event.target);
             break;
 
           // TODO: validation for authority code where applicable. Potentially enable fields on auto-detect of restricted benefits, or make required on same criteria, but enable at all times
@@ -478,9 +478,10 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
   const checkFormValidation = () => {
     let valid = true;
 
-    const drugForm = document.querySelector('.drug-form')
-    const patientForm = document.querySelector('.patient-form')
-    const providerForm = document.querySelector('.provider-form')
+    const drugForm = document.querySelector('.drug-form');
+    const patientForm = document.querySelector('.patient-form');
+    const providerForm = document.querySelector('.provider-form');
+    const miscForm = document.querySelector('.misc-form');
 
     requiredFields.drug.forEach((field) => {
       const input = drugForm.querySelector(`[name="${field}"]`);
@@ -504,6 +505,14 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
       if (input.value.trim().length === 0) {
         valid = false;
         negativeInlineValidation(setProviderAlerts, 'This field cannot be left blank', input);
+      }
+    });
+
+    requiredFields.misc.forEach((field) => {
+      const input = miscForm.querySelector(`[name="${field}"]`);
+      if (input.value.trim().length === 0) {
+        valid = false;
+        negativeInlineValidation(setMiscAlerts, 'This field cannot be left blank', input);
       }
     });
 
@@ -737,12 +746,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
 
       </Fieldset>
 
-      
-
-     
-      
       <button type="submit" className="btn btn-generate">Generate prescription</button>
-      
       
     </StyledRxForm>
   )

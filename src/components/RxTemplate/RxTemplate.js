@@ -89,7 +89,7 @@ const RxTemplate = ({ data }) => {
       {/* If the template is rendered without a full set of data, many functions will fail. Hence this is rendered conditionally */}
       {state.validData ? <>
         <img src={Rx} alt="" />
-        <div className="ui-main-container">
+        <div data-testid="ui" className="ui-main-container">
           <section className="ui-provider-upper">
             <h4 className="ui-provider__title">Provider</h4>
             <div className="ui-container">

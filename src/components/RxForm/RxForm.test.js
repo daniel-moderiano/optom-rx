@@ -1,6 +1,7 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import RxForm from "./RxForm";
 
+// Used because of the 'google is not defined' error 
 beforeEach(() => {
   jest.spyOn(console, 'error')
   // @ts-ignore jest.spyOn adds this functionallity
@@ -11,6 +12,96 @@ afterEach(() => {
   // @ts-ignore jest.spyOn adds this functionallity
   console.error.mockRestore()
 })
+
+const data = {
+  drugData: {
+    activeIngredient: "latanoprost 0.005% eye drops, 5 mL",
+    "brandName":"Xalatan",
+    "quantity":"1",
+    "repeats":"4",
+    "dosage":"Once nightly both eyes",
+    "itemCode":"5552F",
+    substitutePermitted: true,
+    brandOnly: false,    
+    includeBrand: true,   
+    pbsRx: true,    
+    compounded: false,
+  },
+  patientData: {
+    "fullName":"Daniel Moderiano",
+    "streetAddress":"6 Old Tawny Close",
+    "subpremise":"",
+    "suburb":"Wynn Vale",
+    "postcode":"5127",
+    "state":"SA",
+    "medicareNumber":"5151515151",
+    "medicareRefNumber":"3"
+  },
+  providerData: {
+    "prefix":true,
+    "fullName":"Sarah Smoker",
+    "qualifications":"BMedSc(VisSc), MOpt",
+    "practiceName":"OPSM",
+    "streetAddress":"976 North East Road",
+    "subpremise":"Shop 112, Westfield Tea Tree Plaza",
+    "suburb":"Modbury",
+    "postcode":"5092",
+    "state":"SA",
+    "phoneNumber":"0427779650",
+    "prescriberNumber":"7033149"
+  },
+  miscData: {
+    authRxNumber: '',   
+    date: '2021-10-10',
+    authCode: '7979',
+    scriptID: '',
+  },
+}
+
+const dataNoDate = {
+  drugData: {
+    activeIngredient: "latanoprost 0.005% eye drops, 5 mL",
+    "brandName":"Xalatan",
+    "quantity":"1",
+    "repeats":"4",
+    "dosage":"Once nightly both eyes",
+    "itemCode":"5552F",
+    substitutePermitted: true,
+    brandOnly: false,    
+    includeBrand: true,   
+    pbsRx: true,    
+    compounded: false,
+  },
+  patientData: {
+    "fullName":"Daniel Moderiano",
+    "streetAddress":"6 Old Tawny Close",
+    "subpremise":"",
+    "suburb":"Wynn Vale",
+    "postcode":"5127",
+    "state":"SA",
+    "medicareNumber":"5151515151",
+    "medicareRefNumber":"3"
+  },
+  providerData: {
+    "prefix":true,
+    "fullName":"Sarah Smoker",
+    "qualifications":"BMedSc(VisSc), MOpt",
+    "practiceName":"OPSM",
+    "streetAddress":"976 North East Road",
+    "subpremise":"Shop 112, Westfield Tea Tree Plaza",
+    "suburb":"Modbury",
+    "postcode":"5092",
+    "state":"SA",
+    "phoneNumber":"0427779650",
+    "prescriberNumber":"7033149"
+  },
+  miscData: {
+    authRxNumber: '',   
+    date: '', 
+    authCode: '7979',
+    scriptID: '',
+  },
+}
 
 describe('Drug input tests', () => {
   test('Drug input initialises with empty string value', () => {
@@ -72,7 +163,6 @@ describe('Parameter data tests', () => {
     expect(firstNameInput.value).toBe('3');
   });
 });
-
 
 describe('Patient data validation', () => {
   test('IRN rejects values > 1 digit long', () => {
@@ -299,5 +389,52 @@ describe('Patient data validation', () => {
     const alert = screen.getByText(/This field cannot be left blank/i);
     expect(alert).toBeInTheDocument();
   });
+});
 
+describe('Form validation on submit', () => {
+  test('Identifies invalid field on submission attempt (patient section)', () => {
+    render(<RxForm existingData={data}/>);
+    const input = screen.getByLabelText(/medicare number/i);
+    const submit = screen.getByRole('button', { name: 'Generate prescription' });
+    fireEvent.change(input, { target: { value: '' } });
+    fireEvent.click(submit);
+    const alert = screen.getByText(/This field cannot be left blank/i);
+    expect(alert).toBeInTheDocument();
+  });
+
+  test('Identifies invalid field on submission attempt (medication section)', () => {
+    render(<RxForm existingData={data}/>);
+    const input = screen.getByLabelText(/active ingredient/i);
+    const submit = screen.getByRole('button', { name: 'Generate prescription' });
+    fireEvent.change(input, { target: { value: '' } });
+    fireEvent.click(submit);
+    const alert = screen.getByText(/This field cannot be left blank/i);
+    expect(alert).toBeInTheDocument();
+  });
+
+  test('Identifies invalid field on submission attempt (PBS and other section)', () => {
+    render(<RxForm existingData={dataNoDate}/>);
+    // const input = screen.getByLabelText(/date/i);
+    const submit = screen.getByRole('button', { name: 'Generate prescription' });
+    fireEvent.click(submit);
+    const alert = screen.getByText(/This field cannot be left blank/i);
+    expect(alert).toBeInTheDocument();
+  });
+
+  test('Valid form does not generate any error alerts on submit', () => {
+    const handleSubmit = jest.fn();
+    render(<RxForm handleSubmit={handleSubmit} existingData={data}/>);
+    const submit = screen.getByRole('button', { name: 'Generate prescription' });
+    fireEvent.click(submit);
+    const alert = screen.queryByText(/This field cannot be left blank/i);
+    expect(alert).not.toBeInTheDocument();
+  });
+
+  test('Valid form calls handleSubmit on submit', () => {
+    const handleSubmit = jest.fn();
+    render(<RxForm handleSubmit={handleSubmit} existingData={data}/>);
+    const submit = screen.getByRole('button', { name: 'Generate prescription' });
+    fireEvent.click(submit);
+    expect(handleSubmit).toBeCalled();
+  });
 });
