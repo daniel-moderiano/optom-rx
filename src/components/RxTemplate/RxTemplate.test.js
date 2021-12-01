@@ -2,16 +2,8 @@ import { render, screen } from "@testing-library/react";
 import RxTemplate from './RxTemplate';
 import ReactRouter from 'react-router';
 
-beforeEach(() => {
-  jest.spyOn(console, 'error')
-  // @ts-ignore jest.spyOn adds this functionallity
-  console.error.mockImplementation(() => null);
-});
-
-afterEach(() => {
-  // @ts-ignore jest.spyOn adds this functionallity
-  console.error.mockRestore()
-})
+// Mock the useLocation call in RxTemplate.js, providing the state value since this is all that is used.
+const useLocation = jest.spyOn(ReactRouter, 'useLocation');
 
 const ausDate = new Date().toLocaleString("en-CA", { timeZone: "Australia/Adelaide" }).substring(0, 10);
 
@@ -130,11 +122,7 @@ const dataDrug = {
 };
 
 
-
 describe('Data formatting tests (for print template)', () => {
-
-  // Mock the useLocation call in RxTemplate.js, providing the state value since this is all that is used.
-  const useLocation = jest.spyOn(ReactRouter, 'useLocation');
 
   beforeEach(() => {
     // validData must be set to true to display the template correctly
@@ -171,6 +159,61 @@ describe('Data formatting tests (for print template)', () => {
     const drugName = screen.getByTestId(/drugName/i);
     expect(drugName.textContent).toBe('Prednisolone acetate 1% + phenylephrine hydrochloride 0.12% (Prednefrin forte) eye drops, 10 mL');
   });
-
-
 });
+
+describe('UI template display tests', () => {
+
+  beforeEach(() => {
+    // validData must be set to true to display the template correctly
+    useLocation.mockReturnValue({ state: { validData: true } })
+  })
+  
+  test('Displays appropriate brand substitution message', () => {
+    render(<RxTemplate data={dataMobile}/>);
+    const message = screen.getByText(/brand substitution permitted/i);
+    expect(message).toBeInTheDocument();
+  });
+
+  test('Displays appropriate brand substitution message (2)', () => {
+    render(<RxTemplate data={dataMobile}/>);
+    const message = screen.queryByText(/brand substitution not allowed/i);
+    expect(message).not.toBeInTheDocument();
+  });
+
+  test('Displays appropriate PBS vs private message', () => {
+    render(<RxTemplate data={dataMobile}/>);
+    const message = screen.getByText(/PBS prescription/i);
+    expect(message).toBeInTheDocument();
+  });
+
+  test('Displays appropriate PBS vs private message (2)', () => {
+    render(<RxTemplate data={dataMobile}/>);
+    const message = screen.queryByText(/Private (non-PBS) prescription/i);
+    expect(message).not.toBeInTheDocument();
+  });
+
+  test('Displays compounded message only on indicated prescriptions', () => {
+    render(<RxTemplate data={dataMobile}/>);
+    const message = screen.queryByText(/to be compounded/i);
+    expect(message).not.toBeInTheDocument();
+  });
+});
+
+describe('Full component conditional render tests', () => {
+  beforeEach(() => {
+    // validData must be set to false to check that the alternate display works
+    useLocation.mockReturnValue({ state: { validData: false } })
+  });
+
+  test('Displays non-templated message when no valid data is present', () => {
+    render(<RxTemplate data={dataMobile}/>);
+    const message = screen.queryByText(/fill out the form to generate Rx/i);
+    expect(message).toBeInTheDocument();
+  });
+
+  test('Hides UI Rx template when no valid data present', () => {
+    render(<RxTemplate data={dataMobile}/>);
+    const message = screen.queryByTestId(/ui/i);
+    expect(message).not.toBeInTheDocument();
+  });
+})
