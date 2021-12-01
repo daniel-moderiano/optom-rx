@@ -1,10 +1,17 @@
 import FormField from "../FormField/FormField";
 import AddressAutocomplete from "../AddressAutocomplete/AddressAutocomplete";
 import { useState, useEffect, useCallback } from "react";
+import { useAuthContext } from "../../hooks/useAuthContext";
+
+// Firebase imports
+import { db } from '../../firebase/config'
+import { collection, addDoc } from 'firebase/firestore'
 
 // ! Legal requirements include the prescriber's name, address, and contact details, and prescriber number
 
 const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBooleanState, googleLoaded, handleSubmit, standalone }) => {
+  const { user } = useAuthContext();
+
   const [providerData, setProviderData] = useState({
     prefix: false,
     fullName: '',
@@ -39,9 +46,14 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
   };
 
   // Add provider to firestore database when submitting from standalone form
-  const handleStandaloneSubmit = (event, formData) => {
-    // TODO: async addDoc function
-    console.log('Form submitted');
+  const handleStandaloneSubmit = async (event, formData) => {
+    event.preventDefault()
+    await addDoc(collection(db, 'providers'), {
+      ...providerData,
+      uid: user.uid,
+    });
+
+    // TODO: Reset form/state
   }
 
   // Used to toggle any boolean data in the data state (locally within component)
