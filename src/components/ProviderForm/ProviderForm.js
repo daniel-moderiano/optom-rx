@@ -1,4 +1,3 @@
-import Fieldset from "../utils/Fieldset/Fieldset";
 import FormField from "../FormField/FormField";
 import AddressAutocomplete from "../AddressAutocomplete/AddressAutocomplete";
 import { useState, useEffect, useCallback } from "react";
@@ -152,63 +151,123 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
 
   // Standlone form validation on focusout events
   useEffect(() => {
-    document.querySelector('.ProviderForm--standalone').addEventListener('focusout', (event) => {
-      const { name, value } = event.target
-      switch (true) {
-        case name === 'fullName':
-          validateRequiredField(setProviderAlerts, event.target);
-          break;
-
-        case name === 'streetAddress':
-          validateRequiredField(setProviderAlerts, event.target);
-          break;
-        
-        case name === 'suburb':
-          validateRequiredField(setProviderAlerts, event.target);
-          break;
+    if (standalone) {
+      document.querySelector('.ProviderForm--standalone').addEventListener('focusout', (event) => {
+        const { name, value } = event.target
+        switch (true) {
+          case name === 'fullName':
+            validateRequiredField(setProviderAlerts, event.target);
+            break;
   
-        case name === 'state':
-          setProviderData((prevData) => ({
-            ...prevData, 
-            [name]: formatAddressState(value), 
-          }));
-          validateRequiredField(setProviderAlerts, event.target);
-          break;
+          case name === 'streetAddress':
+            validateRequiredField(setProviderAlerts, event.target);
+            break;
+          
+          case name === 'suburb':
+            validateRequiredField(setProviderAlerts, event.target);
+            break;
+    
+          case name === 'state':
+            setProviderData((prevData) => ({
+              ...prevData, 
+              [name]: formatAddressState(value), 
+            }));
+            validateRequiredField(setProviderAlerts, event.target);
+            break;
+    
+          case name === 'postcode':
+            validateRequiredField(setProviderAlerts, event.target);
+            break;
   
-        case name === 'postcode':
-          validateRequiredField(setProviderAlerts, event.target);
-          break;
-
-        case name === 'phoneNumber':
-          // Consider trimming the input of any spaces, hyphens, or parens
-          if (!(/^((0[2-8]\d{8})|(13(00|\d{4})(\d{6})?))$/).test(value.trim())) {
-            if (value.substring(0, 2) === '13') {
-              // Provide business specific error message
-              negativeInlineValidation(setProviderAlerts, 'Australian business numbers are either 6 digits and begin with 13, or 10 digits and begin with 1300', event.target);
+          case name === 'phoneNumber':
+            // Consider trimming the input of any spaces, hyphens, or parens
+            if (!(/^((0[2-8]\d{8})|(13(00|\d{4})(\d{6})?))$/).test(value.trim())) {
+              if (value.substring(0, 2) === '13') {
+                // Provide business specific error message
+                negativeInlineValidation(setProviderAlerts, 'Australian business numbers are either 6 digits and begin with 13, or 10 digits and begin with 1300', event.target);
+              } else {
+                // Provide general error message
+                negativeInlineValidation(setProviderAlerts, 'Australian phone numbers contain 10 digits and begin with 02, 03, 04, 07 or 08', event.target);
+              }
             } else {
-              // Provide general error message
-              negativeInlineValidation(setProviderAlerts, 'Australian phone numbers contain 10 digits and begin with 02, 03, 04, 07 or 08', event.target);
+              positiveInlineValidation(setProviderAlerts, event.target);
             }
-          } else {
-            positiveInlineValidation(setProviderAlerts, event.target);
-          }
-          break;
-
-        case name === 'prescriberNumber':
-          // Check for digits only
-          if (!(/^[0-9]{7}$/).test(value.trim())) {
-            // Sets an alert object in the state, which will immediately cause the component to render an alert message
-            negativeInlineValidation(setProviderAlerts, 'Prescriber number must be a seven digit number', event.target);
-          } else {
-            positiveInlineValidation(setProviderAlerts, event.target);
-          }
-          break;
-      
-        default:
-          break;
-      }
-    });
-  }, [negativeInlineValidation, positiveInlineValidation, validateRequiredField])
+            break;
+  
+          case name === 'prescriberNumber':
+            // Check for digits only
+            if (!(/^[0-9]{7}$/).test(value.trim())) {
+              // Sets an alert object in the state, which will immediately cause the component to render an alert message
+              negativeInlineValidation(setProviderAlerts, 'Prescriber number must be a seven digit number', event.target);
+            } else {
+              positiveInlineValidation(setProviderAlerts, event.target);
+            }
+            break;
+        
+          default:
+            break;
+        }
+      });
+    } else {
+      document.querySelector('.ProviderForm--integrated').addEventListener('focusout', (event) => {
+        const { name, value } = event.target
+        switch (true) {
+          case name === 'fullName':
+            validateRequiredField(setAlerts, event.target);
+            break;
+  
+          case name === 'streetAddress':
+            validateRequiredField(setAlerts, event.target);
+            break;
+          
+          case name === 'suburb':
+            validateRequiredField(setAlerts, event.target);
+            break;
+    
+          case name === 'state':
+            setProviderData((prevData) => ({
+              ...prevData, 
+              [name]: formatAddressState(value), 
+            }));
+            validateRequiredField(setAlerts, event.target);
+            break;
+    
+          case name === 'postcode':
+            validateRequiredField(setAlerts, event.target);
+            break;
+  
+          case name === 'phoneNumber':
+            // Consider trimming the input of any spaces, hyphens, or parens
+            if (!(/^((0[2-8]\d{8})|(13(00|\d{4})(\d{6})?))$/).test(value.trim())) {
+              if (value.substring(0, 2) === '13') {
+                // Provide business specific error message
+                negativeInlineValidation(setAlerts, 'Australian business numbers are either 6 digits and begin with 13, or 10 digits and begin with 1300', event.target);
+              } else {
+                // Provide general error message
+                negativeInlineValidation(setAlerts, 'Australian phone numbers contain 10 digits and begin with 02, 03, 04, 07 or 08', event.target);
+              }
+            } else {
+              positiveInlineValidation(setAlerts, event.target);
+            }
+            break;
+  
+          case name === 'prescriberNumber':
+            // Check for digits only
+            if (!(/^[0-9]{7}$/).test(value.trim())) {
+              // Sets an alert object in the state, which will immediately cause the component to render an alert message
+              negativeInlineValidation(setAlerts, 'Prescriber number must be a seven digit number', event.target);
+            } else {
+              positiveInlineValidation(setAlerts, event.target);
+            }
+            break;
+        
+          default:
+            break;
+        }
+      });
+    }
+    
+  }, [negativeInlineValidation, positiveInlineValidation, validateRequiredField, standalone, setAlerts])
 
   return (
     <>
@@ -247,7 +306,7 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
           name="practiceName"
           label="Practice name (optional)" 
           value={providerData.practiceName} 
-          onChange={handleChange} 
+          onChange={(event) => handleStandaloneChange(event)} 
         />
 
         <AddressAutocomplete 
@@ -290,7 +349,7 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
       </div>}
 
       {/* The non standalone form uses the App/RxForm state instead of local state, and is intedend to integrate within the RxForm component */}
-      {!standalone && <div className="ProviderForm ProviderForm--standalone">
+      {!standalone && <div className="ProviderForm ProviderForm--integrated">
         <FormField 
           fieldType="text" 
           name="fullName"
@@ -324,7 +383,7 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
           name="practiceName"
           label="Practice name (optional)" 
           value={data.practiceName} 
-          onChange={handleChange} 
+          onChange={(event) => handleChange(event)} 
         />
 
         <AddressAutocomplete 

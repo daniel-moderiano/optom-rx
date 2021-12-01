@@ -15,13 +15,13 @@ afterEach(() => {
 
 describe('Provider data input tests', () => {
   test('Provider data input initialises with blank values', () => {
-    render(<ProviderForm />);
+    render(<ProviderForm standalone={true} />);
     const presNo = screen.getByLabelText(/prescriber number/i);
     expect(presNo.value).toBe('');
   });
 
   test("Provider data input updates state and therefore it's own value when user types in input", () => {
-    render(<ProviderForm existingData={{}} standalone={false} />);
+    render(<ProviderForm existingData={{}} standalone={true} />);
     const presNo = screen.getByLabelText(/prescriber number/i);
     fireEvent.change(presNo, { target: { value: '0123456' } })
     expect(presNo.value).toBe('0123456');

@@ -426,7 +426,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
 
     const drugForm = document.querySelector('.drug-form');
     const patientForm = document.querySelector('.patient-form');
-    const providerForm = document.querySelector('.provider-form');
     const miscForm = document.querySelector('.misc-form');
 
     requiredFields.drug.forEach((field) => {
@@ -446,13 +445,16 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
       }
     });
 
-    // requiredFields.provider.forEach((field) => {
-    //   const input = providerForm.querySelector(`[name="${field}"]`);
-    //   if (input.value.trim().length === 0) {
-    //     valid = false;
-    //     negativeInlineValidation(setProviderAlerts, 'This field cannot be left blank', input);
-    //   }
-    // });
+    // Provider form should only be validated on submission if the form is visible (i.e. the user is editing or using the locum provider feature)
+    if (document.querySelector('.provider-form')) {
+      requiredFields.provider.forEach((field) => {
+        const input = document.querySelector('.provider-form').querySelector(`[name="${field}"]`);
+        if (input.value.trim().length === 0) {
+          valid = false;
+          negativeInlineValidation(setProviderAlerts, 'This field cannot be left blank', input);
+        }
+      });
+    }
 
     requiredFields.misc.forEach((field) => {
       const input = miscForm.querySelector(`[name="${field}"]`);
