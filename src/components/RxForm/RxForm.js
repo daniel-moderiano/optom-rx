@@ -5,10 +5,14 @@ import { StyledRxForm } from "./RxForm.styled";
 import DrugAutocomplete from "../DrugAutocomplete/DrugAutocomplete";
 import Fieldset from "../utils/Fieldset/Fieldset";
 import ProviderForm from "../ProviderForm/ProviderForm";
+import { useAuthContext } from "../../hooks/useAuthContext";
+import { useCollection } from "../../hooks/useCollection";
 
 // ! Multiple optometrist items are not permitted to be prescribed on the same form; each must use an individual form
 
 const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
+  const { user } = useAuthContext();
+  const { documents: providers } = useCollection('providers', ['uid', '==', user.uid]);
 
   const [drugAlerts, setDrugAlerts] = useState({
     name: {},
@@ -481,7 +485,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
         if (checkFormValidation()) {
           handleSubmit(drugData, patientData, providerData, miscData)
         }
-      }} 
+      }}
       autoComplete="off">
 
       {/* Final product will provide only a dropdown to select provider, then prefill all info, with an edit button available. Edit button should toggle the show state for the form*/}
@@ -489,13 +493,26 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
         You may also give them the option of adding qualifications */}
         {/* Consider a separate practice name field in the address section for providers, or even a Shop/Building # field? */}
         <div className="provider-controls">
+          {providers && 
+            <div className="Providers__list">
+            {/* Render providers using map function here */}
+            {providers.map(provider => (
+              <div key={provider.id} className="Providers__list-item">{provider.fullName}</div>
+            ))}
+            </div>
+          }
           <div className="form-field">
             <label htmlFor="provider-select" className="select-label">Select provider</label>
             <select name="providerChoice" id="provider-select" className="provider-select">
               {/* List to be populated with any available existing providers */}
-              <option value="daniel-one">Daniel Moderiano - Specsavers West Lakes</option>
-              <option value="daniel-two">Daniel Moderiano - OPSM TTP</option>
-              <option value="daniel-three">Daniel Moderiano - Laubman and Pank Elizabeth</option>
+              {providers && 
+                <>
+                {providers.map(provider => (
+                  <option key={provider.id} className="Providers__list-item">{provider.fullName}</option>
+                ))}  
+                </>   
+              }
+              {!providers && <option value="" defaultValue disabled hidden>---Select provider---</option>}
             </select>
           </div>
           <button onClick={(e) => { e.preventDefault(); toggleProviderForm(); }}>Edit selected provider</button>

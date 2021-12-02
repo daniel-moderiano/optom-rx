@@ -14,7 +14,7 @@ import './App.css';
 
 const App = () => {
   // Can user the user state to conditionally render or redirect routes (logged in vs out for example)
-  const { user } = useAuthContext();
+  const { user, authIsReady } = useAuthContext();
 
   const ausDate = new Date().toLocaleString("en-CA", { timeZone: "Australia/Adelaide" }).substring(0, 10);
   
@@ -139,35 +139,39 @@ const App = () => {
 
   return (
     <div className="App">
-      <GlobalStyles />
-      <Header />
-      {/* Note prescriptions must contain date of issue, and prescriber signature */}
-      <main className="main">
-        <Switch>
-          <Route exact path="/">
-            {user && <Home />}
-            {!user && <Redirect to="/login" />}
-          </Route>
-          <Route exact path="/form">
-            <RxForm handleSubmit={handleSubmit} googleLoaded={googleLoaded} existingData={data}/>
-          </Route>
-          <Route exact path="/signup">
-            {!user && <Signup />}
-            {user && <Redirect to="/" />}
-          </Route>
-          <Route exact path="/login">
-            {!user && <Login />}
-            {user && <Redirect to="/" />}
-          </Route>
-          <Route exact path="/template" render={() => <RxTemplate data={data} />}/>
-          <Route exact path="/providers">
-            {user && <Providers googleLoaded={googleLoaded}/>}
-            {!user && <Redirect to="/login" />}
-          </Route>
-        </Switch>
-      
-      </main>
-      <footer className="footer"></footer>
+      {authIsReady && (<>
+        <GlobalStyles />
+        <Header />
+        {/* Note prescriptions must contain date of issue, and prescriber signature */}
+        <main className="main">
+          <Switch>
+            <Route exact path="/">
+              {user && <Home />}
+              {!user && <Redirect to="/login" />}
+            </Route>
+            <Route exact path="/form">
+              {user && <RxForm handleSubmit={handleSubmit} googleLoaded={googleLoaded} existingData={data}/>}
+              {!user && <Redirect to="/login" />}
+              
+            </Route>
+            <Route exact path="/signup">
+              {!user && <Signup />}
+              {user && <Redirect to="/" />}
+            </Route>
+            <Route exact path="/login">
+              {!user && <Login />}
+              {user && <Redirect to="/" />}
+            </Route>
+            <Route exact path="/template" render={() => <RxTemplate data={data} />}/>
+            <Route exact path="/providers">
+              {user && <Providers googleLoaded={googleLoaded}/>}
+              {!user && <Redirect to="/login" />}
+            </Route>
+          </Switch>
+        
+        </main>
+        <footer className="footer"></footer>
+      </>)}
     </div>
     
     
