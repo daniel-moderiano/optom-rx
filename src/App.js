@@ -161,7 +161,7 @@ const App = () => {
           </Route>
           <Route exact path="/template" render={() => <RxTemplate data={data} />}/>
           <Route exact path="/providers">
-            {user && <Providers />}
+            {user && <Providers googleLoaded={googleLoaded}/>}
             {!user && <Redirect to="/login" />}
           </Route>
         </Switch>

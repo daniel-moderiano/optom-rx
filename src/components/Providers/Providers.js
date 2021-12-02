@@ -3,7 +3,7 @@ import { useCollection } from '../../hooks/useCollection';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { useState } from "react";
 
-const Providers = () => {
+const Providers = ({ googleLoaded }) => {
   const { user } = useAuthContext();
   // This should be called using the curernt user ID to query the collection
   // Query should be ('providers', ['uid', '==', user.uid])
@@ -32,7 +32,7 @@ const Providers = () => {
         </div>
       }
       
-      {showForm && <ProviderForm standalone={true}/>}
+      {showForm && <ProviderForm googleLoaded={googleLoaded} standalone={true}/>}
       
     </div>
   )
