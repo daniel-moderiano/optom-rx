@@ -46,7 +46,7 @@ const Nav = () => {
           <button className="Nav__link" onClick={toggleMenu}>Dropdown</button>
         </li>
       </ul>
-      {showMenu && <UserMenu />}
+      {showMenu && <UserMenu handleClick={toggleMenu}/>}
     </StyledNav>
   )
 }
