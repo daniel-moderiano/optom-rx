@@ -3,10 +3,11 @@ import { useCollection } from '../../hooks/useCollection';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { useState } from "react";
 
+// TODO: allow a user to set a provider as default, and be able to have this appear as the pre-selected option in the RxForm
+
 const Providers = ({ googleLoaded }) => {
   const { user } = useAuthContext();
   // This should be called using the curernt user ID to query the collection
-  // Query should be ('providers', ['uid', '==', user.uid])
   const { documents: providers } = useCollection('providers', ['uid', '==', user.uid]);
   
   const [showForm, setShowForm] = useState(false);

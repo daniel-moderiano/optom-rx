@@ -11,6 +11,7 @@ import { useAuthContext } from './hooks/useAuthContext';
 import Home from './components/Home/Home';
 import Providers from "./components/Providers/Providers";
 import './App.css';
+import GuestRxForm from "./components/GuestRxForm/GuestRxForm";
 
 const App = () => {
   // Can user the user state to conditionally render or redirect routes (logged in vs out for example)
@@ -42,19 +43,7 @@ const App = () => {
       "medicareNumber":"5151515151",
       "medicareRefNumber":"3"
     },
-    providerData: {
-      "prefix": true,
-      "fullName":"Daniel Moderiano",
-      "qualifications":"BMedSc(VisSc), MOpt",
-      "practiceName":"Specsavers West Lakes",
-      "streetAddress":"111 West Lakes Boulevard",
-      "subpremise":"Shop 218",
-      "suburb":"Modbury",
-      "postcode":"5092",
-      "state":"SA",
-      "phoneNumber":"0882345678",
-      "prescriberNumber":"7033149",
-    },
+    providerData: {},
     miscData: {
       authRxNumber: '',   
       date: ausDate, 
@@ -151,7 +140,8 @@ const App = () => {
             </Route>
             <Route exact path="/form">
               {user && <RxForm handleSubmit={handleSubmit} googleLoaded={googleLoaded} existingData={data}/>}
-              {!user && <Redirect to="/login" />}
+              {/* Render guest form for users not logged in */}
+              {!user && <GuestRxForm handleSubmit={handleSubmit} googleLoaded={googleLoaded} existingData={data}/>}
               
             </Route>
             <Route exact path="/signup">
