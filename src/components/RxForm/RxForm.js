@@ -132,7 +132,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
     ],
   });
 
-  const [showProviderForm, setShowProviderForm] = useState(true);
+  const [showProviderForm, setShowProviderForm] = useState(false);
 
   // UI functions
   const showErrorClass = (element) => {
@@ -490,19 +490,11 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
       }}
       autoComplete="off">
 
-      {/* Final product will provide only a dropdown to select provider, then prefill all info, with an edit button available. Edit button should toggle the show state for the form*/}
-        {/* ! Legal requirements include the prescriber's name, address, and contact details, and prescriber num
-        You may also give them the option of adding qualifications */}
-        {/* Consider a separate practice name field in the address section for providers, or even a Shop/Building # field? */}
+       
+        
+      <Fieldset className="provider-form" legend="Provider Details">
+
         <div className="provider-controls">
-          {providers && 
-            <div className="Providers__list">
-            {/* Render providers using map function here */}
-            {providers.map(provider => (
-              <div key={provider.id} className="Providers__list-item">{provider.fullName}</div>
-            ))}
-            </div>
-          }
           <div className="form-field">
             <label htmlFor="provider-select" className="select-label">Select provider</label>
             <select value={chosenProvider} name="providerChoice" id="provider-select" className="provider-select" onChange={(event) => setChosenProvider(event.target.value)}>
@@ -521,8 +513,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
           <button onClick={(e) => { e.preventDefault(); toggleProviderForm(); }}>Edit selected provider</button>
           <button onClick={(e) => e.preventDefault()}>Create temporary (locum) provider</button>
         </div>
-        
-      <Fieldset className="provider-form" legend="Provider Details">
+
         {showProviderForm && 
           <ProviderForm 
             googleLoaded={googleLoaded}

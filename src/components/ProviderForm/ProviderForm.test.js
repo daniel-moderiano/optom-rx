@@ -7,6 +7,12 @@ beforeEach(() => {
   jest.spyOn(console, 'error')
   // @ts-ignore jest.spyOn adds this functionallity
   console.error.mockImplementation(() => null);
+
+  render(
+    <AuthContextProvider>
+      <ProviderForm standalone={true} />
+    </AuthContextProvider>  
+  );
 });
 
 afterEach(() => {
@@ -16,21 +22,11 @@ afterEach(() => {
 
 describe('Provider data input tests', () => {
   test('Provider data input initialises with blank values', () => {
-    render(
-      <AuthContextProvider>
-        <ProviderForm standalone={true} />
-      </AuthContextProvider>  
-    );
     const presNo = screen.getByLabelText(/prescriber number/i);
     expect(presNo.value).toBe('');
   });
 
   test("Provider data input updates state and therefore it's own value when user types in input", () => {
-    render(
-      <AuthContextProvider>
-        <ProviderForm standalone={true} />
-      </AuthContextProvider>  
-    );
     const presNo = screen.getByLabelText(/prescriber number/i);
     fireEvent.change(presNo, { target: { value: '0123456' } })
     expect(presNo.value).toBe('0123456');
@@ -40,11 +36,6 @@ describe('Provider data input tests', () => {
 describe('Form submit testing (standalone)', () => {
   // Form submission tests here
   test('Identifies invalid field on submission attempt (provider section)', () => {
-    render(
-      <AuthContextProvider>
-        <ProviderForm standalone={true} />
-      </AuthContextProvider>  
-    );
     const input = screen.getByLabelText(/prescriber number/i);
     const submit = screen.getByRole('button', { name: 'Save' });
     fireEvent.change(input, { target: { value: '' } });
@@ -54,12 +45,6 @@ describe('Form submit testing (standalone)', () => {
   });
 
   test('Valid form does not generate any error alerts on submit', () => {
-    render(
-      <AuthContextProvider>
-        <ProviderForm standalone={true} />
-      </AuthContextProvider>  
-    );
-
     const fullName = screen.getByLabelText(/full name/i)
     const street = screen.getByLabelText(/street address/i)
     const suburb = screen.getByLabelText(/suburb/i)
@@ -82,7 +67,5 @@ describe('Form submit testing (standalone)', () => {
     const alert = screen.queryByText(/This field cannot be left blank/i);
     expect(alert).not.toBeInTheDocument();
   });
-
-
 });
 
