@@ -10,7 +10,7 @@ import { useCollection } from "../../hooks/useCollection";
 
 // ! Multiple optometrist items are not permitted to be prescribed on the same form; each must use an individual form
 
-const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
+const RxForm = ({ handleSubmit, googleLoaded, existingData, guest }) => {
   const { user } = useAuthContext();
   const { documents: providers } = useCollection('providers', ['uid', '==', user.uid]);
 

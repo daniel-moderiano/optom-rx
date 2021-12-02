@@ -135,14 +135,11 @@ const App = () => {
         <main className="main">
           <Switch>
             <Route exact path="/">
-              {user && <Home />}
-              {!user && <Redirect to="/login" />}
+              <Home />
             </Route>
             <Route exact path="/form">
               {user && <RxForm handleSubmit={handleSubmit} googleLoaded={googleLoaded} existingData={data}/>}
-              {/* Render guest form for users not logged in */}
               {!user && <GuestRxForm handleSubmit={handleSubmit} googleLoaded={googleLoaded} existingData={data}/>}
-              
             </Route>
             <Route exact path="/signup">
               {!user && <Signup />}
