@@ -1,17 +1,25 @@
 import { Link } from "react-router-dom";
 import { StyledNav } from "./Nav.styled";
 import { useLogout } from '../../hooks/useLogout';
+import UserMenu from "../UserMenu/UserMenu";
+import { useState } from "react";
 
 
 const Nav = () => {
   // Bring in the logout function from the custom hook so that it can be called on click via Logout btn
   const { logout } = useLogout();
 
+  const [showMenu, setShowMenu] = useState(true);
+
   // Ensures that navigating to template route via Nav does not try to display a template with no data
   const templateLocation = {
     pathname: '/template',
     state: { validData: false }
   }
+
+  const toggleMenu = () => {
+    setShowMenu((prevState) => !prevState);
+  };
 
   return (
     <StyledNav className="Nav">
@@ -35,9 +43,10 @@ const Nav = () => {
           <Link className="Nav__link" to={templateLocation}>Template</Link>
         </li>
         <li className="Nav__list-item">
-          <Link className="Nav__link" to="/providers">Providers</Link>
+          <button className="Nav__link" onClick={toggleMenu}>Dropdown</button>
         </li>
       </ul>
+      {showMenu && <UserMenu />}
     </StyledNav>
   )
 }
