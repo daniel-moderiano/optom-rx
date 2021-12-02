@@ -53,7 +53,24 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
       uid: user.uid,
     });
 
-    // TODO: Reset form/state
+    // Reset form both via state update and removal of UI classes (success classes)
+    setProviderData({
+      prefix: false,
+      fullName: '',
+      qualifications: '',
+      practiceName: '',
+      streetAddress: '',
+      subpremise: '',
+      suburb: '',
+      postcode: '',
+      state: '',
+      phoneNumber: '',
+      prescriberNumber: '',
+    })
+
+    document.querySelectorAll('input').forEach((input) => {
+      removeAllValidation(input);
+    })
   }
 
   // Used to toggle any boolean data in the data state (locally within component)
@@ -87,6 +104,15 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
     const tick = element.parentNode.querySelector('.tickCircle');
     tick.classList.remove('hide');
     tick.classList.add("show");
+  }
+
+  const removeAllValidation = (element) => {
+    element.classList.remove('success');
+
+    // Remove the tick icon
+    const tick = element.parentNode.querySelector('.tickCircle');
+    tick.classList.remove('show');
+    tick.classList.add("hide");
   }
 
    // Show positive feedback once a validation requirements are met

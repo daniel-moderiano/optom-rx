@@ -193,6 +193,7 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider, alerts, se
           onChange={handleChange} 
           alert={alerts.postcode}
           className="postcode-field"
+          maxlength="4"
         />
       </div>
     </StyledAddressAutocomplete>
