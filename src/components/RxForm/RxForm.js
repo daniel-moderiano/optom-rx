@@ -167,7 +167,9 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
   // A handle change function specifically for the select element. Sets both the input state and providerData based on selection
   const handleSelectChange = (event) => {
     setChosenProvider(event.target.value);
+    // Use the unique document ID to grab the provider from the fetched providers array
     const providerId = event.target.options[event.target.selectedIndex].dataset.id;
+    // Note the provider is returned from array.filter as an array, hence destructuring
     const [provider] = providers.filter((provider) => provider.id === providerId);
     setProviderData({
       ...provider,
@@ -433,7 +435,10 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
   };
 
   const toggleProviderForm = () => {
-    setShowProviderForm((prevState) => !prevState);
+    if (!showProviderForm) {
+      setShowProviderForm((prevState) => !prevState);
+    }
+ 
   };
 
   // Ensure form is validated before calling form submission function (to generate Rx)
@@ -462,7 +467,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
     });
 
     // Provider form should only be validated on submission if the form is visible (i.e. the user is editing or using the locum provider feature)
-    if (document.querySelector('.provider-form')) {
+    if (showProviderForm) {
       requiredFields.provider.forEach((field) => {
         const input = document.querySelector('.provider-form').querySelector(`[name="${field}"]`);
         if (input.value.trim().length === 0) {
