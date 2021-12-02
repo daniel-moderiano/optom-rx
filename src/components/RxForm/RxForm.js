@@ -14,6 +14,8 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
   const { user } = useAuthContext();
   const { documents: providers } = useCollection('providers', ['uid', '==', user.uid]);
 
+  const [chosenProvider, setChosenProvider] = useState('---Select provider---');
+
   const [drugAlerts, setDrugAlerts] = useState({
     name: {},
     quantity: {},
@@ -503,16 +505,17 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
           }
           <div className="form-field">
             <label htmlFor="provider-select" className="select-label">Select provider</label>
-            <select name="providerChoice" id="provider-select" className="provider-select">
+            <select value={chosenProvider} name="providerChoice" id="provider-select" className="provider-select" onChange={(event) => setChosenProvider(event.target.value)}>
+              {/* This default option must have a value matching the initial state in chosenProvider to be displayed */}
+              <option disabled hidden className="Providers__list-item" value="---Select provider---">---Select provider---</option>
               {/* List to be populated with any available existing providers */}
               {providers && 
                 <>
                 {providers.map(provider => (
-                  <option key={provider.id} className="Providers__list-item">{provider.fullName}</option>
+                  <option key={provider.id} className="Providers__list-item" value={provider.fullName}>{provider.fullName}</option>
                 ))}  
                 </>   
               }
-              {!providers && <option value="" defaultValue disabled hidden>---Select provider---</option>}
             </select>
           </div>
           <button onClick={(e) => { e.preventDefault(); toggleProviderForm(); }}>Edit selected provider</button>
@@ -533,9 +536,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
           />
         }
       </Fieldset>
-      
-        
-      
 
       <Fieldset className="patient-form" legend="Patient Details">
       {/* Legal requirements include only the patient's name and address */}
