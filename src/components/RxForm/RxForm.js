@@ -164,6 +164,16 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
     }));
   };
 
+  // A handle change function specifically for the select element. Sets both the input state and providerData based on selection
+  const handleSelectChange = (event) => {
+    setChosenProvider(event.target.value);
+    const providerId = event.target.options[event.target.selectedIndex].dataset.id;
+    const [provider] = providers.filter((provider) => provider.id === providerId);
+    setProviderData({
+      ...provider,
+    })
+  }
+
   // Will return true or false depending on whether the validated field is empty (not valid/false) or not
   const validateFieldForEmpty = (setFuncAlert, field) => {
     // Validate full name here
@@ -497,14 +507,14 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
         <div className="provider-controls">
           <div className="form-field">
             <label htmlFor="provider-select" className="select-label">Select provider</label>
-            <select value={chosenProvider} name="providerChoice" id="provider-select" className="provider-select" onChange={(event) => setChosenProvider(event.target.value)}>
+            <select value={chosenProvider} name="providerChoice" id="provider-select" className="provider-select" onChange={handleSelectChange}>
               {/* This default option must have a value matching the initial state in chosenProvider to be displayed */}
               <option disabled hidden className="Providers__list-item" value="---Select provider---">---Select provider---</option>
               {/* List to be populated with any available existing providers */}
               {providers && 
                 <>
                 {providers.map(provider => (
-                  <option key={provider.id} className="Providers__list-item" value={provider.fullName}>{provider.fullName}</option>
+                  <option key={provider.id} data-id={provider.id} className="Providers__list-item" value={provider.fullName}>{provider.fullName}</option>
                 ))}  
                 </>   
               }
