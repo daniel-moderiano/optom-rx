@@ -268,6 +268,25 @@ const GuestRxForm = ({ handleSubmit, googleLoaded, existingData, guest }) => {
     return `${baseNumber}${checkDigit}`;
   }
 
+  const incrementAuthRxNumber = (prevNumber) => {
+    // All base numbers have length 7, and so must end up with this length regardless of the incrementation or leading zeroes etc
+    
+    // First convert to base 10
+    const base10 = parseInt(prevNumber, 10);
+    const incremented = base10 + 1;
+
+    let newNum = incremented.toString();
+
+    // Ensure the length is at required by adding zeroes as needed
+    while (newNum.length < 7) {
+      newNum = '0' + newNum;
+    }
+
+    return newNum;
+  }
+
+  console.log(incrementAuthRxNumber('1234500'));
+
   // Inline form validation
   useEffect(() => {
     // Event propagation will capture all focusout events from patient form

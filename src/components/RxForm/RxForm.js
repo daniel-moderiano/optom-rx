@@ -287,6 +287,8 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, guest }) => {
     return `${baseNumber}${checkDigit}`;
   }
 
+  console.log(generateAuthRxNumber('0000000'));
+
   // Inline form validation
   useEffect(() => {
     // Event propagation will capture all focusout events from patient form
