@@ -1,5 +1,5 @@
 import { db } from "../firebase/config";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 // Firebase imports
 import { doc, getDoc, updateDoc } from "firebase/firestore";
@@ -60,53 +60,44 @@ export const useNumbers = () => {
     return `${baseNumber}${checkDigit}`;
   }
 
-  // useEffect(() => {
-    
+  const fetchData = () => {
+    // Note there will only ever be one 'current' field in each document in this collection. There are only two documents: scriptNo and authRxNo. They should never need to be called separately.
+    const scriptNoRef = doc(db, 'numbers', 'scriptNo');
+    const authRxNoRef = doc(db, 'numbers', 'authRxNo');
 
-    
+    // Initialise error and loading state
+    setIsLoading(true);
+    setIsError(false);
 
-    const fetchData = () => {
-      // Note there will only ever be one 'current' field in each document in this collection. There are only two documents: scriptNo and authRxNo. They should never need to be called separately.
-      const scriptNoRef = doc(db, 'numbers', 'scriptNo');
-      const authRxNoRef = doc(db, 'numbers', 'authRxNo');
+    // Define promises for fetching each number
+    const scriptNoSnap = getDoc(scriptNoRef);
+    const authRxNoSnap = getDoc(authRxNoRef); 
 
-      // Initialise error and loading state
-      setIsLoading(true);
-      setIsError(false);
-
-      // Define promises for fetching each number
-      const scriptNoSnap = getDoc(scriptNoRef);
-      const authRxNoSnap = getDoc(authRxNoRef); 
-
-      // Handle the collective responses
-      Promise.all([scriptNoSnap, authRxNoSnap])
-        .then(([script, auth]) => {
-          // Handle the data
-          setScriptNo(script.data().current);
-          // Convert to proper authority Rx number here and set this to state, since this is the value that should be used in forms etc
-          setAuthRxNo(generateAuthRxNumber(auth.data().current));
-          // However pass along the base form auth number for updating backend
-          return [script.data().current, auth.data().current];
-        })
-        .then(([scriptNoCurrent, authRxNoCurrent]) => {
-          // This block will only execute once the above operations are complete, and serves to change the backend number for the next fetch request (ensuring unique scriptNo and authRxNo on each call)
-          updateDoc(scriptNoRef, {
-            current: incrementScriptNumber(scriptNoCurrent)
-          });
-          updateDoc(authRxNoRef, {
-            current: incrementAuthRxNumber(authRxNoCurrent)
-          }); 
-        })
-        .catch((error) => {
-          setIsError(true); 
-        }) 
-        // In either case (resolve or reject), the loading is done
-        .finally(() => setIsLoading(false));
-    };
-
-    // fetchData();
-
-  // }, [])
+    // Handle the collective responses
+    Promise.all([scriptNoSnap, authRxNoSnap])
+      .then(([script, auth]) => {
+        // Handle the data
+        setScriptNo(script.data().current);
+        // Convert to proper authority Rx number here and set this to state, since this is the value that should be used in forms etc
+        setAuthRxNo(generateAuthRxNumber(auth.data().current));
+        // However pass along the base form auth number for updating backend
+        return [script.data().current, auth.data().current];
+      })
+      .then(([scriptNoCurrent, authRxNoCurrent]) => {
+        // This block will only execute once the above operations are complete, and serves to change the backend number for the next fetch request (ensuring unique scriptNo and authRxNo on each call)
+        updateDoc(scriptNoRef, {
+          current: incrementScriptNumber(scriptNoCurrent)
+        });
+        updateDoc(authRxNoRef, {
+          current: incrementAuthRxNumber(authRxNoCurrent)
+        }); 
+      })
+      .catch((error) => {
+        setIsError(true); 
+      }) 
+      // In either case (resolve or reject), the loading is done
+      .finally(() => setIsLoading(false));
+  };
 
   // Reference the documents using destructuring in any component
   return [{ scriptNo, authRxNo, isError, isLoading }, fetchData]
