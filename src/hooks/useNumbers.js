@@ -50,6 +50,7 @@ export const useNumbers = () => {
           setScriptNo(script.data().current);
           setAuthRxNo(auth.data().current);
           setIsLoading(false);
+          console.log('done');
         })
         .catch((error) => {
           setIsError(true);
