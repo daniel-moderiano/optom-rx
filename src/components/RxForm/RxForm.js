@@ -7,10 +7,12 @@ import Fieldset from "../utils/Fieldset/Fieldset";
 import ProviderForm from "../ProviderForm/ProviderForm";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useCollection } from "../../hooks/useCollection";
+import { useNumbers } from "../../hooks/useNumbers";
 
 // ! Multiple optometrist items are not permitted to be prescribed on the same form; each must use an individual form
 
-const RxForm = ({ handleSubmit, googleLoaded, existingData, guest }) => {
+const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
+  const [{ scriptNo, authRxNo, isError, isLoading }, fetchNumbers] = useNumbers();
   const { user } = useAuthContext();
   const { documents: providers } = useCollection('providers', ['uid', '==', user.uid]);
 
@@ -490,7 +492,19 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, guest }) => {
       }}
       autoComplete="off">
 
-       
+        <button onClick={(e) => {e.preventDefault(); fetchNumbers();}}>Fetch numbers</button>
+
+      {isError && <div>Something went wrong...</div>}
+
+      {isLoading ? (
+        <div>Loading...</div>
+        
+      ) : (
+        <>
+          <div>Script No: {scriptNo}</div>
+          <div>Auth No: {authRxNo}</div>
+        </>
+      )}
         
       <Fieldset className="provider-form" legend="Provider Details">
 

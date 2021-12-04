@@ -10,7 +10,6 @@ export const useNumbers = () => {
   const [authRxNo, setAuthRxNo] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  console.log('call useNumbers');
 
   // Correctly increment the base auth Rx number to be updated on the backend
   const incrementAuthRxNumber = (prevNumber) => {
@@ -61,16 +60,20 @@ export const useNumbers = () => {
     return `${baseNumber}${checkDigit}`;
   }
 
-  useEffect(() => {
-    // Note there will only ever be one 'current' field in each document in this collection. There are only two documents: scriptNo and authRxNo. They should never need to be called separately.
-    const scriptNoRef = doc(db, 'numbers', 'scriptNo');
-    const authRxNoRef = doc(db, 'numbers', 'authRxNo');
+  // useEffect(() => {
+    
 
-    // Initialise error and loading state
-    setIsLoading(true);
-    setIsError(false);
+    
 
     const fetchData = () => {
+      // Note there will only ever be one 'current' field in each document in this collection. There are only two documents: scriptNo and authRxNo. They should never need to be called separately.
+      const scriptNoRef = doc(db, 'numbers', 'scriptNo');
+      const authRxNoRef = doc(db, 'numbers', 'authRxNo');
+
+      // Initialise error and loading state
+      setIsLoading(true);
+      setIsError(false);
+
       // Define promises for fetching each number
       const scriptNoSnap = getDoc(scriptNoRef);
       const authRxNoSnap = getDoc(authRxNoRef); 
@@ -101,10 +104,10 @@ export const useNumbers = () => {
         .finally(() => setIsLoading(false));
     };
 
-    fetchData();
+    // fetchData();
 
-  }, [])
+  // }, [])
 
   // Reference the documents using destructuring in any component
-  return { scriptNo, authRxNo, isError, isLoading }
+  return [{ scriptNo, authRxNo, isError, isLoading }, fetchData]
 }
