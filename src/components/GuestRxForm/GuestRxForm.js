@@ -125,8 +125,7 @@ const GuestRxForm = ({ handleSubmit, googleLoaded, existingData, guest }) => {
     ],
   });
 
-  const [showProviderForm, setShowProviderForm] = useState(false);
-
+  
   // UI functions
   const showErrorClass = (element) => {
     element.classList.add('error');
@@ -253,57 +252,7 @@ const GuestRxForm = ({ handleSubmit, googleLoaded, existingData, guest }) => {
     }
   }, []);
 
-
-  // TODO: function to generate Authority prescription numbers
-  // Take any seven digit base number and convert it to a valid PBS authority prescription number
-  const generateAuthRxNumber = (baseNumber) => {
-    if (typeof baseNumber === 'number') {
-      baseNumber = baseNumber.toString()
-    }
-    // AuthNo format must be a 7 digit number followed by a check digit that is the remainder of dividing the sum of the digits of the base number by 9
-    const reducer = (previousValue, currentValue) => parseInt(previousValue) + parseInt(currentValue);
-    const sum = baseNumber.split('').reduce(reducer)
-    const checkDigit = sum % 9;
-
-    return `${baseNumber}${checkDigit}`;
-  }
-
-  // Correctly increment the base auth Rx number to be updated on the backend
-  const incrementAuthRxNumber = (prevNumber) => {
-    // Ensure the counter is 'reset' to 0000000 if the previous number is at the theoretical limit of 9999999
-    if (prevNumber === '9999999') {
-      return '0000000';
-    }
-    
-    // First convert to base 10
-    const base10 = parseInt(prevNumber, 10);
-    const incremented = base10 + 1;
-    let newNum = incremented.toString();
-
-    // Ensure the length is at required seven by adding leading zeroes as needed
-    while (newNum.length < 7) {
-      newNum = '0' + newNum;
-    }
-
-    return newNum;
-  }
-
-  // Correctly increment the base auth Rx number to be updated on the backend
-  const incrementScriptNumber = (prevNumber) => {
-    // First convert to base 10
-    const base10 = parseInt(prevNumber, 10);
-    const incremented = base10 + 1;
-    let newNum = incremented.toString();
-
-    // Ensure the length meets the arbitrarily chosen 8 digits by adding leading zeroes until no longer applicable
-    // This ensures around 800 years' worth of prescriptions before incrementing to a 9 digit number, for interest :)
-    while (newNum.length < 8) {
-      newNum = '0' + newNum;
-    }
-
-    return newNum;
-  }
-
+  
   // Inline form validation
   useEffect(() => {
     // Event propagation will capture all focusout events from patient form
@@ -425,7 +374,7 @@ const GuestRxForm = ({ handleSubmit, googleLoaded, existingData, guest }) => {
     drugDataValidation();
     miscDataValidation();
 
-  }, [validateRequiredField, positiveInlineValidation, negativeInlineValidation, showProviderForm]);
+  }, [validateRequiredField, positiveInlineValidation, negativeInlineValidation]);
 
   // Check remove a visible error or alert from the brand name input where it changes from being required to not
   useEffect(() => {
@@ -451,12 +400,6 @@ const GuestRxForm = ({ handleSubmit, googleLoaded, existingData, guest }) => {
     }));
   };
 
-  const toggleProviderForm = () => {
-    if (!showProviderForm) {
-      setShowProviderForm((prevState) => !prevState);
-    }
- 
-  };
 
   // Ensure form is validated before calling form submission function (to generate Rx)
   const checkFormValidation = () => {

@@ -61,8 +61,6 @@ export const useNumbers = () => {
     return `${baseNumber}${checkDigit}`;
   }
 
-
-
   useEffect(() => {
     // Note there will only ever be one 'current' field in each document in this collection. There are only two documents: scriptNo and authRxNo. They should never need to be called separately.
     const scriptNoRef = doc(db, 'numbers', 'scriptNo');
