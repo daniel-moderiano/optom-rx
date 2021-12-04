@@ -268,16 +268,19 @@ const GuestRxForm = ({ handleSubmit, googleLoaded, existingData, guest }) => {
     return `${baseNumber}${checkDigit}`;
   }
 
+  // Correctly increment the base auth Rx number to be updated on the backend
   const incrementAuthRxNumber = (prevNumber) => {
-    // All base numbers have length 7, and so must end up with this length regardless of the incrementation or leading zeroes etc
+    // Ensure the counter is 'reset' to 0000000 if the previous number is at the theoretical limit of 9999999
+    if (prevNumber === '9999999') {
+      return '0000000';
+    }
     
     // First convert to base 10
     const base10 = parseInt(prevNumber, 10);
     const incremented = base10 + 1;
-
     let newNum = incremented.toString();
 
-    // Ensure the length is at required by adding zeroes as needed
+    // Ensure the length is at required seven by adding leading zeroes as needed
     while (newNum.length < 7) {
       newNum = '0' + newNum;
     }
@@ -285,7 +288,21 @@ const GuestRxForm = ({ handleSubmit, googleLoaded, existingData, guest }) => {
     return newNum;
   }
 
-  console.log(incrementAuthRxNumber('1234500'));
+  // Correctly increment the base auth Rx number to be updated on the backend
+  const incrementScriptNumber = (prevNumber) => {
+    // First convert to base 10
+    const base10 = parseInt(prevNumber, 10);
+    const incremented = base10 + 1;
+    let newNum = incremented.toString();
+
+    // Ensure the length meets the arbitrarily chosen 8 digits by adding leading zeroes until no longer applicable
+    // This ensures around 800 years' worth of prescriptions before incrementing to a 9 digit number, for interest :)
+    while (newNum.length < 8) {
+      newNum = '0' + newNum;
+    }
+
+    return newNum;
+  }
 
   // Inline form validation
   useEffect(() => {
