@@ -48,6 +48,21 @@ export const useNumbers = () => {
     return newNum;
   }
 
+  // Take any seven digit base number and convert it to a valid PBS authority prescription number
+  const generateAuthRxNumber = (baseNumber) => {
+    if (typeof baseNumber === 'number') {
+      baseNumber = baseNumber.toString()
+    }
+    // AuthNo format must be a 7 digit number followed by a check digit that is the remainder of dividing the sum of the digits of the base number by 9
+    const reducer = (previousValue, currentValue) => parseInt(previousValue) + parseInt(currentValue);
+    const sum = baseNumber.split('').reduce(reducer)
+    const checkDigit = sum % 9;
+
+    return `${baseNumber}${checkDigit}`;
+  }
+
+
+
   useEffect(() => {
     // Note there will only ever be one 'current' field in each document in this collection. There are only two documents: scriptNo and authRxNo. They should never need to be called separately.
     const scriptNoRef = doc(db, 'numbers', 'scriptNo');
@@ -56,23 +71,6 @@ export const useNumbers = () => {
     // Initialise error and loading state
     setIsLoading(true);
     setIsError(false);
-
-    // Async within useEffect should be applied using the commented code below. Because there are two similar numbers being fetched, Promise.all() syntax is used in this hook currently
-    // const fetchData = async () => {
-    //   // Initialise error and loading state
-    //   setIsLoading(true);
-    //   setIsError(false);
-
-    //   try {
-    //     const scriptNoSnap = await getDoc(scriptNo);
-    //     const authRxNoSnap = await getDoc(authRxNo);
-    //     setScriptNo(scriptNoSnap.data().current);
-    //     setAuthRxNo(authRxNoSnap.data().current);
-    //   } catch (error) {
-    //     setIsError(true);
-    //   }
-    //   setIsLoading(false);
-    // };
 
     const fetchData = () => {
       // Define promises for fetching each number
@@ -84,11 +82,13 @@ export const useNumbers = () => {
         .then(([script, auth]) => {
           // Handle the data
           setScriptNo(script.data().current);
-          setAuthRxNo(auth.data().current);
+          // Convert to proper authority Rx number here and set this to state, since this is the value that should be used in forms etc
+          setAuthRxNo(generateAuthRxNumber(auth.data().current));
+          // However pass along the base form auth number for updating backend
           return [script.data().current, auth.data().current];
         })
         .then(([scriptNoCurrent, authRxNoCurrent]) => {
-          // This block will only execute once the above operations are complete
+          // This block will only execute once the above operations are complete, and serves to change the backend number for the next fetch request (ensuring unique scriptNo and authRxNo on each call)
           updateDoc(scriptNoRef, {
             current: incrementScriptNumber(scriptNoCurrent)
           });
