@@ -19,7 +19,6 @@ const Home = () => {
 
       {isLoading ? (
         <div>Loading...</div>
-        
       ) : (
         <>
           <div>Script No: {scriptNo}</div>
@@ -27,7 +26,6 @@ const Home = () => {
         </>
       )}
      
-      
     </StyledHome>
   )
 }
