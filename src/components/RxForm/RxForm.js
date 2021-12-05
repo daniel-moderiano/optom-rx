@@ -238,6 +238,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
     return formatted;
   }
 
+  // Set useNumbers hook variables to local state
   const setNumbers = useCallback(() => {
     setMiscData((prevData) => ({
       ...prevData,
@@ -435,11 +436,11 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
     }
   }, [state, fetchNumbers]);
 
+  // Set local state with authRxNo and scriptNo fetched from firestore. Activates only when the numbers have been fetched on a first time new Rx 
   useEffect(() => {
     if (numbersLoaded) {
       setNumbers();
     }
-    
   }, [numbersLoaded, setNumbers])
 
   // Used to toggle any boolean data in the data states

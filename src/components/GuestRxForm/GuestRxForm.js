@@ -5,10 +5,19 @@ import { StyledGuestRxForm } from "./GuestRxForm.styled";
 import DrugAutocomplete from "../DrugAutocomplete/DrugAutocomplete";
 import Fieldset from "../utils/Fieldset/Fieldset";
 import ProviderForm from "../ProviderForm/ProviderForm";
+import { useLocation } from "react-router";
+import { useNumbers } from '../../hooks/useNumbers';
 
 // ! Multiple optometritical items are not permitted to be prescribed on the same form; each must use an individual form
 
-const GuestRxForm = ({ handleSubmit, googleLoaded, existingData, guest }) => {
+const GuestRxForm = ({ handleSubmit, googleLoaded, existingData }) => {
+  const [{ scriptNo, authRxNo, isError, isLoading }, fetchNumbers] = useNumbers();
+
+  // State (at this stage) is only provided if generating a new Rx. Hence the numbers fetch should only be performed when state exists
+  const { state } = useLocation();
+
+  const [numbersLoaded, setNumbersLoaded] = useState(false);
+
   const [drugAlerts, setDrugAlerts] = useState({
     name: {},
     quantity: {},
@@ -252,6 +261,15 @@ const GuestRxForm = ({ handleSubmit, googleLoaded, existingData, guest }) => {
     }
   }, []);
 
+  // Set useNumbers hook variables to local state
+  const setNumbers = useCallback(() => {
+    setMiscData((prevData) => ({
+      ...prevData,
+      scriptID: scriptNo,
+      authRxNumber: authRxNo,
+    }))
+  }, [authRxNo, scriptNo])
+
   
   // Inline form validation
   useEffect(() => {
@@ -387,6 +405,25 @@ const GuestRxForm = ({ handleSubmit, googleLoaded, existingData, guest }) => {
     };
     // It is optional to include a function here that provides a warning when one of these are checked to true and the brand name input is empty, but this is opposite to expected user flow and will likely cause annoyance more than anything else
   }, [drugData.includeBrand, drugData.brandOnly]);
+
+  // Generate the unique script and authRx numbers, and attach them to the local RxForm state. This is only performed when loading the RxForm component using 'Create new prescription' btn
+  useEffect(() => {
+    if (state) {
+      // Use .then() to ensure the above scriptNo and authRxNo variables are set prior to attempting to set data state with them
+      fetchNumbers().then(() => {
+        setNumbersLoaded((prevData) => prevData ? prevData : !prevData);
+      }).catch((error) => {
+        console.log(error);
+      })
+    }
+  }, [state, fetchNumbers]);
+
+  // Set local state with authRxNo and scriptNo fetched from firestore. Activates only when the numbers have been fetched on a first time new Rx 
+  useEffect(() => {
+    if (numbersLoaded) {
+      setNumbers();
+    }
+  }, [numbersLoaded, setNumbers])
 
   // Used to toggle any boolean data in the data states
   const toggleBooleanState = (setFunc, data, boolToChange) => {
@@ -588,6 +625,15 @@ const GuestRxForm = ({ handleSubmit, googleLoaded, existingData, guest }) => {
           className="checkbox pbsRx"
         />  
 
+        <FormField 
+          fieldType="checkbox" 
+          name="pbsRx"
+          label="Authority required" 
+          onChange={() => toggleBooleanState(setDrugData, drugData, 'authRequired')}
+          checked={drugData.authRequired}
+          className="checkbox authRequired"
+        />    
+
         {/* Consider a variable message beside or below this saying 'not required for this medication' or similar */}
         <FormField 
           fieldType="text" 
@@ -607,7 +653,14 @@ const GuestRxForm = ({ handleSubmit, googleLoaded, existingData, guest }) => {
           alert={miscAlerts.date}
         />
 
-        {/* Authority information here */}
+        {/* Authority Rx numbers and ScriptID here */}
+        <div className="numbers" data-testid="numbers">
+          <div className="scriptNo" data-testid="scriptNo">Script number: {isLoading ? 'Loading...' : miscData.scriptID}</div>
+          {/* drugData.authRequired should be auto-selected once PBS integration is complete, but should also have an option to set manually */}
+          {drugData.authRequired && <div className="authRxNo" data-testid="authRxNo">AuthRx number: {isLoading ? 'Loading...' : miscData.authRxNumber}</div>}
+        </div>
+
+        {isError && <div className="numbers__error">Something went wrong</div>}
 
       </Fieldset>
 

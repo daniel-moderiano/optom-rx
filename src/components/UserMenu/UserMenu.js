@@ -14,7 +14,7 @@ const UserMenu = ({ handleClick }) => {
       <div className="UserMenu__links">
         <ul className="UserMenu__list">
           <li className="UserMenu__list-item">
-            <Link onClick={handleClick} className="UserMenu__link" to="/">Home</Link>
+            <Link onClick={handleClick} className="UserMenu__link" to="/">Return Home</Link>
           </li>
           <li className="UserMenu__list-item">
             <Link onClick={handleClick}  className="UserMenu__link" to="/providers">Providers</Link>

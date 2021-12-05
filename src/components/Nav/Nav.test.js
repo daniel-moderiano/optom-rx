@@ -52,4 +52,12 @@ describe('Dropdown menu tests', () => {
     expect(menu).toBeInTheDocument()
   });
 
+  test('Dropdown menu closes on menu link click', () => {
+    const dropdownBtn = screen.getByRole('button', { name: 'Dropdown' });
+    fireEvent.click(dropdownBtn);
+    const menu = screen.getByTestId('userMenu');
+    const menuLink = screen.getByRole('link', { name: 'Return Home' })
+    fireEvent.click(menuLink);
+    expect(menu).not.toBeInTheDocument()
+  });
 });

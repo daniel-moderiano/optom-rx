@@ -42,7 +42,7 @@ const Nav = () => {
     <StyledNav className="Nav">
       <ul className="Nav__list">
         <li className="Nav__list-item">
-          <Link className="Nav__link" to="/">Return home</Link>
+          <Link className="Nav__link" to="/">Home</Link>
         </li>
         <li className="Nav__list-item">
           <Link className="Nav__link" to="/form">Form</Link>
