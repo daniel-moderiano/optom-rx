@@ -671,6 +671,15 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
           className="checkbox pbsRx"
         />  
 
+        <FormField 
+          fieldType="checkbox" 
+          name="pbsRx"
+          label="Authority required" 
+          onChange={() => toggleBooleanState(setDrugData, drugData, 'authRequired')}
+          checked={drugData.authRequired}
+          className="checkbox authRequired"
+        />    
+
         {/* Consider a variable message beside or below this saying 'not required for this medication' or similar */}
         <FormField 
           fieldType="text" 
@@ -693,6 +702,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
         {/* Authority Rx numbers and ScriptID here */}
         <div className="numbers" data-testid="numbers">
           <div className="scriptNo" data-testid="scriptNo">Script number: {isLoading ? 'Loading...' : miscData.scriptID}</div>
+          {/* drugData.authRequired should be auto-selected once PBS integration is complete, but should also have an option to set manually */}
           {drugData.authRequired && <div className="authRxNo" data-testid="authRxNo">AuthRx number: {isLoading ? 'Loading...' : miscData.authRxNumber}</div>}
         </div>
 

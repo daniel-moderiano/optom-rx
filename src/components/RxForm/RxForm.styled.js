@@ -37,7 +37,11 @@ const StyledRxForm = styled.form`
   }
 
   .pbsRx {
-    margin: 1.25rem 0;
+    margin: 1.25rem 0 1rem 0;
+  }
+
+  .authRequired {
+    margin: 0 0 1.25rem 0;
   }
 
   .btn-generate {
