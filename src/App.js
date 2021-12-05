@@ -4,7 +4,7 @@ import GlobalStyles from "./components/utils/globalStyles";
 import RxForm from './components/RxForm/RxForm';
 import RxTemplate from './components/RxTemplate/RxTemplate'
 import { useState, useEffect } from "react";
-import { Switch, Route, useHistory, Redirect } from "react-router";
+import { Route, useNavigate, Routes, Navigate } from "react-router";
 import Signup from "./components/Signup/Signup";
 import Login from "./components/Login/Login";
 import { useAuthContext } from './hooks/useAuthContext';
@@ -12,6 +12,8 @@ import Home from './components/Home/Home';
 import Providers from "./components/Providers/Providers";
 import './App.css';
 import GuestRxForm from "./components/GuestRxForm/GuestRxForm";
+
+// ! React Router v6 has been released and makes breaking changes. Look at updating this.
 
 const App = () => {
   // Can user the user state to conditionally render or redirect routes (logged in vs out for example)
@@ -52,9 +54,7 @@ const App = () => {
     },
   });
 
-  let history = useHistory();
-
-  const [validData, setValidData] = useState(false);
+  let navigate = useNavigate();
 
   const [googleLoaded, setGoogleLoaded] = useState(false);
 
@@ -112,18 +112,8 @@ const App = () => {
       },
     }));
 
-    // Data must be valid (client side) to reach this point and attempt to display template
-    if (!validData) {
-      setValidData(validData => !validData);
-    }
-
-    // Redirect to template page on successful form submit
-    const location = {
-      pathname: '/template',
-      state: { validData: true }
-    }
-
-    history.push(location);
+    // New React Router v6 syntax using navigate. State is passed in a similar way and accessed with useLocation
+    navigate('/template', { state: { validData: true } });
   }
 
   return (
@@ -133,28 +123,39 @@ const App = () => {
         <Header />
         {/* Note prescriptions must contain date of issue, and prescriber signature */}
         <main className="main">
-          <Switch>
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route exact path="/form">
+          <Routes>
+            <Route path="/" element={<Home />} />
+
+            <Route path="/form" element={
+              <>
               {user && <RxForm handleSubmit={handleSubmit} googleLoaded={googleLoaded} existingData={data}/>}
               {!user && <GuestRxForm handleSubmit={handleSubmit} googleLoaded={googleLoaded} existingData={data}/>}
-            </Route>
-            <Route exact path="/signup">
+              </>
+            }/>
+
+            <Route path="/signup" element={
+              <>
               {!user && <Signup />}
-              {user && <Redirect to="/" />}
-            </Route>
-            <Route exact path="/login">
+              {user && <Navigate to="/" />}
+              </>
+            }/>
+              
+            <Route path="/login" element={
+              <>
               {!user && <Login />}
-              {user && <Redirect to="/" />}
-            </Route>
-            <Route exact path="/template" render={() => <RxTemplate data={data} />}/>
-            <Route exact path="/providers">
+              {user && <Navigate to="/" />}
+              </>
+            }/>
+
+            <Route path="/template" element={<RxTemplate data={data} />}/>
+
+            <Route path="/providers" element={
+              <>
               {user && <Providers googleLoaded={googleLoaded}/>}
-              {!user && <Redirect to="/login" />}
-            </Route>
-          </Switch>
+              {!user && <Navigate to="/login" />}
+              </>
+            }/> 
+          </Routes>
         
         </main>
         <footer className="footer"></footer>

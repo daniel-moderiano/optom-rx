@@ -17,7 +17,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
   const { user } = useAuthContext();
   const { documents: providers } = useCollection('providers', ['uid', '==', user.uid]);
 
-  // State (at this stage) is only provided if generating a new Rx. Hnce the numbers fetch should only be performed when state exists
+  // State (at this stage) is only provided if generating a new Rx. Hence the numbers fetch should only be performed when state exists
   const { state } = useLocation();
   
   const [numbersLoaded, setNumbersLoaded] = useState(false);
@@ -527,6 +527,15 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
         }
       }}
       autoComplete="off">
+
+      {isLoading ? (
+        <div className="loading">Loading...</div>
+      ) : (
+        <div className="numbers">
+          <div className="scriptNo">Script number: {scriptNo}</div>
+          <div className="scriptNo">AuthRx number: {authRxNo}</div>
+        </div>
+      )}
         
       <Fieldset className="provider-form" legend="Provider Details">
 

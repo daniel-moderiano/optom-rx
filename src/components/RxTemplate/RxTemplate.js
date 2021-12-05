@@ -1,16 +1,15 @@
 import { StyledRxTemplate } from "./RxTemplate.styled";
 import Rx from '../../assets/template-sized.jpg';
 import tickbox from '../../assets/tickbox.svg';
-import { useLocation, useHistory } from "react-router";
+import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
 
 const RxTemplate = ({ data }) => {
   // Deconstructing for cleanliness of code and easier-to-understand operations
   const { drugData, patientData, providerData, miscData } = data;
 
-  const { state } = useLocation();
-  let history = useHistory();
-  
+  // State is null by default, so checking for it's existence alone will ensure this is a valid link containing data vs a simple nav link
+  let { state } = useLocation();
 
   const formatPhoneNumber = (phoneNumber) => {
     if (phoneNumber.substring(0, 2) === '04') {
@@ -80,15 +79,11 @@ const RxTemplate = ({ data }) => {
     return `${miscData.date.substring(8)}/${miscData.date.substring(5, 7)}/${miscData.date.substring(0, 4)}`;
   }
 
-  const editForm = () => {
-    history.push('/form');
-  }
-
   return (
     <StyledRxTemplate className="RxTemplate">
       <h2 className="RxTemplate__title">Review your prescription</h2>
       {/* If the template is rendered without a full set of data, many functions will fail. Hence this is rendered conditionally */}
-      {state.validData ? <>
+      {state ? <>
         <img src={Rx} alt="" />
         <div data-testid="ui" className="ui-main-container">
           <section className="ui-provider-upper">
