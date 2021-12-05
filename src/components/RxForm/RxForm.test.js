@@ -1,6 +1,7 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import RxForm from "./RxForm";
 import { AuthContext } from '../../context/AuthContext';
+import { BrowserRouter } from 'react-router-dom'
 
 
 // Used because of the 'google is not defined' error 
@@ -108,9 +109,12 @@ const dataNoDate = {
 describe('Drug input tests', () => {
   beforeEach(() => {
     render(
-      <AuthContext.Provider value={{ user: { uid: '1' } }}>
-        <RxForm existingData={{}}/>
-      </AuthContext.Provider>
+      <BrowserRouter>
+        <AuthContext.Provider value={{ user: { uid: '1' } }}>
+          <RxForm existingData={{}}/>
+        </AuthContext.Provider>
+      </BrowserRouter>
+      
     );
   })
   
@@ -130,9 +134,11 @@ describe('Drug input tests', () => {
 describe('Patient data tests', () => {
   test('Patient data input initialises with existing data', () => {
     render(
+      <BrowserRouter>
       <AuthContext.Provider value={{ user: { uid: '1' } }}>
         <RxForm existingData={{ patientData: { medicareNumber: '5151515151' } }}/>
       </AuthContext.Provider>
+      </BrowserRouter>
     );  
     const medicare = screen.getByLabelText(/medicare number/i);
     expect(medicare.value).toBe('5151515151');
@@ -140,9 +146,11 @@ describe('Patient data tests', () => {
 
   test("Patient data input updates state and therefore it's own value when user types in input", () => {
     render(
+      <BrowserRouter>
       <AuthContext.Provider value={{ user: { uid: '1' } }}>
         <RxForm existingData={{}}/>
       </AuthContext.Provider>
+      </BrowserRouter>
     );  
     const firstNameInput = screen.getByLabelText(/medicare number/i);
     fireEvent.change(firstNameInput, { target: { value: '01234567' } })
@@ -153,9 +161,11 @@ describe('Patient data tests', () => {
 describe('Provider data input tests', () => {
   test('Provider data input initialises with existing data', () => {
     render(
+      <BrowserRouter>
       <AuthContext.Provider value={{ user: { uid: '1' } }}>
         <RxForm existingData={{ providerData: { prescriberNumber: '7033149' } }}/>
       </AuthContext.Provider>
+      </BrowserRouter>
     );  
     const editBtn = screen.getByText(/edit selected provider/i);
     fireEvent.click(editBtn);
@@ -165,9 +175,11 @@ describe('Provider data input tests', () => {
 
   test("Provider data input updates state and therefore it's own value when user types in input", () => {
     render(
+      <BrowserRouter>
       <AuthContext.Provider value={{ user: { uid: '1' } }}>
         <RxForm existingData={{}}/>
       </AuthContext.Provider>
+      </BrowserRouter>
     );  
     const editBtn = screen.getByText(/edit selected provider/i);
     fireEvent.click(editBtn);
@@ -180,9 +192,11 @@ describe('Provider data input tests', () => {
 describe('Parameter data tests', () => {
   beforeEach(() => {
     render(
+      <BrowserRouter>
       <AuthContext.Provider value={{ user: { uid: '1' } }}>
         <RxForm existingData={{}}/>
       </AuthContext.Provider>
+      </BrowserRouter>
     );
   })
 
@@ -201,9 +215,11 @@ describe('Parameter data tests', () => {
 describe('Inline data validation', () => {
   beforeEach(() => {
     render(
+      <BrowserRouter>
       <AuthContext.Provider value={{ user: { uid: '1' } }}>
         <RxForm existingData={{}}/>
       </AuthContext.Provider>
+      </BrowserRouter>
     );
     // Must ensure the provider form is visible with this button press
     const editBtn = screen.getByText(/edit selected provider/i);
@@ -414,9 +430,11 @@ describe('Inline data validation', () => {
 describe('Form validation on submit', () => {
   test('Identifies invalid field on submission attempt (provider section)', () => {
     render(
+      <BrowserRouter>
       <AuthContext.Provider value={{ user: { uid: '1' } }}>
         <RxForm existingData={data}/>
       </AuthContext.Provider>
+      </BrowserRouter>
     );
     const editBtn = screen.getByText(/edit selected provider/i);
     fireEvent.click(editBtn);
@@ -430,9 +448,11 @@ describe('Form validation on submit', () => {
 
   test('Identifies invalid field on submission attempt (patient section)', () => {
     render(
+      <BrowserRouter>
       <AuthContext.Provider value={{ user: { uid: '1' } }}>
         <RxForm existingData={data}/>
       </AuthContext.Provider>
+      </BrowserRouter>
     );
     const editBtn = screen.getByText(/edit selected provider/i);
     fireEvent.click(editBtn);
@@ -446,9 +466,11 @@ describe('Form validation on submit', () => {
 
   test('Identifies invalid field on submission attempt (medication section)', () => {
     render(
+      <BrowserRouter>
       <AuthContext.Provider value={{ user: { uid: '1' } }}>
         <RxForm existingData={data}/>
       </AuthContext.Provider>
+      </BrowserRouter>
     );
     const editBtn = screen.getByText(/edit selected provider/i);
     fireEvent.click(editBtn);
@@ -462,9 +484,11 @@ describe('Form validation on submit', () => {
 
   test('Identifies invalid field on submission attempt (PBS and other section)', () => {
     render(
+      <BrowserRouter>
       <AuthContext.Provider value={{ user: { uid: '1' } }}>
         <RxForm existingData={dataNoDate}/>
       </AuthContext.Provider>
+      </BrowserRouter>
     );
     const editBtn = screen.getByText(/edit selected provider/i);
     fireEvent.click(editBtn);
@@ -477,9 +501,11 @@ describe('Form validation on submit', () => {
   test('Valid form does not generate any error alerts on submit', () => {
     const handleSubmit = jest.fn();
     render(
+      <BrowserRouter>
       <AuthContext.Provider value={{ user: { uid: '1' } }}>
         <RxForm existingData={data} handleSubmit={handleSubmit}/>
       </AuthContext.Provider>
+      </BrowserRouter>
     );
     const editBtn = screen.getByText(/edit selected provider/i);
     fireEvent.click(editBtn);
@@ -492,9 +518,11 @@ describe('Form validation on submit', () => {
   test('Valid form calls handleSubmit on submit', () => {
     const handleSubmit = jest.fn();
     render(
+      <BrowserRouter>
       <AuthContext.Provider value={{ user: { uid: '1' } }}>
         <RxForm existingData={data} handleSubmit={handleSubmit}/>
       </AuthContext.Provider>
+      </BrowserRouter>
     );
     const editBtn = screen.getByText(/edit selected provider/i);
     fireEvent.click(editBtn);
@@ -508,9 +536,11 @@ describe('Provider select tests', () => {
   // Instead of the preset AuthContextProvider, use AuthContext export, then recreate as provider by appending '.Proivider'. This allows us to inject manual values for testing
   beforeEach(() => {
     render(
+      <BrowserRouter>
       <AuthContext.Provider value={{ user: { uid: '1' } }}>
         <RxForm existingData={data}/>
       </AuthContext.Provider>
+      </BrowserRouter>
     );
   })
 

@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import RxTemplate from './RxTemplate';
-import ReactRouter from 'react-router';
+import * as ReactRouter from 'react-router';
+import { BrowserRouter } from "react-router-dom";
 
 // Mock the useLocation call in RxTemplate.js, providing the state value since this is all that is used.
 const useLocation = jest.spyOn(ReactRouter, 'useLocation');
@@ -121,7 +122,6 @@ const dataDrug = {
   
 };
 
-
 describe('Data formatting tests (for print template)', () => {
 
   beforeEach(() => {
@@ -130,32 +130,51 @@ describe('Data formatting tests (for print template)', () => {
   })
   
   test('Correctly formats mobile numbers', () => {
-    
-    render(<RxTemplate data={dataMobile}/>);
+    render(
+      <BrowserRouter>
+        <RxTemplate data={dataMobile}/>
+      </BrowserRouter>
+    );
     const phoneNumber = screen.getByTestId(/phone/i);
     expect(phoneNumber.textContent).toBe('Phone: 0427 779 650');
   });
 
   test('Correctly formats landline numbers', () => {
-    render(<RxTemplate data={dataLandline}/>);
+    render(
+      <BrowserRouter>
+        <RxTemplate data={dataLandline}/>
+      </BrowserRouter>
+    );
     const phoneNumber = screen.getByTestId(/phone/i);
     expect(phoneNumber.textContent).toBe('Phone: (08) 8234 5678');
   });
 
   test('Correctly formats six digit business numbers', () => {
-    render(<RxTemplate data={dataBusinessSix}/>);
+    render(
+      <BrowserRouter>
+        <RxTemplate data={dataBusinessSix}/>
+      </BrowserRouter>
+    );
     const phoneNumber = screen.getByTestId(/phone/i);
     expect(phoneNumber.textContent).toBe('Phone: 13 13 45');
   });
 
   test('Correctly formats 10 digit business numbers', () => {
-    render(<RxTemplate data={dataBusinessTen}/>);
+    render(
+      <BrowserRouter>
+        <RxTemplate data={dataBusinessTen}/>
+      </BrowserRouter>
+    );
     const phoneNumber = screen.getByTestId(/phone/i);
     expect(phoneNumber.textContent).toBe('Phone: 1300 667 667');
   });
 
   test('Correctly formats drug name', () => {
-    render(<RxTemplate data={dataDrug}/>);
+    render(
+      <BrowserRouter>
+        <RxTemplate data={dataDrug}/>
+      </BrowserRouter>
+    );
     const drugName = screen.getByTestId(/drugName/i);
     expect(drugName.textContent).toBe('Prednisolone acetate 1% + phenylephrine hydrochloride 0.12% (Prednefrin forte) eye drops, 10 mL');
   });
@@ -166,34 +185,34 @@ describe('UI template display tests', () => {
   beforeEach(() => {
     // validData must be set to true to display the template correctly
     useLocation.mockReturnValue({ state: { validData: true } })
+    render(
+      <BrowserRouter>
+        <RxTemplate data={dataMobile}/>
+      </BrowserRouter>
+    );
   })
   
   test('Displays appropriate brand substitution message', () => {
-    render(<RxTemplate data={dataMobile}/>);
     const message = screen.getByText(/brand substitution permitted/i);
     expect(message).toBeInTheDocument();
   });
 
   test('Displays appropriate brand substitution message (2)', () => {
-    render(<RxTemplate data={dataMobile}/>);
     const message = screen.queryByText(/brand substitution not allowed/i);
     expect(message).not.toBeInTheDocument();
   });
 
   test('Displays appropriate PBS vs private message', () => {
-    render(<RxTemplate data={dataMobile}/>);
     const message = screen.getByText(/PBS prescription/i);
     expect(message).toBeInTheDocument();
   });
 
   test('Displays appropriate PBS vs private message (2)', () => {
-    render(<RxTemplate data={dataMobile}/>);
     const message = screen.queryByText(/Private (non-PBS) prescription/i);
     expect(message).not.toBeInTheDocument();
   });
 
   test('Displays compounded message only on indicated prescriptions', () => {
-    render(<RxTemplate data={dataMobile}/>);
     const message = screen.queryByText(/to be compounded/i);
     expect(message).not.toBeInTheDocument();
   });
@@ -201,18 +220,21 @@ describe('UI template display tests', () => {
 
 describe('Full component conditional render tests', () => {
   beforeEach(() => {
-    // validData must be set to false to check that the alternate display works
-    useLocation.mockReturnValue({ state: { validData: false } })
-  });
+    // validData must be set to true to display the template correctly
+    useLocation.mockReturnValue({ state: null })
+    render(
+      <BrowserRouter>
+        <RxTemplate data={dataMobile}/>
+      </BrowserRouter>
+    );
+  })
 
   test('Displays non-templated message when no valid data is present', () => {
-    render(<RxTemplate data={dataMobile}/>);
     const message = screen.queryByText(/fill out the form to generate Rx/i);
     expect(message).toBeInTheDocument();
   });
 
   test('Hides UI Rx template when no valid data present', () => {
-    render(<RxTemplate data={dataMobile}/>);
     const message = screen.queryByTestId(/ui/i);
     expect(message).not.toBeInTheDocument();
   });

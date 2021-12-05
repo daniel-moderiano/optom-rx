@@ -9,6 +9,9 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 import { useCollection } from "../../hooks/useCollection";
 import { useLocation } from "react-router";
 import { useNumbers } from '../../hooks/useNumbers';
+import * as ReactRouter from 'react-router'
+
+console.log(ReactRouter);
 
 // ! Multiple optometrist items are not permitted to be prescribed on the same form; each must use an individual form
 
