@@ -21,6 +21,7 @@ const dataMobile = {
     includeBrand: true,   
     pbsRx: true,    
     compounded: false,
+    authRequired: true,
   },
   patientData: {
     "fullName":"Daniel Moderiano",
@@ -118,6 +119,7 @@ const dataDrug = {
       includeBrand: true,   
       pbsRx: true,    
       compounded: false,
+      authRequired: false,
   },
   
 };
@@ -216,6 +218,23 @@ describe('UI template display tests', () => {
     const message = screen.queryByText(/to be compounded/i);
     expect(message).not.toBeInTheDocument();
   });
+
+  test('Displays auth info when authority is required', () => {
+    const message = screen.getByText(/authority prescription no:/i);
+    expect(message).toBeInTheDocument();
+  });
+});
+
+test('Hides auth info when no authority is required', () => {
+  // validData must be set to true to display the template correctly
+  useLocation.mockReturnValue({ state: { validData: true } })
+  render(
+    <BrowserRouter>
+      <RxTemplate data={dataDrug}/>
+    </BrowserRouter>
+  );
+  const message = screen.queryByText(/authority prescription no:/i);
+  expect(message).not.toBeInTheDocument();
 });
 
 describe('Full component conditional render tests', () => {

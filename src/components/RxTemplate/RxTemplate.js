@@ -153,9 +153,10 @@ const RxTemplate = ({ data }) => {
                 ? <div className="ui-brandSub--yes">Brand substitution permitted</div>
                 : <div className="ui-brandSub--no">Brand substitution not allowed</div>
               }
-              {drugData.authRequired 
-                && <div className="ui-authCode">{`Authority Approval No: ${miscData.authCode}`}</div>
-              }
+              {drugData.authRequired && (<>
+                <div className="ui-authCode">{`Authority Approval No: ${miscData.authCode}`}</div>
+                <div className="ui-authRxNo">{`Authority Prescription No: ${miscData.authRxNumber}`}</div>
+              </>)}
               <div className="ui-date">Prescription date: {formatDate()}</div>
             </div>
           </section>
