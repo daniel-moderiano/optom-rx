@@ -9,6 +9,7 @@ export const useNumbers = () => {
   const [scriptNo, setScriptNo] = useState('');
   const [authRxNo, setAuthRxNo] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   // Correctly increment the base auth Rx number to be updated on the backend
   const incrementScriptNumber = (prevNumber) => {
@@ -60,6 +61,7 @@ export const useNumbers = () => {
   const fetchData = useCallback(() => {
     // Initialise error and loading state
     setIsLoading(true);
+    setIsError(false);
 
     // Note there will only ever be one 'current' field in each document in this collection. There are only two documents: scriptNo and authRxNo. They should never need to be called separately.
     const scriptNoRef = doc(db, 'numbers', 'scriptNo');
@@ -82,6 +84,7 @@ export const useNumbers = () => {
     })
     .catch((error) => {
       console.log(error);
+      setIsError(true);
     })  
     .finally(() => {
       setIsLoading(false);
@@ -99,6 +102,7 @@ export const useNumbers = () => {
     })
     .catch((error) => {
       console.log(error);
+      setIsError(true);
     })   
     .finally(() => {
       setIsLoading(false);

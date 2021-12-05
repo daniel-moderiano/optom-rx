@@ -528,14 +528,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
       }}
       autoComplete="off">
 
-      {isLoading ? (
-        <div className="loading">Loading...</div>
-      ) : (
-        <div className="numbers">
-          <div className="scriptNo">Script number: {scriptNo}</div>
-          <div className="scriptNo">AuthRx number: {authRxNo}</div>
-        </div>
-      )}
+    
         
       <Fieldset className="provider-form" legend="Provider Details">
 
@@ -701,7 +694,14 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
           alert={miscAlerts.date}
         />
 
-        {/* Authority information here */}
+        {/* Authority Rx numbers and ScriptID here */}
+        <div className="numbers">
+          <div className="scriptNo">Script number: {isLoading ? 'Loading...' : miscData.scriptID}</div>
+          <div className="scriptNo">AuthRx number: {isLoading ? 'Loading...' : miscData.authRxNumber}</div>
+        </div>
+
+        {isError && <div className="numbers__error">Something went wrong</div>}
+
 
       </Fieldset>
 
