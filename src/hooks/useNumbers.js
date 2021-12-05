@@ -2,7 +2,7 @@ import { db } from "../firebase/config";
 import { useState } from "react";
 
 // Firebase imports
-import { doc, getDoc, runTransaction } from "firebase/firestore";
+import { doc, runTransaction } from "firebase/firestore";
 
 // A hook that fetches the current script number from the backend, using a single getDoc call (as opposed to snapshot real time updates), and subsequently increments this number and updates the backend ready for subsequent calls
 export const useNumbers = () => {
@@ -65,7 +65,7 @@ export const useNumbers = () => {
     const scriptNoRef = doc(db, 'numbers', 'scriptNo');
     const authRxNoRef = doc(db, 'numbers', 'authRxNo');
 
-    runTransaction(db, (transaction) => {
+    const scriptTransaction = runTransaction(db, (transaction) => {
       // First read the database for current values of number (first step of transaction)
       return transaction.get(scriptNoRef)
         .then((response) => {
@@ -87,7 +87,7 @@ export const useNumbers = () => {
       setIsLoading(false);
     }) 
 
-    runTransaction(db, (transaction) => {
+    const authTransaction = runTransaction(db, (transaction) => {
       return transaction.get(authRxNoRef)
         .then((response) => {
           const newAuthRxNo = incrementAuthRxNumber(response.data().current);
@@ -103,6 +103,8 @@ export const useNumbers = () => {
     .finally(() => {
       setIsLoading(false);
     }) 
+
+    return Promise.all([scriptTransaction, authTransaction]);
 
   };
 

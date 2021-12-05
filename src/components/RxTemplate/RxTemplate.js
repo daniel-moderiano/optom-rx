@@ -2,6 +2,7 @@ import { StyledRxTemplate } from "./RxTemplate.styled";
 import Rx from '../../assets/template-sized.jpg';
 import tickbox from '../../assets/tickbox.svg';
 import { useLocation, useHistory } from "react-router";
+import { Link } from "react-router-dom";
 
 const RxTemplate = ({ data }) => {
   // Deconstructing for cleanliness of code and easier-to-understand operations
@@ -318,7 +319,7 @@ const RxTemplate = ({ data }) => {
           </section>}
         </div>
         <div className="RxTemplate__btns">
-          <button className="RxTemplate__btn btn-editRx" onClick={editForm}>Make changes</button>
+          <Link className="RxTemplate__btn btn-editRx" to="/form">Make changes</Link>
           <button className="RxTemplate__btn btn-print" onClick={() => window.print()}>Print</button>
         </div>
       </> : <h3 className="RxTemplate__subtitle">Fill out the form to generate Rx</h3>}

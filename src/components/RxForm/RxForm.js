@@ -7,7 +7,8 @@ import Fieldset from "../utils/Fieldset/Fieldset";
 import ProviderForm from "../ProviderForm/ProviderForm";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useCollection } from "../../hooks/useCollection";
-import { useNumbers } from "../../hooks/useNumbers";
+import { useLocation } from "react-router";
+import { useNumbers } from '../../hooks/useNumbers';
 
 // ! Multiple optometrist items are not permitted to be prescribed on the same form; each must use an individual form
 
@@ -15,6 +16,12 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
   const [{ scriptNo, authRxNo, isError, isLoading }, fetchNumbers] = useNumbers();
   const { user } = useAuthContext();
   const { documents: providers } = useCollection('providers', ['uid', '==', user.uid]);
+
+  // State (at this stage) is only provided if generating a new Rx. Hnce the numbers fetch should only be performed when state exists
+  const { state } = useLocation();
+  if (state) {
+    // console.log(fetchNumbers());
+  }
 
   const [chosenProvider, setChosenProvider] = useState('---Select provider---');
 
@@ -273,7 +280,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
       }));
     }
   }, []);
-
 
   // Inline form validation
   useEffect(() => {
