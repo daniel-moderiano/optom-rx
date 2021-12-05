@@ -6,8 +6,8 @@ import { doc, runTransaction } from "firebase/firestore";
 
 // A hook that fetches the current script number from the backend, using a single getDoc call (as opposed to snapshot real time updates), and subsequently increments this number and updates the backend ready for subsequent calls
 export const useNumbers = () => {
-  const [scriptNo, setScriptNo] = useState('');
-  const [authRxNo, setAuthRxNo] = useState('');
+  const [scriptNo, setScriptNo] = useState(null);
+  const [authRxNo, setAuthRxNo] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
   // Correctly increment the base auth Rx number to be updated on the backend

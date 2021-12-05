@@ -19,15 +19,8 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
 
   // State (at this stage) is only provided if generating a new Rx. Hnce the numbers fetch should only be performed when state exists
   const { state } = useLocation();
-
   
-
-  useEffect(() => {
-    if (state) {
-      console.log('First time');
-      fetchNumbers().then(() => {console.log('fetched')})
-    }
-  }, [state, fetchNumbers])
+  const [numbersLoaded, setNumbersLoaded] = useState(false);
 
   const [chosenProvider, setChosenProvider] = useState('---Select provider---');
 
@@ -245,6 +238,14 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
     return formatted;
   }
 
+  const setNumbers = useCallback(() => {
+    setMiscData((prevData) => ({
+      ...prevData,
+      scriptID: scriptNo,
+      authRxNumber: authRxNo,
+    }))
+  }, [authRxNo, scriptNo])
+
   // Show positive feedback once a validation requirements are met
   const positiveInlineValidation = useCallback((setAlertFunc, field) => {
     showSuccessClass(field);
@@ -422,6 +423,29 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
     // It is optional to include a function here that provides a warning when one of these are checked to true and the brand name input is empty, but this is opposite to expected user flow and will likely cause annoyance more than anything else
   }, [drugData.includeBrand, drugData.brandOnly]);
 
+  // Generate the unique script and authRx numbers, and attach them to the local RxForm state. This is only performed when loading the RxForm component using 'Create new prescription' btn
+  useEffect(() => {
+    console.log('Calling numbers effect');
+    if (state) {
+      // Use .then() to ensure the above scriptNo and authRxNo variables are set prior to attempting to set data state with them
+      fetchNumbers().then(() => {
+        console.log('Numbers initialised');
+        setNumbersLoaded((prevData) => prevData ? prevData : !prevData);
+      }).catch((error) => {
+        console.log(error);
+      })
+    }
+  }, [state, fetchNumbers]);
+
+  useEffect(() => {
+    console.log('Numbers loaded effect');
+    if (numbersLoaded) {
+      setNumbers();
+      console.log('Numbers set');
+    }
+    
+  }, [numbersLoaded, setNumbers])
+
   // Used to toggle any boolean data in the data states
   const toggleBooleanState = (setFunc, data, boolToChange) => {
     let newState = true;
@@ -498,25 +522,11 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
       className="rxform" 
       onSubmit={(e) => {
         e.preventDefault(); 
-        if (checkFormValidation()) {
+        if (checkFormValidation()) {          
           handleSubmit(drugData, patientData, providerData, miscData)
         }
       }}
       autoComplete="off">
-
-        <button onClick={(e) => {e.preventDefault(); fetchNumbers();}}>Fetch numbers</button>
-
-      {isError && <div>Something went wrong...</div>}
-
-      {isLoading ? (
-        <div>Loading...</div>
-        
-      ) : (
-        <>
-          <div>Script No: {scriptNo}</div>
-          <div>Auth No: {authRxNo}</div>
-        </>
-      )}
         
       <Fieldset className="provider-form" legend="Provider Details">
 
