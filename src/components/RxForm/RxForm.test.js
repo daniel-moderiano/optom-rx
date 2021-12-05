@@ -1,8 +1,7 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import RxForm from "./RxForm";
 import { AuthContext } from '../../context/AuthContext';
-import { BrowserRouter } from 'react-router-dom'
-
+import { BrowserRouter } from 'react-router-dom';
 
 // Used because of the 'google is not defined' error 
 beforeEach(() => {
@@ -29,6 +28,7 @@ const data = {
     includeBrand: true,   
     pbsRx: true,    
     compounded: false,
+    authRequired: false,
   },
   patientData: {
     "fullName":"Daniel Moderiano",
@@ -101,6 +101,52 @@ const dataNoDate = {
   miscData: {
     authRxNumber: '',   
     date: '', 
+    authCode: '7979',
+    scriptID: '',
+  },
+}
+
+const dataAuthority = {
+  drugData: {
+    activeIngredient: "latanoprost 0.005% eye drops, 5 mL",
+    "brandName":"Xalatan",
+    "quantity":"1",
+    "repeats":"4",
+    "dosage":"Once nightly both eyes",
+    "itemCode":"5552F",
+    substitutePermitted: true,
+    brandOnly: false,    
+    includeBrand: true,   
+    pbsRx: true,    
+    compounded: false,
+    authRequired: true,
+  },
+  patientData: {
+    "fullName":"Daniel Moderiano",
+    "streetAddress":"6 Old Tawny Close",
+    "subpremise":"",
+    "suburb":"Wynn Vale",
+    "postcode":"5127",
+    "state":"SA",
+    "medicareNumber":"5151515151",
+    "medicareRefNumber":"3"
+  },
+  providerData: {
+    "prefix":true,
+    "fullName":"Sarah Smoker",
+    "qualifications":"BMedSc(VisSc), MOpt",
+    "practiceName":"OPSM",
+    "streetAddress":"976 North East Road",
+    "subpremise":"Shop 112, Westfield Tea Tree Plaza",
+    "suburb":"Modbury",
+    "postcode":"5092",
+    "state":"SA",
+    "phoneNumber":"0427779650",
+    "prescriberNumber":"7033149"
+  },
+  miscData: {
+    authRxNumber: '00000001',   
+    date: '2021-10-10',
     authCode: '7979',
     scriptID: '',
   },
@@ -545,8 +591,47 @@ describe('Provider select tests', () => {
   })
 
   test('Provider select element initialises with "---Select provider--- option"', () => {
-    
     const input = screen.getByLabelText(/select provider/i);
     expect(input.value).toBe('---Select provider---');
   });
-})
+});
+
+describe('Authority Rx No. and script No. display tests', () => {
+
+  test('Script number is always present on initialised Rx form', () => {
+    render(
+      <BrowserRouter>
+      <AuthContext.Provider value={{ user: { uid: '1' } }}>
+        <RxForm existingData={data}/>
+      </AuthContext.Provider>
+      </BrowserRouter>
+    );
+    
+    const scriptNo = screen.getByTestId(/scriptNo/i);
+    expect(scriptNo).toBeInTheDocument();
+  });
+
+  test('Auth Rx number is visible on auth required Rx form', () => {
+    render(
+      <BrowserRouter>
+      <AuthContext.Provider value={{ user: { uid: '1' } }}>
+        <RxForm existingData={dataAuthority}/>
+      </AuthContext.Provider>
+      </BrowserRouter>
+    );
+    const authRxNo = screen.getByTestId(/authRxNo/i);
+    expect(authRxNo).toBeInTheDocument();
+  });
+
+  test('Auth Rx number is not included on non-authority Rx form', () => {
+    render(
+      <BrowserRouter>
+      <AuthContext.Provider value={{ user: { uid: '1' } }}>
+        <RxForm existingData={data}/>
+      </AuthContext.Provider>
+      </BrowserRouter>
+    );
+    const authRxNo = screen.queryByTestId(/authRxNo/i);
+    expect(authRxNo).not.toBeInTheDocument();
+  });
+});

@@ -113,5 +113,5 @@ export const useNumbers = () => {
   }, []);
 
   // Reference the documents using destructuring in any component
-  return [{ scriptNo, authRxNo, isLoading }, fetchData]
+  return [{ scriptNo, authRxNo, isLoading, isError }, fetchData]
 }

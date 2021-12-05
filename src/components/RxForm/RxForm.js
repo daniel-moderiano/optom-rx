@@ -9,9 +9,6 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 import { useCollection } from "../../hooks/useCollection";
 import { useLocation } from "react-router";
 import { useNumbers } from '../../hooks/useNumbers';
-import * as ReactRouter from 'react-router'
-
-console.log(ReactRouter);
 
 // ! Multiple optometrist items are not permitted to be prescribed on the same form; each must use an individual form
 
@@ -428,11 +425,9 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
 
   // Generate the unique script and authRx numbers, and attach them to the local RxForm state. This is only performed when loading the RxForm component using 'Create new prescription' btn
   useEffect(() => {
-    console.log('Calling numbers effect');
     if (state) {
       // Use .then() to ensure the above scriptNo and authRxNo variables are set prior to attempting to set data state with them
       fetchNumbers().then(() => {
-        console.log('Numbers initialised');
         setNumbersLoaded((prevData) => prevData ? prevData : !prevData);
       }).catch((error) => {
         console.log(error);
@@ -441,10 +436,8 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
   }, [state, fetchNumbers]);
 
   useEffect(() => {
-    console.log('Numbers loaded effect');
     if (numbersLoaded) {
       setNumbers();
-      console.log('Numbers set');
     }
     
   }, [numbersLoaded, setNumbers])
@@ -698,9 +691,9 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
         />
 
         {/* Authority Rx numbers and ScriptID here */}
-        <div className="numbers">
-          <div className="scriptNo">Script number: {isLoading ? 'Loading...' : miscData.scriptID}</div>
-          <div className="scriptNo">AuthRx number: {isLoading ? 'Loading...' : miscData.authRxNumber}</div>
+        <div className="numbers" data-testid="numbers">
+          <div className="scriptNo" data-testid="scriptNo">Script number: {isLoading ? 'Loading...' : miscData.scriptID}</div>
+          {drugData.authRequired && <div className="authRxNo" data-testid="authRxNo">AuthRx number: {isLoading ? 'Loading...' : miscData.authRxNumber}</div>}
         </div>
 
         {isError && <div className="numbers__error">Something went wrong</div>}

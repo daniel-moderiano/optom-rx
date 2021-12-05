@@ -34,6 +34,7 @@ const App = () => {
       includeBrand: true,    // Indicates whether brand name should be included on the Rx
       pbsRx: true,    // Indicates whether this is a PBS prescription 
       compounded: false,
+      authRequired: false,  // Indicates whether authority is required for this medication
     },
     patientData: {
       "fullName":"Daniel Moderiano",
