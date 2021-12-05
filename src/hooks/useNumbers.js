@@ -67,7 +67,7 @@ export const useNumbers = () => {
 
     runTransaction(db, (transaction) => {
       // First read the database for current values of number (first step of transaction)
-      return getDoc(scriptNoRef)
+      return transaction.get(scriptNoRef)
         .then((response) => {
           // Once read completes, perform logic to modify value
           const newScriptNo = incrementScriptNumber(response.data().current);
@@ -88,7 +88,7 @@ export const useNumbers = () => {
     }) 
 
     runTransaction(db, (transaction) => {
-      return getDoc(authRxNoRef)
+      return transaction.get(authRxNoRef)
         .then((response) => {
           const newAuthRxNo = incrementAuthRxNumber(response.data().current);
           transaction.update(authRxNoRef, { current: newAuthRxNo });
