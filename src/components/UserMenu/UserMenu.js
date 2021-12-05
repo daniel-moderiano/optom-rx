@@ -6,7 +6,7 @@ const UserMenu = ({ handleClick }) => {
   const { logout } = useLogout();
 
   return (
-    <StyledUserMenu className="UserMenu">
+    <StyledUserMenu className="UserMenu" data-testid="userMenu">
       <div className="UserMenu__info">
         <div className="UserMenu__avatar"></div>
         <div className="UserMenu__name">Daniel Moderiano</div>
