@@ -19,9 +19,15 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
 
   // State (at this stage) is only provided if generating a new Rx. Hnce the numbers fetch should only be performed when state exists
   const { state } = useLocation();
-  if (state) {
-    // console.log(fetchNumbers());
-  }
+
+  
+
+  useEffect(() => {
+    if (state) {
+      console.log('First time');
+      fetchNumbers().then(() => {console.log('fetched')})
+    }
+  }, [state, fetchNumbers])
 
   const [chosenProvider, setChosenProvider] = useState('---Select provider---');
 

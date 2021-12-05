@@ -1,5 +1,5 @@
 import { db } from "../firebase/config";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 // Firebase imports
 import { doc, runTransaction } from "firebase/firestore";
@@ -57,7 +57,7 @@ export const useNumbers = () => {
     return `${baseNumber}${checkDigit}`;
   }
 
-  const fetchData = () => {
+  const fetchData = useCallback(() => {
     // Initialise error and loading state
     setIsLoading(true);
 
@@ -106,7 +106,7 @@ export const useNumbers = () => {
 
     return Promise.all([scriptTransaction, authTransaction]);
 
-  };
+  }, []);
 
   // Reference the documents using destructuring in any component
   return [{ scriptNo, authRxNo, isLoading }, fetchData]
