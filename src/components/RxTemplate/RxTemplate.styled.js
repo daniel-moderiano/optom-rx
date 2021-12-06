@@ -222,6 +222,13 @@ const StyledRxTemplate = styled.div`
           font-size: 14px;
         } */
 
+        .scriptNo {
+          position: absolute;
+          left: 268px;
+          top: 52px;
+          width: 400px;
+        }
+
         .pbsSelected {
           width: 17px;
           height: 17px;
@@ -264,7 +271,7 @@ const StyledRxTemplate = styled.div`
       .medication {
         position: absolute;
         left: 112px;
-        top: 366px;
+        top: 386px;
         width: 330px;
         border-bottom: 1px solid #b8b8b8;
         padding: 2px 0;
@@ -295,13 +302,13 @@ const StyledRxTemplate = styled.div`
         display: block;
         position: absolute;
         left: 112px;
-        top: 502px;
+        top: 522px;
         width: 330px;
         
         .practitionerTick {
           position: absolute;
           left: 315px;
-          top: 134px;
+          top: 114px;
           font-size: 26px;
           font-weight: bold;
         }
@@ -309,10 +316,10 @@ const StyledRxTemplate = styled.div`
 
       .authority {
         border-top: 1px solid #b8b8b8;
-        padding-top: 2px;
+        padding-top: 3px;
         position: absolute;
         left: 112px;
-        top: 540px;
+        top: 560px;
         width: 330px;
       }
 
@@ -383,10 +390,12 @@ const StyledRxTemplate = styled.div`
         top: 311px;
         left: 40px;
 
-        /* Consider date reduced font size */
-        /* .date {
-          font-size: 14px;
-        } */
+        .scriptNo {
+          position: absolute;
+          left: 268px;
+          top: 52px;
+          width: 400px;
+        }
 
         .pbsSelected {
           width: 17px;
@@ -430,7 +439,7 @@ const StyledRxTemplate = styled.div`
       .medication {
         position: absolute;
         left: 112px;
-        top: 366px;
+        top: 386px;
         width: 330px;
         border-bottom: 1px solid #b8b8b8;
         padding: 2px 0;
@@ -460,24 +469,17 @@ const StyledRxTemplate = styled.div`
       .provider-lower {
         position: absolute;
         left: 112px;
-        top: 502px;
+        top: 522px;
         width: 330px;
         
-        .practitionerTick {
-          position: absolute;
-          left: 315px;
-          top: 134px;
-          font-size: 26px;
-          font-weight: bold;
-        }
       }
 
       .authority {
         border-top: 1px solid #b8b8b8;
-        padding-top: 2px;
+        padding-top: 3px;
         position: absolute;
         left: 112px;
-        top: 540px;
+        top: 560px;
         width: 330px;
       }
 

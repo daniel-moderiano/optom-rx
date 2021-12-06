@@ -155,7 +155,7 @@ const RxTemplate = ({ data }) => {
               }
               {drugData.authRequired && (<>
                 <div className="ui-authCode">{`Authority Approval No: ${miscData.authCode}`}</div>
-                <div className="ui-authRxNo">{`Authority Prescription No: ${miscData.authRxNumber}`}</div>
+                <div className="ui-authRxNo">{`Authority Script No: ${miscData.authRxNumber}`}</div>
               </>)}
               <div className="ui-scriptNo">Script No: {miscData.scriptID}</div>
               <div className="ui-date">Prescription date: {formatDate()}</div>
@@ -208,7 +208,7 @@ const RxTemplate = ({ data }) => {
               : <div className="nonPbs"><span className="nonPbs-marker">XXXXXXXXXXX</span>Non-PBS</div>
             }
             {!drugData.substitutePermitted && <div className="brandSub">✓</div>}
-            
+            <div className="scriptNo">Script No: {miscData.scriptID}</div>
           </section>
 
           {/* Script ID or authority Rx number should go above the medication once finalised, and perhaps with a border bottom */}
@@ -237,11 +237,13 @@ const RxTemplate = ({ data }) => {
           {/* Wastes space to render authority section for non-authority required scripts, so render only as needed */}
           {drugData.authRequired && <section className="authority">
             <div className="authority__approvalCode">{`Authority Approval No: ${miscData.authCode}`}</div>
+            <div className="authRxNo">{`Authority Script No: ${miscData.authRxNumber}`}</div>
             {/* Optional sections below - not sure how useful these are in this day and age */}
-            {/* <div className="authority__authorised">Authorised:</div>
-            <div className="authority__delegate">Delegate...............</div> */}
+            {/* <div className="authority__authorised">Authorised</div> */}
+            {/*<div className="authority__delegate">Delegate...............</div> */}
           </section>}
         </div>
+
         <div className="right-container">
           <section className="provider-upper">
             <div className="container">
@@ -282,7 +284,7 @@ const RxTemplate = ({ data }) => {
               : <div className="nonPbs"><span className="nonPbs-marker">XXXXXXXXXXX</span>Non-PBS</div>
             }
             {!drugData.substitutePermitted && <div className="brandSub">✓</div>}
-            
+            <div className="scriptNo">Script No: {miscData.scriptID}</div>
           </section>
 
           {/* Script ID or authority Rx number should go above the medication once finalised, and perhaps with a border bottom */}
@@ -310,6 +312,7 @@ const RxTemplate = ({ data }) => {
           {/* Wastes space to render authority section for non-authority required scripts, so render only as needed */}
           {drugData.authRequired && <section className="authority">
             <div className="authority__approvalCode">{`Authority Approval No: ${miscData.authCode}`}</div>
+            <div className="authRxNo">{`Authority Script No: ${miscData.authRxNumber}`}</div>
             {/* Optional sections below - not sure how useful these are in this day and age */}
             {/* <div className="authority__authorised">Authorised:</div>
             <div className="authority__delegate">Delegate...............</div> */}
