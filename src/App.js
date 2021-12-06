@@ -12,6 +12,7 @@ import Home from './components/Home/Home';
 import Providers from "./components/Providers/Providers";
 import './App.css';
 import GuestRxForm from "./components/GuestRxForm/GuestRxForm";
+import { usePBSUpload } from './hooks/usePBSUpload';
 
 // ! React Router v6 has been released and makes breaking changes. Look at updating this.
 
@@ -20,6 +21,8 @@ const App = () => {
   const { user, authIsReady } = useAuthContext();
 
   const ausDate = new Date().toLocaleString("en-CA", { timeZone: "Australia/Adelaide" }).substring(0, 10);
+
+  const { newDrug } = usePBSUpload();
   
   const [data, setData] = useState({
     drugData: {

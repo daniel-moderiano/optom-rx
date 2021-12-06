@@ -1,6 +1,7 @@
 {
   "name": "optom-rx",
   "version": "0.1.0",
+  "type": "module",
   "private": true,
   "dependencies": {
     "@googlemaps/js-api-loader": "^1.12.7",
