@@ -80,7 +80,6 @@ const StyledRxTemplate = styled.div`
     }
   }
 
-
   .RxTemplate__btns {
     place-self: flex-end;
     margin-right: 10%;
@@ -217,16 +216,12 @@ const StyledRxTemplate = styled.div`
         top: 311px;
         left: 40px;
 
-        /* Consider date reduced font size */
-        /* .date {
-          font-size: 14px;
-        } */
-
         .scriptNo {
           position: absolute;
-          left: 268px;
+          left: 200px;
           top: 52px;
-          width: 400px;
+          width: 200px;
+          text-align: right;
         }
 
         .pbsSelected {
@@ -392,9 +387,11 @@ const StyledRxTemplate = styled.div`
 
         .scriptNo {
           position: absolute;
-          left: 268px;
+          left: 200px;
           top: 52px;
-          width: 400px;
+          width: 200px;
+          text-align: right;
+          
         }
 
         .pbsSelected {

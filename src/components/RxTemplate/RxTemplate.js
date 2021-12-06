@@ -161,9 +161,6 @@ const RxTemplate = ({ data }) => {
               <div className="ui-date">Prescription date: {formatDate()}</div>
             </div>
           </section>
-
-         
-
         </div>
 
         <div className="left-container">
