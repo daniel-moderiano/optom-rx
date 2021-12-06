@@ -69,8 +69,8 @@ const StyledRxTemplate = styled.div`
       margin-bottom: 0.5rem;
     }
 
-    .ui-date, .ui-quantityRepeats {
-      margin: 0.5rem 0;
+    .ui-scriptNo, .ui-quantityRepeats {
+      margin-top: 0.5rem;
     }
 
     section {

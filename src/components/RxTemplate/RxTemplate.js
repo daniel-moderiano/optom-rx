@@ -157,6 +157,7 @@ const RxTemplate = ({ data }) => {
                 <div className="ui-authCode">{`Authority Approval No: ${miscData.authCode}`}</div>
                 <div className="ui-authRxNo">{`Authority Prescription No: ${miscData.authRxNumber}`}</div>
               </>)}
+              <div className="ui-scriptNo">Script No: {miscData.scriptID}</div>
               <div className="ui-date">Prescription date: {formatDate()}</div>
             </div>
           </section>

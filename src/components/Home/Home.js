@@ -2,6 +2,7 @@ import { StyledHome } from './Home.styled';
 import { Link } from 'react-router-dom';
 
 const Home = () => {
+  // TODO: Clear all existing data in App.js when new Rx button is clicked
 
   return (
     <StyledHome className="Home">
