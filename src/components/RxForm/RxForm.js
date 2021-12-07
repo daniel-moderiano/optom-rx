@@ -10,6 +10,7 @@ import { useCollection } from "../../hooks/useCollection";
 import { useLocation } from "react-router";
 import { useNumbers } from '../../hooks/useNumbers';
 import { usePBSFetch } from "../../hooks/usePBSFetch";
+import { nanoid } from 'nanoid';
 
 // ! Multiple optometrist items are not permitted to be prescribed on the same form; each must use an individual form
 
@@ -32,6 +33,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
     quantity: {},
     repeats: {},
     dosage: {},
+    pbsRx: {},
   });
 
   const [patientAlerts, setPatientAlerts] = useState({
@@ -75,6 +77,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
     pbsRx: true,    // Indicates whether this is a PBS prescription 
     compounded: false,
     verified: false,    // Set to true when the user selects an autocomplete option. Set to false on any subsequent     modification of drug information, as this cannot be verified on the PBS. Only those verified drugs should be integrated with PBS backend
+    indications: [],    // Indications for the use of drug under PBS restriction
     ...existingData.drugData,
   });
 
@@ -211,13 +214,74 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
         }
       }));
     }
-  }, [pbsInfo, drugData.verified])
+  }, [pbsInfo, drugData.verified]);
+
+  // Identify whether a drug on the PBS is restricted or not, and display indications for use on restricted items
+  const restrictedStatus = useCallback(() => {
+    // PBS info-related effects here
+    if (pbsInfo) {
+      // Check for restricted status
+      switch (pbsInfo['restriction-flag']) {
+        case 'R':
+          console.log('Restricted item');
+          setDrugAlerts((prevAlerts) => ({
+            ...prevAlerts,
+            pbsRx: {
+              message: 'This is a restricted PBS item, see indications for use',
+              type: 'error',
+            }
+          }));
+          // TODO: Add indication
+          // console.log(pbsInfo.indications);
+          setDrugData((prevData) => ({
+            ...prevData,
+            indications: pbsInfo.indications.description,
+          }));
+          break;
+
+        case 'U':
+          console.log('Unrestricted item');
+          setDrugAlerts((prevAlerts) => ({
+            ...prevAlerts,
+            pbsRx: {
+              message: 'This is an unrestricted PBS item',
+              type: 'error',
+            }
+          }));
+          break;
+      
+        // TODO: authority handling, case 'A'
+        default:
+          break;
+      }
+    } else {
+      // TODO: consider disabling PBS checkbox and authority related fields
+      setDrugAlerts((prevAlerts) => ({
+        ...prevAlerts,
+        pbsRx: {
+          message: 'This item is not on the PBS',
+          type: 'error',
+        }
+      }));
+    }
+
+    // Toggle any PBS-related functionality if there is a change in verified status
+    if (!drugData.verified) {
+      setDrugAlerts((prevAlerts) => ({
+        ...prevAlerts,
+        pbsRx: {
+          message: 'Unable to verify drug information on PBS, please select a drug from the dropdown list',
+          type: 'error',
+        }
+      }));
+    }
+  }, [pbsInfo, drugData.verified, drugData.indications]);
 
   // Can utilise a useEffect such as this to set state or UI elements based on PBS data being fetched or lost
   // Note that these PBS-related functions MUST only be performed on drug data with the verified: true tag
   useEffect(() => {
-    authorityStatus();
-  }, [authorityStatus])
+    restrictedStatus();
+  }, [restrictedStatus])
 
   // UI functions
   const showErrorClass = (element) => {
@@ -750,6 +814,15 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
           className="checkbox pbsRx"
           alert={drugAlerts.pbsRx}
         />  
+
+{/* TODO: consider a dropdown UI expandable div */}
+        {(drugData.verified && drugData.indications.length > 0) && 
+          <div className="indications-container">
+            <h4 className="indications__title">Indications for use:</h4>
+            <div className="pbsIndication">{drugData.indications}</div>
+          </div>
+        }
+        
 
         <FormField 
           fieldType="checkbox" 
