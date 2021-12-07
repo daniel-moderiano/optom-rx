@@ -20,34 +20,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
 
   const [{ pbsInfo, pbsError, pbsLoading }, fetchDrug] = usePBSFetch();
 
-  // Can utilise a useEffect such as this to set state or UI elements based on PBS data being fetched or lost
-  useEffect(() => {
-    // PBS info-related effects here
-    if (pbsInfo) {
-      console.log(pbsInfo['item-code']);
-      // Check for authority
-      switch (pbsInfo['restriction-flag']) {
-        case 'A':
-          console.log('Authority item');
-          break;
-        
-        case 'R':
-          console.log('Restricted item');
-          break;
-
-        case 'U':
-          console.log('Unrestricted item');
-          break;
-      
-        default:
-          break;
-      }
-    } else {
-      // Disable authority functions
-      console.log('Authority functions disabled');
-    }
-  }, [pbsInfo])
-
   // State (at this stage) is only provided if generating a new Rx. Hence the numbers fetch should only be performed when state exists
   const { state } = useLocation();
   
@@ -173,6 +145,79 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
   });
 
   const [showProviderForm, setShowProviderForm] = useState(false);
+
+  
+  const authorityStatus = useCallback(() => {
+    // PBS info-related effects here
+    if (pbsInfo) {
+      console.log(pbsInfo['item-code']);
+      // Check for authority
+      switch (pbsInfo['restriction-flag']) {
+        case 'A':
+          console.log('Authority item');
+          setDrugAlerts((prevAlerts) => ({
+            ...prevAlerts,
+            pbsRx: {
+              message: 'This is an authority PBS item',
+              type: 'error',
+            }
+          }));
+          break;
+        
+        case 'R':
+          console.log('Restricted item');
+          setDrugAlerts((prevAlerts) => ({
+            ...prevAlerts,
+            pbsRx: {
+              message: 'This is a restricted PBS item',
+              type: 'error',
+            }
+          }));
+          break;
+
+        case 'U':
+          console.log('Unrestricted item');
+          setDrugAlerts((prevAlerts) => ({
+            ...prevAlerts,
+            pbsRx: {
+              message: 'This is an unrestricted PBS item',
+              type: 'error',
+            }
+          }));
+          break;
+      
+        default:
+          break;
+      }
+    } else {
+      // Disable authority functions
+      console.log('Authority functions disabled');
+      setDrugAlerts((prevAlerts) => ({
+        ...prevAlerts,
+        pbsRx: {
+          message: 'This item is not on the PBS',
+          type: 'error',
+        }
+      }));
+    }
+
+    // Toggle any PBS-related functionality if there is a change in verified status
+    if (!drugData.verified) {
+      setDrugAlerts((prevAlerts) => ({
+        ...prevAlerts,
+        pbsRx: {
+          message: 'Unable to verify drug information on PBS, please select a drug from the dropdown list',
+          type: 'error',
+        }
+      }));
+    }
+  }, [pbsInfo, drugData.verified])
+
+  // Can utilise a useEffect such as this to set state or UI elements based on PBS data being fetched or lost
+  // Note that these PBS-related functions MUST only be performed on drug data with the verified: true tag
+  useEffect(() => {
+    authorityStatus();
+  }, [authorityStatus])
 
   // UI functions
   const showErrorClass = (element) => {
@@ -703,6 +748,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
           onChange={() => toggleBooleanState(setDrugData, drugData, 'pbsRx')}
           checked={drugData.pbsRx}
           className="checkbox pbsRx"
+          alert={drugAlerts.pbsRx}
         />  
 
         <FormField 

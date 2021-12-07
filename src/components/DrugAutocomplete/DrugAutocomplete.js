@@ -40,7 +40,7 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
   };
 
   // Used to set verification status of drug to false. Useful in scenarios where user is modifying auto-fill data and thus inputs can no longer be trusted
-  const removeVerification = () => {
+  const removeVerification = (field) => {
     setData((prevData) => ({
       ...prevData,
       verified: false,
