@@ -78,6 +78,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
     compounded: false,
     verified: false,    // Set to true when the user selects an autocomplete option. Set to false on any subsequent     modification of drug information, as this cannot be verified on the PBS. Only those verified drugs should be integrated with PBS backend
     indications: [],    // Indications for the use of drug under PBS restriction
+    authRequired: false,
     ...existingData.drugData,
   });
 
@@ -153,55 +154,20 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
   const authorityStatus = useCallback(() => {
     // PBS info-related effects here
     if (pbsInfo) {
-      console.log(pbsInfo['item-code']);
-      // Check for authority
-      switch (pbsInfo['restriction-flag']) {
-        case 'A':
-          console.log('Authority item');
-          setDrugAlerts((prevAlerts) => ({
-            ...prevAlerts,
-            pbsRx: {
-              message: 'This is an authority PBS item',
-              type: 'error',
-            }
-          }));
-          break;
-        
-        case 'R':
-          console.log('Restricted item');
-          setDrugAlerts((prevAlerts) => ({
-            ...prevAlerts,
-            pbsRx: {
-              message: 'This is a restricted PBS item',
-              type: 'error',
-            }
-          }));
-          break;
-
-        case 'U':
-          console.log('Unrestricted item');
-          setDrugAlerts((prevAlerts) => ({
-            ...prevAlerts,
-            pbsRx: {
-              message: 'This is an unrestricted PBS item',
-              type: 'error',
-            }
-          }));
-          break;
-      
-        default:
-          break;
+      // All authority required items will have flag 'A'. Set auth status accordingly
+      if (pbsInfo['restriction-flag'] === 'A') {
+        setDrugData((prevData) => ({
+          ...prevData,
+          authRequired: true,
+        }));
+        // TODO: add authority information such as streamline code or phone auth req'd
+      } else {
+        // Where authority is not required, let the user know, and consider disabling authority functions
+        setDrugData((prevData) => ({
+          ...prevData,
+          authRequired: false,
+        }));
       }
-    } else {
-      // Disable authority functions
-      console.log('Authority functions disabled');
-      setDrugAlerts((prevAlerts) => ({
-        ...prevAlerts,
-        pbsRx: {
-          message: 'This item is not on the PBS',
-          type: 'error',
-        }
-      }));
     }
 
     // Toggle any PBS-related functionality if there is a change in verified status
@@ -231,8 +197,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
               type: 'error',
             }
           }));
-          // TODO: Add indication
-          // console.log(pbsInfo.indications);
+          // Add the indication to the local drugData state to allow certain conditional renders
           setDrugData((prevData) => ({
             ...prevData,
             indications: pbsInfo.indications.description,
@@ -248,9 +213,13 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
               type: 'error',
             }
           }));
+          // Remove the indication to the local drugData state to allow certain conditional renders
+          setDrugData((prevData) => ({
+            ...prevData,
+            indications:'',
+          }));
           break;
-      
-        // TODO: authority handling, case 'A'
+
         default:
           break;
       }
@@ -275,13 +244,15 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
         }
       }));
     }
-  }, [pbsInfo, drugData.verified, drugData.indications]);
+  }, [pbsInfo, drugData.verified]);
 
   // Can utilise a useEffect such as this to set state or UI elements based on PBS data being fetched or lost
   // Note that these PBS-related functions MUST only be performed on drug data with the verified: true tag
   useEffect(() => {
+    console.log('Run PBS functions');
     restrictedStatus();
-  }, [restrictedStatus])
+    authorityStatus();
+  }, [restrictedStatus, authorityStatus])
 
   // UI functions
   const showErrorClass = (element) => {
