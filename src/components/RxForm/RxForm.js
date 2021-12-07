@@ -459,17 +459,36 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
             break;
 
           case name === 'quantity':
-            validateRequiredField(setDrugAlerts, event.target);
+            if (drugData.verified) {
+              // Verify using allowed PBS quantity
+            } else {
+              // Verify as standard
+              if (value.trim().length === 0) {
+                negativeInlineValidation(setDrugAlerts, 'This field cannot be left blank', event.target);
+              } else if (!(/^[1-9][0-9]*$/).test(value.trim())) {
+                // Checks for non-zero number with no theoretical limit
+                negativeInlineValidation(setDrugAlerts, 'Please enter a quantity of 1 or more (with no leading zeroes)', event.target);
+              } else {
+                positiveInlineValidation(setDrugAlerts, event.target);
+              }
+            }
+            
             break;
 
           // Can be zero, and for non-PBS prescriptions, there is technically no upper limits
           case name === 'repeats':
-            if (value.trim().length === 0) {
-              negativeInlineValidation(setDrugAlerts, 'This field cannot be left blank', event.target);
-            } else if (!(/^0$|^([1-9]{1,})$/).test(value.trim())) {
-              negativeInlineValidation(setDrugAlerts, 'Please enter a valid number of repeats (may be zero)', event.target);
+            if (drugData.verified) {
+              // Verify using allowed PBS quantity
             } else {
-              positiveInlineValidation(setDrugAlerts, event.target);
+              // Verify as standard
+              if (value.trim().length === 0) {
+                negativeInlineValidation(setDrugAlerts, 'This field cannot be left blank', event.target);
+              } else if (!(/^([1-9][0-9]*)|(0)$/).test(value.trim())) {
+                // Checks for non-zero number with no theoretical limit
+                negativeInlineValidation(setDrugAlerts, 'Please enter a valid number (no leading zeroes)', event.target);
+              } else {
+                positiveInlineValidation(setDrugAlerts, event.target);
+              }
             }
             break;
         
