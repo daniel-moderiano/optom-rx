@@ -4,7 +4,7 @@ import { doc, getDoc } from 'firebase/firestore';
 import { useCallback, useState } from 'react';
 
 export const usePBSFetch = () => {
-  const [pbsInfo, setPbsInfo] = useState({});
+  const [pbsInfo, setPbsInfo] = useState(null);
   const [pbsLoading, setPbsLoading] = useState(false);
   const [pbsError, setPbsError] = useState(false);
 
@@ -42,5 +42,9 @@ export const usePBSFetch = () => {
     
   }, []);
 
-  return [{ pbsInfo, pbsLoading, pbsError }, fetchDrug];
+  const clearPbsState = useCallback(() => {
+    setPbsInfo(null);
+  }, [])
+
+  return [{ pbsInfo, pbsLoading, pbsError }, fetchDrug, clearPbsState];
 }

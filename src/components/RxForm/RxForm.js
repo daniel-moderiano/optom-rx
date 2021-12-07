@@ -19,7 +19,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
   const { user } = useAuthContext();
   const { documents: providers } = useCollection('providers', ['uid', '==', user.uid]);
 
-  const [{ pbsInfo, pbsError, pbsLoading }, fetchDrug] = usePBSFetch();
+  const [{ pbsInfo, pbsError, pbsLoading }, fetchDrug, clearPbsState] = usePBSFetch();
 
   // State (at this stage) is only provided if generating a new Rx. Hence the numbers fetch should only be performed when state exists
   const { state } = useLocation();
@@ -229,6 +229,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
     // Toggle any PBS-related functionality if there is a change in verified status. 
     if (!drugData.verified) {
       clearPbsInfo();
+      clearPbsState();
       setDrugAlerts((prevAlerts) => ({
         ...prevAlerts,
         pbsRx: {
@@ -238,7 +239,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
       }));
     } 
 
-  }, [pbsInfo, drugData.verified, clearPbsInfo]);
+  }, [pbsInfo, drugData.verified, clearPbsInfo, clearPbsState]);
 
   // Identify whether a drug on the PBS is restricted or not, and display indications for use on restricted items
   const restrictedStatus = useCallback(() => {
@@ -310,6 +311,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
     // Toggle any PBS-related functionality if there is a change in verified status. 
     if (!drugData.verified) {
       clearPbsInfo();
+      clearPbsState();
       setDrugAlerts((prevAlerts) => ({
         ...prevAlerts,
         pbsRx: {
@@ -318,15 +320,44 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
         }
       }));
     } 
-  }, [pbsInfo, drugData.verified, clearPbsInfo]);
+  }, [pbsInfo, drugData.verified, clearPbsInfo, clearPbsState]);
+
+  const quantityRepeatStatus = useCallback(() => {
+
+    // PBS info-related effects here
+    if (pbsInfo) {
+      // All PBS drugs have restrictions on quantity and repeats; set to local state
+      setDrugData((prevData) => ({
+        ...prevData,
+        maxRepeats: pbsInfo['repeats'],
+        maxQuantity: pbsInfo['mq'],
+      }));
+    }
+
+    // Toggle any PBS-related functionality if there is a change in verified status. 
+    if (!drugData.verified) {
+      clearPbsInfo();
+      clearPbsState();
+      setDrugAlerts((prevAlerts) => ({
+        ...prevAlerts,
+        pbsRx: {
+          message: 'Unable to verify drug information on PBS, please select a drug from the dropdown list',
+          type: 'error',
+        }
+      }));
+    } 
+
+  }, [pbsInfo, drugData.verified, clearPbsInfo, clearPbsState]);
 
   // Can utilise a useEffect such as this to set state or UI elements based on PBS data being fetched or lost
   // Note that these PBS-related functions MUST only be performed on drug data with the verified: true tag
   useEffect(() => {
     console.log('Run PBS functions');
+    console.log(pbsInfo);
     restrictedStatus();
     authorityStatus();
-  }, [restrictedStatus, authorityStatus])
+    quantityRepeatStatus();
+  }, [restrictedStatus, authorityStatus, quantityRepeatStatus, pbsInfo])
 
   // UI functions
   const showErrorClass = (element) => {
