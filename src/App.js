@@ -48,7 +48,7 @@ const App = () => {
     miscData: {
       authRxNumber: '',   
       date: ausDate, 
-      authCode: '7979',
+      authCode: '',
       scriptID: '',
     },
   });

@@ -152,6 +152,17 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
 
   
   const authorityStatus = useCallback(() => {
+     // Toggle any PBS-related functionality if there is a change in verified status. Call this first to enable over-writing with any custom PBS messages below
+     if (!drugData.verified) {
+      setDrugAlerts((prevAlerts) => ({
+        ...prevAlerts,
+        pbsRx: {
+          message: 'Unable to verify drug information on PBS, please select a drug from the dropdown list',
+          type: 'error',
+        }
+      }));
+    } 
+
     // PBS info-related effects here
     if (pbsInfo) {
       // All authority required items will have flag 'A'. Set auth status accordingly
@@ -161,6 +172,28 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
           authRequired: true,
         }));
         // TODO: add authority information such as streamline code or phone auth req'd
+        if (pbsInfo['streamline-code'].length > 0) {
+          setMiscAlerts((prevAlerts) => ({
+            ...prevAlerts,
+            authCode: {
+              message: 'This medication is available using the streamline code above',
+              type: 'success',
+            }
+          }));
+          setMiscData((prevData) => ({
+            ...prevData,
+            authCode: pbsInfo['streamline-code'],
+          }));
+          // TODO: Success class added to streamline code
+        } else {
+          setMiscAlerts((prevAlerts) => ({
+            ...prevAlerts,
+            authCode: {
+              message: 'This medication requires an authority code, which can be obtained through PRODA',
+              type: 'warning',
+            }
+          }));
+        }
       } else {
         // Where authority is not required, let the user know, and consider disabling authority functions
         setDrugData((prevData) => ({
@@ -170,7 +203,11 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
       }
     }
 
-    // Toggle any PBS-related functionality if there is a change in verified status
+  }, [pbsInfo, drugData.verified]);
+
+  // Identify whether a drug on the PBS is restricted or not, and display indications for use on restricted items
+  const restrictedStatus = useCallback(() => {
+    // Toggle any PBS-related functionality if there is a change in verified status. Call this first to enable over-writing with any custom PBS messages below
     if (!drugData.verified) {
       setDrugAlerts((prevAlerts) => ({
         ...prevAlerts,
@@ -179,17 +216,13 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
           type: 'error',
         }
       }));
-    }
-  }, [pbsInfo, drugData.verified]);
+    } 
 
-  // Identify whether a drug on the PBS is restricted or not, and display indications for use on restricted items
-  const restrictedStatus = useCallback(() => {
     // PBS info-related effects here
     if (pbsInfo) {
       // Check for restricted status
       switch (pbsInfo['restriction-flag']) {
         case 'R':
-          console.log('Restricted item');
           setDrugAlerts((prevAlerts) => ({
             ...prevAlerts,
             pbsRx: {
@@ -205,7 +238,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
           break;
 
         case 'U':
-          console.log('Unrestricted item');
           setDrugAlerts((prevAlerts) => ({
             ...prevAlerts,
             pbsRx: {
@@ -219,6 +251,21 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
             indications:'',
           }));
           break;
+      
+        // All 'A' class items are also restricted with indications or Treatment criteria
+        case 'A':
+          setDrugAlerts((prevAlerts) => ({
+            ...prevAlerts,
+            pbsRx: {
+              message: 'This is an Authority Required item',
+              type: 'error',
+            }
+          }));
+          setDrugData((prevData) => ({
+            ...prevData,
+            indications: pbsInfo.indications.description,
+          }));
+          break;
 
         default:
           break;
@@ -229,17 +276,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
         ...prevAlerts,
         pbsRx: {
           message: 'This item is not on the PBS',
-          type: 'error',
-        }
-      }));
-    }
-
-    // Toggle any PBS-related functionality if there is a change in verified status
-    if (!drugData.verified) {
-      setDrugAlerts((prevAlerts) => ({
-        ...prevAlerts,
-        pbsRx: {
-          message: 'Unable to verify drug information on PBS, please select a drug from the dropdown list',
           type: 'error',
         }
       }));
