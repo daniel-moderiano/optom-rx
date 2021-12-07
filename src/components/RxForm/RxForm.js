@@ -206,7 +206,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
             ...prevAlerts,
             authCode: {
               message: 'This medication requires an authority code, which can be obtained through PRODA',
-              type: 'warning',
+              type: 'neutral',
             }
           }));
         }
@@ -370,11 +370,11 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
         ...prevAlerts,
         maxQuantity: {
           message: `Maximum allowed quantity under the PBS is ${drugData.maxQuantity}`,
-          type: 'warning',
+          type: 'neutral',
         },
         maxRepeats: {
           message: `Maximum allowed repeats under the PBS is ${drugData.maxRepeats}`,
-          type: 'warning',
+          type: 'neutral',
         }
       }));
     } else {

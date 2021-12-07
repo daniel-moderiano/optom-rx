@@ -122,6 +122,18 @@ const StyledFormField = styled.div`
       font-size: 0.8rem;
     }
 
+    .alert--success {
+      color: var(--success);
+      font-size: 0.8rem;
+      margin-left: 0.2rem;
+    }
+
+    .alert--neutral {
+      color: var(--neutral);
+      font-size: 0.8rem;
+      margin-left: 0.2rem;
+    }
+
     .alert-icon {
       margin-right: 0.2rem;
       flex-shrink: 0;
