@@ -34,6 +34,8 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
     repeats: {},
     dosage: {},
     pbsRx: {},
+    maxQuantity: {},
+    maxRepeats: {},
   });
 
   const [patientAlerts, setPatientAlerts] = useState({
@@ -366,11 +368,11 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
     if (drugData.maxQuantity.length > 0 && drugData.maxRepeats.length > 0) {
       setDrugAlerts((prevAlerts) => ({
         ...prevAlerts,
-        quantity: {
+        maxQuantity: {
           message: `Maximum allowed quantity under the PBS is ${drugData.maxQuantity}`,
           type: 'warning',
         },
-        repeats: {
+        maxRepeats: {
           message: `Maximum allowed repeats under the PBS is ${drugData.maxRepeats}`,
           type: 'warning',
         }
@@ -379,8 +381,8 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
       // If the above condition isn't met, it means the quantity and repeat values are gone, so no valid PBS drug exists. hence remove all alerts
       setDrugAlerts((prevAlerts) => ({
         ...prevAlerts,
-        quantity: {},
-        repeats: {},
+        maxQuantity: {},
+        maxRepeats: {},
       }));
     }
   }, [drugData.maxRepeats, drugData.maxQuantity])
@@ -900,6 +902,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
           value={drugData.quantity} 
           onChange={(event) => handleChange(setDrugData, event)} 
           alert={drugAlerts.quantity}
+          subAlert={drugAlerts.maxQuantity}
           className="quantity-field form-field"
         />
 
@@ -910,6 +913,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
           value={drugData.repeats} 
           onChange={(event) => handleChange(setDrugData, event)} 
           alert={drugAlerts.repeats}
+          subAlert={drugAlerts.maxRepeats}
           className="repeats-field form-field"
         /> 
 
