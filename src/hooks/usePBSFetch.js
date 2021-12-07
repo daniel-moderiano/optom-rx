@@ -9,11 +9,12 @@ export const usePBSFetch = () => {
   const [pbsError, setPbsError] = useState(false);
 
   // Fetch the drug data from firestore using item code as document ID
-  const fetchDrug = useCallback(async (itemCode) => {
+  const fetchDrug = useCallback(async (itemCode, verified) => {
     setPbsLoading(true);
     setPbsError(false);
     // Item code will not exist for non-PBS medication, no state update
     if (itemCode === "") {
+      setPbsInfo(null);
       return;
     }
 
@@ -30,6 +31,7 @@ export const usePBSFetch = () => {
       } else {
         // doc.data() will be undefined in this case, no state update
         console.log('No such document, check for PBS updates');
+        setPbsInfo(null);
       }
     } catch (error) {
       setPbsError(true);

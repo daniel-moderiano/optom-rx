@@ -39,6 +39,14 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
     })
   };
 
+  // Used to set verification status of drug to false. Useful in scenarios where user is modifying auto-fill data and thus inputs can no longer be trusted
+  const removeVerification = () => {
+    setData((prevData) => ({
+      ...prevData,
+      verified: false,
+    }));
+  }
+
   // TODO: refactor this bullshit
   // Capture the selection made in the items list via event propagation
   const clickSuggestion = useCallback((event) => {
@@ -53,6 +61,7 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
         activeIngredient: dataset.activeIngredient,
         brandName: dataset.brandName,
         itemCode: dataset.code,
+        verified: true,
       }));
       removeList();
       setExpand(true);
@@ -64,6 +73,7 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
         activeIngredient: parent.dataset.activeIngredient,
         brandName: parent.dataset.brandName,
         itemCode: parent.dataset.code,
+        verified: true,
       }));
       removeList();
       setExpand(true);
@@ -75,6 +85,7 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
         activeIngredient: parent.parentNode.dataset.activeIngredient,
         brandName: parent.parentNode.dataset.brandName,
         itemCode: parent.parentNode.dataset.code,
+        verified: true,
       }));
       removeList();
       setExpand(true);
@@ -301,6 +312,7 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
           placeholder="Enter active ingredient or brand name"
           value={data.activeIngredient} 
           onChange={(event) => {
+            removeVerification();
             handleChange(event);
             handleSearch(event);
           }}
@@ -315,7 +327,10 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
           name="brandName"
           label="Brand name" 
           value={data.brandName} 
-          onChange={handleChange} 
+          onChange={(event) => {
+            removeVerification();
+            handleChange(event);
+          }}
           alert={alerts.brandName}
         />
 

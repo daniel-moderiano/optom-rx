@@ -20,10 +20,33 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
 
   const [{ pbsInfo, pbsError, pbsLoading }, fetchDrug] = usePBSFetch();
 
-  // Can utilise a useEffect such as this to set state or UI elements based on PBS data loading or being successfully fetched
+  // Can utilise a useEffect such as this to set state or UI elements based on PBS data being fetched or lost
   useEffect(() => {
-    console.log(pbsInfo, pbsError, pbsLoading);
-  }, [pbsInfo, pbsLoading, pbsError])
+    // PBS info-related effects here
+    if (pbsInfo) {
+      console.log(pbsInfo['item-code']);
+      // Check for authority
+      switch (pbsInfo['restriction-flag']) {
+        case 'A':
+          console.log('Authority item');
+          break;
+        
+        case 'R':
+          console.log('Restricted item');
+          break;
+
+        case 'U':
+          console.log('Unrestricted item');
+          break;
+      
+        default:
+          break;
+      }
+    } else {
+      // Disable authority functions
+      console.log('Authority functions disabled');
+    }
+  }, [pbsInfo])
 
   // State (at this stage) is only provided if generating a new Rx. Hence the numbers fetch should only be performed when state exists
   const { state } = useLocation();
@@ -79,6 +102,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
     includeBrand: false,    // Indicates whether brand name should be included on the Rx
     pbsRx: true,    // Indicates whether this is a PBS prescription 
     compounded: false,
+    verified: false,    // Set to true when the user selects an autocomplete option. Set to false on any subsequent     modification of drug information, as this cannot be verified on the PBS. Only those verified drugs should be integrated with PBS backend
     ...existingData.drugData,
   });
 
