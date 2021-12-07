@@ -123,15 +123,15 @@ const StyledFormField = styled.div`
     }
 
     .alert--success {
-      color: var(--success);
+      color: var(--success-text);
       font-size: 0.8rem;
-      margin-left: 0.2rem;
+      margin-bottom: 0.05rem;
     }
 
     .alert--neutral {
       color: var(--neutral);
       font-size: 0.8rem;
-      margin-left: 0.2rem;
+      margin-bottom: 0.1rem;
     }
 
     .alert-icon {
