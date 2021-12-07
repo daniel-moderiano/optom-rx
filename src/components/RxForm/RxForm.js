@@ -359,6 +359,32 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
     quantityRepeatStatus();
   }, [restrictedStatus, authorityStatus, quantityRepeatStatus, pbsInfo])
 
+  // Used to manage alerts on max quantity and repeats under the PBS
+  useEffect(() => {
+    console.log('Called alert and quantity func');
+    // Ensures the call happens when a max quantity and repeat are added
+    if (drugData.maxQuantity.length > 0 && drugData.maxRepeats.length > 0) {
+      setDrugAlerts((prevAlerts) => ({
+        ...prevAlerts,
+        quantity: {
+          message: `Maximum allowed quantity under the PBS is ${drugData.maxQuantity}`,
+          type: 'warning',
+        },
+        repeats: {
+          message: `Maximum allowed repeats under the PBS is ${drugData.maxRepeats}`,
+          type: 'warning',
+        }
+      }));
+    } else {
+      // If the above condition isn't met, it means the quantity and repeat values are gone, so no valid PBS drug exists. hence remove all alerts
+      setDrugAlerts((prevAlerts) => ({
+        ...prevAlerts,
+        quantity: {},
+        repeats: {},
+      }));
+    }
+  }, [drugData.maxRepeats, drugData.maxQuantity])
+
   // UI functions
   const showErrorClass = (element) => {
     element.classList.add('error');
@@ -528,37 +554,27 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
             break;
 
           case name === 'quantity':
-            if (drugData.verified) {
-              // Verify using allowed PBS quantity
+            // Verify as standard
+            if (value.trim().length === 0) {
+              negativeInlineValidation(setDrugAlerts, 'This field cannot be left blank', event.target);
+            } else if (!(/^[1-9][0-9]*$/).test(value.trim())) {
+              // Checks for non-zero number with no theoretical limit
+              negativeInlineValidation(setDrugAlerts, 'Please enter a quantity of 1 or more (with no leading zeroes)', event.target);
             } else {
-              // Verify as standard
-              if (value.trim().length === 0) {
-                negativeInlineValidation(setDrugAlerts, 'This field cannot be left blank', event.target);
-              } else if (!(/^[1-9][0-9]*$/).test(value.trim())) {
-                // Checks for non-zero number with no theoretical limit
-                negativeInlineValidation(setDrugAlerts, 'Please enter a quantity of 1 or more (with no leading zeroes)', event.target);
-              } else {
-                positiveInlineValidation(setDrugAlerts, event.target);
-              }
-            }
-            
+              positiveInlineValidation(setDrugAlerts, event.target);
+            }  
             break;
 
           // Can be zero, and for non-PBS prescriptions, there is technically no upper limits
           case name === 'repeats':
-            if (drugData.verified) {
-              // Verify using allowed PBS quantity
-
+            // Verify as standard
+            if (value.trim().length === 0) {
+              negativeInlineValidation(setDrugAlerts, 'This field cannot be left blank', event.target);
+            } else if (!(/^([1-9][0-9]*)|(0)$/).test(value.trim())) {
+              // Checks for non-zero number with no theoretical limit
+              negativeInlineValidation(setDrugAlerts, 'Please enter a valid number (no leading zeroes)', event.target);
             } else {
-              // Verify as standard
-              if (value.trim().length === 0) {
-                negativeInlineValidation(setDrugAlerts, 'This field cannot be left blank', event.target);
-              } else if (!(/^([1-9][0-9]*)|(0)$/).test(value.trim())) {
-                // Checks for non-zero number with no theoretical limit
-                negativeInlineValidation(setDrugAlerts, 'Please enter a valid number (no leading zeroes)', event.target);
-              } else {
-                positiveInlineValidation(setDrugAlerts, event.target);
-              }
+              positiveInlineValidation(setDrugAlerts, event.target);
             }
             break;
         
@@ -709,6 +725,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
     requiredFields.drug.forEach((field) => {
       const input = drugForm.querySelector(`[name="${field}"]`);
       if (input.value.trim().length === 0) {
+        
         valid = false;
         negativeInlineValidation(setDrugAlerts, 'This field cannot be left blank', input);
       }
