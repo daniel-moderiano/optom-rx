@@ -1,29 +1,44 @@
 // This file is intended to code the logic that pushes the PBS data to firestore
 import { db } from '../firebase/config';
 import { doc, getDoc } from 'firebase/firestore';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 
 export const usePBSFetch = () => {
+  const [pbsInfo, setPbsInfo] = useState({});
+  const [pbsLoading, setPbsLoading] = useState(false);
+  const [pbsError, setPbsError] = useState(false);
 
   // Fetch the drug data from firestore using item code as document ID
   const fetchDrug = useCallback(async (itemCode) => {
-    // Item code will not exist for non-PBS medication
+    setPbsLoading(true);
+    setPbsError(false);
+    // Item code will not exist for non-PBS medication, no state update
     if (itemCode === "") {
-      console.log('Drug is not listed on PBS');
       return;
     }
 
+    // Initialise reference to doc using provided itemCode
     const docRef = doc(db, 'pbs', itemCode);
-    const docSnap = await getDoc(docRef);
 
-    // Check if the drug is on the PBS. All non-PBS drugs will not have an item code on PBS
-    if (docSnap.exists()) {
-      console.log('Document data:', docSnap.data());
-    } else {
-      // doc.data() will be undefined in this case
-      console.log('No such document, check for PBS updates');
+    // Use try/catch for error handling
+    try {
+      const docSnap = await getDoc(docRef);
+      // Check if the drug is on the PBS. All non-PBS drugs will not have an item code on PBS
+      if (docSnap.exists()) {
+        // Pass all info into state object
+        setPbsInfo({ ...docSnap.data() })
+      } else {
+        // doc.data() will be undefined in this case, no state update
+        console.log('No such document, check for PBS updates');
+      }
+    } catch (error) {
+      setPbsError(true);
+      console.log(error);
     }
+
+    setPbsLoading(false);
+    
   }, []);
 
-  return fetchDrug;
+  return [{ pbsInfo, pbsLoading, pbsError }, fetchDrug];
 }

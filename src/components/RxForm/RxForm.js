@@ -18,7 +18,12 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
   const { user } = useAuthContext();
   const { documents: providers } = useCollection('providers', ['uid', '==', user.uid]);
 
-  const fetchDrug = usePBSFetch();
+  const [{ pbsInfo, pbsError, pbsLoading }, fetchDrug] = usePBSFetch();
+
+  // Can utilise a useEffect such as this to set state or UI elements based on PBS data loading or being successfully fetched
+  useEffect(() => {
+    console.log(pbsInfo, pbsError, pbsLoading);
+  }, [pbsInfo, pbsLoading, pbsError])
 
   // State (at this stage) is only provided if generating a new Rx. Hence the numbers fetch should only be performed when state exists
   const { state } = useLocation();
