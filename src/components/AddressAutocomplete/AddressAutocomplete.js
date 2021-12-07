@@ -125,7 +125,6 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider, alerts, se
     }
 
     if (googleLoaded) {
-      console.log('Adding autocomplete');
       // Add new autocomplete capability/session to input
       autocomplete = new google.maps.places.Autocomplete(input, {
         // Restrict search to Australian addresses only

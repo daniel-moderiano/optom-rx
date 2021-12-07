@@ -51,6 +51,7 @@ const App = () => {
       authCode: '',
       scriptID: '',
     },
+    pbsData: null,
   });
 
   let navigate = useNavigate();
@@ -94,7 +95,7 @@ const App = () => {
     
   }, [googleLoaded])
 
-  const handleSubmit = (drugData, patientData, providerData, miscData) => {
+  const handleSubmit = (drugData, patientData, providerData, miscData, pbsData) => {
     setData((prevData) => ({
       ...prevData,
       drugData: {
@@ -109,6 +110,7 @@ const App = () => {
       miscData: {
         ...miscData
       },
+      pbsData: pbsData,
     }));
 
     // New React Router v6 syntax using navigate. State is passed in a similar way and accessed with useLocation

@@ -460,7 +460,7 @@ describe('Inline data validation', () => {
     const input = screen.getByLabelText(/repeats/i);
     fireEvent.change(input, { target: { value: '03' } });
     fireEvent.focusOut(input);
-    const alert = screen.getByText(/Please enter a valid number of repeats \(may be zero\)/i);
+    const alert = screen.getByText(/Please enter a valid number \(no leading zeroes\)/i);
     expect(alert).toBeInTheDocument();
   });
 

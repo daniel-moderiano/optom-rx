@@ -10,7 +10,6 @@ import { useCollection } from "../../hooks/useCollection";
 import { useLocation } from "react-router";
 import { useNumbers } from '../../hooks/useNumbers';
 import { usePBSFetch } from "../../hooks/usePBSFetch";
-import { nanoid } from 'nanoid';
 
 // ! Multiple optometrist items are not permitted to be prescribed on the same form; each must use an individual form
 
@@ -19,9 +18,12 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
   const { user } = useAuthContext();
   const { documents: providers } = useCollection('providers', ['uid', '==', user.uid]);
 
-  const [{ pbsInfo, pbsError, pbsLoading }, fetchDrug, clearPbsState] = usePBSFetch();
+  const [localPbs, setLocalPbs] = useState(null);
+
+  const [{ pbsInfo, pbsError, pbsLoading }, fetchDrug, clearPbsState] = usePBSFetch(existingData.pbsData);
 
   const [indication, setIndication] = useState('');
+  
 
   // State (at this stage) is only provided if generating a new Rx. Hence the numbers fetch should only be performed when state exists
   const { state } = useLocation();
@@ -158,6 +160,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
 
   // Remove all PBS related information from local state
   const clearPbsInfo = useCallback(() => {
+    setLocalPbs(null);
     setDrugData((prevData) => ({
       ...prevData,
       authRequired: false,
@@ -194,7 +197,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
       let preAnd = specificCriteria.split('AND')[0];
       preAnd = preAnd.replace(':', '').replace('*', '').trim();
       preAnd = preAnd.slice(0, preAnd.length - 1);
-      console.log(preAnd);
 
       if (specificCriteria.split('AND').length > 1) {
         const postAnd = specificCriteria.split('AND')[1];
@@ -241,7 +243,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
       let preAnd = specificCriteria.split('AND')[0];
       preAnd = preAnd.replace(':', '').replace('*', '').trim();
       preAnd = preAnd.slice(0, preAnd.length - 1);
-      console.log(preAnd);
 
       if (specificCriteria.split('AND').length > 1) {
         const postAnd = specificCriteria.split('AND')[1];
@@ -285,9 +286,8 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
         <div className="indication__main">${indicationStr}</div>
       </div>`;
       setIndication(html);
-      
+
     }
-    
   }
   
   const authorityStatus = useCallback(() => {
@@ -353,7 +353,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
     } 
 
   }, [pbsInfo, drugData.verified, clearPbsInfo, clearPbsState]);
-
 
   // Identify whether a drug on the PBS is restricted or not, and display indications for use on restricted items
   const restrictedStatus = useCallback(() => {
@@ -472,6 +471,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
     restrictedStatus();
     authorityStatus();
     quantityRepeatStatus();
+    setLocalPbs(pbsInfo);
   }, [restrictedStatus, authorityStatus, quantityRepeatStatus, pbsInfo])
 
   // Used to manage alerts on max quantity and repeats under the PBS
@@ -888,7 +888,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
       onSubmit={(e) => {
         e.preventDefault(); 
         if (checkFormValidation()) {          
-          handleSubmit(drugData, patientData, providerData, miscData)
+          handleSubmit(drugData, patientData, providerData, miscData, pbsInfo)
         }
       }}
       autoComplete="off">

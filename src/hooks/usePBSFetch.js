@@ -3,8 +3,8 @@ import { db } from '../firebase/config';
 import { doc, getDoc } from 'firebase/firestore';
 import { useCallback, useState } from 'react';
 
-export const usePBSFetch = () => {
-  const [pbsInfo, setPbsInfo] = useState(null);
+export const usePBSFetch = (localPbsInfo) => {
+  const [pbsInfo, setPbsInfo] = useState(localPbsInfo);
   const [pbsLoading, setPbsLoading] = useState(false);
   const [pbsError, setPbsError] = useState(false);
 
