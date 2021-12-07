@@ -1,4 +1,4 @@
-const data = {
+const PBSData = {
   '5501M': {
     'program-code': 'GE',
     'atc-level-code': '',
@@ -2874,6 +2874,8 @@ const dataFields = [
   'mp-pt',
   'tpuu-or-mpp-pt'
 ];
+
+export default PBSData;
 
 // const reducedData = [];
 

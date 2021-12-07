@@ -22,7 +22,8 @@ const App = () => {
 
   const ausDate = new Date().toLocaleString("en-CA", { timeZone: "Australia/Adelaide" }).substring(0, 10);
 
-  const { newDrug } = usePBSUpload();
+  // ! Enable to update all PBS backend data (once per month)
+  // usePBSUpload();
   
   const [data, setData] = useState({
     drugData: {
