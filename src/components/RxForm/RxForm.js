@@ -21,6 +21,8 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
 
   const [{ pbsInfo, pbsError, pbsLoading }, fetchDrug, clearPbsState] = usePBSFetch();
 
+  const [indication, setIndication] = useState('');
+
   // State (at this stage) is only provided if generating a new Rx. Hence the numbers fetch should only be performed when state exists
   const { state } = useLocation();
   
@@ -175,10 +177,120 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
     }));
 
   }, []);
+
+  const formatIndications = (indicationStr) => {
+    const clinical = indicationStr.includes('Clinical criteria');
+    const treatment = indicationStr.includes('Treatment criteria');
+
+
+    // TODO: consider link to PBS site for ciclosporin
+    
+    if (clinical) {
+      // Extract the main general indication (prior to any specific criteria). Will work even where there is no additional text
+      const mainIndication = indicationStr.split('Clinical criteria')[0].trim();
+      const splitIndication = indicationStr.split('Clinical criteria');
+      // Add 'Clinical criteria' to final html and format accordingly
+      const specificCriteria = splitIndication[1];
+      let preAnd = specificCriteria.split('AND')[0];
+      preAnd = preAnd.replace(':', '').replace('*', '').trim();
+      preAnd = preAnd.slice(0, preAnd.length - 1);
+      console.log(preAnd);
+
+      if (specificCriteria.split('AND').length > 1) {
+        const postAnd = specificCriteria.split('AND')[1];
+        const dotPoints = postAnd.split('* ').filter((point) => point !== " ");      
+  
+        const mapPoints = () => {
+          const ul = document.createElement('ul');
+          dotPoints.forEach((point) => {
+            const li = document.createElement('li');
+            li.classList.add('indication__list-item');
+            li.textContent = point;
+            ul.appendChild(li);
+          });
+          return ul.outerHTML;
+        }
+        const html = `<div class="indication">
+          <div class="indication__main">${mainIndication}</div>
+          <div class="indication__clinical">Clinical criteria:</div>
+            <ul class="indication__list">
+              <li class="indication__list-item">${preAnd}</li>
+            </ul>
+          <div class="indication__and">AND</div>
+          ${mapPoints()}
+        </div>`;
+        setIndication(html);
+      } else {
+        const html = `<div class="indication">
+          <div class="indication__main">${mainIndication}</div>
+          <div class="indication__clinical">Clinical criteria:</div>
+            <ul class="indication__list">
+              <li class="indication__list-item">${preAnd}</li>
+            </ul>
+        </div>`;
+        setIndication(html);
+      }
   
 
-  const authorityStatus = useCallback(() => {
+    } else if (treatment) {
+      // Extract the main general indication (prior to any specific criteria). Will work even where there is no additional text
+      const mainIndication = indicationStr.split('Treatment criteria')[0].trim();
+      const splitIndication = indicationStr.split('Treatment criteria');
+      // Add 'Treatment criteria' to final html and format accordingly
+      const specificCriteria = splitIndication[1];
+      let preAnd = specificCriteria.split('AND')[0];
+      preAnd = preAnd.replace(':', '').replace('*', '').trim();
+      preAnd = preAnd.slice(0, preAnd.length - 1);
+      console.log(preAnd);
 
+      if (specificCriteria.split('AND').length > 1) {
+        const postAnd = specificCriteria.split('AND')[1];
+        const dotPoints = postAnd.split('* ').filter((point) => point !== " ");      
+  
+        const mapPoints = () => {
+          const ul = document.createElement('ul');
+          dotPoints.forEach((point) => {
+            const li = document.createElement('li');
+            li.classList.add('indication__list-item');
+            li.textContent = point;
+            ul.appendChild(li);
+          });
+          return ul.outerHTML;
+        }
+        const html = `<div class="indication">
+          <div class="indication__main">${mainIndication}</div>
+          <div class="indication__clinical">Treatment criteria:</div>
+            <ul class="indication__list">
+              <li class="indication__list-item">${preAnd}</li>
+            </ul>
+          <div class="indication__and">AND</div>
+          ${mapPoints()}
+        </div>`;
+        setIndication(html);
+      } else {
+        const html = `<div class="indication">
+          <div class="indication__main">${mainIndication}</div>
+          <div class="indication__clinical">Treatment criteria:</div>
+            <ul class="indication__list">
+              <li class="indication__list-item">${preAnd}</li>
+            </ul>
+        </div>`;
+        setIndication(html);
+      }
+  
+    } else {
+      // Must be just a single indication
+      
+      const html = `<div className="indication">
+        <div className="indication__main">${indicationStr}</div>
+      </div>`;
+      setIndication(html);
+      
+    }
+    
+  }
+  
+  const authorityStatus = useCallback(() => {
     // PBS info-related effects here
     if (pbsInfo) {
       // All authority required items will have flag 'A'. Set auth status accordingly
@@ -187,7 +299,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
           ...prevData,
           authRequired: true,
         }));
-        // TODO: add authority information such as streamline code or phone auth req'd
         if (pbsInfo['streamline-code'].length > 0) {
           setMiscAlerts((prevAlerts) => ({
             ...prevAlerts,
@@ -243,6 +354,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
 
   }, [pbsInfo, drugData.verified, clearPbsInfo, clearPbsState]);
 
+
   // Identify whether a drug on the PBS is restricted or not, and display indications for use on restricted items
   const restrictedStatus = useCallback(() => {
   
@@ -263,6 +375,8 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
             ...prevData,
             indications: pbsInfo.indications.description,
           }));
+          formatIndications(pbsInfo.indications.description);
+          console.log(formatIndications(pbsInfo.indications.description));
           break;
 
         case 'U':
@@ -293,6 +407,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
             ...prevData,
             indications: pbsInfo.indications.description,
           }));
+          formatIndications(pbsInfo.indications.description);
           break;
 
         default:
@@ -354,8 +469,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
   // Can utilise a useEffect such as this to set state or UI elements based on PBS data being fetched or lost
   // Note that these PBS-related functions MUST only be performed on drug data with the verified: true tag
   useEffect(() => {
-    console.log('Run PBS functions');
-    console.log(pbsInfo);
     restrictedStatus();
     authorityStatus();
     quantityRepeatStatus();
@@ -363,7 +476,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
 
   // Used to manage alerts on max quantity and repeats under the PBS
   useEffect(() => {
-    console.log('Called alert and quantity func');
     // Ensures the call happens when a max quantity and repeat are added
     if (drugData.maxQuantity.length > 0 && drugData.maxRepeats.length > 0) {
       setDrugAlerts((prevAlerts) => ({
@@ -385,7 +497,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
         maxRepeats: {},
       }));
     }
-  }, [drugData.maxRepeats, drugData.maxQuantity])
+  }, [drugData.maxRepeats, drugData.maxQuantity]);
 
   // UI functions
   const showErrorClass = (element) => {
@@ -936,11 +1048,12 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
         {(drugData.verified && drugData.indications.length > 0) && 
           <div className="indications-container">
             <h4 className="indications__title">Indications for use:</h4>
-            <div className="pbsIndication">{drugData.indications}</div>
+            <div className="pbsIndication" dangerouslySetInnerHTML={{ __html: indication }}></div>
+            
           </div>
         }
         
-
+        
         <FormField 
           fieldType="checkbox" 
           name="pbsRx"

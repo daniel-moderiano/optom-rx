@@ -2867,7 +2867,6 @@ const PBSData = {
   }
 }
 
-
 const dataFields = [
   'item-code',
   'brand-name',
@@ -2890,3 +2889,11 @@ export default PBSData;
 // const dataJSON = JSON.stringify(reducedData);
 
 // console.log(dataJSON);
+
+Object.keys(PBSData).forEach((code) => {
+  
+  const desc = PBSData[code]['indications']['description'];
+  if (desc) {
+    console.log(desc);
+  }
+})
