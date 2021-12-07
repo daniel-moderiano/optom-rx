@@ -12,31 +12,25 @@ import Home from './components/Home/Home';
 import Providers from "./components/Providers/Providers";
 import './App.css';
 import GuestRxForm from "./components/GuestRxForm/GuestRxForm";
-import { usePBSUpload } from './hooks/usePBSUpload';
-
-// ! React Router v6 has been released and makes breaking changes. Look at updating this.
 
 const App = () => {
   // Can user the user state to conditionally render or redirect routes (logged in vs out for example)
   const { user, authIsReady } = useAuthContext();
 
   const ausDate = new Date().toLocaleString("en-CA", { timeZone: "Australia/Adelaide" }).substring(0, 10);
-
-  // ! Enable to update all PBS backend data (once per month)
-  // usePBSUpload();
   
   const [data, setData] = useState({
     drugData: {
-      activeIngredient: "latanoprost 0.005% eye drops, 5 mL",
-      "brandName":"Xalatan",
-      "quantity":"1",
-      "repeats":"4",
-      "dosage":"Once nightly both eyes",
-      "itemCode":"5552F",
+      // activeIngredient: "latanoprost 0.005% eye drops, 5 mL",
+      // "brandName":"Xalatan",
+      // "quantity":"1",
+      // "repeats":"4",
+      // "dosage":"Once nightly both eyes",
+      // "itemCode":"5552F",
       substitutePermitted: true,    // Indicates if brand substitution is permitted
       brandOnly: false,    // Indicates whether the Rx should list brand name only (only permitted for certain drugs)
       includeBrand: true,    // Indicates whether brand name should be included on the Rx
-      pbsRx: true,    // Indicates whether this is a PBS prescription 
+      pbsRx: false,    // Indicates whether this is a PBS prescription 
       compounded: false,
       authRequired: false,  // Indicates whether authority is required for this medication
     },

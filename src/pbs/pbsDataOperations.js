@@ -709,6 +709,98 @@ const JSONdata = [
     ],
     "mp-pt": "phenylephrine",
     "tpuu-or-mpp-pt": "phenylephrine hydrochloride 10% eye drops, 20 x 0.5 mL unit doses"
+  },
+  {
+    "item-code": "",
+    "brand-name": [
+        "Optrex Actimist"
+    ],
+    "mp-pt": "soy lecithin + tocopherol + vitamin A",
+    "tpuu-or-mpp-pt": "soy lecithin 1% + tocopherol 0.002% + vitamin A palmitate 0.025% spray, 100 actuations"
+  },
+  {
+    "item-code": "",
+    "brand-name": [
+      "Cromo-Fresh"
+    ],
+    "mp-pt": "sodium cromoglycate",
+    "tpuu-or-mpp-pt": "sodium cromoglycate 2% eye drops, 10 mL"
+  },
+  {
+    "item-code": "",
+    "brand-name": [
+      "Zyrtec",
+      "Livostin"
+    ],
+    "mp-pt": "levocabastine",
+    "tpuu-or-mpp-pt": "levocabastine hydrochloride 0.05% eye drops, 4 mL"
+  },
+  {
+    "item-code": "",
+    "brand-name": [
+      "Lomide"
+    ],
+    "mp-pt": "lodoxamide",
+    "tpuu-or-mpp-pt": "lodoxamide trometamol 0.1% eye drops, 10 mL"
+  },
+  {
+    "item-code": "",
+    "brand-name": [
+      "Albalon-A"
+    ],
+    "mp-pt": "naphazoline + antazoline",
+    "tpuu-or-mpp-pt": "naphazoline 0.05% + antazoline phosphate 0.5% mg/mL eye drops, 15 mL"
+  },
+  {
+    "item-code": "",
+    "brand-name": [
+      "Brolene"
+    ],
+    "mp-pt": "propamidine",
+    "tpuu-or-mpp-pt": "propamidine isethionate 0.1% eye drops, 10 mL"
+  },
+  {
+    "item-code": "",
+    "brand-name": [
+      "Eyezep"
+    ],
+    "mp-pt": "azelastine",
+    "tpuu-or-mpp-pt": "azelastine hydrochloride 0.0457% mg/mL eye drops, 6 mL"
+  },
+  {
+    "item-code": "",
+    "brand-name": [
+      "Visine Allergy",
+      "Naphcon-A"
+    ],
+    "mp-pt": "naphazoline + pheniramine",
+    "tpuu-or-mpp-pt": "naphazoline hydrochloride 0.025% + pheniramine maleate 0.3% eye drops, 15 mL"
+  },
+  {
+    "item-code": "",
+    "brand-name": [
+      "Naphcon-Forte",
+      "Albalon",
+      "Systane Red Eyes"
+    ],
+    "mp-pt": "naphazoline",
+    "tpuu-or-mpp-pt": "naphazoline hydrochloride 0.1% eye drops, 15 mL"
+  },
+  {
+    "item-code": "",
+    "brand-name": [
+      "Optrex Eye Drops"
+    ],
+    "mp-pt": "naphazoline",
+    "tpuu-or-mpp-pt": "naphazoline hydrochloride 0.01% eye drops, 10 mL"
+  },
+  {
+    "item-code": "",
+    "brand-name": [
+      "Murine Clear eyes"
+    ],
+    "mp-pt": "naphazoline",
+    "tpuu-or-mpp-pt": "naphazoline hydrochloride 0.012% eye drops, 10 mL"
   }
 ]
 
@@ -1640,8 +1732,128 @@ const dataSpread = [
       ],
       "mp-pt": "phenylephrine",
       "tpuu-or-mpp-pt": "phenylephrine hydrochloride 10% eye drops, 20 x 0.5 mL unit doses"
+  },
+  {
+      "item-code": "",
+      "brand-name": [
+          "Optrex Actimist"
+      ],
+      "mp-pt": "soy lecithin + tocopherol + vitamin A",
+      "tpuu-or-mpp-pt": "soy lecithin 1% + tocopherol 0.002% + vitamin A palmitate 0.025% spray, 100 actuations"
+  },
+  {
+      "item-code": "",
+      "brand-name": [
+          "Cromo-Fresh"
+      ],
+      "mp-pt": "sodium cromoglycate",
+      "tpuu-or-mpp-pt": "sodium cromoglycate 2% eye drops, 10 mL"
+  },
+  {
+      "item-code": "",
+      "brand-name": [
+          "Zyrtec"
+      ],
+      "mp-pt": "levocabastine",
+      "tpuu-or-mpp-pt": "levocabastine hydrochloride 0.05% eye drops, 4 mL"
+  },
+  {
+      "item-code": "",
+      "brand-name": [
+          "Livostin"
+      ],
+      "mp-pt": "levocabastine",
+      "tpuu-or-mpp-pt": "levocabastine hydrochloride 0.05% eye drops, 4 mL"
+  },
+  {
+      "item-code": "",
+      "brand-name": [
+          "Lomide"
+      ],
+      "mp-pt": "lodoxamide",
+      "tpuu-or-mpp-pt": "lodoxamide trometamol 0.1% eye drops, 10 mL"
+  },
+  {
+      "item-code": "",
+      "brand-name": [
+          "Albalon-A"
+      ],
+      "mp-pt": "naphazoline + antazoline",
+      "tpuu-or-mpp-pt": "naphazoline 0.05% + antazoline phosphate 0.5% mg/mL eye drops, 15 mL"
+  },
+  {
+      "item-code": "",
+      "brand-name": [
+          "Brolene"
+      ],
+      "mp-pt": "propamidine",
+      "tpuu-or-mpp-pt": "propamidine isethionate 0.1% eye drops, 10 mL"
+  },
+  {
+      "item-code": "",
+      "brand-name": [
+          "Eyezep"
+      ],
+      "mp-pt": "azelastine",
+      "tpuu-or-mpp-pt": "azelastine hydrochloride 0.0457% mg/mL eye drops, 6 mL"
+  },
+  {
+      "item-code": "",
+      "brand-name": [
+          "Visine Allergy"
+      ],
+      "mp-pt": "naphazoline + pheniramine",
+      "tpuu-or-mpp-pt": "naphazoline hydrochloride 0.025% + pheniramine maleate 0.3% eye drops, 15 mL"
+  },
+  {
+      "item-code": "",
+      "brand-name": [
+          "Naphcon-A"
+      ],
+      "mp-pt": "naphazoline + pheniramine",
+      "tpuu-or-mpp-pt": "naphazoline hydrochloride 0.025% + pheniramine maleate 0.3% eye drops, 15 mL"
+  },
+  {
+      "item-code": "",
+      "brand-name": [
+          "Naphcon-Forte"
+      ],
+      "mp-pt": "naphazoline",
+      "tpuu-or-mpp-pt": "naphazoline hydrochloride 0.1% eye drops, 15 mL"
+  },
+  {
+      "item-code": "",
+      "brand-name": [
+          "Albalon"
+      ],
+      "mp-pt": "naphazoline",
+      "tpuu-or-mpp-pt": "naphazoline hydrochloride 0.1% eye drops, 15 mL"
+  },
+  {
+      "item-code": "",
+      "brand-name": [
+          "Systane Red Eyes"
+      ],
+      "mp-pt": "naphazoline",
+      "tpuu-or-mpp-pt": "naphazoline hydrochloride 0.1% eye drops, 15 mL"
+  },
+  {
+      "item-code": "",
+      "brand-name": [
+          "Optrex Eye Drops"
+      ],
+      "mp-pt": "naphazoline",
+      "tpuu-or-mpp-pt": "naphazoline hydrochloride 0.01% eye drops, 10 mL"
+  },
+  {
+      "item-code": "",
+      "brand-name": [
+          "Murine Clear eyes"
+      ],
+      "mp-pt": "naphazoline",
+      "tpuu-or-mpp-pt": "naphazoline hydrochloride 0.012% eye drops, 10 mL"
   }
-];
+]
 
 // This operation creates individual drug object entries in the JSON data for every unique brand name, as opposed to aggregating the brand names under one umbrella for a given active ingredient
 JSONdata.forEach((drug) => {

@@ -82,7 +82,7 @@
   {
       "item-code": "10108B",
       "brand-name": [
-          "Ganfort PF 0.3/5"
+          "GANfort PF 0.3/5"
       ],
       "mp-pt": "bimatoprost + timolol",
       "tpuu-or-mpp-pt": "bimatoprost 0.03% + timolol 0.5% eye drops, 30 x 0.4 mL unit doses"
@@ -893,7 +893,7 @@
           "Minims Lignocaine (Lidocaine) and Fluorescein Sodium"
       ],
       "mp-pt": "lignocaine (lidocaine) and fluorescein sodium",
-      "tpuu-or-mpp-pt": "lignocaine (lidocaine) 4% + fluorescein sodium 0.25% eye drops, 20 x 0.5 mL unit doses"
+      "tpuu-or-mpp-pt": "lignocaine (lidocaine) 4% and fluorescein sodium 0.25% eye drops, 20 x 0.5 mL unit doses"
   },
   {
       "item-code": "",
@@ -928,11 +928,123 @@
       "tpuu-or-mpp-pt": "phenylephrine hydrochloride 10% eye drops, 20 x 0.5 mL unit doses"
   },
   {
-    "item-code": "",
-    "brand-name": [
-        "Optrex Actimist"
-    ],
-    "mp-pt": "soy lecithin + tocopherol + vitamin A",
-    "tpuu-or-mpp-pt": "soy lecithin 1% + tocopherol 0.002% + vitamin A palmitate 0.025% spray, 100 actuations"
+      "item-code": "",
+      "brand-name": [
+          "Optrex Actimist"
+      ],
+      "mp-pt": "soy lecithin + tocopherol + vitamin A",
+      "tpuu-or-mpp-pt": "soy lecithin 1% + tocopherol 0.002% + vitamin A palmitate 0.025% spray, 100 actuations"
+  },
+  {
+      "item-code": "",
+      "brand-name": [
+          "Cromo-Fresh"
+      ],
+      "mp-pt": "sodium cromoglycate",
+      "tpuu-or-mpp-pt": "sodium cromoglycate 2% eye drops, 10 mL"
+  },
+  {
+      "item-code": "",
+      "brand-name": [
+          "Zyrtec"
+      ],
+      "mp-pt": "levocabastine",
+      "tpuu-or-mpp-pt": "levocabastine hydrochloride 0.05% eye drops, 4 mL"
+  },
+  {
+      "item-code": "",
+      "brand-name": [
+          "Livostin"
+      ],
+      "mp-pt": "levocabastine",
+      "tpuu-or-mpp-pt": "levocabastine hydrochloride 0.05% eye drops, 4 mL"
+  },
+  {
+      "item-code": "",
+      "brand-name": [
+          "Lomide"
+      ],
+      "mp-pt": "lodoxamide",
+      "tpuu-or-mpp-pt": "lodoxamide trometamol 0.1% eye drops, 10 mL"
+  },
+  {
+      "item-code": "",
+      "brand-name": [
+          "Albalon-A"
+      ],
+      "mp-pt": "naphazoline + antazoline",
+      "tpuu-or-mpp-pt": "naphazoline 0.05% + antazoline phosphate 0.5% mg/mL eye drops, 15 mL"
+  },
+  {
+      "item-code": "",
+      "brand-name": [
+          "Brolene"
+      ],
+      "mp-pt": "propamidine",
+      "tpuu-or-mpp-pt": "propamidine isethionate 0.1% eye drops, 10 mL"
+  },
+  {
+      "item-code": "",
+      "brand-name": [
+          "Eyezep"
+      ],
+      "mp-pt": "azelastine",
+      "tpuu-or-mpp-pt": "azelastine hydrochloride 0.0457% mg/mL eye drops, 6 mL"
+  },
+  {
+      "item-code": "",
+      "brand-name": [
+          "Visine Allergy"
+      ],
+      "mp-pt": "naphazoline + pheniramine",
+      "tpuu-or-mpp-pt": "naphazoline hydrochloride 0.025% + pheniramine maleate 0.3% eye drops, 15 mL"
+  },
+  {
+      "item-code": "",
+      "brand-name": [
+          "Naphcon-A"
+      ],
+      "mp-pt": "naphazoline + pheniramine",
+      "tpuu-or-mpp-pt": "naphazoline hydrochloride 0.025% + pheniramine maleate 0.3% eye drops, 15 mL"
+  },
+  {
+      "item-code": "",
+      "brand-name": [
+          "Naphcon-Forte"
+      ],
+      "mp-pt": "naphazoline",
+      "tpuu-or-mpp-pt": "naphazoline hydrochloride 0.1% eye drops, 15 mL"
+  },
+  {
+      "item-code": "",
+      "brand-name": [
+          "Albalon"
+      ],
+      "mp-pt": "naphazoline",
+      "tpuu-or-mpp-pt": "naphazoline hydrochloride 0.1% eye drops, 15 mL"
+  },
+  {
+      "item-code": "",
+      "brand-name": [
+          "Systane Red Eyes"
+      ],
+      "mp-pt": "naphazoline",
+      "tpuu-or-mpp-pt": "naphazoline hydrochloride 0.1% eye drops, 15 mL"
+  },
+  {
+      "item-code": "",
+      "brand-name": [
+          "Optrex Eye Drops"
+      ],
+      "mp-pt": "naphazoline",
+      "tpuu-or-mpp-pt": "naphazoline hydrochloride 0.01% eye drops, 10 mL"
+  },
+  {
+      "item-code": "",
+      "brand-name": [
+          "Murine Clear eyes"
+      ],
+      "mp-pt": "naphazoline",
+      "tpuu-or-mpp-pt": "naphazoline hydrochloride 0.012% eye drops, 10 mL"
   }
 ]

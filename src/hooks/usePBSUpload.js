@@ -17,6 +17,8 @@ export const usePBSUpload = () => {
     addDrug(item);
   });
 
-  // ! Call usePBSUpload in App.js to run this logic. It will overwrite existing data for the item codes to ensure up to date data
+  // ! Call usePBSUpload in App.js to run this logic. It will overwrite existing data for the item codes to ensure up to date data. Run as follows in App.js
+  // import { usePBSUpload } from ...
+  // usePBSUpload();
   
 }

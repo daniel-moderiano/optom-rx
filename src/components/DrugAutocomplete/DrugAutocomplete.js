@@ -3,7 +3,7 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import { StyledDrugAutocomplete } from './DrugAutocompleteStyled';
 import FormField from '../FormField/FormField';
 
-const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAlerts }) => {
+const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAlerts, fetchDrug }) => {
   // useRef allows us to store the equivalent of a 'global' component variable without losing data on re-render, but avoiding the async problems that can arise with state
   const currentFocus = useRef(-1);
   // Controls the UI state of the collapsed input fields
@@ -56,6 +56,7 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
       }));
       removeList();
       setExpand(true);
+      fetchDrug(dataset.code);
     } else if (parent.classList.contains('item')) {
       // Set state onclick - do NOT set input.value as this will not work as intended. Always adjust state and have input.value set to state
       setData((prevData) => ({
@@ -66,6 +67,7 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
       }));
       removeList();
       setExpand(true);
+      fetchDrug(parent.dataset.code);
     } else if (parent.parentNode.classList.contains('item')) {
       // Set state onclick - do NOT set input.value as this will not work as intended. Always adjust state and have input.value set to state
       setData((prevData) => ({
@@ -76,6 +78,7 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
       }));
       removeList();
       setExpand(true);
+      fetchDrug(parent.parentNode.dataset.code);
     }
     // Remove errors
     showSuccessClass(document.querySelector('#activeIngredient'));
@@ -85,9 +88,11 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
       brandName: {}
     }));
 
+    // TODO: handleSelection function to run here, which will activate hook for backend PBS data call
+
     // Finally, set focus to next typable field (currently dosage)
     document.querySelector('[name="dosage"]').focus();
-  }, [setAlerts, setData]);
+  }, [setAlerts, setData, fetchDrug]);
 
   // Given a string, use the current search text and regex to bold the segment of text being searched for (using HTML)
   const boldLetters = (string) => {

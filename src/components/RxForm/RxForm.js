@@ -9,6 +9,7 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 import { useCollection } from "../../hooks/useCollection";
 import { useLocation } from "react-router";
 import { useNumbers } from '../../hooks/useNumbers';
+import { usePBSFetch } from "../../hooks/usePBSFetch";
 
 // ! Multiple optometrist items are not permitted to be prescribed on the same form; each must use an individual form
 
@@ -16,6 +17,8 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
   const [{ scriptNo, authRxNo, isError, isLoading }, fetchNumbers] = useNumbers();
   const { user } = useAuthContext();
   const { documents: providers } = useCollection('providers', ['uid', '==', user.uid]);
+
+  const fetchDrug = usePBSFetch();
 
   // State (at this stage) is only provided if generating a new Rx. Hence the numbers fetch should only be performed when state exists
   const { state } = useLocation();
@@ -626,6 +629,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
           toggle={toggleBooleanState}
           alerts={drugAlerts}
           setAlerts={setDrugAlerts}
+          fetchDrug={fetchDrug}
         />
 
         {/* Must include quantity and repeats to meet requirements */}
