@@ -29,6 +29,7 @@ const data = {
     pbsRx: true,    
     compounded: false,
     authRequired: false,
+    verified: true,
   },
   patientData: {
     "fullName":"Daniel Moderiano",
@@ -59,6 +60,104 @@ const data = {
     authCode: '7979',
     scriptID: '',
   },
+}
+
+const dataPbs = {
+  drugData: {
+    activeIngredient: "latanoprost 0.005% eye drops, 5 mL",
+    "brandName":"Xalatan",
+    "quantity":"1",
+    "repeats":"4",
+    "dosage":"Once nightly both eyes",
+    "itemCode":"5552F",
+    substitutePermitted: true,
+    brandOnly: false,    
+    includeBrand: true,   
+    pbsRx: true,    
+    compounded: false,
+    authRequired: true,
+    verified: true,
+  },
+  patientData: {
+    "fullName":"Daniel Moderiano",
+    "streetAddress":"6 Old Tawny Close",
+    "subpremise":"",
+    "suburb":"Wynn Vale",
+    "postcode":"5127",
+    "state":"SA",
+    "medicareNumber":"5151515151",
+    "medicareRefNumber":"3"
+  },
+  providerData: {
+    "prefix":true,
+    "fullName":"Sarah Smoker",
+    "qualifications":"BMedSc(VisSc), MOpt",
+    "practiceName":"OPSM",
+    "streetAddress":"976 North East Road",
+    "subpremise":"Shop 112, Westfield Tea Tree Plaza",
+    "suburb":"Modbury",
+    "postcode":"5092",
+    "state":"SA",
+    "phoneNumber":"0427779650",
+    "prescriberNumber":"7033149"
+  },
+  miscData: {
+    authRxNumber: '',   
+    date: '2021-10-10',
+    authCode: '7979',
+    scriptID: '',
+  },
+  pbsData: {
+    "fee-code": "RP",
+    "mp2p": "0.00",
+    "pack-size": "1",
+    "brand-name": [
+        "Hylo-Fresh"
+    ],
+    "indications": {
+        "misc-res-code": "0",
+        "description": "Severe dry eye syndrome Clinical criteria: * Patient must be sensitive to preservatives in multi-dose eye drops.",
+        "date-req": "N",
+        "text-req": "N"
+    },
+    "atc": "S01XA20",
+    "item-code": "2184Y",
+    "increase-code": "2",
+    "cautions": [],
+    "ldpmq": "0.00",
+    "cdpmq": "34.55",
+    "markup-band": "C",
+    "atc-level-code": "",
+    "bioequivalence": "",
+    "notes": [
+        "The in-use shelf life of Hylo-Fresh and Hylo-Forte is 6 months from the date of opening."
+    ],
+    "lp2p": "0.00",
+    "note-ids": [
+        "7873"
+    ],
+    "streamline-code": "4105",
+    "program-code": "GE",
+    "therapeutic-premium": "0.00",
+    "indication-id": "4105",
+    "dangerous-drug-code": "",
+    "repeats": "5",
+    "atc-print-option": "1",
+    "mrvsn": "35.85",
+    "brand-premium": "0.00",
+    "mp-pt": "hyaluronate sodium",
+    "restriction-flag": "A",
+    "manufacturer-code": "AE",
+    "has-caution": "",
+    "tpuu-or-mpp-pt": "hyaluronate sodium 0.1% eye drops, 10 mL",
+    "mdpmq": "0.00",
+    "caution-ids": [],
+    "cp2p": "22.47",
+    "mq": "1",
+    "atc-type": "P",
+    "has-note": "N",
+    "caution_ids": []
+  }
 }
 
 const dataNoDate = {
@@ -104,53 +203,9 @@ const dataNoDate = {
     authCode: '7979',
     scriptID: '',
   },
+  pbsData: null,
 }
 
-const dataAuthority = {
-  drugData: {
-    activeIngredient: "latanoprost 0.005% eye drops, 5 mL",
-    "brandName":"Xalatan",
-    "quantity":"1",
-    "repeats":"4",
-    "dosage":"Once nightly both eyes",
-    "itemCode":"5552F",
-    substitutePermitted: true,
-    brandOnly: false,    
-    includeBrand: true,   
-    pbsRx: true,    
-    compounded: false,
-    authRequired: true,
-  },
-  patientData: {
-    "fullName":"Daniel Moderiano",
-    "streetAddress":"6 Old Tawny Close",
-    "subpremise":"",
-    "suburb":"Wynn Vale",
-    "postcode":"5127",
-    "state":"SA",
-    "medicareNumber":"5151515151",
-    "medicareRefNumber":"3"
-  },
-  providerData: {
-    "prefix":true,
-    "fullName":"Sarah Smoker",
-    "qualifications":"BMedSc(VisSc), MOpt",
-    "practiceName":"OPSM",
-    "streetAddress":"976 North East Road",
-    "subpremise":"Shop 112, Westfield Tea Tree Plaza",
-    "suburb":"Modbury",
-    "postcode":"5092",
-    "state":"SA",
-    "phoneNumber":"0427779650",
-    "prescriberNumber":"7033149"
-  },
-  miscData: {
-    authRxNumber: '00000001',   
-    date: '2021-10-10',
-    authCode: '7979',
-    scriptID: '',
-  },
-}
 
 describe('Drug input tests', () => {
   beforeEach(() => {
@@ -611,18 +666,6 @@ describe('Authority Rx No. and script No. display tests', () => {
     expect(scriptNo).toBeInTheDocument();
   });
 
-  test('Auth Rx number is visible on auth required Rx form', () => {
-    render(
-      <BrowserRouter>
-      <AuthContext.Provider value={{ user: { uid: '1' } }}>
-        <RxForm existingData={dataAuthority}/>
-      </AuthContext.Provider>
-      </BrowserRouter>
-    );
-    const authRxNo = screen.getByTestId(/authRxNo/i);
-    expect(authRxNo).toBeInTheDocument();
-  });
-
   test('Auth Rx number is not included on non-authority Rx form', () => {
     render(
       <BrowserRouter>
@@ -633,5 +676,78 @@ describe('Authority Rx No. and script No. display tests', () => {
     );
     const authRxNo = screen.queryByTestId(/authRxNo/i);
     expect(authRxNo).not.toBeInTheDocument();
+  });
+});
+
+describe('PBS data tests', () => {
+  beforeEach(() => {
+    render(
+      <BrowserRouter>
+      <AuthContext.Provider value={{ user: { uid: '1' } }}>
+        <RxForm existingData={dataPbs}/>
+      </AuthContext.Provider>
+      </BrowserRouter>
+    );
+  })
+
+  test('Auth Rx number is visible on auth required Rx form', () => {
+    const authRxNo = screen.getByTestId(/authRxNo/i);
+    expect(authRxNo).toBeInTheDocument();
+  });
+
+  test('PBS data sets quantity alerts', () => {
+    const quantityAlert = screen.getByText(/Maximum allowed quantity under the PBS is 1/i);
+    expect(quantityAlert).toBeInTheDocument();
+  });
+
+  test('PBS data sets repeats alerts', () => {
+    const repeatsAlert = screen.getByText(/Maximum allowed repeats under the PBS is 5/i);
+    expect(repeatsAlert).toBeInTheDocument();
+  });
+
+  test('PBS data sets authority/restriction message', () => {
+    const resAlert = screen.getByText(/This is an Authority Required item/i);
+    expect(resAlert).toBeInTheDocument();
+  });
+
+  test('PBS data sets indications where appropriate', () => {
+    const indication = screen.getByText(/Severe dry eye syndrome/i);
+    expect(indication).toBeInTheDocument();
+  });
+
+  test('PBS data sets streamline code if available', () => { 
+    const authCodeInput = screen.getByLabelText(/Authority code \(where applicable\)/i);
+    expect(authCodeInput.value).toBe('4105');
+  });
+
+  test('PBS data sets auth code message', () => {
+    const authMsg = screen.getByText(/This medication is available using the streamline code above/i);
+    expect(authMsg).toBeInTheDocument();
+  });
+});
+
+describe('Empty PBS and non-PBS data tests', () => {
+  test("Empty PBS notifies informs user the information isn't verified yet", () => {
+    render(
+      <BrowserRouter>
+      <AuthContext.Provider value={{ user: { uid: '1' } }}>
+        <RxForm existingData={dataNoDate}/>
+      </AuthContext.Provider>
+      </BrowserRouter>
+    );
+    const pbsMsg = screen.getByText(/Unable to verify drug information on PBS, please select a drug from the dropdown list/i);
+    expect(pbsMsg).toBeInTheDocument();
+  });
+
+  test("Empty PBS but verified drug informs user the drug is not on PBS", () => {
+    render(
+      <BrowserRouter>
+      <AuthContext.Provider value={{ user: { uid: '1' } }}>
+        <RxForm existingData={data}/>
+      </AuthContext.Provider>
+      </BrowserRouter>
+    );
+    const pbsMsg = screen.getByText(/This item is not on the PBS/i);
+    expect(pbsMsg).toBeInTheDocument();
   });
 });

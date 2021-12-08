@@ -18,8 +18,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
   const { user } = useAuthContext();
   const { documents: providers } = useCollection('providers', ['uid', '==', user.uid]);
 
-  const [localPbs, setLocalPbs] = useState(null);
-
   const [{ pbsInfo, pbsError, pbsLoading }, fetchDrug, clearPbsState] = usePBSFetch(existingData.pbsData);
 
   const [indication, setIndication] = useState('');
@@ -160,7 +158,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
 
   // Remove all PBS related information from local state
   const clearPbsInfo = useCallback(() => {
-    setLocalPbs(null);
     setDrugData((prevData) => ({
       ...prevData,
       authRequired: false,
@@ -471,7 +468,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
     restrictedStatus();
     authorityStatus();
     quantityRepeatStatus();
-    setLocalPbs(pbsInfo);
   }, [restrictedStatus, authorityStatus, quantityRepeatStatus, pbsInfo])
 
   // Used to manage alerts on max quantity and repeats under the PBS
