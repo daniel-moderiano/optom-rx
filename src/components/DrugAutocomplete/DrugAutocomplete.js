@@ -14,6 +14,13 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
     element.classList.add('success');
   }
 
+  const changeOnEnter = (event, setFunc, data) => {
+    // If the enter key is pressed
+    if (event.keyCode === 13) {
+      toggle(setFunc, data, event.target.name);
+    }
+  }
+
   // Simply hide the items list but don't alter the items on the list
   const hideItemsList = () => {
     // Check for null in cases where component is dismounting/ed
@@ -341,6 +348,7 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
           onChange={() => toggle(setData, data, 'includeBrand')}
           checked={data.includeBrand}
           className="checkbox brand-checkbox"
+          enterFunc={(event) => changeOnEnter(event, setData, data)}
         /> 
 
         <FormField 
@@ -350,6 +358,7 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
           onChange={() => toggle(setData, data, 'brandOnly')}
           checked={data.brandOnly}
           className="checkbox"
+          enterFunc={(event) => changeOnEnter(event, setData, data)}
         />       
 
         <FormField 
@@ -359,6 +368,7 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
           onChange={() => toggle(setData, data, 'substitutePermitted')}
           checked={data.substitutePermitted}
           className="checkbox"
+          enterFunc={(event) => changeOnEnter(event, setData, data)}
         />     
 
         <FormField 
@@ -368,6 +378,7 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
           onChange={() => toggle(setData, data, 'compounded')}
           checked={data.compounded}
           className="checkbox compounded"
+          enterFunc={(event) => changeOnEnter(event, setData, data)}
         />  
 
         

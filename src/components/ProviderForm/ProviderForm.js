@@ -45,6 +45,7 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
     }));
   };
 
+
   // Add provider to firestore database when submitting from standalone form
   const handleStandaloneSubmit = async (event, formData) => {
     event.preventDefault()
@@ -360,6 +361,11 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
           onChange={() => toggleStandaloneBooleanState(providerData, 'prefix')}
           checked={providerData.prefix}
           className="checkbox prefix-field"
+          enterFunc={(event) => {
+            if (event.keyCode === 13) {
+              toggleStandaloneBooleanState(providerData, event.target.name);
+            }
+          }}
         />  
 
         <FormField 
@@ -440,9 +446,14 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
           fieldType="checkbox" 
           name="prefix"
           label="Include 'Dr' in provider name" 
-          onChange={() => toggleBooleanState(providerData, 'prefix')}
+          onChange={() => toggleBooleanState(setData, data, 'prefix')}
           checked={data.prefix}
           className="checkbox prefix-field"
+          enterFunc={(event) => {
+            if (event.keyCode === 13) {
+              toggleBooleanState(setData, data, event.target.name);
+            }
+          }}
         />  
 
         <FormField 

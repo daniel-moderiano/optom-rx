@@ -495,6 +495,13 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
     }
   }, [drugData.maxRepeats, drugData.maxQuantity]);
 
+  const changeOnEnter = (event, setFunc, data) => {
+    // If the enter key is pressed
+    if (event.keyCode === 13) {
+      toggleBooleanState(setFunc, data, event.target.name);
+    }
+  }
+
   // UI functions
   const showErrorClass = (element) => {
     element.classList.add('error');
@@ -923,6 +930,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
             provider={false}   
             alerts={providerAlerts}
             setAlerts={setProviderAlerts} 
+            toggleBooleanState={toggleBooleanState}
           />
         }
       </Fieldset>
@@ -1038,6 +1046,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
           checked={drugData.pbsRx}
           className="checkbox pbsRx"
           alert={drugAlerts.pbsRx}
+          enterFunc={(event) => changeOnEnter(event, setDrugData, drugData)}
         />  
 
 {/* TODO: consider a dropdown UI expandable div */}
@@ -1052,11 +1061,12 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
         
         <FormField 
           fieldType="checkbox" 
-          name="pbsRx"
+          name="authRequired"
           label="Authority required" 
           onChange={() => toggleBooleanState(setDrugData, drugData, 'authRequired')}
           checked={drugData.authRequired}
           className="checkbox authRequired"
+          enterFunc={(event) => changeOnEnter(event, setDrugData, drugData)}
         />    
 
         {/* Consider a variable message beside or below this saying 'not required for this medication' or similar */}

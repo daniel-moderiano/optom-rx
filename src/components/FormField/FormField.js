@@ -1,7 +1,7 @@
 import { StyledFormField } from "./FormField.styled";
 
 const FormField = (props) => {
-  const { fieldType, id, name, label, value, placeholder, onChange, className, alert, subAlert, maxlength, checked } = props;
+  const { fieldType, id, name, label, value, placeholder, onChange, className, alert, subAlert, maxlength, checked, enterFunc } = props;
 
   return (
     <StyledFormField className={className}>
@@ -19,6 +19,7 @@ const FormField = (props) => {
               maxLength={maxlength}
               checked={checked}
               className={checked ? 'checked' : 'unchecked'}
+              onKeyDown={enterFunc}
             />
             {fieldType === ('checkbox') && <span className={`checkmark ${checked ? 'show' : 'hide'}`}></span>}
             <svg xmlns="http://www.w3.org/2000/svg" className="tickCircle hide" viewBox="0 0 512 512">
