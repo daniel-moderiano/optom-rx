@@ -220,8 +220,8 @@ describe('UI template display tests', () => {
   });
 
   test('Displays auth info when authority is required', () => {
-    const message = screen.getByText(/authority prescription no:/i);
-    expect(message).toBeInTheDocument();
+    const messages = screen.getAllByText(/Authority script no:/i);
+    expect(messages.length > 0).toBe(true);
   });
 });
 

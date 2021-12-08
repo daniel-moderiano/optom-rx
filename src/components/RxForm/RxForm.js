@@ -21,7 +21,8 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
   const [{ pbsInfo, pbsError, pbsLoading }, fetchDrug, clearPbsState] = usePBSFetch(existingData.pbsData);
 
   const [indication, setIndication] = useState('');
-  
+  const [expandIndication, setExpandIndication] = useState(false);
+ 
 
   // State (at this stage) is only provided if generating a new Rx. Hence the numbers fetch should only be performed when state exists
   const { state } = useLocation();
@@ -320,19 +321,19 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
         }
       } else {
         // clearPbsInfo();
-        // Where authority is not required, let the user know, and consider disabling authority functions
+        // Where authority is not required, consider ommitting all messages since it will advise there are no restrictions above
         setDrugData((prevData) => ({
           ...prevData,
           authRequired: false,
         }));
 
-        setMiscAlerts((prevAlerts) => ({
-          ...prevAlerts,
-          authCode: {
-            message: 'This medication does not require authority',
-            type: 'success',
-          }
-        }));
+        // setMiscAlerts((prevAlerts) => ({
+        //   ...prevAlerts,
+        //   authCode: {
+        //     message: 'This medication does not require authority',
+        //     type: 'success',
+        //   }
+        // }));
       }
     }
 
@@ -362,8 +363,8 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
           setDrugAlerts((prevAlerts) => ({
             ...prevAlerts,
             pbsRx: {
-              message: 'This is a restricted PBS item, see indications for use',
-              type: 'error',
+              message: 'This is item is available on the PBS (restrictions apply)',
+              type: 'neutral',
             }
           }));
           // Add the indication to the local drugData state to allow certain conditional renders
@@ -379,8 +380,8 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
           setDrugAlerts((prevAlerts) => ({
             ...prevAlerts,
             pbsRx: {
-              message: 'This is an unrestricted PBS item',
-              type: 'error',
+              message: 'This is item is available on the PBS (unrestricted)',
+              type: 'neutral',
             }
           }));
           // Remove the indication to the local drugData state to allow certain conditional renders
@@ -395,8 +396,8 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
           setDrugAlerts((prevAlerts) => ({
             ...prevAlerts,
             pbsRx: {
-              message: 'This is an Authority Required item',
-              type: 'error',
+              message: 'This item is available on the PBS (authority required)',
+              type: 'neutral',
             }
           }));
           setDrugData((prevData) => ({
@@ -415,8 +416,8 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
       setDrugAlerts((prevAlerts) => ({
         ...prevAlerts,
         pbsRx: {
-          message: 'This item is not on the PBS',
-          type: 'error',
+          message: 'This item is not available on the PBS',
+          type: 'neutral',
         }
       }));
     }
@@ -1049,13 +1050,13 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
           enterFunc={(event) => changeOnEnter(event, setDrugData, drugData)}
         />  
 
-{/* TODO: consider a dropdown UI expandable div */}
+        {/* TODO: consider a dropdown UI expandable div */}
         {(drugData.verified && drugData.indications.length > 0) && 
-          <div className="indications-container">
-            <h4 className="indications__title">Indications for use:</h4>
-            <div className="pbsIndication" dangerouslySetInnerHTML={{ __html: indication }}></div>
-            
+          <div className="indications">
+            <button className="indications__btn collapsible" onClick={() => {setExpandIndication((prevState) => !prevState)}}>Indications for use:</button>
+            <div className={`indications__content ${expandIndication ? 'expand' : 'collapse' }`} dangerouslySetInnerHTML={{ __html: indication }}></div>    
           </div>
+          
         }
         
         

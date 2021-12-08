@@ -288,6 +288,21 @@ describe('Provider data input tests', () => {
     fireEvent.change(firstNameInput, { target: { value: '01234567' } })
     expect(firstNameInput.value).toBe('01234567');
   });
+
+  test("Checkbox is compatible with enter key", () => {
+    render(
+      <BrowserRouter>
+      <AuthContext.Provider value={{ user: { uid: '1' } }}>
+        <RxForm existingData={{}}/>
+      </AuthContext.Provider>
+      </BrowserRouter>
+    );  
+    const editBtn = screen.getByText(/edit selected provider/i);
+    fireEvent.click(editBtn);
+    const checkbox = screen.getByLabelText(/Include 'Dr' in provider name/i);
+    fireEvent.keyDown(checkbox, {key: 'Enter', code: 'Enter', keyCode: 13})
+    expect(checkbox.checked).toBe(true);
+  });
 });
 
 describe('Parameter data tests', () => {
