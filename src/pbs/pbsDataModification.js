@@ -1,3 +1,4 @@
+// This object is the direct output of PBS.py, in the form of a python dict, or JS object
 const PBSData = {
   '5501M': {
     'program-code': 'GE',
@@ -2865,8 +2866,11 @@ const PBSData = {
     atc: 'S01BB02',
     'caution-ids': []
   }
-}
+};
 
+// The PBS 'raw' data above is used for the firebase backend, however for other features such as drug autocomplete, the data must be 'distilled' into the relevant fields, and subsequently sorted in several ways
+
+// First, produce the distilled data set for drug autocomplete. The following fields will be included:
 const dataFields = [
   'item-code',
   'brand-name',
@@ -2874,26 +2878,32 @@ const dataFields = [
   'tpuu-or-mpp-pt'
 ];
 
-export default PBSData;
+const distilledPBSData = [];
 
-// const reducedData = [];
+// Iterate through each drug (item) in the raw data
+Object.keys(PBSData).forEach((itemCode) => {
+  const newItem = {};
+  // For each of the required fields, create a property in the newItem to be added to the distilled data set
+  dataFields.forEach((field) => {
+    newItem[field] = PBSData[itemCode][field];
+  });
+  distilledPBSData.push(newItem);
+});
 
-// Object.keys(data).forEach((code) => {
-//   const entry = {};
-//   dataFields.forEach((field) => {
-//     entry[field] = data[code][field];
-//   });
-//   reducedData.push(entry);
-// });
 
-// const dataJSON = JSON.stringify(reducedData);
+// Next, this operation creates individual drug object entries in the JSON data for every unique brand name, as opposed to aggregating the brand names under one umbrella for a given active ingredient. This is done to enable unique searching and autocomplete by brand name
+const individualBrandData = [];
 
-// console.log(dataJSON);
-
-Object.keys(PBSData).forEach((code) => {
-  
-  const desc = PBSData[code]['indications']['description'];
-  if (desc) {
-    console.log(desc);
+distilledPBSData.forEach((item) => {
+  // Check for items with >1 brand name
+  if (item['brand-name'].length > 1) {
+    // Create individual entry for each brand name, with identical info otherwise
+    item['brand-name'].forEach((name) => {
+      let newDrugItem = { ...item, "brand-name": [name] };
+      individualBrandData.push(newDrugItem);
+    })
+  } else {
+    // Otherwise a single entry for one brand name is required
+    individualBrandData.push(item);
   }
-})
+});

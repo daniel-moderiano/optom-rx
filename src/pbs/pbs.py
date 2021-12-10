@@ -1,3 +1,5 @@
+# This script extracts the relevant data for all ophthalmological PBS medications into a single object. The resultant output is then modified using several JS methods in other files
+
 # Global variables
 drugs = {}
 data = []
