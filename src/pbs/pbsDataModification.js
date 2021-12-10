@@ -3249,6 +3249,12 @@ const addNonPBSDrugs = (distilledPBSData) => {
       ],
       "mp-pt": "naphazoline",
       "tpuu-or-mpp-pt": "naphazoline hydrochloride 0.012% eye drops, 10 mL"
+    },
+    {
+      'item-code': '',
+      'brand-name': [ 'Optrex Actimist' ],
+      'mp-pt': 'soy lecithin + tocopherol + vitamin A',
+      'tpuu-or-mpp-pt': 'soy lecithin 1% + tocopherol 0.002% + vitamin A palmitate 0.025% spray, 100 actuations'
     }
   ];
 
@@ -3307,6 +3313,16 @@ const splitDataByBrands = (brandAggregateData) => {
   return individualBrandData;
 };
 
+// There are certain drugs that are simply not commercially available yet. These should be removed until further notice
+const removeListedItems = (individualBrandData) => {
+  const itemsToRemove = [
+    'Eikance'
+  ];
+
+  // Data will only ever have one brand item in array, hence the notation [0]
+  const filtered = individualBrandData.filter((item) => !itemsToRemove.includes(item['brand-name'][0]));
+  return filtered;
+}
 
 
 
@@ -3322,8 +3338,13 @@ const allDistilledData = addNonPBSDrugs(distilledPBSData);
 // Step 4
 const orderedBrandData = orderBrands(allDistilledData);
 
+// Step 5
+const splitBrandData = splitDataByBrands(orderedBrandData);
 
-// console.log(JSON.stringify(allDistilledData));
+// Step 6
+const filteredData = removeListedItems(splitBrandData);
+
+console.log(JSON.stringify(filteredData));
 
 
 
