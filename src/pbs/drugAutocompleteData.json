@@ -18,14 +18,6 @@
   {
       "item-code": "5552F",
       "brand-name": [
-          "Latanoprost Actavis"
-      ],
-      "mp-pt": "latanoprost",
-      "tpuu-or-mpp-pt": "latanoprost 0.005% eye drops, 2.5 mL"
-  },
-  {
-      "item-code": "5552F",
-      "brand-name": [
           "Latanoprost Sandoz"
       ],
       "mp-pt": "latanoprost",
@@ -304,14 +296,6 @@
       "tpuu-or-mpp-pt": "dorzolamide 2% + timolol 0.5% eye drops, 5 mL"
   },
   {
-      "item-code": "5542Q",
-      "brand-name": [
-          "APO-Dorzolamide/Timolol 20/5"
-      ],
-      "mp-pt": "dorzolamide + timolol",
-      "tpuu-or-mpp-pt": "dorzolamide 2% + timolol 0.5% eye drops, 5 mL"
-  },
-  {
       "item-code": "5554H",
       "brand-name": [
           "Travatan"
@@ -339,14 +323,6 @@
       "item-code": "5551E",
       "brand-name": [
           "Bimatoprost Sandoz"
-      ],
-      "mp-pt": "bimatoprost",
-      "tpuu-or-mpp-pt": "bimatoprost 0.03% eye drops, 3 mL"
-  },
-  {
-      "item-code": "5551E",
-      "brand-name": [
-          "APO-Bimatoprost"
       ],
       "mp-pt": "bimatoprost",
       "tpuu-or-mpp-pt": "bimatoprost 0.03% eye drops, 3 mL"
@@ -603,14 +579,6 @@
       "item-code": "5541P",
       "brand-name": [
           "Trusamide"
-      ],
-      "mp-pt": "dorzolamide",
-      "tpuu-or-mpp-pt": "dorzolamide 2% eye drops, 5 mL"
-  },
-  {
-      "item-code": "5541P",
-      "brand-name": [
-          "APO-Dorzolamide"
       ],
       "mp-pt": "dorzolamide",
       "tpuu-or-mpp-pt": "dorzolamide 2% eye drops, 5 mL"

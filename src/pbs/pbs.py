@@ -4,7 +4,7 @@
 drugs = {}
 data = []
 brand_names = {}
-base_path = 'C:/Users/danie/Documents/Programming/work-projects/optom-rx/info/2021-11-01-v3extracts/'
+base_path = 'C:/Users/danie/Documents/Programming/work-projects/optom-rx/info/2021-12-01-v3extracts/'
 
 # All PBS data fields (including those not entirely relevant)
 # Anatomical Therapeutic Chemical (ATC) classification index is used to classify drugs based on area of intended use. # The ATC level code is a combination of flags that categorisea drug. Program code - mainly/all will be GE => 'Generally available pharmaceutical benefits'
@@ -50,7 +50,7 @@ all_fields = {
 # Isolate the optometry specific medications (by item code) from the PBS list
 # For reference, at the time of writing, there are 64 approved optometry PBS medications
 item_codes = set()
-pres_path = base_path + 'Prescriber_type_20211101.txt'
+pres_path = base_path + 'Prescriber_type_20211201.txt'
 
 with open(pres_path) as f:
   pres_lines = f.readlines()
@@ -63,7 +63,7 @@ with open(pres_path) as f:
       brand_names[line_arr[-2]] = []
 
 # Using the item codes obtained, search the drug.txt doc for pricing and quantity info
-drug_path = base_path + 'drug_20211101.txt'
+drug_path = base_path + 'drug_20211201.txt'
 
 with open(drug_path) as f:
   drug_lines = f.readlines()
@@ -87,7 +87,7 @@ for item_code in brand_names:
   drugs[item_code]['brand-name'] = brand_names[item_code]
 
 # Using the item code, find the indication IDs for the restrictions on the meds. Note that only authorised medications will have indication IDs
-link_path = base_path + 'LinkExtract_20211101.txt'
+link_path = base_path + 'LinkExtract_20211201.txt'
 with open(link_path) as f:
   link_lines = f.readlines()
   columns = link_lines[0].strip().split('!')
@@ -108,7 +108,7 @@ def remove_space(element):
     return False
 
 # Using the item code, find the note and caution IDs, which may be singular or multiple
-table_path = base_path + 'Pharmacy_PBS_Item_Table_20211101.txt'
+table_path = base_path + 'Pharmacy_PBS_Item_Table_20211201.txt'
 
 with open(table_path) as f:
   table_lines = f.readlines()
@@ -127,7 +127,7 @@ with open(table_path) as f:
 
 
 # Using the indication ID, finds the relevant indications for a particular drug restriction
-res_path = base_path + 'RestrictionExtractDelimited_20211101.txt'
+res_path = base_path + 'RestrictionExtractDelimited_20211201.txt'
 
 # Produce a sub-dictionary containing only item-code: restriction-id key: value pairs for referencing
 res_dict = {}
@@ -167,7 +167,7 @@ note_dict = {}
 for code in drugs.keys():
   item_note[code] = drugs[code]['note-ids']
 
-notes_path = base_path + 'NoteExtract_20211101.txt'
+notes_path = base_path + 'NoteExtract_20211201.txt'
 
 # Flatten values array
 flat_item_note = []
@@ -205,7 +205,7 @@ caution_dict = {}
 for code in drugs.keys():
   item_caution[code] = drugs[code]['caution-ids']
 
-caution_path = base_path + 'CautionExtract_20211101.txt'
+caution_path = base_path + 'CautionExtract_20211201.txt'
 
 # Flatten caution array
 flat_item_caution = []
@@ -238,7 +238,7 @@ for item_code in item_caution:
 
 
 # Data on which drugs are available with streamlined authority
-stream_path = base_path + 'streamlined_20211101.txt'
+stream_path = base_path + 'streamlined_20211201.txt'
 
 with open(stream_path) as f:
   stream_lines = f.readlines()
