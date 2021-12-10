@@ -3255,6 +3255,37 @@ const addNonPBSDrugs = (distilledPBSData) => {
   return distilledPBSData.concat(scheduleTwoDrugs, scheduleFourDrugs);
 };
 
+// Prior to splitting by individual brand, the brand name arrays should be ordered by relative popularity or commercial availability. For simplicity, the most common brand will be placed at the start of the array, and the remainder will be left. In most all cases this is appropriate, since there is one clear front runner in practice
+const orderBrands = (unorderedBrandData) => {
+  const topBrands = [
+    'Xalatan',
+    'Xalacom',
+    'Cosopt',
+    'Lumigan',
+    'Alphagan',
+    'BrinzoQuin',
+    'Trusopt'
+  ];
+
+  unorderedBrandData.forEach((item) => {
+    // Nested loop (bad practice I am aware) through brand names
+    topBrands.forEach((name) => {
+      // Isolate brand name array and check for any of the above brand names
+      if (item['brand-name'].includes(name)) {
+        // Find the current index of the brand name in the array of brand names for that drug item
+        const index = item['brand-name'].indexOf(name);
+        // Remove it
+        item['brand-name'].splice(index, 1)
+        // And re-add to the start of the array
+        item['brand-name'].unshift(name);
+      }
+    });
+  });
+
+  // Now ordered
+  return unorderedBrandData;
+}
+
 // This operation creates individual drug object entries in the JSON data for every unique brand name, as opposed to aggregating the brand names under one umbrella for a given active ingredient. This is done to enable unique searching and autocomplete by brand name
 const splitDataByBrands = (brandAggregateData) => {
   const individualBrandData = [];
@@ -3274,7 +3305,9 @@ const splitDataByBrands = (brandAggregateData) => {
   });
 
   return individualBrandData;
-}
+};
+
+
 
 
 // Step 1
@@ -3286,7 +3319,11 @@ const distilledPBSData = distillPBSData(orderedData);
 // Step 3
 const allDistilledData = addNonPBSDrugs(distilledPBSData);
 
-console.log(JSON.stringify(allDistilledData));
+// Step 4
+const orderedBrandData = orderBrands(allDistilledData);
+
+
+// console.log(JSON.stringify(allDistilledData));
 
 
 

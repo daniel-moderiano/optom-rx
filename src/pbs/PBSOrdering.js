@@ -1,67 +1,62 @@
-const PBSOrder = [
-  "5552F",
-  "5513E",
-  "5553G",
-  "10108B",
-  "5558M",
-  "5568C",
-  "5555J",
-  "5550D",
-  "5548B",
-  "5533F",
-  "11112W",
-  "2184Y",
-  "2171G",
-  "5524R",
-  "5532E",
-  "5508X",
-  "Olopatadine",
-  "5505R",
-  "5507W",
-  "5506T",
-  "5504Q",
-  "5502N",
-  "5503P",
-  "5556K",
-  "11853W",
-  "5562R",
-  "5542Q",
-  "5554H",
-  "5551E",
-  "5565X",
-  "5569D",
-  "5570E",
-  "5535H",
-  "10053D",
-  "10547D",
-  "5563T",
-  "5534G",
-  "5540N",
-  "5520M",
-  "5521N",
-  "5523Q",
-  "5516H",
-  "2748P",
-  "5501M",
-  "5517J",
-  "5545W",
-  "5522P",
-  "5519L",
-  "5526W",
-  "2167C",
-  "5541P",
-  "5536J",
-  "5537K",
-  "5538L",
-  "5544T",
-  "11439C",
-  "11634H",
-  "11849P",
-  "12612T",
-  "5564W",
-  "5567B",
-  "5566Y",
-  "5557L",
-  "12663L",
-  "12572Q"
+const test = [{
+  "item-code": "5552F",
+  "brand-name": [
+    "Xalaprost",
+    "Xalatan",
+    "Latanoprost Actavis",
+    "Latanoprost Sandoz",
+    "APO-Latanoprost"
+  ],
+  "mp-pt": "latanoprost",
+  "tpuu-or-mpp-pt": "latanoprost 0.005% eye drops, 2.5 mL"
+},
+{
+  "item-code": "5513E",
+  "brand-name": [
+    "FML Liquifilm"
+  ],
+  "mp-pt": "fluorometholone",
+  "tpuu-or-mpp-pt": "fluorometholone 0.1% eye drops, 5 mL"
+},
+{
+  "item-code": "5553G",
+  "brand-name": [
+    "Xalamol 50/5",
+    "Xalacom",
+    "Latanoprost/Timolol Sandoz 50/5",
+    "APO-Latanoprost/Timolol 0.05/5"
+  ],
+  "mp-pt": "latanoprost + timolol",
+  "tpuu-or-mpp-pt": "latanoprost 0.005% + timolol 0.5% eye drops, 2.5 mL"
+}];
+
+const topBrands = [
+  'Xalatan',
+  'Xalacom',
+  'Cosopt',
+  'Lumigan',
+  'Alphagan',
+  'BrinzoQuin',
+  'Trusopt'
 ];
+
+test.forEach((item) => {
+  // Nested loop (bad practice I am aware) through brand names
+  topBrands.forEach((name) => {
+    // Isolate brand name array and check for any of the above brand names
+    if (item['brand-name'].includes(name)) {
+      // Find the current index of the brand name in the array of brand names for that drug item
+      const index = item['brand-name'].indexOf(name);
+      // Remove it
+      item['brand-name'].splice(index, 1)
+      // And re-add to the start of the array
+      // console.log(name);
+      item['brand-name'].unshift(name);
+      // console.log(index, name);
+    }
+  });
+});
+
+// test.unshift('TEST')
+
+console.log(test);
