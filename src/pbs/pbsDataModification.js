@@ -2869,8 +2869,83 @@ const PBSData = {
   }
 };
 
-// First, produce the distilled data set for drug autocomplete. The following fields will be included:
-const distillPBSData = (rawData) => {
+// This is the recommended order based loosely on the ranking of most prescribed optometrical medications. Note all non-PBS drugs will remain at the bottom of the list, so do not impact this ordering
+const PBSOrder = [
+  "5552F",
+  "5513E",
+  "5553G",
+  "10108B",
+  "5558M",
+  "5568C",
+  "5555J",
+  "5550D",
+  "5548B",
+  "5533F",
+  "11112W",
+  "2184Y",
+  "2171G",
+  "5524R",
+  "5532E",
+  "5508X",
+  "5505R",
+  "5507W",
+  "5506T",
+  "5504Q",
+  "5502N",
+  "5503P",
+  "5556K",
+  "11853W",
+  "5562R",
+  "5542Q",
+  "5554H",
+  "5551E",
+  "5565X",
+  "5569D",
+  "5570E",
+  "5535H",
+  "10053D",
+  "10547D",
+  "5563T",
+  "5534G",
+  "5540N",
+  "5520M",
+  "5521N",
+  "5523Q",
+  "5516H",
+  "2748P",
+  "5501M",
+  "5517J",
+  "5545W",
+  "5522P",
+  "5519L",
+  "5526W",
+  "2167C",
+  "5541P",
+  "5536J",
+  "5537K",
+  "5538L",
+  "5544T",
+  "11439C",
+  "11634H",
+  "11849P",
+  "12612T",
+  "5564W",
+  "5567B",
+  "5566Y",
+  "5557L",
+  "12663L",
+  "12572Q"
+];
+
+// Using a map function, the distilled PBS data may be re-mapped to a new ordered set
+const orderPBSData = (rawPBSData, recommendedOrder) => {
+  // Use the raw PBS data, which references each drug under an itemCode key, as the source of drug data for mapping the recommended order array with actual data
+  const orderedData = recommendedOrder.map((item) => (rawPBSData[item]));
+  return orderedData;
+}
+
+// Produce the distilled data set for drug autocomplete. The fields required can be adjusted within the body of the function
+const distillPBSData = (orderedData) => {
   const dataFields = [
     'item-code',
     'brand-name',
@@ -2881,11 +2956,11 @@ const distillPBSData = (rawData) => {
   const distilledPBSData = [];
   
   // Iterate through each drug (item) in the raw data
-  Object.keys(PBSData).forEach((itemCode) => {
+  orderedData.forEach((item) => {
     const newItem = {};
     // For each of the required fields, create a property in the newItem to be added to the distilled data set
     dataFields.forEach((field) => {
-      newItem[field] = PBSData[itemCode][field];
+      newItem[field] = item[field];
     });
     distilledPBSData.push(newItem);
   });
@@ -2893,7 +2968,7 @@ const distillPBSData = (rawData) => {
   return distilledPBSData;
 }
 
-// These JSON arrays have been manually created for non-PBS drugs, and will rarely change. They are in the same format as distilledPBSData at this stage. When they do need update, manual updates are both quick and easy. Note that neither have been split into individual brand names. They need to be added to the PBS data at this stage
+// These schedule two and four JSON arrays have been manually created for non-PBS drugs, and will rarely change. They are in the same format as distilledPBSData at this stage. Note that neither have been split into individual brand names. They need to be added to the PBS data at this stage
 const addNonPBSDrugs = (distilledPBSData) => {
   const scheduleFourDrugs = [
     {
@@ -3178,30 +3253,41 @@ const addNonPBSDrugs = (distilledPBSData) => {
   ];
 
   return distilledPBSData.concat(scheduleTwoDrugs, scheduleFourDrugs);
+};
+
+// This operation creates individual drug object entries in the JSON data for every unique brand name, as opposed to aggregating the brand names under one umbrella for a given active ingredient. This is done to enable unique searching and autocomplete by brand name
+const splitDataByBrands = (brandAggregateData) => {
+  const individualBrandData = [];
+
+  brandAggregateData.forEach((item) => {
+    // Check for items with >1 brand name
+    if (item['brand-name'].length > 1) {
+      // Create individual entry for each brand name, with identical info otherwise
+      item['brand-name'].forEach((name) => {
+        let newDrugItem = { ...item, "brand-name": [name] };
+        individualBrandData.push(newDrugItem);
+      })
+    } else {
+      // Otherwise a single entry for one brand name is required
+      individualBrandData.push(item);
+    }
+  });
+
+  return individualBrandData;
 }
 
-const distilledData = distillPBSData(PBSData);
-const concatData = addNonPBSDrugs(distilledData);
-console.log(JSON.stringify(concatData));
 
-// TODO: Here the data should be sorted into most commonly prescribed
+// Step 1
+const orderedData = orderPBSData(PBSData, PBSOrder);
 
-// TODO: Next the data should be ordered by individual brand popularity/commercial availability
+// Step 2
+const distilledPBSData = distillPBSData(orderedData);
+
+// Step 3
+const allDistilledData = addNonPBSDrugs(distilledPBSData);
+
+console.log(JSON.stringify(allDistilledData));
 
 
-// Next, this operation creates individual drug object entries in the JSON data for every unique brand name, as opposed to aggregating the brand names under one umbrella for a given active ingredient. This is done to enable unique searching and autocomplete by brand name
-const individualBrandData = [];
 
-// distilledPBSData.forEach((item) => {
-//   // Check for items with >1 brand name
-//   if (item['brand-name'].length > 1) {
-//     // Create individual entry for each brand name, with identical info otherwise
-//     item['brand-name'].forEach((name) => {
-//       let newDrugItem = { ...item, "brand-name": [name] };
-//       individualBrandData.push(newDrugItem);
-//     })
-//   } else {
-//     // Otherwise a single entry for one brand name is required
-//     individualBrandData.push(item);
-//   }
-// });
+
