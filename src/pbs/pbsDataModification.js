@@ -3115,7 +3115,29 @@ const addLEMIandLMBC = (rawData) => {
   
   // LEMI items
   const excludedItems = [
-  
+    '5502N',
+    '5504Q',
+    '5503P',
+    '5506T',
+    '11853W',
+    '5508X',
+    '5505R',
+    '5507W',
+    '5556K',
+    '5521N',
+    '5520M',
+    '2171G',
+    '2184Y',
+    '5517J',
+    '11634H',
+    '11849P',
+    '5519L',
+    '5522P',
+    '5523Q',
+    '5524R',
+    '5532E',
+    '5526W',
+    '2167C',
   ];
 
   // Depending on which list the medication belongs to, the lemi and lmbc properties are set accordingly
@@ -3134,6 +3156,8 @@ const addLEMIandLMBC = (rawData) => {
 
   return rawData;
 };
+
+console.log(addLEMIandLMBC(PBSData));
 
 // This is the recommended order based loosely on the ranking of most prescribed optometrical medications. Note all non-PBS drugs will remain at the bottom of the list, so do not impact this ordering
 const PBSOrder = [
@@ -3613,7 +3637,7 @@ const splitBrandData = splitDataByBrands(orderedBrandData);
 // Step 7
 const filteredData = removeListedItems(splitBrandData);
 
-console.log(JSON.stringify(filteredData));
+// console.log(JSON.stringify(filteredData));
 
 
 
