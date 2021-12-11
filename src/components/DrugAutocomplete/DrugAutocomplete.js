@@ -1,4 +1,4 @@
-import PBSData from '../../pbs/pbsDataUnique.json'
+import PBSData from '../../pbs/drugAutocompleteData.json'
 import { useEffect, useState, useRef, useCallback } from "react";
 import { StyledDrugAutocomplete } from './DrugAutocompleteStyled';
 import FormField from '../FormField/FormField';

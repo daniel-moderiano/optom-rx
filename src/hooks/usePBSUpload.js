@@ -1,7 +1,7 @@
 // This file is intended to code the logic that pushes the PBS data to firestore
 import { db } from '../firebase/config';
 import { doc, setDoc } from 'firebase/firestore';
-import PBSData from "../pbs/pbsData";
+import PBSData from "../pbs/PBSRawWithLEMI.json";
 
 export const usePBSUpload = () => {
   const itemCodes = Object.keys(PBSData);

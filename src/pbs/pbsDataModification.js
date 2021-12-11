@@ -3157,7 +3157,7 @@ const addLEMIandLMBC = (rawData) => {
   return rawData;
 };
 
-console.log(addLEMIandLMBC(PBSData));
+console.log(JSON.stringify(addLEMIandLMBC(PBSData)));
 
 // This is the recommended order based loosely on the ranking of most prescribed optometrical medications. Note all non-PBS drugs will remain at the bottom of the list, so do not impact this ordering
 const PBSOrder = [
