@@ -3089,7 +3089,51 @@ const PBSData = {
       "atc": "S01BB02",
       "caution-ids": []
   }
-}
+};
+
+// Raw PBS data should be modified with the LEMI and LMBC information while it is still referenced by item code
+const addLEMIandLMBC = (rawData) => {
+  // LMBC items
+  const brandConsideration = [
+    '5551E',
+    '10053D',
+    '10108B',
+    '5558M',
+    '5540N',
+    '10547D',
+    '5562R',
+    '5535H',
+    '5563T',
+    '5534G',
+    '5541P',
+    '5542Q',
+    '5552F',
+    '5553G',
+    '5548B',
+    '5550D',
+  ];
+  
+  // LEMI items
+  const excludedItems = [
+  
+  ];
+
+  // Depending on which list the medication belongs to, the lemi and lmbc properties are set accordingly
+  Object.keys(rawData).forEach((item) => {
+    if (brandConsideration.includes(item)) {
+      rawData[item]['lmbc'] = true;
+      rawData[item]['lemi'] = false;
+    } else if (excludedItems.includes(item)) {
+      rawData[item]['lmbc'] = false;
+      rawData[item]['lemi'] = true;
+    } else {
+      rawData[item]['lmbc'] = false;
+      rawData[item]['lemi'] = false;
+    }
+  });
+
+  return rawData;
+};
 
 // This is the recommended order based loosely on the ranking of most prescribed optometrical medications. Note all non-PBS drugs will remain at the bottom of the list, so do not impact this ordering
 const PBSOrder = [
@@ -3172,7 +3216,9 @@ const distillPBSData = (orderedData) => {
     'item-code',
     'brand-name',
     'mp-pt',
-    'tpuu-or-mpp-pt'
+    'tpuu-or-mpp-pt',
+    'lemi',
+    'lmbc',
   ];
   
   const distilledPBSData = [];
@@ -3546,23 +3592,25 @@ const removeListedItems = (individualBrandData) => {
   return filtered;
 }
 
-
 // Step 1
-const orderedData = orderPBSData(PBSData, PBSOrder);
+const addedPropsData = addLEMIandLMBC(PBSData);
 
 // Step 2
-const distilledPBSData = distillPBSData(orderedData);
+const orderedData = orderPBSData(addedPropsData, PBSOrder);
 
 // Step 3
-const allDistilledData = addNonPBSDrugs(distilledPBSData);
+const distilledPBSData = distillPBSData(orderedData);
 
 // Step 4
-const orderedBrandData = orderBrands(allDistilledData);
+const allDistilledData = addNonPBSDrugs(distilledPBSData);
 
 // Step 5
-const splitBrandData = splitDataByBrands(orderedBrandData);
+const orderedBrandData = orderBrands(allDistilledData);
 
 // Step 6
+const splitBrandData = splitDataByBrands(orderedBrandData);
+
+// Step 7
 const filteredData = removeListedItems(splitBrandData);
 
 console.log(JSON.stringify(filteredData));
