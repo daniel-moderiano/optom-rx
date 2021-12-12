@@ -83,17 +83,63 @@ const StyledDrugAutocomplete = styled.fieldset`
     display: flex;
     align-items: center;
     width: 24rem;
+    
+    /* Tooltip container */
+    .tooltip {
+      position: relative;
+      display: inline-block;
 
-    .question-icon {
-      opacity: 0.5;
-      width: 22px;
-      margin-top: 0.25rem;
+      .question-icon {
+        opacity: 0.5;
+        width: 22px;
+        margin-top: 0.25rem;
+      }
+
+      .question-icon:hover {
+        /* cursor: pointer; */
+        opacity: 1.0;
+      }
+
+      .tooltip-text {
+        visibility: hidden;
+        width: 120px;
+        background-color: #555;
+        color: #fff;
+        text-align: center;
+        padding: 5px 0;
+        border-radius: 6px;
+        position: absolute;
+        z-index: 1;
+        left: 125%;
+        margin-top: -0.1rem;
+
+        /* Fade in tooltip */
+        opacity: 0;
+        transition: opacity 0.3s;
+
+        /* Tooltip arrow */
+        &::after {
+          content: "";
+          position: absolute;
+          top: 50%;
+          right: 100%;
+          margin-top: -4px;
+          margin-left: -5px;
+          border-width: 5px;
+          border-style: solid;
+          border-color: transparent #555 transparent transparent;
+        }
+      }
+
+
+      /* Show the tooltip text when you mouse over the tooltip container */
+      &:hover .tooltip-text {
+        visibility: visible;
+        opacity: 1;
+      }
     }
 
-    .question-icon:hover {
-      cursor: pointer;
-      opacity: 1.0;
-    }
+    
   }
   
 
