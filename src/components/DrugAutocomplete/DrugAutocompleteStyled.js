@@ -79,6 +79,24 @@ const StyledDrugAutocomplete = styled.fieldset`
     margin: 0.5rem 0;
   }
 
+  .brandOnly-container {
+    display: flex;
+    align-items: center;
+    width: 24rem;
+
+    .question-icon {
+      opacity: 0.5;
+      width: 22px;
+      margin-top: 0.25rem;
+    }
+
+    .question-icon:hover {
+      cursor: pointer;
+      opacity: 1.0;
+    }
+  }
+  
+
   button {
     position: absolute;
     right: 0.3rem;

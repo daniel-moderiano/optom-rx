@@ -23,6 +23,10 @@ const Nav = () => {
 
   // Ensure the items list closes on outside click
   const menuOutsideClick = useCallback((event) => {
+    // SVG elements on the page do not have a className, so clicking them will crash the app. Avoid that here
+    if (typeof event.target.className !== 'string') {
+      return;
+    }
     // All items within the autocomplete input and items list will contain UserMenu in their class. Note also the dropdown btn has the same class to ensure no clashing of toggle functions
     if (!event.target.className.includes('UserMenu')) {
       setShowMenu(false);

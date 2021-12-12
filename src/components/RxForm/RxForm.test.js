@@ -721,7 +721,7 @@ describe('PBS data tests', () => {
   });
 
   test('PBS data sets authority/restriction message', () => {
-    const resAlert = screen.getByText(/This is an Authority Required item/i);
+    const resAlert = screen.getByText(/This item is available on the PBS \(authority required\)/i);
     expect(resAlert).toBeInTheDocument();
   });
 
@@ -762,7 +762,7 @@ describe('Empty PBS and non-PBS data tests', () => {
       </AuthContext.Provider>
       </BrowserRouter>
     );
-    const pbsMsg = screen.getByText(/This item is not on the PBS/i);
+    const pbsMsg = screen.getByText(/This item is not available on the PBS/i);
     expect(pbsMsg).toBeInTheDocument();
   });
 });
