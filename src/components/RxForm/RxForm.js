@@ -463,13 +463,44 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
 
   }, [pbsInfo, drugData.verified, clearPbsInfo, clearPbsState]);
 
+  // Identify whether a drug on the PBS is restricted or not, and display indications for use on restricted items
+  const lemiStatus = useCallback(() => {
+  
+    // PBS info-related effects here
+    if (pbsInfo) {
+      // Check for lemi and/or lmbc status
+      if (pbsInfo['lemi']) {
+        // Medicine is recommended to prescribe by brand only
+        setDrugData((prevData) => ({
+          ...prevData,
+          brandOnly: true,
+        }));
+      } else if (pbsInfo['lmbc']) {
+        // Medicine is recommended to have brand name included
+        setDrugData((prevData) => ({
+          ...prevData,
+          brandOnly: false,
+          includeBrand: true,
+        }));
+      } else {
+        // Neither LEMI nor LMBC listed; prescribe by active ingredient only
+        setDrugData((prevData) => ({
+          ...prevData,
+          brandOnly: false,
+          includeBrand: false,
+        }));
+      }
+    } 
+  }, [pbsInfo]);
+
   // Can utilise a useEffect such as this to set state or UI elements based on PBS data being fetched or lost
   // Note that these PBS-related functions MUST only be performed on drug data with the verified: true tag
   useEffect(() => {
     restrictedStatus();
     authorityStatus();
     quantityRepeatStatus();
-  }, [restrictedStatus, authorityStatus, quantityRepeatStatus, pbsInfo])
+    lemiStatus();
+  }, [restrictedStatus, authorityStatus, quantityRepeatStatus, lemiStatus, pbsInfo])
 
   // Used to manage alerts on max quantity and repeats under the PBS
   useEffect(() => {
@@ -1053,7 +1084,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
         {/* TODO: consider a dropdown UI expandable div */}
         {(drugData.verified && drugData.indications.length > 0) && 
           <div className="indications">
-            <button className="indications__btn collapsible" onClick={() => {setExpandIndication((prevState) => !prevState)}}>Indications for use:</button>
+            <button className="indications__btn collapsible" onClick={(event) => {event.preventDefault(); setExpandIndication((prevState) => !prevState)}}>Indications for use:</button>
             <div className={`indications__content ${expandIndication ? 'expand' : 'collapse' }`} dangerouslySetInnerHTML={{ __html: indication }}></div>    
           </div>
           

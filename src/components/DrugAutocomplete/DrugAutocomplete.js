@@ -366,7 +366,7 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
           name="substitutePermitted"
           label="Brand substitution not permitted" 
           onChange={() => toggle(setData, data, 'substitutePermitted')}
-          checked={data.substitutePermitted}
+          checked={!data.substitutePermitted}
           className="checkbox"
           enterFunc={(event) => changeOnEnter(event, setData, data)}
         />     
