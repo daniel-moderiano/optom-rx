@@ -22,6 +22,9 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
 
   const [indication, setIndication] = useState('');
   const [expandIndication, setExpandIndication] = useState(false);
+
+  const [showTooltip, setShowTooltip] = useState(true);
+  const [tooltipText, setTooltipText] = useState('');
  
 
   // State (at this stage) is only provided if generating a new Rx. Hence the numbers fetch should only be performed when state exists
@@ -465,7 +468,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
 
   // Identify whether a drug on the PBS is restricted or not, and display indications for use on restricted items
   const lemiStatus = useCallback(() => {
-  
+    console.log('LEMI func called');
     // PBS info-related effects here
     if (pbsInfo) {
       // Check for lemi and/or lmbc status
@@ -475,6 +478,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
           ...prevData,
           brandOnly: true,
         }));
+        setTooltipText('This item is excluded from active ingredient prescribing and should be prescribed by brand name only for practical and safety reasons');
       } else if (pbsInfo['lmbc']) {
         // Medicine is recommended to have brand name included
         setDrugData((prevData) => ({
@@ -482,6 +486,8 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
           brandOnly: false,
           includeBrand: true,
         }));
+        // TODO: LMBC recommends a hyperlink to the LMBC here
+        setTooltipText('This item is included on the List of Medicines for Brand Consideration (LMBC). Prescribers should consider prescribing by brand as well as active ingredient for patient safety');
       } else {
         // Neither LEMI nor LMBC listed; prescribe by active ingredient only
         setDrugData((prevData) => ({
@@ -489,9 +495,22 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
           brandOnly: false,
           includeBrand: false,
         }));
+        setTooltipText('This item should be prescribed by active ingredient only');
+      }
+      // Show tooltip
+      if (!showTooltip) {
+        setShowTooltip((prevData) => !prevData);
+        setTooltipText('');
+      }
+    }
+    
+    // Hide the tooltip if the user changes the medication manually, but leave the lemi/lmbc settings unchanged
+    if (!drugData.verified) {
+      if (showTooltip) {
+        setShowTooltip((prevData) => !prevData);
       }
     } 
-  }, [pbsInfo]);
+  }, [pbsInfo, drugData.verified, setShowTooltip, showTooltip]);
 
   // Can utilise a useEffect such as this to set state or UI elements based on PBS data being fetched or lost
   // Note that these PBS-related functions MUST only be performed on drug data with the verified: true tag
@@ -1031,6 +1050,8 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
           alerts={drugAlerts}
           setAlerts={setDrugAlerts}
           fetchDrug={fetchDrug}
+          showTooltip={showTooltip}
+          tooltipText={tooltipText}
         />
 
         {/* Must include quantity and repeats to meet requirements */}

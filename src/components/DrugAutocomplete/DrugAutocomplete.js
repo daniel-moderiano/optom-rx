@@ -3,7 +3,7 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import { StyledDrugAutocomplete } from './DrugAutocompleteStyled';
 import FormField from '../FormField/FormField';
 
-const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAlerts, fetchDrug }) => {
+const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAlerts, fetchDrug, showTooltip, tooltipText }) => {
   // useRef allows us to store the equivalent of a 'global' component variable without losing data on re-render, but avoiding the async problems that can arise with state
   const currentFocus = useRef(-1);
   // Controls the UI state of the collapsed input fields
@@ -366,13 +366,13 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
             enterFunc={(event) => changeOnEnter(event, setData, data)}
           /> 
 
-          <div className="tooltip">
-            <svg xmlns="http://www.w3.org/2000/svg" className="question-icon" viewBox="0 0 512 512" onClick={showInfoTooltip}>
+          <div className={`tooltip ${showTooltip ? 'show' : 'hide'}`}>
+            <svg xmlns="http://www.w3.org/2000/svg" className="question-icon" viewBox="0 0 512 512" >
               <path d="M256 80a176 176 0 10176 176A176 176 0 00256 80z" fill="none" stroke="currentColor" strokeMiterlimit="10" strokeWidth="32"/>
               <path d="M200 202.29s.84-17.5 19.57-32.57C230.68 160.77 244 158.18 256 158c10.93-.14 20.69 1.67 26.53 4.45 10 4.76 29.47 16.38 29.47 41.09 0 26-17 37.81-36.37 50.8S251 281.43 251 296" fill="none" stroke="currentColor" strokeLinecap="round" strokeMiterlimit="10" strokeWidth="28"/>
               <circle cx="250" cy="348" r="20"/>
             </svg>
-            <span className="tooltip-text">Tooltip text</span>
+            <span className="tooltip-text">{tooltipText}</span>
           </div>
           
           

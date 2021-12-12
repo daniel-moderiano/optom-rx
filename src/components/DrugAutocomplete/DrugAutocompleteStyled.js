@@ -92,7 +92,7 @@ const StyledDrugAutocomplete = styled.fieldset`
       .question-icon {
         opacity: 0.5;
         width: 22px;
-        margin-top: 0.25rem;
+        margin-top: 0.3rem;
       }
 
       .question-icon:hover {
@@ -102,7 +102,7 @@ const StyledDrugAutocomplete = styled.fieldset`
 
       .tooltip-text {
         visibility: hidden;
-        width: 120px;
+        width: 18rem;
         background-color: #555;
         color: #fff;
         text-align: center;
@@ -131,7 +131,6 @@ const StyledDrugAutocomplete = styled.fieldset`
         }
       }
 
-
       /* Show the tooltip text when you mouse over the tooltip container */
       &:hover .tooltip-text {
         visibility: visible;
@@ -139,7 +138,13 @@ const StyledDrugAutocomplete = styled.fieldset`
       }
     }
 
-    
+    .hide {
+      display: none;
+    }
+
+    .show {
+      display: inline-block;
+    }
   }
   
 
@@ -160,7 +165,6 @@ const StyledDrugAutocomplete = styled.fieldset`
       cursor: pointer;
     }
   }
-
  
 `
 
