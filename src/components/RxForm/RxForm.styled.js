@@ -65,17 +65,22 @@ const StyledRxForm = styled.form`
     border: 1px solid rgb(16, 110, 190);
   }
 
+  .indications {
+    margin-bottom: 1.5rem;
+  }
+
   /* Style the button that is used to open and close the collapsible content */
   .collapsible {
-    background-color: #eee;
-    color: #444;
+    /* background-color: #eee; */
     cursor: pointer;
-    padding: 18px;
+    font-size: 1rem;
+    padding: 0.4rem 0 0.5rem 1rem;
     width: 100%;
     border: none;
     text-align: left;
     outline: none;
-    font-size: 15px;
+    font-family: var(--font-stack-segoe);
+    font-weight: bold;
   }
 
   /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
@@ -85,9 +90,29 @@ const StyledRxForm = styled.form`
 
   /* Style the collapsible content. Note: hidden by default */
   .indications__content {
-    padding: 0 18px;
+    padding: 0 1rem;
     overflow: hidden;
-    background-color: #f1f1f1;
+    background-color: #f0f0f0;
+    
+    font-size: 0.9rem;
+
+    .indication__main {
+      margin: 1rem 0;
+    }
+    
+    ul {
+      list-style-type: square;
+      padding-left: 2rem;
+      /* margin: 0; */
+
+      li {
+        margin: 1rem 0;
+      }
+    }
+
+    .indication__clinical, .indication__and {
+      font-weight: bold;
+    }
 
     &.expand {
       display: block;
