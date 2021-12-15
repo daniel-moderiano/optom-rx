@@ -6,9 +6,6 @@ import { StyledProviders } from "./Providers.styled";
 import FormField from "../FormField/FormField";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase/config";
-import { useEffect } from "react/cjs/react.development";
-
-// TODO: allow a user to set a provider as default, and be able to have this appear as the pre-selected option in the RxForm
 
 const Providers = ({ googleLoaded }) => {
   const { user } = useAuthContext();
@@ -43,15 +40,13 @@ const Providers = ({ googleLoaded }) => {
 
   };
 
-  useEffect(() => {
-    
-  }, [])
-
   return (
     <StyledProviders className="Providers">
       <h2 className="Providers__title">Providers</h2>
       <p className="Providers__description">Use this section to add provider details that can be used in your prescriptions</p>
+
       <button className="Providers__add-btn" onClick={showProviderForm}>Add new provider</button>
+      
       {providers && 
         <div className="Providers__list">
         {/* Render providers using map function in combination with HTML table */}
@@ -60,9 +55,9 @@ const Providers = ({ googleLoaded }) => {
             <tr className="table__header-row">
                 <th className="table__header">Name</th>
                 <th className="table__header">Location</th>
-                <th className="table__header">Prescriber Number</th>
-                <th className="table__header">Set as default</th>
-                <th className="table__header">Actions</th>
+                {/* <th className="table__header">Prescriber Number</th> */}
+                <th className="table__header default-header">Set as default</th>
+                <th className="table__header actions-header">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -70,8 +65,8 @@ const Providers = ({ googleLoaded }) => {
               <tr key={provider.id} className="table__data-row">
                 <td className="table__cell">{provider.fullName}</td>
                 <td className="table__cell">{provider.streetAddress}</td>
-                <td className="table__cell">{provider.prescriberNumber}</td>
-                <td className="table__cell">
+                {/* <td className="table__cell">{provider.prescriberNumber}</td> */}
+                <td className="table__cell default-cell">
                   <FormField 
                     fieldType="checkbox" 
                     name="defaultProvider"
@@ -80,22 +75,18 @@ const Providers = ({ googleLoaded }) => {
                     className="checkbox defaultProvider"
                   /> 
                 </td>
-                <td className="table__cell">
-                  <button className="table__action">View</button>
-                  <button className="table__action">Edit</button>
-                  <button className="table__action">Delete</button>
+                <td className="table__cell actions-cell">
+                  <button className="table__action view">View</button>
+                  <button className="table__action edit">Edit</button>
+                  <button className="table__action delete">Delete</button>
                 </td>
-
-              
               </tr>
             ))}
           </tbody>
-          
-
         </table>
-        
         </div>
       }
+      
       
       {showForm && <ProviderForm googleLoaded={googleLoaded} standalone={true}/>}
       
