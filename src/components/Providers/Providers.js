@@ -3,6 +3,9 @@ import { useCollection } from '../../hooks/useCollection';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { useState } from "react";
 import { StyledProviders } from "./Providers.styled";
+import FormField from "../FormField/FormField";
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "../../firebase/config";
 
 // TODO: allow a user to set a provider as default, and be able to have this appear as the pre-selected option in the RxForm
 
@@ -12,6 +15,30 @@ const Providers = ({ googleLoaded }) => {
   const { documents: providers } = useCollection('providers', ['uid', '==', user.uid]);
   
   const [showForm, setShowForm] = useState(false);
+
+  // Store the firebase doc ID of the provider currently set as default
+  const [defaultProvider, setDefaultProvider] = useState('');
+
+  // Update both the UI checkboxes and backend to ensure only one provider can be set default at any one time
+  const setAsDefault = async (currentProviders, provID) => {
+    // Cycle through all backend providers. Note this list is always going to be very small, typicall <5
+    for (let i = 0; i < currentProviders.length; i++) {
+      // Remove defaults
+      if (currentProviders[i].id !== provID) {
+        await updateDoc(doc(db, 'providers', currentProviders[i].id), {
+          default: false
+        })
+      } else {
+        // Add default
+        await updateDoc(doc(db, 'providers', currentProviders[i].id), {
+          default: true
+        })
+      }
+    }
+    // Update UI once complete. Consider loading UI element in meantime
+    setDefaultProvider(provID);
+    console.log('Updated firestore defaults');
+  }
 
   const showProviderForm = () => {
     if (!showForm) {
@@ -29,20 +56,41 @@ const Providers = ({ googleLoaded }) => {
         <div className="Providers__list">
         {/* Render providers using map function in combination with HTML table */}
         <table className="Providers__table">
-          <tr className="table__header-row">
-            <th className="table__header">Name</th>
-            <th className="table__header">Location</th>
-            <th className="table__header">Prescriber Number</th>
-            <th className="table__header">Set default?</th>
-          </tr>
-          {providers.map(provider => (
-            <tr key={provider.id} className="table__data-row">
-              <td className="table__cell">{provider.fullName}</td>
-              <td className="table__cell">{provider.streetAddress}</td>
-              <td className="table__cell">{provider.prescriberNumber}</td>
-              <td className="table__cell">Checkbox</td>
+          <thead>
+            <tr className="table__header-row">
+                <th className="table__header">Name</th>
+                <th className="table__header">Location</th>
+                <th className="table__header">Prescriber Number</th>
+                <th className="table__header">Set as default</th>
+                <th className="table__header">Actions</th>
             </tr>
-          ))}
+          </thead>
+          <tbody>
+            {providers.map(provider => (
+              <tr key={provider.id} className="table__data-row">
+                <td className="table__cell">{provider.fullName}</td>
+                <td className="table__cell">{provider.streetAddress}</td>
+                <td className="table__cell">{provider.prescriberNumber}</td>
+                <td className="table__cell">
+                  <FormField 
+                    fieldType="checkbox" 
+                    name="defaultProvider"
+                    onChange={() => setAsDefault(providers, provider.id)}
+                    checked={provider.id === defaultProvider}
+                    className="checkbox defaultProvider"
+                  /> 
+                </td>
+                <td className="table__cell">
+                  <button className="table__action">View</button>
+                  <button className="table__action">Edit</button>
+                  <button className="table__action">Delete</button>
+                </td>
+
+              
+              </tr>
+            ))}
+          </tbody>
+          
 
         </table>
         

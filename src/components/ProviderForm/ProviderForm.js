@@ -24,6 +24,7 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
     state: '',
     phoneNumber: '',
     prescriberNumber: '',
+    default: false,
   });
 
   const [providerAlerts, setProviderAlerts] = useState({
@@ -47,7 +48,7 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
 
 
   // Add provider to firestore database when submitting from standalone form
-  const handleStandaloneSubmit = async (event, formData) => {
+  const handleStandaloneSubmit = async (event) => {
     event.preventDefault()
     await addDoc(collection(db, 'providers'), {
       ...providerData,
