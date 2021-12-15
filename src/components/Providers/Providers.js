@@ -4,7 +4,7 @@ import { useAuthContext } from '../../hooks/useAuthContext';
 import { useState } from "react";
 import { StyledProviders } from "./Providers.styled";
 import FormField from "../FormField/FormField";
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { db } from "../../firebase/config";
 
 const Providers = ({ googleLoaded }) => {
@@ -31,7 +31,12 @@ const Providers = ({ googleLoaded }) => {
       }
     }
     console.log('Updated firestore defaults');
-  }
+  };
+
+  const deleteProvider = async (provID) => {
+    await deleteDoc(doc(db, 'providers', provID));
+    console.log('Deleted');
+  };
 
   const showProviderForm = () => {
     if (!showForm) {
@@ -78,7 +83,7 @@ const Providers = ({ googleLoaded }) => {
                 <td className="table__cell actions-cell">
                   <button className="table__action view">View</button>
                   <button className="table__action edit">Edit</button>
-                  <button className="table__action delete">Delete</button>
+                  <button className="table__action delete" onClick={() => deleteProvider(provider.id)}>Delete</button>
                 </td>
               </tr>
             ))}
