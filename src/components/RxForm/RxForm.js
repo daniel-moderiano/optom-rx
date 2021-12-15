@@ -160,6 +160,24 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
 
   const [showProviderForm, setShowProviderForm] = useState(false);
 
+  // Update the default option in the providers select with a default provider (if available) 
+  useEffect(() => {
+    // Do not run unless a providers collection exists (i.e. before fetch has occured, or potentially for guest forms)
+    if (providers) {
+      providers.forEach((provider) => {
+        // Check for a default provider
+        if (provider.default) {
+          // Update the select element accordingly
+          setChosenProvider(provider.fullName);
+          // Also set state to provider data to ensure the form is pre-filled
+          setProviderData({
+            ...provider,
+          })
+        }
+      })
+    }
+  }, [providers]);
+
   // Remove all PBS related information from local state
   const clearPbsInfo = useCallback(() => {
     setDrugData((prevData) => ({

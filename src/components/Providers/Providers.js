@@ -6,6 +6,7 @@ import { StyledProviders } from "./Providers.styled";
 import FormField from "../FormField/FormField";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase/config";
+import { useEffect } from "react/cjs/react.development";
 
 // TODO: allow a user to set a provider as default, and be able to have this appear as the pre-selected option in the RxForm
 
@@ -15,9 +16,6 @@ const Providers = ({ googleLoaded }) => {
   const { documents: providers } = useCollection('providers', ['uid', '==', user.uid]);
   
   const [showForm, setShowForm] = useState(false);
-
-  // Store the firebase doc ID of the provider currently set as default
-  const [defaultProvider, setDefaultProvider] = useState('');
 
   // Update both the UI checkboxes and backend to ensure only one provider can be set default at any one time
   const setAsDefault = async (currentProviders, provID) => {
@@ -35,8 +33,6 @@ const Providers = ({ googleLoaded }) => {
         })
       }
     }
-    // Update UI once complete. Consider loading UI element in meantime
-    setDefaultProvider(provID);
     console.log('Updated firestore defaults');
   }
 
@@ -46,6 +42,10 @@ const Providers = ({ googleLoaded }) => {
     }
 
   };
+
+  useEffect(() => {
+    
+  }, [])
 
   return (
     <StyledProviders className="Providers">
@@ -76,7 +76,7 @@ const Providers = ({ googleLoaded }) => {
                     fieldType="checkbox" 
                     name="defaultProvider"
                     onChange={() => setAsDefault(providers, provider.id)}
-                    checked={provider.id === defaultProvider}
+                    checked={provider.default}
                     className="checkbox defaultProvider"
                   /> 
                 </td>
