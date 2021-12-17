@@ -12,6 +12,7 @@ import Home from './components/Home/Home';
 import Providers from "./components/Providers/Providers";
 import './App.css';
 import GuestRxForm from "./components/GuestRxForm/GuestRxForm";
+import EditProvider from "./components/EditProvider/EditProvider";
 
 const App = () => {
   // Can user the user state to conditionally render or redirect routes (logged in vs out for example)
@@ -149,6 +150,8 @@ const App = () => {
             }/>
 
             <Route path="/template" element={<RxTemplate data={data} />}/>
+
+            <Route path="/edit/:id" element={<EditProvider data={data} />}/>
 
             <Route path="/providers" element={
               <>

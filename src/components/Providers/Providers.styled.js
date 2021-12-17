@@ -40,6 +40,17 @@ const StyledProviders = styled.div`
     margin: 0;
     border-collapse: collapse;
     width: 100%;
+    /* table-layout: fixed; */
+
+    .table__form {
+      &.expand {
+        display: table-row;
+      }
+
+      &.collapse {
+        display: none;
+      }
+    }
 
     tr {
       
@@ -55,33 +66,13 @@ const StyledProviders = styled.div`
       }
 
       .actions-cell {
-        padding-left: 2rem;
+        padding-left: 0.5rem;
 
-        .view {
-          background-color: var(--success);
-          border: 1px solid var(--success); 
-
-          &:hover {
-            background-color: #197040;
-            border: 1px solid #197040;
-          }
-        }
-
-        .delete {
-          background-color: var(--error);
-          border: 1px solid var(--error); 
-
-          &:hover {
-            background-color: #a80000;
-            border: 1px solid #a80000;
-          }
-        }
-
-        button {
-          margin-right: 0.8rem;
+        .table__action {
           font-size: 0.85rem;
           font-family: var(--font-stack-segoe);
           box-sizing: border-box;
+          text-decoration: none;
           cursor: pointer;
           padding: 2px 8px 5px 8px;
           border-radius: 2px;
@@ -96,37 +87,50 @@ const StyledProviders = styled.div`
           }
         }
 
+        .edit {
+          margin-right: 0.8rem;
+        }
+
+        .delete {
+          background-color: var(--error);
+          border: 1px solid var(--error); 
+
+          &:hover {
+            background-color: #a80000;
+            border: 1px solid #a80000;
+          }
+        }
+
+        
+
         max-width: 10rem;
       }
 
       .actions-header {
-        padding-left: 2rem;
+        padding-left: 0.5rem;
       }
 
       .default-header {
-        text-align: center;
-        /* margin-right: 2rem; */
+        text-align: center
       }
 
       .default-cell {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        /* width: 2rem; */
-        /* margin-right: 2rem; */
 
         .checkbox {
+          display: flex;
+          align-items: center;
+          justify-content: center;
 
           label {
             width: 16px;
+            position: relative;
 
             .checkmark {
               position: absolute;
               width: 5px;
               height: 10px;
               top: 2px;
-              left: 0.3rem;
+              left: 0.35rem;
               border: solid white;
               border-width: 0 2px 2px 0;
               -webkit-transform: rotate(45deg);

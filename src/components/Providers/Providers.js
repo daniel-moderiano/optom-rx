@@ -6,6 +6,8 @@ import { StyledProviders } from "./Providers.styled";
 import FormField from "../FormField/FormField";
 import { doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { db } from "../../firebase/config";
+import React from "react";
+import { Link } from "react-router-dom";
 
 const Providers = ({ googleLoaded }) => {
   const { user } = useAuthContext();
@@ -13,6 +15,8 @@ const Providers = ({ googleLoaded }) => {
   const { documents: providers } = useCollection('providers', ['uid', '==', user.uid]);
   
   const [showForm, setShowForm] = useState(false);
+
+  const [editData, setEditData] = useState()
 
   // Update both the UI checkboxes and backend to ensure only one provider can be set default at any one time
   const setAsDefault = async (currentProviders, provID) => {
@@ -50,6 +54,25 @@ const Providers = ({ googleLoaded }) => {
     }
   };
 
+  const editProvider = (providerID) => {
+    providers.forEach((provider) => {
+      if (provider.id === providerID) {
+        console.log(provider);
+
+      }
+    });
+    document.querySelector(`[data-id='${providerID}']`).classList.add('expand');
+    document.querySelector(`[data-id='${providerID}']`).classList.remove('collapse');
+  };
+
+  const formatLocation = (practice, streetAddress, suburb) => {
+    if (practice === "") {
+      return `${streetAddress}, ${suburb}`;
+    } else {
+      return `${practice}, ${suburb}`;
+    }
+  };
+
   return (
     <StyledProviders className="Providers">
       <h2 className="Providers__title">Providers</h2>
@@ -73,29 +96,35 @@ const Providers = ({ googleLoaded }) => {
           </thead>
           <tbody>
             {providers.map(provider => (
-              <tr key={provider.id} className="table__data-row">
-                <td className="table__cell">{provider.fullName}</td>
-                <td className="table__cell">{provider.streetAddress}</td>
-                {/* <td className="table__cell">{provider.prescriberNumber}</td> */}
-                <td className="table__cell default-cell">
-                  <FormField 
-                    fieldType="checkbox" 
-                    name="defaultProvider"
-                    onChange={() => setAsDefault(providers, provider.id)}
-                    checked={provider.default}
-                    className="checkbox defaultProvider"
-                  /> 
-                </td>
-                <td className="table__cell actions-cell">
-                  <button className="table__action view">View</button>
-                  <button className="table__action edit">Edit</button>
-                  <button className="table__action delete" onClick={() => deleteProvider(provider.id)}>Delete</button>
-                </td>
-              </tr>
+              <React.Fragment key={provider.id}>
+                <tr className="table__data-row">
+                  <td className="table__cell">{provider.fullName}</td>
+                  <td className="table__cell">{formatLocation(provider.practiceName, provider.streetAddress, provider.suburb)}</td>
+                  <td className="table__cell default-cell">
+                    <FormField 
+                      fieldType="checkbox" 
+                      name="defaultProvider"
+                      onChange={() => setAsDefault(providers, provider.id)}
+                      checked={provider.default}
+                      className="checkbox defaultProvider"
+                    /> 
+                  </td>
+                  <td className="table__cell actions-cell" >
+                    <Link className="table__action edit" to={`/edit/${provider.id}`}>Edit</Link>
+                    <button className="table__action delete" onClick={() => deleteProvider(provider.id)}>Delete</button>
+                  </td>
+                </tr>
+                <tr data-id={provider.id} className="table__form collapse">
+                  <td colSpan="4"><p>Form content for editing</p></td>
+                  {/* Edit version of provider form here */}
+                </tr> 
+              </React.Fragment>
             ))}
           </tbody>
         </table>
         </div>
+
+
       }
     </StyledProviders>
   )
