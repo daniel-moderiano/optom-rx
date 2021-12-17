@@ -42,7 +42,12 @@ const Providers = ({ googleLoaded }) => {
     if (!showForm) {
       setShowForm((prevState) => !prevState);
     }
+  };
 
+  const hideProviderForm = () => {
+    if (showForm) {
+      setShowForm((prevState) => !prevState);
+    }
   };
 
   return (
@@ -51,6 +56,7 @@ const Providers = ({ googleLoaded }) => {
       <p className="Providers__description">Use this section to add provider details that can be used in your prescriptions</p>
 
       <button className="Providers__add-btn" onClick={showProviderForm}>Add new provider</button>
+      {showForm && <ProviderForm googleLoaded={googleLoaded} standalone={true} hideForm={hideProviderForm}/>}
       
       {providers && 
         <div className="Providers__list">
@@ -91,10 +97,6 @@ const Providers = ({ googleLoaded }) => {
         </table>
         </div>
       }
-      
-      
-      {showForm && <ProviderForm googleLoaded={googleLoaded} standalone={true}/>}
-      
     </StyledProviders>
   )
 }

@@ -126,7 +126,7 @@ const StyledProviders = styled.div`
               width: 5px;
               height: 10px;
               top: 2px;
-              left: 0.35rem;
+              left: 0.3rem;
               border: solid white;
               border-width: 0 2px 2px 0;
               -webkit-transform: rotate(45deg);

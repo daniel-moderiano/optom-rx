@@ -9,7 +9,7 @@ import { collection, addDoc } from 'firebase/firestore'
 
 // ! Legal requirements include the prescriber's name, address, and contact details, and prescriber number
 
-const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBooleanState, googleLoaded, handleSubmit, standalone }) => {
+const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBooleanState, googleLoaded, standalone, hideForm }) => {
   const { user } = useAuthContext();
 
   const [providerData, setProviderData] = useState({
@@ -72,7 +72,10 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
 
     document.querySelectorAll('input').forEach((input) => {
       removeAllValidation(input);
-    })
+    });
+
+    hideForm();
+    
   }
 
   // Used to toggle any boolean data in the data state (locally within component)
@@ -429,6 +432,12 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
             handleStandaloneSubmit(event, providerData)
           }
         }}>Save</button>
+
+        <button onClick={(event) => {
+          event.preventDefault(); 
+          // TODO: be able to close form from within 
+          hideForm();
+        }}>Cancel</button>
        
       </div>}
 
