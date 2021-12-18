@@ -151,7 +151,7 @@ const App = () => {
 
             <Route path="/template" element={<RxTemplate data={data} />}/>
 
-            <Route path="/edit/:id" element={<EditProvider data={data} />}/>
+            <Route path="/edit/:id" element={<EditProvider data={data} googleLoaded={googleLoaded}/>}/>
 
             <Route path="/providers" element={
               <>

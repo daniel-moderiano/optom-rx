@@ -10,6 +10,7 @@ import { collection, addDoc } from 'firebase/firestore'
 // ! Legal requirements include the prescriber's name, address, and contact details, and prescriber number
 
 const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBooleanState, googleLoaded, standalone, hideForm }) => {
+
   const { user } = useAuthContext();
 
   const [providerData, setProviderData] = useState({
@@ -346,14 +347,14 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
 
   return (
     <>
-      {/* The standalone form allows all 'in house' state management and validation */}
+      {/* The standalone form allows all 'in house' state management and validation, but has the optiona of overwriting data with custom state if required */}
       {/* Standalone form should submit providers to firebase using user ID as document ID */}
       {standalone &&  <div className="ProviderForm ProviderForm--standalone">
         <FormField 
           fieldType="text" 
           name="fullName"
           label="Full name" 
-          value={providerData.fullName} 
+          value={data ? data.fullName : providerData.fullName} 
           onChange={(event) => handleStandaloneChange(event)} 
           alert={providerAlerts.fullName}
         />    
@@ -363,7 +364,7 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
           name="prefix"
           label="Include 'Dr' in provider name" 
           onChange={() => toggleStandaloneBooleanState(providerData, 'prefix')}
-          checked={providerData.prefix}
+          checked={data ? data : providerData.prefix}
           className="checkbox prefix-field"
           enterFunc={(event) => {
             if (event.keyCode === 13) {
@@ -377,7 +378,7 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
           name="qualifications"
           label="Abbreviated qualifications (optional)" 
           placeholder="e.g. BMedSci(VisSc), MOpt"
-          value={providerData.qualifications} 
+          value={data ? data.qualifications : providerData.qualifications} 
           onChange={(event) => handleStandaloneChange(event)} 
           maxlength="40"
         />
@@ -386,7 +387,7 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
         <FormField 
           name="practiceName"
           label="Practice name (optional)" 
-          value={providerData.practiceName} 
+          value={data ? data.practiceName : providerData.practiceName} 
           onChange={(event) => handleStandaloneChange(event)} 
         />
 
@@ -406,7 +407,7 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
           fieldType="text" 
           name="phoneNumber"
           label="Phone number" 
-          value={providerData.phoneNumber} 
+          value={data ? data.phoneNumber : providerData.phoneNumber} 
           onChange={(event) => handleStandaloneChange(event)} 
           alert={providerAlerts.phoneNumber}
           id="phoneNumber"
@@ -418,7 +419,7 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
           fieldType="text" 
           name="prescriberNumber"
           label="Prescriber number" 
-          value={providerData.prescriberNumber} 
+          value={data ? data.prescriberNumber : providerData.prescriberNumber} 
           onChange={(event) => handleStandaloneChange(event)} 
           alert={providerAlerts.prescriberNumber}
           maxlength="7"
