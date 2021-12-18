@@ -6,17 +6,14 @@ import { StyledProviders } from "./Providers.styled";
 import FormField from "../FormField/FormField";
 import { doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { db } from "../../firebase/config";
-import React from "react";
 import { Link } from "react-router-dom";
 
-const Providers = ({ googleLoaded }) => {
+const Providers = ({ googleLoaded, setToast }) => {
   const { user } = useAuthContext();
   // This should be called using the curernt user ID to query the collection
   const { documents: providers } = useCollection('providers', ['uid', '==', user.uid]);
   
   const [showForm, setShowForm] = useState(false);
-
-  const [editData, setEditData] = useState()
 
   // Update both the UI checkboxes and backend to ensure only one provider can be set default at any one time
   const setAsDefault = async (currentProviders, provID) => {
@@ -34,7 +31,6 @@ const Providers = ({ googleLoaded }) => {
         })
       }
     }
-    console.log('Updated firestore defaults');
   };
 
   const deleteProvider = async (provID) => {
@@ -54,17 +50,6 @@ const Providers = ({ googleLoaded }) => {
     }
   };
 
-  const editProvider = (providerID) => {
-    providers.forEach((provider) => {
-      if (provider.id === providerID) {
-        console.log(provider);
-
-      }
-    });
-    document.querySelector(`[data-id='${providerID}']`).classList.add('expand');
-    document.querySelector(`[data-id='${providerID}']`).classList.remove('collapse');
-  };
-
   const formatLocation = (practice, streetAddress, suburb) => {
     if (practice === "") {
       return `${streetAddress}, ${suburb}`;
@@ -79,7 +64,7 @@ const Providers = ({ googleLoaded }) => {
       <p className="Providers__description">Use this section to add provider details that can be used in your prescriptions</p>
 
       <button className="Providers__add-btn" onClick={showProviderForm}>Add new provider</button>
-      {showForm && <ProviderForm googleLoaded={googleLoaded} standalone={true} handleCancel={hideProviderForm}/>}
+      {showForm && <ProviderForm googleLoaded={googleLoaded} standalone={true} handleCancel={hideProviderForm} setToast={setToast}/>}
       
       {providers && 
         <div className="Providers__list">
@@ -96,35 +81,27 @@ const Providers = ({ googleLoaded }) => {
           </thead>
           <tbody>
             {providers.map(provider => (
-              <React.Fragment key={provider.id}>
-                <tr className="table__data-row">
-                  <td className="table__cell">{provider.fullName}</td>
-                  <td className="table__cell">{formatLocation(provider.practiceName, provider.streetAddress, provider.suburb)}</td>
-                  <td className="table__cell default-cell">
-                    <FormField 
-                      fieldType="checkbox" 
-                      name="defaultProvider"
-                      onChange={() => setAsDefault(providers, provider.id)}
-                      checked={provider.default}
-                      className="checkbox defaultProvider"
-                    /> 
-                  </td>
-                  <td className="table__cell actions-cell" >
-                    <Link className="table__action edit" to={`/edit/${provider.id}`}>Edit</Link>
-                    <button className="table__action delete" onClick={() => deleteProvider(provider.id)}>Delete</button>
-                  </td>
-                </tr>
-                <tr data-id={provider.id} className="table__form collapse">
-                  <td colSpan="4"><p>Form content for editing</p></td>
-                  {/* Edit version of provider form here */}
-                </tr> 
-              </React.Fragment>
+              <tr key={provider.id} className="table__data-row">
+                <td className="table__cell">{provider.fullName}</td>
+                <td className="table__cell">{formatLocation(provider.practiceName, provider.streetAddress, provider.suburb)}</td>
+                <td className="table__cell default-cell">
+                  <FormField 
+                    fieldType="checkbox" 
+                    name="defaultProvider"
+                    onChange={() => setAsDefault(providers, provider.id)}
+                    checked={provider.default}
+                    className="checkbox defaultProvider"
+                  /> 
+                </td>
+                <td className="table__cell actions-cell" >
+                  <Link className="table__action edit" to={`/edit/${provider.id}`}>Edit</Link>
+                  <button className="table__action delete" onClick={() => deleteProvider(provider.id)}>Delete</button>
+                </td>
+              </tr>
             ))}
           </tbody>
         </table>
         </div>
-
-
       }
     </StyledProviders>
   )

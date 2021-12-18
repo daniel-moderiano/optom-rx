@@ -9,7 +9,7 @@ import { collection, addDoc } from 'firebase/firestore'
 
 // ! Legal requirements include the prescriber's name, address, and contact details, and prescriber number
 
-const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBooleanState, googleLoaded, standalone, handleSubmit, handleCancel }) => {
+const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBooleanState, googleLoaded, standalone, handleSubmit, handleCancel, setToast }) => {
 
   const { user } = useAuthContext();
 
@@ -76,6 +76,12 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
     });
 
     handleCancel();
+    setToast((prevData) => ({
+      ...prevData,
+      visible: true,
+      type: 'success',
+      message: 'Added successfully!'
+    }));
     
   };
 

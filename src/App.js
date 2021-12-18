@@ -179,7 +179,7 @@ const App = () => {
 
             <Route path="/providers" element={
               <>
-              {user && <Providers googleLoaded={googleLoaded}/>}
+              {user && <Providers googleLoaded={googleLoaded} setToast={setToastParams}/>}
               {!user && <Navigate to="/login" />}
               </>
             }/> 
