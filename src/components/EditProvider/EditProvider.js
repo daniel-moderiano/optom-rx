@@ -1,12 +1,14 @@
 import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../../firebase/config";
 import ProviderForm from "../ProviderForm/ProviderForm";
 
-const EditProvider = ({ googleLoaded }) => {
+const EditProvider = ({ googleLoaded, setToast }) => {
   const { id } = useParams();
+
+  let navigate = useNavigate();
 
   const [providerData, setProviderData] = useState({
     prefix: false,
@@ -46,8 +48,17 @@ const EditProvider = ({ googleLoaded }) => {
     // Add default
     await updateDoc(doc(db, 'providers', id), {
       ...providerData,
-    })
-    console.log('Edited provider');
+    });
+
+    // Either a toast message here, or navigate back to Providers page and use an app-wide Toast alert system to show a toast on navigation back
+    setToast((prevData) => ({
+      ...prevData,
+      visible: true,
+      type: 'success',
+      message: 'Saved changes!'
+    }));
+
+    navigate('/providers');
   }
 
   useEffect(() => {

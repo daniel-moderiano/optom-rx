@@ -25,6 +25,11 @@ const App = () => {
   const [toastMessage, setToastMessage] = useState('Test toast');
   const [showToast, setShowToast] = useState(true);
   const [toastType, setToastType] = useState('error');
+  const [toastParams, setToastParams] = useState({
+    visible: false, 
+    type: '',
+    message: '',
+  });
   
   const [data, setData] = useState({
     drugData: {
@@ -64,6 +69,19 @@ const App = () => {
   let navigate = useNavigate();
 
   const [googleLoaded, setGoogleLoaded] = useState(false);
+
+  // A global toast listener that fades out any toast message after one second
+  useEffect(() => {
+    if (toastParams.visible) {
+      setTimeout(() => {
+        // Only visibility is changed to preverse styling and message as toast fades out
+        setToastParams((prevData) => ({
+          ...prevData,
+          visible: false, 
+        }))
+      }, 1000);
+    }
+  }, [toastParams.visible])
 
   // Handle google places API loading and script HTML appendment
   useEffect(() => {
@@ -157,7 +175,7 @@ const App = () => {
 
             <Route path="/template" element={<RxTemplate data={data} />}/>
 
-            <Route path="/edit/:id" element={<EditProvider data={data} googleLoaded={googleLoaded} toast={setToastMessage} />}/>
+            <Route path="/edit/:id" element={<EditProvider googleLoaded={googleLoaded} setToast={setToastParams} />}/>
 
             <Route path="/providers" element={
               <>
@@ -170,7 +188,7 @@ const App = () => {
         </main>
         <footer className="footer"></footer>
       </>)}
-      <Toast message={toastMessage} visible={showToast} type={toastType} />
+      <Toast params={toastParams} />
     </div>
     
     
