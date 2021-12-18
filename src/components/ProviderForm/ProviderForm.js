@@ -9,7 +9,7 @@ import { collection, addDoc } from 'firebase/firestore'
 
 // ! Legal requirements include the prescriber's name, address, and contact details, and prescriber number
 
-const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBooleanState, googleLoaded, standalone, hideForm }) => {
+const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBooleanState, googleLoaded, standalone, handleSubmit, handleCancel }) => {
 
   const { user } = useAuthContext();
 
@@ -75,7 +75,7 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
       removeAllValidation(input);
     });
 
-    hideForm();
+    handleCancel();
     
   }
 
@@ -355,15 +355,15 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
           name="fullName"
           label="Full name" 
           value={data ? data.fullName : providerData.fullName} 
-          onChange={(event) => handleStandaloneChange(event)} 
-          alert={providerAlerts.fullName}
+          onChange={handleChange ? handleChange : handleStandaloneChange} 
+          alert={alerts ? alerts.fullName : providerAlerts.fullName}
         />    
 
         <FormField 
           fieldType="checkbox" 
           name="prefix"
           label="Include 'Dr' in provider name" 
-          onChange={() => toggleStandaloneBooleanState(providerData, 'prefix')}
+          onChange={toggleBooleanState ? (() => toggleBooleanState(setData, data, 'prefix')) : (() => toggleStandaloneBooleanState(providerData, 'prefix'))}
           checked={data ? data : providerData.prefix}
           className="checkbox prefix-field"
           enterFunc={(event) => {
@@ -379,7 +379,7 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
           label="Abbreviated qualifications (optional)" 
           placeholder="e.g. BMedSci(VisSc), MOpt"
           value={data ? data.qualifications : providerData.qualifications} 
-          onChange={(event) => handleStandaloneChange(event)} 
+          onChange={handleChange ? handleChange : handleStandaloneChange} 
           maxlength="40"
         />
 
@@ -388,16 +388,16 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
           name="practiceName"
           label="Practice name (optional)" 
           value={data ? data.practiceName : providerData.practiceName} 
-          onChange={(event) => handleStandaloneChange(event)} 
+          onChange={handleChange ? handleChange : handleStandaloneChange} 
         />
 
         <AddressAutocomplete 
-          data={providerData}
-          setData={setProviderData}
-          handleChange={(event) => handleStandaloneChange(event)}
+          data={data ? data : providerData}
+          setData={setData ? setData : setProviderData}
+          handleChange={handleChange ? handleChange : handleStandaloneChange} 
           provider={true}   
-          alerts={providerAlerts}
-          setAlerts={setProviderAlerts} 
+          alerts={alerts ? alerts : providerAlerts}
+          setAlerts={setAlerts ? setAlerts : setProviderAlerts} 
           googleLoaded={googleLoaded}
         />
 
@@ -408,8 +408,8 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
           name="phoneNumber"
           label="Phone number" 
           value={data ? data.phoneNumber : providerData.phoneNumber} 
-          onChange={(event) => handleStandaloneChange(event)} 
-          alert={providerAlerts.phoneNumber}
+          onChange={handleChange ? handleChange : handleStandaloneChange} 
+          alert={alerts ? alerts.phoneNumber : providerAlerts.phoneNumber}
           id="phoneNumber"
           maxlength="10"
           className="phoneNo-field form-field"
@@ -420,8 +420,8 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
           name="prescriberNumber"
           label="Prescriber number" 
           value={data ? data.prescriberNumber : providerData.prescriberNumber} 
-          onChange={(event) => handleStandaloneChange(event)} 
-          alert={providerAlerts.prescriberNumber}
+          onChange={handleChange ? handleChange : handleStandaloneChange} 
+          alert={alerts ? alerts.prescriberNumber : providerAlerts.prescriberNumber}
           maxlength="7"
           className="prescriberNo-field form-field"
         />
@@ -430,14 +430,18 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
         <button onClick={(event) => {
           event.preventDefault(); 
           if (checkFormValidation()) {
-            handleStandaloneSubmit(event, providerData)
+            if (handleSubmit) {
+              handleSubmit();
+            } else {
+              handleStandaloneSubmit(event, providerData);
+            }
           }
         }}>Save</button>
 
         <button onClick={(event) => {
           event.preventDefault(); 
           // TODO: be able to close form from within 
-          hideForm();
+          handleCancel();
         }}>Cancel</button>
        
       </div>}

@@ -79,7 +79,7 @@ const Providers = ({ googleLoaded }) => {
       <p className="Providers__description">Use this section to add provider details that can be used in your prescriptions</p>
 
       <button className="Providers__add-btn" onClick={showProviderForm}>Add new provider</button>
-      {showForm && <ProviderForm googleLoaded={googleLoaded} standalone={true} hideForm={hideProviderForm}/>}
+      {showForm && <ProviderForm googleLoaded={googleLoaded} standalone={true} handleCancel={hideProviderForm}/>}
       
       {providers && 
         <div className="Providers__list">
