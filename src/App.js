@@ -13,12 +13,18 @@ import Providers from "./components/Providers/Providers";
 import './App.css';
 import GuestRxForm from "./components/GuestRxForm/GuestRxForm";
 import EditProvider from "./components/EditProvider/EditProvider";
+import Toast from "./components/utils/Toast/Toast";
 
 const App = () => {
   // Can user the user state to conditionally render or redirect routes (logged in vs out for example)
   const { user, authIsReady } = useAuthContext();
 
   const ausDate = new Date().toLocaleString("en-CA", { timeZone: "Australia/Adelaide" }).substring(0, 10);
+
+  // Used for toast alerts, can pass set function to components that require toast alerts
+  const [toastMessage, setToastMessage] = useState('Test toast');
+  const [showToast, setShowToast] = useState(true);
+  const [toastType, setToastType] = useState('error');
   
   const [data, setData] = useState({
     drugData: {
@@ -151,7 +157,7 @@ const App = () => {
 
             <Route path="/template" element={<RxTemplate data={data} />}/>
 
-            <Route path="/edit/:id" element={<EditProvider data={data} googleLoaded={googleLoaded}/>}/>
+            <Route path="/edit/:id" element={<EditProvider data={data} googleLoaded={googleLoaded} toast={setToastMessage} />}/>
 
             <Route path="/providers" element={
               <>
@@ -164,6 +170,7 @@ const App = () => {
         </main>
         <footer className="footer"></footer>
       </>)}
+      <Toast message={toastMessage} visible={showToast} type={toastType} />
     </div>
     
     
