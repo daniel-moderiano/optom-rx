@@ -59,7 +59,12 @@ const EditProvider = ({ googleLoaded, setToast }) => {
     }));
 
     navigate('/providers');
+  };
+
+  const cancelEdit = () => {
+    navigate('/providers');
   }
+
 
   useEffect(() => {
     const docRef = doc(db, 'providers', id);
@@ -87,6 +92,7 @@ const EditProvider = ({ googleLoaded, setToast }) => {
         data={providerData}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
+        handleCancel={cancelEdit}
         toggleBooleanState={() => toggleBooleanState(setProviderData, providerData, 'prefix')}
         hideForm={() => console.log('Cancel')}
       />

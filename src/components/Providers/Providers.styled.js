@@ -7,6 +7,17 @@ const StyledProviders = styled.div`
   padding: 2rem 3rem;
   width: 90%;
 
+  .ProviderForm {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 2rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+
+    
+  }
+
   .Providers__title {
     font-family: var(--font-title);
     font-weight: normal;

@@ -63,9 +63,7 @@ const Providers = ({ googleLoaded, setToast }) => {
       <h2 className="Providers__title">Providers</h2>
       <p className="Providers__description">Use this section to add provider details that can be used in your prescriptions</p>
 
-      <button className="Providers__add-btn" onClick={showProviderForm}>Add new provider</button>
-      {showForm && <ProviderForm googleLoaded={googleLoaded} standalone={true} handleCancel={hideProviderForm} setToast={setToast}/>}
-      
+      <button className="Providers__add-btn" onClick={showProviderForm}>Add new provider</button>      
       {providers && 
         <div className="Providers__list">
         {/* Render providers using map function in combination with HTML table */}
@@ -103,6 +101,22 @@ const Providers = ({ googleLoaded, setToast }) => {
         </table>
         </div>
       }
+      {showForm && 
+        <div className="modal">
+          <div className="modal__content">
+            <header className="modal__header">
+              <h2 className="modal__title">New provider</h2>
+              <button className="modal__close" aria-label="close current window">
+                <svg className="modal-icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+              </button>
+            </header>
+            <div className="modal__form">
+              <ProviderForm googleLoaded={googleLoaded} standalone={true} handleCancel={hideProviderForm} setToast={setToast}/>
+            </div>
+          </div>
+        </div>
+      }
+      
     </StyledProviders>
   )
 }
