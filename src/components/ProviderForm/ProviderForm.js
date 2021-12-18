@@ -77,7 +77,7 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
 
     handleCancel();
     
-  }
+  };
 
   // Used to toggle any boolean data in the data state (locally within component)
   const toggleStandaloneBooleanState = (data, boolToChange) => {
@@ -363,13 +363,20 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
           fieldType="checkbox" 
           name="prefix"
           label="Include 'Dr' in provider name" 
-          onChange={toggleBooleanState ? (() => toggleBooleanState(setData, data, 'prefix')) : (() => toggleStandaloneBooleanState(providerData, 'prefix'))}
-          checked={data ? data : providerData.prefix}
+          onChange={toggleBooleanState ? toggleBooleanState : (() => toggleStandaloneBooleanState(providerData, 'prefix'))}
+          checked={data ? data.prefix : providerData.prefix}
           className="checkbox prefix-field"
           enterFunc={(event) => {
-            if (event.keyCode === 13) {
-              toggleStandaloneBooleanState(providerData, event.target.name);
+            if (toggleBooleanState) {
+              if (event.keyCode === 13) {
+                toggleBooleanState(setData, data, event.target.name);
+              }
+            } else {
+              if (event.keyCode === 13) {
+                toggleStandaloneBooleanState(providerData, event.target.name);
+              }
             }
+            
           }}
         />  
 
