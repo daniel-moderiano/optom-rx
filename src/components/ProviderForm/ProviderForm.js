@@ -1,11 +1,6 @@
 import FormField from "../FormField/FormField";
 import AddressAutocomplete from "../AddressAutocomplete/AddressAutocomplete";
 import { useState, useEffect, useCallback } from "react";
-import { useAuthContext } from "../../hooks/useAuthContext";
-
-// Firebase imports
-import { db } from '../../firebase/config'
-import { collection, addDoc } from 'firebase/firestore'
 
 // ! Legal requirements include the prescriber's name, address, and contact details, and prescriber number
 
@@ -40,15 +35,6 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
     const tick = element.parentNode.querySelector('.tickCircle');
     tick.classList.remove('hide');
     tick.classList.add("show");
-  }
-
-  const removeAllValidation = (element) => {
-    element.classList.remove('success');
-
-    // Remove the tick icon
-    const tick = element.parentNode.querySelector('.tickCircle');
-    tick.classList.remove('show');
-    tick.classList.add("hide");
   }
 
    // Show positive feedback once a validation requirements are met

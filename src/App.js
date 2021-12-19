@@ -23,9 +23,6 @@ const App = () => {
   const ausDate = new Date().toLocaleString("en-CA", { timeZone: "Australia/Adelaide" }).substring(0, 10);
 
   // Used for toast alerts, can pass set function to components that require toast alerts
-  const [toastMessage, setToastMessage] = useState('Test toast');
-  const [showToast, setShowToast] = useState(true);
-  const [toastType, setToastType] = useState('error');
   const [toastParams, setToastParams] = useState({
     visible: false, 
     type: '',
