@@ -106,6 +106,7 @@ const StyledRxTemplate = styled.div`
     }
           
     .btn-editRx {
+      text-decoration: none;
       margin-right: 2rem;
       min-width: 80px;
       background-color: rgb(255, 255, 255);

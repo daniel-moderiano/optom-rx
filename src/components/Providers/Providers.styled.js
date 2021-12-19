@@ -73,10 +73,15 @@ const StyledProviders = styled.div`
     color: var(--title-color);
     font-size: 2rem;
     padding: 0;
+    margin: 0 0 0.75rem 0;
+  }
+
+  .Providers__description {
     margin: 0;
   }
 
   .Providers__add-btn {
+    display: inline-block;
     font-size: 1rem;
     font-family: var(--font-stack-segoe);
     box-sizing: border-box;
@@ -87,7 +92,8 @@ const StyledProviders = styled.div`
     background-color: rgb(0, 120, 212);
     color: rgb(255, 255, 255);
     border: 1px solid rgb(0, 120, 212); 
-    margin-bottom: 1.5rem;
+    text-decoration: none;
+    margin-top: 0.75rem;
     
     &:hover {
       background-color: rgb(16, 110, 190);
@@ -97,7 +103,7 @@ const StyledProviders = styled.div`
 
   .Providers__table {
     padding: 0;
-    margin: 0;
+    margin-top: 2rem;
     border-collapse: collapse;
     width: 100%;
     /* table-layout: fixed; */

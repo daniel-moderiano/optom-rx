@@ -4,6 +4,7 @@ import { useState } from "react";
 import { db } from "../../firebase/config";
 import ProviderForm from "../ProviderForm/ProviderForm";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import { StyledAddProvider } from "./AddProvider.styled";
 
 const AddProvider = ({ googleLoaded, setToast }) => {
   const { user } = useAuthContext();
@@ -44,14 +45,6 @@ const AddProvider = ({ googleLoaded, setToast }) => {
     }));
   };
 
-  const removeAllValidation = (element) => {
-    element.classList.remove('success');
-
-    // Remove the tick icon
-    const tick = element.parentNode.querySelector('.tickCircle');
-    tick.classList.remove('show');
-    tick.classList.add("hide");
-  }
 
   // Add provider to firestore database when submitting from standalone form
   const handleSubmit = async (event) => {
@@ -76,11 +69,6 @@ const AddProvider = ({ googleLoaded, setToast }) => {
       phoneNumber: '',
       prescriberNumber: '',
     });
-
-    // document.querySelectorAll('input').forEach((input) => {
-    //   removeAllValidation(input);
-    // });
-
     
     setToast((prevData) => ({
       ...prevData,
@@ -98,8 +86,9 @@ const AddProvider = ({ googleLoaded, setToast }) => {
   }
 
   return (
-    <div>
-      <Link to="/providers">Go back</Link>
+    <StyledAddProvider>
+      <h2 className="AddProvider__title">Add provider</h2>
+      <p className="AddProvider__description">Enter details to add a new provider</p>
       <ProviderForm 
         googleLoaded={googleLoaded} 
         standalone={true} 
@@ -109,8 +98,10 @@ const AddProvider = ({ googleLoaded, setToast }) => {
         handleSubmit={handleSubmit}
         handleCancel={cancelEdit}
         toggleBooleanState={() => toggleBooleanState(setProviderData, providerData, 'prefix')}
+        submitBtn="Add provider"
+        cancelBtn="Cancel"
       />
-    </div>
+    </StyledAddProvider>
   )
 }
 
