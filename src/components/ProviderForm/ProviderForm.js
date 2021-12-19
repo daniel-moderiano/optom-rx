@@ -9,24 +9,7 @@ import { collection, addDoc } from 'firebase/firestore'
 
 // ! Legal requirements include the prescriber's name, address, and contact details, and prescriber number
 
-const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBooleanState, googleLoaded, standalone, handleSubmit, handleCancel, setToast }) => {
-
-  const { user } = useAuthContext();
-
-  const [providerData, setProviderData] = useState({
-    prefix: false,
-    fullName: '',
-    qualifications: '',
-    practiceName: '',
-    streetAddress: '',
-    subpremise: '',
-    suburb: '',
-    postcode: '',
-    state: '',
-    phoneNumber: '',
-    prescriberNumber: '',
-    default: false,
-  });
+const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBooleanState, googleLoaded, standalone, handleSubmit, handleCancel }) => {
 
   const [providerAlerts, setProviderAlerts] = useState({
     fullName: {},
@@ -37,65 +20,6 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
     phoneNumber: {},
     prescriberNumber: {},
   });
-
-  // Allows local state update within the component
-  const handleStandaloneChange = (event) => {
-    const { name, value } = event.target;
-    setProviderData((prevData) => ({
-      ...prevData, 
-      [name]: value 
-    }));
-  };
-
-
-  // Add provider to firestore database when submitting from standalone form
-  const handleStandaloneSubmit = async (event) => {
-    event.preventDefault()
-    await addDoc(collection(db, 'providers'), {
-      ...providerData,
-      uid: user.uid,
-    });
-
-    // Reset form both via state update and removal of UI classes (success classes)
-    setProviderData({
-      prefix: false,
-      fullName: '',
-      qualifications: '',
-      practiceName: '',
-      streetAddress: '',
-      subpremise: '',
-      suburb: '',
-      postcode: '',
-      state: '',
-      phoneNumber: '',
-      prescriberNumber: '',
-    })
-
-    document.querySelectorAll('input').forEach((input) => {
-      removeAllValidation(input);
-    });
-
-    handleCancel();
-    setToast((prevData) => ({
-      ...prevData,
-      visible: true,
-      type: 'success',
-      message: 'Added successfully!'
-    }));
-    
-  };
-
-  // Used to toggle any boolean data in the data state (locally within component)
-  const toggleStandaloneBooleanState = (data, boolToChange) => {
-    let newState = true;
-    if (data[boolToChange]) {
-      newState = false;
-    }
-    setProviderData((prevData) => ({
-      ...prevData,
-      [boolToChange]: newState,
-    }));
-  };
 
   // UI functions
   const showErrorClass = (element) => {
@@ -224,7 +148,7 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
             break;
     
           case name === 'state':
-            setProviderData((prevData) => ({
+            setData((prevData) => ({
               ...prevData, 
               [name]: formatAddressState(value), 
             }));
@@ -281,7 +205,7 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
             break;
     
           case name === 'state':
-            setProviderData((prevData) => ({
+            setData((prevData) => ({
               ...prevData, 
               [name]: formatAddressState(value), 
             }));
@@ -323,7 +247,7 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
       });
     }
     
-  }, [negativeInlineValidation, positiveInlineValidation, validateRequiredField, standalone, setAlerts]);
+  }, [negativeInlineValidation, positiveInlineValidation, validateRequiredField, standalone, setAlerts, setData]);
 
   // Ensure form is validated before calling form submission function (standalone form only)
   const checkFormValidation = () => {
@@ -360,8 +284,8 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
           fieldType="text" 
           name="fullName"
           label="Full name" 
-          value={data ? data.fullName : providerData.fullName} 
-          onChange={handleChange ? handleChange : handleStandaloneChange} 
+          value={data.fullName} 
+          onChange={handleChange} 
           alert={alerts ? alerts.fullName : providerAlerts.fullName}
         />    
 
@@ -369,20 +293,13 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
           fieldType="checkbox" 
           name="prefix"
           label="Include 'Dr' in provider name" 
-          onChange={toggleBooleanState ? toggleBooleanState : (() => toggleStandaloneBooleanState(providerData, 'prefix'))}
-          checked={data ? data.prefix : providerData.prefix}
+          onChange={toggleBooleanState}
+          checked={data.prefix}
           className="checkbox prefix-field"
           enterFunc={(event) => {
-            if (toggleBooleanState) {
-              if (event.keyCode === 13) {
-                toggleBooleanState(setData, data, event.target.name);
-              }
-            } else {
-              if (event.keyCode === 13) {
-                toggleStandaloneBooleanState(providerData, event.target.name);
-              }
+            if (event.keyCode === 13) {
+              toggleBooleanState(setData, data, event.target.name);
             }
-            
           }}
         />  
 
@@ -391,8 +308,8 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
           name="qualifications"
           label="Abbreviated qualifications (optional)" 
           placeholder="e.g. BMedSci(VisSc), MOpt"
-          value={data ? data.qualifications : providerData.qualifications} 
-          onChange={handleChange ? handleChange : handleStandaloneChange} 
+          value={data.qualifications} 
+          onChange={handleChange} 
           maxlength="40"
         />
 
@@ -400,14 +317,14 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
         <FormField 
           name="practiceName"
           label="Practice name (optional)" 
-          value={data ? data.practiceName : providerData.practiceName} 
-          onChange={handleChange ? handleChange : handleStandaloneChange} 
+          value={data.practiceName} 
+          onChange={handleChange} 
         />
 
         <AddressAutocomplete 
-          data={data ? data : providerData}
-          setData={setData ? setData : setProviderData}
-          handleChange={handleChange ? handleChange : handleStandaloneChange} 
+          data={data}
+          setData={setData}
+          handleChange={handleChange}
           provider={true}   
           alerts={alerts ? alerts : providerAlerts}
           setAlerts={setAlerts ? setAlerts : setProviderAlerts} 
@@ -420,8 +337,8 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
           fieldType="text" 
           name="phoneNumber"
           label="Phone number" 
-          value={data ? data.phoneNumber : providerData.phoneNumber} 
-          onChange={handleChange ? handleChange : handleStandaloneChange} 
+          value={data.phoneNumber} 
+          onChange={handleChange} 
           alert={alerts ? alerts.phoneNumber : providerAlerts.phoneNumber}
           id="phoneNumber"
           maxlength="10"
@@ -432,8 +349,8 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
           fieldType="text" 
           name="prescriberNumber"
           label="Prescriber number" 
-          value={data ? data.prescriberNumber : providerData.prescriberNumber} 
-          onChange={handleChange ? handleChange : handleStandaloneChange} 
+          value={data.prescriberNumber} 
+          onChange={handleChange} 
           alert={alerts ? alerts.prescriberNumber : providerAlerts.prescriberNumber}
           maxlength="7"
           className="prescriberNo-field form-field"
@@ -443,11 +360,7 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
         <button onClick={(event) => {
           event.preventDefault(); 
           if (checkFormValidation()) {
-            if (handleSubmit) {
-              handleSubmit();
-            } else {
-              handleStandaloneSubmit(event, providerData);
-            }
+            handleSubmit(event);
           }
         }}>Save</button>
 

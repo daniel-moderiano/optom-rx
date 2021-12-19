@@ -14,6 +14,7 @@ import './App.css';
 import GuestRxForm from "./components/GuestRxForm/GuestRxForm";
 import EditProvider from "./components/EditProvider/EditProvider";
 import Toast from "./components/utils/Toast/Toast";
+import AddProvider from "./components/AddProvider/AddProvider";
 
 const App = () => {
   // Can user the user state to conditionally render or redirect routes (logged in vs out for example)
@@ -176,6 +177,8 @@ const App = () => {
             <Route path="/template" element={<RxTemplate data={data} />}/>
 
             <Route path="/edit/:id" element={<EditProvider googleLoaded={googleLoaded} setToast={setToastParams} />}/>
+
+            <Route path="/add-provider" element={<AddProvider googleLoaded={googleLoaded} setToast={setToastParams} />}/>
 
             <Route path="/providers" element={
               <>

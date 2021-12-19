@@ -13,7 +13,7 @@ const Providers = ({ googleLoaded, setToast }) => {
   // This should be called using the curernt user ID to query the collection
   const { documents: providers } = useCollection('providers', ['uid', '==', user.uid]);
   
-  const [showForm, setShowForm] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   // Update both the UI checkboxes and backend to ensure only one provider can be set default at any one time
   const setAsDefault = async (currentProviders, provID) => {
@@ -35,18 +35,17 @@ const Providers = ({ googleLoaded, setToast }) => {
 
   const deleteProvider = async (provID) => {
     await deleteDoc(doc(db, 'providers', provID));
-    console.log('Deleted');
   };
 
   const showProviderForm = () => {
-    if (!showForm) {
-      setShowForm((prevState) => !prevState);
+    if (!showModal) {
+      setShowModal((prevState) => !prevState);
     }
   };
 
   const hideProviderForm = () => {
-    if (showForm) {
-      setShowForm((prevState) => !prevState);
+    if (showModal) {
+      setShowModal((prevState) => !prevState);
     }
   };
 
@@ -62,8 +61,8 @@ const Providers = ({ googleLoaded, setToast }) => {
     <StyledProviders className="Providers">
       <h2 className="Providers__title">Providers</h2>
       <p className="Providers__description">Use this section to add provider details that can be used in your prescriptions</p>
-
-      <button className="Providers__add-btn" onClick={showProviderForm}>Add new provider</button>      
+  
+      <Link className="Providers__add-btn" to={`/add-provider`}>Add new provider</Link> 
       {providers && 
         <div className="Providers__list">
         {/* Render providers using map function in combination with HTML table */}
@@ -101,7 +100,7 @@ const Providers = ({ googleLoaded, setToast }) => {
         </table>
         </div>
       }
-      {showForm && 
+      {showModal && 
         <div className="modal">
           <div className="modal__content">
             <header className="modal__header">

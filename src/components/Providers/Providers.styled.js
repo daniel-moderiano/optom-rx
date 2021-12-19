@@ -7,15 +7,64 @@ const StyledProviders = styled.div`
   padding: 2rem 3rem;
   width: 90%;
 
-  .ProviderForm {
+  .modal {
+    display: flex;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+
+    &.hidden {
+      display: none;
+    }
+  }
+
+  .add-modal__header {
+    background-color: #fff;
+    width: 20rem;
+    padding: 0.5rem 1.5rem 1rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border-radius: 3px;
+  }
+
+  .modal__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #cccbcb;
+    font-weight: bold;
+    font-size: 1.1rem;
+    padding-bottom: 0.2rem;
+    width: 100%;
+  }
+
+  .modal__close {
+    color: #ccc;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
-    margin-bottom: 2rem;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    font-size: 2rem;
+    border: none;
+    background-color: rgba(255, 255, 255, 0);
+  }
 
-    
+  .modal__content {
+    background-color: #fff;
+    padding: 1rem;
+  }
+
+  .modal__close:hover {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
   }
 
   .Providers__title {

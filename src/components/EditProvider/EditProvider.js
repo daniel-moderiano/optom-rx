@@ -78,8 +78,6 @@ const EditProvider = ({ googleLoaded, setToast }) => {
     };
 
     fetchProvider();
-    
-    
   }, [id]);
 
   return (
@@ -90,6 +88,7 @@ const EditProvider = ({ googleLoaded, setToast }) => {
         googleLoaded={googleLoaded} 
         standalone={true} 
         data={providerData}
+        setData={setProviderData}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
         handleCancel={cancelEdit}
