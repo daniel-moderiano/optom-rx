@@ -4,6 +4,7 @@ import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../../firebase/config";
 import ProviderForm from "../ProviderForm/ProviderForm";
+import { StyledEditProvider } from "./EditProvider.styled";
 
 const EditProvider = ({ googleLoaded, setToast }) => {
   const { id } = useParams();
@@ -81,9 +82,9 @@ const EditProvider = ({ googleLoaded, setToast }) => {
   }, [id]);
 
   return (
-    <div>
-      Provider - { id }
-      <Link to="/providers">Go back</Link>
+    <StyledEditProvider>
+      <h2 className="EditProvider__title">Edit provider</h2>
+      <p className="EditProvider__description">Change any details and then save changes</p>
       <ProviderForm 
         googleLoaded={googleLoaded} 
         standalone={true} 
@@ -93,9 +94,10 @@ const EditProvider = ({ googleLoaded, setToast }) => {
         handleSubmit={handleSubmit}
         handleCancel={cancelEdit}
         toggleBooleanState={() => toggleBooleanState(setProviderData, providerData, 'prefix')}
-        hideForm={() => console.log('Cancel')}
+        submitBtn="Save changes"
+        cancelBtn="Cancel"
       />
-    </div>
+    </StyledEditProvider>
   )
 }
 
