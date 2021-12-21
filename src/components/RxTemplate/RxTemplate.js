@@ -376,8 +376,9 @@ const RxTemplate = ({ data }) => {
               <div className="prev-auth">Previous authority: Y / N</div>
               <div className="patient-age">Patient's age if under 18:</div>
             </div>
-            <div className="indication">Indication for use of item:</div>
+            
           </section>}
+          <div className="indication">Indication for use of item:</div>
         </div>
 
 

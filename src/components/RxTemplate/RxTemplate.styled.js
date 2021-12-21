@@ -153,6 +153,7 @@ const StyledRxTemplate = styled.div`
       margin: 0;
       padding: 0;
       display: block;
+      display: none;
     }
 
     .left-container {
@@ -494,6 +495,7 @@ const StyledRxTemplate = styled.div`
       top: 826px;
       left: 410px;
       font-size: 14.5px;
+      width: 400px;
 
       .doctor-copy {
         position: absolute;
@@ -550,7 +552,6 @@ const StyledRxTemplate = styled.div`
           }
 
           .patient__medicareNumber {
-            /* position: absolute; */
             display: flex;
             justify-content: space-between;
             width: 110px;
@@ -563,30 +564,12 @@ const StyledRxTemplate = styled.div`
         top: 196px;
         left: 70px;
 
-        .scriptNo, .authRxNo {
+        .authRxNo {
           position: absolute;
           left: 190px;
           top: 0;
           width: 200px;
           text-align: right;
-        }
-
-        .pbsSelected {
-          width: 17px;
-          height: 17px;
-          display: block;
-          /* Without position the img will size relative to the miscellaneous div above */
-          position: absolute;
-          top: 20px;
-        }
-
-        .nonPbs {
-          position: absolute;
-          top: 27px;
-          left: -18px;
-          padding-top: 12px;
-          width: 80px;
-          box-sizing: border-box;
         }
       }
 
@@ -599,8 +582,7 @@ const StyledRxTemplate = styled.div`
         padding: 2px 0;
 
         .medication__activeIngredient {
-          font-weight: bold;
-          max-width: 330px;
+          width: 400px;
         }
 
         .medication__brandName {
@@ -621,8 +603,6 @@ const StyledRxTemplate = styled.div`
       }
 
       .authority {
-        /* border-top: 1px solid #b8b8b8;
-        padding-top: 3px; */
         position: absolute;
         left: 70px;
         top: 284px;
@@ -637,22 +617,20 @@ const StyledRxTemplate = styled.div`
           display: flex;
           justify-content: space-between;
           width: 400px;
-          /* position: absolute; */
-          /* top: 50px; */
+        }
+
+        .extra-details {
+          display: flex;
+          justify-content: space-between;
+          width: 360px;
+          position: absolute;
+          top: 40px;
         }
       }
-
-      .extra-details {
-        display: flex;
-        justify-content: space-between;
-        width: 360px;
-        position: absolute;
-        top: 40px;
-      }
-
       .indication {
         position: absolute;
-        top: 68px;
+        top: 350px;
+        left: 70px;
       }
     }
 
