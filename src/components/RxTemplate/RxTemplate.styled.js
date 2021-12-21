@@ -491,7 +491,7 @@ const StyledRxTemplate = styled.div`
       margin: 0;
       line-height: normal;
       position: relative;
-      top: 820px;
+      top: 826px;
       left: 410px;
       font-size: 14.5px;
 
