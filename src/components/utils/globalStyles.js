@@ -34,6 +34,9 @@ const GlobalStyles = createGlobalStyle`
     }
   }
 
+  /* COLOUR THEMING */
+  /* Primary colour ideas include #0F6158 (btc markets), #25776A, #387A53, #0C5E6D, #1D5558, #2A7A74, #00857A, #295376  */
+
 `
 
 export default GlobalStyles;
