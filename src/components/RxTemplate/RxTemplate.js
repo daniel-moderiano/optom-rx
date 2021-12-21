@@ -16,7 +16,6 @@ const RxTemplate = ({ data, setToast }) => {
   let { state } = useLocation();
 
   const { user } = useAuthContext();
-  console.log(user.uid)
 
   const formatPhoneNumber = (phoneNumber) => {
     if (phoneNumber.substring(0, 2) === '04') {
@@ -94,7 +93,7 @@ const RxTemplate = ({ data, setToast }) => {
     });
 
     // Add script number to the current user's saved scripts
-    await updateDoc(doc(db, 'providers', user.uid), {
+    await updateDoc(doc(db, 'users', user.uid), {
       scripts: arrayUnion(data.miscData.scriptID)
     });
 
