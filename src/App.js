@@ -171,7 +171,7 @@ const App = () => {
               </>
             }/>
 
-            <Route path="/template" element={<RxTemplate data={data} />}/>
+            <Route path="/template" element={<RxTemplate data={data} setToast={setToastParams}/>}/>
 
             <Route path="/edit/:id" element={<EditProvider googleLoaded={googleLoaded} setToast={setToastParams} />}/>
 

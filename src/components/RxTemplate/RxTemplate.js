@@ -7,7 +7,7 @@ import { db } from '../../firebase/config';
 import { doc, setDoc } from "firebase/firestore";
 
 
-const RxTemplate = ({ data }) => {
+const RxTemplate = ({ data, setToast }) => {
   // Deconstructing for cleanliness of code and easier-to-understand operations
   const { drugData, patientData, providerData, miscData } = data;
 
@@ -83,14 +83,18 @@ const RxTemplate = ({ data }) => {
   };
 
   const saveRx = async () => {
-    
-
-    // Save a script onto firebase, but ensure there is zero identifying patient or provider data
+    // Save a script onto firebase referenced by script ID/Number, containing only non-identifiable information
     await setDoc(doc(db, 'scripts', data.miscData.scriptID), {
-      ...data,
+      ...data.drugData,
+      ...data.miscData,
     });
 
-    console.log('Rx saved');
+    setToast((prevData) => ({
+      ...prevData,
+      visible: true,
+      type: 'success',
+      message: 'Prescription saved'
+    }));
   };
 
   return (
