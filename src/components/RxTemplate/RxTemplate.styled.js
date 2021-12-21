@@ -119,7 +119,7 @@ const StyledRxTemplate = styled.div`
     }
   }
 
-  .right-container, .left-container {
+  .right-container, .left-container, .bottom-container {
     display: none;
   }
 
@@ -483,6 +483,151 @@ const StyledRxTemplate = styled.div`
 
       .provider__fullName {
         font-weight: bold;
+      }
+    }
+
+    .bottom-container {
+      display: block;
+      margin: 0;
+      line-height: normal;
+      position: relative;
+      top: 820px;
+      left: 400px;
+
+      .doctor-copy {
+        position: absolute;
+        font-style: italic;
+        left: 215px;
+      }
+      
+      .container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+      }
+
+      .provider-upper {
+        position: absolute;
+        width: 450px;
+        top: 10px;
+
+        .provider__contact-upper {
+          position: absolute;
+          left: 70px;
+          top: 20px;
+
+          .provider__streetAddress {
+            max-width: 330px;
+          }
+        }
+
+        .provider__contact-lower {
+          position: absolute;
+          left: 70px;
+          top: 80px;
+          display: flex;
+          justify-content: space-between;
+          width: 350px;
+        }
+      }
+
+      .patient {
+        position: relative;
+
+        .container {
+          display: flex;
+          position: absolute;
+          width: auto;
+          top: 130px;
+          left: 70px;
+          align-items: flex-start;
+
+          .patient__contactDetails {
+            width: 300px;
+            margin-left: 6px;
+          }
+
+          .patient__medicareNumber {
+            position: absolute;
+            display: flex;
+            justify-content: space-between;
+            top: 138px;
+            left: 140px;
+            width: 110px;
+            font-weight: bold;
+          }
+        }        
+      }
+
+      .miscellaneous {
+        position: absolute;
+        top: 211px;
+        left: 70px;
+
+        .scriptNo {
+          position: absolute;
+          left: 200px;
+          top: 0;
+          width: 200px;
+          text-align: right;
+        }
+
+        .pbsSelected {
+          width: 17px;
+          height: 17px;
+          display: block;
+          /* Without position the img will size relative to the miscellaneous div above */
+          position: absolute;
+          top: 20px;
+        }
+
+        .nonPbs {
+          position: absolute;
+          top: 27px;
+          left: -18px;
+          padding-top: 12px;
+          width: 80px;
+          box-sizing: border-box;
+        }
+      }
+
+      .medication {
+        position: absolute;
+        left: 112px;
+        top: 250px;
+        width: 330px;
+        border-bottom: 1px solid #b8b8b8;
+        padding: 2px 0;
+
+        .medication__activeIngredient {
+          font-weight: bold;
+          max-width: 330px;
+        }
+
+        .medication__brandName {
+          font-weight: bold;
+        }
+
+        .quantityRepeats {
+          display: flex;
+          justify-content: space-between;
+          width: 170px;
+        }
+
+        .item-printed {
+          position: absolute;
+          bottom: -22px;
+          right: 2px;
+        }
+      }
+
+      .authority {
+        /* border-top: 1px solid #b8b8b8;
+        padding-top: 3px; */
+        position: absolute;
+        left: 112px;
+        top: 360px;
+        width: 330px;
       }
     }
 

@@ -315,6 +315,79 @@ const RxTemplate = ({ data }) => {
             <div className="authority__delegate">Delegate...............</div> */}
           </section>}
         </div>
+
+        <div className="bottom-container">
+          <span className="doctor-copy">Prescriber's Copy</span>
+          <section className="provider-upper">
+            <div className="container">
+              <div className="provider__contact-upper">
+                {/* {drugData.authRequired && <div className="authRxNo">{`PBS/RPBS Authority Script No: ${miscData.authRxNumber}`}</div>} */}
+                <div className="provider__fullName">{`${providerData.prefix ? 'Dr' : ''} ${providerData.fullName}`}</div>
+                {formatProvAddress()}
+                <div className="provider__addressLine2">
+                  {`${providerData.suburb} ${providerData.state} ${providerData.postcode}`}
+                </div>
+              </div>
+              <div className="provider__contact-lower">
+                <div className="provider__phoneNumber">
+                  {`Phone: ${formatPhoneNumber(providerData.phoneNumber)}`}
+                </div>
+                <div className="provider__prescriberNumber">Prescriber No. {providerData.prescriberNumber}</div>
+                
+              </div>
+            </div>
+          </section>
+
+          <section className="patient">
+            <div className="container">
+              {/* <div className="patient__medicareNumber">
+                {`${patientData.medicareNumber.substring(0, 4)} ${patientData.medicareNumber.substring(4, 9)} ${patientData.medicareNumber.substring(9, 10)}-${patientData.medicareRefNumber}`}
+              </div> */}
+              <span className="patient__label">Patient:</span>
+              <div className="patient__contactDetails">
+                <div className="patient__fullName">{patientData.fullName}</div>
+                <div className="patient__streetAddress">{`${patientData.subpremise} ${patientData.streetAddress}`}</div>
+                <div className="patient__addressLine2">{`${patientData.suburb} ${patientData.state} ${patientData.postcode}`}</div>
+              </div>
+            </div>
+          </section>
+
+          <section className="miscellaneous">
+            {/* Include Script ID and Authority Rx number here */}
+            <div className="date">{formatDate()}</div>
+            {drugData.pbsRx 
+              ? <div className="pbsSelected">PBS</div>
+              : <div className="nonPbs">Non-PBS</div>
+            }
+            <div className="scriptNo">Script No: {miscData.scriptID}</div>
+          </section>
+
+          {/* Script ID or authority Rx number should go above the medication once finalised, and perhaps with a border bottom */}
+          <section className="medication">
+            <div className="medication__activeIngredient">
+              {formatDrug(drugData.activeIngredient, drugData.brandName)}
+            </div>
+            <div className="medication__dosage">{drugData.dosage}</div>
+            <div className="quantityRepeats">
+              <div className="medication__quantity">{`Quantity: ${drugData.quantity}`}</div>
+              <div className="medication__repeats">{`${drugData.repeats} repeats`}</div>
+            </div>
+            <span className="item-printed">1 item printed</span>
+          </section>
+          {/* Will only ever be 1 item printed, so consider omitting this */}
+
+          {/* Wastes space to render authority section for non-authority required scripts, so render only as needed */}
+          {drugData.authRequired && <section className="authority">
+            <div className="authority__approvalCode">{`Authority Approval No: ${miscData.authCode}`}</div>
+            <div className="authRxNo">{`Authority Script No: ${miscData.authRxNumber}`}</div>
+
+            <div className="prev-auth">Previous authority : Y / N</div>
+            <div className="indication">Indication for use of item:</div>
+           
+          </section>}
+        </div>
+
+
         <div className="RxTemplate__btns">
           <Link className="RxTemplate__btn btn-editRx" to="/form">Make changes</Link>
           <button className="RxTemplate__btn btn-print" onClick={() => window.print()}>Print</button>
