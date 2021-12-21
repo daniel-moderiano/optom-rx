@@ -1,0 +1,49 @@
+THEMED NEUTRALS
+
+GRAY
+gray 0
+#f9f9f9
+gray 1
+#eceeed
+gray 2
+#dfe1e1
+gray 3
+#d0d3d3
+gray 4
+#c0c5c4
+gray 5
+#afb4b3
+gray 6
+#9aa1a0
+gray 7
+#828b8a
+gray 8
+#646e6d
+gray 9
+#344240
+
+
+FULL NEUTRALS
+
+gray 0
+#FFFFFF
+gray 1
+#E8EAED
+gray 2
+#D1D6DB
+gray 3
+#BAC1C9
+gray 4
+#A4ACB7
+gray 5
+#8D98A5
+gray 6
+#768393
+gray 7
+#5A6572
+gray 8
+#48515B
+gray 9
+#363C45
+gray 10
+#21252A

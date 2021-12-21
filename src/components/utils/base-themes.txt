@@ -1,0 +1,111 @@
+BASE COLOUR: #31776F
+
+CYAN
+cyan 0
+#f7fafa
+cyan 1
+#e7efee
+cyan 2
+#d5e4e2
+cyan 3
+#c2d7d5
+cyan 4
+#aec9c6
+cyan 5
+#96bab6
+cyan 6
+#7ba8a3
+cyan 7
+#5b938c
+cyan 8
+#31776f
+cyan 9
+#0b4740
+
+BLUE
+blue 0
+#f8fafa
+blue 1
+#eaeef1
+blue 2
+#dae2e7
+blue 3
+#c9d5dc
+blue 4
+#b7c6cf
+blue 5
+#a2b6c2
+blue 6
+#8ba3b2
+blue 7
+#6f8da0
+blue 8
+#4a7188
+blue 9
+#104362
+
+INDIGO
+indigo 0
+#f9f9fb
+indigo 1
+#ecedf3
+indigo 2
+#dfe0ea
+indigo 3
+#d0d2e0
+indigo 4
+#c0c3d6
+indigo 5
+#aeb2ca
+indigo 6
+#9a9ebc
+indigo 7
+#8287ac
+indigo 8
+#636998
+indigo 9
+#313a77
+
+GREEN
+green 0
+#f8faf7
+green 1
+#e8efe7
+green 2
+#d8e4d6
+green 3
+#c6d8c4
+green 4
+#b2caaf
+green 5
+#9cbb98
+green 6
+#83aa7e
+green 7
+#65955e
+green 8
+#3d7934
+green 9
+#134a0b
+
+TEAL
+teal 0
+#f7faf8
+teal 1
+#e7efea
+teal 2
+#d6e4db
+teal 3
+#c3d8cb
+teal 4
+#afcab9
+teal 5
+#98bba5
+teal 6
+#7daa8e
+teal 7
+#5e9572
+teal 8
+#34794e
+teal 9
+#0b4923
