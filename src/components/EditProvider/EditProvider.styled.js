@@ -40,26 +40,28 @@ const StyledEditProvider = styled.div`
 
     .submit-btn {
       min-width: 80px;
-      background-color: rgb(0, 120, 212);
+      background-color: var(--primary-color);
       color: rgb(255, 255, 255);
-      border: 1px solid rgb(0, 120, 212);         
+      /* border: 1px solid rgb(0, 120, 212);          */
+      border: none;
     }
     
     .submit-btn:hover {
-      background-color: rgb(16, 110, 190);
-      border: 1px solid rgb(16, 110, 190);
+      background-color: var(--btn-hover);
+      /* border: 1px solid rgb(16, 110, 190); */
     }
           
     .cancel-btn {
       text-decoration: none;
       margin-right: 2rem;
       min-width: 80px;
-      background-color: rgb(255, 255, 255);
-      color: rgb(50, 49, 48);
-      border: 1px solid rgb(138, 136, 134);                
+      background-color: var(--btn-secondary);
+      color: var(--btn-secondary-text);
+      /* border: 1px solid rgb(138, 136, 134);                 */\
+      border: none;
     }
     .cancel-btn:hover {
-      background-color: rgb(243, 242, 241);
+      background-color: #D1D6DB;
       color: rgb(32, 31, 30);
     }
   }

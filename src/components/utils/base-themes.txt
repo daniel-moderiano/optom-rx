@@ -1,4 +1,5 @@
 BASE COLOUR: #31776F
+Alternatives include #0F6158 (btc markets, used to generate this theme herein), #25776A, #0C5E6D, #1D5558, #2A7A74, #00857A, #295376
 
 CYAN
 cyan 0

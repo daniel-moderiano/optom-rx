@@ -11,7 +11,7 @@ const StyledNav = styled.nav`
 
       .Nav__link {
         text-decoration: none;
-        color: #000000;
+        color: #FFFFFF;
       }
 
       .Nav__logout-btn {
@@ -21,6 +21,7 @@ const StyledNav = styled.nav`
         background-color: var(--primary-color);
         margin: 0;
         padding: 0;
+        color: #FFFFFF;
       }
 
       .Nav__logout-btn:hover {

@@ -74,12 +74,12 @@ const StyledFormField = styled.div`
         appearance: none;
         -webkit-appearance: none;
 	      -moz-appearance: none;
-        border: 2px solid rgb(105,118,132);
+        border: 2px solid #5A6572;
         border-radius: 2px;
       }
 
       .checked {
-        background-color: #333f48;
+        background-color: #363C45;
         border: none;
       }
 

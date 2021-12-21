@@ -16,7 +16,7 @@ const StyledFieldset = styled.fieldset`
     font-size: 1.9rem;
     margin-bottom: 0.7rem;
     font-family: var(--font-title);
-    color: #004165;
+    color: var(--title-color);
   }
 
 `

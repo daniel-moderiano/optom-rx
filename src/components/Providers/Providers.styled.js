@@ -89,15 +89,15 @@ const StyledProviders = styled.div`
     padding: 6px 16px 8px 16px;
     border-radius: 2px;
     min-width: 80px;
-    background-color: rgb(0, 120, 212);
+    background-color: var(--primary-color);
     color: rgb(255, 255, 255);
-    border: 1px solid rgb(0, 120, 212); 
+    border: 1px solid var(--primary-color); 
     text-decoration: none;
     margin-top: 0.75rem;
     
     &:hover {
-      background-color: rgb(16, 110, 190);
-      border: 1px solid rgb(16, 110, 190);
+      background-color: var(--btn-hover);
+      border: 1px solid var(--btn-hover);
     }
   }
 

@@ -1,0 +1,133 @@
+Brighter accents, generated using #00857A on Palx.com
+
+GREEN
+green 0
+#f6fbf6
+green 1
+#e4f1e2
+green 2
+#cfe7cd
+green 3
+#b9dcb6
+green 4
+#a1d09c
+green 5
+#85c27f
+green 6
+#63b15c
+green 7
+#3a9c31
+green 8
+#0a7e00
+green 9
+#064a00
+
+TEAL
+teal 0
+#f6fbf8
+teal 1
+#e2f1e8
+teal 2
+#cde7d8
+teal 3
+#b5dcc5
+teal 4
+#9bcfb1
+teal 5
+#7ec19a
+teal 6
+#5bb17e
+teal 7
+#2f9c5c
+teal 8
+#007d34
+teal 9
+#004a1f
+
+YELLOW
+yellow 0
+#fafaf5
+yellow 1
+#f0eedf
+yellow 2
+#e4e2c7
+yellow 3
+#d8d5ae
+yellow 4
+#cbc691
+yellow 5
+#bbb572
+yellow 6
+#aaa24d
+yellow 7
+#958b21
+yellow 8
+#776e00
+yellow 9
+#464000
+
+RED
+red 0
+#fcf9f9
+red 1
+#f5ebec
+red 2
+#efddde
+red 3
+#e7cdcf
+red 4
+#dfbbbe
+red 5
+#d5a8ab
+red 6
+#ca9196
+red 7
+#bd757b
+red 8
+#ab4f57
+red 9
+#85000b
+
+BLUE
+blue 0
+#f7fafb
+blue 1
+#e7eff4
+blue 2
+#d6e3eb
+blue 3
+#c3d6e2
+blue 4
+#afc7d9
+blue 5
+#98b7cd
+blue 6
+#7da5c1
+blue 7
+#5d8eb1
+blue 8
+#33719d
+blue 9
+#004170
+
+INDIGO
+indigo 0
+#f9f9fc
+indigo 1
+#ecedf6
+indigo 2
+#dee0ef
+indigo 3
+#cfd1e8
+indigo 4
+#bfc2e0
+indigo 5
+#adb0d8
+indigo 6
+#989cce
+indigo 7
+#7f84c2
+indigo 8
+#5e65b2
+indigo 9
+#283298

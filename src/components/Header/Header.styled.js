@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const StyledHeader = styled.header`
+  color: #FFFFFF;
   background-color: var(--primary-color);
   display: flex;
   justify-content: space-between;
@@ -9,7 +10,7 @@ const StyledHeader = styled.header`
   h1 {
     a {
       text-decoration: none;
-      color: black;
+      color: #FFFFFF;
     }
   }
 
