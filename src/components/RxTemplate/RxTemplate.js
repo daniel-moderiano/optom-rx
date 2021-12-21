@@ -4,7 +4,8 @@ import tickbox from '../../assets/tickbox.svg';
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import { db } from '../../firebase/config';
-import { doc, setDoc } from "firebase/firestore";
+import { arrayUnion, doc, setDoc, updateDoc } from "firebase/firestore";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 
 const RxTemplate = ({ data, setToast }) => {
@@ -13,6 +14,9 @@ const RxTemplate = ({ data, setToast }) => {
 
   // State is null by default, so checking for it's existence alone will ensure this is a valid link containing data vs a simple nav link
   let { state } = useLocation();
+
+  const { user } = useAuthContext();
+  console.log(user.uid)
 
   const formatPhoneNumber = (phoneNumber) => {
     if (phoneNumber.substring(0, 2) === '04') {
@@ -87,6 +91,11 @@ const RxTemplate = ({ data, setToast }) => {
     await setDoc(doc(db, 'scripts', data.miscData.scriptID), {
       ...data.drugData,
       ...data.miscData,
+    });
+
+    // Add script number to the current user's saved scripts
+    await updateDoc(doc(db, 'providers', user.uid), {
+      scripts: arrayUnion(data.miscData.scriptID)
     });
 
     setToast((prevData) => ({

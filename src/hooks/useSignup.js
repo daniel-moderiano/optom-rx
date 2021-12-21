@@ -2,6 +2,8 @@ import { useState } from "react"
 import { auth } from "../firebase/config";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useAuthContext } from '../hooks/useAuthContext';
+import { db } from "../firebase/config";
+import { doc, setDoc } from "firebase/firestore";
 
 // Custom hook to handle user signing in
 export const useSignup = () => {
@@ -9,17 +11,23 @@ export const useSignup = () => {
   const [error, setError] = useState(null);
   const { dispatch } = useAuthContext();
 
-  const signup = (email, password) => {
+  const signup = async (email, password) => {
     setError(null);
-    // Firebase function to sign up user. Once resolved, confirm with a context state change
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((res) => {
-        dispatch({ type: 'LOGIN', payload: res.user })
-      })
-      .catch((err) => {
-        setError(err.message)
-      })
+    try {
+      // Firebase function to sign up user. Once resolved, confirm with a context state change
+      const res = await createUserWithEmailAndPassword(auth, email, password);
+  
+      await setDoc(doc(db, 'users', res.user.uid), {
+        // User data here
+        displayName: '',
+        scripts: [],
+      });
+  
+      dispatch({ type: 'LOGIN', payload: res.user })
+      
+    } catch (error) {
+      setError(error.message)
+    }
   }
-
   return { error, signup }
 }
