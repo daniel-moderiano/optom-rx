@@ -492,12 +492,14 @@ const StyledRxTemplate = styled.div`
       line-height: normal;
       position: relative;
       top: 820px;
-      left: 400px;
+      left: 410px;
+      font-size: 14.5px;
 
       .doctor-copy {
         position: absolute;
         font-style: italic;
         left: 215px;
+        font-size: 15px;
       }
       
       .container {
@@ -509,7 +511,7 @@ const StyledRxTemplate = styled.div`
       .provider-upper {
         position: absolute;
         width: 450px;
-        top: 10px;
+        top: 8px;
 
         .provider__contact-upper {
           position: absolute;
@@ -524,10 +526,10 @@ const StyledRxTemplate = styled.div`
         .provider__contact-lower {
           position: absolute;
           left: 70px;
-          top: 80px;
+          top: 76px;
           display: flex;
           justify-content: space-between;
-          width: 350px;
+          width: 390px;
         }
       }
 
@@ -538,7 +540,7 @@ const StyledRxTemplate = styled.div`
           display: flex;
           position: absolute;
           width: auto;
-          top: 130px;
+          top: 114px;
           left: 70px;
           align-items: flex-start;
 
@@ -561,12 +563,12 @@ const StyledRxTemplate = styled.div`
 
       .miscellaneous {
         position: absolute;
-        top: 211px;
+        top: 196px;
         left: 70px;
 
-        .scriptNo {
+        .scriptNo, .authRxNo {
           position: absolute;
-          left: 200px;
+          left: 190px;
           top: 0;
           width: 200px;
           text-align: right;
@@ -593,9 +595,9 @@ const StyledRxTemplate = styled.div`
 
       .medication {
         position: absolute;
-        left: 112px;
-        top: 250px;
-        width: 330px;
+        left: 70px;
+        top: 222px;
+        width: 390px;
         border-bottom: 1px solid #b8b8b8;
         padding: 2px 0;
 
@@ -625,9 +627,35 @@ const StyledRxTemplate = styled.div`
         /* border-top: 1px solid #b8b8b8;
         padding-top: 3px; */
         position: absolute;
-        left: 112px;
-        top: 360px;
+        left: 70px;
+        top: 284px;
         width: 330px;
+
+        .authority__approvalCode {
+          position: absolute;
+          top: 0px;
+        }
+
+        .auth-numbers {
+          display: flex;
+          justify-content: space-between;
+          width: 400px;
+          /* position: absolute; */
+          /* top: 50px; */
+        }
+      }
+
+      .extra-details {
+        display: flex;
+        justify-content: space-between;
+        width: 360px;
+        position: absolute;
+        top: 40px;
+      }
+
+      .indication {
+        position: absolute;
+        top: 68px;
       }
     }
 
