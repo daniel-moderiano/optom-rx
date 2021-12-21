@@ -3,6 +3,9 @@ import Rx from '../../assets/template-sized.jpg';
 import tickbox from '../../assets/tickbox.svg';
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
+import { db } from '../../firebase/config';
+import { doc, setDoc } from "firebase/firestore";
+
 
 const RxTemplate = ({ data }) => {
   // Deconstructing for cleanliness of code and easier-to-understand operations
@@ -77,7 +80,18 @@ const RxTemplate = ({ data }) => {
 
   const formatDate = () => {
     return `${miscData.date.substring(8)}/${miscData.date.substring(5, 7)}/${miscData.date.substring(0, 4)}`;
-  }
+  };
+
+  const saveRx = async () => {
+    
+
+    // Save a script onto firebase, but ensure there is zero identifying patient or provider data
+    await setDoc(doc(db, 'scripts', data.miscData.scriptID), {
+      ...data,
+    });
+
+    console.log('Rx saved');
+  };
 
   return (
     <StyledRxTemplate className="RxTemplate">
@@ -384,7 +398,13 @@ const RxTemplate = ({ data }) => {
 
         <div className="RxTemplate__btns">
           <Link className="RxTemplate__btn btn-editRx" to="/form">Make changes</Link>
-          <button className="RxTemplate__btn btn-print" onClick={() => window.print()}>Print</button>
+          <button 
+            className="RxTemplate__btn btn-print" 
+            onClick={() => {
+              saveRx();
+              window.print();
+            }}>
+          Save and Print</button>
         </div>
       </> : <h3 className="RxTemplate__subtitle">Fill out the form to generate Rx</h3>}
       
