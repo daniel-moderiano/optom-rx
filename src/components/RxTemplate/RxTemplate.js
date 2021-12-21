@@ -321,8 +321,8 @@ const RxTemplate = ({ data }) => {
           <section className="provider-upper">
             <div className="container">
               <div className="provider__contact-upper">
-                {/* {drugData.authRequired && <div className="authRxNo">{`PBS/RPBS Authority Script No: ${miscData.authRxNumber}`}</div>} */}
                 <div className="provider__fullName">{`${providerData.prefix ? 'Dr' : ''} ${providerData.fullName}`}</div>
+                {/* Consider appending qualifications after provider name in this copy? */}
                 {formatProvAddress()}
                 <div className="provider__addressLine2">
                   {`${providerData.suburb} ${providerData.state} ${providerData.postcode}`}
@@ -340,30 +340,24 @@ const RxTemplate = ({ data }) => {
 
           <section className="patient">
             <div className="container">
-              {/* <div className="patient__medicareNumber">
-                {`${patientData.medicareNumber.substring(0, 4)} ${patientData.medicareNumber.substring(4, 9)} ${patientData.medicareNumber.substring(9, 10)}-${patientData.medicareRefNumber}`}
-              </div> */}
               <span className="patient__label">Patient:</span>
               <div className="patient__contactDetails">
                 <div className="patient__fullName">{patientData.fullName}</div>
                 <div className="patient__streetAddress">{`${patientData.subpremise} ${patientData.streetAddress}`}</div>
                 <div className="patient__addressLine2">{`${patientData.suburb} ${patientData.state} ${patientData.postcode}`}</div>
+                {/* Unsure if including this here */}
+                <div className="patient__medicareNumber">
+                {`${patientData.medicareNumber.substring(0, 4)} ${patientData.medicareNumber.substring(4, 9)} ${patientData.medicareNumber.substring(9, 10)}-${patientData.medicareRefNumber}`}
+                </div>
               </div>
             </div>
           </section>
 
           <section className="miscellaneous">
-            {/* Include Script ID and Authority Rx number here */}
             <div className="date">{formatDate()}</div>
-            {/* {drugData.pbsRx 
-              ? <div className="pbsSelected">PBS</div>
-              : <div className="nonPbs">Non-PBS</div>
-            } */}
-            {/* <div className="scriptNo">Script No: {miscData.scriptID}</div> */}
             {drugData.authRequired && <div className="authRxNo">{`Authority Script No: ${miscData.authRxNumber}`}</div>}
           </section>
 
-          {/* Script ID or authority Rx number should go above the medication once finalised, and perhaps with a border bottom */}
           <section className="medication">
             <div className="medication__activeIngredient">
               {formatDrug(drugData.activeIngredient, drugData.brandName)}
@@ -375,23 +369,14 @@ const RxTemplate = ({ data }) => {
             </div>
             <span className="item-printed">1 item printed</span>
           </section>
-          {/* Will only ever be 1 item printed, so consider omitting this */}
 
-          {/* Wastes space to render authority section for non-authority required scripts, so render only as needed */}
           {drugData.authRequired && <section className="authority">
-              <div className="authority__approvalCode">{`Authority Approval No: ${miscData.authCode}`}</div>
-              {/* <div className="authRxNo">{`Authority Script No: ${miscData.authRxNumber}`}</div> */}
-            
-
+            <div className="authority__approvalCode">{`Authority Approval No: ${miscData.authCode}`}</div>
             <div className="extra-details">
               <div className="prev-auth">Previous authority: Y / N</div>
               <div className="patient-age">Patient's age if under 18:</div>
-              
             </div>
-
             <div className="indication">Indication for use of item:</div>
-            
-           
           </section>}
         </div>
 
