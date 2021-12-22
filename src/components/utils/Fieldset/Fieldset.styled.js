@@ -3,7 +3,8 @@ import styled from "styled-components";
 const StyledFieldset = styled.fieldset`
   border: none;
   margin: 0;
-  padding: 2.6rem 1rem 2.5rem 4rem;
+  /* padding: 2.6rem 1rem 2.5rem 4rem; */
+  padding: 3.7rem 5.5rem 3.75rem 5.5rem;
   background-color: #fff;
   display: flex;
   flex-direction: column;

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const StyledProviders = styled.div`
-  margin-top: 1rem;
+  margin-top: 3rem;
   background-color: #FFFFFF;
   box-shadow: 0 1.6px 3.6px 0 rgb(0 0 0 / 13%), 0 0.3px 0.9px 0 rgb(0 0 0 / 11%);
   padding: 2rem 3rem;
@@ -99,6 +99,10 @@ const StyledProviders = styled.div`
       background-color: var(--btn-primary-hover);
       border: 1px solid var(--btn-primary-hover);
     }
+
+    &:active {
+      transform: scale(0.98);
+    }
   }
 
   .Providers__table {
@@ -143,6 +147,8 @@ const StyledProviders = styled.div`
           padding: 2px 8px 5px 8px;
           border-radius: 2px;
           background-color: #fff;
+
+          
         }
 
         .edit {

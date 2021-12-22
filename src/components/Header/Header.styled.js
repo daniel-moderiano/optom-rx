@@ -7,33 +7,18 @@ const StyledHeader = styled.header`
   justify-content: space-between;
   align-items: center;
   
-  height: 4rem;
+  /* height: 4rem; */
 
   h1 {
-    margin: 0;
-    padding: 0 0.25rem 0.2rem 1rem;
-    /* font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif; */
-    font-family: var(--font-title);
-    font-weight: normal;
-
-    a {
-      text-decoration: none;
-      color: #FFFFFF;
-    }
-  }
-
-  .logo {
-    display: flex;
-    align-items: center;
-    height: 100%;
+    margin: 0.5rem 1rem 0 1rem;
+    padding: 0 0 0rem 0;
 
     img {
-      /* width: 40px; */
-      height: 40px;
-      margin-top: 0.5rem;
-      flex-shrink: 0;
+      height: 30px;
     }
   }
+
+  
 
   @media print {
     display: none;

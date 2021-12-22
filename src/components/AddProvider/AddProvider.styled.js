@@ -26,8 +26,6 @@ const StyledAddProvider = styled.div`
   }
 
   .ProviderForm__btns {
-    /* place-self: flex-end;
-    margin-right: 10%; */
 
     .ProviderForm__btn {
       font-size: 1rem;
@@ -36,6 +34,10 @@ const StyledAddProvider = styled.div`
       cursor: pointer;
       padding: 8px 16px 10px 16px;
       border-radius: 2px;
+
+      &:active {
+        transform: scale(0.98);
+      }
     }
 
     .submit-btn {

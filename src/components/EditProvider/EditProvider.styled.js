@@ -36,6 +36,7 @@ const StyledEditProvider = styled.div`
       cursor: pointer;
       padding: 8px 16px 10px 16px;
       border-radius: 2px;
+
     }
 
     .submit-btn {
@@ -57,7 +58,7 @@ const StyledEditProvider = styled.div`
       min-width: 80px;
       background-color: var(--btn-secondary);
       color: var(--btn-secondary-text);
-      /* border: 1px solid rgb(138, 136, 134);                 */\
+      /* border: 1px solid rgb(138, 136, 134);                 */
       border: none;
     }
     .cancel-btn:hover {
