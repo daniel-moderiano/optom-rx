@@ -35,7 +35,7 @@ body {
   flex-grow: 1;
   flex-direction: column;
   align-items: center;
-  background-color: #FAFBFD;
+  background-color: var(--background);
   height: auto;
 }
 

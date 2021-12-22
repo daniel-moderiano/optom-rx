@@ -47,7 +47,7 @@ const StyledEditProvider = styled.div`
     }
     
     .submit-btn:hover {
-      background-color: var(--btn-hover);
+      background-color: var(--btn-primary-hover);
       /* border: 1px solid rgb(16, 110, 190); */
     }
           
@@ -61,8 +61,8 @@ const StyledEditProvider = styled.div`
       border: none;
     }
     .cancel-btn:hover {
-      background-color: #D1D6DB;
-      color: rgb(32, 31, 30);
+      background-color: var(--btn-secondary-hover);
+      color: #21252A;
     }
   }
 

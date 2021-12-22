@@ -96,8 +96,8 @@ const StyledProviders = styled.div`
     margin-top: 0.75rem;
     
     &:hover {
-      background-color: var(--btn-hover);
-      border: 1px solid var(--btn-hover);
+      background-color: var(--btn-primary-hover);
+      border: 1px solid var(--btn-primary-hover);
     }
   }
 
@@ -142,28 +142,29 @@ const StyledProviders = styled.div`
           cursor: pointer;
           padding: 2px 8px 5px 8px;
           border-radius: 2px;
-          /* min-width: 80px; */
-          background-color: rgb(0, 120, 212);
-          color: rgb(255, 255, 255);
-          border: 1px solid rgb(0, 120, 212); 
-          
-          &:hover {
-            background-color: rgb(16, 110, 190);
-            border: 1px solid rgb(16, 110, 190);
-          }
+          background-color: #fff;
         }
 
         .edit {
           margin-right: 0.8rem;
+          color: var(--btn-positive);
+          border: 0.1rem solid var(--btn-positive); 
+          
+          &:hover {
+            color: var(--btn-positive-hover-text);
+            background-color: var(--btn-positive-hover);
+            border: 0.1rem solid var(--btn-positive);
+          }
         }
 
         .delete {
-          background-color: var(--error);
-          border: 1px solid var(--error); 
+          border: 0.1rem solid var(--btn-negative); 
+          color: var(--btn-negative);
 
           &:hover {
-            background-color: #a80000;
-            border: 1px solid #a80000;
+            background-color: var(--btn-negative-hover);
+            color: var(--btn-negative-hover-text);
+            border: 0.1rem solid var(--btn-negative); 
           }
         }
 
