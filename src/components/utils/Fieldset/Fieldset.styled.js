@@ -7,7 +7,7 @@ const StyledFieldset = styled.fieldset`
   padding: 2rem 0;
   background-color: #fff;
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   width: 100%;
   border-bottom: 0.1rem solid #dfe1e1;
   /* box-shadow: 0 1.6px 3.6px 0 rgb(0 0 0 / 13%), 0 0.3px 0.9px 0 rgb(0 0 0 / 11%); */
@@ -18,12 +18,15 @@ const StyledFieldset = styled.fieldset`
     font-size: 1.5rem;
     font-family: var(--font-title);
     color: var(--title-color);
+    width: 16rem;
   }
 
   .container {
     width: auto;
     display: flex;
     flex-direction: column;
+    /* padding-right: 2rem; */
+    /* width: 100%; */
     /* margin-left: 3rem; */
   }
 
