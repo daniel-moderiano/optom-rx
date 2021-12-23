@@ -5,13 +5,9 @@ import logo from '../../assets/logo.svg';
 const Header = () => {
   return (
     <StyledHeader className="Header">
-      <div className="logo">
         <h1 className="Header__title">
           <img src={logo} alt="logo-rx" />
-        </h1>
-        
-      </div>
-      
+        </h1>      
       <Nav />
     </StyledHeader>
   )

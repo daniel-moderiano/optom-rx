@@ -8,7 +8,9 @@ const StyledRxForm = styled.form`
   align-items: center;
   max-width: 880px;
   width: 90%;
-  margin-top: 2rem;
+  margin: 2rem 0;
+  background-color: #fff;
+  padding: 0 5.5rem;
 
   .medicareFields {
     display: flex;

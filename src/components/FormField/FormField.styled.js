@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const StyledFormField = styled.div`
-  margin: 1rem 0;
+  margin: 0.85rem 0;
   position: relative;
   width: 24rem;
 

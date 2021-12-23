@@ -4,7 +4,9 @@ const Fieldset = ({ className, legend, children }) => {
   return (
     <StyledFieldset className={className}>
       <legend>{legend}</legend>
-      {children}
+      <div className="container">
+        {children}
+      </div>
     </StyledFieldset>
   )
 }

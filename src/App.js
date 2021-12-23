@@ -45,14 +45,14 @@ const App = () => {
       authRequired: false,  // Indicates whether authority is required for this medication
     },
     patientData: {
-      "fullName":"Daniel Moderiano",
-      "streetAddress":"6 Carragarmungee Estate Long Road Name",
-      "subpremise":"Unit 12",
-      "suburb":"Port Bonython",
-      "postcode":"5127",
-      "state":"SA",
-      "medicareNumber":"5151515151",
-      "medicareRefNumber":"3"
+      // "fullName":"Daniel Moderiano",
+      // "streetAddress":"6 Carragarmungee Estate Long Road Name",
+      // "subpremise":"Unit 12",
+      // "suburb":"Port Bonython",
+      // "postcode":"5127",
+      // "state":"SA",
+      // "medicareNumber":"5151515151",
+      // "medicareRefNumber":"3"
     },
     providerData: {},
     miscData: {

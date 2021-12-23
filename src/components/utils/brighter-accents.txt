@@ -107,6 +107,8 @@ blue 7
 #5d8eb1
 blue 8
 #33719d
+blue 8.5
+#00538F
 blue 9
 #004170
 
