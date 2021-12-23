@@ -972,18 +972,21 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
         <div className="provider-controls">
           <div className="form-field">
             <label htmlFor="provider-select" className="select-label">Select provider</label>
-            <select value={chosenProvider} name="providerChoice" id="provider-select" className="provider-select" onChange={handleSelectChange}>
-              {/* This default option must have a value matching the initial state in chosenProvider to be displayed */}
-              <option disabled hidden className="Providers__list-item" value="---Select provider---">---Select provider---</option>
-              {/* List to be populated with any available existing providers */}
-              {providers && 
-                <>
-                {providers.map(provider => (
-                  <option key={provider.id} data-id={provider.id} className="Providers__list-item" value={provider.fullName}>{provider.fullName}</option>
-                ))}  
-                </>   
-              }
-            </select>
+            <div className="select-wrapper">
+              <select value={chosenProvider} name="providerChoice" id="provider-select" className="provider-select" onChange={handleSelectChange}>
+                  {/* This default option must have a value matching the initial state in chosenProvider to be displayed */}
+                  <option disabled hidden className="Providers__list-item" value="---Select provider---">---Select provider---</option>
+                  {/* List to be populated with any available existing providers */}
+                  {providers && 
+                    <>
+                    {providers.map(provider => (
+                      <option key={provider.id} data-id={provider.id} className="Providers__list-item" value={provider.fullName}>{provider.fullName}</option>
+                    ))}  
+                    </>   
+                  }
+              </select>
+            </div>
+           
           </div>
           <button onClick={(e) => { e.preventDefault(); toggleProviderForm(); }}>Edit selected provider</button>
           <button onClick={(e) => e.preventDefault()}>Create temporary (locum) provider</button>
@@ -1107,7 +1110,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
       </Fieldset>
 
       {/* Note there must be enough info to identify the medicine, including form and strength */}
-      <Fieldset className="misc-form" legend="PBS and Other Details">
+      <Fieldset className="misc-form" legend="PBS Details">
 
         <FormField 
           fieldType="checkbox" 

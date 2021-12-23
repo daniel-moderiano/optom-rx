@@ -50,6 +50,7 @@ const StyledFormField = styled.div`
     flex-direction: column;
   }
 
+  
   /* Unique styling for checkbox fields */
   &.checkbox {
     width: 24rem;
@@ -154,6 +155,8 @@ const StyledFormField = styled.div`
     top: 21px;
     right: -0.35rem;
   }
+
+  
 `
 
 export { StyledFormField }

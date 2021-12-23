@@ -10,7 +10,7 @@ const StyledDrugAutocomplete = styled.fieldset`
   .items-list {
     position: absolute;
     z-index: 10;
-    width: 47rem;
+    width: 150%;
     font-size: 0.9rem;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
     border-radius: 2px;
@@ -151,7 +151,7 @@ const StyledDrugAutocomplete = styled.fieldset`
   button {
     position: absolute;
     right: 0.3rem;
-    top: 6rem;
+    top: 5.6rem;
     background-color: #fff;
     border: none;
     margin: 0;

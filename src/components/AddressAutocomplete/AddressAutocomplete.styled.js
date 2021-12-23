@@ -31,7 +31,7 @@ const StyledAddressAutocomplete = styled.fieldset`
   button {
     position: absolute;
     right: 0.3rem;
-    top: 6rem;
+    top: 5.6rem;
     background-color: #fff;
     border: none;
     margin: 0;

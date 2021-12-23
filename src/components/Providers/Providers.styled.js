@@ -147,8 +147,6 @@ const StyledProviders = styled.div`
           padding: 2px 8px 5px 8px;
           border-radius: 2px;
           background-color: #fff;
-
-          
         }
 
         .edit {

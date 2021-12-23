@@ -27,6 +27,8 @@ FULL NEUTRALS
 
 gray 0
 #FFFFFF
+gray 0.5
+#F4F5F6
 gray 1
 #E8EAED
 gray 2
