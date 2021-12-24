@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const StyledAddProvider = styled.div`
-  margin-top: 1rem;
+  margin-top: 3rem;
   background-color: #FFFFFF;
   box-shadow: 0 1.6px 3.6px 0 rgb(0 0 0 / 13%), 0 0.3px 0.9px 0 rgb(0 0 0 / 11%);
   padding: 2rem 5.5rem;
@@ -14,7 +14,7 @@ const StyledAddProvider = styled.div`
     color: var(--title-color);
     font-size: 2.5rem;
     padding: 0;
-    margin: 0 0 0.75rem 0;
+    margin: 1rem 0 0.75rem 0;
   }
 
   .AddProvider__description {

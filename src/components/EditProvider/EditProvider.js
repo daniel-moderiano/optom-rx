@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { db } from "../../firebase/config";
 import ProviderForm from "../ProviderForm/ProviderForm";
 import { StyledEditProvider } from "./EditProvider.styled";
+import Fieldset from "../utils/Fieldset/Fieldset";
 
 const EditProvider = ({ googleLoaded, setToast }) => {
   const { id } = useParams();
@@ -85,18 +86,20 @@ const EditProvider = ({ googleLoaded, setToast }) => {
     <StyledEditProvider>
       <h2 className="EditProvider__title">Edit provider</h2>
       <p className="EditProvider__description">Change any details and then save changes</p>
-      <ProviderForm 
-        googleLoaded={googleLoaded} 
-        standalone={true} 
-        data={providerData}
-        setData={setProviderData}
-        handleChange={handleChange}
-        handleSubmit={handleSubmit}
-        handleCancel={cancelEdit}
-        toggleBooleanState={() => toggleBooleanState(setProviderData, providerData, 'prefix')}
-        submitBtn="Save changes"
-        cancelBtn="Cancel"
-      />
+      <Fieldset className="edit-provider-form" legend="Provider Details">
+        <ProviderForm 
+          googleLoaded={googleLoaded} 
+          standalone={true} 
+          data={providerData}
+          setData={setProviderData}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          handleCancel={cancelEdit}
+          toggleBooleanState={() => toggleBooleanState(setProviderData, providerData, 'prefix')}
+          submitBtn="Add provider"
+          cancelBtn="Cancel"
+        />
+      </Fieldset>
     </StyledEditProvider>
   )
 }
