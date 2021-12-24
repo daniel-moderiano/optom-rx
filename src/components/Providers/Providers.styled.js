@@ -56,7 +56,7 @@ const StyledProviders = styled.div`
     /* box-shadow: 0 1.6px 3.6px 0 rgb(0 0 0 / 13%), 0 0.3px 0.9px 0 rgb(0 0 0 / 11%); */
 
     .table__header-row {
-      border-bottom: 2px solid black;
+      border-bottom: 1px solid #646e6d;
     }
 
     .table__form {
@@ -72,7 +72,7 @@ const StyledProviders = styled.div`
     tr {
       
       margin: 0;
-      border-bottom: 1px solid #d4d4d4;
+      border-bottom: 1px solid #dfe1e1;
 
       td, th {
         margin: 0;
@@ -82,8 +82,12 @@ const StyledProviders = styled.div`
         /* vertical-align: middle; */
       }
 
+      .name-cell, .name-header {
+        padding-left: 1rem;
+      }
+
       .actions-cell {
-        padding-left: 0.5rem;
+        padding: 0 0.5rem;
 
         .table__action {
           font-size: 0.85rem;

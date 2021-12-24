@@ -54,7 +54,7 @@ const Providers = () => {
         <table className="Providers__table">
           <thead>
             <tr className="table__header-row">
-                <th className="table__header">Name</th>
+                <th className="table__header name-header">Name</th>
                 <th className="table__header">Location</th>
                 {/* <th className="table__header">Prescriber Number</th> */}
                 <th className="table__header default-header">Set as default</th>
@@ -64,7 +64,7 @@ const Providers = () => {
           <tbody>
             {providers.map(provider => (
               <tr key={provider.id} className="table__data-row">
-                <td className="table__cell">{provider.fullName}</td>
+                <td className="table__cell name-cell">{provider.fullName}</td>
                 <td className="table__cell">{formatLocation(provider.practiceName, provider.streetAddress, provider.suburb)}</td>
                 <td className="table__cell default-cell">
                   <FormField 

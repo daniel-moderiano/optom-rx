@@ -6,12 +6,14 @@ const StyledHeader = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  
-  /* height: 4rem; */
 
   h1 {
-    margin: 0.5 rem 1rem 0 1rem;
+    margin: 0.65rem 1rem 0 1rem;
     padding: 0 0 0rem 0;
+
+    &:hover {
+      cursor: pointer;
+    }
 
     img {
       height: 30px;

@@ -31,6 +31,7 @@ const StyledRxForm = styled.form`
   .provider-form  {
     border-top: 1px solid #dfe1e1;
     margin-top: 2.5rem;
+    padding-bottom: 2.95rem;
   }
   
   .ProviderForm{
