@@ -28,22 +28,14 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
   const [showTooltip, setShowTooltip] = useState(true);
   const [tooltipText, setTooltipText] = useState('');
 
-  const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' }
-  ];
- 
-  const [selectOptions, setSelectOptions] = useState([
-
-  ]);
+  const [selectOptions, setSelectOptions] = useState([]);
 
   // State (at this stage) is only provided if generating a new Rx. Hence the numbers fetch should only be performed when state exists
   const { state } = useLocation();
   
   const [numbersLoaded, setNumbersLoaded] = useState(false);
 
-  const [chosenProvider, setChosenProvider] = useState('---Select provider---');
+  const [chosenProvider, setChosenProvider] = useState("");
 
   const [drugAlerts, setDrugAlerts] = useState({
     name: {},
@@ -193,7 +185,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
         // Check for a default provider
         if (provider.default) {
           // Update the select element accordingly
-          setChosenProvider(provider.fullName);
+          setChosenProvider({ label: `${provider.fullName} (${(provider.practiceName !== "") ? provider.practiceName + `, ${provider.suburb}`: provider.suburb})`, value: provider.id });
           // Also set state to provider data to ensure the form is pre-filled
           setProviderData({
             ...provider,
@@ -626,18 +618,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
     }));
   };
 
-  // A handle change function specifically for the select element. Sets both the input state and providerData based on selection
-  const handleSelectChange = (event) => {
-    setChosenProvider(event.target.value);
-    // Use the unique document ID to grab the provider from the fetched providers array
-    const providerId = event.target.options[event.target.selectedIndex].dataset.id;
-    // Note the provider is returned from array.filter as an array, hence destructuring
-    const [provider] = providers.filter((provider) => provider.id === providerId);
-    setProviderData({
-      ...provider,
-    })
-  }
-
   // Will return true or false depending on whether the validated field is empty (not valid/false) or not
   const validateFieldForEmpty = (setFuncAlert, field) => {
     // Validate full name here
@@ -1002,11 +982,49 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
     if (providers) {
       
       setSelectOptions(providers.map((provider) => ({
-        value: provider.fullName,
-        label: provider.fullName,
+        value: provider.id,
+        label: `${provider.fullName} (${(provider.practiceName !== "") ? provider.practiceName + `, ${provider.suburb}`: provider.suburb})`,
       })));
     }
   }, [providers]);
+
+  // A handle change function specifically for the select element. Sets both the input state and providerData based on selection
+  const handleSelectChange = (event) => {
+    setChosenProvider(event);
+    // Use the unique document ID to grab the provider from the fetched providers array
+    const providerId = event.value;
+    // Note the provider is returned from array.filter as an array, hence destructuring
+    const [provider] = providers.filter((provider) => provider.id === providerId);
+    setProviderData({
+      ...provider,
+    })
+  }  
+
+      // box-shadow: 0 0 0 1px #a360ac;
+
+  const customStyles = {
+    control: (base, state) => ({
+      ...base,
+      border: state.isFocused ? '1px solid #a360ac' : '1px solid rgb(144, 147, 150)',
+      boxShadow: state.isFocused ? '0 0 0 1px #a360ac' : '0',
+      '&:hover': { 
+        borderColor: state.isFocused ? '#a360ac' : 'rgb(178, 182, 185)',
+        cursor: 'pointer'
+      },
+      width: '24rem',
+      padding: '0.12rem 0 0.11rem 0.85rem',
+      borderRadius: '4px',
+      fontSize: "1rem",
+      marginTop: '0.5rem',
+      marginBottom: '0.5rem',
+
+    }),
+
+    valueContainer: (provided, state) => ({
+      ...provided,
+      paddingLeft: '0',
+    }),
+  }
 
   return (
     <StyledRxForm 
@@ -1023,39 +1041,28 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
     
         
       <Fieldset className="provider-form" legend="Provider Details">
-
-        <div className="provider-controls">
-          {!newProvider && <div className="form-field">
-            <label htmlFor="provider-select" className="select-label">Select provider</label>
-            <div className="select-wrapper">
-              <select value={chosenProvider} name="providerChoice" id="provider-select" className="provider-select" onChange={handleSelectChange} disabled={newProvider}>
-                  {/* This default option must have a value matching the initial state in chosenProvider to be displayed */}
-                  <option disabled hidden className="Providers__list-item" value="---Select provider---">---Select provider---</option>
-                  {/* List to be populated with any available existing providers */}
-                  {providers && 
-                    <>
-                    {providers.map(provider => (
-                      <option key={provider.id} data-id={provider.id} className="Providers__list-item" value={provider.fullName}>{provider.fullName}</option>
-                    ))}  
-                    </>   
-                  }
-              </select>
-            </div>
-            <span className="or">or</span>
-          </div>}
-          {/* <button onClick={(e) => { e.preventDefault(); toggleProviderForm(); }}>Edit selected provider</button> */}
-   
-          {!newProvider && <button className="provider-addBtn" onClick={(event) => addNewProviderInline(event)}>Add new provider</button>}
-
-          <Select 
-            options={selectOptions} 
-            isSearchable={false}
-            value={options[1]}
-            onChange={() => console.log('changed')}
-          />  
+        {(!newProvider && providers.length !== 0) && 
+          <div className="provider-controls">
+            <label htmlFor="react-select">Select provider</label>
+            <Select 
+              options={selectOptions} 
+              isSearchable={false}
+              value={chosenProvider}
+              onChange={handleSelectChange}
+              styles={customStyles}
+              placeholder="Select provider..."
+              id="react-select"
+            /> 
           
-         
-        </div>
+            <span className="or">or</span>
+          </div>
+        }
+        
+   
+        {!newProvider && <button className="provider-addBtn" onClick={(event) => addNewProviderInline(event)}>Add new provider</button>}
+
+           
+    
 
         {showProviderForm && 
           <ProviderForm 

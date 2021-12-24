@@ -11,70 +11,31 @@ const StyledRxForm = styled.form`
   margin: 2rem 0;
   background-color: #fff;
   padding: 0 5.5rem;
+  
+  .provider-form {
+    .container {
+      width: 24rem;
+    }
+  }
 
   .provider-controls {
     margin-top: 0.65rem;
 
     label {
       font-size: 0.9rem;
-    }
-
-    .select-wrapper {
-      position: relative;
-
-      &::after {
-        /* content: "▼";
-        font-size: 0.8rem;
-        position: absolute;
-        right: 0.8rem;
-        top: 0.6rem;
-        color: grey;
-        pointer-events: none; */
-        content: " ";
-        position: absolute;
-        right: 1rem;
-        top: 50%;
-
-        margin-top: -3px;
-        width: 0;
-        height: 0;
-        border-style: solid;
-        border-width: 8px 5px 0 5px;
-        border-color: #aaa transparent transparent;
-        pointer-events: none;
-      }
-    }
-
-    .provider-select {
-      width: 24rem;
-      -webkit-appearance: none;
-      appearance: none;
-      padding: 0.5rem 40px 0.6rem 0.8rem;
-      box-shadow: 0 1px 3px -2px #9098A9;
-      border: 1px solid #dfe1e1;
-      border-radius: 5px;
-      background: #fff;
-      cursor: pointer;
-      font-family: var(--font-stack-segoe);
-      font-size: 1rem;
-      /* width: 100%; */
-      margin: 0.5rem 0 0.7rem 0;
-
-      &:focus {
-        outline: 0.1rem solid #a360ac;
-        outline-offset: 1px;
-      }
-
-      option:checked {
-        background-color: red;
-      }
+     
     }
 
     .or {
+      /* display: block; */
       font-size: 0.9rem;
+      /* text-align: center; */
     }
+  }
 
-    .provider-addBtn {
+  .provider-addBtn {
+      width: 12rem;
+      /* margin-left: 25%; */
       display: inline-block;
       font-size: 1rem;
       font-family: var(--font-stack-segoe);
@@ -98,8 +59,6 @@ const StyledRxForm = styled.form`
         transform: scale(0.98);
       }
     }
-
-  }
 
   
 
