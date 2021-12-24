@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { addDoc, collection } from "firebase/firestore";
 import { useState } from "react";
 import { db } from "../../firebase/config";
@@ -77,12 +77,17 @@ const AddProvider = ({ googleLoaded, setToast }) => {
       message: 'Added successfully!'
     }));
 
+
     navigate('/providers');
+ 
+    
     
   };
 
   const cancelEdit = () => {
-    navigate('/providers');
+
+      navigate('/providers');
+
   }
 
   return (

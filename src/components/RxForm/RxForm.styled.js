@@ -12,7 +12,9 @@ const StyledRxForm = styled.form`
   background-color: #fff;
   padding: 0 5.5rem;
   
-  .provider-form {
+  .ProviderForm{
+    margin-top: -0.55rem;
+
     .container {
       width: 24rem;
     }
@@ -20,24 +22,32 @@ const StyledRxForm = styled.form`
 
   .provider-controls {
     margin-top: 0.65rem;
+    position: relative;
 
     label {
       font-size: 0.9rem;
      
     }
 
-    .or {
+    
+  }
+
+  .add-new-provider {
+    display: flex;
+    align-items: center;
+    margin-top: 2rem;
+    span {
       /* display: block; */
       font-size: 0.9rem;
+      padding-bottom: 0.1rem;
       /* text-align: center; */
     }
   }
 
   .provider-addBtn {
-      width: 12rem;
-      /* margin-left: 25%; */
+      /* width: 12rem; */
       display: inline-block;
-      font-size: 1rem;
+      font-size: 0.9rem;
       font-family: var(--font-stack-segoe);
       box-sizing: border-box;
       cursor: pointer;
@@ -48,7 +58,7 @@ const StyledRxForm = styled.form`
       color: rgb(255, 255, 255);
       border: 1px solid var(--primary-color); 
       text-decoration: none;
-      margin-top: 0.85rem;
+      margin-left: 1rem;
       
       &:hover {
         background-color: var(--btn-primary-hover);
@@ -58,7 +68,49 @@ const StyledRxForm = styled.form`
       &:active {
         transform: scale(0.98);
       }
+      /* position: absolute;
+      left: 0.3rem;
+      top: 5rem;
+      background-color: #fff;
+      border: none;
+      margin: 0;
+      padding: 0;
+      font-size: 0.8rem;
+      text-decoration: underline;
+      font-family: var(--font-stack-segoe);
+      line-height: 0.8rem;
+
+      &:hover {
+        cursor: pointer;
+      } */
+  
     }
+
+    .cancel-btn {
+      font-size: 1rem;
+      font-family: var(--font-stack-segoe);
+      box-sizing: border-box;
+      cursor: pointer;
+      padding: 8px 16px 10px 16px;
+      border-radius: 2px;
+      text-decoration: none;
+      margin-right: 2rem;
+      min-width: 80px;
+      background-color: var(--btn-secondary);
+      color: var(--btn-secondary-text);
+      /* border: 1px solid rgb(138, 136, 134);                 */
+      border: none;
+
+      &:active {
+        transform: scale(0.98);
+      }
+
+      &:hover {
+        background-color: var(--btn-secondary-hover);
+        color: #21252A;
+      }
+    }
+
 
   
 

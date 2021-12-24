@@ -1,0 +1,20 @@
+Alerts
+
+Red/error
+BASE: #D12323
+red 0
+#FCE8E8
+red 1
+#F4AAAA
+red 2
+#E36363
+red 3
+#DC3030
+red 4
+#B82020
+red 5
+#881A1B
+red 6
+#601717
+
+Green/success

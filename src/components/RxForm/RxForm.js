@@ -11,6 +11,7 @@ import { useLocation } from "react-router";
 import { useNumbers } from '../../hooks/useNumbers';
 import { usePBSFetch } from "../../hooks/usePBSFetch";
 import Select from 'react-select';
+import { Link } from "react-router-dom";
 
 // ! Multiple optometrist items are not permitted to be prescribed on the same form; each must use an individual form
 
@@ -1041,8 +1042,9 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
     
         
       <Fieldset className="provider-form" legend="Provider Details">
-        {(!newProvider && providers.length !== 0) && 
-          <div className="provider-controls">
+      <div className="provider-controls">
+        {(!newProvider && selectOptions.length > 0) && 
+            <>
             <label htmlFor="react-select">Select provider</label>
             <Select 
               options={selectOptions} 
@@ -1053,16 +1055,20 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
               placeholder="Select provider..."
               id="react-select"
             /> 
-          
-            <span className="or">or</span>
-          </div>
+{/*           
+            <span className="or">or</span> */}
+          </>
         }
+        {!newProvider && 
+          <div className="add-new-provider">
+            <span>or</span>
+            <button className="provider-addBtn" onClick={(event) => addNewProviderInline(event)}> Add new provider</button>
+          </div>}
+        
+        </div>
         
    
-        {!newProvider && <button className="provider-addBtn" onClick={(event) => addNewProviderInline(event)}>Add new provider</button>}
-
-           
-    
+        
 
         {showProviderForm && 
           <ProviderForm 
