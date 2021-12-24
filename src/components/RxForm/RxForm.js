@@ -10,6 +10,7 @@ import { useCollection } from "../../hooks/useCollection";
 import { useLocation } from "react-router";
 import { useNumbers } from '../../hooks/useNumbers';
 import { usePBSFetch } from "../../hooks/usePBSFetch";
+import Select from 'react-select';
 
 // ! Multiple optometrist items are not permitted to be prescribed on the same form; each must use an individual form
 
@@ -19,13 +20,23 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
   const { documents: providers } = useCollection('providers', ['uid', '==', user.uid]);
 
   const [{ pbsInfo, pbsError, pbsLoading }, fetchDrug, clearPbsState] = usePBSFetch(existingData.pbsData);
+  const [newProvider, setNewProvider] = useState(false);
 
   const [indication, setIndication] = useState('');
   const [expandIndication, setExpandIndication] = useState(false);
 
   const [showTooltip, setShowTooltip] = useState(true);
   const [tooltipText, setTooltipText] = useState('');
+
+  const options = [
+    { value: 'chocolate', label: 'Chocolate' },
+    { value: 'strawberry', label: 'Strawberry' },
+    { value: 'vanilla', label: 'Vanilla' }
+  ];
  
+  const [selectOptions, setSelectOptions] = useState([
+
+  ]);
 
   // State (at this stage) is only provided if generating a new Rx. Hence the numbers fetch should only be performed when state exists
   const { state } = useLocation();
@@ -118,6 +129,20 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
     phoneNumber: '',
     prescriberNumber: '',
     ...existingData.providerData,
+  });
+
+  const [newProviderData, setNewProviderData] = useState({
+    prefix: false,
+    fullName: '',
+    qualifications: '',
+    practiceName: '',
+    streetAddress: '',
+    subpremise: '',
+    suburb: '',
+    postcode: '',
+    state: '',
+    phoneNumber: '',
+    prescriberNumber: '',
   });
 
   const [miscData, setMiscData] = useState({
@@ -894,12 +919,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
     }));
   };
 
-  const toggleProviderForm = () => {
-    if (!showProviderForm) {
-      setShowProviderForm((prevState) => !prevState);
-    }
-  };
-
   // Ensure form is validated before calling form submission function (to generate Rx)
   const checkFormValidation = () => {
     let valid = true;
@@ -952,7 +971,42 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
     }
 
     return valid;
-  }
+  };
+
+  const addNewProviderInline = (event) => {
+    event.preventDefault();
+    setNewProvider(true);
+    setShowProviderForm(true);
+  };
+
+  // Used when the user wants to cancel adding a new provider on the RxForm page. Reset back to default selected provider
+  const handleCancel = (event) => {
+    setNewProvider(false);
+    setNewProviderData({
+      prefix: false,
+      fullName: '',
+      qualifications: '',
+      practiceName: '',
+      streetAddress: '',
+      subpremise: '',
+      suburb: '',
+      postcode: '',
+      state: '',
+      phoneNumber: '',
+      prescriberNumber: '',
+    })
+    setShowProviderForm(false);
+  };
+
+  useEffect(() => {
+    if (providers) {
+      
+      setSelectOptions(providers.map((provider) => ({
+        value: provider.fullName,
+        label: provider.fullName,
+      })));
+    }
+  }, [providers]);
 
   return (
     <StyledRxForm 
@@ -960,6 +1014,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
       onSubmit={(e) => {
         e.preventDefault(); 
         if (checkFormValidation()) {          
+
           handleSubmit(drugData, patientData, providerData, miscData, pbsInfo)
         }
       }}
@@ -970,10 +1025,10 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
       <Fieldset className="provider-form" legend="Provider Details">
 
         <div className="provider-controls">
-          <div className="form-field">
+          {!newProvider && <div className="form-field">
             <label htmlFor="provider-select" className="select-label">Select provider</label>
             <div className="select-wrapper">
-              <select value={chosenProvider} name="providerChoice" id="provider-select" className="provider-select" onChange={handleSelectChange}>
+              <select value={chosenProvider} name="providerChoice" id="provider-select" className="provider-select" onChange={handleSelectChange} disabled={newProvider}>
                   {/* This default option must have a value matching the initial state in chosenProvider to be displayed */}
                   <option disabled hidden className="Providers__list-item" value="---Select provider---">---Select provider---</option>
                   {/* List to be populated with any available existing providers */}
@@ -986,23 +1041,35 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
                   }
               </select>
             </div>
-           
-          </div>
-          <button onClick={(e) => { e.preventDefault(); toggleProviderForm(); }}>Edit selected provider</button>
-          <button onClick={(e) => e.preventDefault()}>Create temporary (locum) provider</button>
+            <span className="or">or</span>
+          </div>}
+          {/* <button onClick={(e) => { e.preventDefault(); toggleProviderForm(); }}>Edit selected provider</button> */}
+   
+          {!newProvider && <button className="provider-addBtn" onClick={(event) => addNewProviderInline(event)}>Add new provider</button>}
+
+          <Select 
+            options={selectOptions} 
+            isSearchable={false}
+            value={options[1]}
+            onChange={() => console.log('changed')}
+          />  
+          
+         
         </div>
 
         {showProviderForm && 
           <ProviderForm 
             googleLoaded={googleLoaded}
-            standalone={false}
-            data={providerData}
-            setData={setProviderData}
+            standalone={true}
+            data={newProviderData}
+            setData={setNewProviderData}
             handleChange={(event) => handleChange(setProviderData, event)}      
             provider={false}   
             alerts={providerAlerts}
             setAlerts={setProviderAlerts} 
             toggleBooleanState={toggleBooleanState}
+            cancelBtn="Cancel"
+            handleCancel={handleCancel}
           />
         }
       </Fieldset>
