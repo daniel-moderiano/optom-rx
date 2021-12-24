@@ -3,7 +3,6 @@ import styled from "styled-components";
 const StyledProviderForm = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
 
   .checkbox {
     margin: 0.75rem 0;
@@ -11,7 +10,7 @@ const StyledProviderForm = styled.div`
 
   .ProviderForm__btns {
     place-self: flex-end;
-    margin-right: 10%;
+    margin-top: 1rem;
 
     .ProviderForm__btn {
       font-size: 1rem;

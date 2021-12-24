@@ -5,6 +5,7 @@ import { db } from "../../firebase/config";
 import ProviderForm from "../ProviderForm/ProviderForm";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { StyledAddProvider } from "./AddProvider.styled";
+import Fieldset from "../utils/Fieldset/Fieldset";
 
 const AddProvider = ({ googleLoaded, setToast }) => {
   const { user } = useAuthContext();
@@ -94,18 +95,21 @@ const AddProvider = ({ googleLoaded, setToast }) => {
     <StyledAddProvider>
       <h2 className="AddProvider__title">Add provider</h2>
       <p className="AddProvider__description">Enter details to add a new provider</p>
-      <ProviderForm 
-        googleLoaded={googleLoaded} 
-        standalone={true} 
-        data={providerData}
-        setData={setProviderData}
-        handleChange={handleChange}
-        handleSubmit={handleSubmit}
-        handleCancel={cancelEdit}
-        toggleBooleanState={() => toggleBooleanState(setProviderData, providerData, 'prefix')}
-        submitBtn="Add provider"
-        cancelBtn="Cancel"
-      />
+      <Fieldset className="add-provider-form" legend="Provider Details">
+        <ProviderForm 
+          googleLoaded={googleLoaded} 
+          standalone={true} 
+          data={providerData}
+          setData={setProviderData}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          handleCancel={cancelEdit}
+          toggleBooleanState={() => toggleBooleanState(setProviderData, providerData, 'prefix')}
+          submitBtn="Add provider"
+          cancelBtn="Cancel"
+        />
+      </Fieldset>
+      
     </StyledAddProvider>
   )
 }
