@@ -1038,9 +1038,9 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
         }
       }}
       autoComplete="off">
+      <h2 className="RxForm__title">New Prescription</h2>
+      <p className="RxForm__description">Fill out the details required to prescribe</p>
 
-    
-        
       <Fieldset className="provider-form" legend="Provider Details">
       <div className="provider-controls">
         {(!newProvider && selectOptions.length > 0) && 

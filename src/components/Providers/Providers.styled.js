@@ -1,79 +1,20 @@
 import styled from "styled-components";
 
 const StyledProviders = styled.div`
-  margin-top: 3rem;
+  margin: 3rem 0;
   background-color: #FFFFFF;
   box-shadow: 0 1.6px 3.6px 0 rgb(0 0 0 / 13%), 0 0.3px 0.9px 0 rgb(0 0 0 / 11%);
-  padding: 2rem 3rem;
+  padding: 2rem 5.5rem 4rem 5.5rem;
   width: 90%;
 
-  .modal {
-    display: flex;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.5);
-    justify-content: center;
-    align-items: center;
-
-    &.hidden {
-      display: none;
-    }
-  }
-
-  .add-modal__header {
-    background-color: #fff;
-    width: 20rem;
-    padding: 0.5rem 1.5rem 1rem 1.5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    border-radius: 3px;
-  }
-
-  .modal__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #cccbcb;
-    font-weight: bold;
-    font-size: 1.1rem;
-    padding-bottom: 0.2rem;
-    width: 100%;
-  }
-
-  .modal__close {
-    color: #ccc;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-    border: none;
-    background-color: rgba(255, 255, 255, 0);
-  }
-
-  .modal__content {
-    background-color: #fff;
-    padding: 1rem;
-  }
-
-  .modal__close:hover {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-  }
-
   .Providers__title {
-    font-family: var(--font-title);
-    font-weight: normal;
+    font-family: var(--font-stack-myriad);
+    font-weight: 400;
     color: var(--title-color);
-    font-size: 2rem;
+    font-size: 2.5rem;
     padding: 0;
-    margin: 0 0 0.75rem 0;
+    margin: 1rem 0 0.75rem 0;
+    place-self: flex-start;
   }
 
   .Providers__description {
@@ -106,11 +47,17 @@ const StyledProviders = styled.div`
   }
 
   .Providers__table {
-    padding: 0;
+
     margin-top: 2rem;
     border-collapse: collapse;
     width: 100%;
     /* table-layout: fixed; */
+    /* border: 1px solid black; */
+    /* box-shadow: 0 1.6px 3.6px 0 rgb(0 0 0 / 13%), 0 0.3px 0.9px 0 rgb(0 0 0 / 11%); */
+
+    .table__header-row {
+      border-bottom: 2px solid black;
+    }
 
     .table__form {
       &.expand {

@@ -8,9 +8,30 @@ const StyledRxForm = styled.form`
   align-items: center;
   max-width: 880px;
   width: 90%;
-  margin: 2rem 0;
   background-color: #fff;
-  padding: 0 5.5rem;
+  padding: 2rem 5.5rem;
+  margin: 3rem 0;
+  box-shadow: 0 1.6px 3.6px 0 rgb(0 0 0 / 13%), 0 0.3px 0.9px 0 rgb(0 0 0 / 11%);
+
+  .RxForm__title {
+    font-family: var(--font-stack-myriad);
+    font-weight: 400;
+    color: var(--title-color);
+    font-size: 2.5rem;
+    padding: 0;
+    margin: 1rem 0 0.75rem 0;
+    place-self: flex-start;
+  }
+
+  .RxForm__description {
+    place-self: flex-start;
+    margin: 0;
+  }
+
+  .provider-form  {
+    border-top: 1px solid #dfe1e1;
+    margin-top: 2.5rem;
+  }
   
   .ProviderForm{
     margin-top: -0.55rem;
