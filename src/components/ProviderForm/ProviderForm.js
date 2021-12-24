@@ -1,6 +1,7 @@
 import FormField from "../FormField/FormField";
 import AddressAutocomplete from "../AddressAutocomplete/AddressAutocomplete";
 import { useState, useEffect, useCallback } from "react";
+import { StyledProviderForm } from './ProviderForm.styled.js'
 
 // ! Legal requirements include the prescriber's name, address, and contact details, and prescriber number
 
@@ -265,7 +266,7 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
     <>
       {/* The standalone form allows all 'in house' state management and validation, but has the optiona of overwriting data with custom state if required */}
       {/* Standalone form should submit providers to firebase using user ID as document ID */}
-      {standalone &&  <div className="ProviderForm ProviderForm--standalone">
+      {standalone &&  <StyledProviderForm className="ProviderForm ProviderForm--standalone">
         <FormField 
           fieldType="text" 
           name="fullName"
@@ -366,10 +367,10 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
 
        
        
-      </div>}
+      </StyledProviderForm>}
 
       {/* The non standalone form uses the App/RxForm state instead of local state, and is intedend to integrate within the RxForm component */}
-      {!standalone && <div className="ProviderForm ProviderForm--integrated">
+      {!standalone && <StyledProviderForm className="ProviderForm ProviderForm--integrated">
         <FormField 
           fieldType="text" 
           name="fullName"
@@ -445,7 +446,7 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
           maxlength="7"
           className="prescriberNo-field form-field"
         />
-      </div>}
+      </StyledProviderForm>}
     </>
       
   )
