@@ -26,16 +26,14 @@ const StyledRxForm = styled.form`
 
     label {
       font-size: 0.9rem;
-     
     }
-
-    
   }
 
   .add-new-provider {
     display: flex;
     align-items: center;
     margin-top: 2rem;
+
     span {
       /* display: block; */
       font-size: 0.9rem;
@@ -94,11 +92,11 @@ const StyledRxForm = styled.form`
       padding: 8px 16px 10px 16px;
       border-radius: 2px;
       text-decoration: none;
-      margin-right: 2rem;
       min-width: 80px;
       background-color: var(--btn-secondary);
       color: var(--btn-secondary-text);
       /* border: 1px solid rgb(138, 136, 134);                 */
+      margin-right: 0;
       border: none;
 
       &:active {

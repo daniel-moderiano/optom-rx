@@ -30,6 +30,7 @@ const StyledProviderForm = styled.div`
       background-color: var(--primary-color);
       color: rgb(255, 255, 255);
       border: none;
+      margin-left: 1.5rem;
     }
     
     .submit-btn:hover {
@@ -38,7 +39,7 @@ const StyledProviderForm = styled.div`
           
     .cancel-btn {
       text-decoration: none;
-      margin-right: 2rem;
+      /* margin-right: 2rem; */
       min-width: 80px;
       background-color: var(--btn-secondary);
       color: var(--btn-secondary-text);
