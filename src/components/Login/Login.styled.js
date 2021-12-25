@@ -67,6 +67,10 @@ const StyledLogin = styled.div`
       color: var(--primary-color);
       font-weight: bold;
       font-size: 1rem;
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 
