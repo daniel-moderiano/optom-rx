@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { auth } from "../firebase/config";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useAuthContext } from '../hooks/useAuthContext';
 import { db } from "../firebase/config";
 import { doc, setDoc } from "firebase/firestore";
@@ -16,10 +16,14 @@ export const useSignup = () => {
     try {
       // Firebase function to sign up user. Once resolved, confirm with a context state change
       const res = await createUserWithEmailAndPassword(auth, email, password);
+
+      // Add display name to user
+      await updateProfile(res.user, {
+        displayName: displayName,
+      })
   
       await setDoc(doc(db, 'users', res.user.uid), {
-        // User data here
-        displayName: displayName,
+        // Any additional user data here
         scripts: [],
       });
   

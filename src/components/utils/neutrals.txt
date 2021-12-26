@@ -42,7 +42,7 @@ gray 5
 gray 6
 #768393
 gray 7
-#
+#5A6572
 gray 8
 #48515B
 gray 9
