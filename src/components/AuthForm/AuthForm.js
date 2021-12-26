@@ -1,13 +1,19 @@
 import { useState } from "react";
 import FormField from "../FormField/FormField";
 
-const AuthForm = ({ submitFunc, buttonLabel }) => {
+const AuthForm = ({ type, submitFunc, buttonLabel }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [displayName, setDisplayName] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    submitFunc(email, password);
+    if (type === 'login') {
+      submitFunc(email, password);
+    } else {
+      submitFunc(email, password, displayName)
+    }
+    
   }
 
   return (
@@ -30,6 +36,21 @@ const AuthForm = ({ submitFunc, buttonLabel }) => {
         onChange={(event) => setPassword(event.target.value)} 
         className="auth-field form-field"
       />
+
+      {(type === 'signup') && 
+        <div className="displayName-group">
+          <FormField 
+            fieldType="text" 
+            name="displayName"
+            label="Display name" 
+            value={displayName} 
+            onChange={(event) => setDisplayName(event.target.value)} 
+            className="auth-field form-field displayName-field"
+          />
+          <span className="displayName-msg">This name will be visible only to you when logged in</span>
+        </div>
+        
+      }
 
       <button>{buttonLabel}</button>
 

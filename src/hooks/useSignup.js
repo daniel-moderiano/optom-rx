@@ -11,7 +11,7 @@ export const useSignup = () => {
   const [error, setError] = useState(null);
   const { dispatch } = useAuthContext();
 
-  const signup = async (email, password) => {
+  const signup = async (email, password, displayName) => {
     setError(null);
     try {
       // Firebase function to sign up user. Once resolved, confirm with a context state change
@@ -19,7 +19,7 @@ export const useSignup = () => {
   
       await setDoc(doc(db, 'users', res.user.uid), {
         // User data here
-        displayName: '',
+        displayName: displayName,
         scripts: [],
       });
   

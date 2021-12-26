@@ -46,7 +46,7 @@ const StyledLogin = styled.div`
     font-family: var(--font-stack-myriad);
     font-weight: 400;
     color: var(--title-color);
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     margin: 1rem 0 0.75rem 0;
   }
 
@@ -73,9 +73,5 @@ const StyledLogin = styled.div`
       }
     }
   }
-
-  
-
 `
-
 export { StyledLogin }

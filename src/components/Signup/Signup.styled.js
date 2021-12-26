@@ -46,8 +46,18 @@ const StyledSignup = styled.div`
     font-family: var(--font-stack-myriad);
     font-weight: 400;
     color: var(--title-color);
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     margin: 1rem 0 0.75rem 0;
+  }
+
+  .displayName-field {
+    margin-bottom: 0;
+  }
+
+  .displayName-msg {
+    font-style: italic;
+    font-size: 0.8rem;
+    color: #5A6572;
   }
 
   .login-option {

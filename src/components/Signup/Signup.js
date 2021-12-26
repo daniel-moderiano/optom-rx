@@ -10,6 +10,7 @@ const Signup = () => {
     <StyledSignup className="Signup">
       <h2 className="Signup__title">Sign up</h2>
       <AuthForm 
+        type="signup"
         submitFunc={signup}
         buttonLabel="Sign up"
       />
