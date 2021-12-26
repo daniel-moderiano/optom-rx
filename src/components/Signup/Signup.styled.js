@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const StyledSignup = styled.div`
-  margin-top: -3.5rem;
+  margin-top: -4.7rem;
   background-color: #FFFFFF;
   box-shadow: 0 1.6px 3.6px 0 rgb(0 0 0 / 13%), 0 0.3px 0.9px 0 rgb(0 0 0 / 11%);
   padding: 1rem 3rem;
@@ -61,18 +61,15 @@ const StyledSignup = styled.div`
   }
 
   .login-option {
-    width: 24rem;
-    /* padding-left: 3rem; */
     margin-bottom: 1.5rem;
-    display: flex;
-    justify-content: space-between;
+    place-self: flex-end;
 
     .login-msg {
       color: #5A6572;
       margin-right: 0.4rem;
     }
 
-    .login-link, .home-link {
+    .login-link {
       text-decoration: none;
       color: var(--primary-color);
       font-weight: bold;

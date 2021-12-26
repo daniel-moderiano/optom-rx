@@ -15,7 +15,6 @@ const Signup = () => {
         buttonLabel="Sign up"
       />
       <div className="login-option">
-        <Link to="/" className="home-link">Cancel</Link>
         <div className="login-group">
           <span className="login-msg">Already have an account?</span>
           <Link to="/login" className="login-link">Log in.</Link>

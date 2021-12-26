@@ -6,13 +6,13 @@ const StyledHeader = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 2rem;
+  padding: 1rem 3rem 0 3rem;
   margin: 0;
 
   
 
   h1 {
-    margin: ${props => props.user ? '0.65rem 0 0 0' : '1rem 0 0 0'};
+    margin: ${props => props.user ? '0.65rem 0 0 0' : '0.85rem 0 0 0'};
     width: 7rem;
 
     &:hover {

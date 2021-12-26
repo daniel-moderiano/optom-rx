@@ -15,12 +15,8 @@ const Login = () => {
         buttonLabel="Log in"
       />
       <div className="signup-option">
-        <Link to="/" className="home-link">Cancel</Link>
-        <div className="signup-group">
-          <span className="signup-msg">Don't have an account?</span>
-          <Link to="/signup" className="signup-link">Sign Up.</Link>
-        </div>
-        
+        <span className="signup-msg">Don't have an account?</span>
+        <Link to="/signup" className="signup-link">Sign Up.</Link>
       </div>
       
       {error && <p>{error}</p>}
