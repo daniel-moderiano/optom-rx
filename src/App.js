@@ -153,7 +153,6 @@ const App = () => {
               {!user && <Navigate to="/login" />}
               {user && <Home />}
               </>
-            
             } />
 
             <Route path="/form" element={
@@ -177,11 +176,26 @@ const App = () => {
               </>
             }/>
 
-            <Route path="/template" element={<RxTemplate data={data} setToast={setToastParams}/>}/>
+            <Route path="/template" element={
+              <>
+              {user && <RxTemplate data={data} setToast={setToastParams}/>}
+              {!user && <Navigate to="/login"/>}
+              </>
+            }/>
 
-            <Route path="/edit/:id" element={<EditProvider googleLoaded={googleLoaded} setToast={setToastParams} />}/>
+            <Route path="/edit/:id" element={
+              <>
+              {user && <EditProvider googleLoaded={googleLoaded} setToast={setToastParams} />}
+              {!user && <Navigate to="/login"/>}
+              </>
+            }/>
 
-            <Route path="/add-provider" element={<AddProvider googleLoaded={googleLoaded} setToast={setToastParams} />}/>
+            <Route path="/add-provider" element={
+              <>
+              {user && <AddProvider googleLoaded={googleLoaded} setToast={setToastParams} />}
+              {!user && <Navigate to="/login"/>}
+              </>
+            }/>
 
             <Route path="/providers" element={
               <>
