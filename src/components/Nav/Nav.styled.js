@@ -29,6 +29,27 @@ const StyledNav = styled.nav`
       }
     }
 
+    .UserMenu__toggle {
+      background-color: var(--primary-color);
+      font-family: var(--font-stack-segoe);
+      font-size: 1.2rem;
+      margin: 0;
+      padding: 0;
+      border: none;
+      display: flex;
+      align-items: center;
+
+      .UserMenu__icon {
+        font-size: 0.8rem;
+        padding-left: 0.3rem;
+        padding-top: 0.2rem;
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
   }
 `
 

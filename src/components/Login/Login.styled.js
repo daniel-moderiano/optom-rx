@@ -51,8 +51,6 @@ const StyledLogin = styled.div`
   }
 
   .signup-option {
-    /* width: 24rem; */
-    /* padding-left: 3rem; */
     margin-bottom: 1.5rem;
     place-self: flex-end;
 

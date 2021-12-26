@@ -6,7 +6,7 @@ const StyledHeader = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 3rem 0 3rem;
+  padding: ${props => props.user ? '0 1.5rem' : '1rem 3rem 0 3rem'};
   margin: 0;
 
   

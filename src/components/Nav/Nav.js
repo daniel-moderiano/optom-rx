@@ -60,7 +60,8 @@ const Nav = () => {
             <Link className="Nav__link" to="/form">Form</Link>
           </li>
           <li className="Nav__list-item">
-            <button className="Nav__link UserMenu__toggle" onClick={toggleMenu}>{user.displayName}</button>
+            <button className="Nav__link UserMenu__toggle" onClick={toggleMenu}>{user.displayName}<span className="UserMenu__icon">▼</span></button>
+            
           </li>
           </>
         }
