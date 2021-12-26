@@ -148,12 +148,18 @@ const App = () => {
         {/* Note prescriptions must contain date of issue, and prescriber signature */}
         <main className="main">
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={
+              <>
+              {!user && <Navigate to="/login" />}
+              {user && <Home />}
+              </>
+            
+            } />
 
             <Route path="/form" element={
               <>
               {user && <RxForm handleSubmit={handleSubmit} googleLoaded={googleLoaded} existingData={data}/>}
-              {!user && <GuestRxForm handleSubmit={handleSubmit} googleLoaded={googleLoaded} existingData={data}/>}
+              {!user && <Navigate to="/login"/>}
               </>
             }/>
 
