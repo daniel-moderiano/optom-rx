@@ -36,28 +36,33 @@ const Nav = () => {
   }, [menuOutsideClick])
 
   return (
-    <StyledNav className="Nav">
+    <StyledNav user={user} className="Nav">
       <ul className="Nav__list">
-        <li className="Nav__list-item">
-          <Link className="Nav__link" to="/">Home</Link>
-        </li>
-        <li className="Nav__list-item">
-          <Link className="Nav__link" to="/form">Form</Link>
-        </li>
+
+        
+
         {!user && 
-          <li className="Nav__list-item">
-            <Link className="Nav__link" to="/signup">Sign up</Link>
-          </li>
-        }
-        {!user &&
-          <li className="Nav__list-item">
+          <>
+            <li className="Nav__list-item">
+              <Link className="Nav__link" to="/signup">Sign up</Link>
+            </li>
+            <li className="Nav__list-item">
             <Link className="Nav__link" to="/login">Login</Link>
-          </li>
+            </li>
+          </>
         }
         {user &&
+          <>
+          <li className="Nav__list-item">
+            <Link className="Nav__link" to="/">Home</Link>
+          </li>
+          <li className="Nav__list-item">
+            <Link className="Nav__link" to="/form">Form</Link>
+          </li>
           <li className="Nav__list-item">
             <button className="Nav__link UserMenu__toggle" onClick={toggleMenu}>{user.displayName}</button>
           </li>
+          </>
         }
         
       </ul>

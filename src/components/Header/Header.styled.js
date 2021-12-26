@@ -2,25 +2,27 @@ import styled from "styled-components";
 
 const StyledHeader = styled.header`
   color: #FFFFFF;
-  background-color: var(--primary-color);
+  background-color: ${props => props.user ? 'var(--primary-color)' : 'var(--background)'};
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0 2rem;
+  margin: 0;
+
+  
 
   h1 {
-    margin: 0.65rem 1rem 0 1rem;
-    padding: 0 0 0rem 0;
+    margin: ${props => props.user ? '0.65rem 0 0 0' : '1rem 0 0 0'};
+    width: 7rem;
 
     &:hover {
       cursor: pointer;
     }
 
-    img {
-      height: 30px;
+    .cls-1 {
+      fill: ${props => props.user ? '#fff' : 'var(--primary-color)'};
     }
   }
-
-  
 
   @media print {
     display: none;

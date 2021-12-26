@@ -144,7 +144,7 @@ const App = () => {
     <div className="App">
       {authIsReady && (<>
         <GlobalStyles />
-        <Header />
+        <Header user={user}/>
         {/* Note prescriptions must contain date of issue, and prescriber signature */}
         <main className="main">
           <Routes>

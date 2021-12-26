@@ -11,7 +11,7 @@ const StyledNav = styled.nav`
 
       .Nav__link {
         text-decoration: none;
-        color: #FFFFFF;
+        color: ${props => props.user ? '#FFF' : 'var(--primary-color)'};
       }
 
       .Nav__logout-btn {
