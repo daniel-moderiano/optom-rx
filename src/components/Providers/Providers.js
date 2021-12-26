@@ -61,30 +61,41 @@ const Providers = () => {
                 <th className="table__header actions-header">Actions</th>
             </tr>
           </thead>
-          <tbody>
-            {providers.map(provider => (
-              <tr key={provider.id} className="table__data-row">
-                <td className="table__cell name-cell">{provider.fullName}</td>
-                <td className="table__cell">{formatLocation(provider.practiceName, provider.streetAddress, provider.suburb)}</td>
-                <td className="table__cell default-cell">
-                  <FormField 
-                    fieldType="checkbox" 
-                    name="defaultProvider"
-                    onChange={() => setAsDefault(providers, provider.id)}
-                    checked={provider.default}
-                    className="checkbox defaultProvider"
-                  /> 
-                </td>
-                <td className="table__cell actions-cell" >
-                  <Link className="table__action edit" to={`/edit/${provider.id}`}>Edit</Link>
-                  <button className="table__action delete" onClick={() => deleteProvider(provider.id)}>Delete</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
+          {providers.length > 0 ? 
+            (<tbody>
+              {providers.map(provider => (
+                <tr key={provider.id} className="table__data-row">
+                  <td className="table__cell name-cell">{provider.fullName}</td>
+                  <td className="table__cell">{formatLocation(provider.practiceName, provider.streetAddress, provider.suburb)}</td>
+                  <td className="table__cell default-cell">
+                    <FormField 
+                      fieldType="checkbox" 
+                      name="defaultProvider"
+                      onChange={() => setAsDefault(providers, provider.id)}
+                      checked={provider.default}
+                      className="checkbox defaultProvider"
+                    /> 
+                  </td>
+                  <td className="table__cell actions-cell" >
+                    <Link className="table__action edit" to={`/edit/${provider.id}`}>Edit</Link>
+                    <button className="table__action delete" onClick={() => deleteProvider(provider.id)}>Delete</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>)
+            : (<tbody>
+                <tr>
+                <td colSpan="4" className='Providers__none-msg'>No providers added yet</td>
+                </tr>
+            </tbody>
+            
+            )
+          }
+          
         </table>
         </div>
       }      
+      
     </StyledProviders>
   )
 }

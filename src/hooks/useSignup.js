@@ -24,6 +24,7 @@ export const useSignup = () => {
   
       await setDoc(doc(db, 'users', res.user.uid), {
         // Any additional user data here
+        displayName: displayName,
         scripts: [],
       });
   
