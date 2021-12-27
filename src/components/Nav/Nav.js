@@ -9,6 +9,7 @@ const Nav = () => {
   // Conditionally display nav links based on user auth state (logged in or not)
   const { user } = useAuthContext();
   const [showMenu, setShowMenu] = useState(false);
+  const [activeLink, setActiveLink] = useState('');
 
   const toggleMenu = () => {
     setShowMenu((prevState) => !prevState);
@@ -25,6 +26,8 @@ const Nav = () => {
       setShowMenu(false);
     }      
   }, []);
+
+  
 
   // Runs once only on initial mount, and cleans up on dismount
   useEffect(() => {
@@ -55,10 +58,20 @@ const Nav = () => {
         {user &&
           <>
           <li className="Nav__list-item">
-            <Link className="Nav__link Nav__link--std" to="/">Home</Link>
+            <Link 
+              className={`Nav__link Nav__link--std ${activeLink === 'home' && 'Nav__link--active'}`} 
+              to="/"
+              onClick={() => setActiveLink('home')}
+              >Home
+            </Link>
           </li>
           <li className="Nav__list-item">
-            <Link className="Nav__link Nav__link--std" to="/form">Form</Link>
+            <Link 
+              className={`Nav__link Nav__link--std ${activeLink === 'form' && 'Nav__link--active'}`} 
+              to="/form"
+              onClick={() => setActiveLink('form')}
+              >Form
+            </Link>
           </li>
           <li className="Nav__list-item">
             <button className="Nav__link Nav__link--std UserMenu__toggle" onClick={toggleMenu}>Hi, {user.displayName}

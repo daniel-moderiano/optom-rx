@@ -38,8 +38,7 @@ const StyledNav = styled.nav`
           transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.320, 1.275), opacity 0.2s;
         }
 
-        &:hover,
-        &:focus {
+        &:hover {
           &:before,
           &:after {
             opacity: 1;
@@ -51,6 +50,22 @@ const StyledNav = styled.nav`
           &:after {
             transition: transform 0s 0.2s cubic-bezier(0.175, 0.885, 0.320, 1.275), opacity 0s 0.2s;
           }
+        }
+
+        
+      }
+
+    .Nav__link--active {
+        &:before,
+        &:after {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        &:before {
+          transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.320, 1.275), opacity 0.2s;
+        }
+        &:after {
+          transition: transform 0s 0.2s cubic-bezier(0.175, 0.885, 0.320, 1.275), opacity 0s 0.2s;
         }
       }
 
