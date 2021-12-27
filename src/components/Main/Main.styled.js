@@ -5,7 +5,6 @@ const StyledMain = styled.main`
   flex-grow: 1;
   flex-direction: column;
   align-items: center;
-  /* justify-content: center; */
   background-color: var(--background);
 
   @media print {

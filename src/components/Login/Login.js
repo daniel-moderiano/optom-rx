@@ -8,18 +8,21 @@ const Login = () => {
 
   return (
     <StyledLogin className="Login">
-      <h2 className="Login__title">Log in</h2>
-      <AuthForm 
-        type="login"
-        submitFunc={login}
-        buttonLabel="Log in"
-      />
-      <div className="signup-option">
-        <span className="signup-msg">Don't have an account?</span>
-        <Link to="/signup" className="signup-link">Sign Up.</Link>
+      <div className="login-container">
+        <h2 className="Login__title">Log in</h2>
+        <AuthForm 
+          type="login"
+          submitFunc={login}
+          buttonLabel="Log in"
+        />
+        <div className="signup-option">
+          <span className="signup-msg">Don't have an account?</span>
+          <Link to="/signup" className="signup-link">Sign Up.</Link>
+        </div>
+        
+        {error && <p>{error}</p>}
       </div>
       
-      {error && <p>{error}</p>}
     </StyledLogin>
   )
 }

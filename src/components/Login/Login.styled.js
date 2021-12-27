@@ -2,16 +2,27 @@ import styled from "styled-components";
 
 const StyledLogin = styled.div`
   /* place-self: center center; */
-  margin-top: calc(0.5 * 1vh);
   /* margin-bottom: 50%; */
-  background-color: #FFFFFF;
-  box-shadow: 0 1.6px 3.6px 0 rgb(0 0 0 / 13%), 0 0.3px 0.9px 0 rgb(0 0 0 / 11%);
-  padding: 1rem 3rem;
-  width: 90%;
-  max-width: 30rem;
+  
+
+  height: 100%;
+  width: 100%;
   display: flex;
-  align-items: flex-end;
-  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .login-container {
+    margin-top: -4.7rem;
+    background-color: #FFFFFF;
+    box-shadow: 0 1.6px 3.6px 0 rgb(0 0 0 / 13%), 0 0.3px 0.9px 0 rgb(0 0 0 / 11%);
+    padding: 1rem 3rem;
+    width: 90%;
+    max-width: 30rem;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+  }
+ 
 
   form {
     width: 100%;

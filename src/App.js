@@ -22,6 +22,9 @@ const App = () => {
 
   const ausDate = new Date().toLocaleString("en-CA", { timeZone: "Australia/Adelaide" }).substring(0, 10);
 
+  // Mark certain pages for centered content, e.g. login and signup forms
+  const [centerContent, setCenterContent] = useState(false);
+
   // Used for toast alerts, can pass set function to components that require toast alerts
   const [toastParams, setToastParams] = useState({
     visible: false, 
@@ -145,8 +148,8 @@ const App = () => {
       {authIsReady && (<>
         <GlobalStyles />
         <Header user={user}/>
-        {/* Note prescriptions must contain date of issue, and prescriber signature */}
-        <Main className="main">
+
+        <Main >
           <Routes>
             <Route path="/" element={
               <>
