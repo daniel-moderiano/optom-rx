@@ -1,8 +1,10 @@
-const Main = () => {
+import { StyledMain } from "./Main.styled"
+
+const Main = ({ children }) => {
   return (
-    <main className="Main">
-      <h2 className="Main-title">Prepare prescription</h2>
-    </main>
+    <StyledMain className="Main">
+      {children}
+    </StyledMain>
   )
 }
 

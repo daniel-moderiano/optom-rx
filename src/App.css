@@ -30,29 +30,13 @@ body {
   flex-direction: column;
 }
 
-.main {
-  display: flex;
-  flex-grow: 1;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--background);
-}
-
 @media print {
 
   * {
     margin: 0;
     padding: 0;
   }
-
-  .main {
-    display: block;
-    background-color: #fff;
-    width: auto;
-    height: auto;
-  }
-
+  
   @page {
     size: auto;
     margin: 0mm;

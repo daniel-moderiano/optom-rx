@@ -11,10 +11,10 @@ import { useAuthContext } from './hooks/useAuthContext';
 import Home from './components/Home/Home';
 import Providers from "./components/Providers/Providers";
 import './App.css';
-import GuestRxForm from "./components/GuestRxForm/GuestRxForm";
 import EditProvider from "./components/EditProvider/EditProvider";
 import Toast from "./components/utils/Toast/Toast";
 import AddProvider from "./components/AddProvider/AddProvider";
+import Main from "./components/Main/Main";
 
 const App = () => {
   // Can user the user state to conditionally render or redirect routes (logged in vs out for example)
@@ -146,7 +146,7 @@ const App = () => {
         <GlobalStyles />
         <Header user={user}/>
         {/* Note prescriptions must contain date of issue, and prescriber signature */}
-        <main className="main">
+        <Main className="main">
           <Routes>
             <Route path="/" element={
               <>
@@ -204,8 +204,7 @@ const App = () => {
               </>
             }/> 
           </Routes>
-        
-        </main>
+        </Main>
         <footer className="footer"></footer>
       </>)}
       <Toast params={toastParams} />

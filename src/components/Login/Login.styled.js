@@ -1,7 +1,9 @@
 import styled from "styled-components";
 
 const StyledLogin = styled.div`
-  margin-top: -4.7rem;
+  /* place-self: center center; */
+  margin-top: calc(0.5 * 1vh);
+  /* margin-bottom: 50%; */
   background-color: #FFFFFF;
   box-shadow: 0 1.6px 3.6px 0 rgb(0 0 0 / 13%), 0 0.3px 0.9px 0 rgb(0 0 0 / 11%);
   padding: 1rem 3rem;
