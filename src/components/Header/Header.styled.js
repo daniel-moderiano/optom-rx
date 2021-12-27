@@ -5,10 +5,8 @@ const StyledHeader = styled.header`
   background-color: ${props => props.user ? 'var(--primary-color)' : 'var(--background)'};
   display: flex;
   justify-content: space-between;
-  align-items: center;
   padding: ${props => props.user ? '0 1.5rem' : '1rem 3rem 0 3rem'};
   margin: 0;
-
   
 
   h1 {

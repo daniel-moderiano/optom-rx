@@ -44,23 +44,28 @@ const Nav = () => {
         {!user && 
           <>
             <li className="Nav__list-item">
-              <Link className="Nav__link" to="/signup">Sign up</Link>
+              <Link className="Nav__link Nav__link--std Nav__link--login" to="/login">Login</Link>
             </li>
             <li className="Nav__list-item">
-            <Link className="Nav__link" to="/login">Login</Link>
+              <Link className="Nav__link Nav__link--signup" to="/signup">Sign up</Link>
             </li>
+            
           </>
         }
         {user &&
           <>
           <li className="Nav__list-item">
-            <Link className="Nav__link" to="/">Home</Link>
+            <Link className="Nav__link Nav__link--std" to="/">Home</Link>
           </li>
           <li className="Nav__list-item">
-            <Link className="Nav__link" to="/form">Form</Link>
+            <Link className="Nav__link Nav__link--std" to="/form">Form</Link>
           </li>
           <li className="Nav__list-item">
-            <button className="Nav__link UserMenu__toggle" onClick={toggleMenu}>{user.displayName}<span className="UserMenu__icon">▼</span></button>
+            <button className="Nav__link Nav__link--std UserMenu__toggle" onClick={toggleMenu}>Hi, {user.displayName}
+              <span className="UserMenu__icon">
+                <svg xmlns="http://www.w3.org/2000/svg" className="ionicon" viewBox="0 0 512 512"><title>Chevron Down</title><path fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M112 184l144 144 144-144"/></svg>
+              </span>
+            </button>
             
           </li>
           </>
