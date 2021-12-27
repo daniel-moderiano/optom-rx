@@ -3,6 +3,7 @@ import { StyledNav } from "./Nav.styled";
 import UserMenu from "../UserMenu/UserMenu";
 import { useCallback, useEffect, useState } from "react";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import { useLogout } from "../../hooks/useLogout";
 
 
 const Nav = () => {
@@ -10,6 +11,7 @@ const Nav = () => {
   const { user } = useAuthContext();
   const [showMenu, setShowMenu] = useState(false);
   const [activeLink, setActiveLink] = useState('');
+  const { logout } = useLogout();
 
   const toggleMenu = () => {
     setShowMenu((prevState) => !prevState);
@@ -50,37 +52,41 @@ const Nav = () => {
               <Link className="Nav__link Nav__link--std Nav__link--login" to="/login">Login</Link>
             </li>
             <li className="Nav__list-item">
-              <Link className="Nav__link Nav__link--signup" to="/signup">Sign up</Link>
+              <Link className="Nav__link Nav__link--std Nav__link--signup" to="/signup">Sign up</Link>
             </li>
             
           </>
         }
         {user &&
           <>
+          
           <li className="Nav__list-item">
-            <Link 
-              className={`Nav__link Nav__link--std ${activeLink === 'home' && 'Nav__link--active'}`} 
-              to="/"
-              onClick={() => setActiveLink('home')}
-              >Home
-            </Link>
+            <Link className="Nav__link Nav__link--std" to="/form" state={ { newRx: true } }>New prescription</Link>
           </li>
           <li className="Nav__list-item">
-            <Link 
-              className={`Nav__link Nav__link--std ${activeLink === 'form' && 'Nav__link--active'}`} 
-              to="/form"
-              onClick={() => setActiveLink('form')}
-              >Form
-            </Link>
+            <Link className="Nav__link Nav__link--std" to="/add-provider">Add provider</Link>
           </li>
           <li className="Nav__list-item">
+            <Link className="Nav__link Nav__link--std" to="/providers">Provider list</Link>
+          </li>
+          <li className="Nav__list-item">
+            <Link className="Nav__link Nav__link--std" to="/">Home</Link>
+          </li>
+          <li className="Nav__list-item">
+            <button 
+              className={`Nav__link Nav__link--std Nav__link--logout`} 
+              onClick={logout}
+              >Log out
+            </button>
+          </li>
+          {/* <li className="Nav__list-item">
             <button className="Nav__link Nav__link--std UserMenu__toggle" onClick={toggleMenu}>Hi, {user.displayName}
               <span className="UserMenu__icon">
                 <svg xmlns="http://www.w3.org/2000/svg" className="ionicon" viewBox="0 0 512 512"><title>Chevron Down</title><path fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M112 184l144 144 144-144"/></svg>
               </span>
             </button>
             
-          </li>
+          </li> */}
           </>
         }
         

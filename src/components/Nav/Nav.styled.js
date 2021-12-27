@@ -55,7 +55,7 @@ const StyledNav = styled.nav`
         
       }
 
-    .Nav__link--active {
+      .Nav__link--active {
         &:before,
         &:after {
           opacity: 1;
@@ -69,7 +69,7 @@ const StyledNav = styled.nav`
         }
       }
 
-      .Nav__link--login {
+      .Nav__link--login, .Nav__link--signup {
         &:before,
         &:after {
           background-color: var(--primary-color);
@@ -77,17 +77,24 @@ const StyledNav = styled.nav`
       }
 
       .Nav__link--signup {
-        border: 0.1rem solid var(--primary-color);
-        border-radius: 5px;
-        padding: 0.4rem 1rem 0.5rem 1rem;
+        /* border: 0.1rem solid var(--primary-color); */
+        /* border-radius: 5px; */
+        /* padding: 0.4rem 1rem 0.5rem 1rem; */
         text-decoration: none;
         color: ${props => props.user ? '#FFF' : 'var(--primary-color)'};
+      }
+
+      .Nav__link--logout {
+        background-color: var(--primary-color);
+        margin: 0;
+        padding: 0;
+        border: none;
+        font-family: var(--font-stack-segoe);
+        font-size: 1.1rem;
+        padding-bottom: 6px;
 
         &:hover {
-          background-color: var(--btn-primary-hover);
-          border: 0.1rem solid var(--btn-primary-hover);
-          color: #fff;
-          text-decoration: none;
+          cursor: pointer;
         }
       }
     }
