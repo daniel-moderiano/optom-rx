@@ -211,6 +211,13 @@ const App = () => {
               {!user && <Navigate to="/login" />}
               </>
             }/> 
+
+            <Route path="/scripts/:id" element={
+              <>
+              {/* {user && < googleLoaded={googleLoaded} setToast={setToastParams} />} */}
+              {!user && <Navigate to="/login"/>}
+              </>
+            }/>
           </Routes>
         </Main>
         <footer className="footer"></footer>

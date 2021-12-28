@@ -1,6 +1,7 @@
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { StyledScripts } from './Scripts.styled';
 import { useScripts } from '../../hooks/useScripts';
+import { Link } from 'react-router-dom';
 
 const Scripts = () => {
   const { user } = useAuthContext();
@@ -41,6 +42,15 @@ const Scripts = () => {
     <StyledScripts className="Scripts">
       <h2 className="Scripts__title">Scripts</h2>
       <p className="Scripts__description">Use this section to view previous scripts and save favourites for quick prescribing</p>
+{/* 
+      <div className="indications">
+        <button className="indications__btn collapsible" onClick={(event) => {
+          document.querySelector(`[data-id='selected']`).classList.toggle('expand');
+        }}>Rx<span className="icon up">
+        <svg xmlns="http://www.w3.org/2000/svg" className="ionicon" viewBox="0 0 512 512"><title>Chevron Down</title><path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M112 184l144 144 144-144"/></svg>
+      </span></button>
+        <div className='indications__content' data-id="selected">Expanded</div>    
+      </div> */}
       
       {scripts && 
         <div className="Scripts__container">
@@ -48,13 +58,15 @@ const Scripts = () => {
             (<ul className='Scripts__list'>
               {scripts.map(script => (
                 <li key={script.scriptID} className="Scripts__list-item">
+                  <div className="Scripts__ID"><Link to="/scripts">{script.scriptID}</Link></div>
                   <div className="Scripts_drug">{formatDrug(script)}</div>
-                  <div className="Scripts__dosage">{script.dosage}</div>
-                  <div className="Scripts__pbs">{script.pbsRx ? 'PBS' : 'Non-PBS'}</div>
-                  <div className="Scripts__ID">{script.scriptID}</div>
+                  {/* <div className="Scripts__dosage">{script.dosage}</div>
+                  <div className="Scripts__pbs">{script.pbsRx ? 'PBS' : 'Non-PBS'}</div> */}
+                  
                   <div className="Scripts__date">{script.date}</div>
-                  <div className="Scripts__quantity">{script.quantity}</div>
-                  <div className="Scripts__repeats">{script.repeats}</div>
+                  {/* <div className="Scripts__quantity">{script.quantity}</div>
+                  <div className="Scripts__repeats">{script.repeats}</div> */}
+                  {/* <div className="Scripts__info"><button>Show more</button></div> */}
                 </li>
               ))}
             </ul>)
