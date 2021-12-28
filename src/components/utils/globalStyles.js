@@ -35,6 +35,7 @@ const GlobalStyles = createGlobalStyle`
 
     /* Font stacks */
     --font-stack-segoe: 'Segoe UI', Arial, Helvetica, sans-serif;
+    --font-stack-segoe-semi: 'Segoe UI Semibold', Arial, Helvetica, sans-serif;
     --font-stack-myriad: 'Myriad Pro Regular', Arial, Helvetica, sans-serif;
     --font-title: 'Myriad Pro Light', Arial, Helvetica, sans-serif;
   }

@@ -12,13 +12,14 @@ const StyledTable = styled.table`
 
   .tableHeader {
     background-color: #F9FAFB;
-    padding: 12px;
-
+    padding: 0.75rem 1.5rem;
+    color: #48515B;
+    font-size: 0.75rem;
+    line-height: 0.85rem;
     text-align: left;
-
-
-    font-weight: normal;
-
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+    font-family: var(--font-stack-segoe-semibold);
     border-top: none;
     border-bottom: 1px solid #D1D6DB;
   }
@@ -36,8 +37,8 @@ const StyledTable = styled.table`
   }
 
   .tableCell {
-    padding: 12px;
-    font-size: 14px;
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
     color: #48515B;
   } 
 

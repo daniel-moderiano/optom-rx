@@ -18,6 +18,11 @@
   src: local('Segoe UI'), url(./assets/SEGOEUI.TTF) format('truetype');
 }
 
+@font-face {
+  font-family: 'Segoe UI Semibold';
+  src: local('Segeo Semibold'), url(./assets/SegoeUI-SemiBold.woff) format('woff');
+}
+
 body {
   margin: 0;
   padding: 0;
