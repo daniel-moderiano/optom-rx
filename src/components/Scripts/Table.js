@@ -4,6 +4,7 @@ import { useState } from "react";
 import useTable from "../../hooks/useTable";
 import { StyledTable } from "./Table.styled";
 import TableFooter from "../utils/TableFooter/TableFooter";
+import { Link } from "react-router-dom";
 
 const Table = ({ data, rowsPerPage }) => {
   // Start on page 1
@@ -57,7 +58,7 @@ const Table = ({ data, rowsPerPage }) => {
         <tbody>
           {dataSlice.map((script) => (
             <tr className="tableRowItems" key={script.scriptID}>
-              <td className="tableCell">{script.scriptID}</td>
+              <td className="tableCell"><Link to={`/scripts/${script.scriptID}`}>{script.scriptID}</Link></td>
               <td className="tableCell">{formatDrug(script)}</td>
               <td className="tableCell">{script.date}</td>
             </tr>

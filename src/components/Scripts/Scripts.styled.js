@@ -9,10 +9,8 @@ const StyledScripts = styled.div`
 
   .Scripts__container {
     margin-top: 2rem;
-    /* border-radius: 10px; */
-  }
 
-  .list {display: none;}
+  }
 
   .Scripts__title {
     font-family: var(--font-stack-myriad);
@@ -26,45 +24,6 @@ const StyledScripts = styled.div`
 
   .Scripts__description {
     margin: 0;
-  }
-
-  .Scripts__list {
-    
-    list-style: none;
-    margin: 0;
-    padding: 0;
-
-    .Scripts__list-item {
-      font-size: 0.9rem;
-      background-color: #f8f8f8;
-      display: grid;
-      grid-template-columns: 5.5rem 1fr 5.5rem;
-      margin: 0.2rem 0;
-    }
-  }
-
-
-  .Scripts__table {
-    display: none;
-    margin-top: 2rem;
-    border-collapse: collapse;
-    width: 100%;
-
-    .table__header-row {
-      border-bottom: 1px solid #646e6d;
-    }
-
-    tr {
-      margin: 0;
-      border-bottom: 1px solid #dfe1e1;
-
-      td, th {
-        margin: 0;
-        padding: 0.5rem 0;
-        text-align: left;
-        font-size: 0.9rem;
-      }
-    }
   }
 `
 
