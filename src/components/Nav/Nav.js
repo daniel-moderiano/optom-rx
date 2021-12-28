@@ -61,13 +61,13 @@ const Nav = () => {
           <>
           
           <li className="Nav__list-item">
-            <Link className="Nav__link Nav__link--std" to="/form" state={ { newRx: true } }>New prescription</Link>
+            <Link className="Nav__link Nav__link--std" to="/form" state={ { newRx: true } }>New Rx</Link>
           </li>
           <li className="Nav__list-item">
-            <Link className="Nav__link Nav__link--std" to="/add-provider">Add provider</Link>
+            <Link className="Nav__link Nav__link--std" to="/scripts">Scripts</Link>
           </li>
           <li className="Nav__list-item">
-            <Link className="Nav__link Nav__link--std" to="/providers">Provider list</Link>
+            <Link className="Nav__link Nav__link--std" to="/providers">Providers</Link>
           </li>
           <li className="Nav__list-item">
             <Link className="Nav__link Nav__link--std" to="/">Home</Link>

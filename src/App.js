@@ -15,15 +15,13 @@ import EditProvider from "./components/EditProvider/EditProvider";
 import Toast from "./components/utils/Toast/Toast";
 import AddProvider from "./components/AddProvider/AddProvider";
 import Main from "./components/Main/Main";
+import Scripts from "./components/Scripts/Scripts";
 
 const App = () => {
   // Can user the user state to conditionally render or redirect routes (logged in vs out for example)
   const { user, authIsReady } = useAuthContext();
 
   const ausDate = new Date().toLocaleString("en-CA", { timeZone: "Australia/Adelaide" }).substring(0, 10);
-
-  // Mark certain pages for centered content, e.g. login and signup forms
-  const [centerContent, setCenterContent] = useState(false);
 
   // Used for toast alerts, can pass set function to components that require toast alerts
   const [toastParams, setToastParams] = useState({
@@ -203,6 +201,13 @@ const App = () => {
             <Route path="/providers" element={
               <>
               {user && <Providers googleLoaded={googleLoaded} setToast={setToastParams}/>}
+              {!user && <Navigate to="/login" />}
+              </>
+            }/> 
+
+            <Route path="/scripts" element={
+              <>
+              {user && <Scripts setToast={setToastParams}/>}
               {!user && <Navigate to="/login" />}
               </>
             }/> 

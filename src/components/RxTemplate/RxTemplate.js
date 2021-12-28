@@ -90,6 +90,7 @@ const RxTemplate = ({ data, setToast }) => {
     await setDoc(doc(db, 'scripts', data.miscData.scriptID), {
       ...data.drugData,
       ...data.miscData,
+      favourite: false,
     });
 
     // Add script number to the current user's saved scripts
