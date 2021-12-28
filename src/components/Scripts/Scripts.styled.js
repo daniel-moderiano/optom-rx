@@ -7,6 +7,11 @@ const StyledScripts = styled.div`
   padding: 2rem 5.5rem 4rem 5.5rem;
   width: 90%;
 
+  .Scripts__container {
+    margin-top: 2rem;
+    /* border-radius: 10px; */
+  }
+
   .list {display: none;}
 
   .Scripts__title {
@@ -24,6 +29,7 @@ const StyledScripts = styled.div`
   }
 
   .Scripts__list {
+    
     list-style: none;
     margin: 0;
     padding: 0;
@@ -39,6 +45,7 @@ const StyledScripts = styled.div`
 
 
   .Scripts__table {
+    display: none;
     margin-top: 2rem;
     border-collapse: collapse;
     width: 100%;

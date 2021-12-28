@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const StyledTableFooter = styled.div`
 
-  background-color: #f1f1f1;
+  /* background-color: #f1f1f1; */
   padding: 8px 0px;
   width: 100%;
   font-weight: 500;
