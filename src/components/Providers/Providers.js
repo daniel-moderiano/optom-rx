@@ -6,6 +6,7 @@ import FormField from "../FormField/FormField";
 import { doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import { Link } from "react-router-dom";
+import TableProviders from './TableProviders';
 
 const Providers = () => {
   const { user } = useAuthContext();
@@ -34,13 +35,7 @@ const Providers = () => {
     await deleteDoc(doc(db, 'providers', provID));
   };
 
-  const formatLocation = (practice, streetAddress, suburb) => {
-    if (practice === "") {
-      return `${streetAddress}, ${suburb}`;
-    } else {
-      return `${practice}, ${suburb}`;
-    }
-  };
+  
 
   return (
     <StyledProviders className="Providers">
@@ -50,49 +45,11 @@ const Providers = () => {
       <Link className="Providers__add-btn" to={`/add-provider`}>Add new provider</Link> 
       {providers && 
         <div className="Providers__list">
-        {/* Render providers using map function in combination with HTML table */}
-        <table className="Providers__table">
-          <thead>
-            <tr className="table__header-row">
-                <th className="table__header name-header">Name</th>
-                <th className="table__header">Location</th>
-                {/* <th className="table__header">Prescriber Number</th> */}
-                <th className="table__header default-header">Set as default</th>
-                <th className="table__header actions-header">Actions</th>
-            </tr>
-          </thead>
-          {providers.length > 0 ? 
-            (<tbody>
-              {providers.map(provider => (
-                <tr key={provider.id} className="table__data-row">
-                  <td className="table__cell name-cell">{provider.fullName}</td>
-                  <td className="table__cell">{formatLocation(provider.practiceName, provider.streetAddress, provider.suburb)}</td>
-                  <td className="table__cell default-cell">
-                    <FormField 
-                      fieldType="checkbox" 
-                      name="defaultProvider"
-                      onChange={() => setAsDefault(providers, provider.id)}
-                      checked={provider.default}
-                      className="checkbox defaultProvider"
-                    /> 
-                  </td>
-                  <td className="table__cell actions-cell" >
-                    <Link className="table__action edit" to={`/edit/${provider.id}`}>Edit</Link>
-                    <button className="table__action delete" onClick={() => deleteProvider(provider.id)}>Delete</button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>)
-            : (<tbody>
-                <tr>
-                <td colSpan="4" className='Providers__none-msg'>No providers added yet</td>
-                </tr>
-            </tbody>
-            
-            )
-          }
-          
-        </table>
+          {providers.length > 0 ? (
+            <TableProviders data={providers} rowsPerPage={5} />
+          ) : (
+            <div className='Providers__none'>No providers added yet</div>
+          )}
         </div>
       }      
       

@@ -43,7 +43,7 @@ const StyledTable = styled.table`
 
     a {
       /* font-weight: 600; */
-      color: #48515B;
+      color: #0b4740;
     }
   } 
 
