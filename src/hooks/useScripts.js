@@ -18,8 +18,8 @@ export const useScripts = (userId) => {
       // Array to take script data
       const results = [];
 
-      // Get the array of script IDs for this user
-      const scriptIDs = docSnap.data().scripts;
+      // Get the array of script IDs for this user. Reverse the array to get most recent scripts first
+      const scriptIDs = (docSnap.data().scripts).reverse();
       
       // Iterate through each scriptID and fetch the associated script data
       for (let i = 0; i < scriptIDs.length; i++) {

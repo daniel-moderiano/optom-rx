@@ -7,6 +7,8 @@ const StyledScripts = styled.div`
   padding: 2rem 5.5rem 4rem 5.5rem;
   width: 90%;
 
+  .list {display: none;}
+
   .Scripts__title {
     font-family: var(--font-stack-myriad);
     font-weight: 400;
@@ -35,70 +37,28 @@ const StyledScripts = styled.div`
     }
   }
 
-    /* Style the button that is used to open and close the collapsible content */
-  .collapsible {
-    /* background-color: #eee; */
-    cursor: pointer;
-    font-size: 1rem;
-    padding: 0.4rem 0 0.5rem 1rem;
+
+  .Scripts__table {
+    margin-top: 2rem;
+    border-collapse: collapse;
     width: 100%;
-    border: none;
-    text-align: left;
-    outline: none;
-    font-family: var(--font-stack-segoe);
-    font-weight: bold;
-    height: 1rem;
-    position: relative;
-    display: flex;
 
-    .icon {
-      height: 1rem;
-      width: 1rem;
+    .table__header-row {
+      border-bottom: 1px solid #646e6d;
     }
 
-    .up {
-      transform: rotate(180deg);
-    }
-  }
+    tr {
+      margin: 0;
+      border-bottom: 1px solid #dfe1e1;
 
-  /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-  .active, .collapsible:hover {
-    background-color: #ccc;
-  }
-
-  /* Style the collapsible content. Note: hidden by default */
-  .indications__content {
-    padding: 0 1rem;
-    overflow: hidden;
-    background-color: #f0f0f0;
-    display: none;
-    font-size: 0.9rem;
-
-    .indication__main {
-      margin: 1rem 0;
-    }
-    
-    ul {
-      list-style-type: square;
-      padding-left: 2rem;
-      /* margin: 0; */
-
-      li {
-        margin: 1rem 0;
+      td, th {
+        margin: 0;
+        padding: 0.5rem 0;
+        text-align: left;
+        font-size: 0.9rem;
       }
     }
-
-    .indication__clinical, .indication__and {
-      font-weight: bold;
-    }
-
-    &.expand {
-      display: block;
-    }
-
   }
-
-
 `
 
 export { StyledScripts }

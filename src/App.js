@@ -16,6 +16,7 @@ import Toast from "./components/utils/Toast/Toast";
 import AddProvider from "./components/AddProvider/AddProvider";
 import Main from "./components/Main/Main";
 import Scripts from "./components/Scripts/Scripts";
+import ViewScript from "./components/ViewScript/ViewScript";
 
 const App = () => {
   // Can user the user state to conditionally render or redirect routes (logged in vs out for example)
@@ -214,7 +215,7 @@ const App = () => {
 
             <Route path="/scripts/:id" element={
               <>
-              {/* {user && < googleLoaded={googleLoaded} setToast={setToastParams} />} */}
+              {user && <ViewScript/>}
               {!user && <Navigate to="/login"/>}
               </>
             }/>

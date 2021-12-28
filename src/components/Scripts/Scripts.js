@@ -2,6 +2,7 @@ import { useAuthContext } from '../../hooks/useAuthContext';
 import { StyledScripts } from './Scripts.styled';
 import { useScripts } from '../../hooks/useScripts';
 import { Link } from 'react-router-dom';
+import Table from './Table';
 
 const Scripts = () => {
   const { user } = useAuthContext();
@@ -41,7 +42,7 @@ const Scripts = () => {
   return (
     <StyledScripts className="Scripts">
       <h2 className="Scripts__title">Scripts</h2>
-      <p className="Scripts__description">Use this section to view previous scripts and save favourites for quick prescribing</p>
+      <p className="Scripts__description">View all prescriptions you have written. Click the script ID for more information.</p>
 {/* 
       <div className="indications">
         <button className="indications__btn collapsible" onClick={(event) => {
@@ -53,12 +54,12 @@ const Scripts = () => {
       </div> */}
       
       {scripts && 
-        <div className="Scripts__container">
+        <div className="Scripts__container list">
           {scripts.length > 0 ? 
             (<ul className='Scripts__list'>
               {scripts.map(script => (
                 <li key={script.scriptID} className="Scripts__list-item">
-                  <div className="Scripts__ID"><Link to="/scripts">{script.scriptID}</Link></div>
+                  <div className="Scripts__ID"><Link to={`/scripts/${script.scriptID}`}>{script.scriptID}</Link></div>
                   <div className="Scripts_drug">{formatDrug(script)}</div>
                   {/* <div className="Scripts__dosage">{script.dosage}</div>
                   <div className="Scripts__pbs">{script.pbsRx ? 'PBS' : 'Non-PBS'}</div> */}
@@ -75,6 +76,47 @@ const Scripts = () => {
           }
         </div>
       }
+
+
+
+      {scripts && 
+
+        
+
+        <div className="Scripts__container">
+        <Table data={scripts} rowsPerPage={3}/>
+        {/* Render providers using map function in combination with HTML table */}
+        <table className="Scripts__table">
+          <thead>
+            <tr className="table__header-row">
+                <th className="table__header id-header">Script ID</th>
+                <th className="table__header medication-header">Medication</th>
+                {/* <th className="table__header">Prescriber Number</th> */}
+                <th className="table__header date-header">Date prescribed</th>
+            </tr>
+          </thead>
+          {scripts.length > 0 ? 
+            (<tbody>
+              {scripts.map(script => (
+                <tr key={script.scriptID} className="table__data-row">
+                  <td className="table__cell name-cell"><Link to={`/scripts/${script.scriptID}`}>{script.scriptID}</Link></td>
+                  <td className="table__cell">{formatDrug(script)}</td>
+                  <td className="table__cell">{script.date}</td>
+                </tr>
+              ))}
+            </tbody>)
+            : (<tbody>
+                <tr>
+                <td colSpan="3" className='Providers__none-msg'>No providers added yet</td>
+                </tr>
+            </tbody>
+            
+            )
+          }
+          
+        </table>
+        </div>
+      }  
     </StyledScripts>
   )
 }
