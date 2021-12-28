@@ -14,6 +14,8 @@ const TableFooter = ({ pages, setPage, page, slice }) => {
 
   return (
     <StyledTableFooter className="TableFooter">
+        
+      <button className="arrow arrow-left">&laquo;</button>
       {/* For each page, create a page button numbered by index */}
       {pages.map((pageNum, index) => (
         // OnClick function allows setting of active class + displaying relevant data slice
@@ -27,6 +29,7 @@ const TableFooter = ({ pages, setPage, page, slice }) => {
           {pageNum}
         </button>
       ))}
+      <button className="arrow arrow-right">&raquo;</button>
     </StyledTableFooter>
   );
 };

@@ -40,6 +40,11 @@ const StyledTable = styled.table`
     padding: 0.8rem 1.5rem;
     font-size: 0.9rem;
     color: #48515B;
+
+    a {
+      /* font-weight: 600; */
+      color: #48515B;
+    }
   } 
 
 `
