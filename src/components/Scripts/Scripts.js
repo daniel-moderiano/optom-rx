@@ -1,35 +1,68 @@
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { StyledScripts } from './Scripts.styled';
 import { useScripts } from '../../hooks/useScripts';
-import { useEffect } from 'react';
 
 const Scripts = () => {
   const { user } = useAuthContext();
   const { scripts } = useScripts(user.uid);
-  console.log(scripts);
+
+  // Create a more UI friendly summary of drug name +/- brand
+  const formatDrug = (script) => {
+    const capitalised = script.activeIngredient[0].toUpperCase() + script.activeIngredient.substring(1);
+    // Brand name only
+    if (script.brandOnly) {
+      if (!capitalised.includes('eye')) {
+        if (capitalised.includes('spray')) {
+          return `${script.brandName} ${capitalised.substr(capitalised.indexOf('spray'), 5)}`;
+        } else {
+          return script.brandName;
+        }
+      } else {
+        return `${script.brandName} ${capitalised.substr(capitalised.indexOf('eye'))}`;
+      }
+    }    
+    // Brand name NOT to be included
+    if (!script.includeBrand) {
+      return capitalised;
+    }
+    // Brand name included in addition to active ingredient
+    if (!capitalised.includes('eye')) {
+      if (capitalised.includes('spray')) {
+        return `${capitalised.replace('spray', `(${script.brandName}) spray`)}`;
+      } else {
+        return `${capitalised.replace(',', ` (${script.brandName}),`)}`;
+      }
+    } else {
+      return `${capitalised.replace('eye', `(${script.brandName}) eye`)}`;
+    }
+  };
 
   return (
-    <StyledScripts className="Providers">
-      <h2 className="Providers__title">Scripts</h2>
-      <p className="Providers__description">Use this section to view prescriptions you've written and save favourites for quick prescribing</p>
+    <StyledScripts className="Scripts">
+      <h2 className="Scripts__title">Scripts</h2>
+      <p className="Scripts__description">Use this section to view previous scripts and save favourites for quick prescribing</p>
       
       {scripts && 
-        <div className="Providers__list">
+        <div className="Scripts__container">
           {scripts.length > 0 ? 
-            (<ul>
+            (<ul className='Scripts__list'>
               {scripts.map(script => (
-                <li key={script.scriptID} className="table__data-row">
-                  <div className="table__cell name-cell">{script.activeIngredient}</div>
-                  <div className="table__cell">{script.brandName}</div>
+                <li key={script.scriptID} className="Scripts__list-item">
+                  <div className="Scripts_drug">{formatDrug(script)}</div>
+                  <div className="Scripts__dosage">{script.dosage}</div>
+                  <div className="Scripts__pbs">{script.pbsRx ? 'PBS' : 'Non-PBS'}</div>
+                  <div className="Scripts__ID">{script.scriptID}</div>
+                  <div className="Scripts__date">{script.date}</div>
+                  <div className="Scripts__quantity">{script.quantity}</div>
+                  <div className="Scripts__repeats">{script.repeats}</div>
                 </li>
               ))}
             </ul>)
             : 
-            <div colSpan="4" className='Providers__none-msg'>No providers added yet</div>    
-  
+            (<div className='Scripts__none'>No prescriptions written yet</div>    )
           }
-          </div>}
-      
+        </div>
+      }
     </StyledScripts>
   )
 }
