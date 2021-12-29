@@ -90,14 +90,13 @@ const StyledFormField = styled.div`
 
       .unchecked:hover {
         cursor: pointer;
-        /* background-color: #ccc; */
       }
 
       .checkmark {
         position: absolute;
         width: 5px;
         height: 10px;
-        top: 4px;
+        top: 0.1rem;
         left: 0.35rem;
         border: solid white;
         border-width: 0 2px 2px 0;

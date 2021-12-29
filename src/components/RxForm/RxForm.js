@@ -1251,10 +1251,17 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
 
         {isError && <div className="numbers__error">Something went wrong</div>}
 
+       
 
       </Fieldset>
 
-      <button type="submit" className="btn btn-generate">Generate prescription</button>
+      <div className="ProviderForm__btns">
+        <Link to="/" className="cancel-btn ProviderForm__btn">Cancel</Link>
+        <button type="submit" className="submit-btn ProviderForm__btn">Generate prescription</button>
+      </div>
+
+     
+      
       
     </StyledRxForm>
   )
