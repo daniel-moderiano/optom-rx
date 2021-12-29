@@ -12,10 +12,29 @@ const TableFooter = ({ pages, setPage, page, slice }) => {
     }
   }, [slice, page, setPage]);
 
+  // Arrow button navigation
+  const incrementPage = () => {
+    // If not already on the last page
+    if (page !== pages.length) {
+      setPage(page + 1)
+    } else {
+      // do nothing
+    }
+  }
+
+  const decrementPage = () => {
+    // If not on the first page
+    if (page > 0) {
+      setPage(page - 1)
+    } else {
+      // do nothing
+    }
+  }
+
   return (
     <StyledTableFooter className="TableFooter">
         
-      <button className="arrow arrow-left">&laquo;</button>
+      <button className="arrow arrow-left" onClick={decrementPage}>&laquo;</button>
       {/* For each page, create a page button numbered by index */}
       {pages.map((pageNum, index) => (
         // OnClick function allows setting of active class + displaying relevant data slice
@@ -29,7 +48,7 @@ const TableFooter = ({ pages, setPage, page, slice }) => {
           {pageNum}
         </button>
       ))}
-      <button className="arrow arrow-right">&raquo;</button>
+      <button className="arrow arrow-right" onClick={incrementPage}>&raquo;</button>
     </StyledTableFooter>
   );
 };

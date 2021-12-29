@@ -19,6 +19,9 @@ const StyledTableFooter = styled.div`
     background-color: #fff;
     border: none;
     padding-bottom: 0.1rem;
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   .arrow-right {
