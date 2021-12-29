@@ -145,7 +145,7 @@ const StyledRxTemplate = styled.div`
     padding: 0;
     display: block;
 
-    .ui-main-container {
+    .ui-container, .ui-description {
       display: none;
     }
 

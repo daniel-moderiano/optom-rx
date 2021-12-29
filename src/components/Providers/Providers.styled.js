@@ -46,6 +46,10 @@ const StyledProviders = styled.div`
     }
   }
 
+  .Providers__none {
+    margin-top: 2rem;
+  }
+
   .Providers__table {
 
     margin-top: 2rem;

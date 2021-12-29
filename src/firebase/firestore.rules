@@ -1,0 +1,38 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{user_id} {
+      allow read, create: if request.auth != null;
+      allow update: if request.auth.uid == user_id;
+    }
+    match /pbs/{item_code} {
+      allow read: if request.auth != null;
+    }
+    match /providers/{provider_id} {
+      allow read, create: if request.auth != null;
+      allow update, delete: if request.auth.uid == resource.data.createdBy.id;
+    }
+    match /scripts/{script_id} {
+      allow read, create, update: if request.auth != null;
+    }
+    match /numbers/{user_id} {
+      allow read, update: if request.auth != null;
+    }
+  }
+}
+
+// numbers collection
+// - any authenticated user can read and update it (but cannot create or delete)
+
+// pbs collection
+// - read only by authenticated users
+
+// providers collection
+// - any authenticated user can read, update, create, but only for documents where their uid matches the uid in the provider codument
+
+// scripts collection
+// - any authenticated user can read, create, and update documents, but cannot delete
+
+// users collection
+// - any authenticated user can read and create
+// - only users who 'own' the document can update it (i.e. matching user ID)

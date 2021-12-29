@@ -1110,15 +1110,17 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
               placeholder="Select provider..."
               id="react-select"
             /> 
-{/*           
-            <span className="or">or</span> */}
+
+            {/* <div className="add-new-provider">
+              <span>or</span>
+              <button className="provider-addBtn" onClick={(event) => addNewProviderInline(event)}> Add new provider</button>
+            </div> */}
           </>
         }
-        {!newProvider && 
-          <div className="add-new-provider">
-            <span>or</span>
-            <button className="provider-addBtn" onClick={(event) => addNewProviderInline(event)}> Add new provider</button>
-          </div>}
+
+        {(!newProvider && selectOptions.length) === 0 && 
+          <Link className="provider-addBtn provider-addBtn--solo" to="/add-provider">Add new provider</Link>
+        }
         
         </div>
         

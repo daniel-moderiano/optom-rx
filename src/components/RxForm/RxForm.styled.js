@@ -131,6 +131,10 @@ const StyledRxForm = styled.form`
       }
     }
 
+  .provider-addBtn--solo {
+    margin: 0;
+  }
+
 
   
 
