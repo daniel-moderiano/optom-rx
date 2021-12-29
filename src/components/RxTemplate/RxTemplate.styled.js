@@ -1,24 +1,22 @@
 import styled from "styled-components";
 
 const StyledRxTemplate = styled.div`
-  /* All screen display styling here */
-  background-color: #fff;
-  font-size: 15px;
+  margin-top: 3rem;
+  background-color: #FFFFFF;
+  box-shadow: 0 1.6px 3.6px 0 rgb(0 0 0 / 13%), 0 0.3px 0.9px 0 rgb(0 0 0 / 11%);
+  padding: 2rem 5.5rem;
   width: 90%;
   max-width: 880px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-stack-segoe);
-  margin-top: 2rem;
-  padding-bottom: 2.5rem;
 
   .RxTemplate__title {
-    font-size: 2rem;
-    margin: 1.5rem 0 3rem 0;
+    font-family: var(--font-stack-myriad);
+    font-weight: 400;
+    color: var(--title-color);
+    font-size: 2.5rem;
     padding: 0;
-    color: #142d53;
+    margin: 1rem 0 0.75rem 0;
   }
 
   /* Remove this in prod (img element will be removed) */
@@ -26,63 +24,36 @@ const StyledRxTemplate = styled.div`
     display: none;
   }
 
-  .ui-main-container {
+  .ui-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    width: 80%;
-    margin-bottom: 2rem;
-    line-height: 1.3rem;
+    margin-top: 1.5rem;
 
-    .ui-container {
-      display: flex;
-      flex-direction: column;
-      margin-bottom: 2rem;
-    }
-
-    h4 {
-      border-bottom: 1px solid #142d53;
+    .ui__title {
+      background-color: #F9FAFB;
+      padding: 0.75rem 0.5rem;
+      /* margin-top: 0.5rem; */
+      /* color: #48515B; */
+      /* text-align: left;
+      font-size: 0.75rem;
+      line-height: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05rem;
+      font-family: var(--font-stack-segoe-semibold); */
+      font-size: 1.3rem;
       font-family: var(--font-title);
-      padding-bottom: 0.8rem;
-      font-size: 1.8rem;
-      margin: 0 0 1rem 0;
-      color: #142d53;
+      color: var(--title-color);
+      border-top: none;
       font-weight: normal;
+      /* border-bottom: 1px solid #D1D6DB; */
     }
 
-    .ui-medicare {
-      display: flex;
-      justify-content: space-between;
-      width: 17rem;
-      margin-top: 0.5rem;
-    }
-
-    /* .ui-medication__name, .ui-patient__fullName, .ui-provider__fullName {
-      font-weight: bold;
-    } */
-
-    .ui-provider__prescriberNumber {
-      margin-top: 0.5rem;
-    }
-
-    .ui-pbsRx {
-      margin-bottom: 0.5rem;
-    }
-
-    .ui-scriptNo, .ui-quantityRepeats {
-      margin-top: 0.5rem;
-    }
-
-    section {
-      padding: 0;
-      margin: 0;
-      height: auto;
-    }
   }
+
 
   .RxTemplate__btns {
     place-self: flex-end;
-    margin-right: 10%;
+    margin: 2.5rem 0;
 
     .RxTemplate__btn {
       font-size: 1rem;
@@ -91,31 +62,36 @@ const StyledRxTemplate = styled.div`
       cursor: pointer;
       padding: 8px 16px 10px 16px;
       border-radius: 2px;
+
+      &:active {
+        transform: scale(0.98);
+      }
     }
 
     .btn-print {
       min-width: 80px;
-      background-color: rgb(0, 120, 212);
+      background-color: var(--primary-color);
       color: rgb(255, 255, 255);
-      border: 1px solid rgb(0, 120, 212);         
+      border: none;
+      margin-left: 1.5rem;
+      text-decoration: none;       
     }
     
     .btn-print:hover {
-      background-color: rgb(16, 110, 190);
-      border: 1px solid rgb(16, 110, 190);
+      background-color: var(--btn-primary-hover);
     }
           
     .btn-editRx {
       text-decoration: none;
-      margin-right: 2rem;
+      /* margin-right: 2rem; */
       min-width: 80px;
-      background-color: rgb(255, 255, 255);
-      color: rgb(50, 49, 48);
-      border: 1px solid rgb(138, 136, 134);                
+      background-color: var(--btn-secondary);
+      color: var(--btn-secondary-text);
+      border: none;            
     }
     .btn-editRx:hover {
-      background-color: rgb(243, 242, 241);
-      color: rgb(32, 31, 30);
+      background-color: var(--btn-secondary-hover);
+      color: #21252A;
     }
   }
 

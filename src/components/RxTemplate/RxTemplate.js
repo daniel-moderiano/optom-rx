@@ -112,10 +112,10 @@ const RxTemplate = ({ data, setToast }) => {
       {/* If the template is rendered without a full set of data, many functions will fail. Hence this is rendered conditionally */}
       {state ? <>
         <img src={Rx} alt="" />
-        <div data-testid="ui" className="ui-main-container">
-          <section className="ui-provider-upper">
-            <h4 className="ui-provider__title">Provider</h4>
-            <div className="ui-container">
+        <div data-testid="ui" className="ui-container">
+          <section className="ui-provider">
+            <h4 className="ui__title">Provider</h4>
+
               <div className="ui-provider__contact-upper">
                 <div className="ui-provider__fullName">{`${providerData.prefix ? 'Dr' : ''} ${providerData.fullName}`}</div>
                 {formatProvAddress()}
@@ -127,13 +127,11 @@ const RxTemplate = ({ data, setToast }) => {
                 </div>
               </div>
               <div className="ui-provider__prescriberNumber">Prescriber number: {providerData.prescriberNumber}</div>
-            </div>
+
           </section>
 
           <section className="ui-patient">
-            <h4 className="ui-patient__title">Patient</h4>
-            <div className="ui-container">
-              
+            <h4 className="ui__title">Patient</h4>
               <div className="ui-patient__contactDetails">
                 <div className="ui-patient__fullName">{patientData.fullName}</div>
                 <div className="ui-patient__streetAddress">{`${patientData.subpremise} ${patientData.streetAddress}`}</div>
@@ -145,13 +143,11 @@ const RxTemplate = ({ data, setToast }) => {
                 </div>
                 <div className="ui-patient__medicareRefNumber">IRN: {patientData.medicareRefNumber}</div>
               </div>
-            </div>
           </section>
 
            {/* Script ID or authority Rx number should go above the medication once finalised, and perhaps with a border bottom */}
            <section className="ui-medication">
-            <h4 className="ui-medication__title">Medication</h4>
-            <div className="ui-container">
+            <h4 className="ui__title">Medication</h4>
               <div className="ui-medication__name">
                 {formatDrug(drugData.activeIngredient, drugData.brandName)}
               </div>
@@ -162,15 +158,12 @@ const RxTemplate = ({ data, setToast }) => {
               </div>
               {drugData.compounded 
                 && <div className="ui-compounded">To be compounded</div>
-              }
-            </div>
-            
+              } 
           </section>
 
           <section className="ui-miscellaneous">
             {/* Include Script ID and Authority Rx number here */}
-            <h4 className="ui-provider__title">PBS and Other</h4>
-            <div className="ui-container">
+            <h4 className="ui__title">PBS and Other</h4>
               
               {drugData.pbsRx 
                 ? <div className="ui-pbsRx ui-pbsRx--selected">PBS prescription</div>
@@ -186,7 +179,6 @@ const RxTemplate = ({ data, setToast }) => {
               </>)}
               <div className="ui-scriptNo">Script No: {miscData.scriptID}</div>
               <div className="ui-date">Prescription date: {formatDate()}</div>
-            </div>
           </section>
         </div>
 
@@ -407,7 +399,6 @@ const RxTemplate = ({ data, setToast }) => {
           </section>}
           <div className="indication">Indication for use of item:</div>
         </div>
-
 
         <div className="RxTemplate__btns">
           <Link className="RxTemplate__btn btn-editRx" to="/form">Make changes</Link>
