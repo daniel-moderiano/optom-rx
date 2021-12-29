@@ -65,53 +65,32 @@ const StyledViewScript = styled.div`
   }
 
   .Script__info {
-    display: grid;
-    grid-template-areas: 
-    'title-drug title-pbs title-other'
-    'drug pbs date'
-    'dosage auth date'
-    'quantity auth date'
-    'repeats compounded date'
+    width: 100%;
+    box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    border-radius: 6px;
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
     ;
 
-    .Script__drug {
-      grid-area: drug;
+    .Script__title {
+      background-color: #F9FAFB;
+      padding: 0.75rem 1.5rem;
+      color: #48515B;
+      font-size: 0.75rem;
+      line-height: 0.85rem;
+      text-align: left;
+      text-transform: uppercase;
+      letter-spacing: 0.05rem;
+      font-family: var(--font-stack-segoe-semibold);
+      border-top: none;
+      border-bottom: 1px solid #D1D6DB;
     }
 
-    .Script__pbs {
-      grid-area: pbs;
-    }
-
-    .Script__dosage {
-      grid-area: dosage;
-    }
-
-    .Script__quantity {
-      grid-area: quantity;
-    }
-
-    .Script__repeats {
-      grid-area: repeats;
-    }
-
-    .Script__authority {
-      grid-area: auth;
-    }
-
-    .Script__date {
-      grid-area: date;
-    }
-
-    .Script__title--medication {
-      grid-area: 'title-drug';
-    }
-
-    .Script__title--pbs {
-      grid-area: 'title-pbs';
-    }
-
-    .Script__title--other {
-      grid-area: 'title-other';
+    .Script__info--section {
+      padding: 0.8rem 1.5rem;
+      font-size: 0.9rem;
+      color: #48515B;
     }
 
   }

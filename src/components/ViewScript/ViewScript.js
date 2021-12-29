@@ -129,24 +129,40 @@ const ViewScript = ({ setToast }) => {
   return (
     <StyledViewScript>
       <h2 className="EditProvider__title">Script #{id}</h2>
-      {/* <p className="EditProvider__description">View prescription details</p> */}
+      <p className="EditProvider__description">Patient details are not saved at any point in OptomRx. Only medication details will be available for review.</p>
       {scriptData && 
         <div className="Script__info">
-          <div className="Script__title Script__title--medication">Medication details</div>
-          <div className="Script__title Script__title--pbs">PBS details</div>
-          <div className="Script__title Script__title--other">Other details</div>
-  
-          <div className="Script__id">{scriptData.scriptID}</div>
-          <div className="Script__drug">{formatDrug(scriptData)}</div>
-          <div className="Script__dosage">{scriptData.dosage}</div>
-          <div className="Script__repeats">{scriptData.repeats}</div>
-          <div className="Script__quantity">{scriptData.quantity}</div>
-          {scriptData.compounded && <div className="Script__compounded">To be compounded</div>}
-          <div className="Script__pbs">{`${scriptData.pbsRx ? 'PBS prescription' : 'Non-PBS prescription'}`}</div>
-          <div className="Script__authority">
-            {/* Further auth details */}
+          <div className="Script__medication">
+            <div className="Script__title Script__title--medication">Medication details</div>
+            <div className="Script__info--section Script__drug">{formatDrug(scriptData)}</div>
+            <div className="Script__info--section Script__dosage">{scriptData.dosage}</div>
+            <div className="Script__info--section Script__params">
+              <div className="Script__quantity">Quantity: {scriptData.quantity}</div>
+              <div className="Script__repeats">Repeats: {scriptData.repeats}</div>
+            </div>
           </div>
-          <div className="Script__date">{formatDate(scriptData.date)}</div>
+
+          <div className="Script__pbs">
+            <div className="Script__title Script__title--pbs">PBS details</div>
+            <div className="Script__info--section Script__pbs">{`${scriptData.pbsRx ? 'PBS prescription' : 'Non-PBS prescription'}`}</div>
+            {scriptData.authRequired && <div className="Script__info--section Script__authority">
+              {/* <div className="Script__authReq">Authority prescription</div> */}
+              <div className="Script__authCode">Authority code: {scriptData.authCode}</div>
+              <div className="Script__authNum">Authority Rx No: {scriptData.authRxNumber}</div>
+            </div>}
+          </div>
+        
+          <div className="Script__other">
+          <div className="Script__title Script__title--other">Other details</div>
+          
+          <div className="Script__info--section Script__id">{scriptData.scriptID}</div>
+
+          
+          {scriptData.compounded && <div className="Script__info--section Script__compounded">To be compounded</div>}
+
+          <div className="Script__info--section Script__date">{formatDate(scriptData.date)}</div>
+          </div>
+         
         </div>
       }
       
