@@ -129,7 +129,7 @@ const ViewScript = ({ setToast }) => {
   return (
     <StyledViewScript>
       <h2 className="EditProvider__title">Script #{id}</h2>
-      <p className="EditProvider__description">Patient details are not saved at any point in OptomRx. Only medication details will be available for review.</p>
+      <p className="EditProvider__description">Patient details are not saved in OptomRx. Only medication details will be available for review.</p>
       <div className="container">
         {scriptData && 
           <div className="Script__info">
