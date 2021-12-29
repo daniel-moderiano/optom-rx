@@ -64,6 +64,58 @@ const StyledViewScript = styled.div`
     }
   }
 
+  .Script__info {
+    display: grid;
+    grid-template-areas: 
+    'title-drug title-pbs title-other'
+    'drug pbs date'
+    'dosage auth date'
+    'quantity auth date'
+    'repeats compounded date'
+    ;
+
+    .Script__drug {
+      grid-area: drug;
+    }
+
+    .Script__pbs {
+      grid-area: pbs;
+    }
+
+    .Script__dosage {
+      grid-area: dosage;
+    }
+
+    .Script__quantity {
+      grid-area: quantity;
+    }
+
+    .Script__repeats {
+      grid-area: repeats;
+    }
+
+    .Script__authority {
+      grid-area: auth;
+    }
+
+    .Script__date {
+      grid-area: date;
+    }
+
+    .Script__title--medication {
+      grid-area: 'title-drug';
+    }
+
+    .Script__title--pbs {
+      grid-area: 'title-pbs';
+    }
+
+    .Script__title--other {
+      grid-area: 'title-other';
+    }
+
+  }
+
 `
 
 export { StyledViewScript }

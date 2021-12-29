@@ -7,6 +7,17 @@ import { StyledViewScript } from "./ViewScript.styled.";
 
 const ViewScript = ({ setToast }) => {
   const { id } = useParams();
+  const [scriptData, setScriptData] = useState(null);
+
+  // Fetch the script data using the supplied ID
+  useEffect(() => {
+    const fetchData = async () => {
+      const docSnap = await getDoc(doc(db, 'scripts', id));
+      setScriptData(docSnap.data());
+    };
+
+    fetchData();
+  }, [id])
 
   let navigate = useNavigate();
 
@@ -80,11 +91,65 @@ const ViewScript = ({ setToast }) => {
     fetchProvider();
   }, [id]);
 
+  // Create a more UI friendly summary of drug name +/- brand
+  const formatDrug = (script) => {
+    const capitalised = script.activeIngredient[0].toUpperCase() + script.activeIngredient.substring(1);
+    // Brand name only
+    if (script.brandOnly) {
+      if (!capitalised.includes('eye')) {
+        if (capitalised.includes('spray')) {
+          return `${script.brandName} ${capitalised.substr(capitalised.indexOf('spray'), 5)}`;
+        } else {
+          return script.brandName;
+        }
+      } else {
+        return `${script.brandName} ${capitalised.substr(capitalised.indexOf('eye'))}`;
+      }
+    }    
+    // Brand name NOT to be included
+    if (!script.includeBrand) {
+      return capitalised;
+    }
+    // Brand name included in addition to active ingredient
+    if (!capitalised.includes('eye')) {
+      if (capitalised.includes('spray')) {
+        return `${capitalised.replace('spray', `(${script.brandName}) spray`)}`;
+      } else {
+        return `${capitalised.replace(',', ` (${script.brandName}),`)}`;
+      }
+    } else {
+      return `${capitalised.replace('eye', `(${script.brandName}) eye`)}`;
+    }
+  };
+
+  const formatDate = (date) => {
+    return `${date.substring(8)}/${date.substring(5, 7)}/${date.substring(0, 4)}`;
+  };
+
   return (
     <StyledViewScript>
       <h2 className="EditProvider__title">Script #{id}</h2>
-      <p className="EditProvider__description">View prescription details</p>
-
+      {/* <p className="EditProvider__description">View prescription details</p> */}
+      {scriptData && 
+        <div className="Script__info">
+          <div className="Script__title Script__title--medication">Medication details</div>
+          <div className="Script__title Script__title--pbs">PBS details</div>
+          <div className="Script__title Script__title--other">Other details</div>
+  
+          <div className="Script__id">{scriptData.scriptID}</div>
+          <div className="Script__drug">{formatDrug(scriptData)}</div>
+          <div className="Script__dosage">{scriptData.dosage}</div>
+          <div className="Script__repeats">{scriptData.repeats}</div>
+          <div className="Script__quantity">{scriptData.quantity}</div>
+          {scriptData.compounded && <div className="Script__compounded">To be compounded</div>}
+          <div className="Script__pbs">{`${scriptData.pbsRx ? 'PBS prescription' : 'Non-PBS prescription'}`}</div>
+          <div className="Script__authority">
+            {/* Further auth details */}
+          </div>
+          <div className="Script__date">{formatDate(scriptData.date)}</div>
+        </div>
+      }
+      
       <div className="ProviderForm__btns">
         <Link to="/scripts" className="cancel-btn ProviderForm__btn">Go back</Link>
         <Link to="/scripts" className="submit-btn ProviderForm__btn">Re-prescribe</Link>

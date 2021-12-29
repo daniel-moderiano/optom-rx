@@ -24,7 +24,7 @@ const TableFooter = ({ pages, setPage, page, slice }) => {
 
   const decrementPage = () => {
     // If not on the first page
-    if (page > 0) {
+    if (page > 1) {
       setPage(page - 1)
     } else {
       // do nothing
