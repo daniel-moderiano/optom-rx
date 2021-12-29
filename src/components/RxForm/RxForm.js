@@ -15,7 +15,7 @@ import { Link } from "react-router-dom";
 
 // ! Multiple optometrist items are not permitted to be prescribed on the same form; each must use an individual form
 
-const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
+const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
   const [{ scriptNo, authRxNo, isError, isLoading }, fetchNumbers] = useNumbers();
   const { user } = useAuthContext();
   const { documents: providers } = useCollection('providers', ['uid', '==', user.uid]);
@@ -86,7 +86,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
     substitutePermitted: true,    // Indicates if brand substitution is permitted
     brandOnly: false,    // Indicates whether the Rx should list brand name only (only permitted for certain drugs)
     includeBrand: false,    // Indicates whether brand name should be included on the Rx
-    pbsRx: true,    // Indicates whether this is a PBS prescription 
+    pbsRx: false,    // Indicates whether this is a PBS prescription 
     compounded: false,
     verified: false,    // Set to true when the user selects an autocomplete option. Set to false on any subsequent     modification of drug information, as this cannot be verified on the PBS. Only those verified drugs should be integrated with PBS backend
     indications: '',    // Indications for the use of drug under PBS restriction
@@ -878,8 +878,63 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData }) => {
       }).catch((error) => {
         console.log(error);
       })
+
+      // Also reset all existing data 
+      resetData();
+      setDrugData({
+        activeIngredient: '',
+        brandName: '',
+        quantity: '',
+        repeats: '',
+        dosage: '',
+        itemCode: '',
+        substitutePermitted: true,    
+        brandOnly: false, 
+        includeBrand: false,    
+        pbsRx: false,   
+        compounded: false,
+        verified: false,   
+        indications: '', 
+        authRequired: false,
+        maxQuantity: '',
+        maxRepeats: '',
+      });
+
+      setPatientData({
+        fullName: '',
+        streetAddress: '',
+        subpremise: '',
+        suburb: '',
+        postcode: '',
+        state: '',
+        medicareNumber: '',
+        medicareRefNumber: '',
+      });
+
+      // setProviderData({
+      //   prefix: false,
+      //   fullName: '',
+      //   qualifications: '',
+      //   practiceName: '',
+      //   streetAddress: '',
+      //   subpremise: '',
+      //   suburb: '',
+      //   postcode: '',
+      //   state: '',
+      //   phoneNumber: '',
+      //   prescriberNumber: '',
+      // });
+
+      setMiscData((prevData) => ({
+        ...prevData,
+        authRxNumber: '',  
+        authCode: '',    
+        scriptID: '',   
+      }));
+      
+      
     }
-  }, [state, fetchNumbers]);
+  }, [state, fetchNumbers, resetData]);
 
   // Set local state with authRxNo and scriptNo fetched from firestore. Activates only when the numbers have been fetched on a first time new Rx 
   useEffect(() => {

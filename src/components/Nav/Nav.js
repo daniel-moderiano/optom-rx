@@ -6,11 +6,10 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 import { useLogout } from "../../hooks/useLogout";
 
 
-const Nav = () => {
+const Nav = ({ resetData }) => {
   // Conditionally display nav links based on user auth state (logged in or not)
   const { user } = useAuthContext();
   const [showMenu, setShowMenu] = useState(false);
-  const [activeLink, setActiveLink] = useState('');
   const { logout } = useLogout();
 
   const toggleMenu = () => {

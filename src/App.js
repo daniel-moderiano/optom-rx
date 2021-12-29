@@ -3,7 +3,7 @@ import Header from "./components/Header/Header";
 import GlobalStyles from "./components/utils/globalStyles";
 import RxForm from './components/RxForm/RxForm';
 import RxTemplate from './components/RxTemplate/RxTemplate'
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Route, useNavigate, Routes, Navigate } from "react-router";
 import Signup from "./components/Signup/Signup";
 import Login from "./components/Login/Login";
@@ -33,12 +33,12 @@ const App = () => {
   
   const [data, setData] = useState({
     drugData: {
-      // activeIngredient: "latanoprost 0.005% eye drops, 5 mL",
-      // "brandName":"Xalatan",
-      // "quantity":"1",
-      // "repeats":"4",
-      // "dosage":"Once nightly both eyes",
-      // "itemCode":"5552F",
+      activeIngredient: "latanoprost 0.005% eye drops, 5 mL",
+      "brandName":"Xalatan",
+      "quantity":"1",
+      "repeats":"4",
+      "dosage":"Once nightly both eyes",
+      "itemCode":"5552F",
       substitutePermitted: true,    // Indicates if brand substitution is permitted
       brandOnly: false,    // Indicates whether the Rx should list brand name only (only permitted for certain drugs)
       includeBrand: true,    // Indicates whether brand name should be included on the Rx
@@ -47,14 +47,14 @@ const App = () => {
       authRequired: false,  // Indicates whether authority is required for this medication
     },
     patientData: {
-      // "fullName":"Daniel Moderiano",
-      // "streetAddress":"6 Carragarmungee Estate Long Road Name",
-      // "subpremise":"Unit 12",
-      // "suburb":"Port Bonython",
-      // "postcode":"5127",
-      // "state":"SA",
-      // "medicareNumber":"5151515151",
-      // "medicareRefNumber":"3"
+      "fullName":"Daniel Moderiano",
+      "streetAddress":"6 Carragarmungee Estate Long Road Name",
+      "subpremise":"Unit 12",
+      "suburb":"Port Bonython",
+      "postcode":"5127",
+      "state":"SA",
+      "medicareNumber":"5151515151",
+      "medicareRefNumber":"3"
     },
     providerData: {},
     miscData: {
@@ -69,6 +69,26 @@ const App = () => {
   let navigate = useNavigate();
 
   const [googleLoaded, setGoogleLoaded] = useState(false);
+
+  const resetAllData = useCallback(() => {
+    console.log('Reset all data');
+    setData({
+      drugData: {
+        substitutePermitted: true,
+        brandOnly: false,
+        includeBrand: false,
+        pbsRx: false,
+        compounded: false,
+        authRequired: false,
+      },
+      patientData: {},
+      providerData: {},
+      miscData: {
+        date: ausDate,
+      },
+      pbsData: null,
+    });
+  }, [ausDate]);
 
   // A global toast listener that fades out any toast message after one second
   useEffect(() => {
@@ -146,7 +166,7 @@ const App = () => {
     <div className="App">
       {authIsReady && (<>
         <GlobalStyles />
-        <Header user={user}/>
+        <Header user={user} resetData={resetAllData}/>
 
         <Main >
           <Routes>
@@ -159,7 +179,7 @@ const App = () => {
 
             <Route path="/form" element={
               <>
-              {user && <RxForm handleSubmit={handleSubmit} googleLoaded={googleLoaded} existingData={data}/>}
+              {user && <RxForm handleSubmit={handleSubmit} googleLoaded={googleLoaded} existingData={data} resetData={resetAllData}/>}
               {!user && <Navigate to="/login"/>}
               </>
             }/>
