@@ -158,7 +158,7 @@ const RxTemplate = ({ data, setToast }) => {
                 ? <div className="ui-info ui-brandSub--yes">Brand substitution permitted</div>
                 : <div className="ui-info ui-brandSub--no">Brand substitution not allowed</div>
               }
-              <div className="ui-info ui-medication__dosage">{drugData.dosage}</div>
+              <div className="ui-info ui-medication__dosage">Dosage: {drugData.dosage}</div>
               <div className="ui-quantityRepeats">
                 <div className="ui-info ui-medication__quantity">{`Quantity: ${drugData.quantity}`}</div>
                 <div className="ui-info ui-medication__repeats">{`Repeats: ${drugData.repeats}`}</div>

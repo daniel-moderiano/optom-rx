@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { Link, useNavigate } from "react-router-dom";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../../firebase/config";
 import { StyledViewScript } from "./ViewScript.styled.";
@@ -75,7 +75,6 @@ const ViewScript = ({ setToast }) => {
   const cancelEdit = () => {
     navigate('/providers');
   }
-
 
   useEffect(() => {
     const docRef = doc(db, 'providers', id);

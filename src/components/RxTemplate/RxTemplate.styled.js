@@ -27,7 +27,7 @@ const StyledRxTemplate = styled.div`
   .ui-description {
     display: flex;
     justify-content: space-between;
-    padding-top: 0.5rem;
+    padding-top: 1.5rem;
     padding-left: 0.1rem;
     font-size: 0.9rem;
     color: #48515B;
@@ -36,7 +36,7 @@ const StyledRxTemplate = styled.div`
   .ui-container {
     display: flex;
     flex-direction: column;
-    margin-top: 1.5rem;
+    margin-top: 1rem;
     box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
     border-radius: 6px;
 
@@ -90,7 +90,7 @@ const StyledRxTemplate = styled.div`
 
   .RxTemplate__btns {
     place-self: flex-end;
-    margin: 2.5rem 0 2rem 0;
+    margin: 2rem 0 2rem 0;
     display: flex;
 
     .RxTemplate__btn {
