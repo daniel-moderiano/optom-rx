@@ -13,6 +13,8 @@ const StyledFieldset = styled.fieldset`
   margin: 0;
   /* box-shadow: 0 1.6px 3.6px 0 rgb(0 0 0 / 13%), 0 0.3px 0.9px 0 rgb(0 0 0 / 11%); */
 
+  
+
   legend {
     float: left;    // Moves the legend within the fieldset
     padding: 0;

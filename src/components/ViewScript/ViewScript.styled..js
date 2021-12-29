@@ -7,6 +7,15 @@ const StyledViewScript = styled.div`
   padding: 2rem 5.5rem;
   width: 90%;
   max-width: 880px;
+  display: flex;
+  flex-direction: column;
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1.5rem;
+    /* border-bottom: 1px solid #dfe1e1; */
+  }
 
   .EditProvider__title {
     font-family: var(--font-stack-myriad);
@@ -23,7 +32,7 @@ const StyledViewScript = styled.div`
 
   .ProviderForm__btns {
     place-self: flex-end;
-    margin-top: 1rem;
+    margin: 2.5rem 0;
 
     .ProviderForm__btn {
       font-size: 1rem;
@@ -44,6 +53,7 @@ const StyledViewScript = styled.div`
       color: rgb(255, 255, 255);
       border: none;
       margin-left: 1.5rem;
+      text-decoration: none;
     }
     
     .submit-btn:hover {
@@ -66,32 +76,51 @@ const StyledViewScript = styled.div`
 
   .Script__info {
     width: 100%;
-    box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
-    border-radius: 6px;
-    margin-top: 2rem;
+    /* box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    border-radius: 6px; */
+    /* margin-top: 2.5rem; */
     display: flex;
     flex-direction: column;
-    ;
+    
+    
 
     .Script__title {
       background-color: #F9FAFB;
-      padding: 0.75rem 1.5rem;
-      color: #48515B;
+      padding: 0.75rem 0.5rem;
+      /* margin-top: 0.5rem; */
+      /* color: #48515B; */
+      /* text-align: left;
       font-size: 0.75rem;
       line-height: 0.85rem;
-      text-align: left;
       text-transform: uppercase;
       letter-spacing: 0.05rem;
-      font-family: var(--font-stack-segoe-semibold);
+      font-family: var(--font-stack-segoe-semibold); */
+      font-size: 1.3rem;
+      font-family: var(--font-title);
+      color: var(--title-color);
       border-top: none;
-      border-bottom: 1px solid #D1D6DB;
+      /* border-bottom: 1px solid #D1D6DB; */
     }
 
     .Script__info--section {
-      padding: 0.8rem 1.5rem;
+      padding: 0.5rem 0.5rem;
       font-size: 0.9rem;
       color: #48515B;
     }
+
+    .Script__medication {
+      padding-bottom: 0.5rem;
+    }
+
+    .Script__pbs {
+      padding-bottom: 0.5rem;
+    }
+
+
+    .Script__other {
+      padding-bottom: 0.5rem;
+    }
+
 
   }
 

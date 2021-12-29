@@ -66,7 +66,7 @@ const RxTemplate = ({ data, setToast }) => {
       }
     }    
     // Brand name NOT to be included
-    if (!drugData.includeBrand) {
+    if (!drugData.includeBrand) {  
       return capitalised;
     }
     // Brand name included in addition to active ingredient
