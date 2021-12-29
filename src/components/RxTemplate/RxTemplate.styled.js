@@ -16,7 +16,7 @@ const StyledRxTemplate = styled.div`
     color: var(--title-color);
     font-size: 2.5rem;
     padding: 0;
-    margin: 1rem 0 0.75rem 0;
+    margin: 1rem 0 0 0;
   }
 
   /* Remove this in prod (img element will be removed) */
@@ -24,14 +24,26 @@ const StyledRxTemplate = styled.div`
     display: none;
   }
 
+  .ui-description {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 0.5rem;
+    padding-left: 0.1rem;
+    font-size: 0.9rem;
+    color: #48515B;
+  }
+
   .ui-container {
     display: flex;
     flex-direction: column;
     margin-top: 1.5rem;
+    box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    border-radius: 6px;
 
     .ui__title {
+      margin: 0;
       background-color: #F9FAFB;
-      padding: 0.75rem 0.5rem;
+      padding: 0.75rem 0.75rem;
       /* margin-top: 0.5rem; */
       /* color: #48515B; */
       /* text-align: left;
@@ -48,12 +60,38 @@ const StyledRxTemplate = styled.div`
       /* border-bottom: 1px solid #D1D6DB; */
     }
 
+    .ui-info {
+      padding: 0.5rem 0.75rem;
+      font-size: 0.9rem;
+      color: #48515B;
+    }
+
+    .ui-medication {
+      padding-bottom: 0.5rem;
+    }
+
+    .ui-provider {
+      padding-bottom: 0.5rem;
+    }
+
+
+    .ui-patient {
+      padding-bottom: 0.5rem;
+    }
+
+
+    .ui-miscellaneous {
+      padding-bottom: 0.5rem;
+    }
+
+
   }
 
 
   .RxTemplate__btns {
     place-self: flex-end;
-    margin: 2.5rem 0;
+    margin: 2.5rem 0 2rem 0;
+    display: flex;
 
     .RxTemplate__btn {
       font-size: 1rem;
@@ -82,9 +120,8 @@ const StyledRxTemplate = styled.div`
     }
           
     .btn-editRx {
+      display: block;
       text-decoration: none;
-      /* margin-right: 2rem; */
-      min-width: 80px;
       background-color: var(--btn-secondary);
       color: var(--btn-secondary-text);
       border: none;            

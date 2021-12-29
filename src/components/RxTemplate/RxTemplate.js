@@ -109,6 +109,10 @@ const RxTemplate = ({ data, setToast }) => {
   return (
     <StyledRxTemplate className="RxTemplate">
       <h2 className="RxTemplate__title">Review your prescription</h2>
+      <div className="ui-description">
+        <div className="ui-info ui-scriptNo">Script No: {miscData.scriptID}</div>
+                <div className="ui-info ui-date">{formatDate()}</div>
+      </div>
       {/* If the template is rendered without a full set of data, many functions will fail. Hence this is rendered conditionally */}
       {state ? <>
         <img src={Rx} alt="" />
@@ -116,48 +120,51 @@ const RxTemplate = ({ data, setToast }) => {
           <section className="ui-provider">
             <h4 className="ui__title">Provider</h4>
 
-              <div className="ui-provider__contact-upper">
-                <div className="ui-provider__fullName">{`${providerData.prefix ? 'Dr' : ''} ${providerData.fullName}`}</div>
+              <div className="ui-info ui-provider__contact-upper">
+                <div className=" ui-provider__fullName">{`${providerData.prefix ? 'Dr' : ''} ${providerData.fullName}`}</div>
                 {formatProvAddress()}
-                <div className="ui-provider__addressLine2">
+                <div className=" ui-provider__addressLine2">
                   {`${providerData.suburb} ${providerData.state} ${providerData.postcode}`}
                 </div>
                 <div className="ui-provider__phoneNumber">
                   {`Phone: ${formatPhoneNumber(providerData.phoneNumber)}`}
                 </div>
               </div>
-              <div className="ui-provider__prescriberNumber">Prescriber number: {providerData.prescriberNumber}</div>
+              <div className="ui-info ui-provider__prescriberNumber">Prescriber number: {providerData.prescriberNumber}</div>
 
           </section>
 
           <section className="ui-patient">
             <h4 className="ui__title">Patient</h4>
-              <div className="ui-patient__contactDetails">
+              <div className="ui-info ui-patient__contactDetails">
                 <div className="ui-patient__fullName">{patientData.fullName}</div>
                 <div className="ui-patient__streetAddress">{`${patientData.subpremise} ${patientData.streetAddress}`}</div>
                 <div className="ui-patient__addressLine2">{`${patientData.suburb} ${patientData.state} ${patientData.postcode}`}</div>
               </div>
 
-              <div className="ui-medicare">
-                <div className="ui-patient__medicareNumber">Medicare number: {`${patientData.medicareNumber.substring(0, 4)} ${patientData.medicareNumber.substring(4, 9)} ${patientData.medicareNumber.substring(9, 10)}`}
+              <div className="ui-info ui-medicare">
+                <div className="ui-patient__medicareNumber">Medicare number: {`${patientData.medicareNumber.substring(0, 4)} ${patientData.medicareNumber.substring(4, 9)} ${patientData.medicareNumber.substring(9, 10)}-${patientData.medicareRefNumber}`}
                 </div>
-                <div className="ui-patient__medicareRefNumber">IRN: {patientData.medicareRefNumber}</div>
               </div>
           </section>
 
            {/* Script ID or authority Rx number should go above the medication once finalised, and perhaps with a border bottom */}
            <section className="ui-medication">
             <h4 className="ui__title">Medication</h4>
-              <div className="ui-medication__name">
+              <div className="ui-info ui-medication__name">
                 {formatDrug(drugData.activeIngredient, drugData.brandName)}
               </div>
-              <div className="ui-medication__dosage">{drugData.dosage}</div>
+              {drugData.substitutePermitted 
+                ? <div className="ui-info ui-brandSub--yes">Brand substitution permitted</div>
+                : <div className="ui-info ui-brandSub--no">Brand substitution not allowed</div>
+              }
+              <div className="ui-info ui-medication__dosage">{drugData.dosage}</div>
               <div className="ui-quantityRepeats">
-                <div className="ui-medication__quantity">{`Quantity: ${drugData.quantity}`}</div>
-                <div className="ui-medication__repeats">{`Repeats: ${drugData.repeats}`}</div>
+                <div className="ui-info ui-medication__quantity">{`Quantity: ${drugData.quantity}`}</div>
+                <div className="ui-info ui-medication__repeats">{`Repeats: ${drugData.repeats}`}</div>
               </div>
               {drugData.compounded 
-                && <div className="ui-compounded">To be compounded</div>
+                && <div className="ui-info ui-compounded">To be compounded</div>
               } 
           </section>
 
@@ -166,19 +173,13 @@ const RxTemplate = ({ data, setToast }) => {
             <h4 className="ui__title">PBS and Other</h4>
               
               {drugData.pbsRx 
-                ? <div className="ui-pbsRx ui-pbsRx--selected">PBS prescription</div>
-                : <div className="ui-pbsRx ui-pbsRx">Private (non-PBS) prescription</div>
+                ? <div className="ui-info ui-pbsRx ui-pbsRx--selected">PBS prescription</div>
+                : <div className="ui-info ui-pbsRx ui-pbsRx">Private (non-PBS) prescription</div>
               }
-              {drugData.substitutePermitted 
-                ? <div className="ui-brandSub--yes">Brand substitution permitted</div>
-                : <div className="ui-brandSub--no">Brand substitution not allowed</div>
-              }
-              {drugData.authRequired && (<>
+              {drugData.authRequired && (<div className="ui-auth ui-info">
                 <div className="ui-authCode">{`Authority Approval No: ${miscData.authCode}`}</div>
                 <div className="ui-authRxNo">{`Authority Script No: ${miscData.authRxNumber}`}</div>
-              </>)}
-              <div className="ui-scriptNo">Script No: {miscData.scriptID}</div>
-              <div className="ui-date">Prescription date: {formatDate()}</div>
+              </div>)}
           </section>
         </div>
 
