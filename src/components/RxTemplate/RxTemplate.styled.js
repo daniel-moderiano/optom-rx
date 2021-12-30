@@ -19,11 +19,6 @@ const StyledRxTemplate = styled.div`
     margin: 1rem 0 0 0;
   }
 
-  /* Remove this in prod (img element will be removed) */
-  img {
-    display: none;
-  }
-
   .ui-description {
     display: flex;
     justify-content: space-between;
@@ -155,20 +150,6 @@ const StyledRxTemplate = styled.div`
       padding: 0;
     }
 
-    img {
-      position: absolute;
-      left: 0;
-      top: 0;
-      z-index: 1;
-      opacity: 0.5;
-      /* This pixel value is specific for the image in question, and is a very close approximation to a real PBS form */
-      width: 902px;
-      margin: 0;
-      padding: 0;
-      display: block;
-      display: none;
-    }
-
     .left-container {
       display: block;
       margin: 0;
@@ -247,7 +228,8 @@ const StyledRxTemplate = styled.div`
           position: absolute;
           top: 20px;
 
-          img {
+          .pbsTick {
+            display: block;
             height: 100%;
             width: 100%;
           }
@@ -275,6 +257,14 @@ const StyledRxTemplate = styled.div`
           left: 148px;
           top: 12px;
           font-size: 24px;
+          height: 12px;
+          width: 12px;
+
+          .largeTick {
+            display: block;
+            height: 100%;
+            width: 100%;
+          }
         }
       }
 
@@ -321,6 +311,15 @@ const StyledRxTemplate = styled.div`
           top: 114px;
           font-size: 26px;
           font-weight: bold;
+          height: 12px;
+          width: 12px;
+
+          .optomTick {
+            display: block;
+            height: 100%;
+            width: 100%;
+          }
+          
         }
       }
 
@@ -417,7 +416,8 @@ const StyledRxTemplate = styled.div`
           position: absolute;
           top: 20px;
 
-          img {
+          .pbsTick {
+            display: block;
             height: 100%;
             width: 100%;
           }
@@ -445,6 +445,14 @@ const StyledRxTemplate = styled.div`
           left: 148px;
           top: 12px;
           font-size: 24px;
+          height: 12px;
+          width: 12px;
+
+          .largeTick {
+            display: block;
+            height: 100%;
+            width: 100%;
+          }
         }
       }
 

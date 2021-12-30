@@ -1,6 +1,7 @@
 import { StyledRxTemplate } from "./RxTemplate.styled";
-import Rx from '../../assets/template-sized.jpg';
 import tickbox from '../../assets/tickbox.svg';
+import lightTick from '../../assets/light-tick.svg';
+import largeTick from '../../assets/large-tick.svg';
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import { db } from '../../firebase/config';
@@ -115,7 +116,6 @@ const RxTemplate = ({ data, setToast }) => {
       </div>
       {/* If the template is rendered without a full set of data, many functions will fail. Hence this is rendered conditionally */}
       {state ? <>
-        <img src={Rx} alt="" />
         <div data-testid="ui" className="ui-container">
           <section className="ui-provider">
             <h4 className="ui__title">Provider</h4>
@@ -221,10 +221,10 @@ const RxTemplate = ({ data, setToast }) => {
             {/* Include Script ID and Authority Rx number here */}
             <div className="date">{formatDate()}</div>
             {drugData.pbsRx 
-              ? <div className="pbsSelected"><img src={tickbox} alt="" /></div>
+              ? <div className="pbsSelected"><img className="pbsTick" src={tickbox} alt="" /></div>
               : <div className="nonPbs"><span className="nonPbs-marker">XXXXXXXXXXX</span>Non-PBS</div>
             }
-            {!drugData.substitutePermitted && <div className="brandSub">✓</div>}
+            {!drugData.substitutePermitted && <div className="brandSub"><img className="brandSubTick" src={largeTick} alt="" /></div>}
             <div className="scriptNo">Script No: {miscData.scriptID}</div>
           </section>
 
@@ -248,7 +248,7 @@ const RxTemplate = ({ data, setToast }) => {
             <div className="provider__fullName">{`${providerData.prefix ? 'Dr' : ''} ${providerData.fullName}`}</div>
             {/* Qualifications should only be included in the lower section */}
             <div className="provider__qualifications">{providerData.qualifications}</div>
-            <div className="practitionerTick">🗸</div>
+            <div className="practitionerTick"><img className="optomTick" src={lightTick} alt="" /></div>
           </section>
 
           {/* Wastes space to render authority section for non-authority required scripts, so render only as needed */}
@@ -297,10 +297,10 @@ const RxTemplate = ({ data, setToast }) => {
             {/* Include Script ID and Authority Rx number here */}
             <div className="date">{formatDate()}</div>
             {drugData.pbsRx 
-              ? <div className="pbsSelected"><img src={tickbox} alt="" /></div>
+              ? <div className="pbsSelected"><img className="pbsTick" src={tickbox} alt="" /></div>
               : <div className="nonPbs"><span className="nonPbs-marker">XXXXXXXXXXX</span>Non-PBS</div>
             }
-            {!drugData.substitutePermitted && <div className="brandSub">✓</div>}
+            {!drugData.substitutePermitted && <div className="brandSub"><img className="brandSubTick" src={largeTick} alt="" /></div>}
             <div className="scriptNo">Script No: {miscData.scriptID}</div>
           </section>
 
