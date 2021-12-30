@@ -257,8 +257,7 @@ const StyledRxTemplate = styled.div`
           left: 148px;
           top: 12px;
           font-size: 24px;
-          height: 12px;
-          width: 12px;
+          width: 18px;
 
           .largeTick {
             display: block;
@@ -310,9 +309,8 @@ const StyledRxTemplate = styled.div`
           left: 315px;
           top: 114px;
           font-size: 26px;
-          font-weight: bold;
-          height: 12px;
-          width: 12px;
+          /* font-weight: bold; */
+          width: 20px;
 
           .optomTick {
             display: block;
@@ -445,8 +443,7 @@ const StyledRxTemplate = styled.div`
           left: 148px;
           top: 12px;
           font-size: 24px;
-          height: 12px;
-          width: 12px;
+          width: 18px;
 
           .largeTick {
             display: block;
