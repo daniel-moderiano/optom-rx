@@ -308,8 +308,6 @@ const StyledRxTemplate = styled.div`
           position: absolute;
           left: 315px;
           top: 114px;
-          font-size: 26px;
-          /* font-weight: bold; */
           width: 20px;
 
           .optomTick {

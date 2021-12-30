@@ -195,51 +195,61 @@ const StyledRxForm = styled.form`
 
   .indications {
     margin-bottom: 1.5rem;
+    width: 100%;
+    box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
   }
 
   /* Style the button that is used to open and close the collapsible content */
   .collapsible {
     /* background-color: #eee; */
     cursor: pointer;
-    font-size: 1rem;
-    padding: 0.4rem 0 0.5rem 1rem;
+    font-size: 0.9rem;
+    background-color: #F9FAFB;
+    padding: 0.6rem 0.75rem 0.75rem 1rem;
     width: 100%;
     border: none;
     text-align: left;
     outline: none;
     font-family: var(--font-stack-segoe);
-    font-weight: bold;
+    border-top: none;
+    color: #48515B;
   }
 
   /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
   .active, .collapsible:hover {
     background-color: #ccc;
+    border-radius: 6px 6px 0 0;
   }
 
   /* Style the collapsible content. Note: hidden by default */
   .indications__content {
-    padding: 0 1rem;
-    overflow: hidden;
-    background-color: #f0f0f0;
     
+    overflow: hidden;
+    padding: 0.6rem 0.75rem 0.5rem 0.5rem;
     font-size: 0.9rem;
+    color: #48515B;
 
     .indication__main {
-      margin: 1rem 0;
+      padding: 0.5rem 0.5rem 0.75rem 0.5rem;
     }
     
     ul {
       list-style-type: square;
       padding-left: 2rem;
-      /* margin: 0; */
+      margin: 0;
 
       li {
-        margin: 1rem 0;
+        padding: 0 0 0.5rem 0.2rem;
       }
     }
 
     .indication__clinical, .indication__and {
       font-weight: bold;
+      padding: 0.5rem 0.5rem 1rem 0.5rem;
+
     }
 
     &.expand {
