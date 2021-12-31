@@ -218,6 +218,7 @@ const StyledRxForm = styled.form`
     border-top: none;
     color: #48515B;
     border-radius: 6px 6px 0 0;
+    cursor: pointer;
 
     &:focus {
       outline: 2px solid #a360ac;

@@ -1275,10 +1275,16 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
         {/* TODO: consider a dropdown UI expandable div */}
         {(drugData.verified && drugData.indications.length > 0) && 
           <div className="indications">
-            <div className="indications__btn collapsible"><button onClick={
+            <div className="indications__btn collapsible" onClick={
               (event) => {
                 event.preventDefault(); 
                 
+                setExpandIndication((prevState) => !prevState);
+                console.log(event);
+              }}><button onClick={
+              (event) => {
+                event.preventDefault(); 
+                event.stopPropagation();
                 setExpandIndication((prevState) => !prevState);
                 console.log(event);
               }}>Indications for use:</button></div>
