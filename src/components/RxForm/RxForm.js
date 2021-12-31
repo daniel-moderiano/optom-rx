@@ -1079,7 +1079,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
         borderColor: state.isFocused ? '#a360ac' : 'rgb(178, 182, 185)',
         cursor: 'pointer'
       },
-      width: '24rem',
+      width: '26rem',
       padding: '0.12rem 0 0.11rem 0.85rem',
       borderRadius: '4px',
       fontSize: "1rem",
@@ -1278,15 +1278,12 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
             <div className="indications__btn collapsible" onClick={
               (event) => {
                 event.preventDefault(); 
-                
                 setExpandIndication((prevState) => !prevState);
-                console.log(event);
               }}><button onClick={
               (event) => {
                 event.preventDefault(); 
                 event.stopPropagation();
                 setExpandIndication((prevState) => !prevState);
-                console.log(event);
               }}>Indications for use:</button></div>
             <div className={`indications__content ${expandIndication ? 'expand' : 'collapse' }`} dangerouslySetInnerHTML={{ __html: indication }}></div>    
           </div>

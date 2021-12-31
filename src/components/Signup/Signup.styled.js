@@ -25,6 +25,10 @@ const StyledSignup = styled.div`
     flex-direction: column;
     align-items: center;
 
+    .form-field {
+      width: 24rem;
+    }
+
     button {
       width: 24rem;
       font-size: 1rem;
