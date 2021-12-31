@@ -178,7 +178,13 @@ const StyledRxForm = styled.form`
   }
 
   .authRequired {
-    margin: 0 0 1.25rem 0;
+    margin: 0 0 0.5em 0;
+  }
+
+  .authRxNo {
+    margin: 0 0 1rem 0;
+    padding: 0;
+    font-size: 0.9rem;
   }
 
   .btn-generate {

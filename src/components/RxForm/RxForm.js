@@ -513,7 +513,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
 
   // Identify whether a drug on the PBS is restricted or not, and display indications for use on restricted items
   const lemiStatus = useCallback(() => {
-    console.log('LEMI func called');
     // PBS info-related effects here
     if (pbsInfo) {
       // Check for lemi and/or lmbc status
@@ -566,10 +565,11 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
     lemiStatus();
   }, [restrictedStatus, authorityStatus, quantityRepeatStatus, lemiStatus, pbsInfo])
 
+
   // Used to manage alerts on max quantity and repeats under the PBS
   useEffect(() => {
     // Ensures the call happens when a max quantity and repeat are added
-    if (drugData.maxQuantity.length > 0 && drugData.maxRepeats.length > 0) {
+    if (drugData.maxQuantity.length > 0 && drugData.maxRepeats.length > 0 && drugData.pbsRx) {
       setDrugAlerts((prevAlerts) => ({
         ...prevAlerts,
         maxQuantity: {
@@ -589,11 +589,10 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
         maxRepeats: {},
       }));
     }
-  }, [drugData.maxRepeats, drugData.maxQuantity]);
+  }, [drugData.maxRepeats, drugData.maxQuantity, drugData.pbsRx]);
 
-  const changeOnEnter = (event, setFunc, data) => {
-    
-    
+
+  const changeOnEnter = (event, setFunc, data) => {    
     // If the enter key is pressed
     if (event.keyCode === 13) {
       event.preventDefault();
@@ -1300,6 +1299,13 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
           enterFunc={(event) => changeOnEnter(event, setDrugData, drugData)}
         />    
 
+        {/* Authority Rx numbers and ScriptID here */}
+        <div className="numbers" data-testid="numbers">
+          
+          {/* drugData.authRequired should be auto-selected once PBS integration is complete, but should also have an option to set manually */}
+          {drugData.authRequired && <div className="authRxNo" data-testid="authRxNo">Authority script number: {isLoading ? 'Loading...' : miscData.authRxNumber}</div>}
+        </div>
+
         {/* Consider a variable message beside or below this saying 'not required for this medication' or similar */}
         <FormField 
           fieldType="text" 
@@ -1318,13 +1324,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
           onChange={(event) => handleChange(setMiscData, event)} 
           alert={miscAlerts.date}
         />
-
-        {/* Authority Rx numbers and ScriptID here */}
-        <div className="numbers" data-testid="numbers">
-          
-          {/* drugData.authRequired should be auto-selected once PBS integration is complete, but should also have an option to set manually */}
-          {drugData.authRequired && <div className="authRxNo" data-testid="authRxNo">AuthRx number: {isLoading ? 'Loading...' : miscData.authRxNumber}</div>}
-        </div>
 
         {isError && <div className="numbers__error">Something went wrong</div>}
 

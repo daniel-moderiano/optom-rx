@@ -23,6 +23,8 @@ const StyledFieldset = styled.fieldset`
     color: var(--title-color);
     width: 16rem;
     flex-shrink: 0;
+    padding-left: 1rem;
+    margin-right: 0.5rem;
   }
 
   .container {
