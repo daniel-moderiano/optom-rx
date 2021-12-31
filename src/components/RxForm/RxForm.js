@@ -1107,7 +1107,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
       autoComplete="off">
       <h2 className="RxForm__title">New Prescription</h2>
       <p className="RxForm__description">Fill out the details required to prescribe</p>
-
+      <div className="scriptNo" data-testid="scriptNo">Script number: {isLoading ? 'Loading...' : miscData.scriptID}</div>
       <Fieldset className="provider-form" legend="Provider Details">
       <div className="provider-controls">
         {(!newProvider && selectOptions.length > 0) && 
@@ -1321,7 +1321,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
 
         {/* Authority Rx numbers and ScriptID here */}
         <div className="numbers" data-testid="numbers">
-          <div className="scriptNo" data-testid="scriptNo">Script number: {isLoading ? 'Loading...' : miscData.scriptID}</div>
+          
           {/* drugData.authRequired should be auto-selected once PBS integration is complete, but should also have an option to set manually */}
           {drugData.authRequired && <div className="authRxNo" data-testid="authRxNo">AuthRx number: {isLoading ? 'Loading...' : miscData.authRxNumber}</div>}
         </div>

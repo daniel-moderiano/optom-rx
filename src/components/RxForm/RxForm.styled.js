@@ -26,11 +26,20 @@ const StyledRxForm = styled.form`
   .RxForm__description {
     place-self: flex-start;
     margin: 0;
+    margin-bottom: 2rem;
+  }
+
+  .scriptNo {
+    width: 100%;
+    text-align: right;
+    padding: 0 0.5rem 0.5rem 0;
+    font-size: 0.9rem;
+    color: #48515B;
   }
 
   .provider-form  {
     border-top: 1px solid #dfe1e1;
-    margin-top: 2.5rem;
+    /* margin-top: 2.5rem; */
     padding-bottom: 2.95rem;
   }
   
@@ -301,7 +310,7 @@ const StyledRxForm = styled.form`
 
   .ProviderForm__btns {
     /* place-self: flex-end; */
-    padding: 2rem 0 2rem 0;
+    padding: 2.75rem 0 2rem 0;
     width: 100%;
     display: flex;
     align-items: center;
