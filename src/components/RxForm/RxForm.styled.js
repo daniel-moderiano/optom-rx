@@ -206,9 +206,9 @@ const StyledRxForm = styled.form`
   /* Style the button that is used to open and close the collapsible content */
   .collapsible {
     /* background-color: #eee; */
-    cursor: pointer;
+    /* cursor: pointer; */
     font-size: 0.9rem;
-    background-color: #F9FAFB;
+    background-color: #F4F5F6;
     padding: 0.6rem 0.75rem 0.75rem 1rem;
     width: 100%;
     border: none;
@@ -217,19 +217,53 @@ const StyledRxForm = styled.form`
     font-family: var(--font-stack-segoe);
     border-top: none;
     color: #48515B;
+    border-radius: 6px 6px 0 0;
+
+    &:focus {
+      outline: 2px solid #a360ac;
+      /* For a soft box shadow */
+      /* box-shadow: 0 0 3pt 2pt cornflowerblue; */
+      outline-offset: 1px;
+      
+    }
+
+    button {
+      cursor: pointer;
+      font-size: 0.9rem;
+      background-color: #F4F5F6;
+      color: #48515B;
+      font-family: var(--font-stack-segoe);
+      border: none;
+      margin: 0;
+      padding: 0;
+      background-color: transparent;
+      
+
+      &:hover {
+        
+        text-decoration: underline;
+      }
+
+      &:focus {
+        outline: 2px solid #a360ac;
+        /* For a soft box shadow */
+        /* box-shadow: 0 0 3pt 2pt cornflowerblue; */
+        outline-offset: 2px;
+          
+      }
+    }
   }
 
   /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
   .active, .collapsible:hover {
-    background-color: #ccc;
-    border-radius: 6px 6px 0 0;
+    background-color: #E8EAED;
   }
 
   /* Style the collapsible content. Note: hidden by default */
   .indications__content {
     
     overflow: hidden;
-    padding: 1rem 1rem 1rem 1rem;
+    padding: 1rem 1rem 1.25rem 1rem;
     font-size: 0.9rem;
     color: #48515B;
     
