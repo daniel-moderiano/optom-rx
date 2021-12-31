@@ -195,11 +195,12 @@ const StyledRxForm = styled.form`
 
   .indications {
     margin-bottom: 1.5rem;
-    width: 100%;
+    width: 26rem;
     box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
     border-radius: 6px;
     display: flex;
     flex-direction: column;
+
   }
 
   /* Style the button that is used to open and close the collapsible content */
@@ -228,29 +229,31 @@ const StyledRxForm = styled.form`
   .indications__content {
     
     overflow: hidden;
-    padding: 0.6rem 0.75rem 0.5rem 0.5rem;
+    padding: 1rem 1rem 1rem 1rem;
     font-size: 0.9rem;
     color: #48515B;
-
-    .indication__main {
-      padding: 0.5rem 0.5rem 0.75rem 0.5rem;
-    }
     
-    ul {
-      list-style-type: square;
-      padding-left: 2rem;
-      margin: 0;
+    .indication__extra {
 
-      li {
-        padding: 0 0 0.5rem 0.2rem;
+      padding: 0.5rem 0 0 0;
+
+      ul {
+        list-style-type: square;
+        padding-left: 1.5rem;
+        margin: 0;
+
+        li {
+          padding: 0.75rem 0 0 0.2rem;
+        }
+      }
+
+      .indication__clinical, .indication__and {
+        font-weight: bold;
+        padding: 0.75rem 0.5rem 0.25rem 0rem;
+
       }
     }
-
-    .indication__clinical, .indication__and {
-      font-weight: bold;
-      padding: 0.5rem 0.5rem 1rem 0.5rem;
-
-    }
+    
 
     &.expand {
       display: block;

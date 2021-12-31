@@ -3,7 +3,7 @@ import styled from "styled-components";
 const StyledFormField = styled.div`
   margin: 0.85rem 0;
   position: relative;
-  width: 24rem;
+  width: 26rem;
 
   input {
     margin-top: 0.5rem;

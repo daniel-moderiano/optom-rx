@@ -250,22 +250,27 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
           return ul.outerHTML;
         }
         const html = `<div class="indication">
+
           <div class="indication__main">${mainIndication}</div>
-          <div class="indication__clinical">Clinical criteria:</div>
-            <ul class="indication__list">
-              <li class="indication__list-item">${preAnd}</li>
-            </ul>
-          <div class="indication__and">AND</div>
-          ${mapPoints()}
+          <div class="indication__extra">
+            <div class="indication__clinical">Clinical criteria:</div>
+              <ul class="indication__list">
+                <li class="indication__list-item">${preAnd}</li>
+              </ul>
+            <div class="indication__and">AND</div>
+            ${mapPoints()}
+          </div>     
         </div>`;
         setIndication(html);
       } else {
         const html = `<div class="indication">
           <div class="indication__main">${mainIndication}</div>
+          <div class="indication__extra">
           <div class="indication__clinical">Clinical criteria:</div>
             <ul class="indication__list">
               <li class="indication__list-item">${preAnd}</li>
             </ul>
+          </div>
         </div>`;
         setIndication(html);
       }
@@ -297,21 +302,25 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
         }
         const html = `<div class="indication">
           <div class="indication__main">${mainIndication}</div>
+          <div class="indication__extra">
           <div class="indication__clinical">Treatment criteria:</div>
             <ul class="indication__list">
               <li class="indication__list-item">${preAnd}</li>
             </ul>
           <div class="indication__and">AND</div>
           ${mapPoints()}
+          </div>
         </div>`;
         setIndication(html);
       } else {
         const html = `<div class="indication">
           <div class="indication__main">${mainIndication}</div>
+          <div class="indication__extra">
           <div class="indication__clinical">Treatment criteria:</div>
             <ul class="indication__list">
               <li class="indication__list-item">${preAnd}</li>
             </ul>
+          </div>
         </div>`;
         setIndication(html);
       }
@@ -1267,8 +1276,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
             <div className={`indications__content ${expandIndication ? 'expand' : 'collapse' }`} dangerouslySetInnerHTML={{ __html: indication }}></div>    
           </div>
           
-        }
-        
+        }        
         
         <FormField 
           fieldType="checkbox" 
