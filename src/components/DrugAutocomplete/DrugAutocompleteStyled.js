@@ -101,20 +101,23 @@ const StyledDrugAutocomplete = styled.fieldset`
       }
 
       .tooltip-text {
-        visibility: hidden;
+        /* visibility: hidden; */
         width: 18rem;
         background-color: #555;
         color: #fff;
-        text-align: center;
-        padding: 5px 0;
+        text-align: left;
+        font-size: 0.9rem;
+        padding: 0.7rem 1rem 1rem 1rem;
         border-radius: 6px;
         position: absolute;
         z-index: 1;
         left: 125%;
         margin-top: -0.1rem;
+        height: 10rem;
+        top: -4rem;
 
         /* Fade in tooltip */
-        opacity: 0;
+        /* opacity: 0; */
         transition: opacity 0.3s;
 
         /* Tooltip arrow */

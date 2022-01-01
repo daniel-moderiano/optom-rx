@@ -533,7 +533,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
           ...prevData,
           brandOnly: true,
         }));
-        setTooltipText('This item is excluded from active ingredient prescribing and should be prescribed by brand name only for practical and safety reasons');
+        setTooltipText(`<span>This item is included on the <a target="_blank" href="https://www.safetyandquality.gov.au/publications-and-resources/resource-library/list-excluded-medicinal-items-lemi">List of Excluded Medicinal Items (LEMI)</a>, and should be prescribed by brand name only for practical and safety reasons</span>`);
       } else if (pbsInfo['lmbc']) {
         // Medicine is recommended to have brand name included
         setDrugData((prevData) => ({
@@ -541,8 +541,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
           brandOnly: false,
           includeBrand: true,
         }));
-        // TODO: LMBC recommends a hyperlink to the LMBC here
-        setTooltipText('This item is included on the List of Medicines for Brand Consideration (LMBC). Prescribers should consider prescribing by brand as well as active ingredient for patient safety');
+        setTooltipText(`<span>This item is included on the <a target="_blank" href="https://www.safetyandquality.gov.au/publications-and-resources/resource-library/list-medicines-brand-consideration-lmbc">List of Medicines for Brand Consideration (LMBC)</a>. Prescribers should consider prescribing by brand as well as active ingredient for patient safety</span>`);
       } else {
         // Neither LEMI nor LMBC listed; prescribe by active ingredient only
         setDrugData((prevData) => ({
@@ -550,7 +549,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
           brandOnly: false,
           includeBrand: false,
         }));
-        setTooltipText('This item should be prescribed by active ingredient only');
+        setTooltipText('<span>This item should be prescribed by active ingredient only</span>');
       }
       // Show tooltip
       if (!showTooltip) {
