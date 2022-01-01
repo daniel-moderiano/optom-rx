@@ -56,7 +56,8 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
     postcode: {},
     state: {},
     medicareNumber: {},
-    medicareRefNumber: {}
+    medicareRefNumber: {},
+    noMedicare: {},
   });
 
   const [providerAlerts, setProviderAlerts] = useState({
@@ -161,8 +162,8 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
       'suburb',
       'postcode',
       'state',
-      'medicareNumber',
-      'medicareRefNumber',
+      // 'medicareNumber',
+      // 'medicareRefNumber',
     ],
     provider: [
       'fullName',
@@ -931,6 +932,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
         state: '',
         medicareNumber: '',
         medicareRefNumber: '',
+        noMedicare: false,
       });
 
       // setProviderData({
@@ -1039,9 +1041,9 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
       }
     }
 
-    // Consider a modal warning here if the user attempts to prescribe a PBS script with no Medicare?
-    if (drugData.pbsRx && patientData.noMedicare) {
-      console.log('Sure you wanna leave out the medicare details bud?')
+    // Finally, check for any active error alerts that were not detected with the more basic submission validation
+    if (document.querySelectorAll('.alert--error').length > 0) {
+      valid = false;
     }
 
     return valid;
@@ -1243,7 +1245,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
           onChange={() => toggleBooleanState(setPatientData, patientData, 'noMedicare')}
           checked={patientData.noMedicare}
           className="checkbox noMedicare"
-          // alert={drugAlerts.pbsRx}
           enterFunc={(event) => changeOnEnter(event, setPatientData, patientData)}
         />  
 
@@ -1287,7 +1288,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
         />  
 
         {/* TODO: consider a dropdown UI expandable div */}
-        {(drugData.verified && drugData.indications.length > 0) && 
+        {(drugData.verified && drugData.indications.length > 0 && drugData.pbsRx) && 
           <div className="indications">
             <div className="indications__btn collapsible" onClick={
               (event) => {

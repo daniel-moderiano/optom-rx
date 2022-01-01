@@ -376,9 +376,12 @@ const RxTemplate = ({ data, setToast }) => {
                 <div className="patient__streetAddress">{`${patientData.subpremise} ${patientData.streetAddress}`}</div>
                 <div className="patient__addressLine2">{`${patientData.suburb} ${patientData.state} ${patientData.postcode}`}</div>
                 {/* Unsure if including this here */}
-                <div className="patient__medicareNumber">
-                {`${patientData.medicareNumber.substring(0, 4)} ${patientData.medicareNumber.substring(4, 9)} ${patientData.medicareNumber.substring(9, 10)}-${patientData.medicareRefNumber}`}
-                </div>
+                {!patientData.noMedicare && 
+                  <div className="patient__medicareNumber">
+                  {`${patientData.medicareNumber.substring(0, 4)} ${patientData.medicareNumber.substring(4, 9)} ${patientData.medicareNumber.substring(9, 10)}-${patientData.medicareRefNumber}`}
+                  </div>
+                }
+                
               </div>
             </div>
           </section>
