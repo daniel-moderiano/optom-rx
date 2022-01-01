@@ -1287,37 +1287,46 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
 
       {/* Note there must be enough info to identify the medicine, including form and strength */}
       <Fieldset className="misc-form" legend="Authority Details">
-
-       
-
               
-        
-        <FormField 
-          fieldType="checkbox" 
-          name="authRequired"
-          label="Authority required" 
-          onChange={() => toggleBooleanState(setDrugData, drugData, 'authRequired')}
-          checked={drugData.authRequired}
-          className="checkbox authRequired"
-          enterFunc={(event) => changeOnEnter(event, setDrugData, drugData)}
-        />    
+        {drugData.authRequired && drugData.pbsRx ? <>
+         <FormField 
+            fieldType="checkbox" 
+            name="authRequired"
+            label="Authority required" 
+            onChange={() => toggleBooleanState(setDrugData, drugData, 'authRequired')}
+            checked={drugData.authRequired}
+            className="checkbox authRequired"
+            enterFunc={(event) => changeOnEnter(event, setDrugData, drugData)}
+          />    
 
-        {/* Authority Rx numbers and ScriptID here */}
-        <div className="numbers" data-testid="numbers">
-          
-          {/* drugData.authRequired should be auto-selected once PBS integration is complete, but should also have an option to set manually */}
-          {drugData.authRequired && <div className="authRxNo" data-testid="authRxNo">Authority script number: {isLoading ? 'Loading...' : miscData.authRxNumber}</div>}
-        </div>
+          <div className="numbers" data-testid="numbers">
+            
+            {/* drugData.authRequired should be auto-selected once PBS integration is complete, but should also have an option to set manually */}
+            {drugData.authRequired && <div className="authRxNo" data-testid="authRxNo">Authority script number: {isLoading ? 'Loading...' : miscData.authRxNumber}</div>}
+            {isError && <div className="numbers__error">Something went wrong</div>}
+          </div>
 
-        {/* Consider a variable message beside or below this saying 'not required for this medication' or similar */}
-        <FormField 
-          fieldType="text" 
-          name="authCode"
-          label="Authority code (where applicable)" 
-          value={miscData.authCode} 
-          onChange={(event) => handleChange(setMiscData, event)} 
-          alert={miscAlerts.authCode}
-        />
+          {/* Consider a variable message beside or below this saying 'not required for this medication' or similar */}
+          <FormField 
+            fieldType="text" 
+            name="authCode"
+            label="Authority code (where applicable)" 
+            value={miscData.authCode} 
+            onChange={(event) => handleChange(setMiscData, event)} 
+            alert={miscAlerts.authCode}
+          />
+          </> : (
+            <div className="solo-alert-container"> 
+              <svg xmlns="http://www.w3.org/2000/svg" className="alert-icon alert-icon--neutral" viewBox="0 0 512 512" width="17px">
+                <path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" fill="none" stroke="#014083" strokeMiterlimit="10" strokeWidth="32"/>
+                <path d="M250.26 166.05L256 288l5.73-121.95a5.74 5.74 0 00-5.79-6h0a5.74 5.74 0 00-5.68 6z" fill="none" stroke="#014083" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32"/>
+                <path d="M256 367.91a20 20 0 1120-20 20 20 0 01-20 20z" fill="#014083"/>
+              </svg>
+              <span className={`alert alert--neutral`}>Awaiting medication selection</span>
+            </div>
+          )
+        }
+       
 
         <FormField 
           fieldType="date" 
@@ -1328,7 +1337,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
           alert={miscAlerts.date}
         />
 
-        {isError && <div className="numbers__error">Something went wrong</div>}
+        
 
        
 

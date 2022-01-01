@@ -144,6 +144,23 @@ const StyledRxForm = styled.form`
     margin: 0;
   }
 
+  .solo-alert-container {
+    display: flex;
+    align-items: center;
+    margin: 0.8rem 0 0.75rem -0.1rem;
+    width: 24rem;
+
+    .alert--neutral {
+      color: var(--neutral);
+      font-size: 0.8rem;
+      margin-bottom: 0.1rem;
+    }
+
+    .alert-icon {
+      margin-right: 0.2rem;
+      flex-shrink: 0;
+    }
+  }
 
   
 
