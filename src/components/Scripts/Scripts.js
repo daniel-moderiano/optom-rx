@@ -15,7 +15,7 @@ const Scripts = () => {
       {scripts && 
         <div className="Scripts__container">
           {scripts.length > 0 ? (
-            <Table data={scripts} rowsPerPage={5}/>
+            <Table data={scripts} rowsPerPage={20}/>
           ) : (
             <div className='Scripts__none'>No scripts written yet</div>
           )}

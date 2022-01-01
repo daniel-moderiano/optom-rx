@@ -82,7 +82,7 @@ const StyledDrugAutocomplete = styled.fieldset`
   .brandOnly-container {
     display: flex;
     align-items: center;
-    width: 24rem;
+    width: 18rem;
     
     /* Tooltip container */
     .tooltip {

@@ -107,6 +107,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
     state: '',
     medicareNumber: '',
     medicareRefNumber: '',
+    noMedicare: false,
     ...existingData.patientData,
   });
 
@@ -993,14 +994,25 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
       }
     });
 
-    requiredFields.patient.forEach((field) => {
-      const input = patientForm.querySelector(`[name="${field}"]`);
 
-      if (input.value.trim().length === 0) {
-        valid = false;
-        negativeInlineValidation(setPatientAlerts, 'This field cannot be left blank', input);
-      }
+    // Validation is conditional upon whether medicare details were intended to be included by the user or not
+    requiredFields.patient.forEach((field) => {
+      if (patientData.noMedicare && field === 'medicareNumber') {
+        // Do not validate
+      } else if (patientData.noMedicare && field === 'medicareRefNumber') {
+        // Do not validate
+      } else {
+        // Validate as normal
+        const input = patientForm.querySelector(`[name="${field}"]`);
+
+        if (input.value.trim().length === 0) {
+          valid = false;
+          negativeInlineValidation(setPatientAlerts, 'This field cannot be left blank', input);
+        }
+      }      
     });
+    
+    
 
     // Provider form should only be validated on submission if the form is visible (i.e. the user is editing or using the locum provider feature)
     if (showProviderForm) {
@@ -1025,6 +1037,11 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
       if(!validateFieldForEmpty(setDrugAlerts, document.querySelector('#brandName'))) {
         valid = false;
       }
+    }
+
+    // Consider a modal warning here if the user attempts to prescribe a PBS script with no Medicare?
+    if (drugData.pbsRx && patientData.noMedicare) {
+      console.log('Sure you wanna leave out the medicare details bud?')
     }
 
     return valid;
@@ -1190,6 +1207,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
         />
 
         {/* Fieldset may be more appropriate here? */}
+        {!patientData.noMedicare &&
         <div className="medicareFields">
           {/* Validation requires a 10-digit number. Further checks are beyond the scopy of this application */}
           <FormField 
@@ -1215,7 +1233,21 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
             maxlength="1"
             className="irn-field medicare-field form-field"
           />
-        </div>     
+        </div>
+        }     
+
+        <FormField 
+          fieldType="checkbox" 
+          name="noMedicare"
+          label="Do not include Medicare details" 
+          onChange={() => toggleBooleanState(setPatientData, patientData, 'noMedicare')}
+          checked={patientData.noMedicare}
+          className="checkbox noMedicare"
+          // alert={drugAlerts.pbsRx}
+          enterFunc={(event) => changeOnEnter(event, setPatientData, patientData)}
+        />  
+
+        
       </Fieldset>
 
       {/* Note there must be enough info to identify the medicine, including form and strength */}
