@@ -22,6 +22,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
 
   const [{ pbsInfo, pbsError, pbsLoading }, fetchDrug, clearPbsState] = usePBSFetch(existingData.pbsData);
   const [newProvider, setNewProvider] = useState(false);
+  const [authorityMessage, setAuthorityMessage] = useState('Please select a medication for authority requirements')
 
   const [indication, setIndication] = useState('');
   const [expandIndication, setExpandIndication] = useState(false);
@@ -368,20 +369,11 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
           }));
         }
       } else {
-        // clearPbsInfo();
-        // Where authority is not required, consider ommitting all messages since it will advise there are no restrictions above
         setDrugData((prevData) => ({
           ...prevData,
           authRequired: false,
         }));
-
-        // setMiscAlerts((prevAlerts) => ({
-        //   ...prevAlerts,
-        //   authCode: {
-        //     message: 'This medication does not require authority',
-        //     type: 'success',
-        //   }
-        // }));
+        setAuthorityMessage('This prescription does not require authority');
       }
     }
 
@@ -392,13 +384,19 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
       setDrugAlerts((prevAlerts) => ({
         ...prevAlerts,
         pbsRx: {
-          message: 'Unable to verify drug information on PBS, please select a drug from the dropdown list',
-          type: 'error',
+          message: 'Select a medication from the dropdown list for PBS information',
+          type: 'neutral',
         }
       }));
-    } 
+      // Only bother with an authority message to select a dropdown medication IF the user is trying to prescribe on PBS
+      if (drugData.pbsRx) {
+        setAuthorityMessage('Select a medication from the dropdown list for authority information');
+      } else {
+        setAuthorityMessage('This prescription does not require authority');
+      }
+    }
 
-  }, [pbsInfo, drugData.verified, clearPbsInfo, clearPbsState]);
+  }, [pbsInfo, drugData.verified, clearPbsInfo, clearPbsState, drugData.pbsRx]);
 
   // Identify whether a drug on the PBS is restricted or not, and display indications for use on restricted items
   const restrictedStatus = useCallback(() => {
@@ -421,7 +419,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
             indications: pbsInfo.indications.description,
           }));
           formatIndications(pbsInfo.indications.description);
-          console.log(formatIndications(pbsInfo.indications.description));
+          // setAuthorityMessage('This prescription does not require authority');
           break;
 
         case 'U':
@@ -437,6 +435,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
             ...prevData,
             indications:'',
           }));
+          // setAuthorityMessage('This prescription does not require authority');
           break;
       
         // All 'A' class items are also restricted with indications or Treatment criteria
@@ -453,6 +452,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
             indications: pbsInfo.indications.description,
           }));
           formatIndications(pbsInfo.indications.description);
+
           break;
 
         default:
@@ -477,12 +477,18 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
       setDrugAlerts((prevAlerts) => ({
         ...prevAlerts,
         pbsRx: {
-          message: 'Unable to verify drug information on PBS, please select a drug from the dropdown list',
-          type: 'error',
+          message: 'Select a medication from the dropdown list for PBS information',
+          type: 'neutral',
         }
       }));
+      // Only bother with an authority message to select a dropdown medication IF the user is trying to prescribe on PBS
+      if (drugData.pbsRx) {
+        setAuthorityMessage('Select a medication from the dropdown list for authority information');
+      } else {
+        setAuthorityMessage('This prescription does not require authority');
+      }
     } 
-  }, [pbsInfo, drugData.verified, clearPbsInfo, clearPbsState]);
+  }, [pbsInfo, drugData.verified, clearPbsInfo, clearPbsState, drugData.pbsRx]);
 
   const quantityRepeatStatus = useCallback(() => {
 
@@ -503,13 +509,18 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
       setDrugAlerts((prevAlerts) => ({
         ...prevAlerts,
         pbsRx: {
-          message: 'Unable to verify drug information on PBS, please select a drug from the dropdown list',
-          type: 'error',
+          message: 'Select a medication from the dropdown list for PBS information',
+          type: 'neutral',
         }
       }));
+      if (drugData.pbsRx) {
+        setAuthorityMessage('Select a medication from the dropdown list for authority information');
+      } else {
+        setAuthorityMessage('This prescription does not require authority');
+      }
     } 
 
-  }, [pbsInfo, drugData.verified, clearPbsInfo, clearPbsState]);
+  }, [pbsInfo, drugData.verified, clearPbsInfo, clearPbsState, drugData.pbsRx]);
 
   // Identify whether a drug on the PBS is restricted or not, and display indications for use on restricted items
   const lemiStatus = useCallback(() => {
@@ -1316,13 +1327,14 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
             alert={miscAlerts.authCode}
           />
           </> : (
+            // Add additional conditionals to specialise alert message
             <div className="solo-alert-container"> 
               <svg xmlns="http://www.w3.org/2000/svg" className="alert-icon alert-icon--neutral" viewBox="0 0 512 512" width="17px">
                 <path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" fill="none" stroke="#014083" strokeMiterlimit="10" strokeWidth="32"/>
                 <path d="M250.26 166.05L256 288l5.73-121.95a5.74 5.74 0 00-5.79-6h0a5.74 5.74 0 00-5.68 6z" fill="none" stroke="#014083" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32"/>
                 <path d="M256 367.91a20 20 0 1120-20 20 20 0 01-20 20z" fill="#014083"/>
               </svg>
-              <span className={`alert alert--neutral`}>Awaiting medication selection</span>
+              <span className={`alert alert--neutral`}>{authorityMessage}</span>
             </div>
           )
         }
