@@ -112,9 +112,8 @@ const StyledDrugAutocomplete = styled.fieldset`
         position: absolute;
         z-index: 1;
         left: 125%;
-        margin-top: -0.1rem;
-        height: 10rem;
-        top: -4rem;
+        top: 50%;
+        transform: translateY(-50%);
 
         /* Fade in tooltip */
         /* opacity: 0; */
