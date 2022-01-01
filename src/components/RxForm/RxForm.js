@@ -1234,33 +1234,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
         />
 
         <FormField 
-          fieldType="number" 
-          name="quantity"
-          label="Quantity" 
-          value={drugData.quantity} 
-          onChange={(event) => handleChange(setDrugData, event)} 
-          alert={drugAlerts.quantity}
-          subAlert={drugAlerts.maxQuantity}
-          className="quantity-field form-field"
-        />
-
-        <FormField 
-          fieldType="number" 
-          name="repeats"
-          label="Repeats" 
-          value={drugData.repeats} 
-          onChange={(event) => handleChange(setDrugData, event)} 
-          alert={drugAlerts.repeats}
-          subAlert={drugAlerts.maxRepeats}
-          className="repeats-field form-field"
-        /> 
-
-      </Fieldset>
-
-      {/* Note there must be enough info to identify the medicine, including form and strength */}
-      <Fieldset className="misc-form" legend="PBS Details">
-
-        <FormField 
           fieldType="checkbox" 
           name="pbsRx"
           label="PBS prescription" 
@@ -1286,8 +1259,38 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
               }}>Indications for use:</button></div>
             <div className={`indications__content ${expandIndication ? 'expand' : 'collapse' }`} dangerouslySetInnerHTML={{ __html: indication }}></div>    
           </div>
-          
-        }        
+        }  
+
+        <FormField 
+          fieldType="number" 
+          name="quantity"
+          label="Quantity" 
+          value={drugData.quantity} 
+          onChange={(event) => handleChange(setDrugData, event)} 
+          alert={drugAlerts.quantity}
+          subAlert={drugAlerts.maxQuantity}
+          className="quantity-field form-field"
+        />
+
+        <FormField 
+          fieldType="number" 
+          name="repeats"
+          label="Repeats" 
+          value={drugData.repeats} 
+          onChange={(event) => handleChange(setDrugData, event)} 
+          alert={drugAlerts.repeats}
+          subAlert={drugAlerts.maxRepeats}
+          className="repeats-field form-field"
+        /> 
+
+      </Fieldset>
+
+      {/* Note there must be enough info to identify the medicine, including form and strength */}
+      <Fieldset className="misc-form" legend="Authority Details">
+
+       
+
+              
         
         <FormField 
           fieldType="checkbox" 

@@ -178,7 +178,7 @@ const StyledRxForm = styled.form`
   }
 
   .authRequired {
-    margin: 0 0 0.5em 0;
+    margin: 0.85rem 0 1rem 0;
   }
 
   .authRxNo {
