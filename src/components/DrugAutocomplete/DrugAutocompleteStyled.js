@@ -101,13 +101,13 @@ const StyledDrugAutocomplete = styled.fieldset`
       }
 
       .tooltip-text {
-        /* visibility: hidden; */
-        width: 18rem;
+        visibility: hidden;
+        width: 15.5rem;
         background-color: #3D3D3D;
         color: #fff;
         text-align: left;
         font-size: 0.9rem;
-        padding: 0.7rem 1rem 1rem 1rem;
+        padding: 0.6rem 0.75rem 0.75rem 0.9rem;
         border-radius: 6px;
         position: absolute;
         z-index: 1;
@@ -116,7 +116,7 @@ const StyledDrugAutocomplete = styled.fieldset`
         transform: translateY(-50%);
 
         /* Fade in tooltip */
-        /* opacity: 0; */
+        opacity: 0;
         transition: opacity 0.3s;
 
         a {

@@ -533,7 +533,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
           ...prevData,
           brandOnly: true,
         }));
-        setTooltipText(`<span>This item is included on the <a target="_blank" href="https://www.safetyandquality.gov.au/publications-and-resources/resource-library/list-excluded-medicinal-items-lemi">List of Excluded Medicinal Items (LEMI)</a> and should be prescribed by brand name only for practical and safety reasons</span>`);
+        setTooltipText(`<span>This item is included on the <a target="_blank" href="https://www.safetyandquality.gov.au/publications-and-resources/resource-library/list-excluded-medicinal-items-lemi">List of Excluded Medicinal Items (LEMI)</a>, and should be prescribed by brand name only for practical and safety reasons</span>`);
       } else if (pbsInfo['lmbc']) {
         // Medicine is recommended to have brand name included
         setDrugData((prevData) => ({

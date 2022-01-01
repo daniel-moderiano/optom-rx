@@ -270,12 +270,6 @@ const StyledRxForm = styled.form`
       margin: 0;
       padding: 0;
       background-color: transparent;
-      
-
-      &:hover {
-        
-        text-decoration: underline;
-      }
 
       &:focus {
         outline: 2px solid #a360ac;
