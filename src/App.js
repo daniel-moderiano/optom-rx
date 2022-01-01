@@ -54,7 +54,8 @@ const App = () => {
       "postcode":"5127",
       "state":"SA",
       "medicareNumber":"5151515151",
-      "medicareRefNumber":"3"
+      "medicareRefNumber":"3",
+      noMedicare: false,
     },
     providerData: {},
     miscData: {

@@ -142,10 +142,13 @@ const RxTemplate = ({ data, setToast }) => {
                 <div className="ui-patient__addressLine2">{`${patientData.suburb} ${patientData.state} ${patientData.postcode}`}</div>
               </div>
 
-              <div className="ui-info ui-medicare">
-                <div className="ui-patient__medicareNumber">Medicare number: {`${patientData.medicareNumber.substring(0, 4)} ${patientData.medicareNumber.substring(4, 9)} ${patientData.medicareNumber.substring(9, 10)}-${patientData.medicareRefNumber}`}
+              {!patientData.noMedicare && 
+                <div className="ui-info ui-medicare">
+                  <div className="ui-patient__medicareNumber">Medicare number: {`${patientData.medicareNumber.substring(0, 4)} ${patientData.medicareNumber.substring(4, 9)} ${patientData.medicareNumber.substring(9, 10)}-${patientData.medicareRefNumber}`}
+                  </div>
                 </div>
-              </div>
+              }
+              
           </section>
 
            {/* Script ID or authority Rx number should go above the medication once finalised, and perhaps with a border bottom */}
@@ -206,9 +209,12 @@ const RxTemplate = ({ data, setToast }) => {
           <section className="patient">
             <h4 className="patient__title">Patient</h4>
             <div className="container">
-              <div className="patient__medicareNumber">
-                {`${patientData.medicareNumber.substring(0, 4)} ${patientData.medicareNumber.substring(4, 9)} ${patientData.medicareNumber.substring(9, 10)}-${patientData.medicareRefNumber}`}
-              </div>
+              {!patientData.noMedicare && 
+                <div className="patient__medicareNumber">
+                  {`${patientData.medicareNumber.substring(0, 4)} ${patientData.medicareNumber.substring(4, 9)} ${patientData.medicareNumber.substring(9, 10)}-${patientData.medicareRefNumber}`}
+                </div>
+              }
+              
               <div className="patient__contactDetails">
                 <div className="patient__fullName">{patientData.fullName}</div>
                 <div className="patient__streetAddress">{`${patientData.subpremise} ${patientData.streetAddress}`}</div>
@@ -282,9 +288,13 @@ const RxTemplate = ({ data, setToast }) => {
 
           <section className="patient">
             <div className="container">
-              <div className="patient__medicareNumber">
-                {`${patientData.medicareNumber.substring(0, 4)} ${patientData.medicareNumber.substring(4, 9)} ${patientData.medicareNumber.substring(9, 10)}-${patientData.medicareRefNumber}`}
-              </div>
+
+              {!patientData.noMedicare && 
+                <div className="patient__medicareNumber">
+                  {`${patientData.medicareNumber.substring(0, 4)} ${patientData.medicareNumber.substring(4, 9)} ${patientData.medicareNumber.substring(9, 10)}-${patientData.medicareRefNumber}`}
+                </div>
+              }
+              
               <div className="patient__contactDetails">
                 <div className="patient__fullName">{patientData.fullName}</div>
                 <div className="patient__streetAddress">{`${patientData.subpremise} ${patientData.streetAddress}`}</div>
