@@ -31,7 +31,6 @@ body {
   margin: 0;
   padding: 0;
   font-family: var(--font-stack-segoe);
-
 }
 
 .App {
@@ -42,6 +41,9 @@ body {
 }
 
 @media print {
+  .App {
+    background-color: white;
+  }
 
   * {
     margin: 0;

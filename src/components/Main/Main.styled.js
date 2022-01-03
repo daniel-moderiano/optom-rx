@@ -10,9 +10,10 @@ const StyledMain = styled.main`
   
 
   @media print {
+
     display: block;
     background-color: #fff;
-    width: auto;
+    width: 100%;
     height: auto;
   }
  
