@@ -21,9 +21,9 @@ const StyledFieldset = styled.fieldset`
     font-size: 1.6rem;
     font-family: var(--font-title);
     color: var(--title-color);
-    width: 16rem;
+    width: 19rem;
     flex-shrink: 0;
-    padding-left: 1rem;
+    padding-left: 2rem;
     margin-right: 0.5rem;
   }
 

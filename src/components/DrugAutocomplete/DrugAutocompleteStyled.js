@@ -10,7 +10,7 @@ const StyledDrugAutocomplete = styled.fieldset`
   .items-list {
     position: absolute;
     z-index: 10;
-    width: 150%;
+    width: 155%;
     font-size: 0.9rem;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
     border-radius: 2px;
@@ -83,17 +83,19 @@ const StyledDrugAutocomplete = styled.fieldset`
   .brandOnly-container {
     display: flex;
     align-items: center;
-    width: 18rem;
+    justify-content: space-between;
+    width: 26rem;
     
     /* Tooltip container */
     .tooltip {
       position: relative;
       display: inline-block;
+      line-height: 0;
 
       .question-icon {
         opacity: 0.5;
         width: 22px;
-        margin-top: 0.3rem;
+        /* margin-top: 0.3rem; */
       }
 
       .question-icon:hover {
@@ -114,7 +116,9 @@ const StyledDrugAutocomplete = styled.fieldset`
         z-index: 1;
         left: 125%;
         top: 50%;
+        margin-top: -0.05rem;
         transform: translateY(-50%);
+        line-height: normal;
 
         /* Fade in tooltip */
         opacity: 0;
