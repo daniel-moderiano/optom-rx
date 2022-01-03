@@ -14,7 +14,7 @@ const StyledDrugAutocomplete = styled.fieldset`
     font-size: 0.9rem;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
     border-radius: 2px;
-    max-height: 16rem;  // Use multiples of 2rem while the item height remains 2rem
+    /* max-height: 16rem;  // Use multiples of 2rem while the item height remains 2rem */
     overflow-y: hidden;  // Scroll or hidden, need to decide which is more appropriate
 
     .item {
@@ -26,7 +26,7 @@ const StyledDrugAutocomplete = styled.fieldset`
       overflow: hidden;
       border-top: 1px solid #e6e6e6;
       width: 100%;
-      height: 2rem;
+      /* height: 2rem; */
       text-align: left;
       line-height: 1.9rem;
     }
@@ -35,6 +35,7 @@ const StyledDrugAutocomplete = styled.fieldset`
       background-color: #e9e9e9;
       overflow: visible;
       white-space: normal;
+      color: black;
     }
 
     .active {

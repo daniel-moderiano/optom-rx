@@ -18,6 +18,8 @@ import Main from "./components/Main/Main";
 import Scripts from "./components/Scripts/Scripts";
 import ViewScript from "./components/ViewScript/ViewScript";
 
+// ! Medicare details are NOT required for valid Australian prescriptions, even under PBS
+
 const App = () => {
   // Can user the user state to conditionally render or redirect routes (logged in vs out for example)
   const { user, authIsReady } = useAuthContext();

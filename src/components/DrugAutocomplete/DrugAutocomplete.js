@@ -146,8 +146,16 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
     showItemsList();
 
     const itemsList = document.querySelector('.items-list');
-    // Append each list item from the source array of matches
-    matchArr.forEach((match) => {
+
+    // Limit the autocomplete list to a specified amount of items
+    const maxListItems = 6;
+ 
+    for (let i = 0; i < maxListItems; i++) {
+      if (i >= matchArr.length) {
+        break;
+      }
+
+      let match = matchArr[i];
       // Operation in template literal is capitalising first letter
       const boldActiveName = boldLetters(`${(match['tpuu-or-mpp-pt'][0].toUpperCase() + match['tpuu-or-mpp-pt'].substring(1))}`);
       const boldBrandName = boldLetters(`${match['brand-name']}`);
@@ -161,8 +169,26 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
       item.dataset.brandName = match['brand-name'];
       item.classList.add('item');
       item.classList.add('item-click');
-      itemsList.appendChild(item);     
-    }); 
+      itemsList.appendChild(item);  
+    }
+
+    // // Append each list item from the source array of matches
+    // matchArr.forEach((match) => {
+    //   // Operation in template literal is capitalising first letter
+    //   const boldActiveName = boldLetters(`${(match['tpuu-or-mpp-pt'][0].toUpperCase() + match['tpuu-or-mpp-pt'].substring(1))}`);
+    //   const boldBrandName = boldLetters(`${match['brand-name']}`);
+
+    //   const item = document.createElement('div');
+    //   // Using spans will allow alternate styling of active ingredient and brand name if desired
+    //   item.innerHTML = `<span class="item-active item-click">${boldActiveName}</span> <span class="item-brand item-click">(${boldBrandName})</span>`;
+    //   // Add dataset information here to update state when the user selects an item
+    //   item.dataset.code = match['item-code'];
+    //   item.dataset.activeIngredient = match['tpuu-or-mpp-pt'];
+    //   item.dataset.brandName = match['brand-name'];
+    //   item.classList.add('item');
+    //   item.classList.add('item-click');
+    //   itemsList.appendChild(item);     
+    // }); 
   }, []);
 
   // Leave this dependency array empty to ensure this runs only once on first mount
@@ -307,10 +333,6 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
     }
 
     createList(matches);
-  }
-
-  const showInfoTooltip = (e) => {
-    console.log(typeof e.target.className);
   }
 
   return (
