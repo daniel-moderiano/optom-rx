@@ -6,6 +6,8 @@ const StyledMain = styled.main`
   flex-direction: column;
   align-items: center;
   background-color: var(--background);
+  width: 100%;
+  
 
   @media print {
     display: block;

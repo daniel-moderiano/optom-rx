@@ -6,8 +6,8 @@ const StyledRxForm = styled.form`
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  max-width: 880px;
-  width: 90%;
+  max-width: 1140px;
+  width: 100%;
   background-color: #fff;
   padding: 2rem 5.5rem;
   margin: 3rem 0;

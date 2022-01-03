@@ -7,7 +7,7 @@ const StyledHeader = styled.header`
   justify-content: space-between;
   padding: ${props => props.user ? '0 1.5rem' : '1rem 3rem 0 3rem'};
   margin: 0;
-  
+  width: 100%;
 
   h1 {
     margin: ${props => props.user ? '0.65rem 0 0 0' : '0.85rem 0 0 0'};
