@@ -8,34 +8,10 @@ import { db } from "../../firebase/config";
 import { Link } from "react-router-dom";
 import TableProviders from './TableProviders';
 
-const Providers = () => {
+const Providers = ({ setToast }) => {
   const { user } = useAuthContext();
   // This should be called using the curernt user ID to query the collection
-  const { documents: providers } = useCollection('providers', ['uid', '==', user.uid]);
-
-  // Update both the UI checkboxes and backend to ensure only one provider can be set default at any one time
-  const setAsDefault = async (currentProviders, provID) => {
-    // Cycle through all backend providers. Note this list is always going to be very small, typicall <5
-    for (let i = 0; i < currentProviders.length; i++) {
-      // Remove defaults
-      if (currentProviders[i].id !== provID) {
-        await updateDoc(doc(db, 'providers', currentProviders[i].id), {
-          default: false
-        })
-      } else {
-        // Add default
-        await updateDoc(doc(db, 'providers', currentProviders[i].id), {
-          default: true
-        })
-      }
-    }
-  };
-
-  const deleteProvider = async (provID) => {
-    await deleteDoc(doc(db, 'providers', provID));
-  };
-
-  
+  const { documents: providers } = useCollection('providers', ['uid', '==', user.uid]); 
 
   return (
     <StyledProviders className="Providers">
@@ -46,7 +22,7 @@ const Providers = () => {
       {providers && 
         <div className="Providers__list">
           {providers.length > 0 ? (
-            <TableProviders data={providers} rowsPerPage={10} />
+            <TableProviders data={providers} rowsPerPage={10} setToast={setToast}/>
           ) : (
             <div className='Providers__none'>No providers added yet</div>
           )}

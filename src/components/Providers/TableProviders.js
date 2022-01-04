@@ -11,7 +11,7 @@ import { db } from "../../firebase/config";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useCollection } from "../../hooks/useCollection";
 
-const TableProviders = ({ data, rowsPerPage }) => {
+const TableProviders = ({ data, rowsPerPage, setToast }) => {
   // Start on page 1
   const [page, setPage] = useState(1);
   // Gather the data slices for each page and the range of pages needed 
@@ -59,6 +59,13 @@ const TableProviders = ({ data, rowsPerPage }) => {
   // Delete providers using the provider ID (documetn ID in firestore)
   const deleteProvider = async (provID) => {
     await deleteDoc(doc(db, 'providers', provID));
+
+    setToast((prevData) => ({
+      ...prevData,
+      visible: true,
+      type: 'success',
+      message: 'Provider has been removed'
+    }));
   };
 
   const formatLocation = (practice, streetAddress, suburb) => {

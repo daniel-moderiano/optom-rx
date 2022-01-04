@@ -57,7 +57,7 @@ const EditProvider = ({ googleLoaded, setToast }) => {
       ...prevData,
       visible: true,
       type: 'success',
-      message: 'Saved changes!'
+      message: 'Provider details updated'
     }));
 
     navigate('/providers');
@@ -96,7 +96,7 @@ const EditProvider = ({ googleLoaded, setToast }) => {
           handleSubmit={handleSubmit}
           handleCancel={cancelEdit}
           toggleBooleanState={() => toggleBooleanState(setProviderData, providerData, 'prefix')}
-          submitBtn="Add provider"
+          submitBtn="Save changes"
           cancelBtn="Cancel"
         />
       </Fieldset>

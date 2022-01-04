@@ -82,7 +82,7 @@ const AddProvider = ({ googleLoaded, setToast }) => {
       ...prevData,
       visible: true,
       type: 'success',
-      message: 'Added successfully!'
+      message: 'New provider added'
     }));
 
 
