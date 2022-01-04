@@ -5,8 +5,8 @@ const StyledAddProvider = styled.div`
   background-color: #FFFFFF;
   box-shadow: 0 1.6px 3.6px 0 rgb(0 0 0 / 13%), 0 0.3px 0.9px 0 rgb(0 0 0 / 11%);
   padding: 2rem 5.5rem;
-  width: 90%;
-  max-width: 880px;
+  width: 100%;
+  max-width: 1140px;
 
   .AddProvider__title {
     font-family: var(--font-stack-myriad);
