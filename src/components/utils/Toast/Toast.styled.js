@@ -1,34 +1,27 @@
+// Toast design inspired by Jon Rundle's (Envoy) notification design @ https://dribbble.com/shots/9837444-Toast-Messages-v2
+
 import styled from "styled-components";
 
+// Currently styled as default select Toast. For styling of error or info toasts, the JS toast component with conditionally render different SVG icons
 const StyledToast = styled.div`
   position: fixed;
   bottom: ${props => props.visible ? '40px' : '0'};
   left: 0;
   right: 0;
   margin: auto;
-  max-width: 250px;
+  width: 20rem;
   visibility: ${props => props.visible ? 'visible' : 'hidden'};
   opacity: ${props => props.visible ? '1' : '0'};
   z-index: 10;
   padding: 0.4rem;
   text-align: center;
   border-radius: 5px;
-  box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 8px 16px 0px;
   transition: opacity 0.2s, bottom 0.2s, visibility 0.2s;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: var(--font-stack-segoe);
-
-  ${props => props.type === 'success' && `
-    background-color: #fff;
-  `}
-
-  ${props => props.type === 'error' && `
-    background-color: rgb(182, 51, 46);
-    color: var(--light);
-    border: 1px solid #9e2e2e;
-  `}
 
   .toast-container {
     width: 100%;
@@ -41,11 +34,11 @@ const StyledToast = styled.div`
       height: 100%;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      width: 3.2rem;
+      margin-right: 1.25rem;
 
       .line {
         height: 60px;
+        margin-right: 1.1rem;
       }
 
       .toast-icon {
@@ -55,6 +48,7 @@ const StyledToast = styled.div`
 
     .toast-text {
       text-align: left;
+      width: 100%;
 
       .toast-title {
         margin: 0;
