@@ -10,6 +10,7 @@ import { doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useCollection } from "../../hooks/useCollection";
+import { useEffect } from "react";
 
 const TableProviders = ({ data, rowsPerPage }) => {
   // Start on page 1
@@ -23,27 +24,52 @@ const TableProviders = ({ data, rowsPerPage }) => {
 
   // Update both the UI checkboxes and backend to ensure only one provider can be set default at any one time
   const setAsDefault = async (currentProviders, provID) => {
-    // Cycle through all backend providers. Note this list is always going to be very small, typicall <5
+    let prevDefault = null;
+
+    // Remove the current default and record which provider this was
     for (let i = 0; i < currentProviders.length; i++) {
-      // Remove defaults
-      if (currentProviders[i].id !== provID) {
+      // Identify the current default provider
+      if (currentProviders[i].default) {
+        prevDefault = currentProviders[i].id;
+        // In any case, remove the current default user
         await updateDoc(doc(db, 'providers', currentProviders[i].id), {
           default: false
-        })
-      } else {
-        // Add default
-        await updateDoc(doc(db, 'providers', currentProviders[i].id), {
-          default: true
-        })
-      }
+        }); 
+        break;
+      }       
+    }
+
+    if (!prevDefault) {
+      console.log('No default previously set');
+    } else {
+      console.log(`Previous default was ${prevDefault}`);
+    }
+
+    for (let i = 0; i < currentProviders.length; i++) {
+      // When reaching the provider that the user click on
+      if (currentProviders[i].id === provID) {
+        console.log(`Reached clicked provider at ${currentProviders[i].id}`);
+        console.log(provID === prevDefault);
+        // Check that this is not the previous default
+        if (provID !== prevDefault) {
+          console.log('User is clicking a new provider');
+          // And update defaults if so, ending the loop here
+          await updateDoc(doc(db, 'providers', currentProviders[i].id), {
+            default: true
+          }); 
+          break;
+        } else {
+          // Do not reset any defaults and end the loop here
+          break;
+        }
+      } 
     }
   };
 
+  // Delete providers using the provider ID (documetn ID in firestore)
   const deleteProvider = async (provID) => {
     await deleteDoc(doc(db, 'providers', provID));
   };
-
-  
 
   const formatLocation = (practice, streetAddress, suburb) => {
     if (practice === "") {

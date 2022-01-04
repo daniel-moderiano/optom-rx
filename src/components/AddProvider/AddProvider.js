@@ -1,5 +1,5 @@
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import { addDoc, collection } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
+import { addDoc, collection, doc, updateDoc, arrayUnion } from "firebase/firestore";
 import { useState } from "react";
 import { db } from "../../firebase/config";
 import ProviderForm from "../ProviderForm/ProviderForm";
@@ -54,6 +54,13 @@ const AddProvider = ({ googleLoaded, setToast }) => {
     await addDoc(collection(db, 'providers'), {
       ...providerData,
       uid: user.uid,
+    });
+
+    // Add script data to the current user's saved scripts
+    await updateDoc(doc(db, 'users', user.uid), {
+      providers: arrayUnion({
+        ...providerData,
+      })
     });
 
     // Reset form both via state update and removal of UI classes (success classes)
