@@ -10,7 +10,6 @@ import { doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useCollection } from "../../hooks/useCollection";
-import { useEffect } from "react";
 
 const TableProviders = ({ data, rowsPerPage }) => {
   // Start on page 1
@@ -39,20 +38,11 @@ const TableProviders = ({ data, rowsPerPage }) => {
       }       
     }
 
-    if (!prevDefault) {
-      console.log('No default previously set');
-    } else {
-      console.log(`Previous default was ${prevDefault}`);
-    }
-
     for (let i = 0; i < currentProviders.length; i++) {
       // When reaching the provider that the user click on
       if (currentProviders[i].id === provID) {
-        console.log(`Reached clicked provider at ${currentProviders[i].id}`);
-        console.log(provID === prevDefault);
         // Check that this is not the previous default
         if (provID !== prevDefault) {
-          console.log('User is clicking a new provider');
           // And update defaults if so, ending the loop here
           await updateDoc(doc(db, 'providers', currentProviders[i].id), {
             default: true
@@ -87,7 +77,7 @@ const TableProviders = ({ data, rowsPerPage }) => {
           <tr>
             <th className="tableHeader">Name</th>
             <th className="tableHeader">Location</th>
-            <th className="tableHeader default-header">Set default</th>
+            {/* <th className="tableHeader default-header">Set default</th> */}
             <th className="tableHeader actions-header">Actions</th>
           </tr>
         </thead>
@@ -97,7 +87,7 @@ const TableProviders = ({ data, rowsPerPage }) => {
             <tr className="tableRowItems" key={provider.id}>
               <td className="tableCell">{provider.fullName}</td>
               <td className="tableCell">{formatLocation(provider.practiceName, provider.streetAddress, provider.suburb)}</td>
-              <td className="tableCell">
+              {/* <td className="tableCell">
                 <FormField 
                   fieldType="checkbox" 
                   name="defaultProvider"
@@ -105,10 +95,12 @@ const TableProviders = ({ data, rowsPerPage }) => {
                   checked={provider.default}
                   className="checkbox defaultProvider"
                 /> 
-              </td >
+              </td > */}
               <td className="tableCell actions-cell">
+                
                 <Link className="table__action edit" to={`/edit/${provider.id}`}>Edit</Link>
                 <button className="table__action delete" onClick={() => deleteProvider(provider.id)}>Delete</button>
+                <button className={`${provider.default ? 'table__action default--selected' : 'table__action default'}`} onClick={() => setAsDefault(providers, provider.id)}>{`${provider.default ? 'Remove default' : 'Make default'}`}</button>
               </td>
             </tr>
           ))}

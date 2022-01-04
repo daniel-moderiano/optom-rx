@@ -46,7 +46,7 @@ const Providers = () => {
       {providers && 
         <div className="Providers__list">
           {providers.length > 0 ? (
-            <TableProviders data={providers} rowsPerPage={5} />
+            <TableProviders data={providers} rowsPerPage={10} />
           ) : (
             <div className='Providers__none'>No providers added yet</div>
           )}

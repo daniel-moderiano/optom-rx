@@ -49,6 +49,31 @@ const StyledTableProviders = styled.table`
       padding: 2px 8px 5px 8px;
       border-radius: 2px;
       background-color: #fff;
+      box-sizing: border-box;
+    }
+
+    .default {
+      color: var(--neutral);
+      border: 0.1rem solid #4a7188; 
+      width: 7.1rem;
+      
+      &:hover {
+        background-color: #f8fafa;
+        border: 0.1rem solid var(--neutral);
+      }
+    }
+
+    .default--selected {
+      width: 7.1rem;
+      color: #fff;
+      border: 0.1rem solid #185F8C; 
+      background-color: #185F8C;
+      
+      
+      &:hover {
+        border: 0.1rem solid #185F8C; 
+        background-color: #15567E;
+      }
     }
 
     .edit {
@@ -66,6 +91,7 @@ const StyledTableProviders = styled.table`
     .delete {
       border: 0.1rem solid var(--btn-negative); 
       color: var(--btn-negative);
+      margin-right: 0.8rem;
 
       &:hover {
         background-color: var(--btn-negative-hover);
