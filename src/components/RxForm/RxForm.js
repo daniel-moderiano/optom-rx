@@ -1294,12 +1294,14 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
               (event) => {
                 event.preventDefault(); 
                 setExpandIndication((prevState) => !prevState);
-              }}><button onClick={
+              }}>
+                <button type="button" onClick={
               (event) => {
                 event.preventDefault(); 
                 event.stopPropagation();
                 setExpandIndication((prevState) => !prevState);
-              }}>Indications for use:</button></div>
+              }}>Indications for use:</button>
+            </div>
             <div className={`indications__content ${expandIndication ? 'expand' : 'collapse' }`} dangerouslySetInnerHTML={{ __html: indication }}></div>    
           </div>
         }  
