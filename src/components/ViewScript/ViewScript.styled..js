@@ -31,8 +31,12 @@ const StyledViewScript = styled.div`
   }
 
   .ProviderForm__btns {
-    place-self: flex-end;
+    /* place-self: flex-end; */
     margin: 2.5rem 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
 
     .ProviderForm__btn {
       font-size: 1rem;
