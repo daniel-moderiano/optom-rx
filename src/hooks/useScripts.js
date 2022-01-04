@@ -15,19 +15,11 @@ export const useScripts = (userId) => {
     // The user will never be able to add a script while viewing current scripts unless they are using multiple devices, which is an unrealistic use case. Hence a single getDoc function will suffice
     const fetchScripts = async () => {
       const docSnap = await getDoc(ref);
-      // Array to take script data
-      const results = [];
 
       // Get the array of script IDs for this user. Reverse the array to get most recent scripts first
-      const scriptIDs = (docSnap.data().scripts).reverse();
-      
-      // Iterate through each scriptID and fetch the associated script data
-      for (let i = 0; i < scriptIDs.length; i++) {
-        const scriptData = await getDoc(doc(db, 'scripts', scriptIDs[i]));
-        results.push(scriptData.data());
-      }
+      const scriptData = (docSnap.data().scripts).reverse();
 
-      setScripts(results);
+      setScripts(scriptData);
     }
 
     fetchScripts();

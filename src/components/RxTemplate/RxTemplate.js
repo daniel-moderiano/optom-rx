@@ -94,9 +94,13 @@ const RxTemplate = ({ data, setToast }) => {
       favourite: false,
     });
 
-    // Add script number to the current user's saved scripts
+    // Add script data to the current user's saved scripts
     await updateDoc(doc(db, 'users', user.uid), {
-      scripts: arrayUnion(data.miscData.scriptID)
+      scripts: arrayUnion({
+        ...data.drugData,
+        ...data.miscData,
+        favourite: false,
+      })
     });
 
     setToast((prevData) => ({

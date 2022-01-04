@@ -54,7 +54,7 @@ const StyledToast = styled.div`
         margin: 0;
         padding: 0;
         font-weight: bold;
-        font-size: 1.1rem;
+        font-size: 1.05rem;
         color: #292E34;
       }
 
