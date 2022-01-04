@@ -41,6 +41,7 @@ const StyledTableProviders = styled.table`
 
   
     .table__action {
+      /* margin-right: -2rem; */
       font-size: 0.85rem;
       font-family: var(--font-stack-segoe);
       box-sizing: border-box;
@@ -66,13 +67,13 @@ const StyledTableProviders = styled.table`
     .default--selected {
       width: 7.1rem;
       color: #fff;
-      border: 0.1rem solid #185F8C; 
-      background-color: #185F8C;
+      border: 0.1rem solid #1A6899; 
+      background-color: #1A6899;
       
       
       &:hover {
-        border: 0.1rem solid #185F8C; 
-        background-color: #15567E;
+        border: 0.1rem solid #1A6899; 
+        background-color: #185F8C;
       }
     }
 
