@@ -54,6 +54,13 @@ const TableProviders = ({ data, rowsPerPage, setToast }) => {
         }
       } 
     }
+
+    setToast((prevData) => ({
+      ...prevData,
+      visible: true,
+      type: 'success',
+      message: 'Provider defaults updated'
+    }));
   };
 
   // Delete providers using the provider ID (documetn ID in firestore)
