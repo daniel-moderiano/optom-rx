@@ -3,6 +3,7 @@ import { StyledToast } from "./Toast.styled";
 
 const Toast = ({ params }) => {
   // params.type should be a conditional for switching out success icons for error or info icons
+  // params.visible = true;
   return (
     <StyledToast className="toast" visible={params.visible}>
       <div className="toast-container">

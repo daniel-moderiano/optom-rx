@@ -2,9 +2,6 @@
 import { useCollection } from '../../hooks/useCollection';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { StyledProviders } from "./Providers.styled";
-import FormField from "../FormField/FormField";
-import { doc, updateDoc, deleteDoc } from "firebase/firestore";
-import { db } from "../../firebase/config";
 import { Link } from "react-router-dom";
 import TableProviders from './TableProviders';
 

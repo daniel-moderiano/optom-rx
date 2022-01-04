@@ -5,7 +5,6 @@ import useTable from "../../hooks/useTable";
 import TableFooter from "../utils/TableFooter/TableFooter";
 import { Link } from "react-router-dom";
 import { StyledTableProviders } from "./TableProviders.styled";
-import FormField from "../FormField/FormField";
 import { doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import { useAuthContext } from "../../hooks/useAuthContext";

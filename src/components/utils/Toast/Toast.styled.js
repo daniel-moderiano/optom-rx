@@ -22,6 +22,7 @@ const StyledToast = styled.div`
   align-items: center;
   justify-content: center;
   font-family: var(--font-stack-segoe);
+  background-color: #fff;
 
   .toast-container {
     width: 100%;
