@@ -94,7 +94,7 @@ const RxTemplate = ({ data, setToast }) => {
       favourite: false,
     });
 
-    // Add script data to the current user's saved scripts
+    // Add script data to the current user's saved scripts. This operation should only be called once per script!
     await updateDoc(doc(db, 'users', user.uid), {
       scripts: arrayUnion({
         ...data.drugData,
@@ -407,26 +407,34 @@ const RxTemplate = ({ data, setToast }) => {
             <span className="item-printed">1 item printed</span>
           </section>
 
-          {drugData.authRequired && <section className="authority">
+          {drugData.authRequired && (<>
+          <section className="authority">
             <div className="authority__approvalCode">{`Authority Approval No: ${miscData.authCode}`}</div>
             <div className="extra-details">
               <div className="prev-auth">{`Patient has received authority for this medicine before: ${miscData.prevAuth ? 'Yes' : 'No'}`}</div>
               {(miscData.age !== "") && <div className="patient-age">Patient's age: {miscData.age}</div>}
             </div>
             
-          </section>}
+          </section>
           <div className="indication">Clinical justification for use of item: {miscData.justification}</div>
+          </>)}
         </div>
 
         <div className="RxTemplate__btns">
-          <Link className="RxTemplate__btn btn-editRx" to="/form">Make changes</Link>
-          <button 
-            className="RxTemplate__btn btn-print" 
-            onClick={() => {
-              saveRx();
-              window.print();
-            }}>
-          Save and Print</button>
+          <button className="RxTemplate__btn btn-print" onClick={() => {window.print()}}>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+              <title>Print</title> 
+              <path d="M384 368h24a40.12 40.12 0 0040-40V168a40.12 40.12 0 00-40-40H104a40.12 40.12 0 00-40 40v160a40.12 40.12 0 0040 40h24" fill="none" stroke="currentColor" strokeLinejoin="round" strokeWidth="32"/>
+              <rect x="128" y="240" width="256" height="208" rx="24.32" ry="24.32" fill="none" stroke="currentColor" strokeLinejoin="round" strokeWidth="32"/>
+              <path d="M384 128v-24a40.12 40.12 0 00-40-40H168a40.12 40.12 0 00-40 40v24" fill="none" stroke="currentColor" strokeLinejoin="round" strokeWidth="32"/>
+              <circle cx="392" cy="184" r="24" fill="#fff"/>
+            </svg>
+            Print
+          </button>
+          <Link className="RxTemplate__btn btn-finish" to="/" onClick={saveRx}>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><title>Save</title><path d="M380.93 57.37A32 32 0 00358.3 48H94.22A46.21 46.21 0 0048 94.22v323.56A46.21 46.21 0 0094.22 464h323.56A46.36 46.36 0 00464 417.78V153.7a32 32 0 00-9.37-22.63zM256 416a64 64 0 1164-64 63.92 63.92 0 01-64 64zm48-224H112a16 16 0 01-16-16v-64a16 16 0 0116-16h192a16 16 0 0116 16v64a16 16 0 01-16 16z" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32"/></svg>
+            Save and Finish
+          </Link>
         </div>
       </> : <h3 className="RxTemplate__subtitle">Fill out the form to generate Rx</h3>}
       

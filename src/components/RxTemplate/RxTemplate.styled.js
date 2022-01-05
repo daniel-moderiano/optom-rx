@@ -84,11 +84,19 @@ const StyledRxTemplate = styled.div`
 
 
   .RxTemplate__btns {
-    place-self: flex-end;
+
     margin: 2rem 0 2rem 0;
     display: flex;
+    /* justify-content: flex-end; */
+    /* width: 100%; */
+
+    .primary-btns {
+      display: flex;
+    }
 
     .RxTemplate__btn {
+      display: flex;
+      align-items: center;
       font-size: 1rem;
       font-family: var(--font-stack-segoe);
       box-sizing: border-box;
@@ -96,35 +104,45 @@ const StyledRxTemplate = styled.div`
       padding: 8px 16px 10px 16px;
       border-radius: 2px;
 
+      svg {
+        width: 20px;
+        margin-right: 0.5rem;
+        margin-top: 0.2rem;
+      }
+
       &:active {
         transform: scale(0.98);
       }
     }
 
-    .btn-print {
+    .btn-finish, .btn-print {
       min-width: 80px;
       background-color: var(--primary-color);
       color: rgb(255, 255, 255);
+      /* background-color: #fff;
+      color: var(--primary-color);
+      border: 0.1rem solid var(--primary-color); */
       border: none;
-      margin-left: 1.5rem;
+      margin-right: 1.5rem;
       text-decoration: none;       
     }
     
-    .btn-print:hover {
+    .btn-finish:hover, .btn-print:hover {
       background-color: var(--btn-primary-hover);
     }
-          
-    .btn-editRx {
+/*           
+    .btn-print {
       display: block;
       text-decoration: none;
       background-color: var(--btn-secondary);
       color: var(--btn-secondary-text);
       border: none;            
     }
-    .btn-editRx:hover {
+
+    .btn-print:hover {
       background-color: var(--btn-secondary-hover);
       color: #21252A;
-    }
+    } */
   }
 
   .right-container, .left-container, .bottom-container {

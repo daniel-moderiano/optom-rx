@@ -1158,22 +1158,14 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
               placeholder="Select provider..."
               id="react-select"
             /> 
-
-            {/* <div className="add-new-provider">
-              <span>or</span>
-              <button className="provider-addBtn" onClick={(event) => addNewProviderInline(event)}> Add new provider</button>
-            </div> */}
           </>
         }
 
         {(!newProvider && selectOptions.length) === 0 && 
           <Link className="provider-addBtn provider-addBtn--solo" to="/add-provider">Add new provider</Link>
         }
-        
         </div>
-        
-   
-        
+      
 
         {showProviderForm && 
           <ProviderForm 
@@ -1194,7 +1186,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
 
       <Fieldset className="patient-form" legend="Patient Details">
       {/* Legal requirements include only the patient's name and address */}
-      {/* Patient Medicare number is however required for ALL PBS Rx, and should be included in general so that the patient may claim under PBS where this price is cheaper. All Aus are valid private prescriptions however. */}
 
         {/* A max length for these fields based on the physical space available on the Rx pad is possible, however there should be virtually no cases where this is a problem. If anything, a warning alert could be added for fields such as full name, and street address/suburb where the char length exceeds 40 */}
         <FormField 
@@ -1431,8 +1422,9 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
       </Fieldset>
 
       <div className="ProviderForm__btns">
-        <Link to="/" className="cancel-btn ProviderForm__btn">Cancel</Link>
         <button type="submit" className="submit-btn ProviderForm__btn">Generate prescription</button>
+        <Link to="/" className="cancel-btn ProviderForm__btn">Cancel</Link>
+        
       </div>
 
      

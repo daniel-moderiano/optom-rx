@@ -73,77 +73,6 @@ const StyledRxForm = styled.form`
     }
   }
 
-  .provider-addBtn {
-      /* width: 12rem; */
-      display: inline-block;
-      font-size: 0.9rem;
-      font-family: var(--font-stack-segoe);
-      box-sizing: border-box;
-      cursor: pointer;
-      padding: 6px 16px 8px 16px;
-      border-radius: 2px;
-      min-width: 80px;
-      background-color: var(--primary-color);
-      color: rgb(255, 255, 255);
-      border: 1px solid var(--primary-color); 
-      text-decoration: none;
-      margin-left: 1rem;
-      
-      &:hover {
-        background-color: var(--btn-primary-hover);
-        border: 1px solid var(--btn-primary-hover);
-      }
-
-      &:active {
-        transform: scale(0.98);
-      }
-      /* position: absolute;
-      left: 0.3rem;
-      top: 5rem;
-      background-color: #fff;
-      border: none;
-      margin: 0;
-      padding: 0;
-      font-size: 0.8rem;
-      text-decoration: underline;
-      font-family: var(--font-stack-segoe);
-      line-height: 0.8rem;
-
-      &:hover {
-        cursor: pointer;
-      } */
-  
-    }
-
-    .cancel-btn {
-      font-size: 1rem;
-      font-family: var(--font-stack-segoe);
-      box-sizing: border-box;
-      cursor: pointer;
-      padding: 8px 16px 10px 16px;
-      border-radius: 2px;
-      text-decoration: none;
-      min-width: 80px;
-      background-color: var(--btn-secondary);
-      color: var(--btn-secondary-text);
-      /* border: 1px solid rgb(138, 136, 134);                 */
-      margin-right: 0;
-      border: none;
-
-      &:active {
-        transform: scale(0.98);
-      }
-
-      &:hover {
-        background-color: var(--btn-secondary-hover);
-        color: #21252A;
-      }
-    }
-
-  .provider-addBtn--solo {
-    margin: 0;
-  }
-
   .misc-form {
 
     .authRequired {
@@ -255,27 +184,6 @@ const StyledRxForm = styled.form`
     margin: 1.25rem 0 1rem 0;
   }
 
-  .btn-generate {
-    outline: 0;
-    cursor: pointer;
-    margin-bottom: 2rem;
-    border-radius: 2px;
-    width: 18rem;
-    padding: 0.8rem 0 0.9rem 0;
-    background-color: rgb(0, 120, 212);
-    color: rgb(255, 255, 255);
-    font-size: 1.3rem;
-    font-weight: 400;
-    box-sizing: border-box;
-    border: 1px solid rgb(0, 120, 212);
-    font-family: var(--font-stack-segoe);
-  }
-  
-  .btn-generate:hover {
-    background-color: rgb(16, 110, 190);
-    border: 1px solid rgb(16, 110, 190);
-  }
-
   .indications {
     margin-bottom: 1.5rem;
     width: 26rem;
@@ -378,11 +286,11 @@ const StyledRxForm = styled.form`
 
   .ProviderForm__btns {
     /* place-self: flex-end; */
-    padding: 2.75rem 0 2rem 0;
+    padding: 2.75rem 0 2rem 19.5rem;
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    /* justify-content: flex-end; */
     /* border-bottom: 1px solid #dfe1e1; */
 
     .ProviderForm__btn {
@@ -403,7 +311,7 @@ const StyledRxForm = styled.form`
       background-color: var(--primary-color);
       color: rgb(255, 255, 255);
       border: none;
-      margin-left: 1.5rem;
+      margin-right: 1.5rem;
       text-decoration: none;
     }
     
