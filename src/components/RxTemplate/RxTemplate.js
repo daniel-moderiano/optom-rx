@@ -410,12 +410,12 @@ const RxTemplate = ({ data, setToast }) => {
           {drugData.authRequired && <section className="authority">
             <div className="authority__approvalCode">{`Authority Approval No: ${miscData.authCode}`}</div>
             <div className="extra-details">
-              <div className="prev-auth">Previous authority: Y / N</div>
-              <div className="patient-age">Patient's age if under 18:</div>
+              <div className="prev-auth">{`Patient has received authority for this medicine before: ${miscData.prevAuth ? 'Yes' : 'No'}`}</div>
+              {(miscData.age !== "") && <div className="patient-age">Patient's age: {miscData.age}</div>}
             </div>
             
           </section>}
-          <div className="indication">Indication for use of item:</div>
+          <div className="indication">Clinical justification for use of item: {miscData.justification}</div>
         </div>
 
         <div className="RxTemplate__btns">

@@ -636,16 +636,16 @@ const StyledRxTemplate = styled.div`
         }
 
         .extra-details {
-          display: flex;
-          justify-content: space-between;
-          width: 360px;
+          /* display: flex;
+          justify-content: space-between; */
+          width: 380px;
           position: absolute;
           top: 40px;
         }
       }
       .indication {
         position: absolute;
-        top: 350px;
+        top: 365px;
         left: 70px;
       }
     }
