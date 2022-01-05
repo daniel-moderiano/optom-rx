@@ -16,8 +16,8 @@ const Scripts = ({ setToast }) => {
       setToast((prevData) => ({
         ...prevData,
         visible: true,
-        type: 'success',
-        message: 'Failed to fetch'
+        type: 'error',
+        message: 'Failed to complete requests'
       }));
     }
   }, [error, setToast])
