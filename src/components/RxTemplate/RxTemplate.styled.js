@@ -238,7 +238,7 @@ const StyledRxTemplate = styled.div`
 
         .scriptNo {
           position: absolute;
-          left: 200px;
+          left: 190px;
           top: 52px;
           width: 200px;
           text-align: right;
@@ -293,7 +293,7 @@ const StyledRxTemplate = styled.div`
 
       .medication {
         position: absolute;
-        left: 112px;
+        left: 102px;
         top: 386px;
         width: 330px;
         border-bottom: 1px solid #b8b8b8;
@@ -330,7 +330,7 @@ const StyledRxTemplate = styled.div`
       .provider-lower {
         display: block;
         position: absolute;
-        left: 112px;
+        left: 102px;
         top: 536px;
         width: 330px;
         
@@ -353,7 +353,7 @@ const StyledRxTemplate = styled.div`
         border-top: 1px solid #b8b8b8;
         padding-top: 3px;
         position: absolute;
-        left: 112px;
+        left: 102px;
         top: 574px;
         width: 330px;
       }
@@ -427,7 +427,7 @@ const StyledRxTemplate = styled.div`
 
         .scriptNo {
           position: absolute;
-          left: 200px;
+          left: 190px;
           top: 52px;
           width: 200px;
           text-align: right;
@@ -483,7 +483,7 @@ const StyledRxTemplate = styled.div`
 
       .medication {
         position: absolute;
-        left: 112px;
+        left: 102px;
         top: 386px;
         width: 330px;
         border-bottom: 1px solid #b8b8b8;
@@ -519,7 +519,7 @@ const StyledRxTemplate = styled.div`
 
       .provider-lower {
         position: absolute;
-        left: 112px;
+        left: 102px;
         top: 536px;
         width: 330px;
         
@@ -529,7 +529,7 @@ const StyledRxTemplate = styled.div`
         border-top: 1px solid #b8b8b8;
         padding-top: 3px;
         position: absolute;
-        left: 112px;
+        left: 102px;
         top: 574px;
         width: 330px;
       }
