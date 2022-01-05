@@ -76,6 +76,8 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
     authCode: {},    
     scriptID: {},
     justification: {},
+    prevAuth: {},
+    age: {},
   });
 
   // These states have been separated for better logic and avoiding too much nesting. However they still draw on any existing submitted data. Merge them on form submit
@@ -148,6 +150,8 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
     authCode: '',    // Either a streamline authority code, or a code obtained via telephone or online approval
     scriptID: '',    // Unique script ID to reference script 
     justification: '',  // The reason why the drug was used (authority scripts only)
+    prevAuth: false,    // Has the patient received prior authority for this medication. Required for auth scripts
+    age: '',    // Required only if the patient is under 18 years of age, again for auth scripts
     ...existingData.miscData,
   });
 
@@ -1373,8 +1377,35 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
             alert={miscAlerts.authCode}
           />
 
-          <div className="justification">
-            
+          <div className="retention">
+          <div className="retention">
+        <div className="justification-field">
+          <label htmlFor="justification">
+            Clinical justification for use of item
+            <textarea name="justification" value={miscData.justification} id="justification" cols="30" rows="3" onChange={(event) => handleChange(setMiscData, event)} ></textarea>
+          </label>
+        </div>
+          <FormField 
+            fieldType="number" 
+            name="age"
+            label="Patient's age if under 18" 
+            value={miscData.age} 
+            onChange={(event) => handleChange(setMiscData, event)} 
+            alert={miscAlerts.age}
+            className="age-field"
+          />
+
+          <FormField 
+            fieldType="checkbox" 
+            name="prevAuth"
+            label="Patient has received authority for this medicine before" 
+            onChange={() => toggleBooleanState(setMiscData, miscData, 'prevAuth')}
+            checked={miscData.prevAuth}
+            className="checkbox prevAuth"
+            enterFunc={(event) => changeOnEnter(event, setMiscData, miscData)}
+          />  
+        </div>
+       
           </div>
           </> : (
             
@@ -1389,12 +1420,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
           )
         }
        
-       <div className="justification-field">
-        <label htmlFor="justification">
-          Disease or purpose for which benefit required or clinical justification for use of item
-          <textarea name="justification" value={miscData.justification} id="justification" cols="30" rows="3" onChange={(event) => handleChange(setMiscData, event)} ></textarea>
-        </label>
-       </div>
+       
        
 
         <FormField 

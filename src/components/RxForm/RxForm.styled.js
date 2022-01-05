@@ -174,33 +174,51 @@ const StyledRxForm = styled.form`
       }
     }
 
+    .retention {
+      display: flex;
+      flex-direction: column;
+      .age-field {
+        margin: 0.85rem 0;
 
-    .justification-field {
-      margin: 0.85rem 0;
-      position: relative;
-      width: 26rem;
-
-      label {
-        font-size: 0.9rem;
-        display: flex;
-        flex-direction: column;
+        input {
+          width: 5rem;
+        }
+       
       }
 
-      textarea {
-        width: 100%;
-        margin-top: 0.5rem;
-        padding: 0.55rem 0.85rem 0.6rem 0.85rem;   
-        border: 1px solid rgb(144, 147, 150);
-        border-radius: 4px;
-        font-size: 0.9rem;
-        font-family: var(--font-stack-segoe);
+      .prevAuth {
+        position: relative;
+        margin: 1rem 0;
+      }
 
-        &:focus {
-          outline: 2px solid #a360ac;
-          outline-offset: 2px;
+      .justification-field {
+        margin: 0.85rem 0;
+        position: relative;
+        width: 26rem;
+
+        label {
+          font-size: 0.9rem;
+          display: flex;
+          flex-direction: column;
+        }
+
+        textarea {
+          width: 100%;
+          margin-top: 0.5rem;
+          padding: 0.55rem 0.85rem 0.6rem 0.85rem;   
+          border: 1px solid rgb(144, 147, 150);
+          border-radius: 4px;
+          font-size: 0.9rem;
+          font-family: var(--font-stack-segoe);
+
+          &:focus {
+            outline: 2px solid #a360ac;
+            outline-offset: 2px;
+          }
         }
       }
     }
+    
     
     
   }
