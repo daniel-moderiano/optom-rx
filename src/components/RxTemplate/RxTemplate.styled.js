@@ -304,6 +304,12 @@ const StyledRxTemplate = styled.div`
           max-width: 330px;
         }
 
+        .medication__compounded {
+          margin: 0.4rem 0 0.3rem 0;
+          /* font-style: italic; */
+          text-transform: uppercase;
+        }
+
         .medication__brandName {
           font-weight: bold;
         }
@@ -325,13 +331,13 @@ const StyledRxTemplate = styled.div`
         display: block;
         position: absolute;
         left: 112px;
-        top: 522px;
+        top: 536px;
         width: 330px;
         
         .practitionerTick {
           position: absolute;
           left: 315px;
-          top: 114px;
+          top: 100px;
           width: 20px;
 
           .optomTick {
@@ -348,7 +354,7 @@ const StyledRxTemplate = styled.div`
         padding-top: 3px;
         position: absolute;
         left: 112px;
-        top: 560px;
+        top: 574px;
         width: 330px;
       }
 
@@ -488,6 +494,12 @@ const StyledRxTemplate = styled.div`
           max-width: 330px;
         }
 
+        .medication__compounded {
+          margin: 0.4rem 0 0.3rem 0;
+          /* font-style: italic; */
+          text-transform: uppercase;
+        }
+
         .medication__brandName {
           font-weight: bold;
         }
@@ -508,7 +520,7 @@ const StyledRxTemplate = styled.div`
       .provider-lower {
         position: absolute;
         left: 112px;
-        top: 522px;
+        top: 536px;
         width: 330px;
         
       }
@@ -518,7 +530,7 @@ const StyledRxTemplate = styled.div`
         padding-top: 3px;
         position: absolute;
         left: 112px;
-        top: 560px;
+        top: 574px;
         width: 330px;
       }
 
@@ -532,7 +544,7 @@ const StyledRxTemplate = styled.div`
       margin: 0;
       line-height: normal;
       position: relative;
-      top: 826px;
+      top: 820px;
       left: 410px;
       font-size: 14.5px;
       width: 400px;
@@ -624,6 +636,13 @@ const StyledRxTemplate = styled.div`
         .medication__activeIngredient {
           width: 400px;
         }
+
+        .medication__compounded {
+          margin: 0.4rem 0 0.3rem 0;
+          /* font-style: italic; */
+          text-transform: uppercase;
+        }
+
 
         .medication__brandName {
           font-weight: bold;

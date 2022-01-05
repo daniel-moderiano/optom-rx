@@ -164,18 +164,22 @@ const RxTemplate = ({ data, setToast }) => {
               <div className="ui-info ui-medication__name">
                 {formatDrug(drugData.activeIngredient, drugData.brandName)}
               </div>
-              {drugData.substitutePermitted 
-                ? <div className="ui-info ui-brandSub--yes">Brand substitution permitted</div>
-                : <div className="ui-info ui-brandSub--no">Brand substitution not allowed</div>
-              }
+              <div className="ui-info med-parameters">
+                {drugData.substitutePermitted 
+                  ? <div className="ui-brandSub--yes">Brand substitution permitted</div>
+                  : <div className="ui-brandSub--no">Brand substitution not permitted</div>
+                }
+                {drugData.compounded 
+                  && <div className="ui-compounded">To be compounded</div>
+                } 
+              </div>
+              
               <div className="ui-info ui-medication__dosage">Dosage: {drugData.dosage}</div>
               <div className="ui-quantityRepeats">
                 <div className="ui-info ui-medication__quantity">{`Quantity: ${drugData.quantity}`}</div>
                 <div className="ui-info ui-medication__repeats">{`Repeats: ${drugData.repeats}`}</div>
               </div>
-              {drugData.compounded 
-                && <div className="ui-info ui-compounded">To be compounded</div>
-              } 
+              
           </section>
 
           <section className="ui-miscellaneous">
@@ -252,6 +256,9 @@ const RxTemplate = ({ data, setToast }) => {
             <div data-testid="drugName" className="medication__activeIngredient">
               {formatDrug(drugData.activeIngredient, drugData.brandName)}
             </div>
+            {drugData.compounded 
+              && <div className="medication__compounded">To be compounded</div>
+            } 
             <div className="medication__dosage">{drugData.dosage}</div>
             <div className="quantityRepeats">
               <div className="medication__quantity">{`Quantity: ${drugData.quantity}`}</div>
@@ -331,6 +338,9 @@ const RxTemplate = ({ data, setToast }) => {
             <div className="medication__activeIngredient">
               {formatDrug(drugData.activeIngredient, drugData.brandName)}
             </div>
+            {drugData.compounded 
+              && <div className="medication__compounded">To be compounded</div>
+            } 
             <div className="medication__dosage">{drugData.dosage}</div>
             <div className="quantityRepeats">
               <div className="medication__quantity">{`Quantity: ${drugData.quantity}`}</div>
@@ -407,6 +417,9 @@ const RxTemplate = ({ data, setToast }) => {
             <div className="medication__activeIngredient">
               {formatDrug(drugData.activeIngredient, drugData.brandName)}
             </div>
+            {drugData.compounded 
+              && <div className="medication__compounded">To be compounded</div>
+            } 
             <div className="medication__dosage">{drugData.dosage}</div>
             <div className="quantityRepeats">
               <div className="medication__quantity">{`Quantity: ${drugData.quantity}`}</div>
