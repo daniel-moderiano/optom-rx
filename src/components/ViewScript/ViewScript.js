@@ -165,8 +165,9 @@ const ViewScript = ({ setToast }) => {
         }
         
         <div className="ProviderForm__btns">
-          <Link to="/scripts" className="cancel-btn ProviderForm__btn">Go back</Link>
           <Link to="/scripts" className="submit-btn ProviderForm__btn">Re-prescribe</Link>
+          <Link to="/scripts" className="cancel-btn ProviderForm__btn">Go back</Link>
+          
         </div>
 
       </div>

@@ -34,7 +34,7 @@ const StyledViewScript = styled.div`
     /* place-self: flex-end; */
     margin: 2.5rem 0;
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
     align-items: center;
     width: 100%;
 
@@ -56,7 +56,7 @@ const StyledViewScript = styled.div`
       background-color: var(--primary-color);
       color: rgb(255, 255, 255);
       border: none;
-      margin-left: 1.5rem;
+      margin-right: 1.5rem;
       text-decoration: none;
     }
     
