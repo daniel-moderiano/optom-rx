@@ -147,11 +147,11 @@ const StyledRxForm = styled.form`
   .misc-form {
 
     .authRequired {
-      margin: 0.9rem 0 0 0;
+      margin: 0.9rem 0 0.5rem 0;
     }
 
     .authRxNo {
-      margin: 0.75rem 0 1rem 0;
+      margin: 0.75rem 0 0.75rem 0;
       padding: 0;
       font-size: 0.9rem;
     }
@@ -159,12 +159,8 @@ const StyledRxForm = styled.form`
     .solo-alert-container {
       display: flex;
       align-items: center;
-      margin: 0.3rem 0 0.75rem -0.1rem;
+      margin: -0.2rem 0 0.75rem -0.1rem;
       width: 24rem;
-
-      .authRxNo {
-
-      }
 
       .alert--neutral {
         color: var(--neutral);
@@ -177,6 +173,36 @@ const StyledRxForm = styled.form`
         flex-shrink: 0;
       }
     }
+
+
+    .justification-field {
+      margin: 0.85rem 0;
+      position: relative;
+      width: 26rem;
+
+      label {
+        font-size: 0.9rem;
+        display: flex;
+        flex-direction: column;
+      }
+
+      textarea {
+        width: 100%;
+        margin-top: 0.5rem;
+        padding: 0.55rem 0.85rem 0.6rem 0.85rem;   
+        border: 1px solid rgb(144, 147, 150);
+        border-radius: 4px;
+        font-size: 0.9rem;
+        font-family: var(--font-stack-segoe);
+
+        &:focus {
+          outline: 2px solid #a360ac;
+          outline-offset: 2px;
+        }
+      }
+    }
+    
+    
   }
 
   
