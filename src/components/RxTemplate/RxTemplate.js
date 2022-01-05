@@ -410,7 +410,9 @@ const RxTemplate = ({ data, setToast }) => {
 
           <section className="miscellaneous">
             <div className="date">{formatDate()}</div>
-            {drugData.authRequired && <div className="authRxNo">{`Authority Script No: ${miscData.authRxNumber}`}</div>}
+            {drugData.authRequired && <div className="authNumbers">
+              <div className="authRxNo">{`Authority Script No: ${miscData.authRxNumber}`}</div>
+            </div>}
           </section>
 
           <section className="medication">
@@ -425,20 +427,25 @@ const RxTemplate = ({ data, setToast }) => {
               <div className="medication__quantity">{`Quantity: ${drugData.quantity}`}</div>
               <div className="medication__repeats">{`${drugData.repeats} repeats`}</div>
             </div>
-            <span className="item-printed">1 item printed</span>
-          </section>
-
-          {drugData.authRequired && (<>
-          <section className="authority">
-            <div className="authority__approvalCode">{`Authority Approval No: ${miscData.authCode}`}</div>
-            <div className="extra-details">
-              <div className="prev-auth">{`Patient has received authority for this medicine before: ${miscData.prevAuth ? 'Yes' : 'No'}`}</div>
-              {(miscData.age !== "") && <div className="patient-age">Patient's age: {miscData.age}</div>}
+            <div className="item-printed-line">
+              {drugData.authRequired && <div className="authority__approvalCode">{`Authority Approval No: ${miscData.authCode}`}</div>}
+              <span className="item-printed">1 item printed</span>
             </div>
+
+            {drugData.authRequired && (<>
+              <section className="authority">
+                <div className="extra-details">
+                  <div className="prev-auth">{`Patient has received authority for this medicine before: ${miscData.prevAuth ? 'Yes' : 'No'}`}</div>
+                  {(miscData.age !== "") && <div className="patient-age">Patient's age: {miscData.age}</div>}
+                </div>
+                
+              </section>
+              <div className="indication">Clinical justification for use of item: {miscData.justification}</div>
+              </>)}
             
           </section>
-          <div className="indication">Clinical justification for use of item: {miscData.justification}</div>
-          </>)}
+
+          
         </div>
 
         <div className="RxTemplate__btns">

@@ -616,13 +616,18 @@ const StyledRxTemplate = styled.div`
         top: 196px;
         left: 70px;
 
-        .authRxNo {
+        .authNumbers {
           position: absolute;
-          left: 190px;
-          top: 0;
-          width: 200px;
-          text-align: right;
+            left: 190px;
+            top: 0;
+            width: 200px;
+            text-align: right;
+          .authRxNo {
+            
+          }
         }
+
+        
       }
 
       .medication {
@@ -630,7 +635,7 @@ const StyledRxTemplate = styled.div`
         left: 70px;
         top: 222px;
         width: 390px;
-        border-bottom: 1px solid #b8b8b8;
+        /* border-bottom: 1px solid #b8b8b8; */
         padding: 2px 0;
 
         .medication__activeIngredient {
@@ -654,42 +659,25 @@ const StyledRxTemplate = styled.div`
           width: 170px;
         }
 
-        .item-printed {
-          position: absolute;
+        .item-printed-line {
+          display: flex;
+          justify-content: space-between;
+          width: 390px;
+          border-top: 1px solid #b8b8b8;
+          margin-top: 0.2rem;
+          padding-top: 0.2rem;
+          /* position: absolute;
           bottom: -22px;
-          right: 2px;
+          right: 2px; */
         }
       }
 
       .authority {
-        position: absolute;
-        left: 70px;
-        top: 284px;
-        width: 330px;
-
-        .authority__approvalCode {
-          position: absolute;
-          top: 0px;
-        }
-
-        .auth-numbers {
-          display: flex;
-          justify-content: space-between;
-          width: 400px;
-        }
+        margin-top: 0.75rem;
 
         .extra-details {
-          /* display: flex;
-          justify-content: space-between; */
-          width: 380px;
-          position: absolute;
-          top: 40px;
+          margin-bottom: 0.75rem;
         }
-      }
-      .indication {
-        position: absolute;
-        top: 365px;
-        left: 70px;
       }
     }
 
