@@ -345,6 +345,15 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
 
         {/* Only visible on standalone forms */}
         <div className="ProviderForm__btns">
+          {submitBtn && 
+              <button className="submit-btn ProviderForm__btn" onClick={(event) => {
+                event.preventDefault(); 
+                if (checkFormValidation()) {
+                  handleSubmit(event);
+                }
+              }}>{submitBtn}</button>
+            }
+            
           {cancelBtn && 
             <button className="cancel-btn ProviderForm__btn" onClick={(event) => {
               event.preventDefault(); 
@@ -353,14 +362,7 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
             }}>{cancelBtn}</button>
           }
           
-          {submitBtn && 
-            <button className="submit-btn ProviderForm__btn" onClick={(event) => {
-              event.preventDefault(); 
-              if (checkFormValidation()) {
-                handleSubmit(event);
-              }
-            }}>{submitBtn}</button>
-          }
+          
           
         </div>
         

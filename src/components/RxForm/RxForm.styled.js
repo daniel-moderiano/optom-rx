@@ -134,7 +134,7 @@ const StyledRxForm = styled.form`
         textarea {
           width: 100%;
           margin-top: 0.5rem;
-          padding: 0.55rem 0.85rem 0.6rem 0.85rem;   
+          padding: 0.5rem 0.75rem 0.5rem 0.75rem;   
           border: 1px solid rgb(144, 147, 150);
           border-radius: 4px;
           font-size: 0.9rem;

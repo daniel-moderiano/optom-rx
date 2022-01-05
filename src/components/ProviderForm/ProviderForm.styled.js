@@ -9,8 +9,9 @@ const StyledProviderForm = styled.div`
   }
 
   .ProviderForm__btns {
-    place-self: flex-end;
-    margin-top: 1rem;
+    place-self: flex-start;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
 
     .ProviderForm__btn {
       font-size: 1rem;
@@ -30,7 +31,7 @@ const StyledProviderForm = styled.div`
       background-color: var(--primary-color);
       color: rgb(255, 255, 255);
       border: none;
-      margin-left: 1.5rem;
+      margin-right: 1.5rem;
     }
     
     .submit-btn:hover {
