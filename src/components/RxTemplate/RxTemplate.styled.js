@@ -336,7 +336,7 @@ const StyledRxTemplate = styled.div`
         
         .practitionerTick {
           position: absolute;
-          left: 315px;
+          left: 312px;
           top: 100px;
           width: 20px;
 
