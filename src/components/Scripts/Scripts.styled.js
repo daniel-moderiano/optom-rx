@@ -13,6 +13,10 @@ const StyledScripts = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+
+    .table-container {
+      width: 100%;
+    }
   }
 
   .Scripts__title {

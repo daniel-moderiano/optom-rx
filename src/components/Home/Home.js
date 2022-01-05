@@ -14,8 +14,6 @@ const Home = () => {
         <Link onClick={resetData} className="Home__link Home__link--create" to='/form' state={ { newRx: true } }>Create prescription</Link>
         <Link className="Home__link Home__link--providers" to="/providers">View providers</Link>
       </div>
-      <Spinner />
-
     </StyledHome>
   )
 }
