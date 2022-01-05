@@ -144,21 +144,38 @@ const StyledRxForm = styled.form`
     margin: 0;
   }
 
-  .solo-alert-container {
-    display: flex;
-    align-items: center;
-    margin: 0.8rem 0 0.75rem -0.1rem;
-    width: 24rem;
+  .misc-form {
 
-    .alert--neutral {
-      color: var(--neutral);
-      font-size: 0.8rem;
-      margin-bottom: 0.1rem;
+    .authRequired {
+      margin: 0.9rem 0 0 0;
     }
 
-    .alert-icon {
-      margin-right: 0.2rem;
-      flex-shrink: 0;
+    .authRxNo {
+      margin: 0.75rem 0 1rem 0;
+      padding: 0;
+      font-size: 0.9rem;
+    }
+
+    .solo-alert-container {
+      display: flex;
+      align-items: center;
+      margin: 0.3rem 0 0.75rem -0.1rem;
+      width: 24rem;
+
+      .authRxNo {
+
+      }
+
+      .alert--neutral {
+        color: var(--neutral);
+        font-size: 0.8rem;
+        margin-bottom: 0.1rem;
+      }
+
+      .alert-icon {
+        margin-right: 0.2rem;
+        flex-shrink: 0;
+      }
     }
   }
 
@@ -192,16 +209,6 @@ const StyledRxForm = styled.form`
 
   .pbsRx {
     margin: 1.25rem 0 1rem 0;
-  }
-
-  .authRequired {
-    margin: 0.85rem 0 1rem 0;
-  }
-
-  .authRxNo {
-    margin: 0 0 1rem 0;
-    padding: 0;
-    font-size: 0.9rem;
   }
 
   .btn-generate {
