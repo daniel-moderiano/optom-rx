@@ -1,5 +1,5 @@
 
-import { useCollection } from '../../hooks/useCollection';
+import { useProviders } from '../../hooks/useProviders';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { StyledProviders } from "./Providers.styled";
 import { Link } from "react-router-dom";
@@ -9,7 +9,7 @@ import Spinner from '../utils/Spinner/Spinner';
 const Providers = ({ setToast }) => {
   const { user } = useAuthContext();
   // This should be called using the curernt user ID to query the collection
-  const { documents: providers } = useCollection('providers', ['uid', '==', user.uid]); 
+  const { providers, isPending, error } = useProviders(['uid', '==', user.uid]); 
 
   return (
     <StyledProviders className="Providers">
@@ -17,19 +17,22 @@ const Providers = ({ setToast }) => {
       <p className="Providers__description">Use this section to add provider details that can be used in your prescriptions</p>
   
       <Link className="Providers__add-btn" to={`/add-provider`}>Add new provider</Link> 
-      {providers ?
-        (<div className="Providers__list">
-          {providers.length > 0 ? (
-            <TableProviders data={providers} rowsPerPage={10} setToast={setToast}/>
-          ) : (
-            <div className='Providers__none'>No providers added yet</div>
-          )}
-        </div>)
-        : (
-          <Spinner />
-        )
-      }      
-      
+
+      <div className="Providers__container">
+        {isPending && <Spinner />}
+
+        {error && <div>{error}</div>}
+
+        {providers && <div className='table__container'>
+          <div className="Providers__list">
+            {providers.length > 0 ? (
+              <TableProviders data={providers} rowsPerPage={10} setToast={setToast}/>
+            ) : (
+              <div className='Providers__none'>No providers added yet</div>
+            )}
+          </div>
+        </div>}    
+      </div>
     </StyledProviders>
   )
 }

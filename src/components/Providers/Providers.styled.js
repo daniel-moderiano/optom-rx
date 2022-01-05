@@ -22,6 +22,20 @@ const StyledProviders = styled.div`
     margin: 0;
   }
 
+  .Providers__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .Spinner {
+      margin-top: 4rem;
+    }
+
+    .table__container {
+      width: 100%;
+    }
+  }
+
   .Providers__add-btn {
     display: inline-block;
     font-size: 1rem;

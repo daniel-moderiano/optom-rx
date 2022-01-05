@@ -30,7 +30,7 @@ const StyledScripts = styled.div`
   }
 
   .Spinner {
-    margin-top: 1.5rem;
+    margin-top: 2rem;
   }
 `
 
