@@ -10,7 +10,9 @@ const StyledScripts = styled.div`
 
   .Scripts__container {
     margin-top: 2rem;
-
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .Scripts__title {
@@ -25,6 +27,10 @@ const StyledScripts = styled.div`
 
   .Scripts__description {
     margin: 0;
+  }
+
+  .Spinner {
+    margin-top: 1.5rem;
   }
 `
 

@@ -1,14 +1,12 @@
-// Spinner design inspired by Kirtesh Bansal's Spinner Loader @ https://dev.to/kirteshbansal/spinner-loader-in-react-using-css-458h
-
 import styled from "styled-components";
 
 // Currently styled as default select Toast. For styling of error or info toasts, the JS toast component with conditionally render different SVG icons
 const StyledSpinner = styled.div`
-  border: 10px solid #f3f3f3;
-  border-top: 10px solid #3498db;
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid var(--primary-color);
   border-radius: 50%;
-  width: 80px;
-  height: 80px;
+  width: 40px;
+  height: 40px;
   animation: spin 1s linear infinite;
 
   @keyframes spin {

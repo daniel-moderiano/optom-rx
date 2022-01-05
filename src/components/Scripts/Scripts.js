@@ -10,7 +10,6 @@ const Scripts = ({ setToast }) => {
   const { scripts, isPending, error } = useScripts(user.uid);
 
   // This effect will fire an error alert if the fetch fails. 
-  // TODO: make error toast
   useEffect(() => {
     if (error) {
       setToast((prevData) => ({
@@ -27,19 +26,21 @@ const Scripts = ({ setToast }) => {
       <h2 className="Scripts__title">Scripts</h2>
       <p className="Scripts__description">View all prescriptions you have written. Click the script ID for more information.</p>
 
-      {isPending && <Spinner />}
-      {error && <div>{error}</div>}
       
-      {scripts && 
-        <div className="Scripts__container">
+      <div className="Scripts__container">
+        {isPending && <Spinner />}
+
+        {error && <div>{error}</div>}
+
+        {scripts && <div className='table-container'>
           {scripts.length > 0 ? (
-            <Table data={scripts} rowsPerPage={20}/>
+            <Table data={scripts} rowsPerPage={15}/>
           ) : (
             <div className='Scripts__none'>No scripts written yet</div>
           )}
-          
-        </div>
-      }  
+        </div>}  
+      </div>
+      
     </StyledScripts>
   )
 }
