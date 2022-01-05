@@ -189,6 +189,11 @@ const RxTemplate = ({ data, setToast }) => {
               {drugData.authRequired && (<div className="ui-auth ui-info">
                 <div className="ui-authCode">{`Authority Approval No: ${miscData.authCode}`}</div>
                 <div className="ui-authRxNo">{`Authority Script No: ${miscData.authRxNumber}`}</div>
+                <div className="ui-justification">
+                  <div className="ui-prevAuth">{`Patient has previously received authority: ${miscData.prevAuth ? 'Yes' : 'No'}`}</div>
+                  <div className="ui-age">{miscData.age && `Patient's age: ${miscData.age}`}</div>
+                  <div className="ui-justification">{`Clinical justification for use of item: ${miscData.justification}`}</div>
+                </div>
               </div>)}
           </section>
         </div>
@@ -424,20 +429,24 @@ const RxTemplate = ({ data, setToast }) => {
         </div>
 
         <div className="RxTemplate__btns">
-          <button className="RxTemplate__btn btn-print" onClick={() => {window.print()}}>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-              <title>Print</title> 
-              <path d="M384 368h24a40.12 40.12 0 0040-40V168a40.12 40.12 0 00-40-40H104a40.12 40.12 0 00-40 40v160a40.12 40.12 0 0040 40h24" fill="none" stroke="currentColor" strokeLinejoin="round" strokeWidth="32"/>
-              <rect x="128" y="240" width="256" height="208" rx="24.32" ry="24.32" fill="none" stroke="currentColor" strokeLinejoin="round" strokeWidth="32"/>
-              <path d="M384 128v-24a40.12 40.12 0 00-40-40H168a40.12 40.12 0 00-40 40v24" fill="none" stroke="currentColor" strokeLinejoin="round" strokeWidth="32"/>
-              <circle cx="392" cy="184" r="24" fill="#fff"/>
-            </svg>
-            Print
-          </button>
-          <button type="button" className="RxTemplate__btn btn-finish" onClick={saveRx}>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><title>Save</title><path d="M380.93 57.37A32 32 0 00358.3 48H94.22A46.21 46.21 0 0048 94.22v323.56A46.21 46.21 0 0094.22 464h323.56A46.36 46.36 0 00464 417.78V153.7a32 32 0 00-9.37-22.63zM256 416a64 64 0 1164-64 63.92 63.92 0 01-64 64zm48-224H112a16 16 0 01-16-16v-64a16 16 0 0116-16h192a16 16 0 0116 16v64a16 16 0 01-16 16z" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32"/></svg>
-            Save and Finish
-          </button>
+          <div className="primary-btns">
+            <button className="RxTemplate__btn btn-print" onClick={() => {window.print()}}>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                <title>Print</title> 
+                <path d="M384 368h24a40.12 40.12 0 0040-40V168a40.12 40.12 0 00-40-40H104a40.12 40.12 0 00-40 40v160a40.12 40.12 0 0040 40h24" fill="none" stroke="currentColor" strokeLinejoin="round" strokeWidth="32"/>
+                <rect x="128" y="240" width="256" height="208" rx="24.32" ry="24.32" fill="none" stroke="currentColor" strokeLinejoin="round" strokeWidth="32"/>
+                <path d="M384 128v-24a40.12 40.12 0 00-40-40H168a40.12 40.12 0 00-40 40v24" fill="none" stroke="currentColor" strokeLinejoin="round" strokeWidth="32"/>
+                <circle cx="392" cy="184" r="24" fill="#fff"/>
+              </svg>
+              Print
+            </button>
+            <button type="button" className="RxTemplate__btn btn-finish" onClick={saveRx}>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><title>Save</title><path d="M380.93 57.37A32 32 0 00358.3 48H94.22A46.21 46.21 0 0048 94.22v323.56A46.21 46.21 0 0094.22 464h323.56A46.36 46.36 0 00464 417.78V153.7a32 32 0 00-9.37-22.63zM256 416a64 64 0 1164-64 63.92 63.92 0 01-64 64zm48-224H112a16 16 0 01-16-16v-64a16 16 0 0116-16h192a16 16 0 0116 16v64a16 16 0 01-16 16z" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32"/></svg>
+              Save and Finish
+            </button>
+          </div>
+          
+          <Link className="RxTemplate__btn btn-edit" to="/form">Make changes</Link>
         </div>
       </> : <h3 className="RxTemplate__subtitle">Fill out the form to generate Rx</h3>}
       

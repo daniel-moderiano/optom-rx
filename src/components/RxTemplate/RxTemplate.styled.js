@@ -59,6 +59,7 @@ const StyledRxTemplate = styled.div`
       padding: 0.5rem 0.75rem;
       font-size: 0.9rem;
       color: #48515B;
+      line-height: 1.2rem;
     }
 
     .ui-medication {
@@ -79,6 +80,10 @@ const StyledRxTemplate = styled.div`
       padding-bottom: 0.5rem;
     }
 
+    .ui-justification {
+      padding-top: 0.5rem;
+    }
+
 
   }
 
@@ -87,8 +92,9 @@ const StyledRxTemplate = styled.div`
 
     margin: 2rem 0 2rem 0;
     display: flex;
-    /* justify-content: flex-end; */
-    /* width: 100%; */
+    justify-content: space-between;
+    width: 100%;
+    /* padding-left: 0.75rem; */
 
     .primary-btns {
       display: flex;
@@ -130,8 +136,8 @@ const StyledRxTemplate = styled.div`
     .btn-finish:hover, .btn-print:hover {
       background-color: var(--btn-primary-hover);
     }
-/*           
-    .btn-print {
+          
+    .btn-edit {
       display: block;
       text-decoration: none;
       background-color: var(--btn-secondary);
@@ -139,10 +145,10 @@ const StyledRxTemplate = styled.div`
       border: none;            
     }
 
-    .btn-print:hover {
+    .btn-edit:hover {
       background-color: var(--btn-secondary-hover);
       color: #21252A;
-    } */
+    }
   }
 
   .right-container, .left-container, .bottom-container {
