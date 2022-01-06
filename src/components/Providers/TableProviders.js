@@ -16,9 +16,12 @@ const TableProviders = ({ data, rowsPerPage, setToast }) => {
   // Gather the data slices for each page and the range of pages needed 
   const { dataSlice, range } = useTable(data, page, rowsPerPage);
 
+ 
+
   const { user } = useAuthContext();
   // This should be called using the curernt user ID to query the collection
   const { documents: providers } = useCollection('providers', ['uid', '==', user.uid]);
+
 
   // Update both the UI checkboxes and backend to ensure only one provider can be set default at any one time
   const setAsDefault = async (currentProviders, provID) => {

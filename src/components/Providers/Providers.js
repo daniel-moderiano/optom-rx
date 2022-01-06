@@ -1,5 +1,5 @@
 
-import { useProviders } from '../../hooks/useProviders';
+import { useCollection } from '../../hooks/useCollection';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { StyledProviders } from "./Providers.styled";
 import { Link } from "react-router-dom";
@@ -9,7 +9,7 @@ import Spinner from '../utils/Spinner/Spinner';
 const Providers = ({ setToast }) => {
   const { user } = useAuthContext();
   // This should be called using the curernt user ID to query the collection
-  const { providers, isPending, error } = useProviders(['uid', '==', user.uid]); 
+  const { documents: providers, isPending, error } = useCollection('providers', ['uid', '==', user.uid]);
 
   return (
     <StyledProviders className="Providers">
