@@ -28,7 +28,19 @@ const ViewScript = ({ setToast }) => {
     };
 
     fetchData();
-  }, [id])
+  }, [id]);
+
+  // This effect will fire an error alert if the fetch fails. 
+  useEffect(() => {
+    if (error) {
+      setToast((prevData) => ({
+        ...prevData,
+        visible: true,
+        type: 'error',
+        message: 'Failed to complete requests'
+      }));
+    }
+  }, [error, setToast]);
 
   // Create a more UI friendly summary of drug name +/- brand
   const formatDrug = (script) => {

@@ -5,11 +5,24 @@ import { StyledProviders } from "./Providers.styled";
 import { Link } from "react-router-dom";
 import TableProviders from './TableProviders';
 import Spinner from '../utils/Spinner/Spinner';
+import { useEffect } from 'react';
 
 const Providers = ({ setToast }) => {
   const { user } = useAuthContext();
   // This should be called using the curernt user ID to query the collection
   const { documents: providers, isPending, error } = useCollection('providers', ['uid', '==', user.uid]);
+
+  // This effect will fire an error alert if the fetch fails. 
+  useEffect(() => {
+    if (error) {
+      setToast((prevData) => ({
+        ...prevData,
+        visible: true,
+        type: 'error',
+        message: 'Failed to complete requests'
+      }));
+    }
+  }, [error, setToast]);
 
   return (
     <StyledProviders className="Providers">
@@ -28,7 +41,10 @@ const Providers = ({ setToast }) => {
             {providers.length > 0 ? (
               <TableProviders data={providers} rowsPerPage={10} setToast={setToast}/>
             ) : (
-              <div className='Providers__none'>No providers added yet</div>
+              <div className='Providers__none'>
+                <h4 className="no-providers-title">No providers added</h4>
+                <p className="no-providers-text">Providers list requires an internet connection to update and display</p>
+              </div>
             )}
           </div>
         </div>}    
