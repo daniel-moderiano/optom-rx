@@ -17,6 +17,12 @@ const StyledViewScript = styled.div`
     /* border-bottom: 1px solid #dfe1e1; */
   }
 
+  .script__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .EditProvider__title {
     font-family: var(--font-stack-myriad);
     font-weight: 400;

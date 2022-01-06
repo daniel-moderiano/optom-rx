@@ -4,16 +4,27 @@ import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../../firebase/config";
 import { StyledViewScript } from "./ViewScript.styled.";
+import Spinner from '../utils/Spinner/Spinner'
 
 const ViewScript = ({ setToast }) => {
   const { id } = useParams();
   const [scriptData, setScriptData] = useState(null);
+  const [isPending, setIsPending] = useState(false);
+  const [error, setError] = useState(null);
 
   // Fetch the script data using the supplied ID
   useEffect(() => {
     const fetchData = async () => {
-      const docSnap = await getDoc(doc(db, 'scripts', id));
-      setScriptData(docSnap.data());
+      setIsPending(true);
+      try {
+        const docSnap = await getDoc(doc(db, 'scripts', id));
+        setScriptData(docSnap.data());
+        setIsPending(false);
+      } catch (error) {
+        setIsPending(false);
+        setError(error);
+        console.log(error);
+      }
     };
 
     fetchData();
@@ -59,37 +70,46 @@ const ViewScript = ({ setToast }) => {
       <h2 className="EditProvider__title">Script #{id}</h2>
       <p className="EditProvider__description">Patient details are not saved in OptomRx. Only medication details will be available for review.</p>
       <div className="container">
-        {scriptData && 
-          <div className="Script__info">
-            <div className="Script__medication">
-              <div className="Script__title Script__title--medication">Medication details</div>
-              <div className="Script__info--section Script__drug">{formatDrug(scriptData)}</div>
-              {scriptData.compounded && <div className="Script__info--section Script__compounded">To be compounded</div>}
-              <div className="Script__info--section Script__substitute">{`${scriptData.substitutePermitted ? 'Brand substitution allowed' : 'Brand substitution not permitted'}`}</div>
-              <div className="Script__info--section Script__dosage">Dosage: {scriptData.dosage}</div>
-              <div className="Script__info--section Script__quantity">Quantity: {scriptData.quantity}</div>
-                <div className="Script__info--section Script__repeats">Repeats: {scriptData.repeats}</div>
+        <div className="script__container">
+          {isPending && <Spinner />}
+
+          {error && <div className="error">{error.message}</div>}
+
+          {scriptData && <>
+            <div className="Script__info">
+              <div className="Script__medication">
+                <div className="Script__title Script__title--medication">Medication details</div>
+                <div className="Script__info--section Script__drug">{formatDrug(scriptData)}</div>
+                {scriptData.compounded && <div className="Script__info--section Script__compounded">To be compounded</div>}
+                <div className="Script__info--section Script__substitute">{`${scriptData.substitutePermitted ? 'Brand substitution allowed' : 'Brand substitution not permitted'}`}</div>
+                <div className="Script__info--section Script__dosage">Dosage: {scriptData.dosage}</div>
+                <div className="Script__info--section Script__quantity">Quantity: {scriptData.quantity}</div>
+                  <div className="Script__info--section Script__repeats">Repeats: {scriptData.repeats}</div>
+              </div>
+
+              <div className="Script__pbs">
+                <div className="Script__title Script__title--pbs">PBS details</div>
+                <div className="Script__info--section Script__pbs">{`${scriptData.pbsRx ? 'PBS prescription' : 'Non-PBS prescription'}`}</div>
+
+                {scriptData.authRequired && <div className="Script__authority">
+                  <div className="Script__info--section Script__authCode">Authority code: {scriptData.authCode}</div>
+                  <div className="Script__info--section Script__authNum">Authority Rx No: {scriptData.authRxNumber}</div>
+                  <div className="Script__info--section Script__indications">Clinical justification for use of item: {scriptData.justification}</div>
+                </div>}
+                <div className="Script__info--section Script__date">Date prescribed: {formatDate(scriptData.date)}</div>
+              </div>                
             </div>
-
-            <div className="Script__pbs">
-              <div className="Script__title Script__title--pbs">PBS details</div>
-              <div className="Script__info--section Script__pbs">{`${scriptData.pbsRx ? 'PBS prescription' : 'Non-PBS prescription'}`}</div>
-
-              {scriptData.authRequired && <div className="Script__authority">
-                <div className="Script__info--section Script__authCode">Authority code: {scriptData.authCode}</div>
-                <div className="Script__info--section Script__authNum">Authority Rx No: {scriptData.authRxNumber}</div>
-                <div className="Script__info--section Script__indications">Clinical justification for use of item: {scriptData.justification}</div>
-              </div>}
-              <div className="Script__info--section Script__date">Date prescribed: {formatDate(scriptData.date)}</div>
-            </div>                
-          </div>
-        }
-        
-        <div className="ProviderForm__btns">
-          <Link to="/scripts" className="submit-btn ProviderForm__btn">Re-prescribe</Link>
-          <Link to="/scripts" className="cancel-btn ProviderForm__btn">Go back</Link>
-          
+            <div className="ProviderForm__btns">
+            <Link to="/scripts" className="submit-btn ProviderForm__btn">Re-prescribe</Link>
+            <Link to="/scripts" className="cancel-btn ProviderForm__btn">Go back</Link>
+            
+            </div>
+            </>
+          }
         </div>
+       
+        
+        
 
       </div>
       
