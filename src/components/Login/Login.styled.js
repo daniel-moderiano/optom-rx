@@ -7,6 +7,10 @@ const StyledLogin = styled.div`
   align-items: center;
   justify-content: center;
 
+  .Spinner {
+    margin-top: -4rem;
+  }
+
   .login-container {
     margin-top: -4.7rem;
     background-color: #FFFFFF;
@@ -18,6 +22,87 @@ const StyledLogin = styled.div`
     align-items: flex-end;
     flex-direction: column;
   }
+
+  .login-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.6rem;
+  }
+
+  /**===== dots4 =====*/
+
+  #dots4 {
+    position: relative;
+    width: 55px;
+    height: 6px;
+  }
+
+  #dots4 span {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 50%;
+    background: #fff;
+    -webkit-animation: dots4 1s infinite ease-in-out both;
+            animation: dots4 1s infinite ease-in-out both;
+    margin-right: 5px;
+  }
+
+  #dots4 span:nth-child(1) {
+    left: 0px;
+    -webkit-animation-delay: 0.0s;
+            animation-delay: 0.0s;
+  }
+
+  #dots4 span:nth-child(2) {
+    left: 15px;
+    -webkit-animation-delay: 0.1s;
+            animation-delay: 0.1s;
+  }
+
+  #dots4 span:nth-child(3) {
+    left: 30px;
+    -webkit-animation-delay: 0.2s;
+            animation-delay: 0.2s;
+  }
+
+  #dots4 span:nth-child(4) {
+    left: 45px;
+    -webkit-animation-delay: 0.3s;
+            animation-delay: 0.3s;
+  }
+
+  @keyframes dots4 {
+    0%, 80%, 100% {
+      -webkit-transform: scale(0);
+              transform: scale(0);
+      -webkit-transform: scale(0);
+              transform: scale(0);
+      opacity: 0;
+    }
+    40% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+      -webkit-transform: scale(1);
+              transform: scale(1);
+      opacity: 1;
+    }
+  }
+  @-webkit-keyframes dots4 {
+    0%, 80%, 100% {
+      -webkit-transform: scale(0);
+              transform: scale(0);
+      opacity: 0;
+    }
+    40% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+      opacity: 1;
+    }
+  }
+  /** END of dots4 */
  
 
   form {
@@ -83,5 +168,42 @@ const StyledLogin = styled.div`
       }
     }
   }
+
+
+  .pen {
+
+  .preloader-2 .line {
+    width: 1px;
+    height: 12px;
+    background: #fff;
+    margin: 0 3px;
+    display: inline-block;
+    animation: opacity-2 1000ms infinite ease-in-out;
+  }
+
+  .preloader-2 .line-1 { animation-delay: 800ms; }
+  .preloader-2 .line-2 { animation-delay: 600ms; }
+  .preloader-2 .line-3 { animation-delay: 400ms; }
+  .preloader-2 .line-4 { animation-delay: 200ms; }
+  .preloader-2 .line-6 { animation-delay: 200ms; }
+  .preloader-2 .line-7 { animation-delay: 400ms; }
+  .preloader-2 .line-8 { animation-delay: 600ms; }
+  .preloader-2 .line-9 { animation-delay: 800ms; }
+
+  @keyframes opacity-2 { 
+    0% { 
+      opacity: 1;
+      height: 15px;
+    }
+    50% { 
+      opacity: 0;
+      height: 12px;
+    }
+    100% { 
+      opacity: 1;
+      height: 15px;
+    }  
+  }
+}
 `
 export { StyledLogin }
