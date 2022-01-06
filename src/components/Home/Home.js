@@ -1,7 +1,6 @@
 import { StyledHome } from './Home.styled';
 import { Link } from 'react-router-dom';
 import { useAuthContext } from '../../hooks/useAuthContext';
-import Spinner from '../utils/Spinner/Spinner';
 
 const Home = () => {
   const { user, resetData } =  useAuthContext();

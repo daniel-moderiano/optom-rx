@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
-import { Link, useNavigate } from "react-router-dom";
-import { doc, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
+import { Link } from "react-router-dom";
+import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../../firebase/config";
 import { StyledViewScript } from "./ViewScript.styled.";
@@ -18,77 +18,6 @@ const ViewScript = ({ setToast }) => {
 
     fetchData();
   }, [id])
-
-  let navigate = useNavigate();
-
-  const [providerData, setProviderData] = useState({
-    prefix: false,
-    fullName: '',
-    qualifications: '',
-    practiceName: '',
-    streetAddress: '',
-    subpremise: '',
-    suburb: '',
-    postcode: '',
-    state: '',
-    phoneNumber: '',
-    prescriberNumber: '',
-    default: false,
-  });
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setProviderData((prevData) => ({
-      ...prevData, 
-      [name]: value 
-    }));
-  };
-
-  const toggleBooleanState = (setData, data, boolToChange) => {
-    let newState = true;
-    if (data[boolToChange]) {
-      newState = false;
-    }
-    setData((prevData) => ({
-      ...prevData,
-      [boolToChange]: newState,
-    }));
-  };
-
-  const handleSubmit = async () => {
-    // Add default
-    await updateDoc(doc(db, 'providers', id), {
-      ...providerData,
-    });
-
-    // Either a toast message here, or navigate back to Providers page and use an app-wide Toast alert system to show a toast on navigation back
-    setToast((prevData) => ({
-      ...prevData,
-      visible: true,
-      type: 'success',
-      message: 'Saved changes!'
-    }));
-
-    navigate('/providers');
-  };
-
-  const cancelEdit = () => {
-    navigate('/providers');
-  }
-
-  useEffect(() => {
-    const docRef = doc(db, 'providers', id);
-
-    const fetchProvider = async () => {
-      const docSnap = await getDoc(docRef);
-      setProviderData((prevData) => ({
-        ...prevData,
-        ...docSnap.data(),
-      }));
-    };
-
-    fetchProvider();
-  }, [id]);
 
   // Create a more UI friendly summary of drug name +/- brand
   const formatDrug = (script) => {
@@ -147,7 +76,6 @@ const ViewScript = ({ setToast }) => {
               <div className="Script__info--section Script__pbs">{`${scriptData.pbsRx ? 'PBS prescription' : 'Non-PBS prescription'}`}</div>
 
               {scriptData.authRequired && <div className="Script__authority">
-                {/* <div className="Script__authReq">Authority prescription</div> */}
                 <div className="Script__info--section Script__authCode">Authority code: {scriptData.authCode}</div>
                 <div className="Script__info--section Script__authNum">Authority Rx No: {scriptData.authRxNumber}</div>
                 <div className="Script__info--section Script__indications">Clinical justification for use of item: {scriptData.justification}</div>

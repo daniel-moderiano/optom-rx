@@ -810,7 +810,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
       });
     };
 
-    // ! Medicare card validation should be dependent on PBS Rx yes/no. Not required if Rx is non PBS
     const patientDataValidation = () => {
       document.querySelector('.patient-form').addEventListener('focusout', (event) => {
         const { name, value } = event.target
@@ -868,14 +867,11 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
 
     const miscDataValidation = () => {
       document.querySelector('.misc-form').addEventListener('focusout', (event) => {
-        const { name, value } = event.target
+        const { name } = event.target
         switch (true) {
           case name === 'date':
             validateRequiredField(setMiscAlerts, event.target);
             break;
-
-          // TODO: validation for authority code where applicable. Potentially enable fields on auto-detect of restricted benefits, or make required on same criteria, but enable at all times
-
           default:
             break;
         }
