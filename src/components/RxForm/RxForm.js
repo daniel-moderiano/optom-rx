@@ -943,25 +943,14 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
         noMedicare: false,
       });
 
-      // setProviderData({
-      //   prefix: false,
-      //   fullName: '',
-      //   qualifications: '',
-      //   practiceName: '',
-      //   streetAddress: '',
-      //   subpremise: '',
-      //   suburb: '',
-      //   postcode: '',
-      //   state: '',
-      //   phoneNumber: '',
-      //   prescriberNumber: '',
-      // });
-
       setMiscData((prevData) => ({
         ...prevData,
         authRxNumber: '',  
         authCode: '',    
         scriptID: '',   
+        justification: '',
+        prevAuth: false,
+        age: '',
       }));
       
       
@@ -1057,11 +1046,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
     return valid;
   };
 
-  const addNewProviderInline = (event) => {
-    event.preventDefault();
-    setNewProvider(true);
-    setShowProviderForm(true);
-  };
 
   // Used when the user wants to cancel adding a new provider on the RxForm page. Reset back to default selected provider
   const handleCancel = (event) => {

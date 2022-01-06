@@ -60,18 +60,44 @@ const StyledRxForm = styled.form`
     }
   }
 
-  .add-new-provider {
-    display: flex;
-    align-items: center;
-    margin-top: 2rem;
-
-    span {
-      /* display: block; */
-      font-size: 0.9rem;
-      padding-bottom: 0.1rem;
-      /* text-align: center; */
+  .provider-addBtn {
+      /* width: 12rem; */
+      display: inline-block;
+      font-size: 1rem;
+      font-family: var(--font-stack-segoe);
+      box-sizing: border-box;
+      cursor: pointer;
+      padding: 6px 16px 8px 16px;
+      border-radius: 2px;
+      min-width: 80px;
+      background-color: var(--primary-color);
+      color: rgb(255, 255, 255);
+      border: 1px solid var(--primary-color); 
+      text-decoration: none;
+      
+      &:hover {
+        background-color: var(--btn-primary-hover);
+        border: 1px solid var(--btn-primary-hover);
+      }
+      &:active {
+        transform: scale(0.98);
+      }
+      /* position: absolute;
+      left: 0.3rem;
+      top: 5rem;
+      background-color: #fff;
+      border: none;
+      margin: 0;
+      padding: 0;
+      font-size: 0.8rem;
+      text-decoration: underline;
+      font-family: var(--font-stack-segoe);
+      line-height: 0.8rem;
+      &:hover {
+        cursor: pointer;
+      } */
+  
     }
-  }
 
   .misc-form {
 

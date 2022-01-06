@@ -150,17 +150,10 @@ const ViewScript = ({ setToast }) => {
                 {/* <div className="Script__authReq">Authority prescription</div> */}
                 <div className="Script__info--section Script__authCode">Authority code: {scriptData.authCode}</div>
                 <div className="Script__info--section Script__authNum">Authority Rx No: {scriptData.authRxNumber}</div>
-                <div className="Script__info--section Script__indications">TODO: manual notes/indications</div>
+                <div className="Script__info--section Script__indications">Clinical justification for use of item: {scriptData.justification}</div>
               </div>}
-            </div>
-          
-            <div className="Script__other">
-            <div className="Script__title Script__title--other">Other details</div>
-            <div className="Script__info--section Script__date">Date prescribed: {formatDate(scriptData.date)}</div>
-          
-            
-            </div>
-          
+              <div className="Script__info--section Script__date">Date prescribed: {formatDate(scriptData.date)}</div>
+            </div>                
           </div>
         }
         
