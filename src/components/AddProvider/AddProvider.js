@@ -6,11 +6,15 @@ import ProviderForm from "../ProviderForm/ProviderForm";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { StyledAddProvider } from "./AddProvider.styled";
 import Fieldset from "../utils/Fieldset/Fieldset";
+import Spinner from "../utils/Spinner/Spinner";
 
 const AddProvider = ({ googleLoaded, setToast }) => {
   const { user } = useAuthContext();
 
   let navigate = useNavigate();
+
+  const [isPending, setIsPending] = useState(false);
+  const [error, setError] = useState(null);
 
   const [providerData, setProviderData] = useState({
     prefix: false,
@@ -46,51 +50,56 @@ const AddProvider = ({ googleLoaded, setToast }) => {
     }));
   };
 
-
-  // Add provider to firestore database when submitting from standalone form
   const handleSubmit = async (event) => {
     event.preventDefault(); 
+    setIsPending(true);
 
-    await addDoc(collection(db, 'providers'), {
-      ...providerData,
-      uid: user.uid,
-    });
-
-    // Add script data to the current user's saved scripts
-    await updateDoc(doc(db, 'users', user.uid), {
-      providers: arrayUnion({
+    try {
+      // Update data on backend
+      await addDoc(collection(db, 'providers'), {
         ...providerData,
-      })
-    });
+        uid: user.uid,
+      });
 
-    // Reset form both via state update and removal of UI classes (success classes)
-    setProviderData({
-      prefix: false,
-      fullName: '',
-      qualifications: '',
-      practiceName: '',
-      streetAddress: '',
-      subpremise: '',
-      suburb: '',
-      postcode: '',
-      state: '',
-      phoneNumber: '',
-      prescriberNumber: '',
-    });
-    
-    setToast((prevData) => ({
-      ...prevData,
-      visible: true,
-      type: 'success',
-      message: 'New provider added'
-    }));
+      setIsPending(false);
 
+      // Either a toast message here, or navigate back to Providers page and use an app-wide Toast alert system to show a toast on navigation back
+      setToast((prevData) => ({
+        ...prevData,
+        visible: true,
+        type: 'success',
+        message: 'New provider added'
+      }));
 
-    navigate('/providers');
- 
-    
+      // Reset form both via state update and removal of UI classes (success classes)
+      setProviderData({
+        prefix: false,
+        fullName: '',
+        qualifications: '',
+        practiceName: '',
+        streetAddress: '',
+        subpremise: '',
+        suburb: '',
+        postcode: '',
+        state: '',
+        phoneNumber: '',
+        prescriberNumber: '',
+      });
+
+      navigate('/providers');
+    } catch (error) {
+      setIsPending(false);
+      setError(error);
+      setToast((prevData) => ({
+        ...prevData,
+        visible: true,
+        type: 'error',
+        message: 'Failed to complete request'
+      }));
+    }
     
   };
+
 
   const cancelEdit = () => {
 
@@ -98,10 +107,16 @@ const AddProvider = ({ googleLoaded, setToast }) => {
 
   }
 
+  
+
   return (
     <StyledAddProvider>
       <h2 className="AddProvider__title">Add provider</h2>
       <p className="AddProvider__description">Enter details to add a new provider</p>
+      <div className="main-container">
+      {isPending && <div className="overlay">
+        <Spinner />
+      </div>}
       <Fieldset className="add-provider-form" legend="Provider Details">
         <ProviderForm 
           googleLoaded={googleLoaded} 
@@ -116,6 +131,9 @@ const AddProvider = ({ googleLoaded, setToast }) => {
           cancelBtn="Cancel"
         />
       </Fieldset>
+
+      </div>
+     
       
     </StyledAddProvider>
   )
