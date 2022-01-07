@@ -57,7 +57,9 @@ const TableProviders = ({ data, rowsPerPage, setToast }) => {
             await updateDoc(doc(db, 'providers', currentProviders[i].id), {
               default: true
             }); 
+  
             break;
+            
           } else {
             // Do not reset any defaults and end the loop here
             break;
@@ -144,8 +146,12 @@ const TableProviders = ({ data, rowsPerPage, setToast }) => {
                 
                 <Link className="table__action edit" to={`/edit/${provider.id}`}>Edit</Link>
                 <button className="table__action delete" onClick={() => deleteProvider(provider.id)}>Delete</button>
-                <button className={`${provider.default ? 'table__action default--selected' : 'table__action default'}`} onClick={(event) => setAsDefault(providers, provider.id)}>
-                  {`${provider.default ? 'Remove default' : 'Make default'}`}
+                <button className={`${(provider.default && !isPending) ? 'table__action default--selected' : 'table__action default'}`} onClick={(event) => setAsDefault(providers, provider.id)}>
+                  {isPending ? (
+                    'Updating...'
+                    ) : (
+                    `${provider.default ? 'Remove default' : 'Make default'}`
+                  )}
                 </button>
               </td>
             </tr>

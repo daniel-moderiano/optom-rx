@@ -47,7 +47,7 @@ const StyledProviderForm = styled.div`
     }
 
     .submit-btn {
-      min-width: 80px;
+      min-width: 130px;
       background-color: var(--primary-color);
       color: rgb(255, 255, 255);
       border: none;
