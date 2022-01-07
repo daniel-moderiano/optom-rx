@@ -7,11 +7,15 @@ import { Link } from "react-router-dom";
 import { db } from '../../firebase/config';
 import { arrayUnion, doc, setDoc, updateDoc } from "firebase/firestore";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import { useState } from "react";
+import Dots from '../utils/Dots/Dots'
 
 
 const RxTemplate = ({ data, setToast }) => {
   // Deconstructing for cleanliness of code and easier-to-understand operations
   const { drugData, patientData, providerData, miscData } = data;
+  const [isPending, setIsPending] = useState(false)
+  const [error, setError] = useState(null);
 
   // State is null by default, so checking for it's existence alone will ensure this is a valid link containing data vs a simple nav link
   let { state } = useLocation();
@@ -88,30 +92,44 @@ const RxTemplate = ({ data, setToast }) => {
   };
 
   const saveRx = async () => {
-    // Save a script onto firebase referenced by script ID/Number, containing only non-identifiable information
-    await setDoc(doc(db, 'scripts', data.miscData.scriptID), {
-      ...data.drugData,
-      ...data.miscData,
-      favourite: false,
-    });
-
-    // Add script data to the current user's saved scripts. This operation should only be called once per script!
-    await updateDoc(doc(db, 'users', user.uid), {
-      scripts: arrayUnion({
+    setIsPending(true);
+    setError(null);
+    try {
+      // Save a script onto firebase referenced by script ID/Number, containing only non-identifiable information
+      await setDoc(doc(db, 'scripts', data.miscData.scriptID), {
         ...data.drugData,
         ...data.miscData,
         favourite: false,
-      })
-    });
+      });
 
-    setToast((prevData) => ({
-      ...prevData,
-      visible: true,
-      type: 'success',
-      message: 'Prescription saved'
-    }));
+      // Add script data to the current user's saved scripts. This operation should only be called once per script!
+      await updateDoc(doc(db, 'users', user.uid), {
+        scripts: arrayUnion({
+          ...data.drugData,
+          ...data.miscData,
+          favourite: false,
+        })
+      });
 
-    navigate('/');
+      setIsPending(false);
+
+      setToast((prevData) => ({
+        ...prevData,
+        visible: true,
+        type: 'success',
+        message: 'Prescription saved'
+      }));
+
+      navigate('/');
+    } catch (error) {
+      setError(error);
+      setToast((prevData) => ({
+        ...prevData,
+        visible: true,
+        type: 'error',
+        message: 'There was a problem'
+      }));
+    }
   };
 
   return (
@@ -461,8 +479,12 @@ const RxTemplate = ({ data, setToast }) => {
               Print
             </button>
             <button type="button" className="RxTemplate__btn btn-finish" onClick={saveRx}>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><title>Save</title><path d="M380.93 57.37A32 32 0 00358.3 48H94.22A46.21 46.21 0 0048 94.22v323.56A46.21 46.21 0 0094.22 464h323.56A46.36 46.36 0 00464 417.78V153.7a32 32 0 00-9.37-22.63zM256 416a64 64 0 1164-64 63.92 63.92 0 01-64 64zm48-224H112a16 16 0 01-16-16v-64a16 16 0 0116-16h192a16 16 0 0116 16v64a16 16 0 01-16 16z" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32"/></svg>
-              Save and Finish
+              {isPending ? (
+                <Dots color="white"/>
+              ) : (<>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><title>Save</title><path d="M380.93 57.37A32 32 0 00358.3 48H94.22A46.21 46.21 0 0048 94.22v323.56A46.21 46.21 0 0094.22 464h323.56A46.36 46.36 0 00464 417.78V153.7a32 32 0 00-9.37-22.63zM256 416a64 64 0 1164-64 63.92 63.92 0 01-64 64zm48-224H112a16 16 0 01-16-16v-64a16 16 0 0116-16h192a16 16 0 0116 16v64a16 16 0 01-16 16z" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32"/></svg>
+                Save and Finish
+              </>)}
             </button>
           </div>
           

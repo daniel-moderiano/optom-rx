@@ -98,6 +98,9 @@ const StyledRxTemplate = styled.div`
 
     .primary-btns {
       display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 2.6rem;
     }
 
     .RxTemplate__btn {
@@ -131,6 +134,12 @@ const StyledRxTemplate = styled.div`
       border: none;
       margin-right: 1.5rem;
       text-decoration: none;       
+    }
+
+    .btn-finish {
+      height: 2.6rem;
+      width: 169px;
+      justify-content: center;
     }
     
     .btn-finish:hover, .btn-print:hover {
