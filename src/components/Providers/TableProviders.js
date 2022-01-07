@@ -9,7 +9,7 @@ import { doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useCollection } from "../../hooks/useCollection";
-import Spinner from "../utils/Spinner/Spinner";
+import Dots from '../utils/Dots/Dots'
 
 const TableProviders = ({ data, rowsPerPage, setToast }) => {
   // Start on page 1
@@ -113,11 +113,9 @@ const TableProviders = ({ data, rowsPerPage, setToast }) => {
   return (
     <>
       <StyledTableProviders className="table">
-        {/* Preset table header. Note this reduces the re-usability of the Table component, but not the TableFooter */}
-        {isPending && <div className="overlay">
-          <Spinner />
-        </div>}
-        
+
+    
+        {/* Preset table header. Note this reduces the re-usability of the Table component, but not the TableFooter */}        
         <thead className="tableRowHeader">
           <tr>
             <th className="tableHeader">Name</th>
@@ -146,7 +144,9 @@ const TableProviders = ({ data, rowsPerPage, setToast }) => {
                 
                 <Link className="table__action edit" to={`/edit/${provider.id}`}>Edit</Link>
                 <button className="table__action delete" onClick={() => deleteProvider(provider.id)}>Delete</button>
-                <button className={`${provider.default ? 'table__action default--selected' : 'table__action default'}`} onClick={() => setAsDefault(providers, provider.id)}>{`${provider.default ? 'Remove default' : 'Make default'}`}</button>
+                <button className={`${provider.default ? 'table__action default--selected' : 'table__action default'}`} onClick={(event) => setAsDefault(providers, provider.id)}>
+                  {`${provider.default ? 'Remove default' : 'Make default'}`}
+                </button>
               </td>
             </tr>
           ))}

@@ -56,7 +56,7 @@ const StyledProviderForm = styled.div`
       align-items: center;
       justify-content: center;
       height: 2.6rem;
-      
+       
 
     }
     

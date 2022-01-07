@@ -2,7 +2,7 @@ import { StyledDots } from "./Dots.styled"
 
 const Dots = ({ color }) => {
   return (
-    <StyledDots id="Dots">
+    <StyledDots className="Dots">
       <span className={color}></span>
       <span className={color}></span>
       <span className={color}></span>

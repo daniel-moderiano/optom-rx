@@ -38,6 +38,7 @@ const StyledTableProviders = styled.table`
     font-size: 0.9rem;
     color: #48515B;
     border-bottom: 1px solid #D1D6DB;
+    vertical-align: middle;
 
   
     .table__action {
@@ -51,13 +52,17 @@ const StyledTableProviders = styled.table`
       border-radius: 2px;
       background-color: #fff;
       box-sizing: border-box;
+      height: 1.75rem;
     }
 
     .default {
       color: var(--neutral);
       border: 0.1rem solid #4a7188; 
       width: 7.1rem;
-      
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+   
       &:hover {
         background-color: #f8fafa;
         border: 0.1rem solid var(--neutral);

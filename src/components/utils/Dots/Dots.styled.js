@@ -22,6 +22,10 @@ const StyledDots = styled.div`
     background-color:  #fff;
   }
 
+  .blue {
+    background-color: var(--neutral);
+  }
+
   span:nth-child(1) {
     left: 0px;
     -webkit-animation-delay: 0.0s;
