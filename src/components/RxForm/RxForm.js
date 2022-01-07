@@ -12,16 +12,18 @@ import { useNumbers } from '../../hooks/useNumbers';
 import { usePBSFetch } from "../../hooks/usePBSFetch";
 import Select from 'react-select';
 import { Link } from "react-router-dom";
+import Spinner from "../utils/Spinner/Spinner";
 
 // ! Multiple optometrist items are not permitted to be prescribed on the same form; each must use an individual form
 
 const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
   const [{ scriptNo, authRxNo, isError, isLoading }, fetchNumbers] = useNumbers();
   const { user } = useAuthContext();
-  const { documents: providers } = useCollection('providers', ['uid', '==', user.uid]);
+
+  const { documents: providers, isPending, error } = useCollection('providers', ['uid', '==', user.uid]);
 
   const [{ pbsInfo, pbsError, pbsLoading }, fetchDrug, clearPbsState] = usePBSFetch(existingData.pbsData);
-  const [newProvider, setNewProvider] = useState(false);
+
   const [authorityMessage, setAuthorityMessage] = useState('Please select a medication for authority requirements')
 
   const [indication, setIndication] = useState('');
@@ -128,20 +130,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
     phoneNumber: '',
     prescriberNumber: '',
     ...existingData.providerData,
-  });
-
-  const [newProviderData, setNewProviderData] = useState({
-    prefix: false,
-    fullName: '',
-    qualifications: '',
-    practiceName: '',
-    streetAddress: '',
-    subpremise: '',
-    suburb: '',
-    postcode: '',
-    state: '',
-    phoneNumber: '',
-    prescriberNumber: '',
   });
 
   const [miscData, setMiscData] = useState({
@@ -1042,26 +1030,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
     return valid;
   };
 
-
-  // Used when the user wants to cancel adding a new provider on the RxForm page. Reset back to default selected provider
-  const handleCancel = (event) => {
-    setNewProvider(false);
-    setNewProviderData({
-      prefix: false,
-      fullName: '',
-      qualifications: '',
-      practiceName: '',
-      streetAddress: '',
-      subpremise: '',
-      suburb: '',
-      postcode: '',
-      state: '',
-      phoneNumber: '',
-      prescriberNumber: '',
-    })
-    setShowProviderForm(false);
-  };
-
   useEffect(() => {
     if (providers) {
       
@@ -1124,44 +1092,38 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
       <h2 className="RxForm__title">New Prescription</h2>
       <p className="RxForm__description">Fill out the details required to prescribe</p>
       <div className="scriptNo" data-testid="scriptNo">Script number: {isLoading ? 'Loading...' : miscData.scriptID}</div>
+
       <Fieldset className="provider-form" legend="Provider Details">
-      <div className="provider-controls">
-        {(!newProvider && selectOptions.length > 0) && 
-            <>
-            <label htmlFor="react-select">Select provider</label>
-            <Select 
-              options={selectOptions} 
-              isSearchable={false}
-              value={chosenProvider}
-              onChange={handleSelectChange}
-              styles={customStyles}
-              placeholder="Select provider..."
-              id="react-select"
-            /> 
-          </>
-        }
 
-        {(!newProvider && selectOptions.length) === 0 && 
-          <Link className="provider-addBtn provider-addBtn--solo" to="/add-provider">Add new provider</Link>
-        }
+        <div className="provider-controls">
+          {isPending && <Spinner />}
+          {providers && (<>
+            {(providers.length > 0) ? (
+              <>
+                <label htmlFor="react-select">Select provider</label>
+                <Select 
+                  options={selectOptions} 
+                  isSearchable={false}
+                  value={chosenProvider}
+                  onChange={handleSelectChange}
+                  styles={customStyles}
+                  placeholder="Select provider..."
+                  id="react-select"
+                /> 
+              </>
+            ) : (
+              <Link className="provider-addBtn provider-addBtn--solo" to="/add-provider">Add new provider</Link>
+            )}
+          </>)}
         </div>
-      
+        
 
-        {showProviderForm && 
-          <ProviderForm 
-            googleLoaded={googleLoaded}
-            standalone={true}
-            data={newProviderData}
-            setData={setNewProviderData}
-            handleChange={(event) => handleChange(setProviderData, event)}      
-            provider={false}   
-            alerts={providerAlerts}
-            setAlerts={setProviderAlerts} 
-            toggleBooleanState={toggleBooleanState}
-            cancelBtn="Cancel"
-            handleCancel={handleCancel}
-          />
-        }
+        
+            
+      
+        
+       
+      
       </Fieldset>
 
       <Fieldset className="patient-form" legend="Patient Details">
@@ -1381,9 +1343,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
             </div>
           )
         }
-       
-       
-       
 
         <FormField 
           fieldType="date" 
@@ -1393,11 +1352,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
           onChange={(event) => handleChange(setMiscData, event)} 
           alert={miscAlerts.date}
         />
-
-       
-        
-
-       
 
       </Fieldset>
 
