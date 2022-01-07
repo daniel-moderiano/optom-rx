@@ -22,6 +22,7 @@ export const useLogin = () => {
       .catch((err) => {
         setIsPending(false);
         setError(err.message)
+        console.log(err);
       })
   }
 

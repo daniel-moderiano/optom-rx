@@ -15,6 +15,27 @@ export const useSignup = () => {
   const signup = async (email, password, displayName) => {
     setError(null);
     setIsPending(true);
+
+    const errorHandling = (errorCode) => {
+      switch (errorCode) {
+        case 'auth/email-already-in-use':
+          setError('This email is already in use. Try another')
+          break;
+        case 'auth/internal-error':
+          setError('An unknown server error occured. Please try again')
+          break;
+        case 'auth/invalid-email':
+          setError('Please enter a valid email address')
+          break;
+        case 'auth/weak-password':
+          setError('Please create a password at least six characters in length')
+          break;
+      
+        default:
+          break;
+      }
+    };
+
     try {
       
       // Firebase function to sign up user. Once resolved, confirm with a context state change
@@ -34,10 +55,11 @@ export const useSignup = () => {
       setIsPending(false);
       dispatch({ type: 'LOGIN', payload: res.user })
       
-    } catch (error) {
+    } catch (err) {
       setIsPending(false);
-      setError(error.message)
+      errorHandling(err.code);
     }
+
   }
   return { error, isPending, signup }
 }
