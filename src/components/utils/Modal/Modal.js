@@ -1,6 +1,22 @@
+import { useEffect } from "react";
 import { StyledModal } from "./Modal.styled"
 
 const Modal = ({ title, children, closeModal }) => {
+
+  useEffect(() => {
+    const outsideClick = (event) => {
+      if (event.target === document.querySelector('.Modal')) {
+        closeModal();
+      }
+    }
+
+    window.addEventListener('click', outsideClick);
+
+    return () => {
+      window.removeEventListener('click', outsideClick)
+    }
+  }, [closeModal])
+
   return (
     <StyledModal className="Modal">
       <div className="Modal__content">
