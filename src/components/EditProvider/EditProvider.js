@@ -6,11 +6,15 @@ import { db } from "../../firebase/config";
 import ProviderForm from "../ProviderForm/ProviderForm";
 import { StyledEditProvider } from "./EditProvider.styled";
 import Fieldset from "../utils/Fieldset/Fieldset";
+import { useProvider } from "../../hooks/useProvider";
+import Spinner from "../utils/Spinner/Spinner";
 
 const EditProvider = ({ googleLoaded, setToast }) => {
   const { id } = useParams();
 
   let navigate = useNavigate();
+
+  const { provider, isPending, error } = useProvider(id)
 
   const [providerData, setProviderData] = useState({
     prefix: false,
@@ -67,26 +71,22 @@ const EditProvider = ({ googleLoaded, setToast }) => {
     navigate('/providers');
   }
 
-
+  // Update the local state data once the provider data is fetched from the server
   useEffect(() => {
-    const docRef = doc(db, 'providers', id);
-
-    const fetchProvider = async () => {
-      const docSnap = await getDoc(docRef);
-      setProviderData((prevData) => ({
-        ...prevData,
-        ...docSnap.data(),
-      }));
-    };
-
-    fetchProvider();
-  }, [id]);
+    setProviderData((prevData) => ({
+      ...prevData,
+      ...provider,
+    }));
+  }, [provider]);
 
   return (
     <StyledEditProvider>
       <h2 className="EditProvider__title">Edit provider</h2>
       <p className="EditProvider__description">Change any details and then save changes</p>
       <Fieldset className="edit-provider-form" legend="Provider Details">
+        {isPending && <div className="overlay">
+          <Spinner />
+        </div>}
         <ProviderForm 
           googleLoaded={googleLoaded} 
           standalone={true} 

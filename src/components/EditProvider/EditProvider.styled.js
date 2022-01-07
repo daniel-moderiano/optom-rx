@@ -22,6 +22,7 @@ const StyledEditProvider = styled.div`
   }
 
   .edit-provider-form {
+    position: relative;
     border-top: 1px solid #dfe1e1;
     margin-top: 2.5rem;
   }
