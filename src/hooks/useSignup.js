@@ -9,11 +9,14 @@ import { doc, setDoc } from "firebase/firestore";
 export const useSignup = () => {
   // Error can be passed to UI elements as needed
   const [error, setError] = useState(null);
+  const [isPending, setIsPending] = useState(false);
   const { dispatch } = useAuthContext();
 
   const signup = async (email, password, displayName) => {
     setError(null);
+    setIsPending(true);
     try {
+      
       // Firebase function to sign up user. Once resolved, confirm with a context state change
       const res = await createUserWithEmailAndPassword(auth, email, password);
 
@@ -28,11 +31,13 @@ export const useSignup = () => {
         scripts: [],
       });
   
+      setIsPending(false);
       dispatch({ type: 'LOGIN', payload: res.user })
       
     } catch (error) {
+      setIsPending(false);
       setError(error.message)
     }
   }
-  return { error, signup }
+  return { error, isPending, signup }
 }

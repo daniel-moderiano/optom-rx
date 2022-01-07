@@ -12,6 +12,7 @@ const StyledFormField = styled.div`
     border-radius: 4px;
     font-size: 1rem;
     font-family: var(--font-stack-segoe);
+    background-color: #fff;
 
     &.error {
       border: 0.1rem solid var(--error);
@@ -48,6 +49,14 @@ const StyledFormField = styled.div`
     font-size: 0.9rem;
     display: flex;
     flex-direction: column;
+  }
+
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
+
+  input[type=date] {
+    width: 100%;
   }
 
   

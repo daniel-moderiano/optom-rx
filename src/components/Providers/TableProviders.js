@@ -133,15 +133,7 @@ const TableProviders = ({ data, rowsPerPage, setToast }) => {
             <tr className="tableRowItems" key={provider.id}>
               <td className="tableCell">{provider.fullName}</td>
               <td className="tableCell">{formatLocation(provider.practiceName, provider.streetAddress, provider.suburb)}</td>
-              {/* <td className="tableCell">
-                <FormField 
-                  fieldType="checkbox" 
-                  name="defaultProvider"
-                  onChange={() => setAsDefault(providers, provider.id)}
-                  checked={provider.default}
-                  className="checkbox defaultProvider"
-                /> 
-              </td > */}
+
               <td className="tableCell actions-cell">
                 
                 <Link className="table__action edit" to={`/edit/${provider.id}`}>Edit</Link>

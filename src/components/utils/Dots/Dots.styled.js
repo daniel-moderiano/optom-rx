@@ -13,8 +13,8 @@ const StyledDots = styled.div`
     background: rgba(0, 0, 0, 0.25);
     border-radius: 50%;
     background-color:  var(--primary-color);
-    -webkit-animation: dots4 1s infinite ease-in-out both;
-            animation: dots4 1s infinite ease-in-out both;
+    -webkit-animation: dots 1s infinite ease-in-out both;
+            animation: dots 1s infinite ease-in-out both;
     margin-right: 5px;
   }
 
@@ -50,7 +50,7 @@ const StyledDots = styled.div`
             animation-delay: 0.3s;
   }
 
-  @keyframes Dots {
+  @keyframes dots {
     0%, 80%, 100% {
       -webkit-transform: scale(0);
               transform: scale(0);
@@ -66,7 +66,7 @@ const StyledDots = styled.div`
       opacity: 1;
     }
   }
-  @-webkit-keyframes Dots {
+  @-webkit-keyframes dots {
     0%, 80%, 100% {
       -webkit-transform: scale(0);
               transform: scale(0);
