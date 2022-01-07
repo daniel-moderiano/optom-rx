@@ -10,6 +10,26 @@ export const useLogin = () => {
   const [isPending, setIsPending] = useState(false);
   const { dispatch } = useAuthContext();
 
+  const errorHandling = (errorCode) => {
+    switch (errorCode) {
+      case 'auth/internal-error':
+        setError('An unknown server error occured. Please try again')
+        break;
+      case 'auth/invalid-email':
+        setError('Please enter a valid email address')
+        break;
+      case 'auth/wrong-password':
+        setError('Incorrect password, please try again')
+        break;
+      case 'auth/user-not-found':
+        setError('No user exists with that email. Please try again, or sign in to create an account')
+        break;
+    
+      default:
+        break;
+    }
+  };
+
   const login = (email, password) => {
     setError(null);
     setIsPending(true);
@@ -21,8 +41,7 @@ export const useLogin = () => {
       })
       .catch((err) => {
         setIsPending(false);
-        setError(err.message)
-        console.log(err);
+        errorHandling(err.code);
       })
   }
 
