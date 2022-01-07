@@ -14,7 +14,10 @@ const EditProvider = ({ googleLoaded, setToast }) => {
 
   let navigate = useNavigate();
 
-  const { provider, isPending, error } = useProvider(id)
+  const { provider, isPending, error } = useProvider(id);
+
+  const [localPending, setLocalPending] = useState(false);
+  const [localError, setLocalError] = useState(null);
 
   const [providerData, setProviderData] = useState({
     prefix: false,
@@ -51,20 +54,36 @@ const EditProvider = ({ googleLoaded, setToast }) => {
   };
 
   const handleSubmit = async () => {
-    // Add default
-    await updateDoc(doc(db, 'providers', id), {
-      ...providerData,
-    });
+    setLocalPending(true);
 
-    // Either a toast message here, or navigate back to Providers page and use an app-wide Toast alert system to show a toast on navigation back
-    setToast((prevData) => ({
-      ...prevData,
-      visible: true,
-      type: 'success',
-      message: 'Provider details updated'
-    }));
+    try {
+      // Update data on backend
+      await updateDoc(doc(db, 'providers', id), {
+        ...providerData,
+      });
 
-    navigate('/providers');
+      setLocalPending(false);
+
+      // Either a toast message here, or navigate back to Providers page and use an app-wide Toast alert system to show a toast on navigation back
+      setToast((prevData) => ({
+        ...prevData,
+        visible: true,
+        type: 'success',
+        message: 'Provider details updated'
+      }));
+
+      navigate('/providers');
+    } catch (error) {
+      setLocalPending(false);
+      setLocalError(error);
+      setToast((prevData) => ({
+        ...prevData,
+        visible: true,
+        type: 'error',
+        message: 'Failed to complete request'
+      }));
+    }
+    
   };
 
   const cancelEdit = () => {
@@ -83,23 +102,33 @@ const EditProvider = ({ googleLoaded, setToast }) => {
     <StyledEditProvider>
       <h2 className="EditProvider__title">Edit provider</h2>
       <p className="EditProvider__description">Change any details and then save changes</p>
+      <div className="main-container">
+      {isPending && <div className="overlay">
+        <Spinner />
+      </div>}
+
+      {localPending && <div className="overlay">
+        <Spinner />
+      </div>}
       <Fieldset className="edit-provider-form" legend="Provider Details">
-        {isPending && <div className="overlay">
-          <Spinner />
-        </div>}
-        <ProviderForm 
-          googleLoaded={googleLoaded} 
-          standalone={true} 
-          data={providerData}
-          setData={setProviderData}
-          handleChange={handleChange}
-          handleSubmit={handleSubmit}
-          handleCancel={cancelEdit}
-          toggleBooleanState={() => toggleBooleanState(setProviderData, providerData, 'prefix')}
-          submitBtn="Save changes"
-          cancelBtn="Cancel"
-        />
+     
+      
+      <ProviderForm 
+        googleLoaded={googleLoaded} 
+        standalone={true} 
+        data={providerData}
+        setData={setProviderData}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        handleCancel={cancelEdit}
+        toggleBooleanState={() => toggleBooleanState(setProviderData, providerData, 'prefix')}
+        submitBtn="Save changes"
+        cancelBtn="Cancel"
+        pending={isPending}
+      />
       </Fieldset>
+      </div>
+      
     </StyledEditProvider>
   )
 }
