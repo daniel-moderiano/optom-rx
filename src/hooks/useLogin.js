@@ -11,6 +11,7 @@ export const useLogin = () => {
   const { dispatch } = useAuthContext();
 
   const errorHandling = (errorCode) => {
+    console.log(errorCode);
     switch (errorCode) {
       case 'auth/internal-error':
         setError('An unknown server error occured. Please try again')
@@ -23,6 +24,9 @@ export const useLogin = () => {
         break;
       case 'auth/user-not-found':
         setError('No user exists with that email. Please try again, or sign in to create an account')
+        break;
+      case 'auth/too-many-requests':
+        setError('Failed to login too many times. Please wait a few minutes before trying again')
         break;
     
       default:

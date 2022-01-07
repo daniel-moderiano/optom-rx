@@ -2,7 +2,7 @@ import { useSignup } from "../../hooks/useSignup";
 import { Link } from "react-router-dom";
 import { StyledSignup } from "./Signup.styled";
 import FormField from "../FormField/FormField";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Dots from "../utils/Dots/Dots";
 
 const Signup = () => {
@@ -10,6 +10,72 @@ const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [displayName, setDisplayName] = useState('');
+
+  const [emailAlert, setEmailAlert] = useState({});
+  const [passwordAlert, setPasswordAlert] = useState({});
+  const [displayNameAlert, setDisplayNameAlert] = useState({});
+
+
+  // Inline form validation
+  useEffect(() => {
+    // Event propagation will capture all focusout events from login form
+    const signupValidation = () => {
+      document.querySelector('.Signup__form').addEventListener('focusout', (event) => {
+        const { name, value } = event.target;
+        switch (true) {
+          case name === 'email':
+            // Check for blank field
+            if (value.trim().length === 0) {
+              setEmailAlert({
+                  message: "This field cannot be left blank",
+                  type: 'error',
+                }
+              );
+              event.target.classList.add('error');
+            } else {
+              event.target.classList.remove('error');
+              setEmailAlert({});
+            }
+            break;
+
+          case name === 'password':
+            // Check for blank field
+            if (value.trim().length === 0) {
+              setPasswordAlert({
+                  message: "This field cannot be left blank",
+                  type: 'error',
+                }
+              );
+              event.target.classList.add('error');
+            } else {
+              event.target.classList.remove('error');
+              setPasswordAlert({});
+            }
+            break;
+
+          case name === 'displayName':
+            // Check for blank field
+            if (value.trim().length === 0) {
+              setDisplayNameAlert({
+                  message: "This field cannot be left blank",
+                  type: 'error',
+                }
+              );
+              event.target.classList.add('error');
+            } else {
+              event.target.classList.remove('error');
+              setDisplayNameAlert({});
+            }
+            break;
+
+          default:
+            break;
+        }
+      });
+    };
+
+    signupValidation();
+  }, []);
 
   return (
     <StyledSignup className="Signup">
@@ -22,7 +88,7 @@ const Signup = () => {
           buttonLabel="Sign up"
         /> */}
 
-        <form onSubmit={(event) => {
+        <form className="Signup__form" onSubmit={(event) => {
           event.preventDefault();
           signup(email, password, displayName)
         }}>
@@ -34,6 +100,7 @@ const Signup = () => {
           value={email} 
           onChange={(event) => setEmail(event.target.value)} 
           className="auth-field form-field"
+          alert={emailAlert}
         />
 
         <FormField 
@@ -43,6 +110,7 @@ const Signup = () => {
           value={password} 
           onChange={(event) => setPassword(event.target.value)} 
           className="auth-field form-field"
+          alert={passwordAlert}
         />
 
           <div className="displayName-group">
@@ -53,6 +121,7 @@ const Signup = () => {
               value={displayName} 
               onChange={(event) => setDisplayName(event.target.value)} 
               className="auth-field form-field displayName-field"
+              alert={displayNameAlert}
             />
             <span className="displayName-msg">This name will be visible only to you when logged in</span>
           </div>
