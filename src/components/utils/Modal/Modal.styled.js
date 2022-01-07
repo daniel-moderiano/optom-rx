@@ -16,7 +16,7 @@ const StyledModal = styled.div`
 
   .Modal__content {
     background-color: #fff;
-    width: 20rem;
+    width: 500px;
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
@@ -32,11 +32,16 @@ const StyledModal = styled.div`
     width: 100%;
 
     .Modal__title {
-      font-size: 1rem;
+      font-family: var(--font-stack-segoe);
+      font-size: 1.2rem;
       font-weight: bold;
       margin: 0;
       padding: 0;
     }
+  }
+
+  .Modal__main {
+    width: 100%;
   }
 
   .Modal__close {

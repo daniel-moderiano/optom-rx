@@ -28,7 +28,10 @@ const Providers = ({ setToast }) => {
   return (
     <StyledProviders className="Providers">
       <Modal title="Delete provider">
-        
+        <div className="Modal__buttons">
+          <button className="cancel-btn Modal__btn">Cancel</button>
+          <button className="delete-btn Modal__btn">Delete</button>
+        </div>
       </Modal>
       <h2 className="Providers__title">Providers</h2>
       <p className="Providers__description">Use this section to add provider details that can be used in your prescriptions</p>
