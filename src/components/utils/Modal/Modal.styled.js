@@ -17,7 +17,7 @@ const StyledModal = styled.div`
   .Modal__content {
     background-color: #fff;
     width: 500px;
-    padding: 1.5rem;
+    padding: 1.6rem 1.75rem 1.75rem 1.75rem;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
