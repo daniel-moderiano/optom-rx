@@ -141,7 +141,7 @@ const TableProviders = ({ data, rowsPerPage, setToast }) => {
 
   return (
     <>
-      {showModal && <Modal title="Delete provider">
+      {showModal && <Modal title="Delete provider" closeModal={() => setShowModal(false)}>
         <div className="error-container">
           <div className="error-icon">
             <svg xmlns="http://www.w3.org/2000/svg" className="alert-icon alert-icon--neutral" viewBox="0 0 512 512" width="24px">

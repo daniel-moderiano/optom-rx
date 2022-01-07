@@ -82,7 +82,7 @@ const StyledProviders = styled.div`
 
       .error-text {
         color: #C02121;
-        font-size: 0.85rem;
+        font-size: 0.9rem;
         font-weight: bold;
       }
     }
