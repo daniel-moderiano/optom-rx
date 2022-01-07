@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import TableProviders from './TableProviders';
 import Spinner from '../utils/Spinner/Spinner';
 import { useEffect } from 'react';
+import Modal from '../utils/Modal/Modal';
 
 const Providers = ({ setToast }) => {
   const { user } = useAuthContext();
@@ -26,6 +27,9 @@ const Providers = ({ setToast }) => {
 
   return (
     <StyledProviders className="Providers">
+      <Modal title="Delete provider">
+        
+      </Modal>
       <h2 className="Providers__title">Providers</h2>
       <p className="Providers__description">Use this section to add provider details that can be used in your prescriptions</p>
   
