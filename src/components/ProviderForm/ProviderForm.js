@@ -4,10 +4,11 @@ import { useState, useEffect, useCallback } from "react";
 import { StyledProviderForm } from './ProviderForm.styled.js'
 import Spinner from "../utils/Spinner/Spinner";
 import Dots from "../utils/Dots/Dots";
+import LoadOverlay from "../utils/LoadOverlay/LoadOverlay";
 
 // ! Legal requirements include the prescriber's name, address, and contact details, and prescriber number
 
-const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBooleanState, googleLoaded, standalone, handleSubmit, handleCancel, submitBtn, cancelBtn, pending }) => {
+const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBooleanState, googleLoaded, standalone, handleSubmit, handleCancel, submitBtn, cancelBtn, pending, formPending }) => {
 
   const [providerAlerts, setProviderAlerts] = useState({
     fullName: {},
@@ -269,82 +270,85 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
       {/* The standalone form allows all 'in house' state management and validation, but has the optiona of overwriting data with custom state if required */}
       {/* Standalone form should submit providers to firebase using user ID as document ID */}
       {standalone &&  <StyledProviderForm className="ProviderForm ProviderForm--standalone">
-        
-        <FormField 
-          fieldType="text" 
-          name="fullName"
-          label="Full name" 
-          value={data.fullName} 
-          onChange={handleChange} 
-          alert={alerts ? alerts.fullName : providerAlerts.fullName}
-        />    
+        <div className="fields">
+          {formPending && <LoadOverlay />}
+          <FormField 
+            fieldType="text" 
+            name="fullName"
+            label="Full name" 
+            value={data.fullName} 
+            onChange={handleChange} 
+            alert={alerts ? alerts.fullName : providerAlerts.fullName}
+          />    
 
-        <FormField 
-          fieldType="checkbox" 
-          name="prefix"
-          label="Include 'Dr' in provider name" 
-          onChange={toggleBooleanState}
-          checked={data.prefix}
-          className="checkbox prefix-field"
-          enterFunc={(event) => {
-            if (event.keyCode === 13) {
-              toggleBooleanState(setData, data, event.target.name);
-            }
-          }}
-        />  
+          <FormField 
+            fieldType="checkbox" 
+            name="prefix"
+            label="Include 'Dr' in provider name" 
+            onChange={toggleBooleanState}
+            checked={data.prefix}
+            className="checkbox prefix-field"
+            enterFunc={(event) => {
+              if (event.keyCode === 13) {
+                toggleBooleanState(setData, data, event.target.name);
+              }
+            }}
+          />  
 
-        <FormField 
-          fieldType="text" 
-          name="qualifications"
-          label="Abbreviated qualifications (optional)" 
-          placeholder="e.g. BMedSci(VisSc), MOpt"
-          value={data.qualifications} 
-          onChange={handleChange} 
-          maxlength="40"
-        />
+          <FormField 
+            fieldType="text" 
+            name="qualifications"
+            label="Abbreviated qualifications (optional)" 
+            placeholder="e.g. BMedSci(VisSc), MOpt"
+            value={data.qualifications} 
+            onChange={handleChange} 
+            maxlength="40"
+          />
 
-        {/* Practice name is only relevant for providers, and even then you might consider omitting this, as there is really no room on the computerised for for practice name */}
-        <FormField 
-          name="practiceName"
-          label="Practice name (optional)" 
-          value={data.practiceName} 
-          onChange={handleChange} 
-        />
+          {/* Practice name is only relevant for providers, and even then you might consider omitting this, as there is really no room on the computerised for for practice name */}
+          <FormField 
+            name="practiceName"
+            label="Practice name (optional)" 
+            value={data.practiceName} 
+            onChange={handleChange} 
+          />
 
-        <AddressAutocomplete 
-          data={data}
-          setData={setData}
-          handleChange={handleChange}
-          provider={true}   
-          alerts={alerts ? alerts : providerAlerts}
-          setAlerts={setAlerts ? setAlerts : setProviderAlerts} 
-          googleLoaded={googleLoaded}
-        />
+          <AddressAutocomplete 
+            data={data}
+            setData={setData}
+            handleChange={handleChange}
+            provider={true}   
+            alerts={alerts ? alerts : providerAlerts}
+            setAlerts={setAlerts ? setAlerts : setProviderAlerts} 
+            googleLoaded={googleLoaded}
+          />
 
-        {/* Because this is intended for use only in Australia, present and validate phone numbers in national format, which includes 10 digits for landline and mobile numbers, as follows: 02 1234 4321 [telephone], or 0400 000 000 [mobile]. Note that 13 numbers may be 6 or 10 digits, and indicates an Australia wide number. This shouldn't be appropriate for any optical practices, but should be able to be inputted regardless */}
+          {/* Because this is intended for use only in Australia, present and validate phone numbers in national format, which includes 10 digits for landline and mobile numbers, as follows: 02 1234 4321 [telephone], or 0400 000 000 [mobile]. Note that 13 numbers may be 6 or 10 digits, and indicates an Australia wide number. This shouldn't be appropriate for any optical practices, but should be able to be inputted regardless */}
 
-        <FormField 
-          fieldType="text" 
-          name="phoneNumber"
-          label="Phone number" 
-          value={data.phoneNumber} 
-          onChange={handleChange} 
-          alert={alerts ? alerts.phoneNumber : providerAlerts.phoneNumber}
-          id="phoneNumber"
-          maxlength="10"
-          className="phoneNo-field form-field"
-        />
+          <FormField 
+            fieldType="text" 
+            name="phoneNumber"
+            label="Phone number" 
+            value={data.phoneNumber} 
+            onChange={handleChange} 
+            alert={alerts ? alerts.phoneNumber : providerAlerts.phoneNumber}
+            id="phoneNumber"
+            maxlength="10"
+            className="phoneNo-field form-field"
+          />
 
-        <FormField 
-          fieldType="text" 
-          name="prescriberNumber"
-          label="Prescriber number" 
-          value={data.prescriberNumber} 
-          onChange={handleChange} 
-          alert={alerts ? alerts.prescriberNumber : providerAlerts.prescriberNumber}
-          maxlength="7"
-          className="prescriberNo-field form-field"
-        />
+          <FormField 
+            fieldType="text" 
+            name="prescriberNumber"
+            label="Prescriber number" 
+            value={data.prescriberNumber} 
+            onChange={handleChange} 
+            alert={alerts ? alerts.prescriberNumber : providerAlerts.prescriberNumber}
+            maxlength="7"
+            className="prescriberNo-field form-field"
+          />
+        </div>
+       
 
         {/* Only visible on standalone forms */}
         <div className="ProviderForm__btns">

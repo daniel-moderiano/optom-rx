@@ -5,22 +5,8 @@ const StyledProviderForm = styled.div`
   flex-direction: column;
   position: relative;
 
-  .overlay {
-    background-color: rgba(255, 255, 255, 0.75);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    /* height: calc(100% - 36.8px); */
-    height: 100%;
-    width: 100%;
-    border-bottom-left-radius: 6px;
-    border-bottom-right-radius: 6px;
-    z-index: 10;
-
-    .Spinner {
-      margin: 0;
-    }
+  .fields {
+    position: relative;
   }
 
   .checkbox {

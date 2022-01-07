@@ -28,6 +28,7 @@ const StyledFieldset = styled.fieldset`
   }
 
   .container {
+    position: relative;
     width: auto;
     display: flex;
     flex-direction: column;

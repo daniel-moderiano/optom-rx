@@ -1,12 +1,11 @@
 import { useNavigate } from "react-router-dom";
-import { addDoc, collection, doc, updateDoc, arrayUnion } from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
 import { useState } from "react";
 import { db } from "../../firebase/config";
 import ProviderForm from "../ProviderForm/ProviderForm";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { StyledAddProvider } from "./AddProvider.styled";
 import Fieldset from "../utils/Fieldset/Fieldset";
-import Spinner from "../utils/Spinner/Spinner";
 
 const AddProvider = ({ googleLoaded, setToast }) => {
   const { user } = useAuthContext();
@@ -116,9 +115,7 @@ const AddProvider = ({ googleLoaded, setToast }) => {
     <StyledAddProvider>
       <h2 className="AddProvider__title">Add provider</h2>
       <p className="AddProvider__description">Enter details to add a new provider</p>
-      {isPending && <div className="overlay">
-        <Spinner />
-      </div>}
+
       <Fieldset className="add-provider-form" legend="Provider Details">
         <ProviderForm 
           googleLoaded={googleLoaded} 

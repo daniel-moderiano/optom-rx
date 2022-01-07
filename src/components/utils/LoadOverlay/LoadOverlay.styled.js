@@ -10,6 +10,7 @@ const StyledLoadOverlay = styled.div`
   width: 100%;
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;
+  z-index: 100;
 
   .Spinner {
     margin: 0;

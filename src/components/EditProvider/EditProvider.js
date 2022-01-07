@@ -1,13 +1,12 @@
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { doc, updateDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../../firebase/config";
 import ProviderForm from "../ProviderForm/ProviderForm";
 import { StyledEditProvider } from "./EditProvider.styled";
 import Fieldset from "../utils/Fieldset/Fieldset";
 import { useProvider } from "../../hooks/useProvider";
-import Spinner from "../utils/Spinner/Spinner";
 
 const EditProvider = ({ googleLoaded, setToast }) => {
   const { id } = useParams();
@@ -103,26 +102,25 @@ const EditProvider = ({ googleLoaded, setToast }) => {
       <h2 className="EditProvider__title">Edit provider</h2>
       <p className="EditProvider__description">Change any details and then save changes</p>
       <div className="main-container">
-      {/* {isPending && <div className="overlay">
-        <Spinner />
-      </div>} */}
+      
 
-      <Fieldset className="edit-provider-form" legend="Provider Details">
+      <Fieldset className="edit-provider-form" legend="Provider Details" >
      
       
-      <ProviderForm 
-        googleLoaded={googleLoaded} 
-        standalone={true} 
-        data={providerData}
-        setData={setProviderData}
-        handleChange={handleChange}
-        handleSubmit={handleSubmit}
-        handleCancel={cancelEdit}
-        toggleBooleanState={() => toggleBooleanState(setProviderData, providerData, 'prefix')}
-        submitBtn="Save changes"
-        cancelBtn="Cancel"
-        pending={localPending}
-      />
+        <ProviderForm 
+          googleLoaded={googleLoaded} 
+          standalone={true} 
+          data={providerData}
+          setData={setProviderData}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          handleCancel={cancelEdit}
+          toggleBooleanState={() => toggleBooleanState(setProviderData, providerData, 'prefix')}
+          submitBtn="Save changes"
+          cancelBtn="Cancel"
+          pending={localPending}
+          formPending={isPending}
+        />
       </Fieldset>
       </div>
       
