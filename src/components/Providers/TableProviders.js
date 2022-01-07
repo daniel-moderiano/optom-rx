@@ -9,6 +9,7 @@ import { doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useCollection } from "../../hooks/useCollection";
+import Spinner from "../utils/Spinner/Spinner";
 
 const TableProviders = ({ data, rowsPerPage, setToast }) => {
   // Start on page 1
@@ -22,50 +23,74 @@ const TableProviders = ({ data, rowsPerPage, setToast }) => {
   // This should be called using the curernt user ID to query the collection
   const { documents: providers } = useCollection('providers', ['uid', '==', user.uid]);
 
+  const [isPending, setIsPending] = useState(false);
+  const [error, setError] = useState(null);
+
 
   // Update both the UI checkboxes and backend to ensure only one provider can be set default at any one time
   const setAsDefault = async (currentProviders, provID) => {
     let prevDefault = null;
 
-    // Remove the current default and record which provider this was
-    for (let i = 0; i < currentProviders.length; i++) {
-      // Identify the current default provider
-      if (currentProviders[i].default) {
-        prevDefault = currentProviders[i].id;
-        // In any case, remove the current default user
-        await updateDoc(doc(db, 'providers', currentProviders[i].id), {
-          default: false
-        }); 
-        break;
-      }       
-    }
+    // Begin pending state
+    setIsPending(true);
 
-    for (let i = 0; i < currentProviders.length; i++) {
-      // When reaching the provider that the user click on
-      if (currentProviders[i].id === provID) {
-        // Check that this is not the previous default
-        if (provID !== prevDefault) {
-          // And update defaults if so, ending the loop here
+    try {
+      // Remove the current default and record which provider this was
+      for (let i = 0; i < currentProviders.length; i++) {
+        // Identify the current default provider
+        if (currentProviders[i].default) {
+          prevDefault = currentProviders[i].id;
+          // In any case, remove the current default user
           await updateDoc(doc(db, 'providers', currentProviders[i].id), {
-            default: true
+            default: false
           }); 
           break;
-        } else {
-          // Do not reset any defaults and end the loop here
-          break;
-        }
-      } 
-    }
+        }       
+      }
 
-    setToast((prevData) => ({
-      ...prevData,
-      visible: true,
-      type: 'success',
-      message: 'Provider defaults updated'
-    }));
+      for (let i = 0; i < currentProviders.length; i++) {
+        // When reaching the provider that the user click on
+        if (currentProviders[i].id === provID) {
+          // Check that this is not the previous default
+          if (provID !== prevDefault) {
+            // And update defaults if so, ending the loop here
+            await updateDoc(doc(db, 'providers', currentProviders[i].id), {
+              default: true
+            }); 
+            break;
+          } else {
+            // Do not reset any defaults and end the loop here
+            break;
+          }
+        } 
+      }
+
+      setIsPending(false);
+
+      setToast((prevData) => ({
+        ...prevData,
+        visible: true,
+        type: 'success',
+        message: 'Provider defaults updated'
+      }));
+    } catch (error) {
+      setIsPending(false);
+      setError(error);
+
+      setToast((prevData) => ({
+        ...prevData,
+        visible: true,
+        type: 'error',
+        message: 'Unable to complete request'
+      }));
+    }
+ 
+
+    
   };
 
   // Delete providers using the provider ID (documetn ID in firestore)
+  // TODO: modal confirming that provider should be deleted
   const deleteProvider = async (provID) => {
     await deleteDoc(doc(db, 'providers', provID));
 
@@ -89,6 +114,10 @@ const TableProviders = ({ data, rowsPerPage, setToast }) => {
     <>
       <StyledTableProviders className="table">
         {/* Preset table header. Note this reduces the re-usability of the Table component, but not the TableFooter */}
+        {isPending && <div className="overlay">
+          <Spinner />
+        </div>}
+        
         <thead className="tableRowHeader">
           <tr>
             <th className="tableHeader">Name</th>
@@ -99,6 +128,7 @@ const TableProviders = ({ data, rowsPerPage, setToast }) => {
         </thead>
         {/* Preset table data, must specify this according to the data that is being passed in */}
         <tbody>
+          
           {dataSlice.map((provider) => (
             <tr className="tableRowItems" key={provider.id}>
               <td className="tableCell">{provider.fullName}</td>

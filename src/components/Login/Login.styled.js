@@ -30,9 +30,9 @@ const StyledLogin = styled.div`
     height: 2.6rem;
   }
 
-  /**===== dots4 =====*/
+  /* *===== dots4 =====*/
 
-  #dots4 {
+  /* #dots4 {
     position: relative;
     width: 55px;
     height: 6px;
@@ -101,7 +101,7 @@ const StyledLogin = styled.div`
               transform: scale(1);
       opacity: 1;
     }
-  }
+  } */
   /** END of dots4 */
  
 

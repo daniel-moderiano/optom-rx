@@ -39,7 +39,7 @@ const Providers = ({ setToast }) => {
         {providers && <div className='table__container'>
           <div className="Providers__list">
             {providers.length > 0 ? (
-              <TableProviders data={providers} rowsPerPage={10} setToast={setToast}/>
+              <TableProviders data={providers} rowsPerPage={10} setToast={setToast} />
             ) : (
               <div className='Providers__none'>
                 <h4 className="no-providers-title">No providers added</h4>

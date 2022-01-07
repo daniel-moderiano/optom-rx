@@ -22,6 +22,10 @@ const StyledProviders = styled.div`
     margin: 0;
   }
 
+  .no-providers-text {
+    color: #757575;
+  }
+
   .Providers__container {
     display: flex;
     align-items: center;
@@ -63,6 +67,26 @@ const StyledProviders = styled.div`
 
   .Providers__none {
     margin-top: 2rem;
+  }
+
+  .table {
+    position: relative;
+
+    .overlay {
+      background-color: rgba(255, 255, 255, 0.75);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      height: calc(100% - 36.8px);
+      width: 100%;
+      border-bottom-left-radius: 6px;
+      border-bottom-right-radius: 6px;
+
+      .Spinner {
+        margin: 0;
+      }
+    }
   }
 
   .Providers__table {
