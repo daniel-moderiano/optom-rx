@@ -1,12 +1,12 @@
 import { StyledDots } from "./Dots.styled"
 
-const Dots = () => {
+const Dots = ({ color }) => {
   return (
     <StyledDots id="Dots">
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
+      <span className={color}></span>
+      <span className={color}></span>
+      <span className={color}></span>
+      <span className={color}></span>
     </StyledDots>
   )
 }

@@ -3,6 +3,7 @@ import AddressAutocomplete from "../AddressAutocomplete/AddressAutocomplete";
 import { useState, useEffect, useCallback } from "react";
 import { StyledProviderForm } from './ProviderForm.styled.js'
 import Spinner from "../utils/Spinner/Spinner";
+import Dots from "../utils/Dots/Dots";
 
 // ! Legal requirements include the prescriber's name, address, and contact details, and prescriber number
 
@@ -268,9 +269,7 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
       {/* The standalone form allows all 'in house' state management and validation, but has the optiona of overwriting data with custom state if required */}
       {/* Standalone form should submit providers to firebase using user ID as document ID */}
       {standalone &&  <StyledProviderForm className="ProviderForm ProviderForm--standalone">
-        {/* {pending && <div className="overlay">
-          <Spinner />
-        </div>} */}
+        
         <FormField 
           fieldType="text" 
           name="fullName"
@@ -355,7 +354,11 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
                 if (checkFormValidation()) {
                   handleSubmit(event);
                 }
-              }}>{submitBtn}</button>
+              }}>{pending ? (
+                <Dots color="white" />
+                ) : (
+                `${submitBtn}`
+              )}</button>
             }
             
           {cancelBtn && 

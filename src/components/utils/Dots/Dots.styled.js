@@ -2,10 +2,10 @@ import styled from "styled-components";
 
 const StyledDots = styled.div`
   position: relative;
-  width: 105px;
+  width: 55px;
   height: 6px;
 
-
+  /* Default (no color provided) styling */
   span {
     position: absolute;
     width: 8px;
@@ -16,6 +16,10 @@ const StyledDots = styled.div`
     -webkit-animation: dots4 1s infinite ease-in-out both;
             animation: dots4 1s infinite ease-in-out both;
     margin-right: 5px;
+  }
+
+  .white {
+    background-color:  #fff;
   }
 
   span:nth-child(1) {

@@ -16,6 +16,7 @@ const AddProvider = ({ googleLoaded, setToast }) => {
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState(null);
 
+
   const [providerData, setProviderData] = useState({
     prefix: false,
     fullName: '',
@@ -49,6 +50,8 @@ const AddProvider = ({ googleLoaded, setToast }) => {
       [boolToChange]: newState,
     }));
   };
+
+  
 
   const handleSubmit = async (event) => {
     event.preventDefault(); 
@@ -113,7 +116,6 @@ const AddProvider = ({ googleLoaded, setToast }) => {
     <StyledAddProvider>
       <h2 className="AddProvider__title">Add provider</h2>
       <p className="AddProvider__description">Enter details to add a new provider</p>
-      <div className="main-container">
       {isPending && <div className="overlay">
         <Spinner />
       </div>}
@@ -129,11 +131,9 @@ const AddProvider = ({ googleLoaded, setToast }) => {
           toggleBooleanState={() => toggleBooleanState(setProviderData, providerData, 'prefix')}
           submitBtn="Add provider"
           cancelBtn="Cancel"
+          pending={isPending}
         />
-      </Fieldset>
-
-      </div>
-     
+      </Fieldset>   
       
     </StyledAddProvider>
   )

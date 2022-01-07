@@ -103,13 +103,10 @@ const EditProvider = ({ googleLoaded, setToast }) => {
       <h2 className="EditProvider__title">Edit provider</h2>
       <p className="EditProvider__description">Change any details and then save changes</p>
       <div className="main-container">
-      {isPending && <div className="overlay">
+      {/* {isPending && <div className="overlay">
         <Spinner />
-      </div>}
+      </div>} */}
 
-      {localPending && <div className="overlay">
-        <Spinner />
-      </div>}
       <Fieldset className="edit-provider-form" legend="Provider Details">
      
       
@@ -124,7 +121,7 @@ const EditProvider = ({ googleLoaded, setToast }) => {
         toggleBooleanState={() => toggleBooleanState(setProviderData, providerData, 'prefix')}
         submitBtn="Save changes"
         cancelBtn="Cancel"
-        pending={isPending}
+        pending={localPending}
       />
       </Fieldset>
       </div>

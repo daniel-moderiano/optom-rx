@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { StyledLogin } from "./Login.styled";
 import FormField from "../FormField/FormField";
 import { useState } from "react";
+import Dots from '../utils/Dots/Dots';
 
 const Login = () => {
   const { error, login, isPending } = useLogin();
@@ -40,13 +41,9 @@ const Login = () => {
           />
 
           <button className="login-btn">
+            
             {isPending ? (
-              <div id="dots4">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
+              <Dots color="white" />
               ) : (
             'Log in'
             )} 

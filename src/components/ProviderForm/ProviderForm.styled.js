@@ -31,6 +31,7 @@ const StyledProviderForm = styled.div`
     place-self: flex-start;
     margin-top: 1.5rem;
     margin-bottom: 0.5rem;
+    display: flex;
 
     .ProviderForm__btn {
       font-size: 1rem;
@@ -51,6 +52,12 @@ const StyledProviderForm = styled.div`
       color: rgb(255, 255, 255);
       border: none;
       margin-right: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 2.6rem;
+      
+
     }
     
     .submit-btn:hover {
