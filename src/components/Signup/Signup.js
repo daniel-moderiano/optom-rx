@@ -1,11 +1,9 @@
-import AuthForm from "../AuthForm/AuthForm";
 import { useSignup } from "../../hooks/useSignup";
 import { Link } from "react-router-dom";
 import { StyledSignup } from "./Signup.styled";
 import FormField from "../FormField/FormField";
 import { useState } from "react";
 import Dots from "../utils/Dots/Dots";
-import Spinner from '../utils/Spinner/Spinner'
 
 const Signup = () => {
   const { error, isPending, signup } = useSignup();
