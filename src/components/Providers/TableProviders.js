@@ -9,7 +9,8 @@ import { doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useCollection } from "../../hooks/useCollection";
-import Dots from '../utils/Dots/Dots'
+
+import Modal from "../utils/Modal/Modal";
 
 const TableProviders = ({ data, rowsPerPage, setToast }) => {
   // Start on page 1
@@ -17,7 +18,15 @@ const TableProviders = ({ data, rowsPerPage, setToast }) => {
   // Gather the data slices for each page and the range of pages needed 
   const { dataSlice, range } = useTable(data, page, rowsPerPage);
 
- 
+  const [showModal, setShowModal] = useState(false);
+  const [selectedProvider, setSelectedProvider] = useState({
+    fullName: '',
+    location: '',
+    id: '',
+  });
+
+  const [deletePending, setDeletePending] = useState(false);
+  const [deleteError, setDeleteError] = useState(null);
 
   const { user } = useAuthContext();
   // This should be called using the curernt user ID to query the collection
@@ -94,14 +103,32 @@ const TableProviders = ({ data, rowsPerPage, setToast }) => {
   // Delete providers using the provider ID (documetn ID in firestore)
   // TODO: modal confirming that provider should be deleted
   const deleteProvider = async (provID) => {
-    await deleteDoc(doc(db, 'providers', provID));
+    setDeletePending(true);
+    setDeleteError(null);
+    try {
+      await deleteDoc(doc(db, 'providers', provID));
+      setDeletePending(false);
 
-    setToast((prevData) => ({
-      ...prevData,
-      visible: true,
-      type: 'success',
-      message: 'Provider has been removed'
-    }));
+      setToast((prevData) => ({
+        ...prevData,
+        visible: true,
+        type: 'success',
+        message: 'Provider has been removed'
+      }));
+
+      
+    } catch (error) {
+      setDeleteError(error);
+      setToast((prevData) => ({
+        ...prevData,
+        visible: true,
+        type: 'error',
+        message: 'Could not complete request'
+      }));
+    } finally {
+      setShowModal(false);
+    }
+    
   };
 
   const formatLocation = (practice, streetAddress, suburb) => {
@@ -114,6 +141,30 @@ const TableProviders = ({ data, rowsPerPage, setToast }) => {
 
   return (
     <>
+      {showModal && <Modal title="Delete provider">
+        <div className="error-container">
+          <div className="error-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" className="alert-icon alert-icon--neutral" viewBox="0 0 512 512" width="24px">
+              <path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" fill="#D12323" stroke="#D12323" strokeMiterlimit="10" strokeWidth="32"/>
+              <path d="M250.26 166.05L256 288l5.73-121.95a5.74 5.74 0 00-5.79-6h0a5.74 5.74 0 00-5.68 6z" fill="#D12323" stroke="#ffffff" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32"/>
+              <path d="M256 367.91a20 20 0 1120-20 20 20 0 01-20 20z" fill="#ffffff"/>
+            </svg>
+          </div>
+          <div className="error-text">
+            This will permanently delete the following provider details
+          </div>
+        </div>
+        <div className="provider-display">
+          <div className="provider-label">Selected provider</div>
+          <div className="provider-summary">{`${selectedProvider.fullName} (${selectedProvider.location})`}</div>
+        </div>
+        <div className="Modal__buttons">
+          <button className="cancel-btn Modal__btn" onClick={() => setShowModal(false)}>Cancel</button>
+          <button className="delete-btn Modal__btn" onClick={() => {
+            deleteProvider(selectedProvider.id);
+          }}>Delete</button>
+        </div>
+      </Modal>}
       <StyledTableProviders className="table">
 
     
@@ -137,7 +188,14 @@ const TableProviders = ({ data, rowsPerPage, setToast }) => {
               <td className="tableCell actions-cell">
                 
                 <Link className="table__action edit" to={`/edit/${provider.id}`}>Edit</Link>
-                <button className="table__action delete" onClick={() => deleteProvider(provider.id)}>Delete</button>
+                <button className="table__action delete" onClick={() => {
+                  setShowModal(true);
+                  setSelectedProvider({
+                    fullName: provider.fullName,
+                    location: formatLocation(provider.practiceName, provider.streetAddress, provider.suburb),
+                    id: provider.id,
+                  })
+                }}>Delete</button>
                 <button className={`${(provider.default && !isPending) ? 'table__action default--selected' : 'table__action default'}`} onClick={(event) => setAsDefault(providers, provider.id)}>
                   {isPending ? (
                     'Updating...'
