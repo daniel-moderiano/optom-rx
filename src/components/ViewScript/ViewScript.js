@@ -55,7 +55,7 @@ const ViewScript = ({ setToast, resetData }) => {
       setFavPending(true);
       setFavError(null);
       try {
-        // Add script data to the current user's favourite scripts. This operation should only be called once per script, so consider a toggle type function
+        // Add script data to the current user's favourite scripts. This operation can be called multiple times as arrayUnion will not add elements already present BUT the UI design should encourage multiple calls
         await updateDoc(doc(db, 'users', user.uid), {
           favourites: arrayUnion({
             ...scriptToAdd,
