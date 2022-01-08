@@ -107,7 +107,6 @@ const RxTemplate = ({ data, setToast }) => {
         scripts: arrayUnion({
           ...data.drugData,
           ...data.miscData,
-          favourite: false,
         })
       });
 
@@ -123,6 +122,7 @@ const RxTemplate = ({ data, setToast }) => {
       navigate('/');
     } catch (error) {
       setError(error);
+      setIsPending(false);
       setToast((prevData) => ({
         ...prevData,
         visible: true,

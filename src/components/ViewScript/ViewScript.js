@@ -1,16 +1,21 @@
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc, arrayUnion } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../../firebase/config";
 import { StyledViewScript } from "./ViewScript.styled.";
 import Spinner from '../utils/Spinner/Spinner'
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 const ViewScript = ({ setToast, resetData }) => {
+  const { user } = useAuthContext();
   const { id } = useParams();
   const [scriptData, setScriptData] = useState(null);
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState(null);
+  const [favPending, setFavPending] = useState(false);
+  const [favError, setFavError] = useState(null);
+  
 
   // Fetch the script data using the supplied ID
   useEffect(() => {
@@ -41,6 +46,43 @@ const ViewScript = ({ setToast, resetData }) => {
       }));
     }
   }, [error, setToast]);
+
+
+
+  const addToFavourites = async (scriptToAdd) => {
+    // Ensure the scriptData is not null
+    if (scriptToAdd) {
+      setFavPending(true);
+      setFavError(null);
+      try {
+        // Add script data to the current user's favourite scripts. This operation should only be called once per script, so consider a toggle type function
+        await updateDoc(doc(db, 'users', user.uid), {
+          favourites: arrayUnion({
+            ...scriptToAdd,
+          })
+        });
+  
+        setFavPending(false);
+  
+        setToast((prevData) => ({
+          ...prevData,
+          visible: true,
+          type: 'success',
+          message: 'Prescription saved to favourites'
+        }));
+  
+      } catch (error) {
+        setFavError(error);
+        setFavPending(false);
+        setToast((prevData) => ({
+          ...prevData,
+          visible: true,
+          type: 'error',
+          message: 'There was a problem'
+        }));
+      }
+    }
+  }
 
   // Create a more UI friendly summary of drug name +/- brand
   const formatDrug = (script) => {
@@ -118,6 +160,7 @@ const ViewScript = ({ setToast, resetData }) => {
               scriptData: scriptData,
             }}>Re-prescribe</Link>
             <Link to="/scripts" className="cancel-btn ProviderForm__btn">Go back</Link>
+            <button className="ProviderForm__btn" onClick={() => addToFavourites(scriptData)}>Add to favourites</button>
             
             </div>
             </>
