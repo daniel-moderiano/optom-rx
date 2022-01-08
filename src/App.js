@@ -176,7 +176,7 @@ const App = () => {
             <Route path="/" element={
               <>
               {!user && <Navigate to="/login" />}
-              {user && <Home />}
+              {user && <Home setToast={setToastParams}/>}
               </>
             } />
 
