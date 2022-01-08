@@ -94,41 +94,21 @@ const StyledLogin = styled.div`
     }
   }
 
+  .error-container {
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+    margin-bottom: -1rem;
+    width: 100%;
 
-  .pen {
-
-  .preloader-2 .line {
-    width: 1px;
-    height: 12px;
-    background: #fff;
-    margin: 0 3px;
-    display: inline-block;
-    animation: opacity-2 1000ms infinite ease-in-out;
-  }
-
-  .preloader-2 .line-1 { animation-delay: 800ms; }
-  .preloader-2 .line-2 { animation-delay: 600ms; }
-  .preloader-2 .line-3 { animation-delay: 400ms; }
-  .preloader-2 .line-4 { animation-delay: 200ms; }
-  .preloader-2 .line-6 { animation-delay: 200ms; }
-  .preloader-2 .line-7 { animation-delay: 400ms; }
-  .preloader-2 .line-8 { animation-delay: 600ms; }
-  .preloader-2 .line-9 { animation-delay: 800ms; }
-
-  @keyframes opacity-2 { 
-    0% { 
-      opacity: 1;
-      height: 15px;
+    .alert-icon {
+      margin-right: 0.3rem;
     }
-    50% { 
-      opacity: 0;
-      height: 12px;
+
+    .alert--error {
+      color: var(--error);
+      font-size: 0.85rem;
     }
-    100% { 
-      opacity: 1;
-      height: 15px;
-    }  
   }
-}
 `
 export { StyledLogin }

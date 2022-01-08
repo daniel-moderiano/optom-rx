@@ -21,18 +21,22 @@ export const useSignup = () => {
         case 'auth/email-already-in-use':
           setError('This email is already in use. Try another')
           break;
-        case 'auth/internal-error':
-          setError('An unknown server error occured. Please try again')
-          break;
+        
         case 'auth/invalid-email':
           setError('Please enter a valid email address')
           break;
         case 'auth/weak-password':
           setError('Please create a password at least six characters in length')
           break;
+
+        case 'auth/network-request-failed':
+          setError('Unable to connect - please check your internet connection')
+          break;
       
         default:
+          setError('An unknown server error occured. Please try again')
           break;
+
       }
     };
 

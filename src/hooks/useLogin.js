@@ -13,9 +13,6 @@ export const useLogin = () => {
   const errorHandling = (errorCode) => {
     console.log(errorCode);
     switch (errorCode) {
-      case 'auth/internal-error':
-        setError('An unknown server error occured. Please try again')
-        break;
       case 'auth/invalid-email':
         setError('Please enter a valid email address')
         break;
@@ -28,8 +25,12 @@ export const useLogin = () => {
       case 'auth/too-many-requests':
         setError('Failed to login too many times. Please wait a few minutes before trying again')
         break;
+      case 'auth/network-request-failed':
+        setError('Unable to connect - please check your internet connection')
+        break;
     
       default:
+        setError('An unknown server error occured. Please try again')
         break;
     }
   };
