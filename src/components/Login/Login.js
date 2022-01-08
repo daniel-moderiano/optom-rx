@@ -27,7 +27,7 @@ const Login = () => {
             // Check for blank field
             if (value.trim().length === 0) {
               setEmailAlert({
-                  message: "Please enter an email address",
+                  message: "Please enter an email address.",
                   type: 'error',
                 }
               );
@@ -42,7 +42,7 @@ const Login = () => {
             // Check for blank field
             if (value.trim().length === 0) {
               setPasswordAlert({
-                  message: "Please enter a password",
+                  message: "Please enter a password.",
                   type: 'error',
                 }
               );
@@ -62,6 +62,36 @@ const Login = () => {
     loginValidation();
   }, []);
 
+   // Ensure form is validated before calling form submission function
+   const isFormValid = () => {
+    let valid = true;
+
+    const emailInput = document.querySelector('input[name="email"]');
+    const passwordInput = document.querySelector('input[name="password"]');
+
+    // Check for blank field
+    if (emailInput.value.trim().length === 0) {
+      setEmailAlert({
+          message: "Please enter an email address.",
+          type: 'error',
+        }
+      );
+      emailInput.classList.add('error');
+      valid = false;
+    } 
+
+    // Check for blank field
+    if (passwordInput.value.trim().length === 0) {
+      setPasswordAlert({
+          message: "Please enter an password.",
+          type: 'error',
+        }
+      );
+      passwordInput.classList.add('error');
+      valid = false;
+    } 
+    return valid;
+  }
 
   return (
     <StyledLogin className="Login">
@@ -71,7 +101,11 @@ const Login = () => {
 
         <form className='Login__form' onSubmit={(event) => {
           event.preventDefault();
-          login(email, password);
+          // Ensure form validation passes
+          if (isFormValid()) {
+            login(email, password);
+          }
+          
         }}>
 
           <FormField 

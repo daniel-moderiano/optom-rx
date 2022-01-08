@@ -27,7 +27,7 @@ const Signup = () => {
             // Check for blank field
             if (value.trim().length === 0) {
               setEmailAlert({
-                  message: "This field cannot be left blank",
+                  message: "Please enter an email address.",
                   type: 'error',
                 }
               );
@@ -42,7 +42,7 @@ const Signup = () => {
             // Check for blank field
             if (value.trim().length === 0) {
               setPasswordAlert({
-                  message: "This field cannot be left blank",
+                  message: "Please enter a password.",
                   type: 'error',
                 }
               );
@@ -57,7 +57,7 @@ const Signup = () => {
             // Check for blank field
             if (value.trim().length === 0) {
               setDisplayNameAlert({
-                  message: "This field cannot be left blank",
+                  message: "Please enter a display name.",
                   type: 'error',
                 }
               );
@@ -77,20 +77,63 @@ const Signup = () => {
     signupValidation();
   }, []);
 
+   // Ensure form is validated before calling form submission function (to generate Rx)
+   const isFormValid = () => {
+    let valid = true;
+
+    const emailInput = document.querySelector('input[name="email"]');
+    const passwordInput = document.querySelector('input[name="password"]');
+    const displayNameInput = document.querySelector('input[name="displayName"]');
+
+    // Check for blank field
+    if (emailInput.value.trim().length === 0) {
+      setEmailAlert({
+          message: "Please enter an email address.",
+          type: 'error',
+        }
+      );
+      emailInput.classList.add('error');
+      valid = false;
+    } 
+
+    // Check for blank field
+    if (passwordInput.value.trim().length === 0) {
+      setPasswordAlert({
+          message: "Please enter an password.",
+          type: 'error',
+        }
+      );
+      passwordInput.classList.add('error');
+      valid = false;
+    } 
+
+    // Check for blank field
+    if (displayNameInput.value.trim().length === 0) {
+      setDisplayNameAlert({
+          message: "Please enter an display name.",
+          type: 'error',
+        }
+      );
+      displayNameInput.classList.add('error');
+      valid = false;
+    } 
+
+    return valid;
+  }
+
   return (
     <StyledSignup className="Signup">
 
       <div className="signup-container">
         <h2 className="Signup__title">Sign up</h2>
-        {/* <AuthForm 
-          type="signup"
-          submitFunc={signup}
-          buttonLabel="Sign up"
-        /> */}
 
         <form className="Signup__form" onSubmit={(event) => {
           event.preventDefault();
-          signup(email, password, displayName)
+          // Check form validity before calling submit function
+          if (isFormValid()) {
+            signup(email, password, displayName);
+          }
+          
         }}>
 
         <FormField 
@@ -150,8 +193,7 @@ const Signup = () => {
             <Link to="/login" className="login-link">Log in.</Link>
           </div>
         </div>
-        {/* Conditionally render a UI error message */}
-        {error && <p>{error}</p>}
+
       </div>
     </StyledSignup>
   )
