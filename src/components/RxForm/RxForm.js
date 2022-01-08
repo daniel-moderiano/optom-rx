@@ -4,7 +4,6 @@ import AddressAutocomplete from "../AddressAutocomplete/AddressAutocomplete";
 import { StyledRxForm } from "./RxForm.styled";
 import DrugAutocomplete from "../DrugAutocomplete/DrugAutocomplete";
 import Fieldset from "../utils/Fieldset/Fieldset";
-import ProviderForm from "../ProviderForm/ProviderForm";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useCollection } from "../../hooks/useCollection";
 import { useLocation } from "react-router";
@@ -943,7 +942,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
       // If the user has clicked a prescribe or re-prescribe button to get here then newRx should still be present, but this additional logic must be run
       if (state.rePrescribe) {
         // State will have scriptData attached. Set it to local state here at form initialisation
-        console.log(state.scriptData);
         setDrugData((prevData) => ({
           ...prevData,
           activeIngredient: state.scriptData.activeIngredient,
@@ -958,16 +956,15 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
           pbsRx: state.scriptData.pbsRx,   
           compounded: state.scriptData.compounded,
           verified: state.scriptData.verified,   
-          indications: state.scriptData.indications, 
-          authRequired: state.scriptData.authRequired,
-          maxQuantity: state.scriptData.maxQuantity,
-          maxRepeats: state.scriptData.maxRepeats,
         }));
 
-        // Add checks on verified and indications here, or consider directly removing certain PBS alerts since the user will want to keep most parameters the same
+        // Leave the verified status intact from the original script. Re-call the fetchDrug function; thereby updating all the authority, maxQuantity/repeats, PBS indications, and other related PBS/LEMI features
+
+        // It is possible the drug data will be different from when the drug was initially prescribed. This will update when the fetch call is made, but some of the original script parameters (e.g. max quantity, repeats, or LEMI) may be inappropriate, and the user will not be aware. Consider a modal for scripts older than X months warning the user, or even manually add later if PBS undergoes major changes down the line
+        fetchDrug(state.scriptData.itemCode);
       }
     }
-  }, [state, fetchNumbers, resetData]);
+  }, [state, fetchNumbers, resetData, fetchDrug]);
 
   // Set local state with authRxNo and scriptNo fetched from firestore. Activates only when the numbers have been fetched on a first time new Rx 
   useEffect(() => {
