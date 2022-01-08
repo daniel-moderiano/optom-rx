@@ -941,6 +941,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
       }
       // If the user has clicked a prescribe or re-prescribe button to get here then newRx should still be present, but this additional logic must be run
       if (state.rePrescribe) {
+        console.log(state.scriptData);
         // State will have scriptData attached. Set it to local state here at form initialisation
         setDrugData((prevData) => ({
           ...prevData,
