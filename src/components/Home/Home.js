@@ -1,6 +1,7 @@
 import { StyledHome } from './Home.styled';
 import { Link } from 'react-router-dom';
 import { useAuthContext } from '../../hooks/useAuthContext';
+import Favourites from '../Favourites/Favourites';
 
 const Home = () => {
   const { user, resetData } =  useAuthContext();
@@ -12,6 +13,10 @@ const Home = () => {
       <div className="Home__links">
         <Link onClick={resetData} className="Home__link Home__link--create" to='/form' state={ { newRx: true } }>Create prescription</Link>
         <Link className="Home__link Home__link--providers" to="/providers">View providers</Link>
+      </div>
+
+      <div className="Favourites">
+        <Favourites />
       </div>
     </StyledHome>
   )
