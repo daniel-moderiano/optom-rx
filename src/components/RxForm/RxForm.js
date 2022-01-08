@@ -887,57 +887,85 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
   // Generate the unique script and authRx numbers, and attach them to the local RxForm state. This is only performed when loading the RxForm component using 'Create new prescription' btn
   useEffect(() => {
     if (state) {
-      // Use .then() to ensure the above scriptNo and authRxNo variables are set prior to attempting to set data state with them
-      fetchNumbers().then(() => {
-        setNumbersLoaded((prevData) => prevData ? prevData : !prevData);
-      }).catch((error) => {
-        console.log(error);
-      })
+      // Checks for newRx button having been pressed
+      if (state.newRx) {
+        // Use .then() to ensure the above scriptNo and authRxNo variables are set prior to attempting to set data state with them
+        fetchNumbers().then(() => {
+          setNumbersLoaded((prevData) => prevData ? prevData : !prevData);
+        }).catch((error) => {
+          console.log(error);
+        })
 
-      // Also reset all existing data 
-      resetData();
-      setDrugData({
-        activeIngredient: '',
-        brandName: '',
-        quantity: '',
-        repeats: '',
-        dosage: '',
-        itemCode: '',
-        substitutePermitted: true,    
-        brandOnly: false, 
-        includeBrand: false,    
-        pbsRx: false,   
-        compounded: false,
-        verified: false,   
-        indications: '', 
-        authRequired: false,
-        maxQuantity: '',
-        maxRepeats: '',
-      });
+        // Also reset all existing data 
+        resetData();
+        setDrugData({
+          activeIngredient: '',
+          brandName: '',
+          quantity: '',
+          repeats: '',
+          dosage: '',
+          itemCode: '',
+          substitutePermitted: true,    
+          brandOnly: false, 
+          includeBrand: false,    
+          pbsRx: false,   
+          compounded: false,
+          verified: false,   
+          indications: '', 
+          authRequired: false,
+          maxQuantity: '',
+          maxRepeats: '',
+        });
 
-      setPatientData({
-        fullName: '',
-        streetAddress: '',
-        subpremise: '',
-        suburb: '',
-        postcode: '',
-        state: '',
-        medicareNumber: '',
-        medicareRefNumber: '',
-        noMedicare: false,
-      });
+        setPatientData({
+          fullName: '',
+          streetAddress: '',
+          subpremise: '',
+          suburb: '',
+          postcode: '',
+          state: '',
+          medicareNumber: '',
+          medicareRefNumber: '',
+          noMedicare: false,
+        });
 
-      setMiscData((prevData) => ({
-        ...prevData,
-        authRxNumber: '',  
-        authCode: '',    
-        scriptID: '',   
-        justification: '',
-        prevAuth: false,
-        age: '',
-      }));
+        setMiscData((prevData) => ({
+          ...prevData,
+          authRxNumber: '',  
+          authCode: '',    
+          scriptID: '',   
+          justification: '',
+          prevAuth: false,
+          age: '',
+        }));
       
-      
+      }
+      // If the user has clicked a prescribe or re-prescribe button to get here then newRx should still be present, but this additional logic must be run
+      if (state.rePrescribe) {
+        // State will have scriptData attached. Set it to local state here at form initialisation
+        console.log(state.scriptData);
+        setDrugData((prevData) => ({
+          ...prevData,
+          activeIngredient: state.scriptData.activeIngredient,
+          brandName: state.scriptData.brandName,
+          quantity: state.scriptData.quantity,
+          repeats: state.scriptData.repeats,
+          dosage: state.scriptData.dosage,
+          itemCode: state.scriptData.itemCode,
+          substitutePermitted: state.scriptData.substitutePermitted,    
+          brandOnly: state.scriptData.brandOnly, 
+          includeBrand: state.scriptData.includeBrand,    
+          pbsRx: state.scriptData.pbsRx,   
+          compounded: state.scriptData.compounded,
+          verified: state.scriptData.verified,   
+          indications: state.scriptData.indications, 
+          authRequired: state.scriptData.authRequired,
+          maxQuantity: state.scriptData.maxQuantity,
+          maxRepeats: state.scriptData.maxRepeats,
+        }));
+
+        // Add checks on verified and indications here, or consider directly removing certain PBS alerts since the user will want to keep most parameters the same
+      }
     }
   }, [state, fetchNumbers, resetData]);
 

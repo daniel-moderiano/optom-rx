@@ -6,7 +6,7 @@ import { db } from "../../firebase/config";
 import { StyledViewScript } from "./ViewScript.styled.";
 import Spinner from '../utils/Spinner/Spinner'
 
-const ViewScript = ({ setToast }) => {
+const ViewScript = ({ setToast, resetData }) => {
   const { id } = useParams();
   const [scriptData, setScriptData] = useState(null);
   const [isPending, setIsPending] = useState(false);
@@ -112,7 +112,11 @@ const ViewScript = ({ setToast }) => {
               </div>                
             </div>
             <div className="ProviderForm__btns">
-            <Link to="/scripts" className="submit-btn ProviderForm__btn">Re-prescribe</Link>
+            <Link onClick={resetData} className="submit-btn ProviderForm__btn" to='/form' state={{ 
+              newRx: true,
+              rePrescribe: true,
+              scriptData: scriptData,
+            }}>Re-prescribe</Link>
             <Link to="/scripts" className="cancel-btn ProviderForm__btn">Go back</Link>
             
             </div>

@@ -238,7 +238,7 @@ const App = () => {
 
             <Route path="/scripts/:id" element={
               <>
-              {user && <ViewScript setToast={setToastParams}/>}
+              {user && <ViewScript setToast={setToastParams} resetData={resetAllData}/>}
               {!user && <Navigate to="/login"/>}
               </>
             }/>
