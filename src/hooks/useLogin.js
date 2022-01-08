@@ -11,26 +11,25 @@ export const useLogin = () => {
   const { dispatch } = useAuthContext();
 
   const errorHandling = (errorCode) => {
-    console.log(errorCode);
     switch (errorCode) {
       case 'auth/invalid-email':
-        setError('Please enter a valid email address')
+        setError('Please enter a valid email address.')
         break;
       case 'auth/wrong-password':
-        setError('Incorrect password, please try again')
+        setError("That's an incorrect password. Try again.")
         break;
       case 'auth/user-not-found':
-        setError('No user exists with that email. Please try again, or sign in to create an account')
+        setError("We couldn't find an account with that email address. Check for typos and try again.")
         break;
       case 'auth/too-many-requests':
-        setError('Failed to login too many times. Please wait a few minutes before trying again')
+        setError('Failed to login too many times. Please wait a few minutes before trying again.')
         break;
       case 'auth/network-request-failed':
-        setError('Unable to connect - please check your internet connection')
+        setError("We couldn't connect to the network. Please check your internet connection and try again.")
         break;
     
       default:
-        setError('An unknown server error occured. Please try again')
+        setError('An unknown server error occured. Please try again.')
         break;
     }
   };

@@ -103,11 +103,12 @@ const StyledLogin = styled.div`
 
     .alert-icon {
       margin-right: 0.3rem;
+      flex-shrink: 0;
     }
 
     .alert--error {
       color: var(--error);
-      font-size: 0.85rem;
+      font-size: 0.8rem;
     }
   }
 `

@@ -27,7 +27,7 @@ const Login = () => {
             // Check for blank field
             if (value.trim().length === 0) {
               setEmailAlert({
-                  message: "This field cannot be left blank",
+                  message: "Please enter an email address",
                   type: 'error',
                 }
               );
@@ -42,7 +42,7 @@ const Login = () => {
             // Check for blank field
             if (value.trim().length === 0) {
               setPasswordAlert({
-                  message: "This field cannot be left blank",
+                  message: "Please enter a password",
                   type: 'error',
                 }
               );

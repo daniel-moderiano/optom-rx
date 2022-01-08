@@ -19,22 +19,22 @@ export const useSignup = () => {
     const errorHandling = (errorCode) => {
       switch (errorCode) {
         case 'auth/email-already-in-use':
-          setError('This email is already in use. Try another')
+          setError('This email is already in use. Try another.')
           break;
         
         case 'auth/invalid-email':
-          setError('Please enter a valid email address')
+          setError('Please enter a valid email address.')
           break;
         case 'auth/weak-password':
-          setError('Please create a password at least six characters in length')
+          setError('Please create a password at least six characters in length.')
           break;
 
         case 'auth/network-request-failed':
-          setError('Unable to connect - please check your internet connection')
+          setError("We couldn't connect to the network. Please check your internet connection and try again.")
           break;
       
         default:
-          setError('An unknown server error occured. Please try again')
+          setError('n unknown server error occured. Please try again.')
           break;
 
       }
