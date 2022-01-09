@@ -33,7 +33,7 @@ const StyledModal = styled.div`
 
     .Modal__title {
       font-family: var(--font-stack-segoe);
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       font-weight: bold;
       margin: 0;
       padding: 0;

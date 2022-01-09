@@ -7,6 +7,7 @@ import { StyledViewScript } from "./ViewScript.styled.";
 import Spinner from '../utils/Spinner/Spinner'
 import { useAuthContext } from "../../hooks/useAuthContext";
 import Modal from "../utils/Modal/Modal";
+import FormField from "../FormField/FormField";
 
 const ViewScript = ({ setToast, resetData }) => {
   const { user } = useAuthContext();
@@ -133,23 +134,18 @@ const ViewScript = ({ setToast, resetData }) => {
 
   return (
     <StyledViewScript>
-      {showModal && <Modal title="Delete provider" closeModal={() => setShowModal(false)}>
-        <div className="error-container">
-          <div className="error-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" className="alert-icon alert-icon--neutral" viewBox="0 0 512 512" width="24px">
-              <path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" fill="#D12323" stroke="#D12323" strokeMiterlimit="10" strokeWidth="32"/>
-              <path d="M250.26 166.05L256 288l5.73-121.95a5.74 5.74 0 00-5.79-6h0a5.74 5.74 0 00-5.68 6z" fill="#D12323" stroke="#ffffff" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32"/>
-              <path d="M256 367.91a20 20 0 1120-20 20 20 0 01-20 20z" fill="#ffffff"/>
-            </svg>
-          </div>
-          <div className="error-text">
-            Select a name to list this script by in your favourites screen
-          </div>
+      {showModal && <Modal title="Add to favourites" closeModal={() => setShowModal(false)}>
+        <FormField 
+            fieldType="text" 
+            name="customName"
+            label="Prescription name" 
+            value={customName} 
+            onChange={(event) => setCustomName(event.target.value)} 
+            className="form-field custom-field"
+          />
+        <div className="provider-display">
+          <div className="provider-label">This script will be displayed in your favourites list using the name above</div>
         </div>
-        {/* <div className="provider-display">
-          <div className="provider-label">Selected script</div>
-          <div className="provider-summary">{`${selectedProvider.fullName} (${selectedProvider.location})`}</div>
-        </div> */}
         <div className="Modal__buttons">
           <button className="cancel-btn Modal__btn" onClick={() => setShowModal(false)}>Cancel</button>
           <button className="delete-btn Modal__btn" onClick={() => addToFavourites(scriptData)}>Add</button>
@@ -189,13 +185,15 @@ const ViewScript = ({ setToast, resetData }) => {
               </div>                
             </div>
             <div className="ProviderForm__btns">
+            <div className="links">
             <Link onClick={resetData} className="submit-btn ProviderForm__btn" to='/form' state={{ 
               newRx: true,
               rePrescribe: true,
               scriptData: scriptData,
             }}>Re-prescribe</Link>
             <Link to="/scripts" className="cancel-btn ProviderForm__btn">Go back</Link>
-            <button className="ProviderForm__btn" onClick={() => {
+            </div>
+            <button className="add-btn" onClick={() => {
               setShowModal(true);
             }}>Add to favourites</button>
             
