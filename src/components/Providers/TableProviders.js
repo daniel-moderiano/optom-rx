@@ -19,6 +19,7 @@ const TableProviders = ({ data, rowsPerPage, setToast }) => {
   const { dataSlice, range } = useTable(data, page, rowsPerPage);
 
   const [showModal, setShowModal] = useState(false);
+  
   const [selectedProvider, setSelectedProvider] = useState({
     fullName: '',
     location: '',

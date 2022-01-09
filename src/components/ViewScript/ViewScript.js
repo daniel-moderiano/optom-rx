@@ -6,6 +6,7 @@ import { db } from "../../firebase/config";
 import { StyledViewScript } from "./ViewScript.styled.";
 import Spinner from '../utils/Spinner/Spinner'
 import { useAuthContext } from "../../hooks/useAuthContext";
+import Modal from "../utils/Modal/Modal";
 
 const ViewScript = ({ setToast, resetData }) => {
   const { user } = useAuthContext();
@@ -16,6 +17,10 @@ const ViewScript = ({ setToast, resetData }) => {
   const [favPending, setFavPending] = useState(false);
   const [favError, setFavError] = useState(null);
   
+  const [showModal, setShowModal] = useState(false);
+  
+  const [selectedFav, setSelectedFav] = useState({});
+  const [customName, setCustomName] = useState('')
 
   // Fetch the script data using the supplied ID
   useEffect(() => {
@@ -59,10 +64,12 @@ const ViewScript = ({ setToast, resetData }) => {
         await updateDoc(doc(db, 'users', user.uid), {
           favourites: arrayUnion({
             ...scriptToAdd,
+            customName: customName,
           })
         });
   
         setFavPending(false);
+        setShowModal(false);
   
         setToast((prevData) => ({
           ...prevData,
@@ -70,10 +77,13 @@ const ViewScript = ({ setToast, resetData }) => {
           type: 'success',
           message: 'Prescription saved to favourites'
         }));
+
+
   
       } catch (error) {
         setFavError(error);
         setFavPending(false);
+        setShowModal(false);
         setToast((prevData) => ({
           ...prevData,
           visible: true,
@@ -84,6 +94,8 @@ const ViewScript = ({ setToast, resetData }) => {
     }
   }
 
+
+  
   // Create a more UI friendly summary of drug name +/- brand
   const formatDrug = (script) => {
     const capitalised = script.activeIngredient[0].toUpperCase() + script.activeIngredient.substring(1);
@@ -121,6 +133,29 @@ const ViewScript = ({ setToast, resetData }) => {
 
   return (
     <StyledViewScript>
+      {showModal && <Modal title="Delete provider" closeModal={() => setShowModal(false)}>
+        <div className="error-container">
+          <div className="error-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" className="alert-icon alert-icon--neutral" viewBox="0 0 512 512" width="24px">
+              <path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" fill="#D12323" stroke="#D12323" strokeMiterlimit="10" strokeWidth="32"/>
+              <path d="M250.26 166.05L256 288l5.73-121.95a5.74 5.74 0 00-5.79-6h0a5.74 5.74 0 00-5.68 6z" fill="#D12323" stroke="#ffffff" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32"/>
+              <path d="M256 367.91a20 20 0 1120-20 20 20 0 01-20 20z" fill="#ffffff"/>
+            </svg>
+          </div>
+          <div className="error-text">
+            Select a name to list this script by in your favourites screen
+          </div>
+        </div>
+        {/* <div className="provider-display">
+          <div className="provider-label">Selected script</div>
+          <div className="provider-summary">{`${selectedProvider.fullName} (${selectedProvider.location})`}</div>
+        </div> */}
+        <div className="Modal__buttons">
+          <button className="cancel-btn Modal__btn" onClick={() => setShowModal(false)}>Cancel</button>
+          <button className="delete-btn Modal__btn" onClick={() => addToFavourites(scriptData)}>Add</button>
+        </div>
+      </Modal>}
+
       <h2 className="EditProvider__title">Script #{id}</h2>
       <p className="EditProvider__description">Patient details are not saved in OptomRx. Only medication details will be available for review.</p>
       <div className="container">
@@ -160,7 +195,9 @@ const ViewScript = ({ setToast, resetData }) => {
               scriptData: scriptData,
             }}>Re-prescribe</Link>
             <Link to="/scripts" className="cancel-btn ProviderForm__btn">Go back</Link>
-            <button className="ProviderForm__btn" onClick={() => addToFavourites(scriptData)}>Add to favourites</button>
+            <button className="ProviderForm__btn" onClick={() => {
+              setShowModal(true);
+            }}>Add to favourites</button>
             
             </div>
             </>
