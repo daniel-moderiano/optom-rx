@@ -937,7 +937,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
           prevAuth: false,
           age: '',
         }));
-      
+     
       }
       // If the user has clicked a prescribe or re-prescribe button to get here then newRx should still be present, but this additional logic must be run
       if (state.rePrescribe) {
@@ -985,6 +985,8 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
       [boolToChange]: newState,
     }));
   };
+
+  
 
   // Ensure form is validated before calling form submission function (to generate Rx)
   const checkFormValidation = () => {
@@ -1255,6 +1257,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
         />  
 
         {/* TODO: consider a dropdown UI expandable div */}
+        {/* TODO: Add PBS site link for ciclosporin specifically */}
         {(drugData.verified && drugData.indications.length > 0 && drugData.pbsRx) && 
           <div className="indications">
             <div className="indications__btn collapsible" onClick={

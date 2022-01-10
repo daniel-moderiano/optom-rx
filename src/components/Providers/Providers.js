@@ -6,9 +6,6 @@ import { Link } from "react-router-dom";
 import TableProviders from './TableProviders';
 import Spinner from '../utils/Spinner/Spinner';
 import { useEffect } from 'react';
-import LoadOverlay from '../utils/LoadOverlay/LoadOverlay'
-
-
 
 
 const Providers = ({ setToast }) => {
@@ -23,7 +20,7 @@ const Providers = ({ setToast }) => {
         ...prevData,
         visible: true,
         type: 'error',
-        message: 'Failed to complete requests'
+        message: 'No internet connection detected'
       }));
     }
   }, [error, setToast]);
@@ -38,7 +35,20 @@ const Providers = ({ setToast }) => {
       <div className="Providers__container">
         {isPending && <Spinner />}
 
-        {error && <div>{error}</div>}
+        {/* {error && <table className="table">
+                <thead className="tableRowHeader">
+                  <tr>
+                    <th className="tableHeader">Name</th>
+                    <th className="tableHeader">Location</th>
+                    <th className="tableHeader actions-header">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="tableRowItems">
+                    <td className="tableCellNone" colSpan="3">No providers added yet</td>
+                  </tr>
+                </tbody>
+              </table>} */}
 
         {providers && <div className='table__container'>
           <div className="Providers__list">
@@ -61,8 +71,6 @@ const Providers = ({ setToast }) => {
               </table>
             )}
                 
-                      
-              
           </div>  
         </div>}
 

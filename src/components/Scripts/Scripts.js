@@ -16,7 +16,7 @@ const Scripts = ({ setToast }) => {
         ...prevData,
         visible: true,
         type: 'error',
-        message: 'Failed to complete requests'
+        message: 'An unknown error occurred while loading scripts'
       }));
     }
   }, [error, setToast])
@@ -30,13 +30,39 @@ const Scripts = ({ setToast }) => {
       <div className="Scripts__container">
         {isPending && <Spinner />}
 
-        {error && <div>{error}</div>}
+        {error && <table className="table">
+              <thead className="tableRowHeader">
+                <tr>
+                  <th className="tableHeader">Script ID</th>
+                  <th className="tableHeader">Medication</th>
+                  <th className="tableHeader">Date prescribed</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="tableRowItems">
+                  <td className="tableCellNone" colSpan="3">No scripts written yet</td>
+                </tr>
+              </tbody>
+            </table>}
 
         {scripts && <div className='table-container'>
           {scripts.length > 0 ? (
             <Table data={scripts} rowsPerPage={15}/>
           ) : (
-            <div className='Scripts__none'>No scripts written yet</div>
+            <table className="table">
+              <thead className="tableRowHeader">
+                <tr>
+                  <th className="tableHeader">Script ID</th>
+                  <th className="tableHeader">Medication</th>
+                  <th className="tableHeader">Date prescribed</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="tableRowItems">
+                  <td className="tableCellNone" colSpan="3">No scripts written yet</td>
+                </tr>
+              </tbody>
+            </table>
           )}
         </div>}  
       </div>

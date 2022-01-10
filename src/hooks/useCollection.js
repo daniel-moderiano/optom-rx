@@ -29,7 +29,7 @@ export const useCollection = (collectionName, docQuery) => {
         setIsPending(false);
         // In the event the user is offline, the snapshot will still return using a local cache version, and this will default to an empty docs array. Handle this accordingly
         // if (snapshot.metadata.fromCache && snapshot.docs.length === 0) {
-        //   setError("No providers found. Please check you are connected to the internet for live data");
+        //   setError("An unknown error occurred loading providers");
         // }
         // Successful result obtained here, adjust pending state
         
