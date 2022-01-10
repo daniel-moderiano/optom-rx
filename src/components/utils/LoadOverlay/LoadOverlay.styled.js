@@ -6,7 +6,7 @@ const StyledLoadOverlay = styled.div`
   align-items: center;
   justify-content: center;
   position: absolute;
-  height: calc(100%);
+  height: 100%;
   width: 100%;
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;

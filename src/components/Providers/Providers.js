@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import TableProviders from './TableProviders';
 import Spinner from '../utils/Spinner/Spinner';
 import { useEffect } from 'react';
+import LoadOverlay from '../utils/LoadOverlay/LoadOverlay'
+
 
 
 
@@ -43,13 +45,27 @@ const Providers = ({ setToast }) => {
             {providers.length > 0 ? (
               <TableProviders data={providers} rowsPerPage={10} setToast={setToast} />
             ) : (
-              <div className='Providers__none'>
-                <h4 className="no-providers-title">No providers added</h4>
-                <p className="no-providers-text">Providers list requires an internet connection to update and display</p>
-              </div>
+              <table className="table">
+                <thead className="tableRowHeader">
+                  <tr>
+                    <th className="tableHeader">Name</th>
+                    <th className="tableHeader">Location</th>
+                    <th className="tableHeader actions-header">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="tableRowItems">
+                    <td className="tableCellNone" colSpan="3">No providers added yet</td>
+                  </tr>
+                </tbody>
+              </table>
             )}
-          </div>
-        </div>}    
+                
+                      
+              
+          </div>  
+        </div>}
+
       </div>
     </StyledProviders>
   )

@@ -1,6 +1,6 @@
 // Code created using guide by Franciso Mendes @ https://dev.to/franciscomendes10866/how-to-create-a-table-with-pagination-in-react-4lpd
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useTable from "../../hooks/useTable";
 import TableFooter from "../utils/TableFooter/TableFooter";
 import { Link } from "react-router-dom";
@@ -12,7 +12,9 @@ import { useCollection } from "../../hooks/useCollection";
 
 import Modal from "../utils/Modal/Modal";
 
-const TableProviders = ({ data, rowsPerPage, setToast }) => {
+// ! The table container and element must be defined outside this component to allow tbody conditional rendering. This will end up being a tbody only type component
+
+const TableProviders = ({ data, rowsPerPage, setToast, bodyLoading }) => {
   // Start on page 1
   const [page, setPage] = useState(1);
   // Gather the data slices for each page and the range of pages needed 
@@ -166,52 +168,50 @@ const TableProviders = ({ data, rowsPerPage, setToast }) => {
           }}>Delete</button>
         </div>
       </Modal>}
+
       <StyledTableProviders className="table">
-
-    
-        {/* Preset table header. Note this reduces the re-usability of the Table component, but not the TableFooter */}        
-        <thead className="tableRowHeader">
-          <tr>
-            <th className="tableHeader">Name</th>
-            <th className="tableHeader">Location</th>
-            {/* <th className="tableHeader default-header">Set default</th> */}
-            <th className="tableHeader actions-header">Actions</th>
-          </tr>
-        </thead>
-        {/* Preset table data, must specify this according to the data that is being passed in */}
-        <tbody>
-          
-          {dataSlice.map((provider) => (
-            <tr className="tableRowItems" key={provider.id}>
-              <td className="tableCell">{provider.fullName}</td>
-              <td className="tableCell">{formatLocation(provider.practiceName, provider.streetAddress, provider.suburb)}</td>
-
-              <td className="tableCell actions-cell">
-                
-                <Link className="table__action edit" to={`/edit/${provider.id}`}>Edit</Link>
-                <button className="table__action delete" onClick={() => {
-                  setShowModal(true);
-                  setSelectedProvider({
-                    fullName: provider.fullName,
-                    location: formatLocation(provider.practiceName, provider.streetAddress, provider.suburb),
-                    id: provider.id,
-                  })
-                }}>Delete</button>
-                <button className={`${(provider.default && !isPending) ? 'table__action default--selected' : 'table__action default'}`} onClick={(event) => setAsDefault(providers, provider.id)}>
-                  {isPending ? (
-                    'Updating...'
-                    ) : (
-                    `${provider.default ? 'Remove default' : 'Make default'}`
-                  )}
-                </button>
-              </td>
+          <thead className="tableRowHeader">
+            <tr>
+              <th className="tableHeader">Name</th>
+              <th className="tableHeader">Location</th>
+              <th className="tableHeader actions-header">Actions</th>
             </tr>
-          ))}
-        </tbody>
+          </thead>
+          <tbody>
+
+            {dataSlice.map((provider) => (
+              <tr className="tableRowItems" key={provider.id}>
+                <td className="tableCell">{provider.fullName}</td>
+                <td className="tableCell">{formatLocation(provider.practiceName, provider.streetAddress, provider.suburb)}</td>
+
+                <td className="tableCell actions-cell">
+                  
+                  <Link className="table__action edit" to={`/edit/${provider.id}`}>Edit</Link>
+                  <button className="table__action delete" onClick={() => {
+                    setShowModal(true);
+                    setSelectedProvider({
+                      fullName: provider.fullName,
+                      location: formatLocation(provider.practiceName, provider.streetAddress, provider.suburb),
+                      id: provider.id,
+                    })
+                  }}>Delete</button>
+                  <button className={`${(provider.default && !isPending) ? 'table__action default--selected' : 'table__action default'}`} onClick={(event) => setAsDefault(providers, provider.id)}>
+                    {isPending ? (
+                      'Updating...'
+                      ) : (
+                      `${provider.default ? 'Remove default' : 'Make default'}`
+                    )}
+                  </button>
+                </td>
+              </tr>
+            ))}
+         
+          
+          </tbody>
+          
       </StyledTableProviders>
       <TableFooter pages={range} slice={dataSlice} setPage={setPage} page={page} />
     </>
-  );
-};
+  )};
 
 export default TableProviders;
