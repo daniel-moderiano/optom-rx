@@ -157,6 +157,7 @@ const ViewScript = ({ setToast, resetData }) => {
             value={customName} 
             onChange={(event) => setCustomName(event.target.value)} 
             className="form-field custom-field"
+            autoFocus
           />
         <div className="provider-display">
           <div className="provider-label">This script will be displayed in your favourites list using the name above</div>
