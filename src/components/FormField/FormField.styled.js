@@ -29,7 +29,8 @@ const StyledFormField = styled.div`
   }
 
   input:focus {
-    outline: 2px solid #a360ac;
+    /* outline: 2px solid #a360ac; */
+    outline: 2px solid #104362;
     outline-offset: 2px;
   }
 
