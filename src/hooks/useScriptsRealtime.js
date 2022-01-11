@@ -1,11 +1,11 @@
 import { db } from "../firebase/config";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 // Firebase imports
-import { doc, onSnapshot } from "firebase/firestore";
+import { collection, doc, onSnapshot, query, where } from "firebase/firestore";
 
 // A hook that retrieves all documents in real time from a specifid collection. Can be upgraded to support queries at a later date
-export const useScripts = (userID) => {
+export const useScriptsRealtime = (userID) => {
   const [scripts, setScripts] = useState(null);
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState(null);
