@@ -28,9 +28,6 @@ const TableProviders = ({ data, rowsPerPage, setToast }) => {
     id: '',
   });
 
-  const [deletePending, setDeletePending] = useState(false);
-  const [deleteError, setDeleteError] = useState(null);
-
   const { user } = useAuthContext();
   // This should be called using the curernt user ID to query the collection
   const { documents: providers } = useCollection('providers', ['uid', '==', user.uid]);
@@ -95,22 +92,19 @@ const TableProviders = ({ data, rowsPerPage, setToast }) => {
         ...prevData,
         visible: true,
         type: 'error',
-        message: 'Unable to complete request'
+        message: 'An error occurred while updating defaults'
       }));
     }
- 
-
-    
+     
   };
 
   // Delete providers using the provider ID (documetn ID in firestore)
   // TODO: modal confirming that provider should be deleted
   const deleteProvider = async (provID) => {
-    setDeletePending(true);
-    setDeleteError(null);
+
     try {
       await deleteDoc(doc(db, 'providers', provID));
-      setDeletePending(false);
+
 
       setToast((prevData) => ({
         ...prevData,
@@ -121,12 +115,12 @@ const TableProviders = ({ data, rowsPerPage, setToast }) => {
 
       
     } catch (error) {
-      setDeleteError(error);
+
       setToast((prevData) => ({
         ...prevData,
         visible: true,
         type: 'error',
-        message: 'Could not complete request'
+        message: 'An error occurred while deleting providers'
       }));
     } finally {
       setShowModal(false);

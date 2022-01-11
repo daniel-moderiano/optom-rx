@@ -14,8 +14,6 @@ const Favourites = ({ setToast }) => {
   // const { favourites, isPending, error } = useFavourites(user.uid);
   // const { documents: favourites, isPending, error } = useCollection('providers', ['uid', '==', user.uid]);
   const { documents: favourites, isPending, error } = useFavourites(user.uid);
-  const [deletePending, setDeletePending] = useState(false);
-  const [deleteError, setDeleteError] = useState(null);
 
   const [showModal, setShowModal] = useState(false);
   
@@ -58,11 +56,11 @@ const Favourites = ({ setToast }) => {
         message: 'An error occurred while loading favourites'
       }));
     }
+
   }, [error, setToast])
 
   const deleteFavourite = async (scriptToDelete) => {
-    setDeletePending(true);
-    setDeleteError(null);
+
     const docRef = doc(db, 'users', user.uid);
 
     try {
@@ -70,8 +68,7 @@ const Favourites = ({ setToast }) => {
         favourites: arrayRemove(scriptToDelete)
       });
 
-      setDeletePending(false);
-      setDeleteError(null);
+     
 
       setToast((prevData) => ({
         ...prevData,
@@ -81,14 +78,12 @@ const Favourites = ({ setToast }) => {
       }));
 
     } catch (err) {
-      setDeletePending(false);
-      setDeleteError(err);
 
       setToast((prevData) => ({
         ...prevData,
         visible: true,
         type: 'error',
-        message: 'Failed to complete requests'
+        message: 'An error occurred while deleting favourites'
       }));
     } finally {
       setShowModal(false)
