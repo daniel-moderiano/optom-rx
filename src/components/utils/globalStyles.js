@@ -4,7 +4,9 @@ const GlobalStyles = createGlobalStyle`
   :root {
     /* Base colour theming */
     --primary-color: #31776f;
+    
     --background: #F4F5F6;
+    /* --background: #FFFFFF; */
 
     /* Text colours */
     --title-color: #0b4740;

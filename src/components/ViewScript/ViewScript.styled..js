@@ -116,7 +116,7 @@ const StyledViewScript = styled.div`
         padding: 0;
         line-height: 0;
         margin-right: 0.2rem;
-        /* margin-top: 0.1rem; */
+      
         margin-left: 13px;
         width: 24px;
       }
@@ -138,7 +138,7 @@ const StyledViewScript = styled.div`
         padding: 0;
         line-height: 0;
         margin-right: 0.2rem;
-        /* margin-top: 0.1rem; */
+        margin-top: -0.1rem;
         margin-left: 13px;
       }
 
