@@ -186,6 +186,8 @@ const StyledViewScript = styled.div`
         padding: 6px 14px 8px 14px;
         border-radius: 2px;
         min-width: 80px;
+        min-width: 85px;
+        height: 2rem;
 
         &:active {
           transform: scale(0.98);
@@ -193,7 +195,7 @@ const StyledViewScript = styled.div`
       }
 
       .delete-btn {
-        /* min-width: 130px; */
+        
         background-color: var(--btn-primary);
         color: rgb(255, 255, 255);
         border: none;
@@ -210,7 +212,7 @@ const StyledViewScript = styled.div`
       .cancel-btn {
         text-decoration: none;
         margin-right: 1rem;
-        /* min-width: 80px; */
+        min-width: 85px;
         background-color: var(--btn-secondary);
         color: var(--btn-secondary-text);
         border: none;

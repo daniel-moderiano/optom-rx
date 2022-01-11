@@ -8,6 +8,7 @@ import Spinner from '../utils/Spinner/Spinner'
 import { useAuthContext } from "../../hooks/useAuthContext";
 import Modal from "../utils/Modal/Modal";
 import FormField from "../FormField/FormField";
+import Dots from "../utils/Dots/Dots";
 
 const ViewScript = ({ setToast, resetData }) => {
   const { user } = useAuthContext();
@@ -18,9 +19,7 @@ const ViewScript = ({ setToast, resetData }) => {
   const [favPending, setFavPending] = useState(false);
   const [favError, setFavError] = useState(null);
   
-  const [showModal, setShowModal] = useState(false);
-  
-  const [selectedFav, setSelectedFav] = useState({});
+  const [showModal, setShowModal] = useState(true);
   const [customName, setCustomName] = useState('')
 
   // Fetch the script data using the supplied ID
@@ -48,10 +47,19 @@ const ViewScript = ({ setToast, resetData }) => {
         ...prevData,
         visible: true,
         type: 'error',
-        message: 'Failed to complete requests'
+        message: 'An error occurred while loading the script'
       }));
     }
-  }, [error, setToast]);
+
+    if (favError) {
+      setToast((prevData) => ({
+        ...prevData,
+        visible: true,
+        type: 'error',
+        message: 'An error occurred while adding favourites'
+      }));
+    }
+  }, [error, setToast, favError]);
 
 
 
@@ -89,7 +97,7 @@ const ViewScript = ({ setToast, resetData }) => {
           ...prevData,
           visible: true,
           type: 'error',
-          message: 'There was a problem'
+          message: 'An error occurred while adding favourites'
         }));
       }
     }
@@ -148,7 +156,13 @@ const ViewScript = ({ setToast, resetData }) => {
         </div>
         <div className="Modal__buttons">
           <button className="cancel-btn Modal__btn" onClick={() => setShowModal(false)}>Cancel</button>
-          <button className="delete-btn Modal__btn" onClick={() => addToFavourites(scriptData)}>Add</button>
+          <button className="delete-btn Modal__btn" onClick={() => addToFavourites(scriptData)}>
+            {favPending ? (
+              <Dots color="white" />
+              ) : (
+              'Add'
+            )} 
+          </button>
         </div>
       </Modal>}
 
