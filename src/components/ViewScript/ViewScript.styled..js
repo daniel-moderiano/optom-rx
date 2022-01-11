@@ -66,7 +66,7 @@ const StyledViewScript = styled.div`
     padding: 0;
     width: 100%;
     padding: 0.5rem 0.5rem;
-    margin-bottom: -1rem;
+  
     font-size: 0.8rem;
     color: #5A6572;
     text-align: center;

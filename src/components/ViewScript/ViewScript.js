@@ -149,6 +149,7 @@ const ViewScript = ({ setToast, resetData }) => {
   return (<>
     <StyledViewScript>
       {showModal && <Modal title="Add to favourites" closeModal={() => setShowModal(false)}>
+        <form>
         <FormField 
             fieldType="text" 
             name="customName"
@@ -161,8 +162,8 @@ const ViewScript = ({ setToast, resetData }) => {
           <div className="provider-label">This script will be displayed in your favourites list using the name above</div>
         </div>
         <div className="Modal__buttons">
-          <button className="cancel-btn Modal__btn" onClick={() => setShowModal(false)}>Cancel</button>
-          <button className="delete-btn Modal__btn" onClick={() => addToFavourites(scriptData)}>
+          <button type="button" className="cancel-btn Modal__btn" onClick={() => setShowModal(false)}>Cancel</button>
+          <button type="submit" className="delete-btn Modal__btn" onClick={(event) => {event.preventDefault(); addToFavourites(scriptData)}}>
             {favPending ? (
               <Dots color="white" />
               ) : (
@@ -170,6 +171,7 @@ const ViewScript = ({ setToast, resetData }) => {
             )} 
           </button>
         </div>
+        </form>
       </Modal>}
       
       <div className="header">

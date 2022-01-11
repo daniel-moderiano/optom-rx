@@ -139,7 +139,7 @@ const Favourites = ({ setToast }) => {
         </div>
         <div className="provider-display">
           <div className="provider-label">Selected script</div>
-          <div className="provider-summary">{selectedScript.customName}</div>
+          <div className="provider-summary">{`${selectedScript.customName === "" ? formatDrug(selectedScript) : selectedScript.customName}`}</div>
         </div>
         <div className="Modal__buttons">
           <button className="cancel-btn Modal__btn" onClick={() => setShowModal(false)}>Cancel</button>
