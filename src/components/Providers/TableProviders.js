@@ -136,6 +136,28 @@ const TableProviders = ({ data, rowsPerPage, setToast }) => {
     }
   };
 
+   // Default to cancel button when user hits enter after pressing delete, aiming avoiding accidental deletes
+   const cancelOnEnter = (event) => {
+    if (event.keyCode === 13) {
+      const cancelBtn = document.querySelector('.cancel-btn');
+
+      if (cancelBtn) {
+        event.preventDefault();
+        cancelBtn.click();
+      }
+    } 
+  }
+
+  
+  // Add event listener only once on initial render
+  useEffect(() => {
+    window.addEventListener('keydown', cancelOnEnter);
+
+    return () => {
+      window.removeEventListener('keydown', cancelOnEnter);
+    }
+  }, [])
+
   return (
     <>
       {showModal && <Modal title="Delete provider" closeModal={() => setShowModal(false)}>
