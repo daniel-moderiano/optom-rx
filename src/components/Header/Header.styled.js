@@ -10,7 +10,7 @@ const StyledHeader = styled.header`
   width: 100%;
 
   h1 {
-    margin: ${props => props.user ? '0.65rem 0 0 0' : '0.85rem 0 0 0'};
+    margin: ${props => props.user ? '0.6rem 0 0.1rem 0' : '0.85rem 0 0 0'};
     width: 7rem;
 
     &:hover {

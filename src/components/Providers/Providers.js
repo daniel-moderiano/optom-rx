@@ -35,21 +35,6 @@ const Providers = ({ setToast }) => {
       <div className="Providers__container">
         {isPending && <Spinner />}
 
-        {/* {error && <table className="table">
-                <thead className="tableRowHeader">
-                  <tr>
-                    <th className="tableHeader">Name</th>
-                    <th className="tableHeader">Location</th>
-                    <th className="tableHeader actions-header">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr className="tableRowItems">
-                    <td className="tableCellNone" colSpan="3">No providers added yet</td>
-                  </tr>
-                </tbody>
-              </table>} */}
-
         {providers && <div className='table__container'>
           <div className="Providers__list">
             {providers.length > 0 ? (

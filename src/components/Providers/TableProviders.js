@@ -14,7 +14,7 @@ import Modal from "../utils/Modal/Modal";
 
 // ! The table container and element must be defined outside this component to allow tbody conditional rendering. This will end up being a tbody only type component
 
-const TableProviders = ({ data, rowsPerPage, setToast, bodyLoading }) => {
+const TableProviders = ({ data, rowsPerPage, setToast }) => {
   // Start on page 1
   const [page, setPage] = useState(1);
   // Gather the data slices for each page and the range of pages needed 

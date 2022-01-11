@@ -1,6 +1,5 @@
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { StyledFavourites } from './Favourites.styled'
-import Table from './Table';
 import Spinner from '../utils/Spinner/Spinner';
 import { useEffect } from 'react';
 import { useFavourites } from '../../hooks/useFavourites';
@@ -8,6 +7,7 @@ import { doc, arrayRemove, updateDoc } from 'firebase/firestore';
 import { db } from '../../firebase/config';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Modal from '../utils/Modal/Modal';
 
 const Favourites = ({ setToast }) => {
   const { user } = useAuthContext();
@@ -17,8 +17,37 @@ const Favourites = ({ setToast }) => {
   const [deletePending, setDeletePending] = useState(false);
   const [deleteError, setDeleteError] = useState(null);
 
- 
+  const [showModal, setShowModal] = useState(false);
+  
+  const [selectedScript, setSelectedScript] = useState({
+    "maxQuantity": "",
+    "authRequired": false,
+    "repeats": "",
+    "brandName": "",
+    "justification": "",
+    "pbsRx": true,
+    "brandOnly": false,
+    "itemCode": "",
+    "scriptID": "",
+    "indications": "",
+    "dosage": "",
+    "verified": false,
+    "age": "",
+    "authRxNumber": "",
+    "prevAuth": false,
+    "quantity": "",
+    "date": "",
+    "compounded": false,
+    "includeBrand": false,
+    "favourite": false,
+    "substitutePermitted": true,
+    "customName": "",
+    "activeIngredient": "",
+    "maxRepeats": "",
+    "authCode": ""
+  });
 
+ 
   // This effect will fire an error alert if the fetch fails. 
   useEffect(() => {
     if (error) {
@@ -41,10 +70,8 @@ const Favourites = ({ setToast }) => {
         favourites: arrayRemove(scriptToDelete)
       });
 
-      setDeletePending(true);
+      setDeletePending(false);
       setDeleteError(null);
-
-      // TODO: delete confirmation modal
 
       setToast((prevData) => ({
         ...prevData,
@@ -54,7 +81,6 @@ const Favourites = ({ setToast }) => {
       }));
 
     } catch (err) {
-      console.log(err);
       setDeletePending(false);
       setDeleteError(err);
 
@@ -64,6 +90,8 @@ const Favourites = ({ setToast }) => {
         type: 'error',
         message: 'Failed to complete requests'
       }));
+    } finally {
+      setShowModal(false)
     }
   }
 
@@ -98,8 +126,33 @@ const Favourites = ({ setToast }) => {
     }
   };
 
-  return (
+  return (<>
+     
     <StyledFavourites className="Scripts">
+    {showModal && <Modal title="Delete provider" closeModal={() => setShowModal(false)}>
+        <div className="error-container">
+          <div className="error-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" className="alert-icon alert-icon--neutral" viewBox="0 0 512 512" width="24px">
+              <path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" fill="#D12323" stroke="#D12323" strokeMiterlimit="10" strokeWidth="32"/>
+              <path d="M250.26 166.05L256 288l5.73-121.95a5.74 5.74 0 00-5.79-6h0a5.74 5.74 0 00-5.68 6z" fill="#D12323" stroke="#ffffff" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32"/>
+              <path d="M256 367.91a20 20 0 1120-20 20 20 0 01-20 20z" fill="#ffffff"/>
+            </svg>
+          </div>
+          <div className="error-text">
+            This will permanently delete the following favourite
+          </div>
+        </div>
+        <div className="provider-display">
+          <div className="provider-label">Selected script</div>
+          <div className="provider-summary">{selectedScript.customName}</div>
+        </div>
+        <div className="Modal__buttons">
+          <button className="cancel-btn Modal__btn" onClick={() => setShowModal(false)}>Cancel</button>
+          <button className="delete-btn Modal__btn" onClick={() => {
+            deleteFavourite(selectedScript);
+          }}>Delete</button>
+        </div>
+      </Modal>}
       <h2 className="Favourites__title">Favourite scripts</h2>
       {/* <p className="Scripts__description">Scripts you have saved to your favourites will appear here, and can be prescribed in one simple click</p> */}
 
@@ -132,7 +185,11 @@ const Favourites = ({ setToast }) => {
                   rePrescribe: true,
                   scriptData: fav,
                 }}>Prescribe</Link>
-                <button className='delete-btn' onClick={() => deleteFavourite(fav)}>Delete</button>
+                <button className='delete-btn' onClick={() => {
+                    setShowModal(true);
+                    setSelectedScript({
+                      ...fav,
+                    })}}>Delete</button>
               </div>
               
               </li>
@@ -148,7 +205,7 @@ const Favourites = ({ setToast }) => {
         </div>}  
       
     </StyledFavourites>
-  )
+  </>)
 }
 
 export default Favourites;

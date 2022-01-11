@@ -1,11 +1,12 @@
 import styled from "styled-components";
 
 const StyledNav = styled.nav`
+
   .Nav__list {
     list-style: none;
     display: flex;
     margin: 0;
-    padding-bottom: 0.2rem;
+    padding-top: 0rem;
 
 
     .Nav__list-item {
