@@ -10,10 +10,21 @@ const Modal = ({ title, children, closeModal }) => {
       }
     }
 
+    const escClose = (event) => {
+  
+      // If Esc key is pressed
+      if (event.keyCode === 27) {
+        
+        closeModal();
+      }
+    }
+
     window.addEventListener('click', outsideClick);
+    window.addEventListener('keydown', escClose);
 
     return () => {
       window.removeEventListener('click', outsideClick)
+      window.removeEventListener('keydown', escClose)
     }
   }, [closeModal])
 

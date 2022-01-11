@@ -242,7 +242,7 @@ const ViewScript = ({ setToast, resetData }) => {
       </div>
       
     </StyledViewScript>
-    <p className="EditProvider__description">Patient details are not saved in OptomRx. Only medication details are be available for review.</p>
+    <p className="bottom-text">Patient details are not saved in OptomRx. Only medication details are be available for review.</p>
     </>
   )
 }
