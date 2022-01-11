@@ -19,8 +19,10 @@ const ViewScript = ({ setToast, resetData }) => {
   const [favPending, setFavPending] = useState(false);
   const [favError, setFavError] = useState(null);
   
-  const [showModal, setShowModal] = useState(true);
-  const [customName, setCustomName] = useState('')
+  const [showModal, setShowModal] = useState(false);
+  const [customName, setCustomName] = useState('');
+
+  const [addStatus, setAddStatus] = useState(false);
 
   // Fetch the script data using the supplied ID
   useEffect(() => {
@@ -78,7 +80,7 @@ const ViewScript = ({ setToast, resetData }) => {
         });
   
         setFavPending(false);
-        setShowModal(false);
+        setAddStatus(true);
   
         setToast((prevData) => ({
           ...prevData,
@@ -88,17 +90,20 @@ const ViewScript = ({ setToast, resetData }) => {
         }));
 
 
+
   
       } catch (error) {
         setFavError(error);
         setFavPending(false);
-        setShowModal(false);
+        
         setToast((prevData) => ({
           ...prevData,
           visible: true,
           type: 'error',
           message: 'An error occurred while adding favourites'
         }));
+      } finally {
+        setShowModal(false);
       }
     }
   }
@@ -165,9 +170,18 @@ const ViewScript = ({ setToast, resetData }) => {
           </button>
         </div>
       </Modal>}
+      
+      <div className="header">
+        <h2 className="EditProvider__title">Script #{id}</h2>
+        <button className={`${addStatus ? 'fav-btn fav-btn--added' : 'fav-btn'}`} onClick={() => {
+          setShowModal(true);
+        }}>
 
-      <h2 className="EditProvider__title">Script #{id}</h2>
-      <p className="EditProvider__description">Patient details are not saved in OptomRx. Only medication details will be available for review.</p>
+          {`${addStatus ? 'Added!' : 'Add to favourites'}`}
+        </button>
+        
+      </div>
+      
       <div className="container">
         <div className="script__container">
           {isPending && <Spinner />}
@@ -198,6 +212,8 @@ const ViewScript = ({ setToast, resetData }) => {
                 <div className="Script__info--section Script__date">Date prescribed: {formatDate(scriptData.date)}</div>
               </div>                
             </div>
+            <p className="EditProvider__description">Patient details are not saved in OptomRx. Only medication details are be available for review.</p>
+            
             <div className="ProviderForm__btns">
             <div className="links">
             <Link onClick={resetData} className="submit-btn ProviderForm__btn" to='/form' state={{ 
@@ -207,14 +223,15 @@ const ViewScript = ({ setToast, resetData }) => {
             }}>Re-prescribe</Link>
             <Link to="/scripts" className="cancel-btn ProviderForm__btn">Go back</Link>
             </div>
-            <button className="add-btn" onClick={() => {
+            {/* <button className="add-btn" onClick={() => {
               setShowModal(true);
-            }}>Add to favourites</button>
+            }}>Add to favourites</button> */}
             
             </div>
             </>
           }
         </div>
+        
        
         
         

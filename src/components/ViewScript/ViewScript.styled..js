@@ -13,8 +13,36 @@ const StyledViewScript = styled.div`
   .container {
     display: flex;
     flex-direction: column;
-    margin-top: 1.5rem;
+    margin-top: 0.5rem;
     /* border-bottom: 1px solid #dfe1e1; */
+  }
+
+  .header {
+    display: flex;
+    /* align-items: center; */
+    justify-content: space-between;
+
+    .fav-btn {
+      padding-top: 1.4rem;
+      background-color: transparent;
+      border: none;
+      font-size: 1rem;
+      font-weight: bold;
+      color: var(--primary-color);
+      font-family: var(--font-stack-segoe);
+      margin-left: 1rem;
+      display: flex;
+      align-items: center;
+
+      .fav-icon {
+        width: 20px;
+        margin-right: 0.5rem;
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
   }
 
   .script__container {
@@ -35,11 +63,17 @@ const StyledViewScript = styled.div`
 
   .EditProvider__description {
     margin: 0;
+    padding: 0;
+    width: 100%;
+    padding: 0.5rem 0.5rem;
+    font-size: 0.8rem;
+    color: #5A6572;
+    text-align: center;
   }
 
   .ProviderForm__btns {
     /* place-self: flex-end; */
-    margin: 2.5rem 0;
+    margin: 2rem 0 2.5rem 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -87,18 +121,18 @@ const StyledViewScript = styled.div`
 
     .add-btn {
       right: 0;
-        background-color: transparent;
-        border: none;
-        font-size: 0.9rem;
-        font-weight: bold;
-        color: var(--primary-color);
-        font-family: var(--font-stack-segoe);
-        margin-left: 1rem;
+      background-color: transparent;
+      border: none;
+      font-size: 0.9rem;
+      font-weight: bold;
+      color: var(--primary-color);
+      font-family: var(--font-stack-segoe);
+      margin-left: 1rem;
 
-        &:hover {
-          cursor: pointer;
-        }
+      &:hover {
+        cursor: pointer;
       }
+    }
   }
 
   .Script__info {
