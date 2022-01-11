@@ -3,7 +3,9 @@ import { StyledToast } from "./Toast.styled";
 
 const Toast = ({ params }) => {
   // params.type should be a conditional for switching out success icons for error or info icons
-
+  // params.visible = true;
+  // params.type = 'success';
+  // params.message = "An error occurred while loading favourites"
   return (
     <StyledToast className="toast" visible={params.visible}>
       <div className="toast-container">
@@ -42,8 +44,8 @@ const Toast = ({ params }) => {
         </div>)}
         
         <div className="toast-text">
-          {(params.type === 'success') && <h5 className="toast-title">Success!</h5>}
-          {(params.type === 'error') && <h5 className="toast-title">Error!</h5>}
+          {/* {(params.type === 'success') && <h5 className="toast-title">Success!</h5>}
+          {(params.type === 'error') && <h5 className="toast-title">Error!</h5>} */}
           <p className="toast-description">{params.message}</p>
         </div>
 

@@ -4,7 +4,6 @@ import { useScripts } from '../../hooks/useScripts';
 import Table from './Table';
 import Spinner from '../utils/Spinner/Spinner';
 import { useEffect } from 'react';
-import { useScriptsRealtime } from '../../hooks/useScriptsRealtime';
 
 const Scripts = ({ setToast }) => {
   const { user } = useAuthContext();
@@ -19,7 +18,7 @@ const Scripts = ({ setToast }) => {
         ...prevData,
         visible: true,
         type: 'error',
-        message: 'An unknown error occurred while loading scripts'
+        message: 'An error occurred while loading scripts'
       }));
     }
   }, [error, setToast])

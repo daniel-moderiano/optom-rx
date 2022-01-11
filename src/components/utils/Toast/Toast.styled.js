@@ -13,7 +13,7 @@ const StyledToast = styled.div`
   visibility: ${props => props.visible ? 'visible' : 'hidden'};
   opacity: ${props => props.visible ? '1' : '0'};
   z-index: 10;
-  padding: 0.4rem;
+  padding: 0.4rem 0.75rem 0.4rem 0.4rem;
   text-align: center;
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.15) 0px 8px 16px 0px;
@@ -35,11 +35,11 @@ const StyledToast = styled.div`
       height: 100%;
       display: flex;
       align-items: center;
-      margin-right: 1.25rem;
+      margin-right: 0.9rem;
 
       .line {
         height: 60px;
-        margin-right: 1.1rem;
+        margin-right: 0.9rem;
       }
 
       .toast-icon {
@@ -63,7 +63,7 @@ const StyledToast = styled.div`
         padding: 0;
         margin: 0;
         font-size: 1rem;
-        color: #677383;
+        /* color: #677383; */
       }
     }
   }

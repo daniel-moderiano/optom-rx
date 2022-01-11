@@ -17,6 +17,8 @@ const Favourites = ({ setToast }) => {
   const [deletePending, setDeletePending] = useState(false);
   const [deleteError, setDeleteError] = useState(null);
 
+ 
+
   // This effect will fire an error alert if the fetch fails. 
   useEffect(() => {
     if (error) {
@@ -24,7 +26,7 @@ const Favourites = ({ setToast }) => {
         ...prevData,
         visible: true,
         type: 'error',
-        message: 'Failed to complete requests'
+        message: 'An error occurred while loading favourites'
       }));
     }
   }, [error, setToast])
