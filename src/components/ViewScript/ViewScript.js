@@ -9,6 +9,7 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 import Modal from "../utils/Modal/Modal";
 import FormField from "../FormField/FormField";
 import Dots from "../utils/Dots/Dots";
+import './ViewScript.css'
 
 const ViewScript = ({ setToast, resetData }) => {
   const { user } = useAuthContext();
@@ -145,7 +146,7 @@ const ViewScript = ({ setToast, resetData }) => {
     return `${date.substring(8)}/${date.substring(5, 7)}/${date.substring(0, 4)}`;
   };
 
-  return (
+  return (<>
     <StyledViewScript>
       {showModal && <Modal title="Add to favourites" closeModal={() => setShowModal(false)}>
         <FormField 
@@ -212,7 +213,7 @@ const ViewScript = ({ setToast, resetData }) => {
                 <div className="Script__info--section Script__date">Date prescribed: {formatDate(scriptData.date)}</div>
               </div>                
             </div>
-            <p className="EditProvider__description">Patient details are not saved in OptomRx. Only medication details are be available for review.</p>
+            
             
             <div className="ProviderForm__btns">
             <div className="links">
@@ -239,6 +240,8 @@ const ViewScript = ({ setToast, resetData }) => {
       </div>
       
     </StyledViewScript>
+    <p className="EditProvider__description">Patient details are not saved in OptomRx. Only medication details are be available for review.</p>
+    </>
   )
 }
 
