@@ -18,19 +18,16 @@ const StyledViewScript = styled.div`
   }
 
   .header {
-    display: flex;
-    /* align-items: center; */
-    justify-content: space-between;
 
     .fav-btn {
-      padding-top: 1.4rem;
+
       background-color: transparent;
       border: none;
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: bold;
       color: var(--primary-color);
       font-family: var(--font-stack-segoe);
-      margin-left: 1rem;
+      /* margin-left: 1rem; */
       display: flex;
       align-items: center;
 
@@ -43,6 +40,7 @@ const StyledViewScript = styled.div`
         cursor: pointer;
       }
     }
+    
   }
 
   .script__container {
@@ -76,12 +74,13 @@ const StyledViewScript = styled.div`
     /* place-self: flex-end; */
     margin: 2rem 0 2.5rem 0;
     display: flex;
-    justify-content: space-between;
     align-items: center;
     width: 100%;
+    /* justify-content: space-between; */
 
 
-    .ProviderForm__btn {
+    .ProviderForm__btn, .fav-btn {
+      height: 40px;
       font-size: 1rem;
       font-family: var(--font-stack-segoe);
       box-sizing: border-box;
@@ -94,7 +93,7 @@ const StyledViewScript = styled.div`
       }
     }
 
-    .submit-btn {
+    .submit-btn, .fav-btn {
       min-width: 80px;
       background-color: var(--primary-color);
       color: rgb(255, 255, 255);
@@ -106,33 +105,47 @@ const StyledViewScript = styled.div`
     .submit-btn:hover {
       background-color: var(--btn-primary-hover);
     }
-          
-    .cancel-btn {
-      text-decoration: none;
-      /* margin-right: 2rem; */
-      min-width: 80px;
-      background-color: var(--btn-secondary);
-      color: var(--btn-secondary-text);
-      border: none;
-    }
-    .cancel-btn:hover {
-      background-color: var(--btn-secondary-hover);
-      color: #21252A;
-    }
 
-    .add-btn {
-      right: 0;
-      background-color: transparent;
-      border: none;
-      font-size: 0.9rem;
-      font-weight: bold;
-      color: var(--primary-color);
-      font-family: var(--font-stack-segoe);
-      margin-left: 1rem;
+    .submit-btn {
+      display: flex;
+      align-items: center;
+      padding: 0;
+ 
 
-      &:hover {
-        cursor: pointer;
+      .icon {
+        padding: 0;
+        line-height: 0;
+        margin-right: 0.2rem;
+        /* margin-top: 0.1rem; */
+        margin-left: 13px;
+        width: 24px;
       }
+
+      span {
+        padding: 8px 16px 10px 4px;
+      }
+
+
+    }
+    
+    .fav-btn {
+      
+      display: flex;
+      align-items: center;
+      padding: 0;
+
+      .icon {
+        padding: 0;
+        line-height: 0;
+        margin-right: 0.2rem;
+        /* margin-top: 0.1rem; */
+        margin-left: 13px;
+      }
+
+      span {
+        padding: 8px 16px 10px 4px;
+      }
+
     }
   }
 
