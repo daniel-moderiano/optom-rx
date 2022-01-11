@@ -33,7 +33,6 @@ export const useScripts = (userId) => {
       } catch (error) {
         setIsPending(false);
         // Instead launch a toast here, or use a useEffect hook in the target component to launch toast
-
         setError(error.message);
 
       }

@@ -4,14 +4,18 @@ import { useScripts } from '../../hooks/useScripts';
 import Table from './Table';
 import Spinner from '../utils/Spinner/Spinner';
 import { useEffect } from 'react';
+import { useScriptsRealtime } from '../../hooks/useScriptsRealtime';
 
 const Scripts = ({ setToast }) => {
   const { user } = useAuthContext();
-  const { scripts, isPending, error } = useScripts(user.uid);
+  // const { scripts, isPending, error } = useScripts(user.uid);
+  const { scripts, isPending, error } = useScriptsRealtime(user.uid);
+
 
   // This effect will fire an error alert if the fetch fails. 
   useEffect(() => {
     if (error) {
+      console.log(error);
       setToast((prevData) => ({
         ...prevData,
         visible: true,

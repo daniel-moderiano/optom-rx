@@ -54,6 +54,7 @@ export const useSignup = () => {
         // Any additional user data here
         displayName: displayName,
         scripts: [],
+        favourites: [],
       });
   
       setIsPending(false);
