@@ -18,13 +18,13 @@ const StyledFieldset = styled.fieldset`
   legend {
     float: left;    // Moves the legend within the fieldset
     padding: 0;
-    font-size: 1.6rem;
+    font-size: 1.7rem;
     font-family: var(--font-title);
     color: var(--title-color);
     width: 19rem;
     flex-shrink: 0;
     padding-left: 2rem;
-    margin-right: 0.5rem;
+    margin-right: 1rem;
   }
 
   .container {

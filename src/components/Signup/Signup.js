@@ -144,6 +144,7 @@ const Signup = () => {
           onChange={(event) => setEmail(event.target.value)} 
           className="auth-field form-field"
           alert={emailAlert}
+          autoFocus
         />
 
         <FormField 

@@ -37,6 +37,11 @@ const StyledHome = styled.div`
       &:active {
         transform: scale(0.98);
       }
+
+      &:focus {
+        outline: none;
+        box-shadow: 0 0 0 5px rgba(21, 156, 228, 0.4);
+      }
     }
 
     .Home__link--create {

@@ -10,9 +10,10 @@ const Header = ({ user, resetData }) => {
   };
 
   return (
-    <StyledHeader className="Header" user={user}>
+    <StyledHeader className="Header" user={user} role="banner">
       <h1 className="Header__title" onClick={returnHome}>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 166.92 45.53">
+    
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 166.92 45.53" className="logo">
           <g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1">
           <path className="cls-1" d="M25.86,14.87c0,10.31-6.32,15.4-13.1,15.4C5.57,30.27,0,24.61,0,15.46,0,5.87,5.8.06,13.12.06S25.86,5.81,25.86,14.87Zm-23.71.52C2.15,22,6,28.55,12.89,28.55S23.71,22.24,23.71,15C23.71,8.84,20.33,1.79,13,1.79S2.15,8.56,2.15,15.39Z"/>
           <path className="cls-1" d="M31,15.61C31,13,31,10.94,30.87,9h2L33,12.91h.09a8.22,8.22,0,0,1,7.68-4.43c5.35,0,9,4.43,9,10.55,0,7.45-4.44,11.24-9.47,11.24a7.91,7.91,0,0,1-7.07-3.85h-.08v12H31Zm2.07,6a7.61,7.61,0,0,0,.18,1.66,7,7,0,0,0,6.85,5.31c4.78,0,7.5-3.89,7.5-9.44,0-4.69-2.61-8.92-7.33-8.92a7.24,7.24,0,0,0-6.9,5.55,8,8,0,0,0-.3,1.78Z"/>

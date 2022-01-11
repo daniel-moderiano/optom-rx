@@ -2,7 +2,7 @@ import { StyledMain } from "./Main.styled"
 
 const Main = ({ children }) => {
   return (
-    <StyledMain className="Main">
+    <StyledMain className="Main" role="main">
       {children}
     </StyledMain>
   )

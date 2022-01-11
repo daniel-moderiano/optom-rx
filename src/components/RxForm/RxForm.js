@@ -1165,6 +1165,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
           value={patientData.fullName} 
           onChange={(event) => handleChange(setPatientData, event)} 
           alert={patientAlerts.fullName}
+          autoFocus
         />
 
         <AddressAutocomplete 

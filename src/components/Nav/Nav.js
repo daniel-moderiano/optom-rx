@@ -40,7 +40,7 @@ const Nav = ({ resetData }) => {
   }, [menuOutsideClick])
 
   return (
-    <StyledNav user={user} className="Nav">
+    <StyledNav user={user} className="Nav" aria-label="Main Navigation" role="navigation">
       <ul className="Nav__list">
 
         
