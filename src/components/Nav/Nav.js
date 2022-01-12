@@ -5,9 +5,8 @@ import { useLogout } from "../../hooks/useLogout";
 import { useEffect } from "react";
 
 
-const Nav = ({ resetData, currentPage }) => {
+const Nav = ({ user, resetData, currentPage }) => {
   // Conditionally display nav links based on user auth state (logged in or not)
-  const { user } = useAuthContext();
   const { logout } = useLogout();
   
   const ariaHome = currentPage === 'home' ? { "aria-current": "page" } : {};
@@ -41,21 +40,17 @@ const Nav = ({ resetData, currentPage }) => {
   return (
     <StyledNav user={user} className="Nav" aria-label="Main Navigation" role="navigation">
       <ul className="Nav__list" role="menubar">
-
-        {!user && 
-          <>
-            <li className="Nav__list-item" role="menuitem">
-              <Link className="Nav__link Nav__link--std Nav__link--login" to="/login"  {...ariaLogin}>Login</Link>
-            </li>
-            <li className="Nav__list-item" role="menuitem">
-              <Link className="Nav__link Nav__link--std Nav__link--signup" to="/signup" {...ariaSignup}>Sign up</Link>
-            </li>
-            
+        {!user && <>
+          <li className="Nav__list-item" role="menuitem">
+            <Link className="Nav__link Nav__link--std Nav__link--login" to="/login"  {...ariaLogin}>Login</Link>
+          </li>
+          <li className="Nav__list-item" role="menuitem">
+            <Link className="Nav__link Nav__link--std Nav__link--signup" to="/signup" {...ariaSignup}>Sign up</Link>
+          </li>
           </>
         }
-        {user &&
-          <>
-          
+      
+        {user && <>
           <li className="Nav__list-item" role="none">
             <Link 
               className="Nav__link Nav__link--std" 
@@ -63,7 +58,7 @@ const Nav = ({ resetData, currentPage }) => {
               role="menuitem" 
               onMouseDown={e => e.preventDefault()}
               {...ariaForm}
-               
+              
               state={ { newRx: true } }>New Rx</Link>
           </li>
           <li className="Nav__list-item" role="none">
@@ -83,15 +78,15 @@ const Nav = ({ resetData, currentPage }) => {
               >Log out
             </button>
           </li>
-          </>
-        }
-        
+        </>}
       </ul>
+
       <div className="hamburger">
         <span className="bar"></span>
         <span className="bar"></span>
         <span className="bar"></span>
       </div>
+
     </StyledNav>
   )
 }

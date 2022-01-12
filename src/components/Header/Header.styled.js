@@ -30,7 +30,19 @@ const StyledHeader = styled.header`
     display: none;
   }
 
-  /* Can also include nav styling here */
+  /* Landscape phones and down */
+  @media (max-width: 480px) { 
+    
+  }
+
+  /* Landscape phone to portrait tablet */
+  /* @media (max-width: 768px) { ... } */
+
+  /* Portrait tablet to landscape and desktop */
+  /* @media (min-width: 768px) and (max-width: 980px) { ... } */
+
+  /* Large desktop */
+  /* @media (min-width: 1200px) { ... } */
 `
 
 export { StyledHeader }

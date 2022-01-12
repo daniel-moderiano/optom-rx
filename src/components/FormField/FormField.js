@@ -4,7 +4,7 @@ const FormField = (props) => {
   const { fieldType, id, name, label, value, placeholder, onChange, className, alert, subAlert, maxlength, checked, enterFunc, required, autoFocus, describedBy, autocomplete } = props;
 
   const ariaDescribe = describedBy ? { "aria-describedby": describedBy } : {};
-  const autocompleteText = autocomplete ? { "autocomplete": autocomplete } : {};
+  const autocompleteText = autocomplete ? { "autoComplete": autocomplete } : {};
   
   // const ariaAlert = alert === {} ? {} : { "aria-describedby": `${id ? id : name}-alert` };
 

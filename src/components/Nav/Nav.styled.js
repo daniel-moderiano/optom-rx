@@ -15,7 +15,21 @@ const StyledNav = styled.nav`
       margin: 6px auto;
       -webkit-transition: all 0.3s ease-in-out;
       transition: all 0.3s ease-in-out;
-      background-color: #FFFFFF;
+      background-color: ${props => props.user ? '#FFFFFF' : 'var(--primary-color)'}
+    }
+  }
+
+  .hamburger--auth {
+    display: none;
+
+    .bar {
+      display: block;
+      width: 25px;
+      height: 2px;
+      margin: 6px auto;
+      -webkit-transition: all 0.3s ease-in-out;
+      transition: all 0.3s ease-in-out;
+      background-color: var(--primary-color);
     }
   }
 
@@ -196,7 +210,7 @@ const StyledNav = styled.nav`
 
   /* Landscape phones and down */
   @media (max-width: 480px) { 
-    
+   
   }
 
   /* Landscape phone to portrait tablet */
@@ -205,9 +219,10 @@ const StyledNav = styled.nav`
       position: fixed;
       left: -100%;
       top: 3.4rem;
+      top: ${props => props.user ? '3.4rem' : '5.8rem'};
       flex-direction: column;
       background-color: #fff;
-      width: 100%;
+      width: 100vw;
       border-radius: 10px;
       text-align: center;
       transition: 0.3s;
@@ -251,9 +266,6 @@ const StyledNav = styled.nav`
       margin: 0;
       padding: 0;
     }
-
-    
-
     
 
     .hamburger {

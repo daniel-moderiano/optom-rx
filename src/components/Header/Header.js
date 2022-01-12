@@ -26,7 +26,7 @@ const Header = ({ user, resetData, currentPage }) => {
       </div>
         
       </h1>      
-      <Nav resetData={resetData} currentPage={currentPage}/>
+      <Nav user={user} resetData={resetData} currentPage={currentPage}/>
     </StyledHeader>
   )
 }
