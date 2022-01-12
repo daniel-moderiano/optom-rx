@@ -292,10 +292,10 @@ const RxTemplate = ({ data, setToast, setPage }) => {
             <span className="item-printed">1 item printed</span>
           </section>
           {/* Will only ever be 1 item printed, so consider omitting this */}
-
+          
           <section className="provider-lower">
             {/* Used to display provider details next to, or below signature space */}
-            <div className="provider__fullName">{`${providerData.prefix ? 'Dr' : ''} ${providerData.fullName}`}</div>
+            <div className={`${providerData.qualifications === "" ? 'provider__fullName provider__fullName--low' : 'provider__fullName'}`}>{`${providerData.prefix ? 'Dr' : ''} ${providerData.fullName}`}</div>
             {/* Qualifications should only be included in the lower section */}
             <div className="provider__qualifications">{providerData.qualifications}</div>
             <div className="practitionerTick"><img className="optomTick" src={lightTick} alt="" /></div>
@@ -377,7 +377,7 @@ const RxTemplate = ({ data, setToast, setPage }) => {
 
           <section className="provider-lower">
             {/* Used to display provider details next to, or below signature space */}
-            <div className="provider__fullName">{`${providerData.prefix ? 'Dr' : ''} ${providerData.fullName}`}</div>
+            <div className={`${providerData.qualifications === "" ? 'provider__fullName provider__fullName--low' : 'provider__fullName'}`}>{`${providerData.prefix ? 'Dr' : ''} ${providerData.fullName}`}</div>
             {/* Qualifications should only be included in the lower section */}
             <div className="provider__qualifications">{providerData.qualifications}</div>
             {/* <div className="practitionerTick">🗸</div> */}

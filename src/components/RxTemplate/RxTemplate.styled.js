@@ -343,10 +343,15 @@ const StyledRxTemplate = styled.div`
         left: 102px;
         top: 536px;
         width: 330px;
+
+        .provider__fullName--low {
+          position: absolute;
+          top: 16px;
+        }
         
         .practitionerTick {
           position: absolute;
-          left: 312px;
+          left: 322px;
           top: 100px;
           width: 20px;
 
@@ -532,6 +537,11 @@ const StyledRxTemplate = styled.div`
         left: 102px;
         top: 536px;
         width: 330px;
+
+        .provider__fullName--low {
+          position: absolute;
+          top: 16px;
+        }
         
       }
 
