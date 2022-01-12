@@ -131,9 +131,11 @@ const Login = ({ setPage }) => {
             autoFocus
             required
             describedBy={Object.keys(emailAlert).length === 0 ? null : 'email-alert'}
+            autocomplete="username"
           />
 
           <FormField 
+            id="current-password"
             fieldType="password" 
             name="password"
             label="Password" 
@@ -143,6 +145,7 @@ const Login = ({ setPage }) => {
             alert={passwordAlert}
             required
             describedBy={Object.keys(passwordAlert).length === 0 ? null : 'password-alert'}
+            autocomplete="current-password"
           />
 
           {error && <div className="error-container">

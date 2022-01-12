@@ -43,5 +43,6 @@
   },
   "setupFilesAfterEnv": [
     "<rootDir>/jest.setup.js"
-  ]
+  ],
+  "devDependencies": {}
 }

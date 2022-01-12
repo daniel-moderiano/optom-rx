@@ -165,10 +165,12 @@ const Signup = ({ setPage }) => {
           autoFocus
           required
           describedBy={Object.keys(emailAlert).length === 0 ? null : 'email-alert'}
+          autocomplete="username"
         />
 
           <div className="displayName-group">
             <FormField 
+              id="new-password"
               fieldType="password" 
               name="password"
               label="Password" 
@@ -179,6 +181,7 @@ const Signup = ({ setPage }) => {
               // describedBy="password-desc"
               required
               describedBy={Object.keys(passwordAlert).length === 0 ? null : 'password-alert'}
+              autocomplete="new-password"
             />
             <span id="password-desc" className="displayName-msg">Password must contain at least 6 characters</span>
           </div>
