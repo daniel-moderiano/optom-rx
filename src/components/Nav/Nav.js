@@ -1,15 +1,13 @@
 import { Link } from "react-router-dom";
 import { StyledNav } from "./Nav.styled";
-import UserMenu from "../UserMenu/UserMenu";
-import { useCallback, useEffect, useState } from "react";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useLogout } from "../../hooks/useLogout";
+import { useEffect } from "react";
 
 
 const Nav = ({ resetData, currentPage }) => {
   // Conditionally display nav links based on user auth state (logged in or not)
   const { user } = useAuthContext();
-  const [showMenu, setShowMenu] = useState(false);
   const { logout } = useLogout();
   
   const ariaHome = currentPage === 'home' ? { "aria-current": "page" } : {};
@@ -19,33 +17,27 @@ const Nav = ({ resetData, currentPage }) => {
   const ariaScripts = currentPage === 'scripts' ? { "aria-current": "page" } : {};
   const ariaPrescribers = currentPage === 'prescribers' ? { "aria-current": "page" } : {};
 
-  const toggleMenu = () => {
-    setShowMenu((prevState) => !prevState);
-  };
-
-  // Ensure the items list closes on outside click
-  const menuOutsideClick = useCallback((event) => {
-    // SVG elements on the page do not have a className, so clicking them will crash the app. Avoid that here
-    if (typeof event.target.className !== 'string') {
-      return;
-    }
-    // All items within the autocomplete input and items list will contain UserMenu in their class. Note also the dropdown btn has the same class to ensure no clashing of toggle functions
-    if (!event.target.className.includes('UserMenu')) {
-      setShowMenu(false);
-    }      
-  }, []);
-
-  
-
-  // Runs once only on initial mount, and cleans up on dismount
   useEffect(() => {
-    window.addEventListener('click', menuOutsideClick);
+    const hamburger = document.querySelector(".hamburger");
+    const navMenu = document.querySelector(".Nav__list");
 
-    return () => {
-      window.removeEventListener('click', menuOutsideClick)
+    hamburger.addEventListener("click", mobileMenu);
+
+    function mobileMenu() {
+      hamburger.classList.toggle("active");
+      navMenu.classList.toggle("active");
     }
-  }, [menuOutsideClick])
 
+    const navLink = document.querySelectorAll(".Nav__link");
+
+    navLink.forEach(n => n.addEventListener("click", closeMenu));
+
+    function closeMenu() {
+      hamburger.classList.remove("active");
+      navMenu.classList.remove("active");
+    }
+  }, []);
+  
   return (
     <StyledNav user={user} className="Nav" aria-label="Main Navigation" role="navigation">
       <ul className="Nav__list" role="menubar">
@@ -91,19 +83,15 @@ const Nav = ({ resetData, currentPage }) => {
               >Log out
             </button>
           </li>
-          {/* <li className="Nav__list-item">
-            <button className="Nav__link Nav__link--std UserMenu__toggle" onClick={toggleMenu}>Hi, {user.displayName}
-              <span className="UserMenu__icon">
-                <svg xmlns="http://www.w3.org/2000/svg" className="ionicon" viewBox="0 0 512 512"><title>Chevron Down</title><path fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M112 184l144 144 144-144"/></svg>
-              </span>
-            </button>
-            
-          </li> */}
           </>
         }
         
       </ul>
-      {showMenu && <UserMenu handleClick={toggleMenu}/>}
+      <div className="hamburger">
+        <span className="bar"></span>
+        <span className="bar"></span>
+        <span className="bar"></span>
+      </div>
     </StyledNav>
   )
 }
