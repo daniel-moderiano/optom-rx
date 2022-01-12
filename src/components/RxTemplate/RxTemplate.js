@@ -393,8 +393,8 @@ const RxTemplate = ({ data, setToast, setPage }) => {
           </section>}
         </div>
 
-        <div className="bottom-container">
-          <span className="doctor-copy">Prescriber's Copy</span>
+        {drugData.authRequired && <div className="bottom-container--left">
+          <span className="doctor-copy">--Prescriber's Copy--</span>
           <section className="provider-upper">
             <div className="container">
               <div className="provider__contact-upper">
@@ -471,7 +471,87 @@ const RxTemplate = ({ data, setToast, setPage }) => {
           </section>
 
           
-        </div>
+        </div>}
+
+        {drugData.authRequired && <div className="bottom-container--right">
+          <span className="doctor-copy">--Services Australia/DVA Copy--</span>
+          <section className="provider-upper">
+            <div className="container">
+              <div className="provider__contact-upper">
+                <div className="provider__fullName">{`${providerData.prefix ? 'Dr' : ''} ${providerData.fullName}`}</div>
+                {/* Consider appending qualifications after provider name in this copy? */}
+                {formatProvAddress()}
+                <div className="provider__addressLine2">
+                  {`${providerData.suburb} ${providerData.state} ${providerData.postcode}`}
+                </div>
+              </div>
+              <div className="provider__contact-lower">
+                <div className="provider__phoneNumber">
+                  {`Phone: ${formatPhoneNumber(providerData.phoneNumber)}`}
+                </div>
+                <div className="provider__prescriberNumber">Prescriber No. {providerData.prescriberNumber}</div>
+                
+              </div>
+            </div>
+          </section>
+
+          <section className="patient">
+            <div className="container">
+              <span className="patient__label">Patient:</span>
+              <div className="patient__contactDetails">
+                <div className="patient__fullName">{patientData.fullName}</div>
+                <div className="patient__streetAddress">{`${patientData.subpremise} ${patientData.streetAddress}`}</div>
+                <div className="patient__addressLine2">{`${patientData.suburb} ${patientData.state} ${patientData.postcode}`}</div>
+                {/* Unsure if including this here */}
+                {!patientData.noMedicare && 
+                  <div className="patient__medicareNumber">
+                  {`${patientData.medicareNumber.substring(0, 4)} ${patientData.medicareNumber.substring(4, 9)} ${patientData.medicareNumber.substring(9, 10)}-${patientData.medicareRefNumber}`}
+                  </div>
+                }
+                
+              </div>
+            </div>
+          </section>
+
+          <section className="miscellaneous">
+            <div className="date">{formatDate()}</div>
+            {drugData.authRequired && <div className="authNumbers">
+              <div className="authRxNo">{`Authority Script No: ${miscData.authRxNumber}`}</div>
+            </div>}
+          </section>
+
+          <section className="medication">
+            <div className="medication__activeIngredient">
+              {formatDrug(drugData.activeIngredient, drugData.brandName)}
+            </div>
+            {drugData.compounded 
+              && <div className="medication__compounded">To be compounded</div>
+            } 
+            <div className="medication__dosage">{drugData.dosage}</div>
+            <div className="quantityRepeats">
+              <div className="medication__quantity">{`Quantity: ${drugData.quantity}`}</div>
+              <div className="medication__repeats">{`${drugData.repeats} repeats`}</div>
+            </div>
+            <div className="item-printed-line">
+              {drugData.authRequired && <div className="authority__approvalCode">{`Authority Approval No: ${miscData.authCode}`}</div>}
+              <span className="item-printed">1 item printed</span>
+            </div>
+
+            {drugData.authRequired && (<>
+              <section className="authority">
+                <div className="extra-details">
+                  <div className="prev-auth">{`Patient has received authority for this medicine before: ${miscData.prevAuth ? 'Yes' : 'No'}`}</div>
+                  {(miscData.age !== "") && <div className="patient-age">Patient's age: {miscData.age}</div>}
+                </div>
+                
+              </section>
+              <div className="indication">Clinical justification for use of item: {miscData.justification}</div>
+              </>)}
+            
+          </section>
+
+          
+        </div>}
 
         <div className="RxTemplate__btns">
           <div className="primary-btns">
