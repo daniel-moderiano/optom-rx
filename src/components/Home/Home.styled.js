@@ -25,7 +25,7 @@ const StyledHome = styled.div`
     margin-top: 2rem;
 
     .Home__link {
-
+      box-sizing: border-box;
       font-size: 1rem;
       font-family: var(--font-stack-segoe);
       box-sizing: border-box;
@@ -39,8 +39,8 @@ const StyledHome = styled.div`
       }
 
       &:focus {
-        outline: none;
-        box-shadow: 0 0 0 5px rgba(21, 156, 228, 0.4);
+        outline: 2px solid #104362;
+        outline-offset: 2px;
       }
     }
 

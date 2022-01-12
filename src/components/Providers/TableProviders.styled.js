@@ -52,6 +52,11 @@ const StyledTableProviders = styled.table`
         background-color: #fff;
         box-sizing: border-box;
         height: 1.75rem;
+
+        &:focus {
+          outline: 2px solid #104362;
+          outline-offset: 2px;
+        }
       }
 
       .default {

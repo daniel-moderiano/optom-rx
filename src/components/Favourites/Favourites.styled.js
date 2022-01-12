@@ -114,12 +114,23 @@ const StyledFavourites = styled.div`
         &:hover {
           background-color: var(--btn-primary-hover);
         }
+
+        &:focus {
+          outline: 2px solid #104362;
+          outline-offset: 2px;
+        }
       }
 
       .delete-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         background-color: transparent;
         border: none;
         font-size: 0.9rem;
+        height: 1rem;
+        margin-top: 0.1rem;
+        padding-bottom: 0.2rem;
         /* font-weight: bold; */
         color: var(--primary-color);
         font-family: var(--font-stack-segoe);
@@ -127,6 +138,11 @@ const StyledFavourites = styled.div`
 
         &:hover {
           cursor: pointer;
+        }
+
+        &:focus {
+          outline: 2px solid #104362;
+          outline-offset: 2px;
         }
       }
     }
@@ -200,6 +216,11 @@ const StyledFavourites = styled.div`
 
         &:active {
           transform: scale(0.98);
+        }
+
+        &:focus {
+          outline: 2px solid #104362;
+          outline-offset: 2px;
         }
       }
 

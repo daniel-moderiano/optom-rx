@@ -22,14 +22,26 @@ const StyledTableFooter = styled.div`
     &:hover {
       cursor: pointer;
     }
+
+    
   }
 
   .arrow-right {
-    padding-left: 1rem;
+    margin-left: 0.75rem;
+
+    &:focus {
+      outline: 2px solid #104362;
+      outline-offset: 2px;
+    }
   }
 
   .arrow-left {
-    padding-right: 1rem;
+    margin-right: 0.75rem;
+
+    &:focus {
+      outline: 2px solid #104362;
+      outline-offset: 2px;
+    }
   }
 
   .button {
@@ -40,6 +52,11 @@ const StyledTableFooter = styled.div`
     margin: 2px;
     border-radius: 0.5rem;
     cursor: pointer;
+
+    &:focus {
+      outline: 2px solid #104362;
+      outline-offset: 2px;
+    }
   }
 
   .activeButton {

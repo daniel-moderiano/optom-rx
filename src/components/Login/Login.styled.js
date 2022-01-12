@@ -28,6 +28,8 @@ const StyledLogin = styled.div`
     align-items: center;
     justify-content: center;
     height: 2.6rem;
+
+
   } 
 
   form {
@@ -61,6 +63,11 @@ const StyledLogin = styled.div`
       &:hover {
         background-color: var(--btn-primary-hover);
       }
+
+      &:focus {
+        outline: 2px solid #104362;
+        outline-offset: 2px;
+      }
     }
   }
 
@@ -90,6 +97,11 @@ const StyledLogin = styled.div`
 
       &:hover {
         text-decoration: underline;
+      }
+
+      &:focus {
+        outline: 2px solid #104362;
+        outline-offset: 2px;
       }
     }
   }

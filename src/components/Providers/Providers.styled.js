@@ -69,6 +69,11 @@ const StyledProviders = styled.div`
     &:active {
       transform: scale(0.98);
     }
+
+    &:focus {
+      outline: 2px solid #104362;
+      outline-offset: 2px;
+    }
   }
 
   .table {
@@ -170,6 +175,11 @@ const StyledProviders = styled.div`
 
         &:active {
           transform: scale(0.98);
+        }
+
+        &:focus {
+          outline: 2px solid #104362;
+          outline-offset: 2px;
         }
       }
 

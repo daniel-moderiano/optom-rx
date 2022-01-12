@@ -185,6 +185,11 @@ const StyledDrugAutocomplete = styled.div`
     &:hover {
       cursor: pointer;
     }
+
+    &:focus {
+      outline: 2px solid #104362;
+      outline-offset: 2px;
+    }
   }
  
 `

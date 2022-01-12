@@ -50,6 +50,11 @@ const StyledSignup = styled.div`
       &:hover {
         background-color: var(--btn-primary-hover);
       }
+
+      &:focus {
+        outline: 2px solid #104362;
+        outline-offset: 2px;
+      }
     }
   }
  
@@ -101,6 +106,11 @@ const StyledSignup = styled.div`
 
       &:hover {
         text-decoration: underline;
+      }
+
+      &:focus {
+        outline: 2px solid #104362;
+        outline-offset: 2px;
       }
     }
   }

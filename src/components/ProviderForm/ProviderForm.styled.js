@@ -30,6 +30,11 @@ const StyledProviderForm = styled.form`
       &:active {
         transform: scale(0.98);
       }
+
+      &:focus {
+        outline: 2px solid #104362;
+        outline-offset: 2px;
+      }
     }
 
     .submit-btn {

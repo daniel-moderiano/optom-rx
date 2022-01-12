@@ -11,16 +11,21 @@ const StyledNav = styled.nav`
     padding-top: 0rem;
 
 
+
     .Nav__list-item {
       font-size: 1.1rem;
-      padding: 0.85rem 0.75rem 0 0.75rem;
+      padding: 0.85rem 0.65rem 0 0.65rem;
 
       .Nav__link--std {
         text-decoration: none;
         color: ${props => props.user ? '#FFF' : 'var(--primary-color)'};
         padding-bottom: 5px;
         position: relative;
-
+        padding-right: 0.2rem;
+        padding-left: 0.2rem;
+        border: 0px solid transparent;
+        border-radius: 2px;
+        
         &:before,
         &:after {
           content: '';
@@ -55,10 +60,28 @@ const StyledNav = styled.nav`
           }
         }
 
+        &:focus {
+          /* Focus fallback for browsers that do not suppert :focus-visible */
+          outline: 0.1rem solid white;
+          outline-offset: 1px;
+        }
+
+        &:focus:not(:focus-visible) {
+          /* Remove the focus indicator on mouse-focus for browsers
+            that do support :focus-visible */
+          outline: none
+        }
+
+        &:focus-visible {
+          /* Keyboard only focus styling, able to differ from fallback styling if required */
+          outline: 0.1rem solid white;
+          outline-offset: 1px;
+        }
         
       }
 
       [aria-current=page] {
+       
         &:before,
         &:after {
           opacity: 1;
@@ -87,9 +110,29 @@ const StyledNav = styled.nav`
       }
 
       .Nav__link--login, .Nav__link--signup {
+        
         &:before,
         &:after {
           background-color: var(--primary-color);
+        }
+
+        &:focus {
+          outline: 0.1rem solid var(--primary-color);
+          outline-offset: 1px;
+        }
+
+        &:focus {
+          outline: 0.1rem solid var(--primary-color);
+          outline-offset: 1px;
+        }
+
+        &:focus:not(:focus-visible) {
+          outline: none
+        }
+
+        &:focus-visible {
+          outline: 0.1rem solid var(--primary-color);
+          outline-offset: 1px;
         }
       }
 
@@ -102,9 +145,11 @@ const StyledNav = styled.nav`
       }
 
       .Nav__link--logout {
+   
+
         background-color: var(--primary-color);
         margin: 0;
-        padding: 0;
+        padding: 0 0.2rem;
         border: none;
         font-family: var(--font-stack-segoe);
         font-size: 1.1rem;
@@ -113,6 +158,21 @@ const StyledNav = styled.nav`
         &:hover {
           cursor: pointer;
         }
+
+        &:focus {
+          outline: 0.1rem solid white;
+          outline-offset: 1px;
+        }
+
+        &:focus:not(:focus-visible) {
+          outline: none
+        }
+
+        &:focus-visible {
+          outline: 0.1rem solid white;
+          outline-offset: 1px;
+        }
+      
       }
     }
 

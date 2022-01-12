@@ -44,6 +44,11 @@ const StyledTable = styled.table`
     a {
       /* font-weight: 600; */
       color: #0b4740;
+
+      &:focus {
+        outline: 2px solid #104362;
+        outline-offset: 2px;
+      }
     }
   } 
 

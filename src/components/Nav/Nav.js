@@ -19,7 +19,6 @@ const Nav = ({ resetData, currentPage }) => {
   const ariaScripts = currentPage === 'scripts' ? { "aria-current": "page" } : {};
   const ariaPrescribers = currentPage === 'prescribers' ? { "aria-current": "page" } : {};
 
-
   const toggleMenu = () => {
     setShowMenu((prevState) => !prevState);
   };
@@ -54,7 +53,7 @@ const Nav = ({ resetData, currentPage }) => {
         {!user && 
           <>
             <li className="Nav__list-item" role="menuitem">
-              <Link className="Nav__link Nav__link--std Nav__link--login" to="/login" {...ariaLogin}>Login</Link>
+              <Link className="Nav__link Nav__link--std Nav__link--login" to="/login"  {...ariaLogin}>Login</Link>
             </li>
             <li className="Nav__list-item" role="menuitem">
               <Link className="Nav__link Nav__link--std Nav__link--signup" to="/signup" {...ariaSignup}>Sign up</Link>
@@ -70,6 +69,7 @@ const Nav = ({ resetData, currentPage }) => {
               className="Nav__link Nav__link--std" 
               to="/form" 
               role="menuitem" 
+              onMouseDown={e => e.preventDefault()}
               {...ariaForm}
                
               state={ { newRx: true } }>New Rx</Link>
