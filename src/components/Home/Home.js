@@ -2,9 +2,15 @@ import { StyledHome } from './Home.styled';
 import { Link } from 'react-router-dom';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import Favourites from '../Favourites/Favourites';
+import { useEffect } from 'react';
 
-const Home = ({ setToast }) => {
+const Home = ({ setToast, setPage }) => {
   const { user } =  useAuthContext();
+
+  // Adjust current page for accessibility and styling
+  useEffect(() => {
+    setPage('home');
+  }, [setPage])
   
   return (
     <StyledHome className="Home">

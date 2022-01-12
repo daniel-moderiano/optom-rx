@@ -5,7 +5,7 @@ import FormField from "../FormField/FormField";
 import { useState, useEffect } from "react";
 import Dots from "../utils/Dots/Dots";
 
-const Signup = () => {
+const Signup = ({ setPage }) => {
   const { error, isPending, signup } = useSignup();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -14,6 +14,11 @@ const Signup = () => {
   const [emailAlert, setEmailAlert] = useState({});
   const [passwordAlert, setPasswordAlert] = useState({});
   const [displayNameAlert, setDisplayNameAlert] = useState({});
+
+  // Adjust current page for accessibility and styling
+  useEffect(() => {
+    setPage('signup');
+  }, [setPage])
 
 
   // Inline form validation

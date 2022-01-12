@@ -8,10 +8,15 @@ import Spinner from '../utils/Spinner/Spinner';
 import { useEffect } from 'react';
 
 
-const Providers = ({ setToast }) => {
+const Providers = ({ setToast, setPage }) => {
   const { user } = useAuthContext();
   // This should be called using the curernt user ID to query the collection
   const { documents: providers, isPending, error } = useCollection('providers', ['uid', '==', user.uid]);
+
+  // Adjust current page for accessibility and styling
+  useEffect(() => {
+    setPage('prescribers');
+  }, [setPage])
 
   // This effect will fire an error alert if the fetch fails. 
   useEffect(() => {

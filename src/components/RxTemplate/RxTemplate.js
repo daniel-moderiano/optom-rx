@@ -7,11 +7,11 @@ import { Link } from "react-router-dom";
 import { db } from '../../firebase/config';
 import { arrayUnion, doc, setDoc, updateDoc } from "firebase/firestore";
 import { useAuthContext } from "../../hooks/useAuthContext";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Dots from '../utils/Dots/Dots'
 
 
-const RxTemplate = ({ data, setToast }) => {
+const RxTemplate = ({ data, setToast, setPage }) => {
   // Deconstructing for cleanliness of code and easier-to-understand operations
   const { drugData, patientData, providerData, miscData } = data;
   const [isPending, setIsPending] = useState(false)
@@ -22,6 +22,11 @@ const RxTemplate = ({ data, setToast }) => {
   let navigate = useNavigate();
 
   const { user } = useAuthContext();
+
+  // Adjust current page for accessibility and styling
+  useEffect(() => {
+    setPage(null);
+  }, [setPage])
 
   const formatPhoneNumber = (phoneNumber) => {
     if (phoneNumber.substring(0, 2) === '04') {

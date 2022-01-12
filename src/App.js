@@ -72,6 +72,7 @@ const App = () => {
   let navigate = useNavigate();
 
   const [googleLoaded, setGoogleLoaded] = useState(false);
+  const [currentPage, setCurrentPage] = useState(null);
 
   const resetAllData = useCallback(() => {
     console.log('Reset all data');
@@ -169,76 +170,76 @@ const App = () => {
     <div className="App">
       {authIsReady && (<>
         <GlobalStyles />
-        <Header user={user} resetData={resetAllData}/>
+        <Header user={user} resetData={resetAllData} currentPage={currentPage}/>
 
         <Main >
           <Routes>
             <Route path="/" element={
               <>
               {!user && <Navigate to="/login" />}
-              {user && <Home setToast={setToastParams}/>}
+              {user && <Home setToast={setToastParams} setPage={setCurrentPage} />}
               </>
             } />
 
             <Route path="/form" element={
               <>
-              {user && <RxForm handleSubmit={handleSubmit} googleLoaded={googleLoaded} existingData={data} resetData={resetAllData}/>}
+              {user && <RxForm handleSubmit={handleSubmit} googleLoaded={googleLoaded} existingData={data} resetData={resetAllData} setPage={setCurrentPage}/> }
               {!user && <Navigate to="/login"/>}
               </>
             }/>
 
             <Route path="/signup" element={
               <>
-              {!user && <Signup />}
+              {!user && <Signup setPage={setCurrentPage}/>}
               {user && <Navigate to="/" />}
               </>
             }/>
               
             <Route path="/login" element={
               <>
-              {!user && <Login />}
+              {!user && <Login setPage={setCurrentPage}/>}
               {user && <Navigate to="/" />}
               </>
             }/>
 
             <Route path="/template" element={
               <>
-              {user && <RxTemplate data={data} setToast={setToastParams}/>}
+              {user && <RxTemplate data={data} setToast={setToastParams} setPage={setCurrentPage}/>}
               {!user && <Navigate to="/login"/>}
               </>
             }/>
 
             <Route path="/edit/:id" element={
               <>
-              {user && <EditProvider googleLoaded={googleLoaded} setToast={setToastParams} />}
+              {user && <EditProvider googleLoaded={googleLoaded} setToast={setToastParams} setPage={setCurrentPage}/>}
               {!user && <Navigate to="/login"/>}
               </>
             }/>
 
             <Route path="/add-provider" element={
               <>
-              {user && <AddProvider googleLoaded={googleLoaded} setToast={setToastParams} />}
+              {user && <AddProvider googleLoaded={googleLoaded} setToast={setToastParams} setPage={setCurrentPage}/>}
               {!user && <Navigate to="/login"/>}
               </>
             }/>
 
             <Route path="/providers" element={
               <>
-              {user && <Providers googleLoaded={googleLoaded} setToast={setToastParams}/>}
+              {user && <Providers googleLoaded={googleLoaded} setToast={setToastParams} setPage={setCurrentPage}/>}
               {!user && <Navigate to="/login" />}
               </>
             }/> 
 
             <Route path="/scripts" element={
               <>
-              {user && <Scripts setToast={setToastParams}/>}
+              {user && <Scripts setToast={setToastParams} setPage={setCurrentPage}/>}
               {!user && <Navigate to="/login" />}
               </>
             }/> 
 
             <Route path="/scripts/:id" element={
               <>
-              {user && <ViewScript setToast={setToastParams} resetData={resetAllData}/>}
+              {user && <ViewScript setToast={setToastParams} resetData={resetAllData} setPage={setCurrentPage}/>}
               {!user && <Navigate to="/login"/>}
               </>
             }/>

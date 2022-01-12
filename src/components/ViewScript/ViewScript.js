@@ -11,7 +11,7 @@ import FormField from "../FormField/FormField";
 import Dots from "../utils/Dots/Dots";
 import './ViewScript.css'
 
-const ViewScript = ({ setToast, resetData }) => {
+const ViewScript = ({ setToast, resetData, setPage }) => {
   const { user } = useAuthContext();
   const { id } = useParams();
   const [scriptData, setScriptData] = useState(null);
@@ -24,6 +24,11 @@ const ViewScript = ({ setToast, resetData }) => {
   const [customName, setCustomName] = useState('');
 
   const [addStatus, setAddStatus] = useState(false);
+
+  // Adjust current page for accessibility and styling
+  useEffect(() => {
+    setPage(null);
+  }, [setPage])
 
   // Fetch the script data using the supplied ID
   useEffect(() => {

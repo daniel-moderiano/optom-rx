@@ -15,7 +15,7 @@ import Spinner from "../utils/Spinner/Spinner";
 
 // ! Multiple optometrist items are not permitted to be prescribed on the same form; each must use an individual form
 
-const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
+const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }) => {
   const [{ scriptNo, authRxNo, isError, isLoading }, fetchNumbers] = useNumbers();
   const { user } = useAuthContext();
 
@@ -173,6 +173,11 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData }) => {
   });
 
   const [showProviderForm, setShowProviderForm] = useState(false);
+
+  // Adjust current page for accessibility and styling
+  useEffect(() => {
+    setPage('form');
+  }, [setPage])
 
   // Update the default option in the providers select with a default provider (if available) 
   useEffect(() => {

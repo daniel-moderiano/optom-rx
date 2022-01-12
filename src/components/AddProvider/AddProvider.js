@@ -1,13 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { addDoc, collection } from "firebase/firestore";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { db } from "../../firebase/config";
 import ProviderForm from "../ProviderForm/ProviderForm";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { StyledAddProvider } from "./AddProvider.styled";
 import Fieldset from "../utils/Fieldset/Fieldset";
 
-const AddProvider = ({ googleLoaded, setToast }) => {
+const AddProvider = ({ googleLoaded, setToast, setPage }) => {
   const { user } = useAuthContext();
 
   let navigate = useNavigate();
@@ -30,6 +30,11 @@ const AddProvider = ({ googleLoaded, setToast }) => {
     prescriberNumber: '',
     default: false,
   });
+
+  // Adjust current page for accessibility and styling
+  useEffect(() => {
+    setPage(null);
+  }, [setPage])
 
   const handleChange = (event) => {
     const { name, value } = event.target;

@@ -5,11 +5,15 @@ import Table from './Table';
 import Spinner from '../utils/Spinner/Spinner';
 import { useEffect } from 'react';
 
-const Scripts = ({ setToast }) => {
+const Scripts = ({ setToast, setPage }) => {
   const { user } = useAuthContext();
   // const { scripts, isPending, error } = useScripts(user.uid);
   const { scripts, isPending, error } = useScripts(user.uid);
 
+  // Adjust current page for accessibility and styling
+  useEffect(() => {
+    setPage('scripts');
+  }, [setPage])
 
   // This effect will fire an error alert if the fetch fails. 
   useEffect(() => {

@@ -8,7 +8,7 @@ import { StyledEditProvider } from "./EditProvider.styled";
 import Fieldset from "../utils/Fieldset/Fieldset";
 import { useProvider } from "../../hooks/useProvider";
 
-const EditProvider = ({ googleLoaded, setToast }) => {
+const EditProvider = ({ googleLoaded, setToast, setPage }) => {
   const { id } = useParams();
 
   let navigate = useNavigate();
@@ -32,6 +32,11 @@ const EditProvider = ({ googleLoaded, setToast }) => {
     prescriberNumber: '',
     default: false,
   });
+
+  // Adjust current page for accessibility and styling
+  useEffect(() => {
+    setPage(null);
+  }, [setPage])
 
   const handleChange = (event) => {
     const { name, value } = event.target;
