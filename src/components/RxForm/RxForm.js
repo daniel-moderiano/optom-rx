@@ -998,23 +998,14 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
   // Ensure form is validated before calling form submission function (to generate Rx)
   const checkFormValidation = () => {
     let valid = true;
+    let inputFocused = false;
 
     const drugForm = document.querySelector('.drug-form');
     const patientForm = document.querySelector('.patient-form');
     const miscForm = document.querySelector('.misc-form');
 
-    requiredFields.drug.forEach((field) => {
-      const input = drugForm.querySelector(`[name="${field}"]`);
-      if (input.value.trim().length === 0) {
-        
-        valid = false;
-        negativeInlineValidation(setDrugAlerts, 'This field cannot be left blank', input);
-      }
-    });
-
-
-    // Validation is conditional upon whether medicare details were intended to be included by the user or not
-    requiredFields.patient.forEach((field) => {
+     // Validation is conditional upon whether medicare details were intended to be included by the user or not
+     requiredFields.patient.forEach((field) => {
       if (patientData.noMedicare && field === 'medicareNumber') {
         // Do not validate
       } else if (patientData.noMedicare && field === 'medicareRefNumber') {
@@ -1024,38 +1015,53 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
         const input = patientForm.querySelector(`[name="${field}"]`);
 
         if (input.value.trim().length === 0) {
+          if (!inputFocused) {
+            input.focus();
+            inputFocused = true;
+          }
           valid = false;
           negativeInlineValidation(setPatientAlerts, 'This field cannot be left blank', input);
         }
       }      
     });
-    
-    
 
-    // Provider form should only be validated on submission if the form is visible (i.e. the user is editing or using the locum provider feature)
-    if (showProviderForm) {
-      requiredFields.provider.forEach((field) => {
-        const input = document.querySelector('.provider-form').querySelector(`[name="${field}"]`);
-        if (input.value.trim().length === 0) {
-          valid = false;
-          negativeInlineValidation(setProviderAlerts, 'This field cannot be left blank', input);
+    requiredFields.drug.forEach((field) => {
+      const input = drugForm.querySelector(`[name="${field}"]`);
+      if (input.value.trim().length === 0) {
+        if (!inputFocused) {
+          input.focus();
+          inputFocused = true;
         }
-      });
+        valid = false;
+        negativeInlineValidation(setDrugAlerts, 'This field cannot be left blank', input);
+      }
+    });
+
+
+    if (drugData.brandOnly || drugData.includeBrand) {
+      if(!validateFieldForEmpty(setDrugAlerts, document.querySelector('#brandName'))) {
+        // if (!inputFocused) {
+        //   document.querySelector('#brandName').focus();
+        //   inputFocused = true;
+        // }
+        valid = false;
+      }
     }
 
+  
     requiredFields.misc.forEach((field) => {
       const input = miscForm.querySelector(`[name="${field}"]`);
       if (input.value.trim().length === 0) {
+        if (!inputFocused) {
+          input.focus();
+          inputFocused = true;
+        }
         valid = false;
         negativeInlineValidation(setMiscAlerts, 'This field cannot be left blank', input);
       }
     });
 
-    if (drugData.brandOnly || drugData.includeBrand) {
-      if(!validateFieldForEmpty(setDrugAlerts, document.querySelector('#brandName'))) {
-        valid = false;
-      }
-    }
+    
 
     // Finally, check for any active error alerts that were not detected with the more basic submission validation
     if (document.querySelectorAll('.alert--error').length > 0) {

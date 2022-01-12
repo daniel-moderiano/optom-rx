@@ -242,6 +242,7 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
   // Ensure form is validated before calling form submission function (standalone form only)
   const checkFormValidation = () => {
     let valid = true;
+    let inputFocused = false;
     const requiredFields = [
       'fullName',
       'streetAddress',
@@ -257,6 +258,10 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
     requiredFields.forEach((field) => {
       const input = form.querySelector(`[name="${field}"]`);
       if (input.value.trim().length === 0) {
+        if (!inputFocused) {
+          input.focus();
+          inputFocused = true;
+        }
         valid = false;
         negativeInlineValidation(setProviderAlerts, 'This field cannot be left blank', input);
       }

@@ -68,12 +68,17 @@ const Login = ({ setPage }) => {
    // Ensure form is validated before calling form submission function
    const isFormValid = () => {
     let valid = true;
+    let inputFocused = false;
 
     const emailInput = document.querySelector('input[name="email"]');
     const passwordInput = document.querySelector('input[name="password"]');
 
     // Check for blank field
     if (emailInput.value.trim().length === 0) {
+      if (!inputFocused) {
+        emailInput.focus();
+        inputFocused = true;
+      }
       setEmailAlert({
           message: "Please enter an email address.",
           type: 'error',
@@ -85,6 +90,10 @@ const Login = ({ setPage }) => {
 
     // Check for blank field
     if (passwordInput.value.trim().length === 0) {
+      if (!inputFocused) {
+        passwordInput.focus();
+        inputFocused = true;
+      }
       setPasswordAlert({
           message: "Please enter an password.",
           type: 'error',

@@ -85,6 +85,7 @@ const Signup = ({ setPage }) => {
    // Ensure form is validated before calling form submission function (to generate Rx)
    const isFormValid = () => {
     let valid = true;
+    let inputFocused = false;
 
     const emailInput = document.querySelector('input[name="email"]');
     const passwordInput = document.querySelector('input[name="password"]');
@@ -92,6 +93,10 @@ const Signup = ({ setPage }) => {
 
     // Check for blank field
     if (emailInput.value.trim().length === 0) {
+      if (!inputFocused) {
+        emailInput.focus();
+        inputFocused = true;
+      }
       setEmailAlert({
           message: "Please enter an email address.",
           type: 'error',
@@ -103,8 +108,12 @@ const Signup = ({ setPage }) => {
 
     // Check for blank field
     if (passwordInput.value.trim().length === 0) {
+      if (!inputFocused) {
+        passwordInput.focus();
+        inputFocused = true;
+      }
       setPasswordAlert({
-          message: "Please enter an password.",
+          message: "Please enter a password.",
           type: 'error',
         }
       );
@@ -114,8 +123,12 @@ const Signup = ({ setPage }) => {
 
     // Check for blank field
     if (displayNameInput.value.trim().length === 0) {
+      if (!inputFocused) {
+        displayNameInput.focus();
+        inputFocused = true;
+      }
       setDisplayNameAlert({
-          message: "Please enter an display name.",
+          message: "Please enter a display name.",
           type: 'error',
         }
       );
