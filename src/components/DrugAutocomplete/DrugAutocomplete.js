@@ -351,6 +351,8 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
           }}
           alert={alerts.activeIngredient}
           className="activeIngredient form-field"
+          required
+          describedBy = {Object.keys(alerts.activeIngredient).length === 0 ? null : 'activeIngredient-alert'}
         />
         <button type="button" onClick={() => setExpand(true)}>Enter manually</button>
 

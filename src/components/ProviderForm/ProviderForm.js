@@ -269,7 +269,7 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
     <>
       {/* The standalone form allows all 'in house' state management and validation, but has the optiona of overwriting data with custom state if required */}
       {/* Standalone form should submit providers to firebase using user ID as document ID */}
-      {standalone &&  <StyledProviderForm className="ProviderForm ProviderForm--standalone">
+      {standalone &&  <StyledProviderForm className="ProviderForm ProviderForm--standalone" autoComplete="off" noValidate>
         <div className="fields">
           {formPending && <LoadOverlay />}
           <FormField 
@@ -279,6 +279,8 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
             value={data.fullName} 
             onChange={handleChange} 
             alert={alerts ? alerts.fullName : providerAlerts.fullName}
+            required
+            describedBy={Object.keys(alerts ? alerts.fullName : providerAlerts.fullName).length === 0 ? null : 'fullName-alert'}
           />    
 
           <FormField 
@@ -335,6 +337,8 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
             id="phoneNumber"
             maxlength="10"
             className="phoneNo-field form-field"
+            required
+            describedBy = {Object.keys(alerts ? alerts.phoneNumber : providerAlerts.phoneNumber).length === 0 ? null : 'phoneNumber-alert'}
           />
 
           <FormField 
@@ -346,6 +350,8 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
             alert={alerts ? alerts.prescriberNumber : providerAlerts.prescriberNumber}
             maxlength="7"
             className="prescriberNo-field form-field"
+            required
+            describedBy = {Object.keys(alerts ? alerts.prescriberNumber : providerAlerts.prescriberNumber).length === 0 ? null : 'prescriberNumber-alert'}
           />
         </div>
        

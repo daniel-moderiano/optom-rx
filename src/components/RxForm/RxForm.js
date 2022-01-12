@@ -48,6 +48,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
     pbsRx: {},
     maxQuantity: {},
     maxRepeats: {},
+    activeIngredient: {},
   });
 
   const [patientAlerts, setPatientAlerts] = useState({
@@ -876,6 +877,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
 
   }, [validateRequiredField, positiveInlineValidation, negativeInlineValidation, showProviderForm]);
 
+
   // Check remove a visible error or alert from the brand name input where it changes from being required to not
   useEffect(() => {
     if (!drugData.includeBrand && !drugData.brandOnly) {
@@ -1121,7 +1123,8 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
           handleSubmit(drugData, patientData, providerData, miscData, pbsInfo)
         }
       }}
-      autoComplete="off">
+      autoComplete="off"
+      noValidate>
       <h2 className="RxForm__title">New Prescription</h2>
       <p className="RxForm__description">Fill out the details required to prescribe</p>
       <div className="scriptNo" data-testid="scriptNo">Script number: {isLoading ? 'Loading...' : miscData.scriptID}</div>
@@ -1142,6 +1145,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
                   styles={customStyles}
                   placeholder="Select provider..."
                   id="react-select"
+                  required
                 /> 
                 </label>
               </>
@@ -1172,6 +1176,8 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
           onChange={(event) => handleChange(setPatientData, event)} 
           alert={patientAlerts.fullName}
           autoFocus
+          required
+          describedBy = {Object.keys(patientAlerts.fullName).length === 0 ? null : 'fullName-alert'}
         />
 
         <AddressAutocomplete 
@@ -1198,6 +1204,8 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
             subAlert={patientAlerts.medicareRefNumber}
             maxlength="10"
             className="medicareNumber-field medicare-field form-field"
+            required
+            describedBy = {Object.keys(patientAlerts.medicareNumber).length === 0 ? null : 'medicareNumber-alert'}
           />
 
           {/* Validation dictates only a single digit from 1-9 */}
@@ -1210,6 +1218,8 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
             // alert={patientAlerts.medicareRefNumber}
             maxlength="1"
             className="irn-field medicare-field form-field"
+            required
+            describedBy = {Object.keys(patientAlerts.medicareRefNumber).length === 0 ? null : 'medicareRefNumber-alert'}
           />
         </div>
         }     
@@ -1250,6 +1260,8 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
           value={drugData.dosage} 
           onChange={(event) => handleChange(setDrugData, event)} 
           alert={drugAlerts.dosage}
+          required
+          describedBy = {Object.keys(drugAlerts.dosage).length === 0 ? null : 'dosage-alert'}
         />
 
         <FormField 
@@ -1292,6 +1304,8 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
           alert={drugAlerts.quantity}
           subAlert={drugAlerts.maxQuantity}
           className="quantity-field form-field"
+          required
+          describedBy = {Object.keys(drugAlerts.quantity).length === 0 ? null : 'quantity-alert'}
         />
 
         <FormField 
@@ -1303,6 +1317,8 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
           alert={drugAlerts.repeats}
           subAlert={drugAlerts.maxRepeats}
           className="repeats-field form-field"
+          required
+          describedBy = {Object.keys(drugAlerts.repeats).length === 0 ? null : 'repeats-alert'}
         /> 
 
       </Fieldset>
@@ -1387,6 +1403,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
           value={miscData.date} 
           onChange={(event) => handleChange(setMiscData, event)} 
           alert={miscAlerts.date}
+          required
         />
 
       </Fieldset>

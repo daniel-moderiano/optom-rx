@@ -24,7 +24,7 @@ const StyledFormField = styled.div`
   }
 
   input::placeholder {
-    color: #808080;
+    color: #767676;
     font-family: var(--font-stack-segoe);
   }
 

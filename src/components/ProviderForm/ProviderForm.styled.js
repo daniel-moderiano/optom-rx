@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const StyledProviderForm = styled.div`
+const StyledProviderForm = styled.form`
   display: flex;
   flex-direction: column;
   position: relative;

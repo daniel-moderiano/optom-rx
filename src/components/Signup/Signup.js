@@ -132,7 +132,7 @@ const Signup = ({ setPage }) => {
       <div className="signup-container">
         <h2 className="Signup__title">Sign up</h2>
 
-        <form className="Signup__form" onSubmit={(event) => {
+        <form className="Signup__form" noValidate onSubmit={(event) => {
           event.preventDefault();
           // Check form validity before calling submit function
           if (isFormValid()) {
@@ -150,17 +150,9 @@ const Signup = ({ setPage }) => {
           className="auth-field form-field"
           alert={emailAlert}
           autoFocus
+          required
+          describedBy={Object.keys(emailAlert).length === 0 ? null : 'email-alert'}
         />
-
-        {/* <FormField 
-          fieldType="password" 
-          name="password"
-          label="Password" 
-          value={password} 
-          onChange={(event) => setPassword(event.target.value)} 
-          className="auth-field form-field"
-          alert={passwordAlert}
-        /> */}
 
           <div className="displayName-group">
             <FormField 
@@ -171,7 +163,9 @@ const Signup = ({ setPage }) => {
               onChange={(event) => setPassword(event.target.value)} 
               className="auth-field form-field pass-field"
               alert={passwordAlert}
-              describedBy="password-desc"
+              // describedBy="password-desc"
+              required
+              describedBy={Object.keys(passwordAlert).length === 0 ? null : 'password-alert'}
             />
             <span id="password-desc" className="displayName-msg">Password must contain at least 6 characters</span>
           </div>
@@ -185,7 +179,9 @@ const Signup = ({ setPage }) => {
               onChange={(event) => setDisplayName(event.target.value)} 
               className="auth-field form-field displayName-field"
               alert={displayNameAlert}
-              describedBy="display-desc"
+              // describedBy="display-desc"
+              describedBy={Object.keys(displayNameAlert).length === 0 ? null : 'displayName-alert'}
+              required
             />
             <span id="display-desc" className="displayName-msg">This name will be visible only to you when logged in</span>
           </div>

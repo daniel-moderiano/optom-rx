@@ -102,7 +102,7 @@ const Login = ({ setPage }) => {
       <div className="login-container">
         <h2 className="Login__title">Log in</h2>
 
-        <form className='Login__form' onSubmit={(event) => {
+        <form className='Login__form' noValidate onSubmit={(event) => {
           event.preventDefault();
           // Ensure form validation passes
           if (isFormValid()) {
@@ -120,6 +120,8 @@ const Login = ({ setPage }) => {
             className="auth-field form-field"
             alert={emailAlert}
             autoFocus
+            required
+            describedBy={Object.keys(emailAlert).length === 0 ? null : 'email-alert'}
           />
 
           <FormField 
@@ -130,6 +132,8 @@ const Login = ({ setPage }) => {
             onChange={(event) => setPassword(event.target.value)} 
             className="auth-field form-field"
             alert={passwordAlert}
+            required
+            describedBy={Object.keys(passwordAlert).length === 0 ? null : 'password-alert'}
           />
 
           {error && <div className="error-container">
