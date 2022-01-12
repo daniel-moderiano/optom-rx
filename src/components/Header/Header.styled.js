@@ -20,6 +20,10 @@ const StyledHeader = styled.header`
     .cls-1 {
       fill: ${props => props.user ? '#fff' : 'var(--primary-color)'};
     }
+
+    svg {
+      pointer-events: none;
+    }
   }
 
   @media print {

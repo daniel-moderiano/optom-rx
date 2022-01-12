@@ -4,6 +4,7 @@ import { useAuthContext } from '../../hooks/useAuthContext';
 import Favourites from '../Favourites/Favourites';
 import { useEffect } from 'react';
 
+
 const Home = ({ setToast, setPage }) => {
   const { user } =  useAuthContext();
 
@@ -11,7 +12,8 @@ const Home = ({ setToast, setPage }) => {
   useEffect(() => {
     setPage('home');
   }, [setPage])
-  
+
+ 
   return (
     <StyledHome className="Home">
       <h2 className="Home__title">Welcome, {user.displayName}</h2>
