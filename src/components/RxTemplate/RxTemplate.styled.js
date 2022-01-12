@@ -173,6 +173,7 @@ const StyledRxTemplate = styled.div`
     margin: 0;
     padding: 0;
     display: block;
+    margin-top: 6px;
 
     .ui-container, .ui-description {
       display: none;
@@ -189,10 +190,12 @@ const StyledRxTemplate = styled.div`
       margin: 0;
       line-height: normal;
       
+      
       .container {
         position: relative;
         width: 100%;
         height: 100%;
+        
       }
 
       .provider-upper {
@@ -564,7 +567,7 @@ const StyledRxTemplate = styled.div`
       margin: 0;
       line-height: normal;
       position: relative;
-      top: 820px;
+      top: 814px;
       left: 410px;
       font-size: 14.5px;
       width: 400px;
