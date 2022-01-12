@@ -10,7 +10,7 @@ const Header = ({ user, resetData, currentPage }) => {
   };
 
   return (
-    <StyledHeader className="Header" user={user} role="banner">
+    <StyledHeader className="Header" user={user} role="banner" aria-labelledby="optomrx-logo">
       <h1 className="Header__title" onClick={returnHome}>
       <div className="logo-container">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 166.92 45.53" className="logo" aria-labelledby="optomrx-logo">

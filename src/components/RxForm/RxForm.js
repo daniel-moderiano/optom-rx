@@ -1142,7 +1142,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
           {providers && (<>
             {(providers.length > 0) ? (
               <>
-                <label>Select provider
+                <label id="react-select-id">Select provider
                 <Select 
                   options={selectOptions} 
                   isSearchable={false}
@@ -1152,6 +1152,8 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
                   placeholder="Select provider..."
                   id="react-select"
                   required
+                  aria-labelledby="react-select-id"
+                  label="Select provider"
                 /> 
                 </label>
               </>
@@ -1357,6 +1359,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
             value={miscData.authCode} 
             onChange={(event) => handleChange(setMiscData, event)} 
             alert={miscAlerts.authCode}
+            describedBy = {Object.keys(miscAlerts.authCode).length === 0 ? null : 'authCode-alert'}
           />
 
           <div className="retention">
