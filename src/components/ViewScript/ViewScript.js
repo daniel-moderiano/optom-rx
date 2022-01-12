@@ -9,6 +9,10 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 import Modal from "../utils/Modal/Modal";
 import FormField from "../FormField/FormField";
 import Dots from "../utils/Dots/Dots";
+import arrow from '../../assets/arrow.svg';
+import starWhite from '../../assets/star-white.svg';
+import starYellow from '../../assets/star-yellow.svg';
+
 import './ViewScript.css'
 
 const ViewScript = ({ setToast, resetData, setPage }) => {
@@ -226,6 +230,7 @@ const ViewScript = ({ setToast, resetData, setPage }) => {
               scriptData: scriptData,
             }}>
               <svg xmlns="http://www.w3.org/2000/svg" className="icon" viewBox="0 0 512 512"><path d="M448 256L272 88v96C103.57 184 64 304.77 64 424c48.61-62.24 91.6-96 208-96v96z" fill="#ffffff" stroke="currentColor" stroke-linejoin="round" stroke-width="10"/></svg>
+              {/* <img src={arrow} alt="" className="icon"/> */}
               <span>Re-prescribe</span>
               </Link>
             {/* <Link to="/scripts" className="cancel-btn ProviderForm__btn">Go back</Link> */}
@@ -234,6 +239,7 @@ const ViewScript = ({ setToast, resetData, setPage }) => {
               setShowModal(true);
             }}>
               <svg className="icon" xmlns="http://www.w3.org/2000/svg" enableBackground="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="22px" fill={`${addStatus ? '#FFBF00' : '#ffffff'}`}><g><path d="M0,0h24v24H0V0z" fill="none"/><path d="M0,0h24v24H0V0z" fill="none"/></g><g><path d="M12,17.27L18.18,21l-1.64-7.03L22,9.24l-7.19-0.61L12,2L9.19,8.63L2,9.24l5.46,4.73L5.82,21L12,17.27z"/></g></svg>
+              {/* <img src={starWhite} alt="" className="icon"/> */}
               <span>{`${addStatus ? 'Added!' : 'Add to favourites'}`}</span>
             </button>
  

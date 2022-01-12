@@ -113,7 +113,7 @@ const StyledRxTemplate = styled.div`
       padding: 8px 16px 10px 16px;
       border-radius: 2px;
 
-      img {
+      svg {
         width: 20px;
         
         margin-right: 0.5rem;
