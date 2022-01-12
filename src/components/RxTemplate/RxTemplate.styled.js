@@ -113,10 +113,11 @@ const StyledRxTemplate = styled.div`
       padding: 8px 16px 10px 16px;
       border-radius: 2px;
 
-      svg {
+      img {
         width: 20px;
+        
         margin-right: 0.5rem;
-        margin-top: 0.2rem;
+        margin-top: 0.1rem;
       }
 
       &:active {
