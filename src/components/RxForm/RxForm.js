@@ -1133,7 +1133,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
           {providers && (<>
             {(providers.length > 0) ? (
               <>
-                <label htmlFor="react-select">Select provider</label>
+                <label>Select provider
                 <Select 
                   options={selectOptions} 
                   isSearchable={false}
@@ -1143,6 +1143,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
                   placeholder="Select provider..."
                   id="react-select"
                 /> 
+                </label>
               </>
             ) : (
               <Link className="provider-addBtn provider-addBtn--solo" to="/add-provider">Add new provider</Link>

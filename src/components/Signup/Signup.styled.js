@@ -70,12 +70,16 @@ const StyledSignup = styled.div`
     height: 2.6rem;
   } 
 
-  .displayName-field {
+  .displayName-field, .pass-field {
     margin-bottom: 0;
   }
 
+  .displayName-field {
+    margin-top: 1.5rem;
+  }
+
   .displayName-msg {
-    font-style: italic;
+    /* font-style: italic; */
     font-size: 0.8rem;
     color: #5A6572;
   }

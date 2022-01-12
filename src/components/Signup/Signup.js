@@ -152,7 +152,7 @@ const Signup = ({ setPage }) => {
           autoFocus
         />
 
-        <FormField 
+        {/* <FormField 
           fieldType="password" 
           name="password"
           label="Password" 
@@ -160,7 +160,21 @@ const Signup = ({ setPage }) => {
           onChange={(event) => setPassword(event.target.value)} 
           className="auth-field form-field"
           alert={passwordAlert}
-        />
+        /> */}
+
+          <div className="displayName-group">
+            <FormField 
+              fieldType="password" 
+              name="password"
+              label="Password" 
+              value={password} 
+              onChange={(event) => setPassword(event.target.value)} 
+              className="auth-field form-field pass-field"
+              alert={passwordAlert}
+              describedBy="password-desc"
+            />
+            <span id="password-desc" className="displayName-msg">Password must contain at least 6 characters</span>
+          </div>
 
           <div className="displayName-group">
             <FormField 
@@ -171,8 +185,9 @@ const Signup = ({ setPage }) => {
               onChange={(event) => setDisplayName(event.target.value)} 
               className="auth-field form-field displayName-field"
               alert={displayNameAlert}
+              describedBy="display-desc"
             />
-            <span className="displayName-msg">This name will be visible only to you when logged in</span>
+            <span id="display-desc" className="displayName-msg">This name will be visible only to you when logged in</span>
           </div>
 
           {error && <div className="error-container">

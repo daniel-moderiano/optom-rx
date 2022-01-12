@@ -186,11 +186,12 @@ const TableProviders = ({ data, rowsPerPage, setToast }) => {
       </Modal>}
 
       <StyledTableProviders className="table">
+          <caption>Prescribers</caption>
           <thead className="tableRowHeader">
             <tr>
-              <th className="tableHeader">Name</th>
-              <th className="tableHeader">Location</th>
-              <th className="tableHeader actions-header">Actions</th>
+              <th className="tableHeader" scope="col">Name</th>
+              <th className="tableHeader" scope="col">Location</th>
+              <th className="tableHeader actions-header" scope="col">Actions</th>
             </tr>
           </thead>
           <tbody>

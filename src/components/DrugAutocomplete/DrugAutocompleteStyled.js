@@ -1,11 +1,21 @@
 import styled from "styled-components";
 
-const StyledDrugAutocomplete = styled.fieldset`
+const StyledDrugAutocomplete = styled.div`
   position: relative;
   border: none;
   margin: 0;
   padding: 0;
-  width: 24rem;
+
+  .visually-hidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
 
   .items-list {
     position: absolute;

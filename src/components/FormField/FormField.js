@@ -1,16 +1,18 @@
 import { StyledFormField } from "./FormField.styled";
 
 const FormField = (props) => {
-  const { fieldType, id, name, label, value, placeholder, onChange, className, alert, subAlert, maxlength, checked, enterFunc, required, autoFocus } = props;
+  const { fieldType, id, name, label, value, placeholder, onChange, className, alert, subAlert, maxlength, checked, enterFunc, required, autoFocus, describedBy } = props;
+
+  const ariaDescribe = describedBy ? { "aria-describedby": describedBy } : {};
 
   return (
     <StyledFormField className={className}>
       {/* Input nested in label to avoid the need for htmlFor + id. A <span> may be wrapped around the label text to add more styling options */}
       <div className="container">
-        <label className="form-field__label">
+        <label className="form-field__label" htmlFor={id ? id : name}>
           <span className="label-text">{label}</span>
             <input 
-              id={id}
+              id={id ? id : name}
               name={name}
               type={fieldType} 
               value={value} 
@@ -22,6 +24,7 @@ const FormField = (props) => {
               onKeyDown={enterFunc}
               required={required}
               autoFocus={autoFocus ? true : false}
+              {...ariaDescribe}
             />
             {fieldType === ('checkbox') && <span className={`checkmark ${checked ? 'show' : 'hide'}`}></span>}
             <svg xmlns="http://www.w3.org/2000/svg" className="tickCircle hide" viewBox="0 0 512 512">

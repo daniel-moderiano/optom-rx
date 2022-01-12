@@ -28,6 +28,17 @@ const StyledAddressAutocomplete = styled.fieldset`
     margin-bottom: 1.5rem;
   }
 
+  .visually-hidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
   button {
     position: absolute;
     right: 0.3rem;

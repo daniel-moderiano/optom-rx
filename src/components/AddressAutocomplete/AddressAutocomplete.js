@@ -145,7 +145,7 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider, alerts, se
  
   return (
     <StyledAddressAutocomplete>
-      
+        <legend className="visually-hidden">Patient Address</legend>
         <FormField
           name="streetAddress"
           label="Street address"

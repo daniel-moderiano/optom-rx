@@ -47,11 +47,12 @@ const Table = ({ data, rowsPerPage }) => {
     <>
       <StyledTable className="table">
         {/* Preset table header. Note this reduces the re-usability of the Table component, but not the TableFooter */}
+        <caption>Prescriptions</caption>
         <thead className="tableRowHeader">
           <tr>
-            <th className="tableHeader">Script ID</th>
-            <th className="tableHeader">Medication</th>
-            <th className="tableHeader">Date prescribed</th>
+            <th className="tableHeader" scope="col">Script ID</th>
+            <th className="tableHeader" scope="col">Medication</th>
+            <th className="tableHeader" scope="col">Date prescribed</th>
           </tr>
         </thead>
         {/* Preset table data, must specify this according to the data that is being passed in */}
