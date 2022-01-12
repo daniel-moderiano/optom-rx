@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 const StyledNav = styled.nav`
 
+  
+
   .Nav__list {
     list-style: none;
     display: flex;
@@ -54,6 +56,20 @@ const StyledNav = styled.nav`
         }
 
         
+      }
+
+      [aria-current=page] {
+        &:before,
+        &:after {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        &:before {
+          transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.320, 1.275), opacity 0.2s;
+        }
+        &:after {
+          transition: transform 0s 0.2s cubic-bezier(0.175, 0.885, 0.320, 1.275), opacity 0s 0.2s;
+        }
       }
 
       .Nav__link--active {
