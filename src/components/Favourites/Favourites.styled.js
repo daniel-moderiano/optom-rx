@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 const StyledFavourites = styled.div`
   margin-top: 4rem;
+  width: 100%;
 
   .Favourites__title {
     padding: 0;
@@ -253,6 +254,36 @@ const StyledFavourites = styled.div`
       }
     }
   }
+
+  /* Landscape phone to portrait tablet */
+  @media (max-width: 550px) { 
+    
+    .fav-list {
+
+      .list-header {
+        text-align: center;
+      }
+      li {
+        
+        flex-direction: column;
+        /* align-items: flex-start; */
+        padding: 1rem 1.5rem;
+
+        .btns {
+          margin-top: 1rem;
+        }
+      }
+    }
+
+    .Modal {
+      .Modal__content {
+        width: 90%;
+        text-align: left;
+      }
+    }
+  }
+
+
 
 `
 
