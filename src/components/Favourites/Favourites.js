@@ -15,6 +15,8 @@ const Favourites = ({ setToast }) => {
   // const { documents: favourites, isPending, error } = useCollection('providers', ['uid', '==', user.uid]);
   const { documents: favourites, isPending, error } = useFavourites(user.uid);
 
+  
+
   const [showModal, setShowModal] = useState(false);
   
   const [selectedScript, setSelectedScript] = useState({

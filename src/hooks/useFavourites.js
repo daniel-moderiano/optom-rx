@@ -13,11 +13,12 @@ export const useFavourites = (userID) => {
   useEffect(() => {
     // This technically marks the beginning of the fetch call, so set pending state here
     setIsPending(true);
-
+    
     // Written as an unsub function to unsubscribe once component dismounts
     const unsub = onSnapshot(doc(db, 'users', userID), 
       (snapshot) => {
         setIsPending(false);
+        setError(null);
         // In the event the user is offline, the snapshot will still return using a local cache version, and this will default to an empty docs array. Handle this accordingly
         // if (snapshot.metadata.fromCache && snapshot.docs.length === 0) {
         //   setError("No providers found. Please check you are connected to the internet for live data");
@@ -26,7 +27,7 @@ export const useFavourites = (userID) => {
 
         if (snapshot.data()) {
           // If the data is retrieved this point will be reached, even if there are no scripts
-          console.log(snapshot.data());
+          
           setDocuments(snapshot.data().favourites);
         } else {
           // The document retrieved will be null in this case, and data() undefined, so set an error
