@@ -1,10 +1,17 @@
 .bottom-text {
-  margin: 0;
-  padding: 0;
+  margin: 0 0 1rem 0;
+  padding: 0 1rem;
   width: 100%;
   padding: 0.5rem 0.5rem;
 
   font-size: 0.8rem;
   color: #5A6572;
   text-align: center;
+}
+
+@media(max-width: 768px) {
+  
+  .bottom-text {
+    width: 80%;
+  }
 }

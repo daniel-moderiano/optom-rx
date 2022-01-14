@@ -5,7 +5,7 @@ const StyledViewScript = styled.div`
   background-color: #FFFFFF;
   box-shadow: 0 1.6px 3.6px 0 rgb(0 0 0 / 13%), 0 0.3px 0.9px 0 rgb(0 0 0 / 11%);
   padding: 2rem 5.5rem;
-  width: 90%;
+  width: 100%;
   max-width: 880px;
   display: flex;
   flex-direction: column;
@@ -103,7 +103,7 @@ const StyledViewScript = styled.div`
       background-color: var(--primary-color);
       color: rgb(255, 255, 255);
       border: none;
-      margin-right: 1.5rem;
+      
       text-decoration: none;
     }
     
@@ -115,7 +115,7 @@ const StyledViewScript = styled.div`
       display: flex;
       align-items: center;
       padding: 0;
- 
+      margin-right: 1.5rem;
 
       .icon {
         padding: 0;
@@ -162,24 +162,13 @@ const StyledViewScript = styled.div`
     display: flex;
     flex-direction: column;
     
-    
-
     .Script__title {
       background-color: #F9FAFB;
       padding: 0.75rem 0.5rem;
-      /* margin-top: 0.5rem; */
-      /* color: #48515B; */
-      /* text-align: left;
-      font-size: 0.75rem;
-      line-height: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05rem;
-      font-family: var(--font-stack-segoe-semibold); */
       font-size: 1.3rem;
       font-family: var(--font-title);
       color: var(--title-color);
       border-top: none;
-      /* border-bottom: 1px solid #D1D6DB; */
     }
 
     .Script__info--section {
@@ -280,6 +269,87 @@ const StyledViewScript = styled.div`
         color: #21252A;
       }
     }
+  }
+
+  
+  /* Landscape phone to portrait tablet */
+  @media (max-width: 768px) { 
+    padding: 3rem 3rem;
+
+    
+    
+  }
+
+  /* Landscape phone to portrait tablet */
+  @media (max-width: 550px) { 
+    .Modal {
+      .Modal__content {
+        width: 90%;
+        text-align: left;
+        max-width: 500px;
+      }
+    }
+  }
+
+  @media (max-width: 450px) { 
+    .ProviderForm__btns {
+      flex-direction: column;
+
+      .ProviderForm__btn, .fav-btn {
+        padding: 8px 16px 10px 16px;
+        width: 90%;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .submit-btn, .fav-btn {
+        min-width: 80px;
+      }
+
+      .submit-btn {
+        display: flex;
+        align-items: center;
+        padding: 0;
+        /* margin-right: 1.5rem; */
+        margin: 0 0 1.5rem 0;
+
+        .icon {
+          padding: 0;
+          line-height: 0;
+          margin-right: 0.2rem;
+        
+          margin-left: 13px;
+          width: 24px;
+        }
+
+        span {
+          padding: 8px 16px 10px 4px;
+        }
+
+
+      }
+      
+      .fav-btn {
+        
+        display: flex;
+        align-items: center;
+        padding: 0;
+
+        .icon {
+          padding: 0;
+          line-height: 0;
+          margin-right: 0.2rem;
+          margin-top: -0.1rem;
+          margin-left: 13px;
+        }
+
+        span {
+          padding: 8px 16px 10px 4px;
+        }
+
+      }
+    }
+
   }
 
 

@@ -379,6 +379,14 @@ const StyledProviders = styled.div`
     .TableFooter {
       justify-content: center;
     }
+
+    .Modal {
+      .Modal__content {
+        width: 90%;
+        text-align: left;
+        max-width: 500px;
+      }
+    }
   }
 
   

@@ -387,62 +387,6 @@ const StyledFavourites = styled.div`
     }
   }
 
-  
-
-  /* @media(min-width: 420px) and (max-width: 550px) {
-    .fav-list {
-        li {
-          align-items: center;
-          padding: 1rem 1.5rem;
-
-          .btns {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-
-            a, .delete-btn {
-              margin: 0;
-            }
-
-            a {
-              margin-bottom: 1rem;
-            }
-          }
-        }
-      }
-  } */
-
-  /* @media(max-width: 420px) {
-    .fav-list {
-
-      .list-header {
-      }
-      li {
-        
-        flex-direction: column;
-        align-items: flex-start;
-
-        padding: 1rem 1.5rem;
-
-        .btns {
-          display: flex;
-          flex-direction: row;
-          margin-top: 1rem;
-          align-items: center;
-          justify-content: center;
-
-          a, .delete-btn {
-            margin: 0;
-          }
-
-          a {
-            margin: 0 1rem 0 0rem;
-          } 
-        }
-      }
-      }
-  } */
 
 
 

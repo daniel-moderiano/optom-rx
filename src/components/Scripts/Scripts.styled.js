@@ -94,6 +94,8 @@ const StyledScripts = styled.div`
   /* Landscape phone to portrait tablet */
   @media (max-width: 768px) { 
     padding: 3rem 3rem;
+
+    
     
   }
 
@@ -120,7 +122,17 @@ const StyledScripts = styled.div`
     .TableFooter {
       justify-content: center;
     }
+
+    .Modal {
+      .Modal__content {
+        width: 90%;
+        text-align: left;
+        max-width: 500px;
+      }
+    }
   }
+
+  
 `
 
 export { StyledScripts }
