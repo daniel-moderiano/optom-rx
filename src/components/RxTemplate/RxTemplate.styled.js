@@ -296,11 +296,10 @@ const StyledRxTemplate = styled.div`
 
       .patient__medicareNumber {
         position: absolute;
-        display: flex;
-        justify-content: space-between;
+       
         top: 138px;
         left: 140px;
-        width: 110px;
+        width: 150px;
         font-weight: bold;
       }
 
@@ -494,7 +493,7 @@ const StyledRxTemplate = styled.div`
         justify-content: space-between;
         top: 138px;
         left: 140px;
-        width: 110px;
+        width: 150px;
         font-weight: bold;
       }
 
@@ -690,7 +689,7 @@ const StyledRxTemplate = styled.div`
           .patient__medicareNumber {
             display: flex;
             justify-content: space-between;
-            width: 110px;
+            width: 150px;
           }
         }        
       }
@@ -832,7 +831,7 @@ const StyledRxTemplate = styled.div`
           .patient__medicareNumber {
             display: flex;
             justify-content: space-between;
-            width: 110px;
+            width: 150px;
           }
         }        
       }

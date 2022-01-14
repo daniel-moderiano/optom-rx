@@ -422,7 +422,7 @@ const StyledRxForm = styled.form`
 
     .medicareFields {
       .medicareNumber-field {
-        width: 7.5rem;
+        width: 8.5rem;
         margin-right: 1rem;
       }
 
