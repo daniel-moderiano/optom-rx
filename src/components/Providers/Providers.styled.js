@@ -389,7 +389,15 @@ const StyledProviders = styled.div`
     }
   }
 
-  
+   /* Landscape phone to portrait tablet */
+   @media (max-width: 360px) { 
+    .Providers__add-btn {
+      text-align: center;
+      
+      max-width: 250px;
+      width: 100%;
+    }
+  }
 
 `
 

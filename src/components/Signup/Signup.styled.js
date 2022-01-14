@@ -95,6 +95,7 @@ const StyledSignup = styled.div`
     /* font-style: italic; */
     font-size: 0.8rem;
     color: #5A6572;
+    width: 100%;
   }
 
   .login-option {
