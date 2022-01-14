@@ -185,8 +185,8 @@ const TableProviders = ({ data, rowsPerPage, setToast }) => {
         </div>
       </Modal>}
 
-      <StyledTableProviders className="table">
-          <caption>Prescribers</caption>
+      <StyledTableProviders className="table" aria-describedby="Providers__description">
+          
           <thead className="tableRowHeader">
             <tr>
               <th className="tableHeader" scope="col">Name</th>
@@ -198,11 +198,11 @@ const TableProviders = ({ data, rowsPerPage, setToast }) => {
 
             {dataSlice.map((provider) => (
               <tr className="tableRowItems" key={provider.id}>
-                <td className="tableCell">{provider.fullName}</td>
-                <td className="tableCell">{formatLocation(provider.practiceName, provider.streetAddress, provider.suburb)}</td>
+                <td data-title="Name" className="tableCell">{provider.fullName}</td>
+                <td data-title="Location" className="tableCell">{formatLocation(provider.practiceName, provider.streetAddress, provider.suburb)}</td>
 
-                <td className="tableCell actions-cell">
-                  
+                <td data-title="Actions" className="tableCell actions-cell">
+                  <div className="btns">
                   <Link className="table__action edit" to={`/edit/${provider.id}`}>Edit</Link>
                   <button className="table__action delete" onClick={() => {
                     setShowModal(true);
@@ -219,6 +219,8 @@ const TableProviders = ({ data, rowsPerPage, setToast }) => {
                       `${provider.default ? 'Remove default' : 'Make default'}`
                     )}
                   </button>
+                  </div>
+                  
                 </td>
               </tr>
             ))}

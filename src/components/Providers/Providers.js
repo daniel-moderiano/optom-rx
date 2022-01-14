@@ -33,7 +33,7 @@ const Providers = ({ setToast, setPage }) => {
   return (
     <StyledProviders className="Providers">
       <h2 className="Providers__title">Providers</h2>
-      <p className="Providers__description">Use this section to add provider details that can be used in your prescriptions</p>
+      <p id='Providers__description' className="Providers__description">Use this section to add provider details that can be used in your prescriptions</p>
   
       <Link className="Providers__add-btn" to={`/add-provider`}>Add new provider</Link> 
 
