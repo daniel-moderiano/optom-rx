@@ -1111,6 +1111,12 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
       marginTop: '0.5rem',
       marginBottom: '0.5rem',
 
+      "@media (max-width: 590px)": {
+        width: "100%",
+        maxWidth: "26rem",
+        marginRight: "1.5rem",
+      },
+
     }),
 
     valueContainer: (provided, state) => ({

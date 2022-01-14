@@ -312,7 +312,7 @@ const StyledRxForm = styled.form`
 
   .ProviderForm__btns {
     /* place-self: flex-end; */
-    padding: 2.75rem 0 2rem 19.5rem;
+    padding: 2.75rem 0 2rem 20rem;
     width: 100%;
     display: flex;
     align-items: center;
@@ -362,8 +362,75 @@ const StyledRxForm = styled.form`
       background-color: var(--btn-secondary-hover);
       color: #21252A;
     }
-  }             
-                
+  }     
+  
+  /* Landscape phones and down */
+  @media (max-width: 920px) { 
+    .ProviderForm__btns {
+      padding: 2.75rem 0 2rem 0rem;
+    }
+  }
+
+  
+
+  /* Landscape phones and down */
+  @media (max-width: 590px) { 
+    padding: 2rem 3rem;
+
+    .misc-form {
+
+      .solo-alert-container {
+        max-width: 24rem;
+        width: 100%;
+      }
+    }
+
+    .medicareFields {
+  
+      .alert-container {
+        width: 20rem;
+      }
+    }
+
+    
+  }
+            
+            
+  @media(max-width: 450px) {
+    .ProviderForm__btns {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      .ProviderForm__btn {
+        width: 90%;
+        margin: 0;
+        text-align: center;
+      }
+
+      .submit-btn {
+        margin-bottom: 1.5rem;
+        min-width: 0;
+      }
+    }
+
+    .medicareFields {
+      .medicareNumber-field {
+        width: 7.5rem;
+        margin-right: 1rem;
+      }
+
+      .irn-field {
+        width: 2.5rem;
+      }
+
+      .alert-container {
+        width: 11rem;
+      }
+    }
+  }
+
+
 `
 
 export { StyledRxForm }

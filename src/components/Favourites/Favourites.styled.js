@@ -305,7 +305,7 @@ const StyledFavourites = styled.div`
         display: flex;
         flex-direction: column;
         margin-bottom: 2rem;
-        box-shadow: 0 2px 4px -1px rgb(0 0 0 / 1%), 0 4px 5px 0 rgb(0 0 0 / 5%), 0 1px 5px 0 rgb(0 0 0 / 10%);
+        box-shadow: 0 2px 4px -1px rgb(0 0 0 / 1%), 0 1px 5px 0 rgb(0 0 0 / 5%), 0 1px 5px 0 rgb(0 0 0 / 10%);
         border-radius: 6px;
         -moz-border-radius:6px;
 
