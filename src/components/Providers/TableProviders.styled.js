@@ -175,9 +175,23 @@ const StyledTableProviders = styled.table`
         margin: 0;
       }
     }
+
+    .btns {
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: flex-start;
+
+      .default, .default--selected {
+        margin-top: 0;
+      }
+
+      .delete {
+        margin-right: 0.8rem;
+      }
+    }
   }
 
-  @media(min-width: 360px) and (max-width: 550px) {
+  @media(min-width: 360px) and (max-width: 700px) {
     .btns {
       flex-direction: row;
       align-items: flex-start;
@@ -194,7 +208,7 @@ const StyledTableProviders = styled.table`
   }
 
   /* Simple CSS for flexbox table on mobile */
-  @media(max-width: 550px) {
+  @media(max-width: 700px) {
     thead {
       left: -9999px;
       position: absolute;

@@ -351,7 +351,7 @@ const StyledProviders = styled.div`
     padding: 3rem 3rem;
   }
   
-  @media(max-width: 550px) {
+  @media(max-width: 700px) {
     .table {
       border: none;
       box-shadow: none;
