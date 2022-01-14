@@ -179,6 +179,10 @@ const StyledFormField = styled.div`
     flex-direction: column;
     align-items: center; */
 
+    input {
+      width: 100%;
+    }
+
     .alert-container, &.checkbox {
       width: 100%;
       max-width: 24rem;

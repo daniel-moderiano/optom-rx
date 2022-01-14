@@ -17,7 +17,7 @@ const StyledProviderForm = styled.form`
   }
 
   .ProviderForm__btns {
-    place-self: flex-start;
+    width: 100%;
     margin-top: 1.5rem;
     margin-bottom: 0.5rem;
     display: flex;
@@ -82,10 +82,26 @@ const StyledProviderForm = styled.form`
     display: flex;
     flex-direction: column;
     align-items: center;
-
     
+  }
 
-    
+  @media(max-width: 450px) {
+    .ProviderForm__btns {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      .ProviderForm__btn {
+        width: 90%;
+        margin: 0;
+        
+      }
+
+      .submit-btn {
+        margin-bottom: 1.5rem;
+        min-width: 0;
+      }
+    }
   }
 `
 
