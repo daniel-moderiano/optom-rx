@@ -179,8 +179,8 @@ const Favourites = ({ setToast }) => {
         {isPending && <Spinner />}
 
         {error && <div className='list-container'>
-          <ul className='fav-list'>
-            <div className="list-header">Prescriptions</div>
+          <ul className='fav-list fav-list--none'>
+            <div className="list-header list-header--none">Prescriptions</div>
               <li className="fav-item fav-item--none">
                 No favourites added yet
               </li>
@@ -195,27 +195,35 @@ const Favourites = ({ setToast }) => {
             <div className="list-header">Prescriptions</div>
             {favourites.map((fav) => (
               <li key={fav.scriptID} className="fav-item">
-              <div className="item-name">{(fav.customName === "") ? formatDrug(fav) : fav.customName}</div>
-              
-              <div className="btns">
-                <Link className="" to='/form' state={{ 
-                  newRx: true,
-                  rePrescribe: true,
-                  scriptData: fav,
-                }}>Prescribe</Link>
-                <button className='delete-btn' onClick={() => {
-                    setShowModal(true);
-                    setSelectedScript({
-                      ...fav,
-                    })}}>Delete</button>
-              </div>
+                <div className="item-name">
+                  <span className="cell-title">Script name</span>
+                  <span className="item-content">{(fav.customName === "") ? formatDrug(fav) : fav.customName}</span>
+                  
+                </div>
+                
+                <div className="actions">
+                  <span className="cell-title">Actions</span>
+                  <div className="btns">
+                    <Link className="" to='/form' state={{ 
+                      newRx: true,
+                      rePrescribe: true,
+                      scriptData: fav,
+                    }}>Prescribe</Link>
+                    <button className='delete-btn' onClick={() => {
+                        setShowModal(true);
+                        setSelectedScript({
+                          ...fav,
+                        })}}>Delete</button>
+                  </div>
+                  
+                </div>
               
               </li>
             ))}
           </ul>   
           ) : (
-            <ul className='fav-list'>
-            <div className="list-header">Prescriptions</div>
+            <ul className='fav-list fav-list--none'>
+            <div className="list-header list-header--none">Prescriptions</div>
               <li className="fav-item fav-item--none">No favourites added yet
               </li>
           </ul>   

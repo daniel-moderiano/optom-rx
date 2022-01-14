@@ -74,21 +74,21 @@ const StyledHome = styled.div`
   }
 
   /* Landscape phone to portrait tablet */
-  @media (max-width: 600px) { 
+  @media (max-width: 768px) { 
     padding: 3rem 3rem;
     
   }
 
   /* Landscape phone to portrait tablet */
-  @media (max-width: 550px) { 
-    text-align: center;
-    align-items: center;
+  @media (max-width: 450px) { 
+    /* text-align: center;
+    align-items: center; */
 
     .Home__links {
       display: flex;
       flex-direction: column;
-      /* align-items: flex-start; */
-      align-items: center;
+      align-items: flex-start;
+      /* align-items: center; */
       /* width: 15rem; */
       .Home__link {
         margin: 0 0 1rem 0;
