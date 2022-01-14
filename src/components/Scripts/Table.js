@@ -45,9 +45,9 @@ const Table = ({ data, rowsPerPage }) => {
 
   return (
     <>
+    <div role="region" className="region" aria-labelledby='Scripts__description' tabIndex="0">
       <StyledTable className="table">
         {/* Preset table header. Note this reduces the re-usability of the Table component, but not the TableFooter */}
-        <caption>Prescriptions</caption>
         <thead className="tableRowHeader">
           <tr>
             <th className="tableHeader" scope="col">Script ID</th>
@@ -65,8 +65,9 @@ const Table = ({ data, rowsPerPage }) => {
             </tr>
           ))}
         </tbody>
-      </StyledTable>
-      <TableFooter pages={range} slice={dataSlice} setPage={setPage} page={page} />
+      </StyledTable>     
+    </div>
+    <TableFooter pages={range} slice={dataSlice} setPage={setPage} page={page} />
     </>
   );
 };

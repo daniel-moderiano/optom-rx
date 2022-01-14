@@ -89,7 +89,7 @@ const StyledHome = styled.div`
       flex-direction: column;
       /* align-items: flex-start; */
       align-items: center;
-
+      /* width: 15rem; */
       .Home__link {
         margin: 0 0 1rem 0;
       }

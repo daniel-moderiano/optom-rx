@@ -270,7 +270,18 @@ const StyledFavourites = styled.div`
         padding: 1rem 1.5rem;
 
         .btns {
+          display: flex;
+          /* flex-direction: column; */
           margin-top: 1rem;
+          align-items: center;
+
+          /* a, .delete-btn {
+            margin: 0;
+          }
+
+          a {
+            margin-bottom: 1rem;
+          } */
         }
       }
     }

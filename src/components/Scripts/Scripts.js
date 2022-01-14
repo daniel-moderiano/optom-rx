@@ -30,13 +30,14 @@ const Scripts = ({ setToast, setPage }) => {
   return (
     <StyledScripts className="Scripts">
       <h2 className="Scripts__title">Scripts</h2>
-      <p className="Scripts__description">View all prescriptions you have written. Click the script ID for more information.</p>
+      <p id='Scripts__description' className="Scripts__description">View all prescriptions you have written. Click the script ID for more information.</p>
 
       
       <div className="Scripts__container">
         {isPending && <Spinner />}
 
-        {error && <table className="table">
+        {error && <div role="region" className="region" aria-labelledby='Scripts__description' tabIndex="0">
+          <table className="table">
               <thead className="tableRowHeader">
                 <tr>
                   <th className="tableHeader">Script ID</th>
@@ -49,11 +50,12 @@ const Scripts = ({ setToast, setPage }) => {
                   <td className="tableCellNone" colSpan="3">No scripts written yet</td>
                 </tr>
               </tbody>
-            </table>}
+            </table>
+            </div>}
 
         {scripts && <div className='table-container'>
           {scripts.length > 0 ? (
-            <Table data={scripts} rowsPerPage={15}/>
+            <Table data={scripts} rowsPerPage={15}/>            
           ) : (
             <table className="table">
               <thead className="tableRowHeader">
