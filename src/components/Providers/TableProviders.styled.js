@@ -162,19 +162,7 @@ const StyledTableProviders = styled.table`
   @media (max-width: 800px) { 
   
     
-    .btns {
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: center;
-
-      .default, .default--selected {
-        margin-top: 1rem;
-      }
-
-      .delete {
-        margin: 0;
-      }
-    }
+    
 
     .btns {
       flex-direction: row;
@@ -264,6 +252,22 @@ const StyledTableProviders = styled.table`
       border-bottom: 1px solid #D1D6DB;
       border-radius: 6px;
       margin-bottom: 0;
+    }
+  }
+
+  @media(max-width: 360px) {
+    .btns {
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+
+      .default, .default--selected {
+        margin-top: 1rem;
+      }
+
+      .delete {
+        margin: 0;
+      }
     }
   }
 

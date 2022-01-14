@@ -60,6 +60,10 @@ const StyledFavourites = styled.div`
       background-color: #F9FAFB;
     }
 
+    .list-header--none {
+      font-size: 0;
+    }
+
     .fav-item--none {
       display: flex;
       align-items: center;
@@ -164,6 +168,7 @@ const StyledFavourites = styled.div`
     }
   }
 
+  
 
   .Scripts__title {
     font-family: var(--font-stack-myriad);

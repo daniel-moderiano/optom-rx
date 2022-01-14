@@ -66,6 +66,12 @@ const StyledScripts = styled.div`
     }
   }
 
+  .table-none {
+    .tableHeader {
+      font-size: 0;
+    }
+  }
+
   .Scripts__title {
     font-family: var(--font-stack-myriad);
     font-weight: 400;
