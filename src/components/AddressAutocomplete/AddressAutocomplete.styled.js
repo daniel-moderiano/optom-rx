@@ -70,7 +70,7 @@ const StyledAddressAutocomplete = styled.fieldset`
     width: 100%;
     max-width: 26rem;
 
-    #autocomplete-provider-alert {
+    #autocomplete-provider-alert, #autocomplete-patient-alert {
       width: 50%;
     }
 

@@ -5,7 +5,7 @@ const Fieldset = ({ className, legend, children, pending }) => {
   return (
     <StyledFieldset className={className}>
       <legend>{legend}</legend>
-      <div className="container">
+      <div className="fieldset-container">
         
         {children}
       </div>

@@ -21,7 +21,7 @@ const StyledFieldset = styled.fieldset`
     margin-right: 1rem;
   }
 
-  .container {
+  .fieldset-container {
     position: relative;
     width: auto;
     display: flex;
@@ -43,7 +43,7 @@ const StyledFieldset = styled.fieldset`
       width: 100%;
     }
 
-    .container {
+    .fieldset-container {
       width: 100%;
     }
 

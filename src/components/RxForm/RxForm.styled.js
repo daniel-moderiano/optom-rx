@@ -82,20 +82,7 @@ const StyledRxForm = styled.form`
       &:active {
         transform: scale(0.98);
       }
-      /* position: absolute;
-      left: 0.3rem;
-      top: 5rem;
-      background-color: #fff;
-      border: none;
-      margin: 0;
-      padding: 0;
-      font-size: 0.8rem;
-      text-decoration: underline;
-      font-family: var(--font-stack-segoe);
-      line-height: 0.8rem;
-      &:hover {
-        cursor: pointer;
-      } */
+     
   
     }
 
@@ -372,7 +359,6 @@ const StyledRxForm = styled.form`
   }
 
   
-
   /* Landscape phones and down */
   @media (max-width: 590px) { 
     padding: 2rem 3rem;
@@ -392,7 +378,16 @@ const StyledRxForm = styled.form`
       }
     }
 
-    
+    .quantity-field, .repeats-field {
+      .alert-container {
+        width: 12rem;
+      }
+    }   
+
+    .indications {
+      max-width: 26rem;
+      width: 100%;
+    }
   }
             
             

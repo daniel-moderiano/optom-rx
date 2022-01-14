@@ -5,7 +5,8 @@ const StyledDrugAutocomplete = styled.div`
   border: none;
   margin: 0;
   padding: 0;
-  
+  width: 26rem;
+
 
   .visually-hidden {
     border: 0;
@@ -173,6 +174,7 @@ const StyledDrugAutocomplete = styled.div`
   button {
     position: absolute;
     right: 0.3rem;
+    /* left: 100%; */
     top: 5.6rem;
     background-color: #fff;
     border: none;
@@ -193,7 +195,28 @@ const StyledDrugAutocomplete = styled.div`
     }
   }
 
-  
+  /* Landscape phones and down */
+  @media (max-width: 590px) { 
+    width: 100%;
+    max-width: 26rem;
+
+    .brandOnly-container {
+      /* display: flex;
+      align-items: center;
+      justify-content: space-between; */
+      max-width: 26rem;
+      width: 100%;
+    }
+
+    #activeIngredient-alert {
+      width: 50%;
+    }
+
+    #postcode-alert {
+      /* The limiting factor on width responsiveness */
+      width: 12rem;
+    }
+  }
  
 `
 
