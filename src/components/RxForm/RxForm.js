@@ -1373,7 +1373,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
         <div className="justification-field">
           <label htmlFor="justification">
             Clinical justification for use of item
-            <textarea name="justification" value={miscData.justification} id="justification" cols="30" rows="3" onChange={(event) => handleChange(setMiscData, event)} ></textarea>
+            <textarea className="textarea-justification" name="justification" value={miscData.justification} id="justification" cols="30" rows="3" onChange={(event) => handleChange(setMiscData, event)} ></textarea>
           </label>
         </div>
           <FormField 

@@ -154,7 +154,7 @@ const StyledRxForm = styled.form`
           font-family: var(--font-stack-segoe);
 
           &:focus {
-            outline: 2px solid #a360ac;
+            outline: 2px solid #104362;
             outline-offset: 2px;
           }
         }
@@ -165,7 +165,6 @@ const StyledRxForm = styled.form`
     
   }
 
-  
 
   .medicareFields {
     display: flex;
@@ -196,6 +195,7 @@ const StyledRxForm = styled.form`
   .pbsRx {
     margin: 1.25rem 0 1rem 0;
   }
+
 
   .indications {
     margin-bottom: 1.5rem;
@@ -364,7 +364,6 @@ const StyledRxForm = styled.form`
     padding: 2rem 3rem;
 
     .misc-form {
-
       .solo-alert-container {
         max-width: 24rem;
         width: 100%;
@@ -372,7 +371,6 @@ const StyledRxForm = styled.form`
     }
 
     .medicareFields {
-  
       .alert-container {
         width: 20rem;
       }
@@ -385,6 +383,11 @@ const StyledRxForm = styled.form`
     }   
 
     .indications {
+      max-width: 26rem;
+      width: 100%;
+    }
+
+    .misc-form .retention .justification-field {
       max-width: 26rem;
       width: 100%;
     }
