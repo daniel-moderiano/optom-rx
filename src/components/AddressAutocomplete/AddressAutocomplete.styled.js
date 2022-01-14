@@ -79,6 +79,10 @@ const StyledAddressAutocomplete = styled.fieldset`
       width: 12rem;
     }
   }
+
+  @media (max-width: 420px) {
+    margin-bottom: 0.75rem;
+  }
 `
 
 export { StyledAddressAutocomplete }

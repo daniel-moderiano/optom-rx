@@ -268,6 +268,12 @@ const StyledDrugAutocomplete = styled.div`
     }
   }
 }}
+
+@media (max-width: 420px) {
+    .drug-collapse {
+      margin-top: 2.25rem;
+    }
+  }
  
 `
 
