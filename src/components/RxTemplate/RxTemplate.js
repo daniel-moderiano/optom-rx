@@ -143,8 +143,9 @@ const RxTemplate = ({ data, setToast, setPage }) => {
     <StyledRxTemplate className="RxTemplate">
       <h2 className="RxTemplate__title">Review your prescription</h2>
       <div className="ui-description">
+      <div className="ui-info ui-date">{formatDate()}</div>
         <div className="ui-info ui-scriptNo">Script No: {miscData.scriptID}</div>
-                <div className="ui-info ui-date">{formatDate()}</div>
+                
       </div>
       {/* If the template is rendered without a full set of data, many functions will fail. Hence this is rendered conditionally */}
       {state ? <>

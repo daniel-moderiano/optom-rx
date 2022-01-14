@@ -100,10 +100,11 @@ const StyledRxTemplate = styled.div`
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 2.6rem;
+      /* height: 2.6rem; */
     }
 
     .RxTemplate__btn {
+      height: 2.6rem;
       display: flex;
       align-items: center;
       font-size: 1rem;
@@ -148,6 +149,7 @@ const StyledRxTemplate = styled.div`
     }
           
     .btn-edit {
+      height: 2.6rem;
       display: block;
       text-decoration: none;
       background-color: var(--btn-secondary);
@@ -163,6 +165,64 @@ const StyledRxTemplate = styled.div`
 
   .right-container, .left-container, .bottom-container--left, .bottom-container--right {
     display: none;
+  }
+
+  /* Landscape phone to portrait tablet */
+  @media (max-width: 768px) { 
+    padding: 3rem 3rem;
+  }
+
+  /* Landscape phone to portrait tablet */
+  @media (max-width: 550px) { 
+    .Modal {
+      .Modal__content {
+        width: 90%;
+        text-align: left;
+        max-width: 500px;
+      }
+    }
+  }
+
+  @media (max-width: 550px) { 
+    .ui-description {
+      flex-direction: column;
+    }
+
+    .RxTemplate__btns {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      
+
+      .primary-btns {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+        width: 100%;
+      }
+
+      .RxTemplate__btn {
+        padding: 8px 16px 10px 16px;
+        width: 90%;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+        max-width: 300px;
+      }
+
+      .btn-print {
+        margin: 0 0 1.5rem 0;
+        max-width: 300px;
+      }
+
+      .btn-edit {
+        display: block;
+        text-align: center;
+        max-width: 300px;
+      }
+    }
+
   }
 
   /* Print styles are created to match the dimensions of the physical Rx form */

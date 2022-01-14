@@ -87,11 +87,17 @@ const StyledHome = styled.div`
     .Home__links {
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
+      /* align-items: center; */
+      justify-content: center;
+      
       /* align-items: center; */
       /* width: 15rem; */
       .Home__link {
         margin: 0 0 1rem 0;
+        width: 70%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
     }
   }
