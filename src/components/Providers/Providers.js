@@ -55,7 +55,7 @@ const Providers = ({ setToast, setPage }) => {
                 </thead>
                 <tbody>
                   <tr className="tableRowItems">
-                    <td className="tableCellNone" colSpan="3">No providers added yet</td>
+                    <td data-title="Providers" className="tableCellNone" colSpan="3">No providers added yet</td>
                   </tr>
                 </tbody>
               </table>

@@ -188,30 +188,33 @@ const TableProviders = ({ data, rowsPerPage, setToast }) => {
       <StyledTableProviders className="table" aria-describedby="Providers__description">
           
           <thead className="tableRowHeader">
-            <tr>
-              <th className="tableHeader" scope="col">Name</th>
-              <th className="tableHeader" scope="col">Location</th>
-              <th className="tableHeader actions-header" scope="col">Actions</th>
+            <tr role="row">
+              <th role="columnheader" className="tableHeader" scope="col">Name</th>
+              <th role="columnheader"className="tableHeader" scope="col">Location</th>
+              <th role="columnheader" className="tableHeader actions-header" scope="col">Actions</th>
             </tr>
           </thead>
           <tbody>
 
             {dataSlice.map((provider) => (
-              <tr className="tableRowItems" key={provider.id}>
-                <td data-title="Name" className="tableCell">{provider.fullName}</td>
-                <td data-title="Location" className="tableCell">{formatLocation(provider.practiceName, provider.streetAddress, provider.suburb)}</td>
+              <tr role="row" className="tableRowItems" key={provider.id}>
+                <td role="cell" data-title="Name" className="tableCell">{provider.fullName}</td>
+                <td role="cell" data-title="Location" className="tableCell">{formatLocation(provider.practiceName, provider.streetAddress, provider.suburb)}</td>
 
-                <td data-title="Actions" className="tableCell actions-cell">
+                <td role="cell" data-title="Actions" className="tableCell actions-cell">
                   <div className="btns">
-                  <Link className="table__action edit" to={`/edit/${provider.id}`}>Edit</Link>
-                  <button className="table__action delete" onClick={() => {
-                    setShowModal(true);
-                    setSelectedProvider({
-                      fullName: provider.fullName,
-                      location: formatLocation(provider.practiceName, provider.streetAddress, provider.suburb),
-                      id: provider.id,
-                    })
-                  }}>Delete</button>
+                    <div className="non-default">
+                      <Link className="table__action edit" to={`/edit/${provider.id}`}>Edit</Link>
+                      <button className="table__action delete" onClick={() => {
+                        setShowModal(true);
+                        setSelectedProvider({
+                          fullName: provider.fullName,
+                          location: formatLocation(provider.practiceName, provider.streetAddress, provider.suburb),
+                          id: provider.id,
+                        })
+                      }}>Delete</button>
+                    </div>
+                 
                   <button className={`${(provider.default && !isPending) ? 'table__action default--selected' : 'table__action default'}`} onClick={(event) => setAsDefault(providers, provider.id)}>
                     {isPending ? (
                       'Updating...'

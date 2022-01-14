@@ -263,6 +263,8 @@ const StyledProviders = styled.div`
       .actions-cell {
         padding: 0 0.5rem;
 
+        
+
         .table__action {
           font-size: 0.85rem;
           font-family: var(--font-stack-segoe);
@@ -296,11 +298,10 @@ const StyledProviders = styled.div`
             border: 0.1rem solid var(--btn-negative); 
           }
         }
-
-        
-
         max-width: 10rem;
       }
+
+      
 
       .actions-header {
         padding-left: 0.5rem;
@@ -346,85 +347,21 @@ const StyledProviders = styled.div`
     
   }
 
-   /* Landscape phone to portrait tablet */
-   @media (max-width: 600px) { 
+  @media (max-width: 800px) { 
     padding: 3rem 3rem;
+
     
   }
-
-  /* Simple CSS for flexbox table on mobile */
+  
   @media(max-width: 550px) {
-
     .table {
       border: none;
       box-shadow: none;
-    }
-
-
-    thead {
-        left: -9999px;
-        position: absolute;
-        visibility: hidden;
-    }
-    tr {
-        border-bottom: 0;
-        display: flex;
-        flex-direction: column;
-        /* flex-wrap: wrap; */
-        margin-bottom: 40px;
-
-        box-shadow: 0 2px 4px -1px rgb(0 0 0 / 1%), 0 4px 5px 0 rgb(0 0 0 / 5%), 0 1px 5px 0 rgb(0 0 0 / 10%);
-
-        border-collapse: separate;
-        border-radius: 6px;
-        border-spacing: 0;
-        -moz-border-radius:6px;
-        /* margin-top: 2rem; */
-
-    }
-    .tableCell {
-        /* border: 1px solid;
-        margin: 0 -1px -1px 0;
-        padding-top: 35px; */
-        position: relative;
-        padding: 2.2rem 1rem 0.9rem 1rem;
-        width: 100%;
-        /* width: 50%; */
-        border: none;
-        &:nth-of-type(3) {
-          /* border-bottom: 1px solid #D1D6DB; */
-          border-radius: 6px;
-          width: 100%;
-        }
-    }
-
-
-    .tableCell:before {
-      position: absolute;
-      
-      top: 0;
-      left: 0;
-      content: attr(data-title);
-      display: inline-block;
-      height: 14px;
-      width: calc(100% - 0.5rem);
-      background-color: #F9FAFB;
-      padding: 0.2rem 0rem 0.2rem 0.5rem;
-      color: #48515B;
-      font-size: 0.75rem;
-      line-height: 0.75rem;
-      text-align: left;
-      text-transform: uppercase;
-      letter-spacing: 0.05rem;
-      font-family: var(--font-stack-segoe-semibold);
-      border-top: none;
-    }
-
-    .tableRowItems:last-child {
-      border-bottom: 1px solid #D1D6DB;
-      border-radius: 6px;
+      padding: 0;
     }
   }
+
+  
 
 `
 
