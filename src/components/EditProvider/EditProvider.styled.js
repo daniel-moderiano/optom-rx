@@ -27,6 +27,11 @@ const StyledEditProvider = styled.div`
     margin-top: 2.5rem;
   }
 
+  /* Landscape phones and down */
+  @media (max-width: 590px) { 
+    padding: 2rem 3rem;
+  }
+
 `
 
 export { StyledEditProvider }

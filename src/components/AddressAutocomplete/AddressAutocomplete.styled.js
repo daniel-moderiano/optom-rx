@@ -21,9 +21,9 @@ const StyledAddressAutocomplete = styled.fieldset`
   }
 
   .postcode-field {
-    input {
+    
       max-width: 6rem;
-    }
+    
     
   }
 
@@ -71,11 +71,12 @@ const StyledAddressAutocomplete = styled.fieldset`
     max-width: 26rem;
 
     #autocomplete-provider-alert {
-      width: 60%;
+      width: 50%;
     }
 
     #postcode-alert {
-      /* width: 1005; */
+      /* The limiting factor on width responsiveness */
+      width: 12rem;
     }
   }
 `
