@@ -58,9 +58,9 @@ const Table = ({ data, rowsPerPage }) => {
         <tbody>
           {dataSlice.map((script) => (
             <tr role="row" className="tableRowItems" key={script.scriptID}>
-              <td role="cell" className="tableCell"><Link to={`/scripts/${script.scriptID}`}>{script.scriptID}</Link></td>
-              <td role="cell" className="tableCell">{formatDrug(script)}</td>
-              <td role="cell" className="tableCell">{script.date}</td>
+              <td role="cell" data-title="Script ID" className="tableCell"><Link to={`/scripts/${script.scriptID}`}>{script.scriptID}</Link></td>
+              <td role="cell" data-title="Medication" className="tableCell">{formatDrug(script)}</td>
+              <td role="cell" data-title="Date prescribed" className="tableCell">{script.date}</td>
             </tr>
           ))}
         </tbody>

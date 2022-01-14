@@ -349,8 +349,6 @@ const StyledProviders = styled.div`
 
   @media (max-width: 800px) { 
     padding: 3rem 3rem;
-
-    
   }
   
   @media(max-width: 550px) {
@@ -370,6 +368,10 @@ const StyledProviders = styled.div`
       .tableHeader {
         font-size: 0;
       }
+    }
+
+    .TableFooter {
+      justify-content: center;
     }
   }
 

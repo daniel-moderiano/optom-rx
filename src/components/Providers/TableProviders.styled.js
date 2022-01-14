@@ -195,11 +195,6 @@ const StyledTableProviders = styled.table`
 
   /* Simple CSS for flexbox table on mobile */
   @media(max-width: 550px) {
-
-    
-    
-  
-
     thead {
       left: -9999px;
       position: absolute;
@@ -210,7 +205,7 @@ const StyledTableProviders = styled.table`
       border-bottom: 0;
       display: flex;
       flex-direction: column;
-      margin-bottom: 40px;
+      margin-bottom: 2rem;
       box-shadow: 0 2px 4px -1px rgb(0 0 0 / 1%), 0 4px 5px 0 rgb(0 0 0 / 5%), 0 1px 5px 0 rgb(0 0 0 / 10%);
       border-collapse: separate;
       border-radius: 6px;
@@ -220,7 +215,7 @@ const StyledTableProviders = styled.table`
 
     .tableCell {
       position: relative;
-      padding: 2.2rem 1rem 0.9rem 1rem;
+      padding: 2.1rem 1rem 0.9rem 1rem;
       width: 100%;
       border: none;
 

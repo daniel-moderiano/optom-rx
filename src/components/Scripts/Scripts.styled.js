@@ -86,7 +86,7 @@ const StyledScripts = styled.div`
 
 
   /* Landscape phone to portrait tablet */
-  @media (max-width: 600px) { 
+  @media (max-width: 768px) { 
     padding: 3rem 3rem;
     
   }
