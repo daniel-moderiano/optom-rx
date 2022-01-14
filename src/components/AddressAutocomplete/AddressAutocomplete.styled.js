@@ -61,6 +61,12 @@ const StyledAddressAutocomplete = styled.fieldset`
       outline-offset: 2px;
     }
   }
+
+   /* Landscape phones and down */
+   @media (max-width: 590px) { 
+    width: 100%;
+    max-width: 26rem;
+  }
 `
 
 export { StyledAddressAutocomplete }

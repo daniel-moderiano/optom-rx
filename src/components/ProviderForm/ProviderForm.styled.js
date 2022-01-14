@@ -7,6 +7,9 @@ const StyledProviderForm = styled.form`
 
   .fields {
     position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
   }
 
   .checkbox {
@@ -67,6 +70,22 @@ const StyledProviderForm = styled.form`
       background-color: var(--btn-secondary-hover);
       color: #21252A;
     }
+  }
+
+  
+  
+  /* Landscape phones and down */
+  @media (max-width: 590px) { 
+
+
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    
+
+    
   }
 `
 

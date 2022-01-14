@@ -5,6 +5,7 @@ const StyledDrugAutocomplete = styled.div`
   border: none;
   margin: 0;
   padding: 0;
+  
 
   .visually-hidden {
     border: 0;
@@ -191,6 +192,8 @@ const StyledDrugAutocomplete = styled.div`
       outline-offset: 2px;
     }
   }
+
+  
  
 `
 

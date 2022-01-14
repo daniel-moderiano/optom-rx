@@ -50,6 +50,11 @@ const StyledFormField = styled.div`
     font-size: 0.9rem;
     display: flex;
     flex-direction: column;
+    
+  }
+
+  .label-text {
+    display: block;
   }
 
   input[type=number] {
@@ -163,6 +168,21 @@ const StyledFormField = styled.div`
     width: 15px;
     top: 21px;
     right: -0.35rem;
+  }
+
+   
+  /* Landscape phones and down */
+  @media (max-width: 590px) { 
+    width: 100%;
+    max-width: 26rem;
+    /* display: flex;
+    flex-direction: column;
+    align-items: center; */
+
+    .alert-container, &.checkbox {
+      width: 100%;
+      max-width: 24rem;
+    }
   }
 
   

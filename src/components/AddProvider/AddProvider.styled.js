@@ -47,6 +47,11 @@ const StyledAddProvider = styled.div`
     }
   }
 
+  /* Landscape phones and down */
+  @media (max-width: 590px) { 
+    padding: 2rem 3rem;
+  }
+
 `
 
 export { StyledAddProvider }
