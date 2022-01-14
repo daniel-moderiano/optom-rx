@@ -6,6 +6,7 @@ const StyledLogin = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 4rem;
 
   .Spinner {
     margin-top: -4rem;
@@ -138,7 +139,7 @@ const StyledLogin = styled.div`
       
       margin: 0;
       padding: 1rem 1.5rem;
-      width: 90%;
+      width: 100%;
   
       display: flex;
       align-items: center;
@@ -147,7 +148,7 @@ const StyledLogin = styled.div`
     }
 
     form {
-      width: 100%;
+      width: 90%;
       display: flex;
       flex-direction: column;
       align-items: center;

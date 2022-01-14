@@ -96,7 +96,9 @@ const StyledScripts = styled.div`
     padding: 3rem 3rem;
 
     
-    
+    .TableFooter {
+      justify-content: center;
+    }
   }
 
   /* Landscape phone to portrait tablet */

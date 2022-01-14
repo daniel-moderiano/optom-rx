@@ -6,6 +6,7 @@ const StyledSignup = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 4rem;
 
   .signup-container {
 
@@ -156,7 +157,7 @@ const StyledSignup = styled.div`
       
       margin: 0;
       padding: 1rem 1.5rem;
-      width: 90%;
+      width: 100%;
   
       display: flex;
       align-items: center;
@@ -165,7 +166,7 @@ const StyledSignup = styled.div`
     }
 
     form {
-      width: 100%;
+      width: 90%;
       display: flex;
       flex-direction: column;
       align-items: center;
