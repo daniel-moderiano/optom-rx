@@ -36,8 +36,8 @@ const Scripts = ({ setToast, setPage }) => {
       <div className="Scripts__container">
         {isPending && <Spinner />}
 
-        {error && <div role="region" className="region" aria-labelledby='Scripts__description' tabIndex="0">
-          <table className="table">
+        {error &&
+          <table className="table table-none">
               <thead className="tableRowHeader">
                 <tr>
                   <th className="tableHeader">Script ID</th>
@@ -51,13 +51,13 @@ const Scripts = ({ setToast, setPage }) => {
                 </tr>
               </tbody>
             </table>
-            </div>}
+      }
 
         {scripts && <div className='table-container'>
           {scripts.length > 0 ? (
             <Table data={scripts} rowsPerPage={15}/>            
           ) : (
-            <table className="table">
+            <table className="table table-none">
               <thead className="tableRowHeader">
                 <tr>
                   <th className="tableHeader">Script ID</th>

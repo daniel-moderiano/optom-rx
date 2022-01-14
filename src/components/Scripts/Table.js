@@ -45,28 +45,27 @@ const Table = ({ data, rowsPerPage }) => {
 
   return (
     <>
-    <div role="region" className="region" aria-labelledby='Scripts__description' tabIndex="0">
-      <StyledTable className="table">
+      <StyledTable className="table" aria-describedby="Scripts__description">
         {/* Preset table header. Note this reduces the re-usability of the Table component, but not the TableFooter */}
         <thead className="tableRowHeader">
-          <tr>
-            <th className="tableHeader" scope="col">Script ID</th>
-            <th className="tableHeader" scope="col">Medication</th>
-            <th className="tableHeader" scope="col">Date prescribed</th>
+          <tr role="row">
+            <th role="columnheader" className="tableHeader" scope="col">Script ID</th>
+            <th role="columnheader" className="tableHeader" scope="col">Medication</th>
+            <th role="columnheader" className="tableHeader" scope="col">Date prescribed</th>
           </tr>
         </thead>
         {/* Preset table data, must specify this according to the data that is being passed in */}
         <tbody>
           {dataSlice.map((script) => (
-            <tr className="tableRowItems" key={script.scriptID}>
-              <td className="tableCell"><Link to={`/scripts/${script.scriptID}`}>{script.scriptID}</Link></td>
-              <td className="tableCell">{formatDrug(script)}</td>
-              <td className="tableCell">{script.date}</td>
+            <tr role="row" className="tableRowItems" key={script.scriptID}>
+              <td role="cell" className="tableCell"><Link to={`/scripts/${script.scriptID}`}>{script.scriptID}</Link></td>
+              <td role="cell" className="tableCell">{formatDrug(script)}</td>
+              <td role="cell" className="tableCell">{script.date}</td>
             </tr>
           ))}
         </tbody>
       </StyledTable>     
-    </div>
+   
     <TableFooter pages={range} slice={dataSlice} setPage={setPage} page={page} />
     </>
   );
