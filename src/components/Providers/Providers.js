@@ -45,7 +45,7 @@ const Providers = ({ setToast, setPage }) => {
             {providers.length > 0 ? (
               <TableProviders data={providers} rowsPerPage={10} setToast={setToast} />
             ) : (
-              <table className="table">
+              <table className="table table-none">
                 <thead className="tableRowHeader">
                   <tr>
                     <th className="tableHeader">Name</th>

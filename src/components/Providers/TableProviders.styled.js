@@ -243,7 +243,7 @@ const StyledTableProviders = styled.table`
       padding: 0.2rem 0rem 0.2rem 0.5rem;
       color: #48515B;
       font-size: 0.75rem;
-      line-height: 0.75rem;
+      line-height: 0.85rem;
       text-align: left;
       text-transform: uppercase;
       letter-spacing: 0.05rem;
@@ -254,6 +254,7 @@ const StyledTableProviders = styled.table`
     .tableRowItems:last-child {
       border-bottom: 1px solid #D1D6DB;
       border-radius: 6px;
+      margin-bottom: 0;
     }
   }
 

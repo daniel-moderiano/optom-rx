@@ -359,6 +359,18 @@ const StyledProviders = styled.div`
       box-shadow: none;
       padding: 0;
     }
+
+    .table-none {
+      box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+      border-collapse: separate;
+      border-radius: 6px;
+      border-spacing: 0;
+      -moz-border-radius:6px;
+
+      .tableHeader {
+        font-size: 0;
+      }
+    }
   }
 
   

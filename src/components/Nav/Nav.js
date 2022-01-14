@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { StyledNav } from "./Nav.styled";
-import { useAuthContext } from "../../hooks/useAuthContext";
 import { useLogout } from "../../hooks/useLogout";
 import { useEffect } from "react";
 
@@ -29,12 +28,15 @@ const Nav = ({ user, resetData, currentPage }) => {
 
     const navLink = document.querySelectorAll(".Nav__link");
 
-    navLink.forEach(n => n.addEventListener("click", closeMenu));
-
     function closeMenu() {
+      
       hamburger.classList.remove("active");
       navMenu.classList.remove("active");
     }
+
+    navLink.forEach(n => n.addEventListener("click", closeMenu));
+
+    
   }, []);
   
   return (
