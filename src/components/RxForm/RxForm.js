@@ -1119,6 +1119,11 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
 
     }),
 
+    menu: (base, state) => ({
+      ...base,
+      maxWidth: "26rem",
+    }),
+
     valueContainer: (provided, state) => ({
       ...provided,
       paddingLeft: '0',
@@ -1141,7 +1146,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
       <p className="RxForm__description">Fill out the details required to prescribe</p>
       <div className="scriptNo" data-testid="scriptNo">Script number: {isLoading ? 'Loading...' : miscData.scriptID}</div>
 
-      <Fieldset className="provider-form" legend="Provider Details">
+      <Fieldset className="provider-form select-fieldset" legend="Provider Details">
 
         <div className="provider-controls">
           {isPending && <Spinner />}

@@ -350,11 +350,17 @@ const StyledRxForm = styled.form`
       color: #21252A;
     }
   }     
+
+  
   
   /* Landscape phones and down */
   @media (max-width: 920px) { 
     .ProviderForm__btns {
       padding: 2.75rem 0 2rem 0rem;
+    }
+
+    .scriptNo {
+      text-align: left;
     }
   }
 

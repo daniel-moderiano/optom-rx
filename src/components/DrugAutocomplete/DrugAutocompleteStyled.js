@@ -195,9 +195,11 @@ const StyledDrugAutocomplete = styled.div`
     }
   }
 
-  /* Tooltip specific queries */
-  @media (max-width: 800px) {
  
+  @media (max-width: 800px) {
+    .items-list {
+      width: 100%;
+    }
 
  
     .brandOnly-container {
