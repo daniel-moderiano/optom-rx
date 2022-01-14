@@ -12,7 +12,7 @@ const StyledLogin = styled.div`
   }
 
   .login-container {
-    margin-top: -4.7rem;
+    /* margin-top: -4.7rem; */
     background-color: #FFFFFF;
     box-shadow: 0 1.6px 3.6px 0 rgb(0 0 0 / 13%), 0 0.3px 0.9px 0 rgb(0 0 0 / 11%);
     padding: 1rem 3rem;
@@ -72,7 +72,7 @@ const StyledLogin = styled.div`
   }
 
   .Login__title {
-    place-self: flex-start;
+    width: 100%;
     font-family: var(--font-stack-myriad);
     font-weight: 400;
     color: var(--title-color);
@@ -82,7 +82,10 @@ const StyledLogin = styled.div`
 
   .signup-option {
     margin-bottom: 1.5rem;
-    place-self: flex-end;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
 
     .signup-msg {
       color: #5A6572;
@@ -126,18 +129,52 @@ const StyledLogin = styled.div`
 
   
   /* Landscape phones and down */
-  @media (max-width: 480px) { 
-    
+  @media (max-width: 550px) { 
+    .Login__title {
+      text-align: center;
+    }
+
+    .login-container {
+      
+      margin: 0;
+      padding: 1rem 1.5rem;
+      width: 90%;
+  
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .form-field {
+        max-width: 24rem;
+        width: 100%;
+      }
+
+      button {
+        max-width: 24rem;
+        width: 100%;
+      }
+    }
+
+    .signup-option {
+      justify-content: center;
+      font-size: 0.9rem;
+
+      .signup-link {
+   
+        font-size: 0.9rem;
+
+      }
+    }
+
   }
-
-  /* Landscape phone to portrait tablet */
-  /* @media (max-width: 768px) { ... } */
-
-  /* Portrait tablet to landscape and desktop */
-  /* @media (min-width: 768px) and (max-width: 980px) { ... } */
-
-  /* Large desktop */
-  /* @media (min-width: 1200px) { ... } */
 
 `
 export { StyledLogin }

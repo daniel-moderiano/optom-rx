@@ -95,7 +95,7 @@ const Login = ({ setPage }) => {
         inputFocused = true;
       }
       setPasswordAlert({
-          message: "Please enter an password.",
+          message: "Please enter a password.",
           type: 'error',
         }
       );

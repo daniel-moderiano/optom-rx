@@ -8,7 +8,7 @@ const StyledSignup = styled.div`
   justify-content: center;
 
   .signup-container {
-    margin-top: -4.7rem;
+
     background-color: #FFFFFF;
     box-shadow: 0 1.6px 3.6px 0 rgb(0 0 0 / 13%), 0 0.3px 0.9px 0 rgb(0 0 0 / 11%);
     padding: 1rem 3rem;
@@ -60,7 +60,7 @@ const StyledSignup = styled.div`
  
 
   .Signup__title {
-    place-self: flex-start;
+    width: 100%;
     font-family: var(--font-stack-myriad);
     font-weight: 400;
     color: var(--title-color);
@@ -74,6 +74,14 @@ const StyledSignup = styled.div`
     justify-content: center;
     height: 2.6rem;
   } 
+
+  .displayName-group {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
 
   .displayName-field, .pass-field {
     margin-bottom: 0;
@@ -91,7 +99,10 @@ const StyledSignup = styled.div`
 
   .login-option {
     margin-bottom: 1.5rem;
-    place-self: flex-end;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 
     .login-msg {
       color: #5A6572;
@@ -131,6 +142,59 @@ const StyledSignup = styled.div`
       color: var(--error);
       font-size: 0.8rem;
     }
+  }
+
+  
+  /* Landscape phones and down */
+  @media (max-width: 550px) { 
+    .Signup__title {
+      text-align: center;
+    }
+
+    .signup-container {
+      
+      margin: 0;
+      padding: 1rem 1.5rem;
+      width: 90%;
+  
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .displayName-group {
+        justify-content: center;
+      }
+
+      .form-field {
+        max-width: 24rem;
+        width: 100%;
+      }
+
+      button {
+        max-width: 24rem;
+        width: 100%;
+      }
+    }
+
+    .login-option {
+      justify-content: center;
+      font-size: 0.9rem;
+
+      .login-link {
+   
+        font-size: 0.9rem;
+
+      }
+    }
+
   }
 `
 export { StyledSignup }

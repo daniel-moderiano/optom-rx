@@ -217,8 +217,7 @@ const StyledNav = styled.nav`
   @media (max-width: 768px) { 
     .Nav__list {
       position: fixed;
-      left: -100%;
-      top: 3.4rem;
+      left: calc(-100% - 1rem);
       top: ${props => props.user ? '3.4rem' : '5.8rem'};
       flex-direction: column;
       background-color: #fff;
