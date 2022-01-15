@@ -56,7 +56,7 @@ const Nav = ({ user, resetData, currentPage }) => {
             <Link onClick={closeNav} className="Nav__link Nav__link--std" to="/scripts" role="menuitem" {...ariaScripts}>Scripts</Link>
           </li>
           <li className="Nav__list-item" role="none">
-            <Link onClick={closeNav} className="Nav__link Nav__link--std" to="/providers" role="menuitem" {...ariaPrescribers}>Providers</Link>
+            <Link onClick={closeNav} className="Nav__link Nav__link--std" to="/providers" role="menuitem" {...ariaPrescribers}>Prescribers</Link>
           </li>
           <li className="Nav__list-item" role="none">
             <Link onClick={closeNav} className="Nav__link Nav__link--std" to="/" role="menuitem" {...ariaHome}>Home</Link>

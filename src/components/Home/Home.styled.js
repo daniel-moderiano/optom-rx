@@ -55,7 +55,7 @@ const StyledHome = styled.div`
       background-color: var(--btn-primary-hover);
     }
 
-    .Home__link--providers {
+    .Home__link--prescribers {
       min-width: 80px;
       background-color: #fff;
       color: #0b4740;
@@ -63,7 +63,7 @@ const StyledHome = styled.div`
       margin-left: 1.5rem;
     }
     
-    .Home__link--providers:hover {
+    .Home__link--prescribers:hover {
       background-color: var(--btn-positive-hover);
       color: var(--btn-positive-hover-text);
     }

@@ -10,7 +10,20 @@ const StyledFieldset = styled.fieldset`
   margin: 0;
 
   legend {
-    float: left;    // Moves the legend within the fieldset
+    /* float: left;    // Moves the legend within the fieldset
+    padding: 0;
+    font-size: 1.7rem;
+    font-family: var(--font-title);
+    color: var(--title-color);
+    width: 19rem;
+    flex-shrink: 0;
+    padding-left: 2rem;
+    margin-right: 1rem; */
+  }
+
+  .legend-label {
+   
+    display: block;
     padding: 0;
     font-size: 1.7rem;
     font-family: var(--font-title);
@@ -38,6 +51,12 @@ const StyledFieldset = styled.fieldset`
     justify-content: center;
 
     legend {
+      margin: 0 0 1.5rem 0;
+      padding: 0;
+      width: 100%;
+    }
+
+    .legend-label {
       margin: 0 0 1.5rem 0;
       padding: 0;
       width: 100%;

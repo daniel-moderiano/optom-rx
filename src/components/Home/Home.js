@@ -20,7 +20,7 @@ const Home = ({ setToast, setPage }) => {
       <div className="Home__welcome">Select an option to get started</div>
       <div className="Home__links">
         <Link className="Home__link Home__link--create" to='/form' state={ { newRx: true } }>Create prescription</Link>
-        <Link className="Home__link Home__link--providers" to="/providers">View providers</Link>
+        <Link className="Home__link Home__link--prescribers" to="/providers">View prescribers</Link>
       </div>
 
       <div className="Favourites">
