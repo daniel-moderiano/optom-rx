@@ -16,6 +16,7 @@ const Home = ({ setToast, setPage }) => {
  
   return (
     <StyledHome className="Home">
+
       <h2 className="Home__title">Welcome, {user.displayName}</h2>
       <div className="Home__welcome">Select an option to get started</div>
       <div className="Home__links">

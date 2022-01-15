@@ -4,6 +4,7 @@ import { useScripts } from '../../hooks/useScripts';
 import Table from './Table';
 import Spinner from '../utils/Spinner/Spinner';
 import { useEffect } from 'react';
+import Dots from '../utils/Dots/Dots';
 
 const Scripts = ({ setToast, setPage }) => {
   const { user } = useAuthContext();

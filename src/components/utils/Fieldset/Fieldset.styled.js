@@ -9,18 +9,6 @@ const StyledFieldset = styled.fieldset`
   border-bottom: 1px solid #dfe1e1;
   margin: 0;
 
-  legend {
-    /* float: left;    // Moves the legend within the fieldset
-    padding: 0;
-    font-size: 1.7rem;
-    font-family: var(--font-title);
-    color: var(--title-color);
-    width: 19rem;
-    flex-shrink: 0;
-    padding-left: 2rem;
-    margin-right: 1rem; */
-  }
-
   .legend-label {
    
     display: block;
@@ -42,6 +30,16 @@ const StyledFieldset = styled.fieldset`
     margin-top: -0.16rem;
   }
 
+  .visually-hidden { 
+    position: absolute !important;
+    height: 1px; 
+    width: 1px;
+    overflow: hidden;
+    clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+    clip: rect(1px, 1px, 1px, 1px);
+    white-space: nowrap; /* added line */
+}
+
   
   
   /* Landscape phones and down */
@@ -49,12 +47,6 @@ const StyledFieldset = styled.fieldset`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
-    legend {
-      margin: 0 0 1.5rem 0;
-      padding: 0;
-      width: 100%;
-    }
 
     .legend-label {
       margin: 0 0 1.5rem 0;

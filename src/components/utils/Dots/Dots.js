@@ -1,14 +1,14 @@
-import { StyledDots } from "./Dots.styled"
+import { StyledDots } from "./Dots.styled";
 
 const Dots = ({ color }) => {
   return (
-    <StyledDots className="Dots">
-      <span className={color}></span>
-      <span className={color}></span>
-      <span className={color}></span>
-      <span className={color}></span>
+    <StyledDots className='Dots'>
+      <span className={`Circle ${color ? color : ''}`}></span>
+      <span className={`Circle ${color ? color : ''}`}></span>
+      <span className={`Circle ${color ? color : ''}`}></span>
+      <span className={`Circle ${color ? color : ''}`}></span>
     </StyledDots>
   )
 }
 
-export default Dots
+export default Dots;
