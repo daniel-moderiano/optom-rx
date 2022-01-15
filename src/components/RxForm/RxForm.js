@@ -1098,12 +1098,20 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
   const customStyles = {
     control: (base, state) => ({
       ...base,
-      border: state.isFocused ? '1px solid #a360ac' : '1px solid rgb(144, 147, 150)',
-      boxShadow: state.isFocused ? '0 0 0 1px #a360ac' : '0',
+      // border: state.isFocused ? '1px solid #104362' : '1px solid rgb(144, 147, 150)',
+      // boxShadow: state.isFocused ? '0 0 0 1px #104362' : '0',
       '&:hover': { 
-        borderColor: state.isFocused ? '#a360ac' : 'rgb(178, 182, 185)',
+        borderColor: state.isFocused ? '#104362' : 'rgb(178, 182, 185)',
         cursor: 'pointer'
       },
+
+      border: state.isFocused ? '1px solid rgb(144, 147, 150)' : '1px solid rgb(144, 147, 150)',
+      boxShadow: state.isFocused ? '0' : '0',
+
+      
+      outline: state.isFocused ? "2px solid #104362" : 'none',
+        outlineOffset: state.isFocused ? "2px" : 'none',
+      
       width: '26rem',
       padding: '0.12rem 0 0.11rem 0.85rem',
       borderRadius: '4px',
