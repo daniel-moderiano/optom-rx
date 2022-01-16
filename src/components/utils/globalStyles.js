@@ -4,6 +4,7 @@ const GlobalStyles = createGlobalStyle`
   :root {
     /* Base colour theming */
     --primary-color: #31776f;
+    --small-shadow: rgba(27, 31, 36, 0.04) 0px 1px 0px 0px;
     
     --background: #F4F5F6;
     /* --background: #FFFFFF; */

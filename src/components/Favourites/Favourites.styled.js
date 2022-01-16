@@ -3,6 +3,8 @@ import styled from "styled-components";
 const StyledFavourites = styled.div`
   margin-top: 4rem;
   width: 100%;
+  
+  
 
   .Favourites__title {
     padding: 0;
@@ -12,6 +14,8 @@ const StyledFavourites = styled.div`
     font-weight: normal;
     margin: 0;
   }
+
+
 
 
   .Scripts__container {
@@ -40,6 +44,7 @@ const StyledFavourites = styled.div`
     /* border-spacing: 0; */
     /* border-bottom: 1px solid transparent; */
     -moz-border-radius:6px;
+    background-color: #fff;
 
     .list-header {
       background-color: #F9FAFB;
@@ -89,6 +94,7 @@ const StyledFavourites = styled.div`
       justify-content: space-between;
       border-top: 1px solid #D1D6DB;
       margin: 0;
+      
 
       &:hover {
         background-color: #F9FAFB;

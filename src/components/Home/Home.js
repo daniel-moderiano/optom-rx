@@ -4,7 +4,6 @@ import { useAuthContext } from '../../hooks/useAuthContext';
 import Favourites from '../Favourites/Favourites';
 import { useEffect } from 'react';
 
-
 const Home = ({ setToast, setPage }) => {
   const { user } =  useAuthContext();
 
@@ -14,7 +13,7 @@ const Home = ({ setToast, setPage }) => {
   }, [setPage])
 
  
-  return (
+  return (<>
     <StyledHome className="Home">
 
       <h2 className="Home__title">Welcome, {user.displayName}</h2>
@@ -25,9 +24,13 @@ const Home = ({ setToast, setPage }) => {
       </div>
 
       <div className="Favourites">
-        <Favourites setToast={setToast}/>
-      </div>
+      <Favourites setToast={setToast}/>
+    </div>
+      
     </StyledHome>
+
+    
+    </>
   )
 }
 

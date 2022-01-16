@@ -17,6 +17,7 @@ import AddProvider from "./components/AddProvider/AddProvider";
 import Main from "./components/Main/Main";
 import Scripts from "./components/Scripts/Scripts";
 import ViewScript from "./components/ViewScript/ViewScript";
+import Settings from "./components/Settings/Settings";
 
 // ! Medicare details are NOT required for valid Australian prescriptions, even under PBS
 
@@ -178,6 +179,13 @@ const App = () => {
               <>
               {!user && <Navigate to="/login" />}
               {user && <Home setToast={setToastParams} setPage={setCurrentPage} />}
+              </>
+            } />
+
+            <Route path="/settings" element={
+              <>
+              {!user && <Navigate to="/login" />}
+              {user && <Settings user={user} setToast={setToastParams} setPage={setCurrentPage} />}
               </>
             } />
 
