@@ -198,5 +198,43 @@ const StyledSignup = styled.div`
     }
 
   }
+
+  .displayName-group {
+    position: relative;
+  }
+
+  .toggle-password {
+    width: auto;
+    position: absolute;
+    right: 0;
+    top: 0.85rem;
+    background-color: transparent;
+    border: none;
+    color: #48515B;
+    font-size: 0.9rem;
+    /* font-weight: bold; */
+    padding: 0;
+    margin: 0;
+    z-index: 2;
+
+    &:hover {
+      background-color: transparent;
+      color: #1B1E22;
+    }
+
+    &:focus {
+      outline: 2px solid #104362;
+      outline-offset: 1px;
+    }
+
+    &:focus:not(:focus-visible) {
+      outline: none
+    }
+
+    &:focus-visible {
+      outline: 2px solid #104362;
+      outline-offset: 1px;
+    }
+  }
 `
 export { StyledSignup }

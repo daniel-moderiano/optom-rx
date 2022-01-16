@@ -15,6 +15,8 @@ const Signup = ({ setPage }) => {
   const [passwordAlert, setPasswordAlert] = useState({});
   const [displayNameAlert, setDisplayNameAlert] = useState({});
 
+  const [showPassword, setShowPassword] = useState(false);
+
   // Adjust current page for accessibility and styling
   useEffect(() => {
     setPage('signup');
@@ -169,9 +171,11 @@ const Signup = ({ setPage }) => {
         />
 
           <div className="displayName-group">
+            <button className="toggle-password" type="button" aria-label={`${showPassword ? 'Show password as plain text. Warning: this will display your password on the screen.' : 'Hide password.'}`} onClick={() => setShowPassword((prevState) => (!prevState))}>{`${showPassword ? 'Hide password' : 'Show password'}`}</button>
+
             <FormField 
               id="new-password"
-              fieldType="password" 
+              fieldType={`${showPassword ? 'text' : 'password'}`}
               name="password"
               label="Password" 
               value={password} 
