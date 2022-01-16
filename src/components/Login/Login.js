@@ -65,8 +65,8 @@ const Login = ({ setPage }) => {
     loginValidation();
   }, []);
 
-   // Ensure form is validated before calling form submission function
-   const isFormValid = () => {
+  // Ensure form is validated before calling form submission function
+  const isFormValid = () => {
     let valid = true;
     let inputFocused = false;
 

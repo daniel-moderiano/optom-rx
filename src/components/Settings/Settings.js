@@ -2,7 +2,7 @@ import { StyledSettings } from "./Settings.styled"
 import FormField from '../FormField/FormField'
 import { useState } from "react"
 import { useEffect } from "react";
-import { updateProfile, deleteUser } from "firebase/auth";
+import { updateProfile, deleteUser, reauthenticateWithCredential, EmailAuthProvider } from "firebase/auth";
 import { collection, deleteDoc, doc, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import { useLogout } from '../../hooks/useLogout';
@@ -22,11 +22,13 @@ const Settings = ({ user, setToast, setPage }) => {
   const [deletePending, setDeletePending] = useState(false);
   const [deleteError, setDeleteError] = useState(null);
 
-  const [email, setEmail] = useState('');
+  // const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const [emailAlert, setEmailAlert] = useState({});
   const [passwordAlert, setPasswordAlert] = useState({});
+
+  const { email } = user;
 
   useEffect(() => {
     setDisplayName(user.displayName);
@@ -37,10 +39,11 @@ const Settings = ({ user, setToast, setPage }) => {
     setPage('settings');
   }, [setPage])
 
-  // Clear any lingering alerts when modal is open/closed
+  // Clear any lingering data and alerts when modal is open/closed
   useEffect(() => {
     setEmailAlert({});
     setPasswordAlert({});
+    setPassword('');
   }, [showModal])
 
 
@@ -120,23 +123,23 @@ const Settings = ({ user, setToast, setPage }) => {
     let valid = true;
     let inputFocused = false;
 
-    const emailInput = document.querySelector('input[name="email"]');
+    // const emailInput = document.querySelector('input[name="email"]');
     const passwordInput = document.querySelector('input[name="password"]');
 
     // Check for blank field
-    if (emailInput.value.trim().length === 0) {
-      if (!inputFocused) {
-        emailInput.focus();
-        inputFocused = true;
-      }
-      setEmailAlert({
-          message: "Please enter an email address.",
-          type: 'error',
-        }
-      );
-      emailInput.classList.add('error');
-      valid = false;
-    } 
+    // if (emailInput.value.trim().length === 0) {
+    //   if (!inputFocused) {
+    //     emailInput.focus();
+    //     inputFocused = true;
+    //   }
+    //   setEmailAlert({
+    //       message: "Please enter an email address.",
+    //       type: 'error',
+    //     }
+    //   );
+    //   emailInput.classList.add('error');
+    //   valid = false;
+    // } 
 
     // Check for blank field
     if (passwordInput.value.trim().length === 0) {
@@ -153,6 +156,36 @@ const Settings = ({ user, setToast, setPage }) => {
       valid = false;
     } 
     return valid;
+  };
+
+  const errorHandling = (errorCode) => {
+    switch (errorCode) {
+      case 'auth/wrong-password':
+        setPasswordAlert({
+          message: "That's an incorrect password. Try again.",
+          type: 'error',
+        });
+        break;
+      case 'auth/too-many-requests':
+        setPasswordAlert({
+          message: 'Failed to authorise too many times. Please wait a few minutes before trying again.',
+          type: 'error',
+        });
+        break;
+      case 'auth/network-request-failed':
+        setPasswordAlert({
+          message: "We couldn't connect to the network. Please check your internet connection and try again.",
+          type: 'error',
+        });
+        break;
+    
+      default:
+        setPasswordAlert({
+          message: 'An unknown server error occured. Please try again.',
+          type: 'error',
+        });
+        break;
+    }
   };
 
   // // Inline form validation
@@ -202,38 +235,70 @@ const Settings = ({ user, setToast, setPage }) => {
   // }, []);
 
 
+  // This function is/returns a Promise
+   const refreshCredentialsForDelete = async () => {
+    // Must be called once the user has entered their password, else it will just error
+    const credential = EmailAuthProvider.credential(email, password);
+
+    try {
+      // Attempt re-authentication
+      await reauthenticateWithCredential(user, credential);
+      
+      setShowModal(false);
+      // Clear passwords
+      setPassword('');
+      return true;
+      
+    } catch (error) {
+      errorHandling(error.code)
+      return false;
+    }
+
+  };
+
+  // Combine the credentials and actual deleting of account using async flow
+  const performDeleteFunctions = async () => {
+    // Check that the credential confirmation was successful
+    const confirmed = await refreshCredentialsForDelete();
+    // Act based on the result
+    if (confirmed) {
+      deleteAccount();
+    } else {
+      // Do nothing, refreshCredentials function hadnles errors and directs user to fix mistakes
+    }
+  }
+
 
    
   return (
     <StyledSettings className="Settings">
-      {showModal && <Modal title="Add to favourites" closeModal={() => setShowModal(false)}>
+            {showModal && <Modal title="Delete provider" closeModal={() => setShowModal(false)}>
+        <div className="error-container">
+          <div className="error-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" className="alert-icon alert-icon--neutral" viewBox="0 0 512 512" width="24px">
+              <path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" fill="#D12323" stroke="#D12323" strokeMiterlimit="10" strokeWidth="32"/>
+              <path d="M250.26 166.05L256 288l5.73-121.95a5.74 5.74 0 00-5.79-6h0a5.74 5.74 0 00-5.68 6z" fill="#D12323" stroke="#ffffff" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32"/>
+              <path d="M256 367.91a20 20 0 1120-20 20 20 0 01-20 20z" fill="#ffffff"/>
+            </svg>
+          </div>
+          <div className="error-text">
+            This action is permanent and cannot be undone.
+          </div>
+        </div>
+        <div className="provider-display">
+          <div className="provider-label">Please enter your password to continue</div>
+          {/* <div className="provider-summary">{`${selectedProvider.fullName} (${selectedProvider.location})`}</div> */}
+        </div>
         <form className='Login__form' noValidate onSubmit={(event) => {
           event.preventDefault();
           // Ensure form validation passes
           if (isFormValid()) {
             // Refresh credentials
-            console.log('Form submitted successfully');
+            performDeleteFunctions();
+              
           }
           
         }}>
-
-        <div className="provider-display">
-          <div className="provider-label">This script will be displayed in your favourites list using the name above</div>
-        </div>
-
-          <FormField 
-            fieldType="email" 
-            name="email"
-            label="Email" 
-            value={email} 
-            onChange={(event) => setEmail(event.target.value)} 
-            className="auth-field form-field"
-            alert={emailAlert}
-            autoFocus
-            required
-            describedBy={Object.keys(emailAlert).length === 0 ? null : 'email-alert'}
-            autocomplete="username"
-          />
 
           <FormField 
             id="current-password"
@@ -249,11 +314,11 @@ const Settings = ({ user, setToast, setPage }) => {
             autocomplete="current-password"
           />
 
-        <div className="Modal__buttons">
-          <button type="button" className="cancel-btn Modal__btn" onClick={() => setShowModal(false)}>Cancel</button>
-          <button type="submit" className="delete-btn Modal__btn" >Submit</button>
-        </div>
 
+        <div className="Modal__buttons">
+          <button className="cancel-btn Modal__btn" onClick={() => setShowModal(false)}>Cancel</button>
+          <button className="delete-btn Modal__btn">Delete</button>
+        </div>
         </form>
       </Modal>}
 
@@ -298,11 +363,11 @@ const Settings = ({ user, setToast, setPage }) => {
             // required
             // describedBy={Object.keys(alerts ? alerts.fullName : providerAlerts.fullName).length === 0 ? null : 'fullName-alert'}
           />  
-          <button type="button" onClick={() => setShowModal(true)}>Update password</button>
+          <button type="button">Update password</button>
         </form>
           
       <div className="delete-account">
-        <button className="delete-btn" type="button" onClick={deleteAccount}>Delete account</button>
+        <button className="delete-btn" type="button" onClick={() => setShowModal(true)}>Delete account</button>
       </div>
         
       </div>
