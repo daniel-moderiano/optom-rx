@@ -6,17 +6,27 @@ import { updateProfile, deleteUser } from "firebase/auth";
 import { collection, deleteDoc, doc, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import { useLogout } from '../../hooks/useLogout';
+import Modal from "../utils/Modal/Modal";
 
 const Settings = ({ user, setToast, setPage }) => {
   const { logout } = useLogout();
   const [displayName, setDisplayName] = useState('Test');
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
+
+  const [showModal, setShowModal] = useState(false);
+
   const [namePending, setNamePending] = useState(false);
   const [nameError, setNameError] = useState(null);
 
   const [deletePending, setDeletePending] = useState(false);
   const [deleteError, setDeleteError] = useState(null);
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const [emailAlert, setEmailAlert] = useState({});
+  const [passwordAlert, setPasswordAlert] = useState({});
 
   useEffect(() => {
     setDisplayName(user.displayName);
@@ -27,17 +37,12 @@ const Settings = ({ user, setToast, setPage }) => {
     setPage('settings');
   }, [setPage])
 
+  // Clear any lingering alerts when modal is open/closed
+  useEffect(() => {
+    setEmailAlert({});
+    setPasswordAlert({});
+  }, [showModal])
 
-  const toggleBooleanState = (setData, data, boolToChange) => {
-    let newState = true;
-    if (data[boolToChange]) {
-      newState = false;
-    }
-    setData((prevData) => ({
-      ...prevData,
-      [boolToChange]: newState,
-    }));
-  };
 
   const updateName = async () => {
     setNamePending(true);
@@ -85,7 +90,6 @@ const Settings = ({ user, setToast, setPage }) => {
       await deleteDoc(doc(db, 'users', user.uid))     
       // Delete the user iteself from firebase auth
       await deleteUser(user);
-      
       // Finally, logout
       logout();
 
@@ -109,11 +113,150 @@ const Settings = ({ user, setToast, setPage }) => {
         message: 'An error occurred while deleting account'
       }));
     }
-  }
+  };
+
+  // Ensure form is validated before calling form submission function
+  const isFormValid = () => {
+    let valid = true;
+    let inputFocused = false;
+
+    const emailInput = document.querySelector('input[name="email"]');
+    const passwordInput = document.querySelector('input[name="password"]');
+
+    // Check for blank field
+    if (emailInput.value.trim().length === 0) {
+      if (!inputFocused) {
+        emailInput.focus();
+        inputFocused = true;
+      }
+      setEmailAlert({
+          message: "Please enter an email address.",
+          type: 'error',
+        }
+      );
+      emailInput.classList.add('error');
+      valid = false;
+    } 
+
+    // Check for blank field
+    if (passwordInput.value.trim().length === 0) {
+      if (!inputFocused) {
+        passwordInput.focus();
+        inputFocused = true;
+      }
+      setPasswordAlert({
+          message: "Please enter a password.",
+          type: 'error',
+        }
+      );
+      passwordInput.classList.add('error');
+      valid = false;
+    } 
+    return valid;
+  };
+
+  // // Inline form validation
+  // useEffect(() => {
+  //   // Event propagation will capture all focusout events from login form
+  //   const loginValidation = () => {
+  //     document.querySelector('.Login__form').addEventListener('focusout', (event) => {
+  //       const { name, value } = event.target;
+  //       switch (true) {
+  //         case name === 'email':
+  //           // Check for blank field
+  //           if (value.trim().length === 0) {
+  //             setEmailAlert({
+  //                 message: "Please enter an email address.",
+  //                 type: 'error',
+  //               }
+  //             );
+  //             event.target.classList.add('error');
+  //           } else {
+  //             event.target.classList.remove('error');
+  //             setEmailAlert({});
+  //           }
+  //           break;
+
+  //         case name === 'password':
+  //           // Check for blank field
+  //           if (value.trim().length === 0) {
+  //             setPasswordAlert({
+  //                 message: "Please enter a password.",
+  //                 type: 'error',
+  //               }
+  //             );
+  //             event.target.classList.add('error');
+  //           } else {
+  //             event.target.classList.remove('error');
+  //             setPasswordAlert({});
+  //           }
+  //           break;
+
+  //         default:
+  //           break;
+  //       }
+  //     });
+  //   };
+
+  //   loginValidation();
+  // }, []);
+
+
 
    
   return (
     <StyledSettings className="Settings">
+      {showModal && <Modal title="Add to favourites" closeModal={() => setShowModal(false)}>
+        <form className='Login__form' noValidate onSubmit={(event) => {
+          event.preventDefault();
+          // Ensure form validation passes
+          if (isFormValid()) {
+            // Refresh credentials
+            console.log('Form submitted successfully');
+          }
+          
+        }}>
+
+        <div className="provider-display">
+          <div className="provider-label">This script will be displayed in your favourites list using the name above</div>
+        </div>
+
+          <FormField 
+            fieldType="email" 
+            name="email"
+            label="Email" 
+            value={email} 
+            onChange={(event) => setEmail(event.target.value)} 
+            className="auth-field form-field"
+            alert={emailAlert}
+            autoFocus
+            required
+            describedBy={Object.keys(emailAlert).length === 0 ? null : 'email-alert'}
+            autocomplete="username"
+          />
+
+          <FormField 
+            id="current-password"
+            fieldType="password" 
+            name="password"
+            label="Password" 
+            value={password} 
+            onChange={(event) => setPassword(event.target.value)} 
+            className="auth-field form-field"
+            alert={passwordAlert}
+            required
+            describedBy={Object.keys(passwordAlert).length === 0 ? null : 'password-alert'}
+            autocomplete="current-password"
+          />
+
+        <div className="Modal__buttons">
+          <button type="button" className="cancel-btn Modal__btn" onClick={() => setShowModal(false)}>Cancel</button>
+          <button type="submit" className="delete-btn Modal__btn" >Submit</button>
+        </div>
+
+        </form>
+      </Modal>}
+
       <h2 className="Home__title">Settings</h2>
       <div className="Home__welcome">Select an option to get started</div>
       <div className="Settings-container">
@@ -155,7 +298,7 @@ const Settings = ({ user, setToast, setPage }) => {
             // required
             // describedBy={Object.keys(alerts ? alerts.fullName : providerAlerts.fullName).length === 0 ? null : 'fullName-alert'}
           />  
-          <button type="button">Update password</button>
+          <button type="button" onClick={() => setShowModal(true)}>Update password</button>
         </form>
           
       <div className="delete-account">
