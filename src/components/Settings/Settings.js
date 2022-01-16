@@ -2,12 +2,15 @@ import { StyledSettings } from "./Settings.styled"
 import FormField from '../FormField/FormField'
 import { useState } from "react"
 import { useEffect } from "react";
+import { updateProfile } from "firebase/auth";
 
 const Settings = ({ user, setToast }) => {
 
   const [displayName, setDisplayName] = useState('Test');
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
+  const [namePending, setNamePending] = useState(false);
+  const [nameError, setNameError] = useState(null);
 
   useEffect(() => {
     setDisplayName(user.displayName);
@@ -24,6 +27,36 @@ const Settings = ({ user, setToast }) => {
       [boolToChange]: newState,
     }));
   };
+
+  const updateName = async () => {
+    setNamePending(true);
+    setNameError(null);
+
+    try {
+      await updateProfile(user, {
+        displayName: displayName,
+      });
+
+      setNamePending(false);
+      setNameError(null);
+
+      setToast((prevData) => ({
+        ...prevData,
+        visible: true,
+        type: 'success',
+        message: 'Display name updated'
+      }));
+    } catch (error) {
+      setNamePending(false);
+      setNameError(error);
+      setToast((prevData) => ({
+        ...prevData,
+        visible: true,
+        type: 'error',
+        message: 'An error occurred while changing name'
+      }));
+    }
+  }
   
   return (
     <StyledSettings className="Settings">
@@ -41,7 +74,8 @@ const Settings = ({ user, setToast }) => {
             // required
             // describedBy={Object.keys(alerts ? alerts.fullName : providerAlerts.fullName).length === 0 ? null : 'fullName-alert'}
           />  
-          <button>Update display name</button>
+          <input type="text" className="hidden" />
+          <button type="button" onClick={updateName}>Update display name</button>
         </form>
         
         
@@ -67,7 +101,7 @@ const Settings = ({ user, setToast }) => {
             // required
             // describedBy={Object.keys(alerts ? alerts.fullName : providerAlerts.fullName).length === 0 ? null : 'fullName-alert'}
           />  
-          <button>Update password</button>
+          <button type="button">Update password</button>
         </form>
           
       <div className="delete-account">

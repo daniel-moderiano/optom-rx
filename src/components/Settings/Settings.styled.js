@@ -22,6 +22,10 @@ const StyledSettings = styled.div`
     margin: 0 0 0.5rem 0;
     padding: 0;
   }
+
+  .hidden {
+    display: none;
+  }
 `
 
 export { StyledSettings }
