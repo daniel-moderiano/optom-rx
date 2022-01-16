@@ -138,7 +138,7 @@ const Login = ({ setPage }) => {
 
           <div className="password-group">
     
-            <button className="toggle-password" type="button" aria-label={`${showPassword ? 'Show password as plain text. Warning: this will display your password on the screen.' : 'Hide password.'}`} onClick={() => setShowPassword((prevState) => (!prevState))}>{`${showPassword ? 'Hide password' : 'Show password'}`}</button>
+            
             
             <FormField 
               id="current-password"
@@ -153,6 +153,7 @@ const Login = ({ setPage }) => {
               describedBy={Object.keys(passwordAlert).length === 0 ? null : 'password-alert'}
               autocomplete="current-password"
             />
+            <button className="toggle-password" type="button" aria-label={`${showPassword ? 'Show password as plain text. Warning: this will display your password on the screen.' : 'Hide password.'}`} onClick={() => setShowPassword((prevState) => (!prevState))}>{`${showPassword ? 'Hide password' : 'Show password'}`}</button>
           </div>
          
 

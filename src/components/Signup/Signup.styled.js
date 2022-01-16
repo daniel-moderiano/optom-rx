@@ -116,6 +116,7 @@ const StyledSignup = styled.div`
       color: var(--primary-color);
       font-weight: bold;
       font-size: 1rem;
+      border-radius: 2px;
 
       &:hover {
         text-decoration: underline;
@@ -123,7 +124,16 @@ const StyledSignup = styled.div`
 
       &:focus {
         outline: 2px solid #104362;
-        outline-offset: 2px;
+        outline-offset: 1px;
+      }
+
+      &:focus:not(:focus-visible) {
+        outline: none
+      }
+
+      &:focus-visible {
+        outline: 2px solid #104362;
+        outline-offset: 1px;
       }
     }
   }
@@ -191,9 +201,7 @@ const StyledSignup = styled.div`
       font-size: 0.9rem;
 
       .login-link {
-   
         font-size: 0.9rem;
-
       }
     }
 

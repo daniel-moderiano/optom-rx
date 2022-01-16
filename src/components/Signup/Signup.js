@@ -171,7 +171,7 @@ const Signup = ({ setPage }) => {
         />
 
           <div className="displayName-group">
-            <button className="toggle-password" type="button" aria-label={`${showPassword ? 'Show password as plain text. Warning: this will display your password on the screen.' : 'Hide password.'}`} onClick={() => setShowPassword((prevState) => (!prevState))}>{`${showPassword ? 'Hide password' : 'Show password'}`}</button>
+            
 
             <FormField 
               id="new-password"
@@ -187,6 +187,7 @@ const Signup = ({ setPage }) => {
               describedBy={Object.keys(passwordAlert).length === 0 ? null : 'password-alert'}
               autocomplete="new-password"
             />
+            <button className="toggle-password" type="button" aria-label={`${showPassword ? 'Show password as plain text. Warning: this will display your password on the screen.' : 'Hide password.'}`} onClick={() => setShowPassword((prevState) => (!prevState))}>{`${showPassword ? 'Hide password' : 'Show password'}`}</button>
             <span id="password-desc" className="displayName-msg">Password must contain at least 6 characters</span>
           </div>
 
