@@ -72,21 +72,18 @@ const Settings = ({ user, setToast, setPage }) => {
     setDeletePending(true);
     setDeleteError(null);
     
-    const provRef = collection(db, 'providers');
-    const provQuery = query(provRef, where('uid', '==', user.uid));
-    
+    // Gather a reference to all of the user's prescribers
+    const presRef = collection(db, 'providers');
+    const presQuery = query(presRef, where('uid', '==', user.uid));
+    const docsSnap  = await getDocs(presQuery);
 
     try {
-      // await deleteDoc(doc(db, 'users', user.uid))
-
-      // await deleteDoc(doc(db, 'users', user.uid))
-      const docsSnap  = await getDocs(provQuery);
-      // console.log(docsSnap);
+      // Delete all of the user's prescribers
       docsSnap.forEach((doc) => deleteDoc(doc.ref));
+      // Delete the user's document in firestore
+      await deleteDoc(doc(db, 'users', user.uid))     
 
-
-      console.log('User acct deleted');
-      // await deleteUser(user);
+      await deleteUser(user);
       
 
       setDeletePending(false);
