@@ -14,9 +14,10 @@ const Settings = ({ user, setToast, setPage }) => {
   const [currentPassword, setCurrentPassword] = useState('');
   const [currentPasswordAlert, setCurrentPasswordAlert] = useState({});
   const [newPasswordAlert, setNewPasswordAlert] = useState({});
-
-
   const [newPassword, setNewPassword] = useState('');
+
+  const [confirmPasswordAlert, setConfirmPasswordAlert] = useState({});
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   const [showModal, setShowModal] = useState(false);
 
@@ -145,6 +146,13 @@ const Settings = ({ user, setToast, setPage }) => {
             }
             break;
 
+          case name === 'confirmPassword':
+            // Check for non empty field
+            if (value.trim().length !== 0) {
+              event.target.classList.remove('error');
+              setConfirmPasswordAlert({});
+            }
+            break;
           default:
             break;
         }
@@ -185,6 +193,7 @@ const Settings = ({ user, setToast, setPage }) => {
 
     const currentPasswordInput = document.querySelector('input[name="currentPassword"]');
     const newPasswordInput = document.querySelector('input[name="newPassword"]');
+    const confirmPasswordInput = document.querySelector('input[name="confirmPassword"]');
 
     // Check for blank field
     if (currentPasswordInput.value.trim().length === 0) {
@@ -213,6 +222,21 @@ const Settings = ({ user, setToast, setPage }) => {
         }
       );
       newPasswordInput.classList.add('error');
+      valid = false;
+    } 
+
+     // Check for blank field
+     if (confirmPasswordInput.value.trim().length === 0) {
+      if (!inputFocused) {
+        confirmPasswordInput.focus();
+        inputFocused = true;
+      }
+      setConfirmPasswordAlert({
+          message: "Please enter a password.",
+          type: 'error',
+        }
+      );
+      confirmPasswordInput.classList.add('error');
       valid = false;
     } 
 
@@ -338,6 +362,7 @@ const Settings = ({ user, setToast, setPage }) => {
         await updatePassword(user, newPassword);
         setCurrentPassword('');
         setNewPassword('');
+        setConfirmPassword('');
 
         setToast((prevData) => ({
           ...prevData,
@@ -351,6 +376,18 @@ const Settings = ({ user, setToast, setPage }) => {
       }
     } else {
       // Do nothing, refreshCredentials function hadnles errors and directs user to fix mistakes
+    }
+  };
+
+  const comparePasswords = () => {
+    if (newPassword === confirmPassword) {
+      return true;
+    } else {
+      setConfirmPasswordAlert({
+        message: "Passwords do not match",
+        type: 'error',
+      });
+      return false;
     }
   }
    
@@ -430,7 +467,7 @@ const Settings = ({ user, setToast, setPage }) => {
         <form className='password-form' noValidate onSubmit={(event) => {
           event.preventDefault();
           // Ensure form validation passes
-          if (isPasswordFormValid()) {
+          if (isPasswordFormValid() && comparePasswords()) {
             performPasswordUpdate();
           }
         }}>
@@ -455,6 +492,17 @@ const Settings = ({ user, setToast, setPage }) => {
             alert={newPasswordAlert}
             required
             describedBy='newPassword-alert'
+          />  
+
+          <FormField 
+            fieldType="password" 
+            name="confirmPassword"
+            label="Confirm password" 
+            value={confirmPassword} 
+            onChange={(event) => setConfirmPassword(event.target.value)} 
+            alert={confirmPasswordAlert}
+            required
+            describedBy='confirmPassword-alert'
           />  
           <button>Update password</button>
         </form>
