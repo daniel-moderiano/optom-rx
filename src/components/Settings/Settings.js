@@ -2,7 +2,7 @@ import { StyledSettings } from "./Settings.styled"
 import FormField from '../FormField/FormField'
 import { useState } from "react"
 import { useEffect } from "react";
-import { updateProfile, deleteUser, reauthenticateWithCredential, EmailAuthProvider } from "firebase/auth";
+import { updateProfile, deleteUser, reauthenticateWithCredential, EmailAuthProvider, updatePassword } from "firebase/auth";
 import { collection, deleteDoc, doc, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import { useLogout } from '../../hooks/useLogout';
@@ -12,6 +12,10 @@ const Settings = ({ user, setToast, setPage }) => {
   const { logout } = useLogout();
   const [displayName, setDisplayName] = useState('Test');
   const [currentPassword, setCurrentPassword] = useState('');
+  const [currentPasswordAlert, setCurrentPasswordAlert] = useState({});
+  const [newPasswordAlert, setNewPasswordAlert] = useState({});
+
+
   const [newPassword, setNewPassword] = useState('');
 
   const [showModal, setShowModal] = useState(false);
@@ -118,28 +122,44 @@ const Settings = ({ user, setToast, setPage }) => {
     }
   };
 
+   // Inline form validation
+   useEffect(() => {
+    // Event propagation will capture all focusout events from login form
+    const passwordFormValidation = () => {
+      document.querySelector('.password-form').addEventListener('focusout', (event) => {
+        const { name, value } = event.target;
+        switch (true) {
+          case name === 'currentPassword':
+            // Check for non empty field
+            if (value.trim().length !== 0) {
+              event.target.classList.remove('error');
+              setCurrentPasswordAlert({});
+            }
+            break;
+
+          case name === 'newPassword':
+            // Check for non empty field
+            if (value.trim().length !== 0) {
+              event.target.classList.remove('error');
+              setNewPasswordAlert({});
+            }
+            break;
+
+          default:
+            break;
+        }
+      });
+    };
+
+    passwordFormValidation();
+  }, []);
+
   // Ensure form is validated before calling form submission function
-  const isFormValid = () => {
+  const isModalFormValid = () => {
     let valid = true;
     let inputFocused = false;
 
-    // const emailInput = document.querySelector('input[name="email"]');
     const passwordInput = document.querySelector('input[name="password"]');
-
-    // Check for blank field
-    // if (emailInput.value.trim().length === 0) {
-    //   if (!inputFocused) {
-    //     emailInput.focus();
-    //     inputFocused = true;
-    //   }
-    //   setEmailAlert({
-    //       message: "Please enter an email address.",
-    //       type: 'error',
-    //     }
-    //   );
-    //   emailInput.classList.add('error');
-    //   valid = false;
-    // } 
 
     // Check for blank field
     if (passwordInput.value.trim().length === 0) {
@@ -158,29 +178,70 @@ const Settings = ({ user, setToast, setPage }) => {
     return valid;
   };
 
-  const errorHandling = (errorCode) => {
+  // Ensure form is validated before calling form submission function
+  const isPasswordFormValid = () => {
+    let valid = true;
+    let inputFocused = false;
+
+    const currentPasswordInput = document.querySelector('input[name="currentPassword"]');
+    const newPasswordInput = document.querySelector('input[name="newPassword"]');
+
+    // Check for blank field
+    if (currentPasswordInput.value.trim().length === 0) {
+      if (!inputFocused) {
+        currentPasswordInput.focus();
+        inputFocused = true;
+      }
+      setCurrentPasswordAlert({
+          message: "Please enter a password.",
+          type: 'error',
+        }
+      );
+      currentPasswordInput.classList.add('error');
+      valid = false;
+    } 
+
+     // Check for blank field
+     if (newPasswordInput.value.trim().length === 0) {
+      if (!inputFocused) {
+        newPasswordInput.focus();
+        inputFocused = true;
+      }
+      setNewPasswordAlert({
+          message: "Please enter a password.",
+          type: 'error',
+        }
+      );
+      newPasswordInput.classList.add('error');
+      valid = false;
+    } 
+
+    return valid;
+  };
+
+  const errorHandling = (errorCode, alertSetFunc) => {
     switch (errorCode) {
       case 'auth/wrong-password':
-        setPasswordAlert({
+        alertSetFunc({
           message: "That's an incorrect password. Try again.",
           type: 'error',
         });
         break;
       case 'auth/too-many-requests':
-        setPasswordAlert({
+        alertSetFunc({
           message: 'Failed to authorise too many times. Please wait a few minutes before trying again.',
           type: 'error',
         });
         break;
       case 'auth/network-request-failed':
-        setPasswordAlert({
+        alertSetFunc({
           message: "We couldn't connect to the network. Please check your internet connection and try again.",
           type: 'error',
         });
         break;
     
       default:
-        setPasswordAlert({
+        alertSetFunc({
           message: 'An unknown server error occured. Please try again.',
           type: 'error',
         });
@@ -188,55 +249,39 @@ const Settings = ({ user, setToast, setPage }) => {
     }
   };
 
-  // // Inline form validation
-  // useEffect(() => {
-  //   // Event propagation will capture all focusout events from login form
-  //   const loginValidation = () => {
-  //     document.querySelector('.Login__form').addEventListener('focusout', (event) => {
-  //       const { name, value } = event.target;
-  //       switch (true) {
-  //         case name === 'email':
-  //           // Check for blank field
-  //           if (value.trim().length === 0) {
-  //             setEmailAlert({
-  //                 message: "Please enter an email address.",
-  //                 type: 'error',
-  //               }
-  //             );
-  //             event.target.classList.add('error');
-  //           } else {
-  //             event.target.classList.remove('error');
-  //             setEmailAlert({});
-  //           }
-  //           break;
-
-  //         case name === 'password':
-  //           // Check for blank field
-  //           if (value.trim().length === 0) {
-  //             setPasswordAlert({
-  //                 message: "Please enter a password.",
-  //                 type: 'error',
-  //               }
-  //             );
-  //             event.target.classList.add('error');
-  //           } else {
-  //             event.target.classList.remove('error');
-  //             setPasswordAlert({});
-  //           }
-  //           break;
-
-  //         default:
-  //           break;
-  //       }
-  //     });
-  //   };
-
-  //   loginValidation();
-  // }, []);
+  const errorHandleNewPassword = (errorCode, alertSetFunc) => {
+    switch (errorCode) {
+      case 'auth/weak-password':
+        alertSetFunc({
+          message: "Please create a password at least six characters in length. ",
+          type: 'error',
+        });
+        break;
+      case 'auth/too-many-requests':
+        alertSetFunc({
+          message: 'Failed to authorise too many times. Please wait a few minutes before trying again.',
+          type: 'error',
+        });
+        break;
+      case 'auth/network-request-failed':
+        alertSetFunc({
+          message: "We couldn't connect to the network. Please check your internet connection and try again.",
+          type: 'error',
+        });
+        break;
+    
+      default:
+        alertSetFunc({
+          message: 'An unknown server error occured. Please try again.',
+          type: 'error',
+        });
+        break;
+    }
+  };
 
 
   // This function is/returns a Promise
-   const refreshCredentialsForDelete = async () => {
+  const refreshCredentialsForDelete = async () => {
     // Must be called once the user has entered their password, else it will just error
     const credential = EmailAuthProvider.credential(email, password);
 
@@ -250,10 +295,9 @@ const Settings = ({ user, setToast, setPage }) => {
       return true;
       
     } catch (error) {
-      errorHandling(error.code)
+      errorHandling(error.code, setPasswordAlert)
       return false;
     }
-
   };
 
   // Combine the credentials and actual deleting of account using async flow
@@ -268,11 +312,51 @@ const Settings = ({ user, setToast, setPage }) => {
     }
   }
 
+  // This function is/returns a Promise
+  const refreshCredentialsForPassword = async () => {
+    // Must be called once the user has entered their password, else it will just error
+    const credential = EmailAuthProvider.credential(email, currentPassword);
 
+    try {
+      // Attempt re-authentication
+      await reauthenticateWithCredential(user, credential);
+      return true;
+      
+    } catch (error) {
+      errorHandling(error.code, setCurrentPasswordAlert)
+      return false;
+    }
+  };
+
+  // Combine the credentials and actual deleting of account using async flow
+  const performPasswordUpdate = async () => {
+    // Check that the credential confirmation was successful
+    const confirmed = await refreshCredentialsForPassword();
+    // Act based on the result
+    if (confirmed) {
+      try {
+        await updatePassword(user, newPassword);
+        setCurrentPassword('');
+        setNewPassword('');
+
+        setToast((prevData) => ({
+          ...prevData,
+          visible: true,
+          type: 'success',
+          message: 'Password changed successfully'
+        }));
+        
+      } catch (error) {
+        errorHandleNewPassword(error.code, setNewPasswordAlert)
+      }
+    } else {
+      // Do nothing, refreshCredentials function hadnles errors and directs user to fix mistakes
+    }
+  }
    
   return (
     <StyledSettings className="Settings">
-            {showModal && <Modal title="Delete provider" closeModal={() => setShowModal(false)}>
+       {showModal && <Modal title="Delete provider" closeModal={() => setShowModal(false)}>
         <div className="error-container">
           <div className="error-icon">
             <svg xmlns="http://www.w3.org/2000/svg" className="alert-icon alert-icon--neutral" viewBox="0 0 512 512" width="24px">
@@ -292,7 +376,7 @@ const Settings = ({ user, setToast, setPage }) => {
         <form className='Login__form' noValidate onSubmit={(event) => {
           event.preventDefault();
           // Ensure form validation passes
-          if (isFormValid()) {
+          if (isModalFormValid()) {
             // Refresh credentials
             performDeleteFunctions();
               
@@ -324,6 +408,8 @@ const Settings = ({ user, setToast, setPage }) => {
 
       <h2 className="Home__title">Settings</h2>
       <div className="Home__welcome">Select an option to get started</div>
+
+
       <div className="Settings-container">
         <form>
           <FormField 
@@ -341,29 +427,36 @@ const Settings = ({ user, setToast, setPage }) => {
         </form>
         
         
-        <form>
+        <form className='password-form' noValidate onSubmit={(event) => {
+          event.preventDefault();
+          // Ensure form validation passes
+          if (isPasswordFormValid()) {
+            performPasswordUpdate();
+          }
+        }}>
+
           <FormField 
-            fieldType="text" 
+            fieldType="password" 
             name="currentPassword"
             label="Current password" 
             value={currentPassword} 
             onChange={(event) => setCurrentPassword(event.target.value)} 
-            // alert={alerts ? alerts.fullName : providerAlerts.fullName}
-            // required
-            // describedBy={Object.keys(alerts ? alerts.fullName : providerAlerts.fullName).length === 0 ? null : 'fullName-alert'}
+            alert={currentPasswordAlert}
+            required
+            describedBy='currentPassword-alert'
           />  
 
           <FormField 
-            fieldType="text" 
+            fieldType="password" 
             name="newPassword"
             label="New password" 
             value={newPassword} 
             onChange={(event) => setNewPassword(event.target.value)} 
-            // alert={alerts ? alerts.fullName : providerAlerts.fullName}
-            // required
-            // describedBy={Object.keys(alerts ? alerts.fullName : providerAlerts.fullName).length === 0 ? null : 'fullName-alert'}
+            alert={newPasswordAlert}
+            required
+            describedBy='newPassword-alert'
           />  
-          <button type="button">Update password</button>
+          <button>Update password</button>
         </form>
           
       <div className="delete-account">

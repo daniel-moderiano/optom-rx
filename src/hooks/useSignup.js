@@ -34,7 +34,7 @@ export const useSignup = () => {
           break;
       
         default:
-          setError('n unknown server error occured. Please try again.')
+          setError('An unknown server error occured. Please try again.')
           break;
 
       }
