@@ -5,9 +5,10 @@ import { useEffect } from "react";
 import { updateProfile, deleteUser } from "firebase/auth";
 import { collection, deleteDoc, doc, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../firebase/config";
+import { useLogout } from '../../hooks/useLogout';
 
 const Settings = ({ user, setToast, setPage }) => {
-
+  const { logout } = useLogout();
   const [displayName, setDisplayName] = useState('Test');
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
@@ -82,9 +83,11 @@ const Settings = ({ user, setToast, setPage }) => {
       docsSnap.forEach((doc) => deleteDoc(doc.ref));
       // Delete the user's document in firestore
       await deleteDoc(doc(db, 'users', user.uid))     
-
+      // Delete the user iteself from firebase auth
       await deleteUser(user);
       
+      // Finally, logout
+      logout();
 
       setDeletePending(false);
       setDeleteError(null);
