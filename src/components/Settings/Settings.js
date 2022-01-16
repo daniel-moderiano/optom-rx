@@ -2,9 +2,11 @@ import { StyledSettings } from "./Settings.styled"
 import FormField from '../FormField/FormField'
 import { useState } from "react"
 import { useEffect } from "react";
-import { updateProfile } from "firebase/auth";
+import { updateProfile, deleteUser } from "firebase/auth";
+import { collection, deleteDoc, doc, getDocs, query, where } from "firebase/firestore";
+import { db } from "../../firebase/config";
 
-const Settings = ({ user, setToast }) => {
+const Settings = ({ user, setToast, setPage }) => {
 
   const [displayName, setDisplayName] = useState('Test');
   const [currentPassword, setCurrentPassword] = useState('');
@@ -12,9 +14,17 @@ const Settings = ({ user, setToast }) => {
   const [namePending, setNamePending] = useState(false);
   const [nameError, setNameError] = useState(null);
 
+  const [deletePending, setDeletePending] = useState(false);
+  const [deleteError, setDeleteError] = useState(null);
+
   useEffect(() => {
     setDisplayName(user.displayName);
   }, [user]);
+
+  // Adjust current page for accessibility and styling
+  useEffect(() => {
+    setPage('settings');
+  }, [setPage])
 
 
   const toggleBooleanState = (setData, data, boolToChange) => {
@@ -56,8 +66,52 @@ const Settings = ({ user, setToast }) => {
         message: 'An error occurred while changing name'
       }));
     }
+  };
+
+  const deleteAccount = async () => {
+    setDeletePending(true);
+    setDeleteError(null);
+    
+    const provRef = collection(db, 'providers');
+    const provQuery = query(provRef, where('uid', '==', user.uid));
+    
+
+    try {
+      // await deleteDoc(doc(db, 'users', user.uid))
+
+      // await deleteDoc(doc(db, 'users', user.uid))
+      const docsSnap  = await getDocs(provQuery);
+      // console.log(docsSnap);
+      docsSnap.forEach((doc) => deleteDoc(doc.ref));
+
+
+      console.log('User acct deleted');
+      // await deleteUser(user);
+      
+
+      setDeletePending(false);
+      setDeleteError(null);
+
+      setToast((prevData) => ({
+        ...prevData,
+        visible: true,
+        type: 'success',
+        message: 'Account deleted'
+      }));
+    } catch (error) {
+      console.log(error);
+      setDeletePending(false);
+      setDeleteError(error);
+      setToast((prevData) => ({
+        ...prevData,
+        visible: true,
+        type: 'error',
+        message: 'An error occurred while deleting account'
+      }));
+    }
   }
-  
+
+   
   return (
     <StyledSettings className="Settings">
       <h2 className="Home__title">Settings</h2>
@@ -105,7 +159,7 @@ const Settings = ({ user, setToast }) => {
         </form>
           
       <div className="delete-account">
-      <button className="delete-btn" type="button">Delete account</button>
+        <button className="delete-btn" type="button" onClick={deleteAccount}>Delete account</button>
       </div>
         
       </div>

@@ -16,6 +16,7 @@ const Nav = ({ user, resetData, currentPage }) => {
   const ariaLogin = currentPage === 'login' ? { "aria-current": "page" } : {};
   const ariaSignup = currentPage === 'signup' ? { "aria-current": "page" } : {};
   const ariaScripts = currentPage === 'scripts' ? { "aria-current": "page" } : {};
+  const ariaSettings = currentPage === 'settings' ? { "aria-current": "page" } : {};
   const ariaPrescribers = currentPage === 'prescribers' ? { "aria-current": "page" } : {};
 
   const toggleNav = () => {
@@ -54,6 +55,9 @@ const Nav = ({ user, resetData, currentPage }) => {
           </li>
           <li className="Nav__list-item" role="none">
             <Link onClick={closeNav} className="Nav__link Nav__link--std" to="/scripts" role="menuitem" {...ariaScripts}>Scripts</Link>
+          </li>
+          <li className="Nav__list-item" role="none">
+            <Link onClick={closeNav} className="Nav__link Nav__link--std" to="/settings" role="menuitem" {...ariaSettings}>Settings</Link>
           </li>
           <li className="Nav__list-item" role="none">
             <Link onClick={closeNav} className="Nav__link Nav__link--std" to="/providers" role="menuitem" {...ariaPrescribers}>Prescribers</Link>
