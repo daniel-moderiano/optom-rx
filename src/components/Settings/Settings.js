@@ -533,7 +533,7 @@ const Settings = ({ user, setToast, setPage }) => {
 
       </Modal>}
 
-       {showModal && <Modal title="Delete provider" closeModal={() => setShowModal(false)}>
+       {showModal && <Modal title="Delete account" closeModal={() => setShowModal(false)}>
         <div className="error-container">
           <div className="error-icon">
             <svg xmlns="http://www.w3.org/2000/svg" className="alert-icon alert-icon--neutral" viewBox="0 0 512 512" width="24px">
@@ -583,22 +583,22 @@ const Settings = ({ user, setToast, setPage }) => {
         </form>
       </Modal>}
 
-      {showEmailModal && <Modal title="Delete provider" closeModal={() => setShowEmailModal(false)}>
-        <div className="error-container">
-          <div className="error-icon">
+      {showEmailModal && <Modal title="Change email" closeModal={() => setShowEmailModal(false)}>
+        <div className="neutral-container">
+          <div className="neutral-icon">
             <svg xmlns="http://www.w3.org/2000/svg" className="alert-icon alert-icon--neutral" viewBox="0 0 512 512" width="24px">
-              <path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" fill="#D12323" stroke="#D12323" strokeMiterlimit="10" strokeWidth="32"/>
-              <path d="M250.26 166.05L256 288l5.73-121.95a5.74 5.74 0 00-5.79-6h0a5.74 5.74 0 00-5.68 6z" fill="#D12323" stroke="#ffffff" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32"/>
+              <path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" fill="#00477A" stroke="#00477A" strokeMiterlimit="10" strokeWidth="32"/>
+              <path d="M250.26 166.05L256 288l5.73-121.95a5.74 5.74 0 00-5.79-6h0a5.74 5.74 0 00-5.68 6z" fill="#00477A" stroke="#ffffff" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32"/>
               <path d="M256 367.91a20 20 0 1120-20 20 20 0 01-20 20z" fill="#ffffff"/>
             </svg>
           </div>
-          <div className="error-text">
-            This action is permanent and cannot be undone.
+          <div className="neutral-text">
+            Changes to email require you to re-enter your password
           </div>
         </div>
-        <div className="provider-display">
-          <div className="provider-label">Please enter your password to continue</div>
-          {/* <div className="provider-summary">{`${selectedProvider.fullName} (${selectedProvider.location})`}</div> */}
+        <div className="update-display">
+          <div className="update-label">New email address:</div>
+          <div className="update-summary">{currentEmail}</div>
         </div>
         <form className='Login__form' noValidate onSubmit={(event) => {
           event.preventDefault();
@@ -628,7 +628,7 @@ const Settings = ({ user, setToast, setPage }) => {
 
         <div className="Modal__buttons">
           <button className="cancel-btn Modal__btn" onClick={() => setShowEmailModal(false)}>Cancel</button>
-          <button className="delete-btn Modal__btn">Update</button>
+          <button className="update-btn Modal__btn">Update</button>
         </div>
         </form>
       </Modal>}

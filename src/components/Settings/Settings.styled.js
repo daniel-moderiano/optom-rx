@@ -238,9 +238,40 @@ const StyledSettings = styled.div`
       }
     }
 
+    .neutral-container {
+      margin-top: 1.25rem;
+      background-color: #eaeef1;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 1rem;
+      border-radius: 2px;
+
+      .neutral-icon {
+        line-height: 0;
+        margin-right: 0.5rem;
+      }
+
+      .neutral-text {
+        color: #00477A;
+        font-size: 0.9rem;
+        font-weight: bold;
+      }
+    }
+
     .provider-display {
       padding-top: 1.25rem;
       .provider-label {
+        font-size: 0.85rem;
+        color: #5A6572;
+        margin-bottom: 0.4rem;
+      }
+    }
+
+    .update-display {
+      padding-top: 1.25rem;
+      margin-bottom: 1.25rem;
+      .update-label {
         font-size: 0.85rem;
         color: #5A6572;
         margin-bottom: 0.4rem;
@@ -286,6 +317,21 @@ const StyledSettings = styled.div`
       
       .delete-btn:hover {
         background-color: var(--btn-negative-hover-text);
+      }
+
+      .update-btn {
+        
+        background-color: var(--btn-primary);
+        color: rgb(255, 255, 255);
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;      
+
+      }
+      
+      .update-btn:hover {
+        background-color: var(--btn-primary-hover);
       }
             
       .cancel-btn {
