@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const StyledLogin = styled.div`
+const StyledResetPassword = styled.div`
   height: 100%;
   width: 100%;
   display: flex;
@@ -169,7 +169,6 @@ const StyledLogin = styled.div`
     margin: 0;
     z-index: 2;
     place-self: flex-end;
-    text-decoration: none;
 
     &:hover {
       background-color: transparent;
@@ -277,4 +276,4 @@ const StyledLogin = styled.div`
     width: 90%;
   }
 `
-export { StyledLogin }
+export { StyledResetPassword }

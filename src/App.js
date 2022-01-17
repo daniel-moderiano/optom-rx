@@ -18,6 +18,7 @@ import Main from "./components/Main/Main";
 import Scripts from "./components/Scripts/Scripts";
 import ViewScript from "./components/ViewScript/ViewScript";
 import Settings from "./components/Settings/Settings";
+import ResetPassword from "./components/ResetPassword/ResetPassword";
 
 // ! Medicare details are NOT required for valid Australian prescriptions, even under PBS
 
@@ -251,7 +252,13 @@ const App = () => {
               {!user && <Navigate to="/login"/>}
               </>
             }/>
+
+            <Route path="/reset-password" element={
+              <ResetPassword setToast={setToastParams} setPage={setCurrentPage}/>
+            }/>
           </Routes>
+
+          
         </Main>
         <footer className="footer"></footer>
       </>)}

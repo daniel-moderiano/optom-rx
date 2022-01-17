@@ -202,6 +202,7 @@ const StyledSignup = styled.div`
     .login-option {
       justify-content: center;
       font-size: 0.9rem;
+      width: 90%;
 
       .login-link {
         font-size: 0.9rem;
@@ -213,6 +214,8 @@ const StyledSignup = styled.div`
   .displayName-group {
     position: relative;
   }
+
+  
 
   .toggle-password {
     width: auto;
@@ -247,5 +250,7 @@ const StyledSignup = styled.div`
       outline-offset: 1px;
     }
   }
+
+  
 `
 export { StyledSignup }
