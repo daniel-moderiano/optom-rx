@@ -59,7 +59,7 @@ const StyledLogin = styled.div`
       background-color: var(--primary-color);
       color: rgb(255, 255, 255);
       border: none;
-      margin: 2rem 0 1rem 0;
+      margin: 2rem 0 0.5rem 0;
 
       &:active {
         transform: scale(0.98);
@@ -86,11 +86,14 @@ const StyledLogin = styled.div`
   }
 
   .signup-option {
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.5rem;
+    margin-top: 2rem;
+    padding-top: 1.25rem;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
     width: 100%;
+    border-top: 1px solid #D1D6DB;
 
     .signup-msg {
       color: #5A6572;
@@ -163,6 +166,38 @@ const StyledLogin = styled.div`
     &:hover {
       background-color: transparent;
       color: #1B1E22;
+    }
+
+    &:focus {
+      outline: 2px solid #104362;
+      outline-offset: 1px;
+    }
+
+    &:focus:not(:focus-visible) {
+      outline: none
+    }
+
+    &:focus-visible {
+      outline: 2px solid #104362;
+      outline-offset: 1px;
+    }
+  }
+
+  .reset-password {
+    width: auto;
+    background-color: transparent;
+    border: none;
+    color: #48515B;
+    font-size: 0.9rem;
+    font-family: var(--font-stack-segoe);
+    /* font-weight: bold; */
+    padding: 0;
+    margin: 0;
+
+    &:hover {
+      background-color: transparent;
+      color: #1B1E22;
+      cursor: pointer;
     }
 
     &:focus {

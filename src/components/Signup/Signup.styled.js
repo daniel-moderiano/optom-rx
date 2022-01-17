@@ -100,11 +100,14 @@ const StyledSignup = styled.div`
   }
 
   .login-option {
-    margin-bottom: 1.5rem;
-    width: 100%;
+    margin-bottom: 0.5rem;
+    margin-top: 1rem;
+    padding-top: 1.25rem;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
+    width: 100%;
+    border-top: 1px solid #D1D6DB;
 
     .login-msg {
       color: #5A6572;

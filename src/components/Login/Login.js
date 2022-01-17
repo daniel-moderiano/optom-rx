@@ -117,8 +117,6 @@ const Login = ({ setPage }) => {
     } catch (error) {
       console.log(error.code);
     }
-    
-
   }
 
   return (
@@ -191,12 +189,13 @@ const Login = ({ setPage }) => {
 
         </form>
 
+        <button className='reset-password' onClick={resetPassword}>Forgot password?</button>
+
         <div className="signup-option">
           <span className="signup-msg">Don't have an account?</span>
           <Link to="/signup" className="signup-link">Sign Up.</Link>
         </div>
 
-        <button className='reset-password' onClick={resetPassword}>Reset password</button>
         
        
       </div>
