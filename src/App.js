@@ -19,6 +19,8 @@ import Scripts from "./components/Scripts/Scripts";
 import ViewScript from "./components/ViewScript/ViewScript";
 import Settings from "./components/Settings/Settings";
 import ResetPassword from "./components/ResetPassword/ResetPassword";
+import Modal from "./components/utils/Modal/Modal";
+import { sendEmailVerification } from "firebase/auth";
 
 // ! Medicare details are NOT required for valid Australian prescriptions, even under PBS
 
@@ -75,6 +77,7 @@ const App = () => {
 
   const [googleLoaded, setGoogleLoaded] = useState(false);
   const [currentPage, setCurrentPage] = useState(null);
+  const [showModal, setShowModal] = useState(true);
 
   const resetAllData = useCallback(() => {
     console.log('Reset all data');
@@ -166,6 +169,15 @@ const App = () => {
 
     // New React Router v6 syntax using navigate. State is passed in a similar way and accessed with useLocation
     navigate('/template', { state: { validData: true } });
+  };
+
+  const resendEmailVerification = async () => {
+    try {
+      await sendEmailVerification(user);
+      console.log('Email sent');
+    } catch (error) {
+      console.log(error.code);
+    }
   }
 
   return (
@@ -263,6 +275,17 @@ const App = () => {
         <footer className="footer"></footer>
       </>)}
       <Toast params={toastParams} />
+      {showModal && <Modal title="Verify your email" closeModal={() => setShowModal(false)}>
+  
+        <div className="verify-container">
+          <p className="verify-message">Hi {user.displayName}! An email verification link has been sent to your email address. Follow the link to verify your email.</p>
+        </div>
+
+        <button type="button" className="resend" onClick={() => setShowModal(false)}>OK</button>
+
+        <button type="button" className="resend" onClick={resendEmailVerification}>Didn't get the mail? Send it again.</button>
+
+      </Modal>}
     </div>
     
     

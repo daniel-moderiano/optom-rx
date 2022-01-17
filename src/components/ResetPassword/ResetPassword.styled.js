@@ -8,10 +8,6 @@ const StyledResetPassword = styled.div`
   justify-content: center;
   margin-bottom: 4rem;
 
-  .Spinner {
-    margin-top: -4rem;
-  }
-
   .login-container {
     /* margin-top: -4.7rem; */
     background-color: #FFFFFF;
@@ -59,7 +55,7 @@ const StyledResetPassword = styled.div`
       background-color: var(--primary-color);
       color: rgb(255, 255, 255);
       border: none;
-      margin: 2rem 0 0.5rem 0;
+      margin: 1.5rem 0 1.5rem 0;
 
       &:active {
         transform: scale(0.98);
@@ -201,6 +197,7 @@ const StyledResetPassword = styled.div`
     /* font-weight: bold; */
     padding: 0;
     margin: 0;
+    text-decoration: none;
 
     &:hover {
       background-color: transparent;

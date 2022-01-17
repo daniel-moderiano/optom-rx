@@ -122,7 +122,7 @@ const ResetPassword = ({ setToast, setPage }) => {
           <FormField 
             fieldType="email" 
             name="email"
-            label="Email" 
+            label="Enter the email address associated with your account and we'll send you a password reset link." 
             value={email} 
             onChange={(event) => setEmail(event.target.value)} 
             className="auth-field form-field"
@@ -137,7 +137,7 @@ const ResetPassword = ({ setToast, setPage }) => {
           {isPending ? (
               <Dots color="white" />
               ) : (
-            'Log in'
+            'Send password reset email'
             )} 
           </button>
 

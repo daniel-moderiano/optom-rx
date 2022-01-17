@@ -114,6 +114,40 @@ const StyledSettings = styled.div`
     }
   }
 
+  .reset-password {
+    width: 100%;
+    text-align: right;
+    background-color: transparent;
+    border: none;
+    color: #48515B;
+    font-size: 0.9rem;
+    font-family: var(--font-stack-segoe);
+    /* font-weight: bold; */
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+
+    &:hover {
+      background-color: transparent;
+      color: #1B1E22;
+      cursor: pointer;
+    }
+
+    &:focus {
+      outline: 2px solid #104362;
+      outline-offset: 1px;
+    }
+
+    &:focus:not(:focus-visible) {
+      outline: none
+    }
+
+    &:focus-visible {
+      outline: 2px solid #104362;
+      outline-offset: 1px;
+    }
+  }
+
 `
 
 export { StyledSettings }

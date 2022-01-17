@@ -7,6 +7,7 @@ import { collection, deleteDoc, doc, getDocs, query, where } from "firebase/fire
 import { db } from "../../firebase/config";
 import { useLogout } from '../../hooks/useLogout';
 import Modal from "../utils/Modal/Modal";
+import { Link } from "react-router-dom";
 
 const Settings = ({ user, setToast, setPage }) => {
   const { logout } = useLogout();
@@ -520,6 +521,7 @@ const Settings = ({ user, setToast, setPage }) => {
               describedBy='confirmPassword-alert'
             />  
             <button>Update password</button>
+            <Link to="/reset-password" className="reset-password">Forgot password?</Link>
           </form>
             
         <div className="delete-account">
