@@ -6,13 +6,13 @@ const StyledSettings = styled.div`
   /* align-items: center; */
   margin: 3rem 0;
   background-color: #FFFFFF;
-  /* box-shadow: 0 1.6px 3.6px 0 rgb(0 0 0 / 13%), 0 0.3px 0.9px 0 rgb(0 0 0 / 11%); */
+  box-shadow: 0 1.6px 3.6px 0 rgb(0 0 0 / 13%), 0 0.3px 0.9px 0 rgb(0 0 0 / 11%);
   padding: 3rem 5.5rem;
   max-width: 1140px;
   width: 100%;
-  border: 1px solid #d0d7de;
+  /* border: 1px solid #d0d7de;
   border-radius: 6px;
-  box-shadow: var(--small-shadow);
+  box-shadow: var(--small-shadow); */
 
   .settings-container {
     display: flex;
@@ -454,6 +454,50 @@ const StyledSettings = styled.div`
   }
 
   
+  /* Landscape phones and down */
+  @media (max-width: 590px) { 
+    padding: 2rem 3rem;
+
+    .email-form {
+      .email-group {
+        width: 100%;
+      }
+    }
+
+    .Modal {
+      .Modal__content {
+        width: 90%;
+        text-align: left;
+        max-width: 500px;
+      }
+    }
+    
+    
+  }
+            
+            
+  @media(max-width: 450px) {
+    .settings-btn {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    .changePassword-btns {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+
+      .reset-password {
+        text-align: left;
+        margin: 0;
+        margin-top: 1rem;
+      }
+
+    }
+  }
+
+
 
 `
 
