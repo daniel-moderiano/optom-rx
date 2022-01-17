@@ -36,7 +36,6 @@ export const useSignup = () => {
         default:
           setError('An unknown server error occured. Please try again.')
           break;
-
       }
     };
 

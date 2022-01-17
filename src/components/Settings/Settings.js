@@ -112,7 +112,6 @@ const Settings = ({ user, setToast, setPage }) => {
         message: 'Account deleted'
       }));
     } catch (error) {
-      console.log(error);
       setDeletePending(false);
       setDeleteError(error);
       setToast((prevData) => ({
@@ -521,7 +520,7 @@ const Settings = ({ user, setToast, setPage }) => {
               describedBy='confirmPassword-alert'
             />  
             <button>Update password</button>
-            <Link to="/reset-password" className="reset-password">Forgot password?</Link>
+            <Link to="/reset-password" className="reset-password" onClick={logout}>Forgot password?</Link>
           </form>
             
         <div className="delete-account">

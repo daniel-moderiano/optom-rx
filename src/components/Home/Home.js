@@ -17,20 +17,39 @@ const Home = ({ setToast, setPage, firstSignIn, setFirstSignIn }) => {
   }, [setPage]);
 
   useEffect(() => {
-    console.log('Call sign in effect');
+    
     // If the user has just signed up for an account and hits the home page for the first time, display the email modal
     if (firstSignIn) {
       setShowModal(true);
       setFirstSignIn(false);
+      sendEmailVerification(user)
+        .then(() => {
+          console.log('Email sent');
+        })
+        .catch((err) => {
+          // Not relevant to display error or success to user, they will be able to manually resend if no email is received. The manual resend has success/error UI handlers
+          console.log(err);
+        })  
     }
-  }, [firstSignIn, setFirstSignIn])
+  }, [firstSignIn, setFirstSignIn, user])
 
   const resendEmailVerification = async () => {
     try {
       await sendEmailVerification(user);
-      console.log('Email sent');
+      setToast((prevData) => ({
+        ...prevData,
+        visible: true,
+        type: 'success',
+        message: 'Email sent successfully'
+      }));
     } catch (error) {
-      console.log(error.code);
+      console.log(error);
+      setToast((prevData) => ({
+        ...prevData,
+        visible: true,
+        type: 'error',
+        message: 'An error occurred while sending verification email'
+      }));
     }
   }
 
