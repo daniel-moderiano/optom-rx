@@ -761,7 +761,7 @@ const Settings = ({ user, setToast, setPage }) => {
               
               
                 <input type="text" className="hidden" />
-                <div className="change-password-btns">
+                <div className="changePassword-btns">
                 <button type="button" className="settings-btn settings-btn--update" onClick={() => setShowEmailModal(true)}>Update email</button>
                 <button className="resend" onClick={resendEmailVerification}>Resend verification email</button>
                 </div>

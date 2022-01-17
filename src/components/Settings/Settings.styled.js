@@ -482,6 +482,7 @@ const StyledSettings = styled.div`
       margin-right: 0;
     }
 
+
     .changePassword-btns {
       display: flex;
       flex-direction: column;
@@ -489,6 +490,12 @@ const StyledSettings = styled.div`
       justify-content: center;
 
       .reset-password {
+        text-align: left;
+        margin: 0;
+        margin-top: 1rem;
+      }
+
+      .resend {
         text-align: left;
         margin: 0;
         margin-top: 1rem;
