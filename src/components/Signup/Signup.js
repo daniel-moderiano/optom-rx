@@ -5,7 +5,7 @@ import FormField from "../FormField/FormField";
 import { useState, useEffect } from "react";
 import Dots from "../utils/Dots/Dots";
 
-const Signup = ({ setPage }) => {
+const Signup = ({ setPage, setFirstSignIn }) => {
   const { error, isPending, signup } = useSignup();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -152,6 +152,7 @@ const Signup = ({ setPage }) => {
           // Check form validity before calling submit function
           if (isFormValid()) {
             signup(email, password, displayName);
+            setFirstSignIn(true);
           }
           
         }}>

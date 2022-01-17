@@ -33,9 +33,10 @@ const StyledHome = styled.div`
       font-family: var(--font-stack-segoe);
       box-sizing: border-box;
       cursor: pointer;
-      padding: 8px 16px 10px 16px;
+      padding: 0.45rem 16px 10px 16px;
       border-radius: 2px;
       text-decoration: none;
+      
 
       &:active {
         transform: scale(0.98);
@@ -51,7 +52,7 @@ const StyledHome = styled.div`
       min-width: 80px;
       background-color: var(--primary-color);
       color: rgb(255, 255, 255);
-      border: none;
+      border: 1px solid transparent;
     }
     
     .Home__link--create:hover {
@@ -60,6 +61,7 @@ const StyledHome = styled.div`
 
     .Home__link--prescribers {
       min-width: 80px;
+      /* padding-top: 0.45rem; */
       background-color: #fff;
       color: #0b4740;
       border: 1px solid #0b4740;

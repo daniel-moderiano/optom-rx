@@ -535,7 +535,9 @@ const Settings = ({ user, setToast, setPage }) => {
             <button className="resend" onClick={resendEmailVerification}>Resend verification email</button>
           </div>
         )}
-        
+         <div className="delete-account">
+          <button className="delete-btn" type="button" onClick={() => setShowModal(true)}>Delete account</button>
+        </div>
       </div>
     </StyledSettings>
   )

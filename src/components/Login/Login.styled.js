@@ -202,6 +202,7 @@ const StyledLogin = styled.div`
     /* font-weight: bold; */
     padding: 0;
     margin: 0;
+    text-decoration: none;
 
     &:hover {
       background-color: transparent;

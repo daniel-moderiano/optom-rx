@@ -32,7 +32,7 @@ body {
   padding: 0;
   font-family: var(--font-stack-segoe);
 }
-
+/* 
 .App {
   display: flex;
   flex-direction: column;
@@ -54,4 +54,4 @@ body {
     size: auto;
     margin: 0mm;
   }
-}
+} */
