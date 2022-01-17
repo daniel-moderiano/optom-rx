@@ -44,7 +44,7 @@ const StyledSettings = styled.div`
     margin-bottom: 0.75rem;
   }
 
-  .displayName-form, .password-form, .delete-account {
+  .displayName-form, .password-form, .delete-account, .email-form {
     padding: 1.5rem 0 2rem 0;
     display: flex;
     flex-direction: column;

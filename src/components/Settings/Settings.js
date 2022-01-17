@@ -2,7 +2,7 @@ import { StyledSettings } from "./Settings.styled"
 import FormField from '../FormField/FormField'
 import { useState } from "react"
 import { useEffect } from "react";
-import { updateProfile, deleteUser, reauthenticateWithCredential, EmailAuthProvider, updatePassword, sendEmailVerification } from "firebase/auth";
+import { updateProfile, deleteUser, reauthenticateWithCredential, EmailAuthProvider, updatePassword, sendEmailVerification, updateEmail } from "firebase/auth";
 import { collection, deleteDoc, doc, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import { useLogout } from '../../hooks/useLogout';
@@ -21,6 +21,7 @@ const Settings = ({ user, setToast, setPage }) => {
   const [confirmPassword, setConfirmPassword] = useState('');
 
   const [showModal, setShowModal] = useState(false);
+  const [showEmailModal, setShowEmailModal] = useState(false);
 
   const [namePending, setNamePending] = useState(false);
   const [nameError, setNameError] = useState(null);
@@ -28,17 +29,22 @@ const Settings = ({ user, setToast, setPage }) => {
   const [deletePending, setDeletePending] = useState(false);
   const [deleteError, setDeleteError] = useState(null);
 
-  // const [email, setEmail] = useState('');
+  const [currentEmail, setCurrentEmail] = useState('');
+  const [emailAlert, setEmailAlert] = useState({});
+
   const [password, setPassword] = useState('');
 
-  const [emailAlert, setEmailAlert] = useState({});
+  
   const [passwordAlert, setPasswordAlert] = useState({});
+
+
 
   const { email } = user;
 
   useEffect(() => {
     setDisplayName(user.displayName);
-  }, [user]);
+    setCurrentEmail(email);
+  }, [user, email]);
 
   // Adjust current page for accessibility and styling
   useEffect(() => {
@@ -353,6 +359,51 @@ const Settings = ({ user, setToast, setPage }) => {
     }
   };
 
+  // This function is/returns a Promise
+  const refreshCredentialsForEmail = async () => {
+    // Must be called once the user has entered their password, else it will just error
+    const credential = EmailAuthProvider.credential(email, password);
+    console.log(credential);
+
+    try {
+      // Attempt re-authentication
+      await reauthenticateWithCredential(user, credential);
+      return true;
+      
+    } catch (error) {
+      // errorHandling(error.code, setEmailAlert)
+      // TODO: Email error handling
+      console.log(error);
+      return false;
+    }
+  };
+
+  // Combine the credentials and actual deleting of account using async flow
+  const performEmailUpdate = async () => {
+    // Check that the credential confirmation was successful
+    const confirmed = await refreshCredentialsForEmail();
+    // Act based on the result
+    if (confirmed) {
+      try {
+        await updateEmail(user, currentEmail);
+        setShowEmailModal(false)
+
+        setToast((prevData) => ({
+          ...prevData,
+          visible: true,
+          type: 'success',
+          message: 'Email updated successfully'
+        }));
+        console.log(user);
+      } catch (error) {
+        console.log(error);
+        // TODO: email update error handling
+      }
+    } else {
+      // Do nothing, refreshCredentials function hadnles errors and directs user to fix mistakes
+    }
+  };
+
   // Combine the credentials and actual deleting of account using async flow
   const performPasswordUpdate = async () => {
     // Check that the credential confirmation was successful
@@ -453,6 +504,56 @@ const Settings = ({ user, setToast, setPage }) => {
         </form>
       </Modal>}
 
+      {showEmailModal && <Modal title="Delete provider" closeModal={() => setShowEmailModal(false)}>
+        <div className="error-container">
+          <div className="error-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" className="alert-icon alert-icon--neutral" viewBox="0 0 512 512" width="24px">
+              <path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" fill="#D12323" stroke="#D12323" strokeMiterlimit="10" strokeWidth="32"/>
+              <path d="M250.26 166.05L256 288l5.73-121.95a5.74 5.74 0 00-5.79-6h0a5.74 5.74 0 00-5.68 6z" fill="#D12323" stroke="#ffffff" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32"/>
+              <path d="M256 367.91a20 20 0 1120-20 20 20 0 01-20 20z" fill="#ffffff"/>
+            </svg>
+          </div>
+          <div className="error-text">
+            This action is permanent and cannot be undone.
+          </div>
+        </div>
+        <div className="provider-display">
+          <div className="provider-label">Please enter your password to continue</div>
+          {/* <div className="provider-summary">{`${selectedProvider.fullName} (${selectedProvider.location})`}</div> */}
+        </div>
+        <form className='Login__form' noValidate onSubmit={(event) => {
+          event.preventDefault();
+          // Ensure form validation passes
+          if (isModalFormValid()) {
+            // Refresh credentials
+            performEmailUpdate();
+              
+          }
+          
+        }}>
+
+          <FormField 
+            id="current-password"
+            fieldType="password" 
+            name="password"
+            label="Password" 
+            value={password} 
+            onChange={(event) => setPassword(event.target.value)} 
+            className="auth-field form-field"
+            alert={passwordAlert}
+            required
+            describedBy={Object.keys(passwordAlert).length === 0 ? null : 'password-alert'}
+            autocomplete="current-password"
+          />
+
+
+        <div className="Modal__buttons">
+          <button className="cancel-btn Modal__btn" onClick={() => setShowEmailModal(false)}>Cancel</button>
+          <button className="delete-btn Modal__btn">Update</button>
+        </div>
+        </form>
+      </Modal>}
+
       <h2 className="Home__title">Settings</h2>
       {/* <div className="Home__welcome">Select an option to get started</div> */}
 
@@ -467,12 +568,23 @@ const Settings = ({ user, setToast, setPage }) => {
               label="Display name" 
               value={displayName} 
               onChange={(event) => setDisplayName(event.target.value)} 
-              // alert={alerts ? alerts.fullName : providerAlerts.fullName}
-              // required
-              // describedBy={Object.keys(alerts ? alerts.fullName : providerAlerts.fullName).length === 0 ? null : 'fullName-alert'}
             />  
             <input type="text" className="hidden" />
             <button type="button" className="settings-btn settings-btn--update" onClick={updateName}>Update display name</button>
+          </form>
+
+          <form className="email-form">
+            <div className="form-title">Change email</div>
+            <FormField 
+              fieldType="text" 
+              name="email"
+              label="Email address" 
+              value={currentEmail} 
+              onChange={(event) => setCurrentEmail(event.target.value)} 
+            />  
+      
+            <input type="text" className="hidden" />
+            <button type="button" className="settings-btn settings-btn--update" onClick={() => setShowEmailModal(true)}>Update email</button>
           </form>
           
           
