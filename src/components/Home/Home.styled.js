@@ -190,6 +190,15 @@ const StyledHome = styled.div`
     /* text-align: center;
     align-items: center; */
 
+    .Modal {
+      .Modal__content {
+        width: 90%;
+        text-align: left;
+        max-width: 500px;
+      }
+    }
+    
+
     .Home__links {
       display: flex;
       flex-direction: column;
