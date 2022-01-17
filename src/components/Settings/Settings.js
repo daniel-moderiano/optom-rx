@@ -315,8 +315,6 @@ const Settings = ({ user, setToast, setPage }) => {
     try {
       // Attempt re-authentication
       await reauthenticateWithCredential(user, credential);
-      
-      setShowModal(false);
       // Clear passwords
       setPassword('');
       return true;

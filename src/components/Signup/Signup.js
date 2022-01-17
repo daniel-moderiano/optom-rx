@@ -152,9 +152,7 @@ const Signup = ({ setPage, setFirstSignIn }) => {
           event.preventDefault();
           // Check form validity before calling submit function
           if (isFormValid()) {
-            signup(email, password, displayName);
-            
-            setFirstSignIn(true);
+            signup(email, password, displayName, setFirstSignIn);
           }
           
         }}>
