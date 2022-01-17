@@ -401,8 +401,6 @@ const Settings = ({ user, setToast, setPage }) => {
     }
   }
 
-  
-   
   return (
     <StyledSettings className="Settings">
        {showModal && <Modal title="Delete provider" closeModal={() => setShowModal(false)}>
@@ -456,12 +454,13 @@ const Settings = ({ user, setToast, setPage }) => {
       </Modal>}
 
       <h2 className="Home__title">Settings</h2>
-      <div className="Home__welcome">Select an option to get started</div>
+      {/* <div className="Home__welcome">Select an option to get started</div> */}
 
 
       <div className="Settings-container">
         {user.emailVerified ? (<>
-          <form>
+          <form className="displayName-form">
+            <div className="form-title">Change display name</div>
             <FormField 
               fieldType="text" 
               name="displayName"
@@ -473,7 +472,7 @@ const Settings = ({ user, setToast, setPage }) => {
               // describedBy={Object.keys(alerts ? alerts.fullName : providerAlerts.fullName).length === 0 ? null : 'fullName-alert'}
             />  
             <input type="text" className="hidden" />
-            <button type="button" onClick={updateName}>Update display name</button>
+            <button type="button" className="settings-btn settings-btn--update" onClick={updateName}>Update display name</button>
           </form>
           
           
@@ -484,6 +483,7 @@ const Settings = ({ user, setToast, setPage }) => {
               performPasswordUpdate();
             }
           }}>
+            <div className="form-title">Change password</div>
 
             <FormField 
               fieldType="password" 
@@ -517,12 +517,16 @@ const Settings = ({ user, setToast, setPage }) => {
               required
               describedBy='confirmPassword-alert'
             />  
-            <button>Update password</button>
-            <Link to="/reset-password" className="reset-password" onClick={logout}>Forgot password?</Link>
+            <div className="changePassword-btns">
+              <button className="settings-btn settings-btn--update">Update password</button>
+              <Link to="/reset-password" className="reset-password" onClick={logout}>Forgot password?</Link>
+            </div>
           </form>
             
         <div className="delete-account">
-          <button className="delete-btn" type="button" onClick={() => setShowModal(true)}>Delete account</button>
+          <div className="form-title form-title--delete">Delete account</div>
+          <p className="warning">Once you delete your account, it is permanent. Please be sure before proceeding.</p>
+          <button className="settings-btn settings-btn--delete" type="button" onClick={() => setShowModal(true)}>Delete account</button>
         </div>
         
         </>) : (

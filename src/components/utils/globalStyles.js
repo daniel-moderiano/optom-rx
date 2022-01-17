@@ -51,6 +51,10 @@ const GlobalStyles = createGlobalStyle`
     height: 100vh;
     width: 100%;
     color: var(--text);
+
+    p {
+      margin: 0;
+    }
   }
 
   /* Autocomplete dropdown styling */
