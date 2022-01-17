@@ -5,6 +5,7 @@ import { StyledLogin } from "./Login.styled";
 import FormField from "../FormField/FormField";
 import { useState, useEffect } from "react";
 import Dots from '../utils/Dots/Dots';
+import { sendPasswordResetEmail, getAuth } from 'firebase/auth'
 
 const Login = ({ setPage }) => {
   const { error, login, isPending } = useLogin();
@@ -105,6 +106,19 @@ const Login = ({ setPage }) => {
       valid = false;
     } 
     return valid;
+  };
+
+  const resetPassword = async () => {
+    const auth = getAuth();
+
+    try {
+      await sendPasswordResetEmail(auth, email);
+      console.log('Email sent');
+    } catch (error) {
+      console.log(error.code);
+    }
+    
+
   }
 
   return (
@@ -182,6 +196,7 @@ const Login = ({ setPage }) => {
           <Link to="/signup" className="signup-link">Sign Up.</Link>
         </div>
 
+        <button className='reset-password' onClick={resetPassword}>Reset password</button>
         
        
       </div>

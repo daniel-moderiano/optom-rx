@@ -2,7 +2,7 @@ import { StyledSettings } from "./Settings.styled"
 import FormField from '../FormField/FormField'
 import { useState } from "react"
 import { useEffect } from "react";
-import { updateProfile, deleteUser, reauthenticateWithCredential, EmailAuthProvider, updatePassword } from "firebase/auth";
+import { updateProfile, deleteUser, reauthenticateWithCredential, EmailAuthProvider, updatePassword, sendEmailVerification } from "firebase/auth";
 import { collection, deleteDoc, doc, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import { useLogout } from '../../hooks/useLogout';
@@ -159,8 +159,11 @@ const Settings = ({ user, setToast, setPage }) => {
       });
     };
 
-    passwordFormValidation();
-  }, []);
+    if (user.emailVerified) {
+      passwordFormValidation();
+    }
+    
+  }, [user.emailVerified]);
 
   // Ensure form is validated before calling form submission function
   const isModalFormValid = () => {
@@ -389,7 +392,18 @@ const Settings = ({ user, setToast, setPage }) => {
       });
       return false;
     }
+  };
+
+  const resendEmailVerification = async () => {
+    try {
+      await sendEmailVerification(user);
+      console.log('Email sent');
+    } catch (error) {
+      console.log(error.code);
+    }
   }
+
+  
    
   return (
     <StyledSettings className="Settings">
@@ -448,68 +462,77 @@ const Settings = ({ user, setToast, setPage }) => {
 
 
       <div className="Settings-container">
-        <form>
-          <FormField 
-            fieldType="text" 
-            name="displayName"
-            label="Display name" 
-            value={displayName} 
-            onChange={(event) => setDisplayName(event.target.value)} 
-            // alert={alerts ? alerts.fullName : providerAlerts.fullName}
-            // required
-            // describedBy={Object.keys(alerts ? alerts.fullName : providerAlerts.fullName).length === 0 ? null : 'fullName-alert'}
-          />  
-          <input type="text" className="hidden" />
-          <button type="button" onClick={updateName}>Update display name</button>
-        </form>
-        
-        
-        <form className='password-form' noValidate onSubmit={(event) => {
-          event.preventDefault();
-          // Ensure form validation passes
-          if (isPasswordFormValid() && comparePasswords()) {
-            performPasswordUpdate();
-          }
-        }}>
-
-          <FormField 
-            fieldType="password" 
-            name="currentPassword"
-            label="Current password" 
-            value={currentPassword} 
-            onChange={(event) => setCurrentPassword(event.target.value)} 
-            alert={currentPasswordAlert}
-            required
-            describedBy='currentPassword-alert'
-          />  
-
-          <FormField 
-            fieldType="password" 
-            name="newPassword"
-            label="New password" 
-            value={newPassword} 
-            onChange={(event) => setNewPassword(event.target.value)} 
-            alert={newPasswordAlert}
-            required
-            describedBy='newPassword-alert'
-          />  
-
-          <FormField 
-            fieldType="password" 
-            name="confirmPassword"
-            label="Confirm password" 
-            value={confirmPassword} 
-            onChange={(event) => setConfirmPassword(event.target.value)} 
-            alert={confirmPasswordAlert}
-            required
-            describedBy='confirmPassword-alert'
-          />  
-          <button>Update password</button>
-        </form>
+        {user.emailVerified ? (<>
+          <form>
+            <FormField 
+              fieldType="text" 
+              name="displayName"
+              label="Display name" 
+              value={displayName} 
+              onChange={(event) => setDisplayName(event.target.value)} 
+              // alert={alerts ? alerts.fullName : providerAlerts.fullName}
+              // required
+              // describedBy={Object.keys(alerts ? alerts.fullName : providerAlerts.fullName).length === 0 ? null : 'fullName-alert'}
+            />  
+            <input type="text" className="hidden" />
+            <button type="button" onClick={updateName}>Update display name</button>
+          </form>
           
-      <div className="delete-account">
-        <button className="delete-btn" type="button" onClick={() => setShowModal(true)}>Delete account</button>
-      </div>
+          
+          <form className='password-form' noValidate onSubmit={(event) => {
+            event.preventDefault();
+            // Ensure form validation passes
+            if (isPasswordFormValid() && comparePasswords()) {
+              performPasswordUpdate();
+            }
+          }}>
+
+            <FormField 
+              fieldType="password" 
+              name="currentPassword"
+              label="Current password" 
+              value={currentPassword} 
+              onChange={(event) => setCurrentPassword(event.target.value)} 
+              alert={currentPasswordAlert}
+              required
+              describedBy='currentPassword-alert'
+            />  
+
+            <FormField 
+              fieldType="password" 
+              name="newPassword"
+              label="New password" 
+              value={newPassword} 
+              onChange={(event) => setNewPassword(event.target.value)} 
+              alert={newPasswordAlert}
+              required
+              describedBy='newPassword-alert'
+            />  
+
+            <FormField 
+              fieldType="password" 
+              name="confirmPassword"
+              label="Confirm password" 
+              value={confirmPassword} 
+              onChange={(event) => setConfirmPassword(event.target.value)} 
+              alert={confirmPasswordAlert}
+              required
+              describedBy='confirmPassword-alert'
+            />  
+            <button>Update password</button>
+          </form>
+            
+        <div className="delete-account">
+          <button className="delete-btn" type="button" onClick={() => setShowModal(true)}>Delete account</button>
+        </div>
+        
+        </>) : (
+          <div className="no-email">
+            <p>Email address must be verified to access account settings</p>
+            <p className="spam-msg">Make sure to check your spam/junk folder</p>
+            <button className="resend" onClick={resendEmailVerification}>Resend verification email</button>
+          </div>
+        )}
         
       </div>
     </StyledSettings>
