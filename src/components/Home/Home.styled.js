@@ -79,6 +79,9 @@ const StyledHome = styled.div`
   }
 
 
+  .verify-container {
+    margin-top: 1rem;
+  }
   .modal-btns {
     display: flex;
     flex-direction: column;
