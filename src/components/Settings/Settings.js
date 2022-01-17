@@ -402,7 +402,11 @@ const Settings = ({ user, setToast, setPage }) => {
         } catch (error) {
           console.log(error);
         } finally {
-          setShowVerifyModal(true);
+          // Timeout is purely to not overwhelm the user with modals flying one after the other
+          setTimeout(() => {
+            setShowVerifyModal(true);
+          }, 1000)
+          
         }
         
   
@@ -465,7 +469,7 @@ const Settings = ({ user, setToast, setPage }) => {
 
   return (
     <StyledSettings className="Settings">
-{showVerifyModal && <Modal title="Verify your email" closeModal={() => setShowVerifyModal(false)}>
+      {showVerifyModal && <Modal title="Verify your email" closeModal={() => setShowVerifyModal(false)}>
   
   <div className="verify-container">
     <p className="verify-message">An email verification link has been sent to your email address. Follow the link to verify your email and activate all features.</p>
@@ -527,7 +531,7 @@ const Settings = ({ user, setToast, setPage }) => {
       </div>
  
 
-</Modal>}
+      </Modal>}
 
        {showModal && <Modal title="Delete provider" closeModal={() => setShowModal(false)}>
         <div className="error-container">
@@ -650,13 +654,24 @@ const Settings = ({ user, setToast, setPage }) => {
 
           <form className="email-form">
             <div className="form-title">Change email</div>
-            <FormField 
-              fieldType="text" 
-              name="email"
-              label="Email address" 
-              value={currentEmail} 
-              onChange={(event) => setCurrentEmail(event.target.value)} 
-            />  
+            <div className="email-group">
+              <FormField 
+                fieldType="text" 
+                name="email"
+                label="Email address" 
+                value={currentEmail} 
+                onChange={(event) => setCurrentEmail(event.target.value)} 
+              />  
+
+              <div className="verified">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="alert-icon alert-icon--success" viewBox="0 0 512 512" width="17px">
+                  <path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" fill="none" stroke="#096600" strokeMiterlimit="10" strokeWidth="32"/>
+                  <path fill="none" stroke="#096600" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32" d="M352 176L217.6 336 160 272"/>
+                </svg>
+                <span>Verified</span>
+              </div>
+            </div>
+            
       
             <input type="text" className="hidden" />
             <button type="button" className="settings-btn settings-btn--update" onClick={() => setShowEmailModal(true)}>Update email</button>
@@ -718,14 +733,48 @@ const Settings = ({ user, setToast, setPage }) => {
         
         </>) : (
           <div className="no-email">
-            <p>Email address must be verified to access account settings</p>
-            <p className="spam-msg">Make sure to check your spam/junk folder</p>
-            <button className="resend" onClick={resendEmailVerification}>Resend verification email</button>
+            {/* <p className="no-email-desc">Please verify an email address to access all account settings, receive notifications, and reset your password</p> */}
+            {/* <p className="spam-msg">Make sure to check your spam/junk folder</p> */}
+            
+
+              <form className="email-form">
+              <div className="form-title">Change email</div>
+              <p className="no-email-desc">Please verify an email address to access all account settings, receive notifications, and reset your password</p>
+                <div className="email-group">
+                  <FormField 
+                    fieldType="text" 
+                    name="email"
+                    label="Email address" 
+                    value={currentEmail} 
+                    onChange={(event) => setCurrentEmail(event.target.value)} 
+                  />  
+                  <div className="unverified">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="alert-icon alert-icon--neutral" viewBox="0 0 512 512" width="17px">
+                      <path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" fill="none" stroke="#9a6700" strokeMiterlimit="10" strokeWidth="32"/>
+                      <path d="M250.26 166.05L256 288l5.73-121.95a5.74 5.74 0 00-5.79-6h0a5.74 5.74 0 00-5.68 6z" fill="none" stroke="#9a6700" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32"/>
+                      <path d="M256 367.91a20 20 0 1120-20 20 20 0 01-20 20z" fill="#9a6700"/>
+                    </svg>
+                    <span>Unverified</span>
+                  </div>
+                  
+                </div>
+              
+              
+                <input type="text" className="hidden" />
+                <div className="change-password-btns">
+                <button type="button" className="settings-btn settings-btn--update" onClick={() => setShowEmailModal(true)}>Update email</button>
+                <button className="resend" onClick={resendEmailVerification}>Resend verification email</button>
+                </div>
+      
+            </form>
+            <div className="delete-account">
+              <div className="form-title form-title--delete">Delete account</div>
+              <p className="warning">Once you delete your account, it is permanent. Please be sure before proceeding.</p>
+              <button className="settings-btn settings-btn--delete" type="button" onClick={() => setShowModal(true)}>Delete account</button>
+            </div>           
           </div>
+
         )}
-         <div className="delete-account">
-          <button className="delete-btn" type="button" onClick={() => setShowModal(true)}>Delete account</button>
-        </div>
       </div>
     </StyledSettings>
   )

@@ -50,6 +50,74 @@ const StyledSettings = styled.div`
     flex-direction: column;
   }
 
+  .email-form {
+
+    .no-email-desc {
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .email-group {
+      position: relative;
+      width: 26rem;
+
+      .unverified, .verified {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 0.85rem;
+        /* left: 6rem; */
+        right: 0;
+        /* font-weight: 600; */
+        color: var(--warning);
+        font-size: 0.9rem;
+
+        span {
+          margin-left: 0.2rem;
+          margin-bottom: 0.05rem;
+        }
+      }
+
+      .verified {
+        color: var(--success-text);
+      }
+    }
+
+    .resend {
+      text-align: center;
+      background-color: transparent;
+      border: none;
+      color: #48515B;
+      /* color: var(--focus); */
+      font-size: 1rem;
+      font-family: var(--font-stack-segoe);
+      /* font-weight: bold; */
+      padding: 0;
+      margin: 0 0 0 1rem;
+
+      &:hover {
+        background-color: transparent;
+        color: #1B1E22;
+        cursor: pointer;
+      }
+
+      &:focus {
+        outline: 2px solid #104362;
+        outline-offset: 1px;
+      }
+
+      &:focus:not(:focus-visible) {
+        outline: none
+      }
+
+      &:focus-visible {
+        outline: 2px solid #104362;
+        outline-offset: 1px;
+      }
+    }
+  }
+        
   .form-title--delete {
     font-weight: bold;
     color: #cc3232;
@@ -86,12 +154,14 @@ const StyledSettings = styled.div`
     margin-top: 0.5rem;
     background-color: var(--primary-color);
     color: rgb(255, 255, 255);
-    border: 1px solid var(--primary-color); 
+    /* border: 1px solid var(--primary-color);  */
+    border: none;
     text-decoration: none;
+    width: 180px;
     
     &:hover {
       background-color: var(--btn-primary-hover);
-      border: 1px solid var(--btn-primary-hover);
+      /* border: 1px solid var(--btn-primary-hover); */
     }
   }
 
@@ -101,7 +171,7 @@ const StyledSettings = styled.div`
     background-color: #cc3232;
     color: rgb(255, 255, 255);
     border: none;
-    max-width: 150px;
+    /* max-width: 150px; */
 
   }
   
@@ -142,6 +212,7 @@ const StyledSettings = styled.div`
       outline-offset: 1px;
     }
   }
+
 
   
 
@@ -293,6 +364,7 @@ const StyledSettings = styled.div`
     }
   }
   }
+
 
   .modal-btns {
     display: flex;

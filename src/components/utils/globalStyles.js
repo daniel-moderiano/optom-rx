@@ -35,6 +35,7 @@ const GlobalStyles = createGlobalStyle`
     --success: #0a7e00;
     --success-text: #096600;
     --neutral: #00477A;
+    --warning: #9a6700;
 
     /* Font stacks */
     --font-stack-segoe: 'Segoe UI', Arial, Helvetica, sans-serif;
