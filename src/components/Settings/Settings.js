@@ -17,6 +17,9 @@ const Settings = ({ user, setToast, setPage }) => {
   const [newPasswordAlert, setNewPasswordAlert] = useState({});
   const [newPassword, setNewPassword] = useState('');
 
+  const [modalPasswordAlert, setModalPasswordAlert] = useState({});
+  const [modalPassword, setModalPassword] = useState('');
+
   const [confirmPasswordAlert, setConfirmPasswordAlert] = useState({});
   const [confirmPassword, setConfirmPassword] = useState('');
 
@@ -29,8 +32,8 @@ const Settings = ({ user, setToast, setPage }) => {
   const [deletePending, setDeletePending] = useState(false);
   const [deleteError, setDeleteError] = useState(null);
 
-  const [currentEmail, setCurrentEmail] = useState('');
-  const [emailAlert, setEmailAlert] = useState({});
+  const [newEmail, setNewEmail] = useState('');
+  const [newEmailAlert, setNewEmailAlert] = useState({});
   
   const [showVerifyModal, setShowVerifyModal] = useState(false)
 
@@ -55,10 +58,13 @@ const Settings = ({ user, setToast, setPage }) => {
 
   // Clear any lingering data and alerts when modal is open/closed
   useEffect(() => {
-    setEmailAlert({});
+    setNewEmailAlert({});
     setPasswordAlert({});
     setPassword('');
-  }, [showModal])
+    setModalPassword('');
+    setModalPasswordAlert('')
+    setNewEmail('')
+  }, [showModal, showEmailModal])
 
 
   const updateName = async () => {
@@ -254,6 +260,66 @@ const Settings = ({ user, setToast, setPage }) => {
     return valid;
   };
 
+  // Ensure form is validated before calling form submission function
+  const isEmailFormValid = () => {
+    let valid = true;
+    let inputFocused = false;
+
+    const modalPasswordInput = document.querySelector('input[name="modalPassword"]');
+    const newEmailInput = document.querySelector('input[name="newEmail"]');
+    
+
+    
+
+     // Check for blank field
+     if (newEmailInput.value.trim().length === 0) {
+      if (!inputFocused) {
+        newEmailInput.focus();
+        inputFocused = true;
+      }
+      setNewEmailAlert({
+          message: "Please enter an email.",
+          type: 'error',
+        }
+      );
+      newEmailInput.classList.add('error');
+      valid = false;
+    } 
+
+    // Check for no change in email
+    if (newEmailInput.value === email) {
+      if (!inputFocused) {
+        newEmailInput.focus();
+        inputFocused = true;
+      }
+      setNewEmailAlert({
+          message: "New email address must be different from the current email address",
+          type: 'error',
+        }
+      );
+      newEmailInput.classList.add('error');
+      valid = false;
+    } 
+
+    // Check for blank field
+    if (modalPasswordInput.value.trim().length === 0) {
+      if (!inputFocused) {
+        modalPasswordInput.focus();
+        inputFocused = true;
+      }
+      setModalPasswordAlert({
+          message: "Please enter a password.",
+          type: 'error',
+        }
+      );
+      modalPasswordInput.classList.add('error');
+      valid = false;
+    } 
+
+    
+    return valid;
+  };
+
   const errorHandling = (errorCode, alertSetFunc) => {
     switch (errorCode) {
       case 'auth/wrong-password':
@@ -364,7 +430,7 @@ const Settings = ({ user, setToast, setPage }) => {
   // This function is/returns a Promise
   const refreshCredentialsForEmail = async () => {
     // Must be called once the user has entered their password, else it will just error
-    const credential = EmailAuthProvider.credential(email, password);
+    const credential = EmailAuthProvider.credential(email, modalPassword);
     console.log(credential);
 
     try {
@@ -387,7 +453,7 @@ const Settings = ({ user, setToast, setPage }) => {
     // Act based on the result
     if (confirmed) {
       try {
-        await updateEmail(user, currentEmail);
+        await updateEmail(user, newEmail);
         setShowEmailModal(false)
 
         setToast((prevData) => ({
@@ -603,7 +669,7 @@ const Settings = ({ user, setToast, setPage }) => {
         <form className='Login__form' noValidate onSubmit={(event) => {
           event.preventDefault();
           // Ensure form validation passes
-          if (isModalFormValid()) {
+          if (isEmailFormValid()) {
             // Refresh credentials
             performEmailUpdate();
               
@@ -612,23 +678,25 @@ const Settings = ({ user, setToast, setPage }) => {
         }}>
           <FormField 
             fieldType="text" 
-            name="email"
+            name="newEmail"
             label="New email address" 
-            value={currentEmail} 
-            onChange={(event) => setCurrentEmail(event.target.value)} 
+            value={newEmail} 
+            onChange={(event) => setNewEmail(event.target.value)} 
+            alert={newEmailAlert}
+            required
+            describedBy={Object.keys(newEmailAlert).length === 0 ? null : 'newEmail-alert'}
           />  
 
           <FormField 
-            id="current-password"
             fieldType="password" 
-            name="password"
+            name="modalPassword"
             label="Password" 
-            value={password} 
-            onChange={(event) => setPassword(event.target.value)} 
+            value={modalPassword} 
+            onChange={(event) => setModalPassword(event.target.value)} 
             className="auth-field form-field"
-            alert={passwordAlert}
+            alert={modalPasswordAlert}
             required
-            describedBy={Object.keys(passwordAlert).length === 0 ? null : 'password-alert'}
+            describedBy={Object.keys(modalPasswordAlert).length === 0 ? null : 'modalPassword-alert'}
             autocomplete="current-password"
           />
 
