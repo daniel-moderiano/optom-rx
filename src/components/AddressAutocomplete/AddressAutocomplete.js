@@ -8,6 +8,14 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider, alerts, se
   // Use this to control whether the additional address fields should be expanded or not
   const [expand, setExpand] = useState(false);
 
+  // Ensure the address field is expanded if the user attempts to submit by entering only street address and leaving other fields untouched
+  useEffect(() => {
+    console.log();
+    if (Object.keys(alerts.suburb).length !== 0 || Object.keys(alerts.state).length !== 0 || Object.keys(alerts.postcode).length !== 0) {
+      setExpand(true);
+    }
+  }, [alerts.suburb, alerts.state, alerts.postcode])
+
   const fillAddress = useCallback((placeDetails) => {
     let address = {
       streetAddress: '',
