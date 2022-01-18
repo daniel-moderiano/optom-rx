@@ -17,15 +17,15 @@ const StyledLogin = styled.div`
     /* margin-top: -4.7rem; */
     background-color: #FFFFFF;
     box-shadow: 0 1.6px 3.6px 0 rgb(0 0 0 / 13%), 0 0.3px 0.9px 0 rgb(0 0 0 / 11%);
-    padding: 0.75rem 3rem 0.75rem 3rem;
+    padding: 1.5rem 3.5rem 0.85rem 3.5rem;
     width: 90%;
-    max-width: 25rem;
+    max-width: 30rem;
     display: flex;
     align-items: flex-end;
     flex-direction: column;
-    /* border: 1px solid #d0d7de;
-    border-radius: 6px;
-    box-shadow: var(--small-shadow); */
+    /* border: 1px solid #d0d7de; */
+    /* border-radius: 6px; */
+    /* box-shadow: var(--small-shadow); */
   }
 
   .Login__title {
@@ -44,7 +44,7 @@ const StyledLogin = styled.div`
     align-items: center;
     justify-content: center;
     height: 2.6rem;
-
+    margin-top: 2rem;
 
   } 
 
@@ -96,14 +96,14 @@ const StyledLogin = styled.div`
  
 
   .signup-option {
-    margin-bottom: 0.5rem;
-    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    margin-top: 1.5rem;
     padding-top: 1.25rem;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
-    border-top: 1px solid #D1D6DB;
+    /* border-top: 1px solid #D1D6DB; */
 
     .signup-msg {
       color: #5A6572;
@@ -155,50 +155,13 @@ const StyledLogin = styled.div`
     }
   }
 
-
   .password-group {
     width: 100%;
     position: relative;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     flex-direction: column;
-    justify-content: flex-start;
   }
-
-  /* .toggle-password {
-    width: auto;
-    position: absolute;
-    right: 0;
-    top: 0.85rem;
-    background-color: transparent;
-    border: none;
-    color: #48515B;
-    font-size: 0.9rem;
-    padding: 0;
-    margin: 0;
-    z-index: 2;
-    place-self: flex-end;
-    text-decoration: none;
-
-    &:hover {
-      background-color: transparent;
-      color: #1B1E22;
-    }
-
-    &:focus {
-      outline: 2px solid #104362;
-      outline-offset: 1px;
-    }
-
-    &:focus:not(:focus-visible) {
-      outline: none
-    }
-
-    &:focus-visible {
-      outline: 2px solid #104362;
-      outline-offset: 1px;
-    }
-  } */
 
   /* Eye icon */
   .toggle-password {
@@ -246,8 +209,8 @@ const StyledLogin = styled.div`
   }
 
   .reset-password {
-    width: 100%;
-    text-align: right;
+ 
+    text-align: center;
     background-color: transparent;
     border: none;
     color: #48515B;
@@ -257,6 +220,8 @@ const StyledLogin = styled.div`
     padding: 0;
     margin: 0;
     text-decoration: none;
+
+  
 
     &:hover {
       background-color: transparent;
@@ -326,10 +291,12 @@ const StyledLogin = styled.div`
       }
     }
 
+    .reset-password {
+      width: 90%;
+    }
+
   }
 
-  .reset-password {
-    width: 90%;
-  }
+
 `
 export { StyledLogin }

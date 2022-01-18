@@ -167,6 +167,8 @@ const Login = ({ setPage }) => {
               )}
             </button>
 
+            
+            
           </div>
          
 
@@ -179,8 +181,7 @@ const Login = ({ setPage }) => {
             <span className="alert alert--error">{error}</span>
           </div>}
 
-          
-
+        
           <button className="login-btn">
             
             {isPending ? (
@@ -189,12 +190,12 @@ const Login = ({ setPage }) => {
             'Log in'
             )} 
           </button>
-
+          <Link to="/reset-password" className="reset-password">Forgot password?</Link>
         </form>
-        <Link to="/reset-password" className="reset-password">Forgot password?</Link>
+       
 
         
-
+        
         <div className="signup-option">
           <span className="signup-msg">Don't have an account?</span>
           <Link to="/signup" className="signup-link">Sign Up.</Link>
