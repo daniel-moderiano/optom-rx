@@ -59,7 +59,7 @@ const StyledLogin = styled.div`
       background-color: var(--primary-color);
       color: rgb(255, 255, 255);
       border: none;
-      margin: 2rem 0 0.5rem 0;
+      margin: 1.7rem 0 0.5rem 0;
 
       &:active {
         transform: scale(0.98);

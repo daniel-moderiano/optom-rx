@@ -1,9 +1,10 @@
 import styled from "styled-components";
 
 const StyledFormField = styled.div`
-  margin: 0.85rem 0;
+  margin: 0.75rem 0;
   position: relative;
   width: 26rem;
+  height: 84px;
 
   input {
     margin-top: 0.5rem;
@@ -129,28 +130,36 @@ const StyledFormField = styled.div`
   .alert-container {
     display: flex;
     align-items: center;
-    margin-top: 0.3rem;
+    margin-top: 0.2rem;
     width: 24rem;
+    height: 15px;
+    font-size: 0.75rem;
 
     .alert--error {
       color: var(--error);
-      font-size: 0.8rem;
+      /* margin-bottom: 0.05rem; */
     }
 
     .alert--success {
       color: var(--success-text);
-      font-size: 0.8rem;
+      /* font-size: 0.8rem; */
       margin-bottom: 0.05rem;
     }
 
     .alert--neutral {
       color: var(--neutral);
-      font-size: 0.8rem;
+      /* font-size: 0.8rem; */
       margin-bottom: 0.1rem;
     }
 
+    .alert--helper {
+      /* font-size: 0.8rem; */
+      color: #5A6572;
+      width: 100%;
+    }
+
     .alert-icon {
-      margin-right: 0.2rem;
+      margin-right: 0.25rem;
       flex-shrink: 0;
     }
   }

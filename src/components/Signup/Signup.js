@@ -13,8 +13,14 @@ const Signup = ({ setPage, setFirstSignIn }) => {
   const [displayName, setDisplayName] = useState('');
 
   const [emailAlert, setEmailAlert] = useState({});
-  const [passwordAlert, setPasswordAlert] = useState({});
-  const [displayNameAlert, setDisplayNameAlert] = useState({});
+  const [passwordAlert, setPasswordAlert] = useState({
+    type: 'helper',
+    message: 'Password must contain at least 6 characters.'
+  });
+  const [displayNameAlert, setDisplayNameAlert] = useState({
+    type: 'helper',
+    message: 'This name will be visible only to you when logged in.'
+  });
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -185,14 +191,13 @@ const Signup = ({ setPage, setFirstSignIn }) => {
               alert={passwordAlert}
               // describedBy="password-desc"
               required
-              describedBy={Object.keys(passwordAlert).length === 0 ? null : 'password-alert'}
+              describedBy={Object.keys(passwordAlert).length === 0 ? null : 'new-password-alert'}
               autocomplete="new-password"
             />
             <button className="toggle-password" type="button" aria-label={`${showPassword ? 'Show password as plain text. Warning: this will display your password on the screen.' : 'Hide password.'}`} onClick={() => setShowPassword((prevState) => (!prevState))}>{`${showPassword ? 'Hide password' : 'Show password'}`}</button>
-            <span id="password-desc" className="displayName-msg">Password must contain at least 6 characters</span>
           </div>
 
-          <div className="displayName-group">
+
             <FormField 
               fieldType="text" 
               name="displayName"
@@ -205,8 +210,7 @@ const Signup = ({ setPage, setFirstSignIn }) => {
               describedBy={Object.keys(displayNameAlert).length === 0 ? null : 'displayName-alert'}
               required
             />
-            <span id="display-desc" className="displayName-msg">This name will be visible only to you when logged in</span>
-          </div>
+
 
           {error && <div className="error-container">
             <svg xmlns="http://www.w3.org/2000/svg" className="alert-icon alert-icon--error" viewBox="0 0 512 512" width="16px">

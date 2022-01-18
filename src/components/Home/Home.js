@@ -5,6 +5,7 @@ import Favourites from '../Favourites/Favourites';
 import { useEffect, useState } from 'react';
 import { sendEmailVerification } from 'firebase/auth';
 import Modal from '../utils/Modal/Modal';
+import Button from '../utils/Button/Button';
 
 const Home = ({ setToast, setPage, firstSignIn, setFirstSignIn }) => {
   const { user } =  useAuthContext();
