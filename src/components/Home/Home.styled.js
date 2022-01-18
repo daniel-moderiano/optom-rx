@@ -70,7 +70,7 @@ const StyledHome = styled.div`
     
     .Home__link--prescribers:hover {
       background-color: var(--btn-positive-hover);
-      color: var(--btn-positive-hover-text);
+      /* color: var(--btn-positive-hover-text); */
     }
   }
 
@@ -89,35 +89,9 @@ const StyledHome = styled.div`
     justify-content: center;
   }
 
-  .ok-btn {
-    box-sizing: border-box;
-    font-size: 1rem;
-    font-family: var(--font-stack-segoe);
-    box-sizing: border-box;
-    cursor: pointer;
-    padding: 5px 16px 6px 16px;
-    border-radius: 2px;
-    text-decoration: none;
-    /* min-width: 80px; */
-    background-color: #fff;
-    color: #0b4740;
-    border: 1px solid #0b4740;
-    margin-bottom: 1rem;
-
-    &:hover {
-      background-color: var(--btn-positive-hover);
-      color: var(--btn-positive-hover-text);
-    }
-    
-
-    &:active {
-      transform: scale(0.98);
-    }
-
-    &:focus {
-      outline: 2px solid #104362;
-      outline-offset: 2px;
-    }
+  .button {
+    margin-bottom: 0.5rem;
+    margin-top: 0.25rem;
   }
 
   .resend {
@@ -179,6 +153,7 @@ const StyledHome = styled.div`
     }
   }
 
+ 
   /* Landscape phone to portrait tablet */
   @media (max-width: 768px) { 
     padding: 3rem 3rem;

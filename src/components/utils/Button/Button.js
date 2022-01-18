@@ -1,9 +1,9 @@
 import { StyledButton } from "./Button.styled"
 
-const Button = ({ text, type }) => {
+const Button = ({ children, type, handleClick }) => {
   return (
-    <StyledButton className={`button--${type} button`}>
-      {text}
+    <StyledButton className={`button--${type} button`} onClick={handleClick}>
+      {children}
     </StyledButton>
   )
 };

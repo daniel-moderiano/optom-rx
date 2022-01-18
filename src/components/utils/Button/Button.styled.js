@@ -31,12 +31,42 @@ const StyledButton = styled.button`
       color: #21252A;
     }
   }
+
+  &.button--delete {
+    background-color: #cc3232;
+    color: rgb(255, 255, 255);
+
+    &:hover {
+      background-color: var(--btn-negative-hover-text);
+    }
+  }
+
+  &.button--ghost {
+    background-color: #fff;
+    color: #0b4740;
+    border: 1px solid #0b4740;
+
+    &:hover {
+      background-color: var(--btn-positive-hover);
+      /* color: var(--btn-positive-hover-text); */
+      color: #0b4740;
+    }
+  }
   
   &:active {
     transform: scale(0.98);
   }
 
   &:focus {
+    outline: 2px solid #104362;
+    outline-offset: 1px;
+  }
+
+  &:focus:not(:focus-visible) {
+    outline: none
+  }
+
+  &:focus-visible {
     outline: 2px solid #104362;
     outline-offset: 2px;
   }

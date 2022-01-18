@@ -8,6 +8,7 @@ import { db } from "../../firebase/config";
 import { useLogout } from '../../hooks/useLogout';
 import Modal from "../utils/Modal/Modal";
 import { Link } from "react-router-dom";
+import Button from "../utils/Button/Button";
 
 const Settings = ({ user, setToast, setPage }) => {
   const { logout } = useLogout();
@@ -35,7 +36,7 @@ const Settings = ({ user, setToast, setPage }) => {
   const [newEmail, setNewEmail] = useState('');
   const [newEmailAlert, setNewEmailAlert] = useState({});
   
-  const [showVerifyModal, setShowVerifyModal] = useState(false)
+  const [showVerifyModal, setShowVerifyModal] = useState(true)
 
   const [password, setPassword] = useState('');
 
@@ -592,8 +593,7 @@ const Settings = ({ user, setToast, setPage }) => {
   
 
       <div className="modal-btns">
-        {/* <button type="button" className="ok-btn" onClick={() => setShowModal(false)}>OK</button> */}
-        <button type="button" className="resend" onClick={resendEmailVerification}>Didn't get the mail? Send it again.</button>
+        <Button type="ghost" handleClick={() => setShowVerifyModal(false)}>Continue to app</Button>
       </div>
  
 
@@ -709,7 +709,7 @@ const Settings = ({ user, setToast, setPage }) => {
         </form>
       </Modal>}
 
-      <h2 className="Home__title">Getting Started</h2>
+      <h2 className="Home__title">Settings</h2>
       {/* <div className="Home__welcome">Select an option to get started</div> */}
 
 

@@ -126,7 +126,8 @@ const Home = ({ setToast, setPage, firstSignIn, setFirstSignIn }) => {
 
       <div className="modal-btns">
         {/* <button type="button" className="ok-btn" onClick={() => setShowModal(false)}>OK</button> */}
-        <button type="button" className="ok-btn" onClick={() => setShowModal(false)}>OK</button>
+        {/* <button type="button" className="ok-btn" onClick={() => setShowModal(false)}>Continue to app</button> */}
+        <Button type="ghost" handleClick={() => setShowModal(false)}>Continue to app</Button>
       </div>
  
 
