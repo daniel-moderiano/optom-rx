@@ -19,9 +19,12 @@ const RxTemplate = ({ data, setToast, setPage }) => {
   const [isPending, setIsPending] = useState(false)
   const [error, setError] = useState(null);
 
-  // State is null by default, so checking for it's existence alone will ensure this is a valid link containing data vs a simple nav link
+  // State is null by default, so checking for it's existence alone will ensure this is a valid link containing data vs a simple nav link. 
+  // Instead, simply check if patient data exists. It will only ever exist for valid data
   let { state } = useLocation();
   let navigate = useNavigate();
+
+
 
   const { user } = useAuthContext();
 
@@ -142,13 +145,16 @@ const RxTemplate = ({ data, setToast, setPage }) => {
   return (
     <StyledRxTemplate className="RxTemplate">
       <h2 className="RxTemplate__title">Review your prescription</h2>
-      <div className="ui-description">
-      <div className="ui-info ui-date">{formatDate()}</div>
+      {/* <div className="ui-description">
+        <div className="ui-info ui-date">{formatDate()}</div>
         <div className="ui-info ui-scriptNo">Script No: {miscData.scriptID}</div>
-                
-      </div>
+      </div> */}
       {/* If the template is rendered without a full set of data, many functions will fail. Hence this is rendered conditionally */}
-      {state ? <>
+      {Object.keys(patientData).length > 0 ? <>
+        <div className="ui-description">
+          <div className="ui-info ui-date">{formatDate()}</div>
+          <div className="ui-info ui-scriptNo">Script No: {miscData.scriptID}</div>
+        </div>
         <div data-testid="ui" className="ui-container">
           <section className="ui-provider">
             <h4 className="ui__title">Provider</h4>
