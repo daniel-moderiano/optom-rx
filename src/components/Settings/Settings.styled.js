@@ -50,26 +50,32 @@ const StyledSettings = styled.div`
     flex-direction: column;
   }
 
-  .email-form {
+  .change-email {
+    padding: 1.5rem 0 2rem 0;
 
     .no-email-desc {
       font-size: 0.9rem;
       margin-bottom: 1rem;
     }
 
+    .current-email {
+      font-weight: bolder;
+      text-size-adjust: 100%;
+      margin-right: 2rem;
+      margin-bottom: 0.3rem;
+    }
+
     .email-group {
-      position: relative;
-      width: 26rem;
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+
+      
 
       .unverified, .verified {
         display: flex;
         align-items: center;
         justify-content: center;
-        position: absolute;
-        top: 0.85rem;
-        /* left: 6rem; */
-        right: 0;
-        /* font-weight: 600; */
         color: var(--warning);
         font-size: 0.9rem;
 
@@ -90,7 +96,7 @@ const StyledSettings = styled.div`
       border: none;
       color: #48515B;
       /* color: var(--focus); */
-      font-size: 1rem;
+      font-size: 0.9rem;
       font-family: var(--font-stack-segoe);
       /* font-weight: bold; */
       padding: 0;
@@ -419,38 +425,38 @@ const StyledSettings = styled.div`
     justify-content: center;
 
     .resend {
-    width: 100%;
-    text-align: center;
-    background-color: transparent;
-    border: none;
-    color: #48515B;
-    /* color: var(--focus); */
-    font-size: 0.9rem;
-    font-family: var(--font-stack-segoe);
-    /* font-weight: bold; */
-    padding: 0;
-    margin: 0;
-
-    &:hover {
+      width: 100%;
+      text-align: center;
       background-color: transparent;
-      color: #1B1E22;
-      cursor: pointer;
-    }
+      border: none;
+      color: #48515B;
+      /* color: var(--focus); */
+      font-size: 0.9rem;
+      font-family: var(--font-stack-segoe);
+      /* font-weight: bold; */
+      padding: 0;
+      margin: 0;
 
-    &:focus {
-      outline: 2px solid #104362;
-      outline-offset: 1px;
-    }
+      &:hover {
+        background-color: transparent;
+        color: #1B1E22;
+        cursor: pointer;
+      }
 
-    &:focus:not(:focus-visible) {
-      outline: none
-    }
+      &:focus {
+        outline: 2px solid #104362;
+        outline-offset: 1px;
+      }
 
-    &:focus-visible {
-      outline: 2px solid #104362;
-      outline-offset: 1px;
+      &:focus:not(:focus-visible) {
+        outline: none
+      }
+
+      &:focus-visible {
+        outline: 2px solid #104362;
+        outline-offset: 1px;
+      }
     }
-  }
   }
 
   

@@ -45,7 +45,7 @@ const Settings = ({ user, setToast, setPage }) => {
 
   useEffect(() => {
     setDisplayName(user.displayName);
-    setCurrentEmail(email);
+    // setCurrentEmail(email);
   }, [user, email]);
 
   // Adjust current page for accessibility and styling
@@ -597,8 +597,8 @@ const Settings = ({ user, setToast, setPage }) => {
           </div>
         </div>
         <div className="update-display">
-          <div className="update-label">New email address:</div>
-          <div className="update-summary">{currentEmail}</div>
+          <div className="update-label">Current email address:</div>
+          <div className="update-summary">{email}</div>
         </div>
         <form className='Login__form' noValidate onSubmit={(event) => {
           event.preventDefault();
@@ -610,6 +610,13 @@ const Settings = ({ user, setToast, setPage }) => {
           }
           
         }}>
+          <FormField 
+            fieldType="text" 
+            name="email"
+            label="New email address" 
+            value={currentEmail} 
+            onChange={(event) => setCurrentEmail(event.target.value)} 
+          />  
 
           <FormField 
             id="current-password"
@@ -633,7 +640,7 @@ const Settings = ({ user, setToast, setPage }) => {
         </form>
       </Modal>}
 
-      <h2 className="Home__title">Settings</h2>
+      <h2 className="Home__title">Getting Started</h2>
       {/* <div className="Home__welcome">Select an option to get started</div> */}
 
 
@@ -737,36 +744,38 @@ const Settings = ({ user, setToast, setPage }) => {
             {/* <p className="spam-msg">Make sure to check your spam/junk folder</p> */}
             
 
-              <form className="email-form">
-              <div className="form-title">Change email</div>
-              <p className="no-email-desc">Please verify an email address to access all account settings, receive notifications, and reset your password</p>
-                <div className="email-group">
-                  <FormField 
-                    fieldType="text" 
-                    name="email"
-                    label="Email address" 
-                    value={currentEmail} 
-                    onChange={(event) => setCurrentEmail(event.target.value)} 
-                  />  
-                  <div className="unverified">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="alert-icon alert-icon--neutral" viewBox="0 0 512 512" width="17px">
-                      <path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" fill="none" stroke="#9a6700" strokeMiterlimit="10" strokeWidth="32"/>
-                      <path d="M250.26 166.05L256 288l5.73-121.95a5.74 5.74 0 00-5.79-6h0a5.74 5.74 0 00-5.68 6z" fill="none" stroke="#9a6700" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32"/>
-                      <path d="M256 367.91a20 20 0 1120-20 20 20 0 01-20 20z" fill="#9a6700"/>
-                    </svg>
-                    <span>Unverified</span>
-                  </div>
+              <div className="change-email">
+                <div className="form-title">Change email</div>
+                <p className="no-email-desc">Please verify your email address to access all account settings, receive notifications, and reset your password</p>
+           
+                    <div className="current-email">{email}</div>
+            
+                    
+              
+
+                  <div className="email-group">
                   
-                </div>
+                  
+                  <div className="unverified">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="alert-icon alert-icon--neutral" viewBox="0 0 512 512" width="17px">
+                        <path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" fill="none" stroke="#9a6700" strokeMiterlimit="10" strokeWidth="32"/>
+                        <path d="M250.26 166.05L256 288l5.73-121.95a5.74 5.74 0 00-5.79-6h0a5.74 5.74 0 00-5.68 6z" fill="none" stroke="#9a6700" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32"/>
+                        <path d="M256 367.91a20 20 0 1120-20 20 20 0 01-20 20z" fill="#9a6700"/>
+                      </svg>
+                      <span>Unverified</span>
+                    </div>
+                    <button className="resend" onClick={resendEmailVerification}>Resend verification email</button>
+                  </div>
+                
+                  <input type="text" className="hidden" />
+                  <div className="changePassword-btns">
+                  <button type="button" className="settings-btn settings-btn--update" onClick={() => setShowEmailModal(true)}>Update email</button>
+                  {/* <button className="resend" onClick={resendEmailVerification}>Resend verification email</button> */}
+                  </div>
+              </div>
               
-              
-                <input type="text" className="hidden" />
-                <div className="changePassword-btns">
-                <button type="button" className="settings-btn settings-btn--update" onClick={() => setShowEmailModal(true)}>Update email</button>
-                <button className="resend" onClick={resendEmailVerification}>Resend verification email</button>
-                </div>
       
-            </form>
+        
             <div className="delete-account">
               <div className="form-title form-title--delete">Delete account</div>
               <p className="warning">Once you delete your account, it is permanent. Please be sure before proceeding.</p>

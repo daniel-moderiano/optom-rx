@@ -13,14 +13,46 @@
   src: local('Myriad Pro Regular'), url(./assets/myriad-pro/MYRIADPRO-REGULAR.woff) format('woff');
 }
 
+/*
+Explicitly define a Segoe UI font-family so that we can assign Segoe UI 
+Semilight to an appropriate font-weight.
+*/
 @font-face {
-  font-family: 'Segoe UI';
-  src: local('Segoe UI'), url(./assets/SEGOEUI.TTF) format('truetype');
+  font-family: "Segoe UI";
+  font-weight: 200;
+  src: local("Segoe UI Light");
 }
-
 @font-face {
-  font-family: 'Segoe UI Semibold';
-  src: local('Segeo Semibold'), url(./assets/SegoeUI-SemiBold.woff) format('woff');
+  font-family: "Segoe UI";
+  font-weight: 300;
+  src: local("Segoe UI Semilight");
+}
+@font-face {
+  font-family: "Segoe UI";
+  font-weight: 400;
+  src: local("Segoe UI");
+}
+@font-face {
+  font-family: "Segoe UI";
+  font-weight: 600;
+  src: local("Segoe UI Semibold");
+}
+@font-face {
+  font-family: "Segoe UI";
+  font-weight: 700;
+  src: local("Segoe UI Bold");
+}
+@font-face {
+  font-family: "Segoe UI";
+  font-style: italic;
+  font-weight: 400;
+  src: local("Segoe UI Italic");
+}
+@font-face {
+  font-family: "Segoe UI";
+  font-style: italic;
+  font-weight: 700;
+  src: local("Segoe UI Bold Italic");
 }
 
 html, body, #root, #root>div {
