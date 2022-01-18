@@ -1,0 +1,45 @@
+import styled from "styled-components";
+
+const StyledButton = styled.button`
+  box-sizing: border-box;
+  font-size: 1rem;
+  font-family: var(--font-stack-segoe);
+  box-sizing: border-box;
+  cursor: pointer;
+  padding: 0.45rem 16px 10px 16px;
+  border-radius: 2px;
+  text-decoration: none;
+  min-width: 80px;
+  
+  border: 1px solid transparent;
+
+  &.button--primary {
+    background-color: var(--primary-color);
+    color: rgb(255, 255, 255);
+
+    &:hover {
+      background-color: var(--btn-primary-hover);
+    }
+  }
+
+  &.button--secondary {
+    background-color: var(--btn-secondary);
+    color: var(--btn-secondary-text);
+
+    &:hover {
+      background-color: var(--btn-secondary-hover);
+      color: #21252A;
+    }
+  }
+  
+  &:active {
+    transform: scale(0.98);
+  }
+
+  &:focus {
+    outline: 2px solid #104362;
+    outline-offset: 2px;
+  }
+`
+
+export { StyledButton }
