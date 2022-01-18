@@ -125,7 +125,7 @@ const Home = ({ setToast, setPage, firstSignIn, setFirstSignIn }) => {
 
       <div className="modal-btns">
         {/* <button type="button" className="ok-btn" onClick={() => setShowModal(false)}>OK</button> */}
-        <button type="button" className="resend" onClick={resendEmailVerification}>Didn't get the mail? Send it again.</button>
+        <button type="button" className="ok-btn" onClick={() => setShowModal(false)}>OK</button>
       </div>
  
 

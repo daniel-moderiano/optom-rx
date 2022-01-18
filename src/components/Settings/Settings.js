@@ -637,7 +637,7 @@ const Settings = ({ user, setToast, setPage }) => {
             className="auth-field form-field"
             alert={passwordAlert}
             required
-            describedBy={Object.keys(passwordAlert).length === 0 ? null : 'password-alert'}
+            describedBy={Object.keys(passwordAlert).length === 0 ? null : 'current-password-alert'}
             autocomplete="current-password"
           />
 
@@ -688,6 +688,7 @@ const Settings = ({ user, setToast, setPage }) => {
           />  
 
           <FormField 
+            id="current-password"
             fieldType="password" 
             name="modalPassword"
             label="Password" 
@@ -696,7 +697,7 @@ const Settings = ({ user, setToast, setPage }) => {
             className="auth-field form-field"
             alert={modalPasswordAlert}
             required
-            describedBy={Object.keys(modalPasswordAlert).length === 0 ? null : 'modalPassword-alert'}
+            describedBy={Object.keys(modalPasswordAlert).length === 0 ? null : 'current-password-alert'}
             autocomplete="current-password"
           />
 

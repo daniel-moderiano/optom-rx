@@ -126,7 +126,7 @@ const StyledSettings = styled.div`
       font-family: var(--font-stack-segoe);
       /* font-weight: bold; */
       padding: 0;
-      margin: 0 0 0 0rem;
+      margin: 0 0 0.05rem 1rem;
 
       &:hover {
         background-color: transparent;
