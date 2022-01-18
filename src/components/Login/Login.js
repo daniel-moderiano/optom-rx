@@ -5,6 +5,7 @@ import { StyledLogin } from "./Login.styled";
 import FormField from "../FormField/FormField";
 import { useState, useEffect } from "react";
 import Dots from '../utils/Dots/Dots';
+import Button from '../utils/Button/Button';
 
 const Login = ({ setPage }) => {
   const { error, login, isPending } = useLogin();
@@ -113,7 +114,7 @@ const Login = ({ setPage }) => {
     <StyledLogin className="Login">
 
 
-      <div className="login-container">
+      <div className="Login__container">
         <h2 className="Login__title">Log in</h2>
 
         <form className='Login__form' noValidate onSubmit={(event) => {
@@ -133,7 +134,7 @@ const Login = ({ setPage }) => {
             onChange={(event) => setEmail(event.target.value)} 
             className="auth-field form-field"
             alert={emailAlert}
-            // autoFocus
+            autoFocus
             required
             describedBy={Object.keys(emailAlert).length === 0 ? null : 'email-alert'}
             autocomplete="username"
@@ -156,8 +157,7 @@ const Login = ({ setPage }) => {
               describedBy={Object.keys(passwordAlert).length === 0 ? null : 'password-alert'}
               autocomplete="current-password"
             />
-            {/* <button className="toggle-password" type="button" aria-label={`${showPassword ? 'Show password as plain text. Warning: this will display your password on the screen.' : 'Hide password.'}`} onClick={() => setShowPassword((prevState) => (!prevState))}>{`${showPassword ? 'Hide password' : 'Show password'}`}</button> */}
-
+ 
             <button className="toggle-password" type="button" aria-label={`${showPassword ? 'Show password as plain text. Warning: this will display your password on the screen.' : 'Hide password.'}`} onClick={() => setShowPassword((prevState) => (!prevState))}>
               <div className="overlay"></div>
               {showPassword ? (
@@ -181,16 +181,15 @@ const Login = ({ setPage }) => {
             <span className="alert alert--error">{error}</span>
           </div>}
 
-        
-          <button className="login-btn">
-            
-            {isPending ? (
-              <Dots color="white" />
-              ) : (
-            'Log in'
-            )} 
-          </button>
-          <Link to="/reset-password" className="reset-password">Forgot password?</Link>
+          <Button classLabel="Login__btn">
+              {isPending ? (
+                <Dots color="white" />
+                ) : (
+              'Log in'
+              )}
+          </Button>
+
+          <Link to="/reset-password" className="forgot-password">Forgot password?</Link>
         </form>
        
 

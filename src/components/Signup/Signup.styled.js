@@ -1,18 +1,19 @@
 import styled from "styled-components";
 
 const StyledSignup = styled.div`
+  /* The overall page styling, NOT the login form/container itself */
   height: 100%;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   margin-bottom: 4rem;
 
-  .signup-container {
-
+  .Signup__container {
     background-color: #FFFFFF;
     box-shadow: 0 1.6px 3.6px 0 rgb(0 0 0 / 13%), 0 0.3px 0.9px 0 rgb(0 0 0 / 11%);
-    padding: 1rem 3rem;
+    padding: 1.5rem 3.7rem 0.85rem 3.7rem;
     width: 90%;
     max-width: 30rem;
     display: flex;
@@ -20,97 +21,93 @@ const StyledSignup = styled.div`
     flex-direction: column;
   }
 
-  form {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    .form-field {
-      width: 24rem;
-    }
-
-    button {
-      width: 24rem;
-      font-size: 1rem;
-      font-family: var(--font-stack-segoe);
-      box-sizing: border-box;
-      cursor: pointer;
-      padding: 8px 16px 10px 16px;
-      border-radius: 2px;
-      min-width: 80px;
-      background-color: var(--primary-color);
-      color: rgb(255, 255, 255);
-      border: none;
-      margin: 2rem 0 1rem 0;
-
-      &:active {
-        transform: scale(0.98);
-      }
-
-      &:hover {
-        background-color: var(--btn-primary-hover);
-      }
-
-      &:focus {
-        outline: 2px solid #104362;
-        outline-offset: 2px;
-      }
-    }
-  }
- 
-
   .Signup__title {
     width: 100%;
-    font-family: var(--font-stack-myriad);
+    font-family: var(--font-title);
     font-weight: 400;
     color: var(--title-color);
     font-size: 2.2rem;
     margin: 1rem 0 0.75rem 0;
   }
 
-  .signup-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 2.6rem;
-  } 
-
-  .displayName-group {
+  .Signup__form {
     width: 100%;
     display: flex;
-    align-items: center;
     flex-direction: column;
-    justify-content: flex-start;
+    align-items: center;
+
+    .form-field {
+      width: 100%;
+    }
+  
+    .password-group {
+      width: 100%;
+      position: relative;
+
+      .toggle-password {
+        min-width: 20px;
+        width: 20px;
+        position: absolute;
+        top: 3.2rem;
+        right: 1rem;
+        background-color: transparent;
+        border: none;
+        padding: 0;
+        margin: 0;
+        z-index: 2;
+
+        &:hover {
+          cursor: pointer;
+        }
+
+        .overlay {
+          width: 20px;
+          height: 20px;
+          position: absolute;
+          background-color: #fff;
+          opacity: 0.5;
+          pointer-events: none;
+        }
+      }
+    } 
+
+    /* Strictly styling the backend error container above the login button */
+    .error-container {
+      display: flex;
+      align-items: center;
+      margin-top: 1rem;
+      margin-bottom: -1rem;
+      width: 100%;
+
+      .alert-icon {
+        margin-right: 0.3rem;
+        flex-shrink: 0;
+      }
+
+      .alert--error {
+        color: var(--error);
+        font-size: 0.8rem;
+      }
+    }
+
+    .Signup__btn {
+      margin-top: 2rem;
+      margin: 1.7rem 0 0.5rem 0;
+      width: 100%;
+    } 
   }
 
-  .displayName-field, .pass-field {
-    margin-bottom: 0;
-  }
-
-  .displayName-field {
-    margin-top: 1.5rem;
-  }
-
-  .displayName-msg {
-    /* font-style: italic; */
-    font-size: 0.8rem;
-    color: #5A6572;
-    width: 100%;
-  }
 
   .login-option {
-    margin-bottom: 0.5rem;
-    margin-top: 1rem;
+    margin: 1.25rem 0 0.75rem 0;
     padding-top: 1.25rem;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
-    border-top: 1px solid #D1D6DB;
 
     .login-msg {
-      color: #5A6572;
+      color: #48515B;
       margin-right: 0.4rem;
     }
 
@@ -118,7 +115,6 @@ const StyledSignup = styled.div`
       text-decoration: none;
       color: var(--primary-color);
       font-weight: bold;
-      font-size: 1rem;
       border-radius: 2px;
 
       &:hover {
@@ -141,24 +137,6 @@ const StyledSignup = styled.div`
     }
   }
 
-  .error-container {
-    display: flex;
-    align-items: center;
-    margin-top: 1.5rem;
-    margin-bottom: -1rem;
-    width: 100%;
-
-    .alert-icon {
-      margin-right: 0.3rem;
-      flex-shrink: 0;
-    }
-
-    .alert--error {
-      color: var(--error);
-      font-size: 0.8rem;
-    }
-  }
-
   
   /* Landscape phones and down */
   @media (max-width: 550px) { 
@@ -166,37 +144,14 @@ const StyledSignup = styled.div`
       text-align: center;
     }
 
-    .signup-container {
-      
-      margin: 0;
+    .Signup__container {
       padding: 1rem 1.5rem;
       width: 100%;
-  
-      display: flex;
       align-items: center;
-      justify-content: center;
-      flex-direction: column;
     }
 
-    form {
+    .Signup__form {
       width: 90%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-
-      .displayName-group {
-        justify-content: center;
-      }
-
-      .form-field {
-        max-width: 24rem;
-        width: 100%;
-      }
-
-      button {
-        max-width: 24rem;
-        width: 100%;
-      }
     }
 
     .login-option {
@@ -208,49 +163,7 @@ const StyledSignup = styled.div`
         font-size: 0.9rem;
       }
     }
-
   }
-
-  .displayName-group {
-    position: relative;
-  }
-
-  
-
-  .toggle-password {
-    width: auto;
-    position: absolute;
-    right: 0;
-    top: 0.85rem;
-    background-color: transparent;
-    border: none;
-    color: #48515B;
-    font-size: 0.9rem;
-    /* font-weight: bold; */
-    padding: 0;
-    margin: 0;
-    z-index: 2;
-
-    &:hover {
-      background-color: transparent;
-      color: #1B1E22;
-    }
-
-    &:focus {
-      outline: 2px solid #104362;
-      outline-offset: 1px;
-    }
-
-    &:focus:not(:focus-visible) {
-      outline: none
-    }
-
-    &:focus-visible {
-      outline: 2px solid #104362;
-      outline-offset: 1px;
-    }
-  }
-
   
 `
 export { StyledSignup }

@@ -10,6 +10,10 @@ const StyledButton = styled.button`
   border-radius: 2px;
   text-decoration: none;
   min-width: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.5rem;
   
   border: 1px solid transparent;
 
