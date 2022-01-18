@@ -164,15 +164,29 @@ const StyledViewScript = styled.div`
     
     .Script__title {
       background-color: #F9FAFB;
-      padding: 0.75rem 0.5rem;
+      /* padding: 0.75rem 0.5rem; */
+      padding: 0.75rem 0.75rem;
       font-size: 1.3rem;
       font-family: var(--font-title);
-      color: var(--title-color);
+      /* color: var(--title-color);
+       */
+      color: #48515B;
       border-top: none;
+
+      /* background-color: #F9FAFB;
+      color: #48515B;
+      padding: 0.95rem 0.75rem;
+      font-size: 0.85rem;
+      line-height: 0.85rem;
+      text-align: left;
+      text-transform: uppercase;
+      letter-spacing: 0.03rem;
+      font-weight: 400;
+      border-top: none; */
     }
 
     .Script__info--section {
-      padding: 0.5rem 0.5rem;
+      padding: 0.5rem 0.75rem;
       font-size: 0.9rem;
       color: #48515B;
     }
