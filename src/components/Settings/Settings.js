@@ -36,7 +36,7 @@ const Settings = ({ user, setToast, setPage }) => {
   const [newEmail, setNewEmail] = useState('');
   const [newEmailAlert, setNewEmailAlert] = useState({});
   
-  const [showVerifyModal, setShowVerifyModal] = useState(true)
+  const [showVerifyModal, setShowVerifyModal] = useState(false)
 
   const [password, setPassword] = useState('');
 
@@ -129,6 +129,7 @@ const Settings = ({ user, setToast, setPage }) => {
     } catch (error) {
       setDeletePending(false);
       setDeleteError(error);
+      console.log(error);
       setToast((prevData) => ({
         ...prevData,
         visible: true,

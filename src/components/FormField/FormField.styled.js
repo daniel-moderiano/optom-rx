@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
 const StyledFormField = styled.div`
-  margin: 0.75rem 0;
+  margin: 0.85rem 0;
   position: relative;
   width: 26rem;
-  height: 84px;
+  /* height: 80px; */
 
   input {
     margin-top: 0.5rem;
@@ -131,13 +131,14 @@ const StyledFormField = styled.div`
     display: flex;
     align-items: center;
     margin-top: 0.2rem;
+    /* margin-bottom: -0.5rem; */
     width: 24rem;
-    height: 15px;
-    font-size: 0.75rem;
+    /* height: 16px; */
+    font-size: 0.8rem;
 
     .alert--error {
       color: var(--error);
-      /* margin-bottom: 0.05rem; */
+      
     }
 
     .alert--success {

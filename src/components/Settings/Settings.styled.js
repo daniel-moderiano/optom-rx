@@ -291,6 +291,7 @@ const StyledSettings = styled.div`
       }
     }
 
+
     .provider-display {
       padding-top: 1.25rem;
       .provider-label {
@@ -302,13 +303,23 @@ const StyledSettings = styled.div`
 
     .update-display {
       padding-top: 1.25rem;
-      margin-bottom: 1.25rem;
+      margin-bottom: 0.5rem;
       .update-label {
         font-size: 0.85rem;
         color: #5A6572;
         margin-bottom: 0.4rem;
       }
     }
+
+    form {
+      display: flex;
+      flex-direction: column;
+
+      .form-field {
+        width: 100%;
+      }
+    }
+    
 
     .Modal__buttons {
       padding-top: 2rem;
