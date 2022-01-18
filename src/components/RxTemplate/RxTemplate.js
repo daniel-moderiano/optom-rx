@@ -2,9 +2,7 @@ import { StyledRxTemplate } from "./RxTemplate.styled";
 import tickbox from '../../assets/tickbox.svg';
 import lightTick from '../../assets/light-tick.svg';
 import largeTick from '../../assets/large-tick.svg';
-import printOutline from '../../assets/print-outline.svg';
-import saveOutline from '../../assets/save-outline.svg';
-import { useLocation, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import { db } from '../../firebase/config';
 import { arrayUnion, doc, setDoc, updateDoc } from "firebase/firestore";
@@ -17,14 +15,8 @@ const RxTemplate = ({ data, setToast, setPage }) => {
   // Deconstructing for cleanliness of code and easier-to-understand operations
   const { drugData, patientData, providerData, miscData } = data;
   const [isPending, setIsPending] = useState(false)
-  const [error, setError] = useState(null);
-
-  // State is null by default, so checking for it's existence alone will ensure this is a valid link containing data vs a simple nav link. 
-  // Instead, simply check if patient data exists. It will only ever exist for valid data
-  let { state } = useLocation();
+ 
   let navigate = useNavigate();
-
-
 
   const { user } = useAuthContext();
 
@@ -103,7 +95,7 @@ const RxTemplate = ({ data, setToast, setPage }) => {
 
   const saveRx = async () => {
     setIsPending(true);
-    setError(null);
+
     try {
       // Save a script onto firebase referenced by script ID/Number, containing only non-identifiable information
       await setDoc(doc(db, 'scripts', data.miscData.scriptID), {
@@ -131,7 +123,6 @@ const RxTemplate = ({ data, setToast, setPage }) => {
 
       navigate('/');
     } catch (error) {
-      setError(error);
       setIsPending(false);
       setToast((prevData) => ({
         ...prevData,
@@ -145,11 +136,7 @@ const RxTemplate = ({ data, setToast, setPage }) => {
   return (
     <StyledRxTemplate className="RxTemplate">
       <h2 className="RxTemplate__title">Review your prescription</h2>
-      {/* <div className="ui-description">
-        <div className="ui-info ui-date">{formatDate()}</div>
-        <div className="ui-info ui-scriptNo">Script No: {miscData.scriptID}</div>
-      </div> */}
-      {/* If the template is rendered without a full set of data, many functions will fail. Hence this is rendered conditionally */}
+      {/* If the template is rendered without a full set of data, many functions will fail. Hence this is rendered conditionally. Check is performed against presence of patient data  */}
       {Object.keys(patientData).length > 0 ? <>
         <div className="ui-description">
           <div className="ui-info ui-date">{formatDate()}</div>

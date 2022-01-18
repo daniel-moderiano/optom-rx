@@ -149,7 +149,7 @@ const App = () => {
     }));
 
     // New React Router v6 syntax using navigate. State is passed in a similar way and accessed with useLocation
-    navigate('/template', { state: { validData: true } });
+    navigate('/template');
   };
 
   
