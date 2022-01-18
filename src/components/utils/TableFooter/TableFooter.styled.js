@@ -28,6 +28,7 @@ const StyledTableFooter = styled.div`
 
   .arrow-right {
     margin-left: 0.75rem;
+    border-radius: 2px;
 
     &:focus {
       outline: 2px solid #104362;
@@ -37,6 +38,7 @@ const StyledTableFooter = styled.div`
 
   .arrow-left {
     margin-right: 0.75rem;
+    border-radius: 2px;
 
     &:focus {
       outline: 2px solid #104362;
@@ -50,12 +52,21 @@ const StyledTableFooter = styled.div`
     border: none;
     padding: 3px 10px 5px 10px;
     margin: 2px;
-    border-radius: 0.5rem;
+    border-radius: 2px;
     cursor: pointer;
 
     &:focus {
       outline: 2px solid #104362;
-      outline-offset: 2px;
+      outline-offset: 1px;
+    }
+
+    &:focus:not(:focus-visible) {
+      outline: none
+    }
+
+    &:focus-visible {
+      outline: 2px solid #104362;
+      outline-offset: 1px;
     }
   }
 
