@@ -40,15 +40,26 @@ const StyledTable = styled.table`
     padding: 0.8rem 1.5rem;
     font-size: 0.9rem;
     color: #48515B;
+   
 
     a {
       /* font-weight: 600; */
       color: #0b4740;
+      border-radius: 2px;
 
       &:focus {
-        outline: 2px solid #104362;
-        outline-offset: 2px;
-      }
+          outline: 2px solid #104362;
+          outline-offset: 1px;
+        }
+
+        &:focus:not(:focus-visible) {
+          outline: none
+        }
+
+        &:focus-visible {
+          outline: 2px solid #104362;
+          outline-offset: 2px;
+        }
     }
   } 
 

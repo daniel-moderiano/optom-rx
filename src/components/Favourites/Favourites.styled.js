@@ -153,6 +153,7 @@ const StyledFavourites = styled.div`
         justify-content: center;
         background-color: transparent;
         border: none;
+        border-radius: 2px;
         font-size: 0.9rem;
         height: 1rem;
         margin-top: 0.1rem;
@@ -164,9 +165,19 @@ const StyledFavourites = styled.div`
 
         &:hover {
           cursor: pointer;
+          color: var(--btn-primary-hover);
         }
 
         &:focus {
+          outline: 2px solid #104362;
+          outline-offset: 1px;
+        }
+
+        &:focus:not(:focus-visible) {
+          outline: none
+        }
+
+        &:focus-visible {
           outline: 2px solid #104362;
           outline-offset: 2px;
         }
