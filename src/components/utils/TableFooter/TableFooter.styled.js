@@ -52,7 +52,7 @@ const StyledTableFooter = styled.div`
     border: none;
     padding: 3px 10px 5px 10px;
     margin: 2px;
-    border-radius: 2px;
+    border-radius: 8px;
     cursor: pointer;
 
     &:focus {

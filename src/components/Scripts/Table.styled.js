@@ -19,7 +19,8 @@ const StyledTable = styled.table`
     text-align: left;
     text-transform: uppercase;
     letter-spacing: 0.05rem;
-    font-family: var(--font-stack-segoe-semibold);
+    font-weight: 600;
+    /* font-family: var(--font-stack-segoe-semibold); */
     border-top: none;
     border-bottom: 1px solid #D1D6DB;
   }
@@ -112,8 +113,8 @@ const StyledTable = styled.table`
       text-align: left;
       text-transform: uppercase;
       letter-spacing: 0.05rem;
-      font-family: var(--font-stack-segoe-semibold);
       border-top: none;
+      font-weight: 600;
     }
 
     .tableRowItems:last-child {

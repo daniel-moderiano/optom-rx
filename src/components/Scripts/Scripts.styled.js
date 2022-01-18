@@ -37,7 +37,7 @@ const StyledScripts = styled.div`
       text-align: left;
       text-transform: uppercase;
       letter-spacing: 0.05rem;
-      font-family: var(--font-stack-segoe-semibold);
+      font-weight: 600;
       border-top: none;
       border-bottom: 1px solid #D1D6DB;
     }
