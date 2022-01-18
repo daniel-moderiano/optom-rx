@@ -6,6 +6,7 @@ const StyledLogin = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   margin-bottom: 4rem;
 
   .Spinner {
@@ -16,12 +17,26 @@ const StyledLogin = styled.div`
     /* margin-top: -4.7rem; */
     background-color: #FFFFFF;
     box-shadow: 0 1.6px 3.6px 0 rgb(0 0 0 / 13%), 0 0.3px 0.9px 0 rgb(0 0 0 / 11%);
-    padding: 1rem 3rem;
+    padding: 0.75rem 3rem 0.75rem 3rem;
     width: 90%;
-    max-width: 30rem;
+    max-width: 25rem;
     display: flex;
     align-items: flex-end;
     flex-direction: column;
+    /* border: 1px solid #d0d7de;
+    border-radius: 6px;
+    box-shadow: var(--small-shadow); */
+  }
+
+  .Login__title {
+    width: 100%;
+    /* font-family: var(--font-stack-myriad); */
+    font-family: var(--font-title);
+    font-weight: 400;
+    color: var(--title-color);
+    font-size: 2.2rem;
+    margin: 1rem 0 0.5rem 0;
+    /* text-align: center; */
   }
 
   .login-btn {
@@ -41,6 +56,7 @@ const StyledLogin = styled.div`
 
     .form-field {
       width: 24rem;
+      width: 100%;
 
       /* label {
         width: auto;
@@ -49,6 +65,7 @@ const StyledLogin = styled.div`
 
     button {
       width: 24rem;
+      width: 100%;
       font-size: 1rem;
       font-family: var(--font-stack-segoe);
       box-sizing: border-box;
@@ -76,14 +93,7 @@ const StyledLogin = styled.div`
     }
   }
 
-  .Login__title {
-    width: 100%;
-    font-family: var(--font-stack-myriad);
-    font-weight: 400;
-    color: var(--title-color);
-    font-size: 2.2rem;
-    margin: 1rem 0 0.75rem 0;
-  }
+ 
 
   .signup-option {
     margin-bottom: 0.5rem;
@@ -155,7 +165,7 @@ const StyledLogin = styled.div`
     justify-content: flex-start;
   }
 
-  .toggle-password {
+  /* .toggle-password {
     width: auto;
     position: absolute;
     right: 0;
@@ -164,7 +174,6 @@ const StyledLogin = styled.div`
     border: none;
     color: #48515B;
     font-size: 0.9rem;
-    /* font-weight: bold; */
     padding: 0;
     margin: 0;
     z-index: 2;
@@ -188,6 +197,51 @@ const StyledLogin = styled.div`
     &:focus-visible {
       outline: 2px solid #104362;
       outline-offset: 1px;
+    }
+  } */
+
+  /* Eye icon */
+  .toggle-password {
+    min-width: 20px;
+    width: 20px;
+    position: absolute;
+    /* right: 0; */
+    top: 3.2rem;
+    right: 1rem;
+    background-color: transparent;
+    border: none;
+    color: #48515B;
+    font-size: 0.9rem;
+    padding: 0;
+    margin: 0;
+    z-index: 2;
+
+    &:hover {
+      background-color: transparent;
+      color: #1B1E22;
+    }
+
+    &:focus {
+      outline: 2px solid #104362;
+      outline-offset: 1px;
+    }
+
+    &:focus:not(:focus-visible) {
+      outline: none
+    }
+
+    &:focus-visible {
+      outline: 2px solid #104362;
+      outline-offset: 1px;
+    }
+
+    .overlay {
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      background-color: #fff;
+      opacity: 0.5;
+      pointer-events: none;
     }
   }
 
