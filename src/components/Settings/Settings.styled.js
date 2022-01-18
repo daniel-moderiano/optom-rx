@@ -52,6 +52,8 @@ const StyledSettings = styled.div`
 
   .change-email {
     padding: 1.5rem 0 2rem 0;
+    display: flex;
+    flex-direction: column;
 
     .no-email-desc {
       font-size: 0.9rem;
@@ -63,6 +65,30 @@ const StyledSettings = styled.div`
       text-size-adjust: 100%;
       margin-right: 2rem;
       margin-bottom: 0.3rem;
+      margin-top: 0.75rem;
+      display: flex;
+      align-items: center;
+      
+
+      .unverified, .verified {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--warning);
+        font-size: 0.9rem;
+        font-weight: normal;
+        margin-left: 1rem;
+
+        span {
+          margin-left: 0.2rem;
+          margin-bottom: 0.05rem;
+        }
+      }
+
+      .verified {
+        color: var(--success-text);
+      }
+    
     }
 
     .email-group {
@@ -100,7 +126,7 @@ const StyledSettings = styled.div`
       font-family: var(--font-stack-segoe);
       /* font-weight: bold; */
       padding: 0;
-      margin: 0 0 0 1rem;
+      margin: 0 0 0 0rem;
 
       &:hover {
         background-color: transparent;

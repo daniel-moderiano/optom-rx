@@ -584,7 +584,7 @@ const Settings = ({ user, setToast, setPage }) => {
       </Modal>}
 
       {showEmailModal && <Modal title="Change email" closeModal={() => setShowEmailModal(false)}>
-        <div className="neutral-container">
+        {/* <div className="neutral-container">
           <div className="neutral-icon">
             <svg xmlns="http://www.w3.org/2000/svg" className="alert-icon alert-icon--neutral" viewBox="0 0 512 512" width="24px">
               <path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" fill="#00477A" stroke="#00477A" strokeMiterlimit="10" strokeWidth="32"/>
@@ -595,7 +595,7 @@ const Settings = ({ user, setToast, setPage }) => {
           <div className="neutral-text">
             Changes to email require you to re-enter your password
           </div>
-        </div>
+        </div> */}
         <div className="update-display">
           <div className="update-label">Current email address:</div>
           <div className="update-summary">{email}</div>
@@ -659,31 +659,29 @@ const Settings = ({ user, setToast, setPage }) => {
             <button type="button" className="settings-btn settings-btn--update" onClick={updateName}>Update display name</button>
           </form>
 
-          <form className="email-form">
-            <div className="form-title">Change email</div>
+          <div className="change-email">
+                <div className="form-title">Change email</div>
+          <div className="current-email">{email}</div>
             <div className="email-group">
-              <FormField 
-                fieldType="text" 
-                name="email"
-                label="Email address" 
-                value={currentEmail} 
-                onChange={(event) => setCurrentEmail(event.target.value)} 
-              />  
-
-              <div className="verified">
+            
+            <div className="verified">
                   <svg xmlns="http://www.w3.org/2000/svg" className="alert-icon alert-icon--success" viewBox="0 0 512 512" width="17px">
                   <path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" fill="none" stroke="#096600" strokeMiterlimit="10" strokeWidth="32"/>
                   <path fill="none" stroke="#096600" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32" d="M352 176L217.6 336 160 272"/>
                 </svg>
                 <span>Verified</span>
               </div>
-            </div>
+     
             
-      
-            <input type="text" className="hidden" />
-            <button type="button" className="settings-btn settings-btn--update" onClick={() => setShowEmailModal(true)}>Update email</button>
-          </form>
-          
+            </div>
+            <div className="changePassword-btns">
+                  <button type="button" className="settings-btn settings-btn--update" onClick={() => setShowEmailModal(true)}>Update email</button>
+                  {/* <button className="resend" onClick={resendEmailVerification}>Resend verification email</button> */}
+                  </div>
+            </div>
+
+                
+
           
           <form className='password-form' noValidate onSubmit={(event) => {
             event.preventDefault();
@@ -748,7 +746,7 @@ const Settings = ({ user, setToast, setPage }) => {
                 <div className="form-title">Change email</div>
                 <p className="no-email-desc">Please verify your email address to access all account settings, receive notifications, and reset your password</p>
            
-                    <div className="current-email">{email}</div>
+                  <div className="current-email">{email}</div>
             
                     
               
