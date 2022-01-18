@@ -52,7 +52,7 @@ const Scripts = ({ setToast, setPage }) => {
                 </tr>
               </tbody>
             </table>
-      }
+        }
 
         {scripts && <div className='table-container'>
           {scripts.length > 0 ? (

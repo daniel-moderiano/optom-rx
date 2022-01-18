@@ -16,6 +16,7 @@ export const useScripts = (userID) => {
   useEffect(() => {
     // This technically marks the beginning of the fetch call, so set pending state here
     setIsPending(true);
+    setError(null);
     // Get reference to the intended user's user doc (which contains their scripts)
     let ref = doc(db, 'users', userID);
 
@@ -28,7 +29,7 @@ export const useScripts = (userID) => {
     const unsub = onSnapshot(ref, 
       (snapshot) => {
         setIsPending(false);
-      
+        setError(null);
         if (snapshot.data()) {
          
           // If the data is retrieved this point will be reached, even if there are no scripts
