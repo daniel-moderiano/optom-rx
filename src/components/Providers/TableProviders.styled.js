@@ -20,9 +20,8 @@ const StyledTableProviders = styled.table`
       text-align: left;
       text-transform: uppercase;
       letter-spacing: 0.05rem;
-      font-family: var(--font-stack-segoe-semibold);
+      font-weight: 600;
       border-top: none;
-      border-bottom: 1px solid #D1D6DB;
     }
 
     .tableHeader:first-child {
@@ -55,7 +54,20 @@ const StyledTableProviders = styled.table`
 
         &:focus {
           outline: 2px solid #104362;
+          outline-offset: 1px;
+        }
+
+        &:focus:not(:focus-visible) {
+          outline: none
+        }
+
+        &:focus-visible {
+          outline: 2px solid #104362;
           outline-offset: 2px;
+        }
+
+        &:active {
+          transform: scale(0.98);
         }
       }
 
