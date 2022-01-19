@@ -9,6 +9,7 @@ const StyledPasswordContainer = styled.div`
   .toggle-password {
     min-width: 20px;
     width: 20px;
+    height: 20px;
     position: absolute;
     top: 3.2rem;
     right: 1rem;
@@ -17,6 +18,21 @@ const StyledPasswordContainer = styled.div`
     padding: 0;
     margin: 0;
     z-index: 2;
+    border-radius: 2px;
+
+    &:focus {
+      outline: 2px solid #104362;
+      outline-offset: 1px;
+    }
+
+    &:focus:not(:focus-visible) {
+      outline: none
+    }
+
+    &:focus-visible {
+      outline: 2px solid #104362;
+      outline-offset: 1px;
+    }
 
     &:hover {
       cursor: pointer;

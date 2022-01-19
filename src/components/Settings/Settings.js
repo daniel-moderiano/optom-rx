@@ -530,7 +530,7 @@ const Settings = ({ user, setToast, setPage }) => {
       }
     } else {
       // Do nothing, refreshCredentials function hadnles errors and directs user to fix mistakes
-      setChangePasswordPending(true);
+      setChangePasswordPending(false);
     }
   };
 
@@ -832,7 +832,13 @@ const Settings = ({ user, setToast, setPage }) => {
           </PasswordContainer>   
             
             <div className="changePassword-btns">
-              <Button type="submit" >Update password</Button>
+              <Button type="submit">
+                {changePasswordPending ? (
+                  <Dots color="white"/>
+                ) : (
+                  'Update password'
+                )}
+              </Button>
               <Link to="/reset-password" className="reset-password" onClick={logout}>Forgot password?</Link>
             </div>
           </form>

@@ -134,10 +134,15 @@ const StyledSettings = styled.div`
   .changePassword-btns {
     display: flex;
     align-items: center;
+    margin-top: 1rem;
+
+    .button {
+      margin: 0;
+    }
   }
         
   .form-title--delete {
-    font-weight: bold;
+    font-weight: 400;
     color: #cc3232;
   }
 
@@ -149,6 +154,8 @@ const StyledSettings = styled.div`
   .button {
     padding: 6px 14px 8px 14px;
     max-width: 180px;
+    min-width: 155px;
+    margin-top: 1rem;
   }
 
  

@@ -3,7 +3,7 @@ import styled from "styled-components";
 const StyledModal = styled.div`
   display: flex;
 	position: fixed;
-	z-index: 1;
+	z-index: 1000;
 	left: 0;
 	top: 0;
 	height: 100%;
