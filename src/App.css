@@ -56,7 +56,8 @@ Semilight to an appropriate font-weight.
 }
 
 html, body, #root, #root>div {
-  height: 100%
+  height: 100vh;
+  width: 100%;
 }
 
 body {
@@ -64,26 +65,3 @@ body {
   padding: 0;
   font-family: var(--font-stack-segoe);
 }
-/* 
-.App {
-  display: flex;
-  flex-direction: column;
-  background-color: var(--background);
-  align-items: center;
-}
-
-@media print {
-  .App {
-    background-color: white;
-  }
-
-  * {
-    margin: 0;
-    padding: 0;
-  }
-  
-  @page {
-    size: auto;
-    margin: 0mm;
-  }
-} */
