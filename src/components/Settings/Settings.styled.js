@@ -15,12 +15,14 @@ const StyledSettings = styled.div`
   .form-title {
     display: block;
     padding: 0;
-    font-size: 1.6rem;
-    font-family: var(--font-title);
-    color: var(--title-color);
     border-bottom: 1px solid #dfe1e1;
     padding-bottom: 0.5rem;
     margin-bottom: 0.75rem;
+    font-size: 1.6rem;
+    font-weight: 200;
+    font-family: var(--font-stack-segoe);
+    color: var(--title-color);
+
   }
 
   .displayName-form, .password-form, .delete-account, .email-form {
@@ -525,6 +527,19 @@ const StyledSettings = styled.div`
     }
   }
 
+  @media (max-width: 768px) {
+
+      .form-title {
+        font-size: 1.5rem;
+      }
+  }
+
+  @media (max-width: 475px) {
+
+      .form-title {
+        font-size: 1.35rem;
+      }
+  }
 
 
 `

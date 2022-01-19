@@ -14,6 +14,7 @@ const StyledFormField = styled.div`
     font-size: 1rem;
     font-family: var(--font-stack-segoe);
     background-color: #fff;
+    transition: border 0.5s ease-in-out;
 
     &.error {
       border: 0.1rem solid var(--error);

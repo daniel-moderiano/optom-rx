@@ -216,7 +216,7 @@ const Signup = ({ setPage, setFirstSignIn }) => {
             <span className="alert alert--error">{error}</span>
           </div>}
 
-          <Button classLabel="Signup__btn">
+          <Button classLabel="Signup__btn" type="submit">
             {isPending ? (
               <Dots color="white" />
               ) : (

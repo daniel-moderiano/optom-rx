@@ -10,7 +10,6 @@ const StyledFieldset = styled.fieldset`
   margin: 0;
 
   .legend-label {
-   
     display: block;
     padding: 0;
     font-family: var(--font-stack-segoe);

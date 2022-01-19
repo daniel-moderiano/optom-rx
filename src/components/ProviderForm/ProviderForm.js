@@ -379,7 +379,7 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
 
             
           {cancelBtn && 
-            <Button type="secondary" classLabel="cancel" handleClick={(event) => {
+            <Button design="secondary" classLabel="cancel" handleClick={(event) => {
               event.preventDefault(); 
               handleCancel();
             }}>

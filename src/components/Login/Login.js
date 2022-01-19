@@ -167,7 +167,7 @@ const Login = ({ setPage }) => {
             <span className="alert alert--error">{error}</span>
           </div>}
 
-          <Button classLabel="Login__btn">
+          <Button classLabel="Login__btn" type="submit">
               {isPending ? (
                 <Dots color="white" />
                 ) : (

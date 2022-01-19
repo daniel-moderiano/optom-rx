@@ -12,6 +12,7 @@ import Button from "../utils/Button/Button";
 import ContentContainer from '../utils/ContentContainer/ContentContainer';
 import PasswordContainer from '../utils/PasswordContainer/PasswordContainer';
 import PageHeader from '../utils/PageHeader/PageHeader';
+import Dots from '../utils/Dots/Dots';
 
 const Settings = ({ user, setToast, setPage }) => {
   const { logout } = useLogout();
@@ -736,7 +737,7 @@ const Settings = ({ user, setToast, setPage }) => {
 
       <div className="Settings-container">
         {user.emailVerified ? (<>
-          <form className="displayName-form">
+          <form className="displayName-form" onSubmit={e => e.preventDefault()}>
             <div className="form-title">Change display name</div>
             <FormField 
               fieldType="text" 
@@ -746,7 +747,13 @@ const Settings = ({ user, setToast, setPage }) => {
               onChange={(event) => setDisplayName(event.target.value)} 
             />  
             <input type="text" className="hidden" />
-            <button type="button" className="settings-btn settings-btn--update" onClick={updateName}>Update display name</button>
+            <Button handleClick={updateName} classLabel="update">
+              {namePending ? (
+                <Dots color="white"/>
+              ) : (
+                'Update display name'
+              )}
+            </Button>
           </form>
 
           <div className="change-email">
@@ -766,7 +773,6 @@ const Settings = ({ user, setToast, setPage }) => {
             </div>
             <div className="changePassword-btns">
                   <button type="button" className="settings-btn settings-btn--update" onClick={() => setShowEmailModal(true)}>Update email</button>
-                  {/* <button className="resend" onClick={resendEmailVerification}>Resend verification email</button> */}
                   </div>
             </div>
 

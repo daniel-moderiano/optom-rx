@@ -102,7 +102,7 @@ const Home = ({ setToast, setPage, firstSignIn, setFirstSignIn }) => {
           </div>
 
           <div className="modal-btns">
-            <Button type="ghost" handleClick={() => setShowModal(false)}>Continue to app</Button>
+            <Button design="ghost" handleClick={() => setShowModal(false)}>Continue to app</Button>
           </div>
         </Modal>)}
 
