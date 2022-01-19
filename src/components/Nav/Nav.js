@@ -12,7 +12,6 @@ const Nav = ({ user, resetData, currentPage }) => {
   const [showNav, setShowNav] = useState(false);
   const [toggleHamburger, setToggleHamburger] = useState(false);
   
-  const ariaHome = currentPage === 'home' ? { "aria-current": "page" } : {};
   const ariaForm = currentPage === 'form' ? { "aria-current": "page" } : {};
   const ariaLogin = currentPage === 'login' ? { "aria-current": "page" } : {};
   const ariaSignup = currentPage === 'signup' ? { "aria-current": "page" } : {};
@@ -31,7 +30,7 @@ const Nav = ({ user, resetData, currentPage }) => {
   }
   
   return (
-    <StyledNav user={user} className="Nav" aria-label="Main Navigation" role="navigation">
+    <StyledNav user={user} className="Nav" aria-label="Main menu" role="navigation">
       <ul className={`${showNav ? "Nav__list active" : "Nav__list"}`} role="menubar">
         {!user && <>
           <li className="Nav__list-item" role="menuitem">
@@ -77,13 +76,7 @@ const Nav = ({ user, resetData, currentPage }) => {
         </>}
       </ul>
 
-      {/* <div className={`${toggleHamburger ? "hamburger active" : "hamburger"}`} onClick={toggleNav}>
-        <span className="bar"></span>
-        <span className="bar"></span>
-        <span className="bar"></span>
-      </div> */}
-
-      <Hamburger loggedIn={user ? true : false} handleClick={toggleNav} active={toggleHamburger}/> 
+      <Hamburger loggedIn={user ? true : false} handleClick={toggleNav} expanded={toggleHamburger}/> 
 
     </StyledNav>
   )
