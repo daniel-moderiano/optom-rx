@@ -13,7 +13,7 @@ const StyledSettings = styled.div`
     font-weight: 400;
     color: var(--title-color);
     font-size: 2.5rem;
-    margin: 0 0 0.5rem 0;
+    margin: 1rem 0 0.5rem 0;
     padding: 0;
   }
 

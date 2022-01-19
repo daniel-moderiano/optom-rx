@@ -10,17 +10,30 @@ const StyledContentContainer = styled.div`
   padding: 3rem 5.5rem;
   max-width: 1140px;
   width: 100%;
-  /* border: 1px solid #d0d7de;
+  border: 1px solid #d0d7de;
   border-radius: 6px;
-  box-shadow: var(--small-shadow); */
+  box-shadow: var(--small-shadow);
 
-  
+  /* Early padding is suitable for those pages containing tables */
   @media (max-width: ${props => props.earlyPadding ? '800px' : '590px'}) {
     padding: 3rem 3.5rem;
+    /* width: 90%; */
   }
 
+  @media (max-width: 800px) {
+    /* border: none;
+    box-shadow: 0;
+    margin-top: 0; */
+  }
+
+  /* This is the typical breakpoint for tables to transition to a card display */
   @media (max-width: 550px) {
     padding: 3rem 2.5rem;
+  }
+
+  /* For smaller screens (portrait phones) */
+  @media (max-width: 400px) {
+    padding: 3rem 1.5rem;
   }
 `
 

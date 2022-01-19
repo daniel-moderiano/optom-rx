@@ -6,8 +6,14 @@ const StyledMain = styled.main`
   flex-direction: column;
   align-items: center;
   background-color: var(--background);
+  background-color: #F6F8FA;
+  background-color: #F6F7F9;
+  background-color: #F3F4F7;
   width: 100%;
   
+  @media (max-width: 800px) {
+    /* background-color: #fff; */
+  }
 
   @media print {
 

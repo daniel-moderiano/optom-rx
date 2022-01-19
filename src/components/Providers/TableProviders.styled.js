@@ -267,7 +267,7 @@ const StyledTableProviders = styled.table`
     }
   }
 
-  @media(max-width: 360px) {
+  @media(max-width: 326px) {
     .btns {
       flex-direction: column;
       align-items: flex-start;

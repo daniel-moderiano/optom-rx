@@ -39,12 +39,11 @@ const StyledFavourites = styled.div`
     margin: 0 0 1rem 0;
     padding: 0;
     width: 100%;
-    box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    /* box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px; */
     border-radius: 6px;
-    /* border-spacing: 0; */
-    /* border-bottom: 1px solid transparent; */
     -moz-border-radius:6px;
     background-color: #fff;
+    border: 1px solid #d0d7de;
 
     .list-header {
       background-color: #F9FAFB;
