@@ -5,7 +5,7 @@ const StyledRxTemplate = styled.div`
   flex-direction: column;
   margin: 2rem 0;
   background-color: #FFFFFF;
-  box-shadow: 0 1.6px 3.6px 0 rgb(0 0 0 / 13%), 0 0.3px 0.9px 0 rgb(0 0 0 / 11%);
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px, rgba(0, 0, 0, 0.05) 0px 0px 1px 0px;
   padding: 3.5rem 5.5rem;
   max-width: 1140px;
   width: 100%;
@@ -35,7 +35,7 @@ const StyledRxTemplate = styled.div`
     display: flex;
     flex-direction: column;
     margin-top: 1rem;
-    box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px, rgba(0, 0, 0, 0.05) 0px 0px 1px 0px;
     border-radius: 6px;
 
     .ui__title {

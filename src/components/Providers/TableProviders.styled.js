@@ -3,7 +3,7 @@ import styled from "styled-components";
 const StyledTableProviders = styled.table`
 
     width: 100%;
-    box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px, rgba(0, 0, 0, 0.05) 0px 0px 1px 0px;
 
     border-collapse: separate;
     border-radius: 6px;
@@ -220,7 +220,7 @@ const StyledTableProviders = styled.table`
       display: flex;
       flex-direction: column;
       margin-bottom: 2rem;
-      box-shadow: 0 2px 4px -1px rgb(0 0 0 / 1%), 0 1px 5px 0 rgb(0 0 0 / 5%), 0 1px 5px 0 rgb(0 0 0 / 10%);
+      box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px, rgba(0, 0, 0, 0.05) 0px 0px 1px 0px;
       border-collapse: separate;
       border-radius: 6px;
       border-spacing: 0;
@@ -261,7 +261,7 @@ const StyledTableProviders = styled.table`
     }
 
     .tableRowItems:last-child {
-      border-bottom: 1px solid #D1D6DB;
+
       border-radius: 6px;
       margin-bottom: 0;
     }

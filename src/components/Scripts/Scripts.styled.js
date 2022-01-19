@@ -19,8 +19,7 @@ const StyledScripts = styled.div`
     border-radius: 6px;
     border-spacing: 0;
     -moz-border-radius:6px;
-    border: 1px solid #d0d7de;
-    box-shadow: 0;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px, rgba(0, 0, 0, 0.05) 0px 0px 1px 0px;
 
     .tableHeader {
       background-color: #F9FAFB;

@@ -60,7 +60,7 @@ const StyledProviders = styled.div`
 
   .table {
     width: 100%;
-    box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px, rgba(0, 0, 0, 0.05) 0px 0px 1px 0px;
 
     border-collapse: separate;
     border-radius: 6px;
@@ -211,9 +211,7 @@ const StyledProviders = styled.div`
     margin-top: 2rem;
     border-collapse: collapse;
     width: 100%;
-    /* table-layout: fixed; */
-    /* border: 1px solid black; */
-    /* box-shadow: 0 1.6px 3.6px 0 rgb(0 0 0 / 13%), 0 0.3px 0.9px 0 rgb(0 0 0 / 11%); */
+
 
     .table__header-row {
       border-bottom: 1px solid #646e6d;
@@ -345,7 +343,7 @@ const StyledProviders = styled.div`
     }
 
     .table-none {
-      box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+      box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px, rgba(0, 0, 0, 0.05) 0px 0px 1px 0px;
       border-collapse: separate;
       border-radius: 6px;
       border-spacing: 0;

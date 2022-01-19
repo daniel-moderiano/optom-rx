@@ -8,11 +8,15 @@ const StyledFavourites = styled.div`
 
   .Favourites__title {
     padding: 0;
-    font-size: 1.8rem;
-    font-family: var(--font-title);
-    color: var(--title-color);
-    font-weight: normal;
+
     margin: 0;
+
+
+    font-size: 1.65rem;
+    font-weight: 200;
+    font-family: var(--font-stack-segoe);
+    color: var(--title-color);
+
   }
 
 
@@ -39,11 +43,13 @@ const StyledFavourites = styled.div`
     margin: 0 0 1rem 0;
     padding: 0;
     width: 100%;
-    /* box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px; */
+    
     border-radius: 6px;
     -moz-border-radius:6px;
     background-color: #fff;
-    border: 1px solid #d0d7de;
+    /* border: 1px solid rgba(0, 0, 0, 0.1); */
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px, rgba(0, 0, 0, 0.05) 0px 0px 1px 0px;
+
 
     .list-header {
       background-color: #F9FAFB;
@@ -56,8 +62,6 @@ const StyledFavourites = styled.div`
       letter-spacing: 0.05rem;
       font-weight: 600;
       border-top: none;
-      /* font-weight: bold; */
-      /* border-bottom: 1px solid #D1D6DB; */
     }
 
     .fav-list:nth-child(even) {
@@ -317,8 +321,8 @@ const StyledFavourites = styled.div`
         margin-bottom: 2rem;
         border-radius: 6px;
         -moz-border-radius:6px;
-        border: 1px solid #e2e7ec;
-        box-shadow: var(--small-shadow);
+        box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px, rgba(0, 0, 0, 0.05) 0px 0px 1px 0px;
+        border: none;
 
         &:hover {
           background-color: #fff;
@@ -374,10 +378,8 @@ const StyledFavourites = styled.div`
     }
 
     .fav-list--none {
-      box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
       border-radius: 6px;
-      /* border-spacing: 0; */
-      /* border-bottom: 1px solid transparent; */
       -moz-border-radius:6px;
 
       .fav-item--none {
@@ -399,6 +401,18 @@ const StyledFavourites = styled.div`
         }
       }
   
+    }
+  }
+
+  @media (max-width: 768px) {
+    .Favourites__title {
+      font-size: 1.55rem;
+    }
+  }
+
+  @media (max-width: 475px) {
+    .Favourites__title {
+      font-size: 1.4rem;
     }
   }
 
