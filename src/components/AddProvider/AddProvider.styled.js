@@ -15,8 +15,9 @@ const StyledAddProvider = styled.div`
     .form-title {
       display: block;
       padding: 0;
-      font-size: 1.7rem;
-      font-family: var(--font-title);
+      font-size: 1.65rem;
+      font-weight: 200;
+      font-family: var(--font-stack-segoe);
       color: var(--title-color);
       width: 19rem;
       flex-shrink: 0;
@@ -39,6 +40,22 @@ const StyledAddProvider = styled.div`
         margin: 0 0 1.5rem 0;
         padding: 0;
         width: 100%;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .form-container {
+      .form-title {
+        font-size: 1.55rem;
+      }
+    }
+  }
+
+  @media (max-width: 475px) {
+    .form-container {
+      .form-title {
+        font-size: 1.4rem;
       }
     }
   }

@@ -11,11 +11,7 @@ import Modal from '../utils/Modal/Modal';
 
 const Favourites = ({ setToast }) => {
   const { user } = useAuthContext();
-  // const { favourites, isPending, error } = useFavourites(user.uid);
-  // const { documents: favourites, isPending, error } = useCollection('providers', ['uid', '==', user.uid]);
   const { documents: favourites, isPending, error } = useFavourites(user.uid);
-
-  
 
   const [showModal, setShowModal] = useState(false);
   
@@ -47,7 +43,6 @@ const Favourites = ({ setToast }) => {
     "authCode": ""
   });
 
- 
   // Default to cancel button when user hits enter after pressing delete, aiming avoiding accidental deletes
   const cancelOnEnter = (event) => {
     if (event.keyCode === 13) {
@@ -83,15 +78,12 @@ const Favourites = ({ setToast }) => {
   }, [error, setToast])
 
   const deleteFavourite = async (scriptToDelete) => {
-
     const docRef = doc(db, 'users', user.uid);
 
     try {
       await updateDoc(docRef, {
         favourites: arrayRemove(scriptToDelete)
       });
-
-     
 
       setToast((prevData) => ({
         ...prevData,
@@ -101,7 +93,6 @@ const Favourites = ({ setToast }) => {
       }));
 
     } catch (err) {
-
       setToast((prevData) => ({
         ...prevData,
         visible: true,
@@ -187,7 +178,6 @@ const Favourites = ({ setToast }) => {
           </ul>   
         </div>}
 
-  
         
       </div>
       {favourites && <div className='list-container'>
@@ -210,10 +200,10 @@ const Favourites = ({ setToast }) => {
                       scriptData: fav,
                     }}>Prescribe</Link>
                     <button className='delete-btn' onClick={() => {
-                        setShowModal(true);
-                        setSelectedScript({
-                          ...fav,
-                        })}}>Delete</button>
+                      setShowModal(true);
+                      setSelectedScript({
+                        ...fav,
+                    })}}>Delete</button>
                   </div>
                   
                 </div>

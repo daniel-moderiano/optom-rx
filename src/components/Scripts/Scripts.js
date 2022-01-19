@@ -4,7 +4,6 @@ import { useScripts } from '../../hooks/useScripts';
 import Table from './Table';
 import Spinner from '../utils/Spinner/Spinner';
 import { useEffect } from 'react';
-import Dots from '../utils/Dots/Dots';
 import ContentContainer from '../utils/ContentContainer/ContentContainer';
 import PageHeader from '../utils/PageHeader/PageHeader';
 
@@ -32,8 +31,8 @@ const Scripts = ({ setToast, setPage }) => {
 
   return (
     <ContentContainer earlyPadding={true}>
-      <StyledScripts className="Scripts">
-        <PageHeader title="Scripts" description="View all prescriptions you have written. Click the script ID for more information."/>
+      <StyledScripts className="Scripts" >
+        <PageHeader title="Scripts"  />
         
         <div className="Scripts__container">
           {isPending && <Spinner />}

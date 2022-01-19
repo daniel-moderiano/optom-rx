@@ -112,7 +112,7 @@ const StyledFormField = styled.div`
         position: absolute;
         width: 5px;
         height: 10px;
-        top: 0.1rem;
+        top: 0.2rem;
         left: 0.35rem;
         border: solid white;
         border-width: 0 2px 2px 0;

@@ -15,11 +15,12 @@ const StyledScripts = styled.div`
 
   .table {
     width: 100%;
-    box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
     border-collapse: separate;
     border-radius: 6px;
     border-spacing: 0;
     -moz-border-radius:6px;
+    border: 1px solid #d0d7de;
+    box-shadow: 0;
 
     .tableHeader {
       background-color: #F9FAFB;

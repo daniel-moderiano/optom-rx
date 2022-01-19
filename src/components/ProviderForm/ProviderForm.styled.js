@@ -33,16 +33,11 @@ const StyledProviderForm = styled.form`
   }
 
   
-  
-  /* Landscape phones and down */
   @media (max-width: 590px) { 
-
-
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    
   }
 
   @media(max-width: 450px) {
@@ -54,7 +49,6 @@ const StyledProviderForm = styled.form`
       .button {
         width: 90%;
         margin: 0;
-        
       }
 
       .submit {
