@@ -9,7 +9,8 @@ import { useLogout } from '../../hooks/useLogout';
 import Modal from "../utils/Modal/Modal";
 import { Link } from "react-router-dom";
 import Button from "../utils/Button/Button";
-import ContentContainer from '../utils/ContentContainer/ContentContainer'
+import ContentContainer from '../utils/ContentContainer/ContentContainer';
+import PasswordContainer from '../utils/PasswordContainer/PasswordContainer'
 
 const Settings = ({ user, setToast, setPage }) => {
   const { logout } = useLogout();
@@ -42,10 +43,15 @@ const Settings = ({ user, setToast, setPage }) => {
   const [newEmail, setNewEmail] = useState('');
   const [newEmailAlert, setNewEmailAlert] = useState({});
   
-  const [showVerifyModal, setShowVerifyModal] = useState(false)
+  const [showVerifyModal, setShowVerifyModal] = useState(false);
+
+  const [showDeleteConfirmPassword, setShowDeleteConfirmPassword] = useState(false);
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [showEmailConfirmPassword, setShowEmailConfirmPassword] = useState(false);
 
   
-
 
 
   const { email } = user;
@@ -66,8 +72,10 @@ const Settings = ({ user, setToast, setPage }) => {
     setPasswordAlert({});
     setPassword('');
     setdeleteConfirmPassword('');
-    setdeleteConfirmPasswordAlert('')
-    setNewEmail('')
+    setdeleteConfirmPasswordAlert('');
+    setNewEmail('');
+    setShowDeleteConfirmPassword(false);
+    setShowEmailConfirmPassword(false);
   }, [showModal, showEmailModal])
 
 
@@ -501,6 +509,9 @@ const Settings = ({ user, setToast, setPage }) => {
         setCurrentPassword('');
         setNewPassword('');
         setConfirmPassword('');
+        setShowCurrentPassword(false);
+        setShowNewPassword(false);
+        setShowConfirmPassword(false);
 
         setToast((prevData) => ({
           ...prevData,
@@ -632,20 +643,23 @@ const Settings = ({ user, setToast, setPage }) => {
           
         }}>
 
-          <FormField 
-            id="current-password"
-            fieldType="password" 
-            name="emailConfirmPassword"
-            label="Password" 
-            value={emailConfirmPassword} 
-            onChange={(event) => setPassword(event.target.value)} 
-            className="auth-field form-field"
-            alert={emailConfirmPasswordAlert}
-            required
-            describedBy={Object.keys(emailConfirmPasswordAlert).length === 0 ? null : 'current-password-alert'}
-            autocomplete="current-password"
-          />
+          <PasswordContainer showPassword={showDeleteConfirmPassword} handleClick={() => setShowDeleteConfirmPassword((prevState) => (!prevState))}>
+            <FormField 
+              id="current-password"
+              fieldType={`${showDeleteConfirmPassword ? 'text' : 'password'}`}
+              name="deleteConfirmPassword"
+              label="Password" 
+              value={deleteConfirmPassword} 
+              onChange={(event) => setdeleteConfirmPassword(event.target.value)} 
+              className="auth-field form-field"
+              alert={deleteConfirmPasswordAlert}
+              required
+              describedBy={Object.keys(deleteConfirmPasswordAlert).length === 0 ? null : 'current-password-alert'}
+              autocomplete="current-password"
+            />
+          </PasswordContainer>
 
+          
 
         <div className="Modal__buttons">
           <button className="cancel-btn Modal__btn" onClick={() => setShowModal(false)}>Cancel</button>
@@ -692,19 +706,22 @@ const Settings = ({ user, setToast, setPage }) => {
             describedBy={Object.keys(newEmailAlert).length === 0 ? null : 'newEmail-alert'}
           />  
 
-          <FormField 
-            id="current-password"
-            fieldType="password" 
-            name="deleteConfirmPassword"
-            label="Password" 
-            value={deleteConfirmPassword} 
-            onChange={(event) => setdeleteConfirmPassword(event.target.value)} 
-            className="auth-field form-field"
-            alert={deleteConfirmPasswordAlert}
-            required
-            describedBy={Object.keys(deleteConfirmPasswordAlert).length === 0 ? null : 'current-password-alert'}
-            autocomplete="current-password"
-          />
+
+          <PasswordContainer showPassword={showEmailConfirmPassword} handleClick={() => setShowEmailConfirmPassword((prevState) => (!prevState))}>
+            <FormField 
+              id="current-password"
+              fieldType={`${showEmailConfirmPassword ? 'text' : 'password'}`}
+              name="emailConfirmPassword"
+              label="Password" 
+              value={emailConfirmPassword} 
+              onChange={(event) => setPassword(event.target.value)} 
+              className="auth-field form-field"
+              alert={emailConfirmPasswordAlert}
+              required
+              describedBy={Object.keys(emailConfirmPasswordAlert).length === 0 ? null : 'current-password-alert'}
+              autocomplete="current-password"
+            />
+          </PasswordContainer>          
 
 
         <div className="Modal__buttons">
@@ -766,19 +783,22 @@ const Settings = ({ user, setToast, setPage }) => {
           }}>
             <div className="form-title">Change password</div>
 
-            <FormField 
-              fieldType="password" 
-              name="currentPassword"
-              label="Current password" 
-              value={currentPassword} 
-              onChange={(event) => setCurrentPassword(event.target.value)} 
-              alert={currentPasswordAlert}
-              required
-              describedBy='currentPassword-alert'
-            />  
+          <PasswordContainer showPassword={showCurrentPassword} handleClick={() => setShowCurrentPassword((prevState) => (!prevState))}>
+              <FormField 
+                fieldType={`${showCurrentPassword ? 'text' : 'password'}`}
+                name="currentPassword"
+                label="Current password" 
+                value={currentPassword} 
+                onChange={(event) => setCurrentPassword(event.target.value)} 
+                alert={currentPasswordAlert}
+                required
+                describedBy='currentPassword-alert'
+              />  
+          </PasswordContainer>   
 
+          <PasswordContainer showPassword={showNewPassword} handleClick={() => setShowNewPassword((prevState) => (!prevState))}>
             <FormField 
-              fieldType="password" 
+              fieldType={`${showNewPassword ? 'text' : 'password'}`}
               name="newPassword"
               label="New password" 
               value={newPassword} 
@@ -787,9 +807,11 @@ const Settings = ({ user, setToast, setPage }) => {
               required
               describedBy='newPassword-alert'
             />  
+          </PasswordContainer>   
 
+          <PasswordContainer showPassword={showConfirmPassword} handleClick={() => setShowConfirmPassword((prevState) => (!prevState))}>
             <FormField 
-              fieldType="password" 
+              fieldType={`${showConfirmPassword ? 'text' : 'password'}`}
               name="confirmPassword"
               label="Confirm password" 
               value={confirmPassword} 
@@ -798,6 +820,13 @@ const Settings = ({ user, setToast, setPage }) => {
               required
               describedBy='confirmPassword-alert'
             />  
+          </PasswordContainer>   
+
+          
+
+            
+
+            
             <div className="changePassword-btns">
               <button className="settings-btn settings-btn--update">Update password</button>
               <Link to="/reset-password" className="reset-password" onClick={logout}>Forgot password?</Link>
