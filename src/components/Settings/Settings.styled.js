@@ -130,6 +130,11 @@ const StyledSettings = styled.div`
       }
     }
   }
+
+  .changePassword-btns {
+    display: flex;
+    align-items: center;
+  }
         
   .form-title--delete {
     font-weight: bold;
@@ -141,60 +146,15 @@ const StyledSettings = styled.div`
     margin-bottom: 1rem;
   }
 
-  .settings-btn {
-    font-size: 1rem;
-    font-family: var(--font-stack-segoe);
-    box-sizing: border-box;
-    cursor: pointer;
+  .button {
     padding: 6px 14px 8px 14px;
-    border-radius: 2px;
-    min-width: 80px;
     max-width: 180px;
-   
-    
-
-    &:active {
-      transform: scale(0.98);
-    }
-
-    &:focus {
-      outline: 2px solid #104362;
-      outline-offset: 2px;
-    }
   }
 
-  .settings-btn--update {
-    margin-top: 0.5rem;
-    background-color: var(--primary-color);
-    color: rgb(255, 255, 255);
-    /* border: 1px solid var(--primary-color);  */
-    border: none;
-    text-decoration: none;
-    width: 180px;
-    
-    &:hover {
-      background-color: var(--btn-primary-hover);
-      /* border: 1px solid var(--btn-primary-hover); */
-    }
-  }
-
-  .settings-btn--delete {
-    
-    /* min-width: 130px; */
-    background-color: #cc3232;
-    color: rgb(255, 255, 255);
-    border: none;
-    /* max-width: 150px; */
-
-  }
-  
-  .settings-btn--delete:hover {
-    background-color: var(--btn-negative-hover-text);
-  }
-
+ 
   .reset-password {
-    width: 100%;
-    text-align: right;
+    /* width: 100%; */
+    /* text-align: right; */
     background-color: transparent;
     border: none;
     color: #48515B;
@@ -508,7 +468,7 @@ const StyledSettings = styled.div`
 
     .changePassword-btns {
       display: flex;
-      flex-direction: column;
+      
       align-items: flex-start;
       justify-content: center;
 

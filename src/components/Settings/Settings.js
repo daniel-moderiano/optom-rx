@@ -42,6 +42,8 @@ const Settings = ({ user, setToast, setPage }) => {
   const [deletePending, setDeletePending] = useState(false);
   const [deleteError, setDeleteError] = useState(null);
 
+  const [changePasswordPending, setChangePasswordPending] = useState(false);
+
   const [newEmail, setNewEmail] = useState('');
   const [newEmailAlert, setNewEmailAlert] = useState({});
   
@@ -283,9 +285,6 @@ const Settings = ({ user, setToast, setPage }) => {
     const deleteConfirmPasswordInput = document.querySelector('input[name="deleteConfirmPassword"]');
     const newEmailInput = document.querySelector('input[name="newEmail"]');
     
-
-    
-
      // Check for blank field
      if (newEmailInput.value.trim().length === 0) {
       if (!inputFocused) {
@@ -395,7 +394,6 @@ const Settings = ({ user, setToast, setPage }) => {
     }
   };
 
-
   // This function is/returns a Promise
   const refreshCredentialsForDelete = async () => {
     // Must be called once the user has entered their password, else it will just error
@@ -502,6 +500,8 @@ const Settings = ({ user, setToast, setPage }) => {
 
   // Combine the credentials and actual deleting of account using async flow
   const performPasswordUpdate = async () => {
+    setChangePasswordPending(true);
+
     // Check that the credential confirmation was successful
     const confirmed = await refreshCredentialsForPassword();
     // Act based on the result
@@ -515,6 +515,8 @@ const Settings = ({ user, setToast, setPage }) => {
         setShowNewPassword(false);
         setShowConfirmPassword(false);
 
+        setChangePasswordPending(false);
+
         setToast((prevData) => ({
           ...prevData,
           visible: true,
@@ -523,10 +525,12 @@ const Settings = ({ user, setToast, setPage }) => {
         }));
         
       } catch (error) {
+        setChangePasswordPending(false);
         errorHandleNewPassword(error.code, setNewPasswordAlert)
       }
     } else {
       // Do nothing, refreshCredentials function hadnles errors and directs user to fix mistakes
+      setChangePasswordPending(true);
     }
   };
 
@@ -737,7 +741,7 @@ const Settings = ({ user, setToast, setPage }) => {
 
       <div className="Settings-container">
         {user.emailVerified ? (<>
-          <form className="displayName-form" onSubmit={e => e.preventDefault()}>
+          <form className="displayName-form" >
             <div className="form-title">Change display name</div>
             <FormField 
               fieldType="text" 
@@ -747,7 +751,7 @@ const Settings = ({ user, setToast, setPage }) => {
               onChange={(event) => setDisplayName(event.target.value)} 
             />  
             <input type="text" className="hidden" />
-            <Button handleClick={updateName} classLabel="update">
+            <Button handleClick={updateName} >
               {namePending ? (
                 <Dots color="white"/>
               ) : (
@@ -771,9 +775,9 @@ const Settings = ({ user, setToast, setPage }) => {
      
             
             </div>
-            <div className="changePassword-btns">
-                  <button type="button" className="settings-btn settings-btn--update" onClick={() => setShowEmailModal(true)}>Update email</button>
-                  </div>
+
+            <Button handleClick={() => setShowEmailModal(true)} >Update email</Button>
+        
             </div>
 
                 
@@ -826,14 +830,9 @@ const Settings = ({ user, setToast, setPage }) => {
               describedBy='confirmPassword-alert'
             />  
           </PasswordContainer>   
-
-          
-
-            
-
             
             <div className="changePassword-btns">
-              <button className="settings-btn settings-btn--update">Update password</button>
+              <Button type="submit" >Update password</Button>
               <Link to="/reset-password" className="reset-password" onClick={logout}>Forgot password?</Link>
             </div>
           </form>
@@ -841,7 +840,9 @@ const Settings = ({ user, setToast, setPage }) => {
         <div className="delete-account">
           <div className="form-title form-title--delete">Delete account</div>
           <p className="warning">Once you delete your account, it is permanent. Please be sure before proceeding.</p>
-          <button className="settings-btn settings-btn--delete" type="button" onClick={() => setShowModal(true)}>Delete account</button>
+          <Button handleClick={() => setShowModal(true)} design="delete" >
+            Delete account
+          </Button>
         </div>
         
         </>) : (

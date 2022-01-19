@@ -2,7 +2,7 @@ import { StyledButton } from "./Button.styled"
 
 const Button = ({ children, type, design, handleClick, classLabel }) => {
   return (
-    <StyledButton className={`button--${design} button ${classLabel}`} onClick={handleClick} type={type}>
+    <StyledButton className={`button--${design} button ${classLabel ? classLabel : ''}`} onClick={handleClick} type={type}>
       {children}
     </StyledButton>
   )
