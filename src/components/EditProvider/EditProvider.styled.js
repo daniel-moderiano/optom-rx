@@ -6,6 +6,7 @@ const StyledEditProvider = styled.div`
     padding: 2rem 0;
     background-color: #fff;
     display: flex;
+    align-items: flex-start;
     width: 100%;
     border-bottom: 1px solid #dfe1e1;
     border-top: 1px solid #dfe1e1;
@@ -22,13 +23,16 @@ const StyledEditProvider = styled.div`
       padding-left: 2rem;
       margin-right: 1rem;
     }
+
+    .ProviderForm {
+      margin-top: -0.2rem;
+    }
   }
 
 
   @media (max-width: 920px) { 
     .form-container {
       flex-direction: column;
-      align-items: center;
       justify-content: center;
 
       .form-title {

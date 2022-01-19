@@ -2,9 +2,9 @@ import FormField from "../FormField/FormField";
 import AddressAutocomplete from "../AddressAutocomplete/AddressAutocomplete";
 import { useState, useEffect, useCallback } from "react";
 import { StyledProviderForm } from './ProviderForm.styled.js'
-import Spinner from "../utils/Spinner/Spinner";
 import Dots from "../utils/Dots/Dots";
 import LoadOverlay from "../utils/LoadOverlay/LoadOverlay";
+import Button from '../utils/Button/Button';
 
 // ! Legal requirements include the prescriber's name, address, and contact details, and prescriber number
 
@@ -363,25 +363,27 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
 
         {/* Only visible on standalone forms */}
         <div className="ProviderForm__btns">
-          {submitBtn && 
-              <button className="submit-btn ProviderForm__btn" onClick={(event) => {
-                event.preventDefault(); 
-                if (checkFormValidation()) {
-                  handleSubmit(event);
-                }
-              }}>{pending ? (
-                <Dots color="white" />
-                ) : (
-                `${submitBtn}`
-              )}</button>
+          {submitBtn && <Button classLabel="submit" handleClick={(event) => {
+            event.preventDefault(); 
+            if (checkFormValidation()) {
+              handleSubmit(event);
             }
+          }}>
+            {pending ? (
+              <Dots color="white" />
+              ) : (
+              `${submitBtn}`
+            )}
+          </Button>}
+
             
           {cancelBtn && 
-            <button className="cancel-btn ProviderForm__btn" onClick={(event) => {
+            <Button type="secondary" classLabel="cancel" handleClick={(event) => {
               event.preventDefault(); 
-              // TODO: be able to close form from within 
               handleCancel();
-            }}>{cancelBtn}</button>
+            }}>
+              {cancelBtn}
+            </Button>
           }
           
           
