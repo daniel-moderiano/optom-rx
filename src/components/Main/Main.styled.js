@@ -10,6 +10,7 @@ const StyledMain = styled.main`
   background-color: #F6F7F9;
   background-color: #F3F4F7;
   width: 100%;
+  padding: 0 0.5rem;
   
   @media (max-width: 800px) {
     /* background-color: #fff; */

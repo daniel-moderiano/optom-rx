@@ -5,33 +5,6 @@ const StyledNav = styled.nav`
   justify-content: space-between;
   align-items: center;
 
-  .hamburger {
-    display: none;
-
-    .bar {
-      display: block;
-      width: 25px;
-      height: 2px;
-      margin: 6px auto;
-      -webkit-transition: all 0.3s ease-in-out;
-      transition: all 0.3s ease-in-out;
-      background-color: ${props => props.user ? '#FFFFFF' : 'var(--primary-color)'}
-    }
-  }
-
-  .hamburger--auth {
-    display: none;
-
-    .bar {
-      display: block;
-      width: 25px;
-      height: 2px;
-      margin: 6px auto;
-      -webkit-transition: all 0.3s ease-in-out;
-      transition: all 0.3s ease-in-out;
-      background-color: var(--primary-color);
-    }
-  }
 
   .Nav__list {
     list-style: none;
@@ -213,17 +186,13 @@ const StyledNav = styled.nav`
     }
   }
 
-  /* Landscape phones and down */
-  @media (max-width: 480px) { 
-   
-  }
 
   /* Landscape phone to portrait tablet */
   @media (max-width: 768px) { 
     .Nav__list {
       position: fixed;
       left: calc(-100% - 1rem);
-      top: ${props => props.user ? '3.4rem' : '5.8rem'};
+      top: ${props => props.user ? '3.8rem' : '5.8rem'};
       flex-direction: column;
       background-color: #fff;
       width: 100vw;
@@ -272,28 +241,7 @@ const StyledNav = styled.nav`
     }
     
 
-    .hamburger {
-      display: block;
-      cursor: pointer;
-    }
-
-    .hamburger.active .bar:nth-child(2) {
-      opacity: 0;
-    }
-
-    .hamburger.active .bar:nth-child(1) {
-      transform: translateY(8px) rotate(45deg);
-    }
-
-    .hamburger.active .bar:nth-child(3) {
-      transform: translateY(-8px) rotate(-45deg);
-    }
   }
-  /* Portrait tablet to landscape and desktop */
-  /* @media (min-width: 768px) and (max-width: 980px) { ... } */
-
-  /* Large desktop */
-  /* @media (min-width: 1200px) { ... } */
 `
 
 export { StyledNav }

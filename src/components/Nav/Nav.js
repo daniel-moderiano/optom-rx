@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { StyledNav } from "./Nav.styled";
 import { useLogout } from "../../hooks/useLogout";
 import { useState } from "react";
+import Hamburger from '../Hamburger/Hamburger'
 
 
 const Nav = ({ user, resetData, currentPage }) => {
@@ -76,11 +77,13 @@ const Nav = ({ user, resetData, currentPage }) => {
         </>}
       </ul>
 
-      <div className={`${toggleHamburger ? "hamburger active" : "hamburger"}`} onClick={toggleNav}>
+      {/* <div className={`${toggleHamburger ? "hamburger active" : "hamburger"}`} onClick={toggleNav}>
         <span className="bar"></span>
         <span className="bar"></span>
         <span className="bar"></span>
-      </div>
+      </div> */}
+
+      <Hamburger loggedIn={user ? true : false} handleClick={toggleNav} active={toggleHamburger}/> 
 
     </StyledNav>
   )

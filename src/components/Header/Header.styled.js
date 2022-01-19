@@ -5,10 +5,12 @@ const StyledHeader = styled.header`
   background-color: ${props => props.user ? 'var(--primary-color)' : 'var(--background)'};
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: ${props => props.user ? '0 1.5rem' : '1rem 3rem 1.5rem 3rem'};
   margin: 0;
   width: 100%;
-  height: 4rem;
+  height: ${props => props.user ? '3.8rem' : '5.8rem'};
+  
 
   h1 {
     margin: ${props => props.user ? '0.6rem 0 0.1rem 0' : '0.85rem 0 0 0'};
@@ -31,19 +33,6 @@ const StyledHeader = styled.header`
     display: none;
   }
 
-  /* Landscape phones and down */
-  @media (max-width: 480px) { 
-    
-  }
-
-  /* Landscape phone to portrait tablet */
-  /* @media (max-width: 768px) { ... } */
-
-  /* Portrait tablet to landscape and desktop */
-  /* @media (min-width: 768px) and (max-width: 980px) { ... } */
-
-  /* Large desktop */
-  /* @media (min-width: 1200px) { ... } */
 `
 
 export { StyledHeader }
