@@ -4,7 +4,7 @@ const StyledContentContainer = styled.div`
   display: flex;
   flex-direction: column;
   /* align-items: center; */
-  margin: 3rem 0;
+  margin: 2rem 0;
   background-color: #FFFFFF;
   box-shadow: 0 1.6px 3.6px 0 rgb(0 0 0 / 13%), 0 0.3px 0.9px 0 rgb(0 0 0 / 11%);
   padding: 3rem 5.5rem;

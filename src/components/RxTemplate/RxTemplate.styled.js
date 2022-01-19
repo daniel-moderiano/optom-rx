@@ -9,6 +9,7 @@ const StyledRxTemplate = styled.div`
   max-width: 1140px;
   display: flex;
   flex-direction: column;
+  /* line-height: 1.5rem; */
 
   .RxTemplate__title {
     font-family: var(--font-stack-myriad);
@@ -59,7 +60,8 @@ const StyledRxTemplate = styled.div`
       padding: 0.5rem 0.75rem;
       font-size: 0.9rem;
       color: #48515B;
-      line-height: 1.2rem;
+      line-height: 1.5rem;
+      max-width: 450px;
     }
 
     .ui-medication {

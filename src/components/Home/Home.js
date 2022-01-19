@@ -39,7 +39,7 @@ const Home = ({ setToast, setPage, firstSignIn, setFirstSignIn }) => {
     <ContentContainer earlyPadding={true}>
       <StyledHome className="Home">
           <h2 className="Home__title">Welcome, {user.displayName}</h2>
-          <div className="Home__welcome">Select an option to get started</div>
+          <p className="Home__description">Select an option to get started</p>
           <div className="Home__links">
             <Link className="Home__link Home__link--create" to='/form' state={ { newRx: true } }>Create prescription</Link>
             <Link className="Home__link Home__link--prescribers" to="/providers">View prescribers</Link>

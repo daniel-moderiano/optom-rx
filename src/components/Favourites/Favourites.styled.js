@@ -311,19 +311,18 @@ const StyledFavourites = styled.div`
       }
 
       .fav-item {
-        /* display: block;
-        border-bottom: 1px solid #D1D6DB;
-        align-items: flex-start;
         padding: 0;
-        margin: 1rem 0; */
-        padding: 0;
-        border: 0;
         display: flex;
         flex-direction: column;
         margin-bottom: 2rem;
-        box-shadow: 0 2px 4px -1px rgb(0 0 0 / 1%), 0 1px 5px 0 rgb(0 0 0 / 5%), 0 1px 5px 0 rgb(0 0 0 / 10%);
         border-radius: 6px;
         -moz-border-radius:6px;
+        border: 1px solid #e2e7ec;
+        box-shadow: var(--small-shadow);
+
+        &:hover {
+          background-color: #fff;
+        }
 
         .item-name {
           position: relative;
@@ -390,7 +389,7 @@ const StyledFavourites = styled.div`
         font-size: 0.9rem;
         color: #5A6572;
         box-shadow: none;
-        border-top: 1px solid #D1D6DB;
+        border-top: 1px solid #d0d7de;
         border-top-left-radius: 0;
         border-top-right-radius: 0;
         text-align: center;

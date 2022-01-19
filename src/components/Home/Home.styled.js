@@ -1,20 +1,28 @@
 import styled from "styled-components";
 
 const StyledHome = styled.div`
- 
-
   .Home__title {
-    font-family: var(--font-stack-myriad);
-    font-weight: 400;
+    font-family: var(--font-stack-segoe);
+    font-weight: 600;
     color: var(--title-color);
-    font-size: 2.5rem;
+    font-size: 2.2rem;
+    line-height: 2rem;
     margin: 0 0 0.5rem 0;
     padding: 0;
   }
 
+  .Home__description {
+    color: #57606a;
+    margin: 0;
+    padding: 0;
+    font-size: 1.25rem;
+    line-height: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
   .Home__links {
     display: flex;
-    margin-top: 2rem;
+    
 
     .Home__link {
       box-sizing: border-box;
@@ -63,14 +71,10 @@ const StyledHome = styled.div`
     }
   }
 
-  .Favourites {
-    width: 100%;
-  }
-
-
   .verify-container {
     margin-top: 1rem;
   }
+
   .modal-btns {
     display: flex;
     flex-direction: column;
@@ -81,40 +85,6 @@ const StyledHome = styled.div`
   .button {
     margin-bottom: 0.5rem;
     margin-top: 0.25rem;
-  }
-
-  .resend {
-    width: 100%;
-    text-align: center;
-    background-color: transparent;
-    border: none;
-    color: #48515B;
-    /* color: var(--focus); */
-    font-size: 0.9rem;
-    font-family: var(--font-stack-segoe);
-    /* font-weight: bold; */
-    padding: 0;
-    margin: 0;
-
-    &:hover {
-      background-color: transparent;
-      color: #1B1E22;
-      cursor: pointer;
-    }
-
-    &:focus {
-      outline: 2px solid #104362;
-      outline-offset: 1px;
-    }
-
-    &:focus:not(:focus-visible) {
-      outline: none
-    }
-
-    &:focus-visible {
-      outline: 2px solid #104362;
-      outline-offset: 1px;
-    }
   }
 
   .img-container {
@@ -140,13 +110,6 @@ const StyledHome = styled.div`
       .st4{fill:#FFFFFF;}
   
     }
-  }
-
- 
-  /* Landscape phone to portrait tablet */
-  @media (max-width: 768px) { 
-    /* padding: 3rem 3rem; */
-    
   }
 
   /* Landscape phone to portrait tablet */
