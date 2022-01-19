@@ -75,7 +75,7 @@ const StyledSettings = styled.div`
     .email-group {
       display: flex;
       align-items: center;
-      margin-bottom: 1rem;
+      margin-bottom: 0.75rem;
 
       
 
