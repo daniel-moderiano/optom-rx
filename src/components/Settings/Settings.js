@@ -30,19 +30,18 @@ const Settings = ({ user, setToast, setPage }) => {
   const [confirmPasswordAlert, setConfirmPasswordAlert] = useState({});
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const [emailConfirmPassword, setPassword] = useState('');  
-  const [emailConfirmPasswordAlert, setPasswordAlert] = useState({});
+  const [emailConfirmPassword, setEmailConfirmPassword] = useState('');  
+  const [emailConfirmPasswordAlert, setEmailConfirmPasswordAlert] = useState({});
 
   const [showModal, setShowModal] = useState(false);
   const [showEmailModal, setShowEmailModal] = useState(false);
 
   const [namePending, setNamePending] = useState(false);
-  const [nameError, setNameError] = useState(null);
 
   const [deletePending, setDeletePending] = useState(false);
-  const [deleteError, setDeleteError] = useState(null);
 
   const [changePasswordPending, setChangePasswordPending] = useState(false);
+  const [changeEmailPending, setChangeEmailPending] = useState(false);
 
   const [newEmail, setNewEmail] = useState('');
   const [newEmailAlert, setNewEmailAlert] = useState({});
@@ -54,9 +53,6 @@ const Settings = ({ user, setToast, setPage }) => {
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [showEmailConfirmPassword, setShowEmailConfirmPassword] = useState(false);
-
-  
-
 
   const { email } = user;
 
@@ -73,8 +69,8 @@ const Settings = ({ user, setToast, setPage }) => {
   // Clear any lingering data and alerts when modal is open/closed
   useEffect(() => {
     setNewEmailAlert({});
-    setPasswordAlert({});
-    setPassword('');
+    setEmailConfirmPasswordAlert({});
+    setEmailConfirmPassword('');
     setdeleteConfirmPassword('');
     setdeleteConfirmPasswordAlert('');
     setNewEmail('');
@@ -85,7 +81,6 @@ const Settings = ({ user, setToast, setPage }) => {
 
   const updateName = async () => {
     setNamePending(true);
-    setNameError(null);
 
     try {
       await updateProfile(user, {
@@ -93,7 +88,6 @@ const Settings = ({ user, setToast, setPage }) => {
       });
 
       setNamePending(false);
-      setNameError(null);
 
       setToast((prevData) => ({
         ...prevData,
@@ -103,7 +97,7 @@ const Settings = ({ user, setToast, setPage }) => {
       }));
     } catch (error) {
       setNamePending(false);
-      setNameError(error);
+
       setToast((prevData) => ({
         ...prevData,
         visible: true,
@@ -114,8 +108,6 @@ const Settings = ({ user, setToast, setPage }) => {
   };
 
   const deleteAccount = async () => {
-    setDeletePending(true);
-    setDeleteError(null);
     
     // Gather a reference to all of the user's prescribers
     const presRef = collection(db, 'providers');
@@ -132,9 +124,6 @@ const Settings = ({ user, setToast, setPage }) => {
       // Finally, logout
       logout();
 
-      setDeletePending(false);
-      setDeleteError(null);
-
       setToast((prevData) => ({
         ...prevData,
         visible: true,
@@ -142,9 +131,6 @@ const Settings = ({ user, setToast, setPage }) => {
         message: 'Account deleted'
       }));
     } catch (error) {
-      setDeletePending(false);
-      setDeleteError(error);
-      console.log(error);
       setToast((prevData) => ({
         ...prevData,
         visible: true,
@@ -201,20 +187,20 @@ const Settings = ({ user, setToast, setPage }) => {
     let valid = true;
     let inputFocused = false;
 
-    const emailConfirmPasswordInput = document.querySelector('input[name="emailConfirmPassword"]');
+    const deleteConfirmPasswordInput = document.querySelector('input[name="deleteConfirmPassword"]');
 
     // Check for blank field
-    if (emailConfirmPasswordInput.value.trim().length === 0) {
+    if (deleteConfirmPasswordInput.value.trim().length === 0) {
       if (!inputFocused) {
-        emailConfirmPasswordInput.focus();
+        deleteConfirmPasswordInput.focus();
         inputFocused = true;
       }
-      setPasswordAlert({
+      setdeleteConfirmPasswordAlert({
           message: "Please enter a password.",
           type: 'error',
         }
       );
-      emailConfirmPasswordInput.classList.add('error');
+      deleteConfirmPasswordInput.classList.add('error');
       valid = false;
     } 
     return valid;
@@ -282,7 +268,7 @@ const Settings = ({ user, setToast, setPage }) => {
     let valid = true;
     let inputFocused = false;
 
-    const deleteConfirmPasswordInput = document.querySelector('input[name="deleteConfirmPassword"]');
+    const emailConfirmPasswordInput = document.querySelector('input[name="emailConfirmPassword"]');
     const newEmailInput = document.querySelector('input[name="newEmail"]');
     
      // Check for blank field
@@ -301,32 +287,17 @@ const Settings = ({ user, setToast, setPage }) => {
     } 
 
     // Check for no change in email
-    if (newEmailInput.value === email) {
+    if (emailConfirmPasswordInput.value === email) {
       if (!inputFocused) {
-        newEmailInput.focus();
+        emailConfirmPasswordInput.focus();
         inputFocused = true;
       }
-      setNewEmailAlert({
+      setEmailConfirmPasswordAlert({
           message: "New email address must be different from the current email address",
           type: 'error',
         }
       );
-      newEmailInput.classList.add('error');
-      valid = false;
-    } 
-
-    // Check for blank field
-    if (deleteConfirmPasswordInput.value.trim().length === 0) {
-      if (!inputFocused) {
-        deleteConfirmPasswordInput.focus();
-        inputFocused = true;
-      }
-      setdeleteConfirmPasswordAlert({
-          message: "Please enter a password.",
-          type: 'error',
-        }
-      );
-      deleteConfirmPasswordInput.classList.add('error');
+      emailConfirmPasswordInput.classList.add('error');
       valid = false;
     } 
 
@@ -397,30 +368,34 @@ const Settings = ({ user, setToast, setPage }) => {
   // This function is/returns a Promise
   const refreshCredentialsForDelete = async () => {
     // Must be called once the user has entered their password, else it will just error
-    const credential = EmailAuthProvider.credential(email, emailConfirmPassword);
+    const credential = EmailAuthProvider.credential(email, deleteConfirmPassword);
 
     try {
       // Attempt re-authentication
       await reauthenticateWithCredential(user, credential);
       // Clear passwords
-      setPassword('');
+      setdeleteConfirmPassword('');
       return true;
       
     } catch (error) {
-      errorHandling(error.code, setPasswordAlert)
+      console.log(error);
+      errorHandling(error.code, setdeleteConfirmPasswordAlert);
       return false;
     }
   };
 
   // Combine the credentials and actual deleting of account using async flow
   const performDeleteFunctions = async () => {
+    setDeletePending(true);
     // Check that the credential confirmation was successful
     const confirmed = await refreshCredentialsForDelete();
     // Act based on the result
     if (confirmed) {
       deleteAccount();
+      setDeletePending(false);
     } else {
       // Do nothing, refreshCredentials function hadnles errors and directs user to fix mistakes
+      setDeletePending(false);
     }
   }
 
@@ -443,8 +418,7 @@ const Settings = ({ user, setToast, setPage }) => {
   // This function is/returns a Promise
   const refreshCredentialsForEmail = async () => {
     // Must be called once the user has entered their password, else it will just error
-    const credential = EmailAuthProvider.credential(email, deleteConfirmPassword);
-    console.log(credential);
+    const credential = EmailAuthProvider.credential(email, emailConfirmPassword);
 
     try {
       // Attempt re-authentication
@@ -461,13 +435,15 @@ const Settings = ({ user, setToast, setPage }) => {
 
   // Combine the credentials and actual deleting of account using async flow
   const performEmailUpdate = async () => {
+    setChangeEmailPending(true);
     // Check that the credential confirmation was successful
     const confirmed = await refreshCredentialsForEmail();
     // Act based on the result
     if (confirmed) {
       try {
         await updateEmail(user, newEmail);
-        setShowEmailModal(false)
+        setShowEmailModal(false);
+        setChangeEmailPending(false);
 
         setToast((prevData) => ({
           ...prevData,
@@ -491,9 +467,11 @@ const Settings = ({ user, setToast, setPage }) => {
   
       } catch (error) {
         console.log(error);
+        setChangeEmailPending(false);
         // TODO: email update error handling
       }
     } else {
+      setChangeEmailPending(false);
       // Do nothing, refreshCredentials function hadnles errors and directs user to fix mistakes
     }
   };
@@ -621,7 +599,7 @@ const Settings = ({ user, setToast, setPage }) => {
 
       </Modal>}
 
-       {showModal && <Modal title="Delete account" closeModal={() => setShowModal(false)}>
+      {showModal && <Modal title="Delete account" closeModal={() => setShowModal(false)}>
         <div className="error-container">
           <div className="error-icon">
             <svg xmlns="http://www.w3.org/2000/svg" className="alert-icon alert-icon--neutral" viewBox="0 0 512 512" width="24px">
@@ -668,8 +646,14 @@ const Settings = ({ user, setToast, setPage }) => {
           
 
         <div className="Modal__buttons">
-          <button className="cancel-btn Modal__btn" onClick={() => setShowModal(false)}>Cancel</button>
-          <button className="delete-btn Modal__btn">Delete</button>
+          <Button design="secondary" classLabel="cancel" handleClick={() => setShowModal(false)}>Cancel</Button>
+          <Button type="submit" design="delete">
+            {deletePending ? (
+              <Dots color="white"/>
+            ) : (
+              'Delete'
+            )}
+          </Button>
         </div>
         </form>
       </Modal>}
@@ -720,7 +704,7 @@ const Settings = ({ user, setToast, setPage }) => {
               name="emailConfirmPassword"
               label="Password" 
               value={emailConfirmPassword} 
-              onChange={(event) => setPassword(event.target.value)} 
+              onChange={(event) => setEmailConfirmPassword(event.target.value)} 
               className="auth-field form-field"
               alert={emailConfirmPasswordAlert}
               required
@@ -843,13 +827,7 @@ const Settings = ({ user, setToast, setPage }) => {
             </div>
           </form>
             
-        <div className="delete-account">
-          <div className="form-title form-title--delete">Delete account</div>
-          <p className="warning">Once you delete your account, it is permanent. Please be sure before proceeding.</p>
-          <Button handleClick={() => setShowModal(true)} design="delete" >
-            Delete account
-          </Button>
-        </div>
+        
         
         </>) : (
           <div className="no-email">
@@ -885,18 +863,17 @@ const Settings = ({ user, setToast, setPage }) => {
                   <button type="button" className="settings-btn settings-btn--update" onClick={() => setShowEmailModal(true)}>Update email</button>
                   {/* <button className="resend" onClick={resendEmailVerification}>Resend verification email</button> */}
                   </div>
-              </div>
-              
-      
-        
-            <div className="delete-account">
-              <div className="form-title form-title--delete">Delete account</div>
-              <p className="warning">Once you delete your account, it is permanent. Please be sure before proceeding.</p>
-              <button className="settings-btn settings-btn--delete" type="button" onClick={() => setShowModal(true)}>Delete account</button>
-            </div>           
+              </div>         
           </div>
 
         )}
+        <div className="delete-account">
+          <div className="form-title form-title--delete">Delete account</div>
+          <p className="warning">Once you delete your account, it is permanent. Please be sure.</p>
+          <Button handleClick={() => setShowModal(true)} design="delete" >
+            Delete account
+          </Button>
+        </div>
       </div>
     </StyledSettings>
     </ContentContainer>

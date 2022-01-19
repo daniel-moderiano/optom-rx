@@ -26,7 +26,7 @@ const StyledSettings = styled.div`
   }
 
   .displayName-form, .password-form, .delete-account, .email-form {
-    padding: 1.5rem 0 2rem 0;
+    padding: 1.75rem 0 2rem 0;
     display: flex;
     flex-direction: column;
   }
@@ -137,7 +137,7 @@ const StyledSettings = styled.div`
     margin-top: 1rem;
 
     .button {
-      margin: 0;
+      margin: 0 0.5rem 0 0;
     }
   }
         
@@ -275,67 +275,17 @@ const StyledSettings = styled.div`
       width: 100%;
       align-items: center;
       justify-content: flex-end;
+      
 
-      .Modal__btn {
+      .button {
         font-size: 0.9rem;
-        font-family: var(--font-stack-segoe);
-        box-sizing: border-box;
-        cursor: pointer;
-        padding: 6px 14px 8px 14px;
-        border-radius: 2px;
         min-width: 80px;
-
-        &:active {
-          transform: scale(0.98);
-        }
-
-        &:focus {
-          outline: 2px solid #104362;
-          outline-offset: 2px;
-        }
+        width: 100px;
+        height: 35px;
       }
-
-      .delete-btn {
-        /* min-width: 130px; */
-        background-color: #cc3232;
-        color: rgb(255, 255, 255);
-        border: none;
-        display: flex;
-        align-items: center;
-        justify-content: center;      
-
-      }
-      
-      .delete-btn:hover {
-        background-color: var(--btn-negative-hover-text);
-      }
-
-      .update-btn {
-        
-        background-color: var(--btn-primary);
-        color: rgb(255, 255, 255);
-        border: none;
-        display: flex;
-        align-items: center;
-        justify-content: center;      
-
-      }
-      
-      .update-btn:hover {
-        background-color: var(--btn-primary-hover);
-      }
-            
-      .cancel-btn {
-        text-decoration: none;
+   
+      .cancel {
         margin-right: 1rem;
-        /* min-width: 80px; */
-        background-color: var(--btn-secondary);
-        color: var(--btn-secondary-text);
-        border: none;
-      }
-      .cancel-btn:hover {
-        background-color: var(--btn-secondary-hover);
-        color: #21252A;
       }
     }
   }

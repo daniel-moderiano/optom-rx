@@ -9,7 +9,6 @@ const StyledButton = styled.button`
   padding: 0.45rem 16px 10px 16px;
   border-radius: 2px;
   text-decoration: none;
-  min-width: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
