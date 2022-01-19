@@ -156,8 +156,6 @@ const Login = ({ setPage }) => {
               autocomplete="current-password"
             />
           </PasswordContainer>
-
-     
          
 
           {error && <div className="error-container">

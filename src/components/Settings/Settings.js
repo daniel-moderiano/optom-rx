@@ -14,16 +14,21 @@ import ContentContainer from '../utils/ContentContainer/ContentContainer'
 const Settings = ({ user, setToast, setPage }) => {
   const { logout } = useLogout();
   const [displayName, setDisplayName] = useState('Test');
+
   const [currentPassword, setCurrentPassword] = useState('');
   const [currentPasswordAlert, setCurrentPasswordAlert] = useState({});
+
   const [newPasswordAlert, setNewPasswordAlert] = useState({});
   const [newPassword, setNewPassword] = useState('');
 
-  const [modalPasswordAlert, setModalPasswordAlert] = useState({});
-  const [modalPassword, setModalPassword] = useState('');
+  const [deleteConfirmPasswordAlert, setdeleteConfirmPasswordAlert] = useState({});
+  const [deleteConfirmPassword, setdeleteConfirmPassword] = useState('');
 
   const [confirmPasswordAlert, setConfirmPasswordAlert] = useState({});
   const [confirmPassword, setConfirmPassword] = useState('');
+
+  const [emailConfirmPassword, setPassword] = useState('');  
+  const [emailConfirmPasswordAlert, setPasswordAlert] = useState({});
 
   const [showModal, setShowModal] = useState(false);
   const [showEmailModal, setShowEmailModal] = useState(false);
@@ -39,10 +44,7 @@ const Settings = ({ user, setToast, setPage }) => {
   
   const [showVerifyModal, setShowVerifyModal] = useState(false)
 
-  const [password, setPassword] = useState('');
-
   
-  const [passwordAlert, setPasswordAlert] = useState({});
 
 
 
@@ -63,8 +65,8 @@ const Settings = ({ user, setToast, setPage }) => {
     setNewEmailAlert({});
     setPasswordAlert({});
     setPassword('');
-    setModalPassword('');
-    setModalPasswordAlert('')
+    setdeleteConfirmPassword('');
+    setdeleteConfirmPasswordAlert('')
     setNewEmail('')
   }, [showModal, showEmailModal])
 
@@ -187,12 +189,12 @@ const Settings = ({ user, setToast, setPage }) => {
     let valid = true;
     let inputFocused = false;
 
-    const passwordInput = document.querySelector('input[name="password"]');
+    const emailConfirmPasswordInput = document.querySelector('input[name="emailConfirmPassword"]');
 
     // Check for blank field
-    if (passwordInput.value.trim().length === 0) {
+    if (emailConfirmPasswordInput.value.trim().length === 0) {
       if (!inputFocused) {
-        passwordInput.focus();
+        emailConfirmPasswordInput.focus();
         inputFocused = true;
       }
       setPasswordAlert({
@@ -200,7 +202,7 @@ const Settings = ({ user, setToast, setPage }) => {
           type: 'error',
         }
       );
-      passwordInput.classList.add('error');
+      emailConfirmPasswordInput.classList.add('error');
       valid = false;
     } 
     return valid;
@@ -268,7 +270,7 @@ const Settings = ({ user, setToast, setPage }) => {
     let valid = true;
     let inputFocused = false;
 
-    const modalPasswordInput = document.querySelector('input[name="modalPassword"]');
+    const deleteConfirmPasswordInput = document.querySelector('input[name="deleteConfirmPassword"]');
     const newEmailInput = document.querySelector('input[name="newEmail"]');
     
 
@@ -305,17 +307,17 @@ const Settings = ({ user, setToast, setPage }) => {
     } 
 
     // Check for blank field
-    if (modalPasswordInput.value.trim().length === 0) {
+    if (deleteConfirmPasswordInput.value.trim().length === 0) {
       if (!inputFocused) {
-        modalPasswordInput.focus();
+        deleteConfirmPasswordInput.focus();
         inputFocused = true;
       }
-      setModalPasswordAlert({
+      setdeleteConfirmPasswordAlert({
           message: "Please enter a password.",
           type: 'error',
         }
       );
-      modalPasswordInput.classList.add('error');
+      deleteConfirmPasswordInput.classList.add('error');
       valid = false;
     } 
 
@@ -387,7 +389,7 @@ const Settings = ({ user, setToast, setPage }) => {
   // This function is/returns a Promise
   const refreshCredentialsForDelete = async () => {
     // Must be called once the user has entered their password, else it will just error
-    const credential = EmailAuthProvider.credential(email, password);
+    const credential = EmailAuthProvider.credential(email, emailConfirmPassword);
 
     try {
       // Attempt re-authentication
@@ -433,7 +435,7 @@ const Settings = ({ user, setToast, setPage }) => {
   // This function is/returns a Promise
   const refreshCredentialsForEmail = async () => {
     // Must be called once the user has entered their password, else it will just error
-    const credential = EmailAuthProvider.credential(email, modalPassword);
+    const credential = EmailAuthProvider.credential(email, deleteConfirmPassword);
     console.log(credential);
 
     try {
@@ -633,14 +635,14 @@ const Settings = ({ user, setToast, setPage }) => {
           <FormField 
             id="current-password"
             fieldType="password" 
-            name="password"
+            name="emailConfirmPassword"
             label="Password" 
-            value={password} 
+            value={emailConfirmPassword} 
             onChange={(event) => setPassword(event.target.value)} 
             className="auth-field form-field"
-            alert={passwordAlert}
+            alert={emailConfirmPasswordAlert}
             required
-            describedBy={Object.keys(passwordAlert).length === 0 ? null : 'current-password-alert'}
+            describedBy={Object.keys(emailConfirmPasswordAlert).length === 0 ? null : 'current-password-alert'}
             autocomplete="current-password"
           />
 
@@ -693,14 +695,14 @@ const Settings = ({ user, setToast, setPage }) => {
           <FormField 
             id="current-password"
             fieldType="password" 
-            name="modalPassword"
+            name="deleteConfirmPassword"
             label="Password" 
-            value={modalPassword} 
-            onChange={(event) => setModalPassword(event.target.value)} 
+            value={deleteConfirmPassword} 
+            onChange={(event) => setdeleteConfirmPassword(event.target.value)} 
             className="auth-field form-field"
-            alert={modalPasswordAlert}
+            alert={deleteConfirmPasswordAlert}
             required
-            describedBy={Object.keys(modalPasswordAlert).length === 0 ? null : 'current-password-alert'}
+            describedBy={Object.keys(deleteConfirmPasswordAlert).length === 0 ? null : 'current-password-alert'}
             autocomplete="current-password"
           />
 
