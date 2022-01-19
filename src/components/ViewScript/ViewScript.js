@@ -9,8 +9,8 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 import Modal from "../utils/Modal/Modal";
 import FormField from "../FormField/FormField";
 import Dots from "../utils/Dots/Dots";
-import ContentContainer from '../utils/ContentContainer/ContentContainer'
-
+import ContentContainer from '../utils/ContentContainer/ContentContainer';
+import PageHeader from '../utils/PageHeader/PageHeader';
 import './ViewScript.css'
 
 const ViewScript = ({ setToast, resetData, setPage }) => {
@@ -183,11 +183,7 @@ const ViewScript = ({ setToast, resetData, setPage }) => {
         </form>
       </Modal>}
       
-      <div className="header">
-        <h2 className="EditProvider__title">Script #{id}</h2>
-
-        
-      </div>
+      <PageHeader title={`Script #${id}`} />
       
       <div className="container">
         <div className="script__container">

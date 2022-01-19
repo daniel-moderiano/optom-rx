@@ -5,7 +5,8 @@ import Table from './Table';
 import Spinner from '../utils/Spinner/Spinner';
 import { useEffect } from 'react';
 import Dots from '../utils/Dots/Dots';
-import ContentContainer from '../utils/ContentContainer/ContentContainer'
+import ContentContainer from '../utils/ContentContainer/ContentContainer';
+import PageHeader from '../utils/PageHeader/PageHeader';
 
 const Scripts = ({ setToast, setPage }) => {
   const { user } = useAuthContext();
@@ -32,9 +33,7 @@ const Scripts = ({ setToast, setPage }) => {
   return (
     <ContentContainer earlyPadding={true}>
       <StyledScripts className="Scripts">
-        <h2 className="Scripts__title">Scripts</h2>
-        <p id='Scripts__description' className="Scripts__description">View all prescriptions you have written. Click the script ID for more information.</p>
-
+        <PageHeader title="Scripts" description="View all prescriptions you have written. Click the script ID for more information."/>
         
         <div className="Scripts__container">
           {isPending && <Spinner />}

@@ -7,6 +7,7 @@ import TableProviders from './TableProviders';
 import Spinner from '../utils/Spinner/Spinner';
 import { useEffect } from 'react';
 import ContentContainer from '../utils/ContentContainer/ContentContainer'
+import PageHeader from '../utils/PageHeader/PageHeader';
 
 
 const Providers = ({ setToast, setPage }) => {
@@ -34,9 +35,8 @@ const Providers = ({ setToast, setPage }) => {
   return (
     <ContentContainer earlyPadding={true}>
       <StyledProviders className="Providers">
-        <h2 className="Providers__title">Providers</h2>
-        <p id='Providers__description' className="Providers__description">Use this section to add provider details that can be used in your prescriptions</p>
-    
+        <PageHeader title="Prescribers" description="Use this section to add provider details that can be used in your prescriptions"/>
+
         <Link className="Providers__add-btn" to={`/add-provider`}>Add new provider</Link> 
 
         <div className="Providers__container">

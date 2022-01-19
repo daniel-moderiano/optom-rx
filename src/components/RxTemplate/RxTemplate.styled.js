@@ -1,15 +1,17 @@
 import styled from "styled-components";
 
 const StyledRxTemplate = styled.div`
-  margin-top: 3rem;
-  background-color: #FFFFFF;
-  box-shadow: 0 1.6px 3.6px 0 rgb(0 0 0 / 13%), 0 0.3px 0.9px 0 rgb(0 0 0 / 11%);
-  padding: 2rem 5.5rem;
-  width: 100%;
-  max-width: 1140px;
   display: flex;
   flex-direction: column;
-  /* line-height: 1.5rem; */
+  margin: 2rem 0;
+  background-color: #FFFFFF;
+  box-shadow: 0 1.6px 3.6px 0 rgb(0 0 0 / 13%), 0 0.3px 0.9px 0 rgb(0 0 0 / 11%);
+  padding: 3.5rem 5.5rem;
+  max-width: 1140px;
+  width: 100%;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+  box-shadow: var(--small-shadow);
 
   .RxTemplate__title {
     font-family: var(--font-stack-myriad);
@@ -236,12 +238,17 @@ const StyledRxTemplate = styled.div`
     padding: 0;
     display: block;
     margin-top: 6px;
+    border: none;
+    border-radius: 0;
+    box-shadow: 0;
+    width: auto;
+    max-width: none;
 
     .ui-container, .ui-description {
       display: none;
     }
 
-    h2, h3, h4, button, .RxTemplate__btns {
+    h1, h2, h3, h4, button, .RxTemplate__btns {
       display: none;
       margin: 0;
       padding: 0;
@@ -251,7 +258,6 @@ const StyledRxTemplate = styled.div`
       display: block;
       margin: 0;
       line-height: normal;
-      
       
       .container {
         position: relative;

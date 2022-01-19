@@ -8,7 +8,9 @@ import { db } from '../../firebase/config';
 import { arrayUnion, doc, setDoc, updateDoc } from "firebase/firestore";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useState, useEffect } from "react";
-import Dots from '../utils/Dots/Dots'
+import Dots from '../utils/Dots/Dots';
+import PageHeader from '../utils/PageHeader/PageHeader';
+import ContentContainer from "../utils/ContentContainer/ContentContainer";
 
 
 const RxTemplate = ({ data, setToast, setPage }) => {
@@ -134,8 +136,9 @@ const RxTemplate = ({ data, setToast, setPage }) => {
   };
 
   return (
-    <StyledRxTemplate className="RxTemplate">
-      <h2 className="RxTemplate__title">Review your prescription</h2>
+<StyledRxTemplate className="RxTemplate">
+      <PageHeader title="Review your prescription"/>
+
       {/* If the template is rendered without a full set of data, many functions will fail. Hence this is rendered conditionally. Check is performed against presence of patient data  */}
       {Object.keys(patientData).length > 0 ? <>
         <div className="ui-description">
@@ -569,7 +572,7 @@ const RxTemplate = ({ data, setToast, setPage }) => {
         </div>
       </> : <h3 className="RxTemplate__subtitle">Fill out the form to generate Rx</h3>}
       
-    </StyledRxTemplate>
+    </StyledRxTemplate>   
   );
 };
 

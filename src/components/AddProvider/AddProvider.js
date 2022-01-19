@@ -6,7 +6,8 @@ import ProviderForm from "../ProviderForm/ProviderForm";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { StyledAddProvider } from "./AddProvider.styled";
 import Fieldset from "../utils/Fieldset/Fieldset";
-import ContentContainer from '../utils/ContentContainer/ContentContainer'
+import ContentContainer from '../utils/ContentContainer/ContentContainer';
+import PageHeader from '../utils/PageHeader/PageHeader';
 
 const AddProvider = ({ googleLoaded, setToast, setPage }) => {
   const { user } = useAuthContext();
@@ -108,21 +109,14 @@ const AddProvider = ({ googleLoaded, setToast, setPage }) => {
     
   };
 
-
   const cancelEdit = () => {
-
-      navigate('/providers');
-
+    navigate('/providers');
   }
-
-  
 
   return (
     <ContentContainer>
       <StyledAddProvider>
-        <h2 className="AddProvider__title">Add provider</h2>
-        <p className="AddProvider__description">Enter details to add a new provider</p>
-
+        <PageHeader title="Add provider" description="Enter details to add a new prescriber"/>
         <Fieldset className="add-provider-form" legend="Provider Details">
           <ProviderForm 
             googleLoaded={googleLoaded} 
@@ -138,7 +132,6 @@ const AddProvider = ({ googleLoaded, setToast, setPage }) => {
             pending={isPending}
           />
         </Fieldset>   
-        
       </StyledAddProvider>
     </ContentContainer>
   )

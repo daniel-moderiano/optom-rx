@@ -1,24 +1,6 @@
 import styled from "styled-components";
 
 const StyledRxForm = styled.form`
-
-
-  .RxForm__title {
-    font-family: var(--font-stack-myriad);
-    font-weight: 400;
-    color: var(--title-color);
-    font-size: 2.5rem;
-    padding: 0;
-    margin: 1rem 0 0.75rem 0;
-    place-self: flex-start;
-  }
-
-  .RxForm__description {
-    place-self: flex-start;
-    margin: 0;
-    margin-bottom: 2rem;
-  }
-
   .scriptNo {
     width: 100%;
     text-align: right;

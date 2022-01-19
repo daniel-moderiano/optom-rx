@@ -7,7 +7,8 @@ import ProviderForm from "../ProviderForm/ProviderForm";
 import { StyledEditProvider } from "./EditProvider.styled";
 import Fieldset from "../utils/Fieldset/Fieldset";
 import { useProvider } from "../../hooks/useProvider";
-import ContentContainer from '../utils/ContentContainer/ContentContainer'
+import ContentContainer from '../utils/ContentContainer/ContentContainer';
+import PageHeader from '../utils/PageHeader/PageHeader';
 
 const EditProvider = ({ googleLoaded, setToast, setPage }) => {
   const { id } = useParams();
@@ -106,26 +107,23 @@ const EditProvider = ({ googleLoaded, setToast, setPage }) => {
   return (
     <ContentContainer>
       <StyledEditProvider>
-        <h2 className="EditProvider__title">Edit provider</h2>
-        <p className="EditProvider__description">Change any details and then save changes</p>
-        
-          <Fieldset className="edit-provider-form" legend="Provider Details" >
-            <ProviderForm 
-              googleLoaded={googleLoaded} 
-              standalone={true} 
-              data={providerData}
-              setData={setProviderData}
-              handleChange={handleChange}
-              handleSubmit={handleSubmit}
-              handleCancel={cancelEdit}
-              toggleBooleanState={() => toggleBooleanState(setProviderData, providerData, 'prefix')}
-              submitBtn="Save changes"
-              cancelBtn="Cancel"
-              pending={localPending}
-              formPending={isPending}
-            />
-          </Fieldset>
-
+        <PageHeader title="Edit provider" description="Change any details and then save changes"/>        
+        <Fieldset className="edit-provider-form" legend="Provider Details" >
+          <ProviderForm 
+            googleLoaded={googleLoaded} 
+            standalone={true} 
+            data={providerData}
+            setData={setProviderData}
+            handleChange={handleChange}
+            handleSubmit={handleSubmit}
+            handleCancel={cancelEdit}
+            toggleBooleanState={() => toggleBooleanState(setProviderData, providerData, 'prefix')}
+            submitBtn="Save changes"
+            cancelBtn="Cancel"
+            pending={localPending}
+            formPending={isPending}
+          />
+        </Fieldset>
       </StyledEditProvider>
     </ContentContainer>
   )

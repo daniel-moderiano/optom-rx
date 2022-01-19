@@ -8,15 +8,6 @@ const StyledSettings = styled.div`
 
   }
 
-  .Home__title {
-    font-family: var(--font-stack-myriad);
-    font-weight: 400;
-    color: var(--title-color);
-    font-size: 2.5rem;
-    margin: 1rem 0 0.5rem 0;
-    padding: 0;
-  }
-
   .hidden {
     display: none;
   }

@@ -10,7 +10,8 @@ import Modal from "../utils/Modal/Modal";
 import { Link } from "react-router-dom";
 import Button from "../utils/Button/Button";
 import ContentContainer from '../utils/ContentContainer/ContentContainer';
-import PasswordContainer from '../utils/PasswordContainer/PasswordContainer'
+import PasswordContainer from '../utils/PasswordContainer/PasswordContainer';
+import PageHeader from '../utils/PageHeader/PageHeader';
 
 const Settings = ({ user, setToast, setPage }) => {
   const { logout } = useLogout();
@@ -551,7 +552,7 @@ const Settings = ({ user, setToast, setPage }) => {
 
   return (
     <ContentContainer>
-<StyledSettings className="Settings">
+      <StyledSettings className="Settings">
       {showVerifyModal && <Modal title="Verify your email" closeModal={() => setShowVerifyModal(false)}>
   
   <div className="verify-container">
@@ -731,9 +732,7 @@ const Settings = ({ user, setToast, setPage }) => {
         </form>
       </Modal>}
 
-      <h2 className="Home__title">Settings</h2>
-      {/* <div className="Home__welcome">Select an option to get started</div> */}
-
+      <PageHeader title="Settings" />
 
       <div className="Settings-container">
         {user.emailVerified ? (<>

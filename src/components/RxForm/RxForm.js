@@ -12,7 +12,8 @@ import { usePBSFetch } from "../../hooks/usePBSFetch";
 import Select from 'react-select';
 import { Link } from "react-router-dom";
 import Spinner from "../utils/Spinner/Spinner";
-import ContentContainer from '../utils/ContentContainer/ContentContainer'
+import ContentContainer from '../utils/ContentContainer/ContentContainer';
+import PageHeader from '../utils/PageHeader/PageHeader';
 
 // ! Multiple optometrist items are not permitted to be prescribed on the same form; each must use an individual form
 
@@ -1141,6 +1142,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
 
   return (
     <ContentContainer>
+      <PageHeader title="New prescription" description="Fill out the details required to prescribe"/>
 <StyledRxForm 
       className="rxform" 
       onSubmit={(e) => {
@@ -1152,8 +1154,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
       }}
       autoComplete="off"
       noValidate>
-      <h2 className="RxForm__title">New Prescription</h2>
-      <p className="RxForm__description">Fill out the details required to prescribe</p>
       <div className="scriptNo" data-testid="scriptNo">Script number: {isLoading ? 'Loading...' : miscData.scriptID}</div>
 
       <Fieldset className="provider-form select-fieldset" legend="Provider Details">
