@@ -14,6 +14,7 @@ import { Link } from "react-router-dom";
 import Spinner from "../utils/Spinner/Spinner";
 import ContentContainer from '../utils/ContentContainer/ContentContainer';
 import PageHeader from '../utils/PageHeader/PageHeader';
+import Button from '../utils/Button/Button'
 
 // ! Multiple optometrist items are not permitted to be prescribed on the same form; each must use an individual form
 
@@ -1439,8 +1440,8 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
       </Fieldset>
 
       <div className="ProviderForm__btns">
-        <button type="submit" className="submit-btn ProviderForm__btn">Generate prescription</button>
-        <Link to="/" className="cancel-btn ProviderForm__btn">Cancel</Link>
+        <Button type="submit">Generate prescription</Button>
+        <Link to="/" className="cancel-btn btn-secondary">Cancel</Link>
         
       </div>
 

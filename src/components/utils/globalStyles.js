@@ -47,8 +47,149 @@ const GlobalStyles = createGlobalStyle`
     --font-title: 'Myriad Pro Light', Arial, Helvetica, sans-serif;
   }
 
+  .focus-styles {
+    &:focus {
+      outline: 2px solid #104362;
+      outline-offset: 1px;
+    }
+
+    &:focus:not(:focus-visible) {
+      outline: none
+    }
+
+    &:focus-visible {
+      outline: 2px solid #104362;
+      outline-offset: 2px;
+    }
+  }
+
+  /* Use on elements to replicate primary button styling (links mainly) */
+  .btn-primary {
+    box-sizing: border-box;
+    font-size: 1rem;
+    font-family: var(--font-stack-segoe);
+    box-sizing: border-box;
+    cursor: pointer;
+    padding: 0.45rem 16px 10px 16px;
+    border-radius: 2px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.5rem;
+    border: 1px solid transparent;
+    background-color: var(--primary-color);
+    color: rgb(255, 255, 255);
+
+    &:hover {
+      background-color: var(--btn-primary-hover);
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+
+    &:focus {
+      outline: 2px solid #104362;
+      outline-offset: 1px;
+    }
+
+    &:focus:not(:focus-visible) {
+      outline: none
+    }
+
+    &:focus-visible {
+      outline: 2px solid #104362;
+      outline-offset: 2px;
+    }
+  }
+
+  /* Use on elements to replicate secondary button styling (links mainly) */
+  .btn-secondary {
+    box-sizing: border-box;
+    font-size: 1rem;
+    font-family: var(--font-stack-segoe);
+    box-sizing: border-box;
+    cursor: pointer;
+    padding: 0.45rem 16px 10px 16px;
+    border-radius: 2px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.5rem;
+    border: 1px solid transparent;
+    background-color: var(--btn-secondary);
+    color: var(--btn-secondary-text);
+
+    &:hover {
+      background-color: var(--btn-secondary-hover);
+      color: #21252A;
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+
+    &:focus {
+      outline: 2px solid #104362;
+      outline-offset: 1px;
+    }
+
+    &:focus:not(:focus-visible) {
+      outline: none
+    }
+
+    &:focus-visible {
+      outline: 2px solid #104362;
+      outline-offset: 2px;
+    }
+  }
+
   * {
     box-sizing: border-box;
+  }
+
+    /* Use on elements to replicate ghost button styling (links mainly) */
+  .btn-ghost {
+    box-sizing: border-box;
+    font-size: 1rem;
+    font-family: var(--font-stack-segoe);
+    box-sizing: border-box;
+    cursor: pointer;
+    padding: 0.45rem 16px 10px 16px;
+    border-radius: 2px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.5rem;
+    background-color: #fff;
+    color: #0b4740;
+    border: 1px solid #0b4740;
+
+    &:hover {
+      background-color: var(--btn-positive-hover);
+      color: #0b4740;
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+
+    &:focus {
+      outline: 2px solid #104362;
+      outline-offset: 1px;
+    }
+
+    &:focus:not(:focus-visible) {
+      outline: none
+    }
+
+    &:focus-visible {
+      outline: 2px solid #104362;
+      outline-offset: 2px;
+    }
   }
 
   body {

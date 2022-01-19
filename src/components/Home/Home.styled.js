@@ -23,52 +23,10 @@ const StyledHome = styled.div`
   .Home__links {
     display: flex;
     
-
-    .Home__link {
-      box-sizing: border-box;
-      font-size: 1rem;
-      font-family: var(--font-stack-segoe);
-      box-sizing: border-box;
-      cursor: pointer;
-      padding: 0.45rem 16px 10px 16px;
-      border-radius: 2px;
-      text-decoration: none;
-      
-
-      &:active {
-        transform: scale(0.98);
-      }
-
-      &:focus {
-        outline: 2px solid #104362;
-        outline-offset: 2px;
-      }
-    }
-
-    .Home__link--create {
-      min-width: 80px;
-      background-color: var(--primary-color);
-      color: rgb(255, 255, 255);
-      border: 1px solid transparent;
-    }
-    
-    .Home__link--create:hover {
-      background-color: var(--btn-primary-hover);
-    }
-
     .Home__link--prescribers {
-      min-width: 80px;
-      /* padding-top: 0.45rem; */
-      background-color: #fff;
-      color: #0b4740;
-      border: 1px solid #0b4740;
       margin-left: 1.5rem;
     }
     
-    .Home__link--prescribers:hover {
-      background-color: var(--btn-positive-hover);
-      /* color: var(--btn-positive-hover-text); */
-    }
   }
 
   .Modal {
@@ -150,17 +108,11 @@ const StyledHome = styled.div`
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      
-      /* align-items: center; */
-      /* width: 15rem; */
+
       .Home__link {
         margin: 0 0 1rem 0;
         max-width: 250px;
         width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
       }
     }
   }

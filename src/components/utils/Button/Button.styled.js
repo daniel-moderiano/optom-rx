@@ -13,7 +13,6 @@ const StyledButton = styled.button`
   align-items: center;
   justify-content: center;
   height: 2.5rem;
-  
   border: 1px solid transparent;
 
   &.button--primary {

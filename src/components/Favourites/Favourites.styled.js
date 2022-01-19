@@ -290,7 +290,7 @@ const StyledFavourites = styled.div`
         border-radius: 6px;
         -moz-border-radius:6px;
         box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px, rgba(0, 0, 0, 0.05) 0px 0px 1px 0px;
-        border: none;
+        /* border: 1px solid rgba(0, 0, 0, 0.1); */
 
         &:hover {
           background-color: #fff;

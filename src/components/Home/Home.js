@@ -42,8 +42,8 @@ const Home = ({ setToast, setPage, firstSignIn, setFirstSignIn }) => {
         <PageHeader title={`Welcome, ${user.displayName}`} description="Select an option to get started"/>
         
         <div className="Home__links">
-          <Link className="Home__link Home__link--create" to='/form' state={ { newRx: true } }>Create prescription</Link>
-          <Link className="Home__link Home__link--prescribers" to="/providers">View prescribers</Link>
+          <Link className="Home__link btn-primary" to='/form' state={ { newRx: true } }>Create prescription</Link>
+          <Link className="Home__link Home__link--prescribers btn-ghost" to="/providers">View prescribers</Link>
         </div>
 
           <div className="Favourites">
