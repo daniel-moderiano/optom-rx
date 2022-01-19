@@ -46,22 +46,33 @@ const StyledAddressAutocomplete = styled.fieldset`
     position: absolute;
     right: 0.3rem;
     top: 5.6rem;
-    background-color: #fff;
+    background-color: transparent;
     border: none;
     margin: 0;
     padding: 0;
     font-size: 0.8rem;
-    text-decoration: underline;
     font-family: var(--font-stack-segoe);
     line-height: 0.8rem;
+    color: #48515B;
+    border-radius: 2px;
 
     &:hover {
       cursor: pointer;
-    }
+      color: #1B1E22;
+    }    
 
     &:focus {
       outline: 2px solid #104362;
-      outline-offset: 2px;
+      outline-offset: 1px;
+    }
+
+    &:focus:not(:focus-visible) {
+      outline: none
+    }
+
+    &:focus-visible {
+      outline: 2px solid #104362;
+      outline-offset: 1px;
     }
   }
 

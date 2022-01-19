@@ -297,6 +297,7 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
             className="checkbox prefix-field"
             enterFunc={(event) => {
               if (event.keyCode === 13) {
+                event.preventDefault();
                 toggleBooleanState(setData, data, event.target.name);
               }
             }}

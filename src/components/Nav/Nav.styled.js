@@ -17,7 +17,7 @@ const StyledNav = styled.nav`
         /* text-transform: uppercase; */
         font-family: var(--font-stack-segoe);
         font-weight: 400;
-        font-size: 1rem;
+        font-size: 1.05rem;
         /* letter-spacing: 0.05rem; */
         padding-bottom: 5px;  // Adds space btween link and underline
         position: relative;
