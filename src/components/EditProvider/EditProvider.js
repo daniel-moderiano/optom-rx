@@ -108,7 +108,8 @@ const EditProvider = ({ googleLoaded, setToast, setPage }) => {
     <ContentContainer>
       <StyledEditProvider>
         <PageHeader title="Edit provider" description="Change any details and then save changes"/>        
-        <Fieldset className="edit-provider-form" legend="Provider Details" >
+        <div className="form-container">
+          <span className="form-title">Prescriber details</span>
           <ProviderForm 
             googleLoaded={googleLoaded} 
             standalone={true} 
@@ -123,7 +124,7 @@ const EditProvider = ({ googleLoaded, setToast, setPage }) => {
             pending={localPending}
             formPending={isPending}
           />
-        </Fieldset>
+        </div>
       </StyledEditProvider>
     </ContentContainer>
   )

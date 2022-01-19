@@ -117,7 +117,8 @@ const AddProvider = ({ googleLoaded, setToast, setPage }) => {
     <ContentContainer>
       <StyledAddProvider>
         <PageHeader title="Add provider" description="Enter details to add a new prescriber"/>
-        <Fieldset className="add-provider-form" legend="Provider Details">
+        <div className="form-container">
+          <span className="form-title">Prescriber details</span>
           <ProviderForm 
             googleLoaded={googleLoaded} 
             standalone={true} 
@@ -131,7 +132,7 @@ const AddProvider = ({ googleLoaded, setToast, setPage }) => {
             cancelBtn="Cancel"
             pending={isPending}
           />
-        </Fieldset>   
+        </div>
       </StyledAddProvider>
     </ContentContainer>
   )
