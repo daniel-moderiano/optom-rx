@@ -8,6 +8,7 @@ import { db } from '../../firebase/config';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Modal from '../utils/Modal/Modal';
+import Button from '../utils/Button/Button'
 
 const Favourites = ({ setToast }) => {
   const { user } = useAuthContext();
@@ -156,10 +157,8 @@ const Favourites = ({ setToast }) => {
           <div className="provider-summary">{`${selectedScript.customName === "" ? formatDrug(selectedScript) : selectedScript.customName}`}</div>
         </div>
         <div className="Modal__buttons">
-          <button className="cancel-btn Modal__btn" onClick={() => setShowModal(false)}>Cancel</button>
-          <button className="delete-btn Modal__btn" onClick={() => {
-            deleteFavourite(selectedScript);
-          }}>Delete</button>
+          <Button classLabel="cancel" design="secondary" handleClick={() => setShowModal(false)}>Cancel</Button>
+          <Button design="delete" handleClick={() => deleteFavourite(selectedScript)}>Delete</Button>
         </div>
       </Modal>}
       <h2 className="Favourites__title">Favourite scripts</h2>
