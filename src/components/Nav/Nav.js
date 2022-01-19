@@ -64,7 +64,7 @@ const Nav = ({ user, resetData, currentPage }) => {
           </li>
           <li className="Nav__list-item" role="none"> 
             <button 
-              className={`Nav__link Nav__link--std Nav__link--logout`} 
+              className='Nav__link Nav__link--std'
               onClick={() => {
                 closeNav();
                 logout();

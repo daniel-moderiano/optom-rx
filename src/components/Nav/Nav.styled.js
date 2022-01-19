@@ -1,39 +1,32 @@
 import styled from "styled-components";
 
 const StyledNav = styled.nav`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
 
   .Nav__list {
     list-style: none;
     display: flex;
     margin: 0;
-    /* padding-top: 0rem; */
     justify-content: space-between;
-    align-items: center;
-    /* overflow-y: auto; */
-
 
     .Nav__list-item {
-      font-size: 1.1rem;
-      padding: 0rem 0.65rem 0.2rem 0.65rem;
+      padding: 0 0 0 1.5rem;
 
       .Nav__link--std {
         text-decoration: none;
         color: ${props => props.user ? '#FFF' : 'var(--primary-color)'};
-        text-transform: uppercase;
+        /* text-transform: uppercase; */
         font-family: var(--font-stack-segoe);
-        /* font-weight: 600; */
-        font-size: 0.9rem;
-        letter-spacing: 0.05rem;
-        padding-bottom: 5px;
+        font-weight: 400;
+        font-size: 1rem;
+        /* letter-spacing: 0.05rem; */
+        padding-bottom: 5px;  // Adds space btween link and underline
         position: relative;
-        padding-right: 0.2rem;
-        padding-left: 0.2rem;
-        border: 0px solid transparent;
-        border-radius: 2px;
+        background-color: transparent;
+        border: none;
+        padding: 0 0 5px 0;
+        margin: 0;
+        box-sizing: border-box;
+        
         
         &:before,
         &:after {
@@ -41,7 +34,7 @@ const StyledNav = styled.nav`
           position: absolute;
           bottom: 2px;
           left: 0; right: 0;
-          height: 0.05rem;
+          height: 0.08rem;
           background-color: #fff;
         }
         &:before {
@@ -56,6 +49,8 @@ const StyledNav = styled.nav`
         }
 
         &:hover {
+          cursor: pointer;
+
           &:before,
           &:after {
             opacity: 1;
@@ -73,6 +68,8 @@ const StyledNav = styled.nav`
           /* Focus fallback for browsers that do not suppert :focus-visible */
           outline: 0.1rem solid white;
           outline-offset: 1px;
+          /* border: 0px solid transparent; */
+          border-radius: 2px;
         }
 
         &:focus:not(:focus-visible) {
@@ -85,6 +82,8 @@ const StyledNav = styled.nav`
           /* Keyboard only focus styling, able to differ from fallback styling if required */
           outline: 0.1rem solid white;
           outline-offset: 1px;
+          /* border: 0px solid transparent; */
+          border-radius: 2px;
         }
         
       }
@@ -146,42 +145,8 @@ const StyledNav = styled.nav`
       }
 
       .Nav__link--signup {
-        /* border: 0.1rem solid var(--primary-color); */
-        /* border-radius: 5px; */
-        /* padding: 0.4rem 1rem 0.5rem 1rem; */
         text-decoration: none;
         color: ${props => props.user ? '#FFF' : 'var(--primary-color)'};
-      }
-
-      .Nav__link--logout {
-        
-        background-color: var(--primary-color);
-        margin: 0;
-        /* margin-top: 6px; */
-        padding: 0 0.2rem 5px 0.2rem;
-        border: none;
-        font-family: var(--font-stack-segoe);
-        /* font-size: 1.1rem; */
-        
-
-        &:hover {
-          cursor: pointer;
-        }
-
-        &:focus {
-          outline: 0.1rem solid white;
-          outline-offset: 1px;
-        }
-
-        &:focus:not(:focus-visible) {
-          outline: none
-        }
-
-        &:focus-visible {
-          outline: 0.1rem solid white;
-          outline-offset: 1px;
-        }
-      
       }
     }
   }
@@ -207,30 +172,18 @@ const StyledNav = styled.nav`
       padding: 0;
 
       .Nav__list-item {
-        margin: 1.25rem 0;
-        border-radius: 0;
+        padding: 1.1rem 0;
+        /* border-bottom: 1px solid #eaf0f7; */
+
 
         .Nav__link {
           color: var(--primary-color);
-          font-size: 1.1rem;
 
           &:before,
           &:after {
             background-color: var(--primary-color);
           }
-          
         }
-
-        .Nav__link--logout {
-          color: var(--primary-color);
-          background-color: #fff;
-          margin: 0;
-          padding: 0 0 5px 0;
-          border: none;
-          font-family: var(--font-stack-segoe);
-          font-size: 1.1rem;
-        }
-
       }
     }
 
