@@ -2,16 +2,6 @@ import styled from "styled-components";
 
 const StyledRxForm = styled.form`
 
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  max-width: 1140px;
-  width: 100%;
-  background-color: #fff;
-  padding: 2rem 5.5rem;
-  margin: 3rem 0;
-  box-shadow: 0 1.6px 3.6px 0 rgb(0 0 0 / 13%), 0 0.3px 0.9px 0 rgb(0 0 0 / 11%);
 
   .RxForm__title {
     font-family: var(--font-stack-myriad);
@@ -369,7 +359,7 @@ const StyledRxForm = styled.form`
   
   /* Landscape phones and down */
   @media (max-width: 590px) { 
-    padding: 2rem 3rem;
+    
 
     .misc-form {
       .solo-alert-container {

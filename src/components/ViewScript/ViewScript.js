@@ -9,9 +9,7 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 import Modal from "../utils/Modal/Modal";
 import FormField from "../FormField/FormField";
 import Dots from "../utils/Dots/Dots";
-import arrow from '../../assets/arrow.svg';
-import starWhite from '../../assets/star-white.svg';
-import starYellow from '../../assets/star-yellow.svg';
+import ContentContainer from '../utils/ContentContainer/ContentContainer'
 
 import './ViewScript.css'
 
@@ -156,7 +154,8 @@ const ViewScript = ({ setToast, resetData, setPage }) => {
   };
 
   return (<>
-    <StyledViewScript>
+    <ContentContainer>
+<StyledViewScript>
       {showModal && <Modal title="Add to favourites" closeModal={() => setShowModal(false)}>
         <form>
         <FormField 
@@ -255,6 +254,8 @@ const ViewScript = ({ setToast, resetData, setPage }) => {
       </div>
       
     </StyledViewScript>
+    </ContentContainer>
+    
     <p className="bottom-text">Patient details are not saved in OptomRx. Only medication details are be available for review.</p>
     </>
   )

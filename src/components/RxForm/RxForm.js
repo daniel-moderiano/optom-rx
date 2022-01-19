@@ -12,6 +12,7 @@ import { usePBSFetch } from "../../hooks/usePBSFetch";
 import Select from 'react-select';
 import { Link } from "react-router-dom";
 import Spinner from "../utils/Spinner/Spinner";
+import ContentContainer from '../utils/ContentContainer/ContentContainer'
 
 // ! Multiple optometrist items are not permitted to be prescribed on the same form; each must use an individual form
 
@@ -1139,7 +1140,8 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
   }
 
   return (
-    <StyledRxForm 
+    <ContentContainer>
+<StyledRxForm 
       className="rxform" 
       onSubmit={(e) => {
         e.preventDefault(); 
@@ -1446,6 +1448,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
       
       
     </StyledRxForm>
+    </ContentContainer>
   )
 }
 

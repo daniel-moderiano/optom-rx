@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import TableProviders from './TableProviders';
 import Spinner from '../utils/Spinner/Spinner';
 import { useEffect } from 'react';
+import ContentContainer from '../utils/ContentContainer/ContentContainer'
 
 
 const Providers = ({ setToast, setPage }) => {
@@ -31,41 +32,43 @@ const Providers = ({ setToast, setPage }) => {
   }, [error, setToast]);
 
   return (
-    <StyledProviders className="Providers">
-      <h2 className="Providers__title">Providers</h2>
-      <p id='Providers__description' className="Providers__description">Use this section to add provider details that can be used in your prescriptions</p>
-  
-      <Link className="Providers__add-btn" to={`/add-provider`}>Add new provider</Link> 
+    <ContentContainer earlyPadding={true}>
+      <StyledProviders className="Providers">
+        <h2 className="Providers__title">Providers</h2>
+        <p id='Providers__description' className="Providers__description">Use this section to add provider details that can be used in your prescriptions</p>
+    
+        <Link className="Providers__add-btn" to={`/add-provider`}>Add new provider</Link> 
 
-      <div className="Providers__container">
-        {isPending && <Spinner />}
+        <div className="Providers__container">
+          {isPending && <Spinner />}
 
-        {providers && <div className='table__container'>
-          <div className="Providers__list">
-            {providers.length > 0 ? (
-              <TableProviders data={providers} rowsPerPage={10} setToast={setToast} />
-            ) : (
-              <table className="table table-none">
-                <thead className="tableRowHeader">
-                  <tr>
-                    <th className="tableHeader">Name</th>
-                    <th className="tableHeader">Location</th>
-                    <th className="tableHeader actions-header">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr className="tableRowItems">
-                    <td data-title="Providers" className="tableCellNone" colSpan="3">No providers added yet</td>
-                  </tr>
-                </tbody>
-              </table>
-            )}
-                
-          </div>  
-        </div>}
+          {providers && <div className='table__container'>
+            <div className="Providers__list">
+              {providers.length > 0 ? (
+                <TableProviders data={providers} rowsPerPage={10} setToast={setToast} />
+              ) : (
+                <table className="table table-none">
+                  <thead className="tableRowHeader">
+                    <tr>
+                      <th className="tableHeader">Name</th>
+                      <th className="tableHeader">Location</th>
+                      <th className="tableHeader actions-header">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="tableRowItems">
+                      <td data-title="Providers" className="tableCellNone" colSpan="3">No providers added yet</td>
+                    </tr>
+                  </tbody>
+                </table>
+              )}
+                  
+            </div>  
+          </div>}
 
-      </div>
-    </StyledProviders>
+        </div>
+      </StyledProviders>
+    </ContentContainer>
   )
 }
 

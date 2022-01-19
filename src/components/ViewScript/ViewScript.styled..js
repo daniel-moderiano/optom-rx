@@ -1,14 +1,6 @@
 import styled from "styled-components";
 
 const StyledViewScript = styled.div`
-  margin-top: 3rem;
-  background-color: #FFFFFF;
-  box-shadow: 0 1.6px 3.6px 0 rgb(0 0 0 / 13%), 0 0.3px 0.9px 0 rgb(0 0 0 / 11%);
-  padding: 2rem 5.5rem;
-  width: 100%;
-  max-width: 880px;
-  display: flex;
-  flex-direction: column;
   
   .container {
     display: flex;
@@ -285,14 +277,6 @@ const StyledViewScript = styled.div`
     }
   }
 
-  
-  /* Landscape phone to portrait tablet */
-  @media (max-width: 768px) { 
-    padding: 3rem 3rem;
-
-    
-    
-  }
 
   /* Landscape phone to portrait tablet */
   @media (max-width: 550px) { 

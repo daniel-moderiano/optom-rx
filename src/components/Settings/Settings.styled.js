@@ -1,18 +1,6 @@
 import styled from "styled-components";
 
 const StyledSettings = styled.div`
-  display: flex;
-  flex-direction: column;
-  /* align-items: center; */
-  margin: 3rem 0;
-  background-color: #FFFFFF;
-  box-shadow: 0 1.6px 3.6px 0 rgb(0 0 0 / 13%), 0 0.3px 0.9px 0 rgb(0 0 0 / 11%);
-  padding: 3rem 5.5rem;
-  max-width: 1140px;
-  width: 100%;
-  /* border: 1px solid #d0d7de;
-  border-radius: 6px;
-  box-shadow: var(--small-shadow); */
 
   .settings-container {
     display: flex;
@@ -499,8 +487,7 @@ const StyledSettings = styled.div`
   
   /* Landscape phones and down */
   @media (max-width: 590px) { 
-    padding: 2rem 3rem;
-
+ 
     .email-form {
       .email-group {
         width: 100%;

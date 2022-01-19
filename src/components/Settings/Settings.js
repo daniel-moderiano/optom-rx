@@ -9,6 +9,7 @@ import { useLogout } from '../../hooks/useLogout';
 import Modal from "../utils/Modal/Modal";
 import { Link } from "react-router-dom";
 import Button from "../utils/Button/Button";
+import ContentContainer from '../utils/ContentContainer/ContentContainer'
 
 const Settings = ({ user, setToast, setPage }) => {
   const { logout } = useLogout();
@@ -536,7 +537,8 @@ const Settings = ({ user, setToast, setPage }) => {
   }
 
   return (
-    <StyledSettings className="Settings">
+    <ContentContainer>
+<StyledSettings className="Settings">
       {showVerifyModal && <Modal title="Verify your email" closeModal={() => setShowVerifyModal(false)}>
   
   <div className="verify-container">
@@ -854,6 +856,8 @@ const Settings = ({ user, setToast, setPage }) => {
         )}
       </div>
     </StyledSettings>
+    </ContentContainer>
+    
   )
 }
 

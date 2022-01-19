@@ -8,6 +8,7 @@ const StyledHeader = styled.header`
   padding: ${props => props.user ? '0 1.5rem' : '1rem 3rem 1.5rem 3rem'};
   margin: 0;
   width: 100%;
+  height: 4rem;
 
   h1 {
     margin: ${props => props.user ? '0.6rem 0 0.1rem 0' : '0.85rem 0 0 0'};

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { StyledNav } from "./Nav.styled";
 import { useLogout } from "../../hooks/useLogout";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 
 const Nav = ({ user, resetData, currentPage }) => {
@@ -61,9 +61,6 @@ const Nav = ({ user, resetData, currentPage }) => {
           </li>
           <li className="Nav__list-item" role="none">
             <Link onClick={closeNav} className="Nav__link Nav__link--std" to="/providers" role="menuitem" {...ariaPrescribers}>Prescribers</Link>
-          </li>
-          <li className="Nav__list-item" role="none">
-            <Link onClick={closeNav} className="Nav__link Nav__link--std" to="/" role="menuitem" {...ariaHome}>Home</Link>
           </li>
           <li className="Nav__list-item" role="none"> 
             <button 

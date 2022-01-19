@@ -50,6 +50,11 @@ const StyledNav = styled.nav`
       .Nav__link--std {
         text-decoration: none;
         color: ${props => props.user ? '#FFF' : 'var(--primary-color)'};
+        text-transform: uppercase;
+        font-family: var(--font-stack-segoe);
+        /* font-weight: 600; */
+        font-size: 0.9rem;
+        letter-spacing: 0.05rem;
         padding-bottom: 5px;
         position: relative;
         padding-right: 0.2rem;
@@ -63,7 +68,7 @@ const StyledNav = styled.nav`
           position: absolute;
           bottom: 2px;
           left: 0; right: 0;
-          height: 0.1rem;
+          height: 0.05rem;
           background-color: #fff;
         }
         &:before {
@@ -179,11 +184,11 @@ const StyledNav = styled.nav`
         
         background-color: var(--primary-color);
         margin: 0;
-        margin-top: 5px;
+        /* margin-top: 6px; */
         padding: 0 0.2rem 5px 0.2rem;
         border: none;
         font-family: var(--font-stack-segoe);
-        font-size: 1.1rem;
+        /* font-size: 1.1rem; */
         
 
         &:hover {
