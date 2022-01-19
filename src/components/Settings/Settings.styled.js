@@ -29,6 +29,9 @@ const StyledSettings = styled.div`
     padding: 1.75rem 0 2rem 0;
     display: flex;
     flex-direction: column;
+    .PasswordContainer {
+      max-width: 26rem;
+    }
   }
 
   .change-email {
@@ -142,13 +145,14 @@ const StyledSettings = styled.div`
   }
         
   .form-title--delete {
-    font-weight: 400;
+    font-weight: 600;
     color: #cc3232;
   }
 
   .warning {
     margin-top: 0.5rem;
     margin-bottom: 1rem;
+    font-size: 0.9rem;
   }
 
   .button {
@@ -214,7 +218,7 @@ const StyledSettings = styled.div`
       .error-text {
         color: #C02121;
         font-size: 0.9rem;
-        font-weight: bold;
+        font-weight: 600;
       }
     }
 
@@ -250,10 +254,11 @@ const StyledSettings = styled.div`
     }
 
     .update-display {
+      width: 100%;
       padding-top: 1.25rem;
       margin-bottom: 0.5rem;
       .update-label {
-        font-size: 0.85rem;
+        font-size: 0.9rem;
         color: #5A6572;
         margin-bottom: 0.4rem;
       }
@@ -270,7 +275,7 @@ const StyledSettings = styled.div`
     
 
     .Modal__buttons {
-      padding-top: 2rem;
+      padding-top: 0.5rem;
       display: flex;
       width: 100%;
       align-items: center;
@@ -331,7 +336,7 @@ const StyledSettings = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 2rem 0;
+    margin: 2rem 0 1.5rem 0;
 
     .email-svg {
       width: 75px;

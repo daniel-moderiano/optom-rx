@@ -16,8 +16,8 @@ const StyledModal = styled.div`
 
   .Modal__content {
     background-color: #fff;
-    width: 500px;
-    padding: 1.6rem 1.75rem 1.75rem 1.75rem;
+    width: 520px;
+    padding: 2rem;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -30,11 +30,12 @@ const StyledModal = styled.div`
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    margin-bottom: 0.25rem;
 
     .Modal__title {
       font-family: var(--font-stack-segoe);
-      font-size: 1.3rem;
-      font-weight: bold;
+      font-size: 1.35rem;
+      font-weight: 600;
       margin: 0;
       padding: 0;
     }
@@ -64,6 +65,12 @@ const StyledModal = styled.div`
       color: black;
       text-decoration: none;
       cursor: pointer;
+    }
+  }
+
+  @media (max-width: 450px) {
+    .Modal__content {
+      padding: 1.5rem;
     }
   }
 `

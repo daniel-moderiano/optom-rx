@@ -33,7 +33,7 @@ const Settings = ({ user, setToast, setPage }) => {
   const [emailConfirmPassword, setEmailConfirmPassword] = useState('');  
   const [emailConfirmPasswordAlert, setEmailConfirmPasswordAlert] = useState({});
 
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(true);
   const [showEmailModal, setShowEmailModal] = useState(false);
 
   const [namePending, setNamePending] = useState(false);
@@ -46,7 +46,7 @@ const Settings = ({ user, setToast, setPage }) => {
   const [newEmail, setNewEmail] = useState('');
   const [newEmailAlert, setNewEmailAlert] = useState({});
   
-  const [showVerifyModal, setShowVerifyModal] = useState(false);
+  const [showVerifyModal, setShowVerifyModal] = useState(true);
 
   const [showDeleteConfirmPassword, setShowDeleteConfirmPassword] = useState(false);
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
@@ -865,10 +865,9 @@ const Settings = ({ user, setToast, setPage }) => {
                   </div>
                 
                   <input type="text" className="hidden" />
-                  <div className="changePassword-btns">
+
                   <Button handleClick={() => setShowEmailModal(true)}>Update email</Button>
-                  {/* <button className="resend" onClick={resendEmailVerification}>Resend verification email</button> */}
-                  </div>
+
               </div>         
           </div>
 

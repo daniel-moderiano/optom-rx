@@ -9,6 +9,7 @@ import { doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useCollection } from "../../hooks/useCollection";
+import Button from '../utils/Button/Button'
 
 import Modal from "../utils/Modal/Modal";
 
@@ -20,7 +21,7 @@ const TableProviders = ({ data, rowsPerPage, setToast }) => {
   // Gather the data slices for each page and the range of pages needed 
   const { dataSlice, range } = useTable(data, page, rowsPerPage);
 
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(true);
   
   const [selectedProvider, setSelectedProvider] = useState({
     fullName: '',
@@ -178,10 +179,8 @@ const TableProviders = ({ data, rowsPerPage, setToast }) => {
           <div className="provider-summary">{`${selectedProvider.fullName} (${selectedProvider.location})`}</div>
         </div>
         <div className="Modal__buttons">
-          <button className="cancel-btn Modal__btn" onClick={() => setShowModal(false)}>Cancel</button>
-          <button className="delete-btn Modal__btn" onClick={() => {
-            deleteProvider(selectedProvider.id);
-          }}>Delete</button>
+          <Button classLabel="cancel" design="secondary" handleClick={() => setShowModal(false)}>Cancel</Button>
+          <Button design="delete" handleClick={() => deleteProvider(selectedProvider.id)}>Delete</Button>
         </div>
       </Modal>}
 
