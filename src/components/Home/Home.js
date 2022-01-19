@@ -7,6 +7,7 @@ import { sendEmailVerification } from 'firebase/auth';
 import Modal from '../utils/Modal/Modal';
 import Button from '../utils/Button/Button';
 import ContentContainer from '../utils/ContentContainer/ContentContainer';
+import PageHeader from '../utils/PageHeader/PageHeader';
 
 const Home = ({ setToast, setPage, firstSignIn, setFirstSignIn }) => {
   const { user } =  useAuthContext();
@@ -37,13 +38,13 @@ const Home = ({ setToast, setPage, firstSignIn, setFirstSignIn }) => {
  
   return (
     <ContentContainer earlyPadding={true}>
-      <StyledHome className="Home">
-          <h2 className="Home__title">Welcome, {user.displayName}</h2>
-          <p className="Home__description">Select an option to get started</p>
-          <div className="Home__links">
-            <Link className="Home__link Home__link--create" to='/form' state={ { newRx: true } }>Create prescription</Link>
-            <Link className="Home__link Home__link--prescribers" to="/providers">View prescribers</Link>
-          </div>
+      <StyledHome className="Home" >
+        <PageHeader title={`Welcome, ${user.displayName}`} description="Select an option to get started"/>
+        
+        <div className="Home__links">
+          <Link className="Home__link Home__link--create" to='/form' state={ { newRx: true } }>Create prescription</Link>
+          <Link className="Home__link Home__link--prescribers" to="/providers">View prescribers</Link>
+        </div>
 
           <div className="Favourites">
             <Favourites setToast={setToast}/>

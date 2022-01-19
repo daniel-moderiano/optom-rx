@@ -3,14 +3,12 @@ import styled from "styled-components";
 const StyledContentContainer = styled.div`
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
   margin: 2rem 0;
   background-color: #FFFFFF;
   box-shadow: 0 1.6px 3.6px 0 rgb(0 0 0 / 13%), 0 0.3px 0.9px 0 rgb(0 0 0 / 11%);
-  padding: 3rem 5.5rem;
+  padding: 3.5rem 5.5rem;
   max-width: 1140px;
   width: 100%;
-  /* width: 95%; */
   border: 1px solid #d0d7de;
   border-radius: 6px;
   box-shadow: var(--small-shadow);
@@ -18,14 +16,6 @@ const StyledContentContainer = styled.div`
   /* Early padding is suitable for those pages containing tables */
   @media (max-width: ${props => props.earlyPadding ? '800px' : '590px'}) {
     padding: 3rem 3.5rem;
-    /* width: 90%; */
-  }
-
-  @media (max-width: 800px) {
-    /* border: none;
-    box-shadow: 0;
-    margin-top: 0; */
-    /* width: 95%; */
   }
 
   /* This is the typical breakpoint for tables to transition to a card display */

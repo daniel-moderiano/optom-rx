@@ -114,8 +114,25 @@ const StyledHome = styled.div`
 
   /* Landscape phone to portrait tablet */
   @media (max-width: 450px) { 
-    /* text-align: center;
-    align-items: center; */
+    .Home__title {
+      font-family: var(--font-stack-segoe);
+      font-weight: 600;
+      color: var(--title-color);
+      font-size: 1.65rem;
+      line-height: 1.5rem;
+      margin: 0 0 0.5rem 0;
+      padding: 0;
+    }
+
+    .Home__description {
+      color: #57606a;
+      margin: 0;
+      padding: 0;
+      font-size: 1.1rem;
+      line-height: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
 
     .Modal {
       .Modal__content {
