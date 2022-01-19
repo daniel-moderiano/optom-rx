@@ -133,7 +133,7 @@ const StyledFormField = styled.div`
     align-items: center;
     margin-top: 0.2rem;
     /* margin-bottom: -0.5rem; */
-    width: 24rem;
+    width: 26rem;
     /* height: 16px; */
     font-size: 0.8rem;
 

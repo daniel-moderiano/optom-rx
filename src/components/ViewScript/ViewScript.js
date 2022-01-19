@@ -11,6 +11,7 @@ import FormField from "../FormField/FormField";
 import Dots from "../utils/Dots/Dots";
 import ContentContainer from '../utils/ContentContainer/ContentContainer';
 import PageHeader from '../utils/PageHeader/PageHeader';
+import Button from '../utils/Button/Button'
 import './ViewScript.css'
 
 const ViewScript = ({ setToast, resetData, setPage }) => {
@@ -24,6 +25,10 @@ const ViewScript = ({ setToast, resetData, setPage }) => {
   
   const [showModal, setShowModal] = useState(false);
   const [customName, setCustomName] = useState('');
+  const [customNameAlert, setCustomNameAlert] = useState({
+    type: "helper",
+    message: "This script will be displayed in your favourites list using this name."
+  })
 
   const [addStatus, setAddStatus] = useState(false);
 
@@ -165,20 +170,19 @@ const ViewScript = ({ setToast, resetData, setPage }) => {
             value={customName} 
             onChange={(event) => setCustomName(event.target.value)} 
             className="form-field custom-field"
+            alert={customNameAlert}
             autoFocus
+            describedBy={Object.keys(customNameAlert).length === 0 ? null : 'customName-alert'}
           />
-        <div className="provider-display">
-          <div className="provider-label">This script will be displayed in your favourites list using the name above</div>
-        </div>
         <div className="Modal__buttons">
-          <button type="button" className="cancel-btn Modal__btn" onClick={() => setShowModal(false)}>Cancel</button>
-          <button type="submit" className="delete-btn Modal__btn" onClick={(event) => {event.preventDefault(); addToFavourites(scriptData)}}>
+          <Button classLabel="cancel" design="secondary" handleClick={() => setShowModal(false)}>Cancel</Button>
+          <Button handleClick={() => addToFavourites(scriptData)}>
             {favPending ? (
               <Dots color="white" />
               ) : (
               'Add'
             )} 
-          </button>
+          </Button>
         </div>
         </form>
       </Modal>}

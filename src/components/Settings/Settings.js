@@ -33,7 +33,7 @@ const Settings = ({ user, setToast, setPage }) => {
   const [emailConfirmPassword, setEmailConfirmPassword] = useState('');  
   const [emailConfirmPasswordAlert, setEmailConfirmPasswordAlert] = useState({});
 
-  const [showModal, setShowModal] = useState(true);
+  const [showModal, setShowModal] = useState(false);
   const [showEmailModal, setShowEmailModal] = useState(false);
 
   const [namePending, setNamePending] = useState(false);
@@ -46,7 +46,7 @@ const Settings = ({ user, setToast, setPage }) => {
   const [newEmail, setNewEmail] = useState('');
   const [newEmailAlert, setNewEmailAlert] = useState({});
   
-  const [showVerifyModal, setShowVerifyModal] = useState(true);
+  const [showVerifyModal, setShowVerifyModal] = useState(false);
 
   const [showDeleteConfirmPassword, setShowDeleteConfirmPassword] = useState(false);
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);

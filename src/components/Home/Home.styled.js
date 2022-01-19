@@ -71,46 +71,48 @@ const StyledHome = styled.div`
     }
   }
 
-  .verify-container {
-    margin-top: 1rem;
-  }
+  .Modal {
+    .verify-container {
+      margin-top: 1rem;
+    }
 
-  .modal-btns {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
+    .img-container {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 2rem 0 2.5rem 0;
 
-  .button {
-    margin-bottom: 0.5rem;
-    margin-top: 0.25rem;
-  }
+      .email-svg {
+        width: 75px;
+        pointer-events: none;
+        enable-background:new 0 0 64 64;
 
-  .img-container {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 2rem 0;
+        .st0{fill: #77B3D4;}
 
-    .email-svg {
-      width: 75px;
-      pointer-events: none;
-      enable-background:new 0 0 64 64;
+        .st1{opacity:0.2;}
 
-      .st0{fill: #77B3D4;}
+        .st2{fill:#231F20;}
 
-      .st1{opacity:0.2;}
+        .st3{fill:#E0E0D1;}
 
-      .st2{fill:#231F20;}
+        .st4{fill:#FFFFFF;}
+    
+      }
+    }
 
-      .st3{fill:#E0E0D1;}
+    .modal-btns {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
 
-      .st4{fill:#FFFFFF;}
-  
+      .button {
+        margin: 0;
+      }
     }
   }
+ 
 
   /* Landscape phone to portrait tablet */
   @media (max-width: 450px) { 
