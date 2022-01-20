@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const StyledViewScript = styled.div`
-  
+  position: relative;
   .container {
     display: flex;
     flex-direction: column;
@@ -9,31 +9,7 @@ const StyledViewScript = styled.div`
     /* border-bottom: 1px solid #dfe1e1; */
   }
 
-  .header {
-
-    .fav-btn {
-
-      background-color: transparent;
-      border: none;
-      font-size: 0.95rem;
-      font-weight: bold;
-      color: var(--primary-color);
-      font-family: var(--font-stack-segoe);
-      /* margin-left: 1rem; */
-      display: flex;
-      align-items: center;
-
-      .fav-icon {
-        width: 20px;
-        margin-right: 0.5rem;
-      }
-
-      &:hover {
-        cursor: pointer;
-      }
-    }
-    
-  }
+  
 
   .script__container {
     display: flex;
@@ -45,86 +21,35 @@ const StyledViewScript = styled.div`
 
 
   .ProviderForm__btns {
-    /* place-self: flex-end; */
     margin: 2rem 0 2.5rem 0;
     display: flex;
     align-items: center;
     width: 100%;
-    /* justify-content: space-between; */
 
-
-    .ProviderForm__btn, .fav-btn {
-      height: 40px;
-      font-size: 1rem;
-      font-family: var(--font-stack-segoe);
-      box-sizing: border-box;
-      cursor: pointer;
-      padding: 8px 16px 10px 16px;
-      border-radius: 2px;
-
-      &:active {
-        transform: scale(0.98);
-      }
-
-      &:focus {
-        outline: 2px solid #104362;
-        outline-offset: 2px;
-      }
+    span {
+      padding: 8px 16px 10px 4px;
     }
 
-    .submit-btn, .fav-btn {
-      min-width: 80px;
-      background-color: var(--primary-color);
-      color: rgb(255, 255, 255);
-      border: none;
-      
-      text-decoration: none;
+    .icon {
+      padding: 0;
+      line-height: 0;
+      margin-right: 0.2rem;
+      margin-left: 13px;
+      width: 24px;
+    }
+
+    .star-icon {
+      margin-top: -0.1rem;
+      margin-left: 13px;
     }
     
-    .submit-btn:hover {
-      background-color: var(--btn-primary-hover);
-    }
-
-    .submit-btn {
-      display: flex;
-      align-items: center;
+    .re-prescribe {
       padding: 0;
       margin-right: 1.5rem;
-
-      .icon {
-        padding: 0;
-        line-height: 0;
-        margin-right: 0.2rem;
-      
-        margin-left: 13px;
-        width: 24px;
-      }
-
-      span {
-        padding: 8px 16px 10px 4px;
-      }
-
-
     }
     
     .fav-btn {
-      
-      display: flex;
-      align-items: center;
       padding: 0;
-
-      .icon {
-        padding: 0;
-        line-height: 0;
-        margin-right: 0.2rem;
-        margin-top: -0.1rem;
-        margin-left: 13px;
-      }
-
-      span {
-        padding: 8px 16px 10px 4px;
-      }
-
     }
   }
 
@@ -212,7 +137,6 @@ const StyledViewScript = styled.div`
 
    
   }
-
 
   /* Landscape phone to portrait tablet */
   @media (max-width: 550px) { 
