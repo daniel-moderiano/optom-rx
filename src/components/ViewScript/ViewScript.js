@@ -19,9 +19,8 @@ const ViewScript = ({ setToast, resetData, setPage }) => {
   const { id } = useParams();
   const [scriptData, setScriptData] = useState(null);
   const [isPending, setIsPending] = useState(false);
-  const [error, setError] = useState(null);
+  const [fetchError, setFetchError] = useState(null);
   const [favPending, setFavPending] = useState(false);
-  const [favError, setFavError] = useState(null);
 
   const [showModal, setShowModal] = useState(false);
   const [customName, setCustomName] = useState('');
@@ -41,48 +40,33 @@ const ViewScript = ({ setToast, resetData, setPage }) => {
   useEffect(() => {
     const fetchData = async () => {
       setIsPending(true);
+      setFetchError(null);
       try {
         const docSnap = await getDoc(doc(db, 'scripts', id));
         setScriptData(docSnap.data());
         setIsPending(false);
+        setFetchError(null);
       } catch (error) {
         setIsPending(false);
-        setError(error);
-        console.log(error);
+        setFetchError(error);
+        setToast((prevData) => ({
+          ...prevData,
+          visible: true,
+          type: 'error',
+          message: 'An error occurred while loading the script'
+        }));
       }
     };
 
     fetchData();
-  }, [id]);
-
-  // This effect will fire an error alert if the fetch fails. 
-  useEffect(() => {
-    if (error) {
-      setToast((prevData) => ({
-        ...prevData,
-        visible: true,
-        type: 'error',
-        message: 'An error occurred while loading the script'
-      }));
-    }
-
-    if (favError) {
-      setToast((prevData) => ({
-        ...prevData,
-        visible: true,
-        type: 'error',
-        message: 'An error occurred while adding favourites'
-      }));
-    }
-  }, [error, setToast, favError]);
+  }, [setToast, id]);
 
 
-
+  // Takes current script and adds it to the user's favourites array
   const addToFavourites = async (scriptToAdd) => {
     // Ensure the scriptData is not null
     if (scriptToAdd) {
       setFavPending(true);
-      setFavError(null);
       try {
         // Add script data to the current user's favourite scripts. This operation can be called multiple times as arrayUnion will not add elements already present BUT the UI design should encourage multiple calls
         await updateDoc(doc(db, 'users', user.uid), {
@@ -102,13 +86,8 @@ const ViewScript = ({ setToast, resetData, setPage }) => {
           message: 'Prescription saved to favourites'
         }));
 
-
-
-
       } catch (error) {
-        setFavError(error);
         setFavPending(false);
-
         setToast((prevData) => ({
           ...prevData,
           visible: true,
@@ -120,8 +99,6 @@ const ViewScript = ({ setToast, resetData, setPage }) => {
       }
     }
   }
-
-
 
   // Create a more UI friendly summary of drug name +/- brand
   const formatDrug = (script) => {
@@ -188,14 +165,12 @@ const ViewScript = ({ setToast, resetData, setPage }) => {
         </Modal>}
 
         <PageHeader title={`Script #${id}`} />
-
-        <div className="container">
           <div className="script__container">
             {isPending && <Spinner />}
 
-            {error && <div className="error">{error.message}</div>}
+            {fetchError && <div className="fetch-error">Fetch Error</div>}
 
-            {scriptData && <>
+            {scriptData && (<>
               <div className="Script__info">
                 <div className="Script__medication">
                   <div className="Script__title Script__title--medication">Medication details</div>
@@ -220,7 +195,6 @@ const ViewScript = ({ setToast, resetData, setPage }) => {
                 </div>
               </div>
 
-
               <div className="ProviderForm__btns">
 
                 <Link onClick={resetData} className="re-prescribe btn-primary" to='/form' state={{
@@ -229,10 +203,8 @@ const ViewScript = ({ setToast, resetData, setPage }) => {
                   scriptData: scriptData,
                 }}>
                   <svg xmlns="http://www.w3.org/2000/svg" className="icon arrow-icon" viewBox="0 0 512 512"><path d="M448 256L272 88v96C103.57 184 64 304.77 64 424c48.61-62.24 91.6-96 208-96v96z" fill="#ffffff" stroke="currentColor" stroke-linejoin="round" stroke-width="10" /></svg>
-                  {/* <img src={arrow} alt="" className="icon"/> */}
                   <span>Re-prescribe</span>
                 </Link>
-                {/* <Link to="/scripts" className="cancel-btn ProviderForm__btn">Go back</Link> */}
 
                 <Button classLabel={`${addStatus ? 'fav-btn fav-btn--added' : 'fav-btn'}`} handleClick={() => {
                   setShowModal(true);
@@ -243,10 +215,11 @@ const ViewScript = ({ setToast, resetData, setPage }) => {
                 </Button>
 
               </div>
-            </>
+              
+            </>) 
             }
           </div>
-        </div>
+
       </StyledViewScript>
     </ContentContainer>
     <p className="bottom-text">Patient details are not saved in OptomRx. Only medication details are be available for review.</p>

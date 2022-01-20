@@ -1,18 +1,3 @@
-@font-face {
-  font-family: 'Myriad Pro Light';
-  src: local('Myriad Pro Light'), url(./assets/myriad-pro/MyriadPro-Light.woff) format('woff');
-}
-
-@font-face {
-  font-family: 'Myriad Pro Bold';
-  src: local('Myriad Pro Bold'), url(./assets/myriad-pro/MYRIADPRO-BOLD.woff) format('woff');
-}
-
-@font-face {
-  font-family: 'Myriad Pro Regular';
-  src: local('Myriad Pro Regular'), url(./assets/myriad-pro/MYRIADPRO-REGULAR.woff) format('woff');
-}
-
 /*
 Explicitly define a Segoe UI font-family so that we can assign Segoe UI 
 Semilight to an appropriate font-weight.

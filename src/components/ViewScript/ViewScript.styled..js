@@ -2,12 +2,6 @@ import styled from "styled-components";
 
 const StyledViewScript = styled.div`
   position: relative;
-  
-  .container {
-    display: flex;
-    flex-direction: column;
-    margin-top: 0.5rem;
-  }
 
   .script__container {
     display: flex;
@@ -72,21 +66,12 @@ const StyledViewScript = styled.div`
       color: #48515B;
     }
 
-    .Script__medication {
-      padding-bottom: 0.5rem;
-    }
-
-    .Script__pbs {
-      padding-bottom: 0.5rem;
-    }
-
-    .Script__other {
+    .Script__medication, .Script__pbs {
       padding-bottom: 0.5rem;
     }
   }
 
   .Modal {
-
     .form-field {
       width: 100%;
       margin-bottom: 0.4rem;
@@ -102,7 +87,6 @@ const StyledViewScript = styled.div`
       width: 100%;
       align-items: center;
       justify-content: flex-end;
-      
 
       .button {
         font-size: 0.9rem;

@@ -38,13 +38,7 @@ const GlobalStyles = createGlobalStyle`
     --warning: #9a6700;
 
     /* Font stacks */
-    /* --font-stack-segoe: 'Segoe UI', Arial, Helvetica, sans-serif; */
     --font-stack-segoe: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
- 
-    
-    --font-stack-segoe-semi: 'Segoe UI Semibold', Arial, Helvetica, sans-serif;
-    --font-stack-myriad: 'Myriad Pro Regular', Arial, Helvetica, sans-serif;
-    --font-title: 'Myriad Pro Light', Arial, Helvetica, sans-serif;
   }
 
   .focus-styles {
