@@ -11,7 +11,7 @@ import PageHeader from '../utils/PageHeader/PageHeader';
 
 const Home = ({ setToast, setPage, firstSignIn, setFirstSignIn }) => {
   const { user } =  useAuthContext();
-  const [showModal, setShowModal] = useState(true);
+  const [showModal, setShowModal] = useState(false);
 
   // Adjust current page for accessibility and styling
   useEffect(() => {
@@ -39,8 +39,9 @@ const Home = ({ setToast, setPage, firstSignIn, setFirstSignIn }) => {
   return (
     <ContentContainer earlyPadding={true}>
       <StyledHome className="Home" >
-        <PageHeader title={`Welcome, ${user.displayName}`} description="Select an option to get started"/>
         
+        <PageHeader title={`Welcome, ${user.displayName}`} description="Select an option to get started"/>
+
         <div className="Home__links">
           <Link className="Home__link btn-primary" to='/form' state={ { newRx: true } }>Create prescription</Link>
           <Link className="Home__link Home__link--prescribers btn-ghost" to="/providers">View prescribers</Link>

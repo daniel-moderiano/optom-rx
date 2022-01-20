@@ -9,6 +9,18 @@ const StyledSpinner = styled.div`
   height: 40px;
   animation: spin 1s linear infinite;
 
+  .sr-only {
+    clip: rect(1px, 1px, 1px, 1px);
+    clip-path: inset(50%);
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+  }
+ 
+
   @keyframes spin {
     0% {
       transform: rotate(0deg);
