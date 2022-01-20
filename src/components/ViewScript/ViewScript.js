@@ -22,7 +22,7 @@ const ViewScript = ({ setToast, resetData, setPage }) => {
   const [error, setError] = useState(null);
   const [favPending, setFavPending] = useState(false);
   const [favError, setFavError] = useState(null);
-  
+
   const [showModal, setShowModal] = useState(false);
   const [customName, setCustomName] = useState('');
   const [customNameAlert, setCustomNameAlert] = useState({
@@ -91,10 +91,10 @@ const ViewScript = ({ setToast, resetData, setPage }) => {
             customName: customName,
           })
         });
-  
+
         setFavPending(false);
         setAddStatus(true);
-  
+
         setToast((prevData) => ({
           ...prevData,
           visible: true,
@@ -104,11 +104,11 @@ const ViewScript = ({ setToast, resetData, setPage }) => {
 
 
 
-  
+
       } catch (error) {
         setFavError(error);
         setFavPending(false);
-        
+
         setToast((prevData) => ({
           ...prevData,
           visible: true,
@@ -122,7 +122,7 @@ const ViewScript = ({ setToast, resetData, setPage }) => {
   }
 
 
-  
+
   // Create a more UI friendly summary of drug name +/- brand
   const formatDrug = (script) => {
     const capitalised = script.activeIngredient[0].toUpperCase() + script.activeIngredient.substring(1);
@@ -137,7 +137,7 @@ const ViewScript = ({ setToast, resetData, setPage }) => {
       } else {
         return `${script.brandName} ${capitalised.substr(capitalised.indexOf('eye'))}`;
       }
-    }    
+    }
     // Brand name NOT to be included
     if (!script.includeBrand) {
       return capitalised;
@@ -160,106 +160,97 @@ const ViewScript = ({ setToast, resetData, setPage }) => {
 
   return (<>
     <ContentContainer>
-<StyledViewScript>
-      {showModal && <Modal title="Add to favourites" closeModal={() => setShowModal(false)}>
-        <form>
-        <FormField 
-            fieldType="text" 
-            name="customName"
-            label="Prescription name" 
-            value={customName} 
-            onChange={(event) => setCustomName(event.target.value)} 
-            className="form-field custom-field"
-            alert={customNameAlert}
-            autoFocus
-            describedBy={Object.keys(customNameAlert).length === 0 ? null : 'customName-alert'}
-          />
-        <div className="Modal__buttons">
-          <Button classLabel="cancel" design="secondary" handleClick={() => setShowModal(false)}>Cancel</Button>
-          <Button handleClick={() => addToFavourites(scriptData)}>
-            {favPending ? (
-              <Dots color="white" />
-              ) : (
-              'Add'
-            )} 
-          </Button>
-        </div>
-        </form>
-      </Modal>}
-      
-      <PageHeader title={`Script #${id}`} />
-      
-      <div className="container">
-        <div className="script__container">
-          {isPending && <Spinner />}
+      <StyledViewScript>
+        {showModal && <Modal title="Add to favourites" closeModal={() => setShowModal(false)}>
+          <form>
+            <FormField
+              fieldType="text"
+              name="customName"
+              label="Prescription name"
+              value={customName}
+              onChange={(event) => setCustomName(event.target.value)}
+              className="form-field custom-field"
+              alert={customNameAlert}
+              autoFocus
+              describedBy={Object.keys(customNameAlert).length === 0 ? null : 'customName-alert'}
+            />
+            <div className="Modal__buttons">
+              <Button classLabel="cancel" design="secondary" handleClick={() => setShowModal(false)}>Cancel</Button>
+              <Button handleClick={() => addToFavourites(scriptData)}>
+                {favPending ? (
+                  <Dots color="white" />
+                ) : (
+                  'Add'
+                )}
+              </Button>
+            </div>
+          </form>
+        </Modal>}
 
-          {error && <div className="error">{error.message}</div>}
+        <PageHeader title={`Script #${id}`} />
 
-          {scriptData && <>
-            <div className="Script__info">
-              <div className="Script__medication">
-                <div className="Script__title Script__title--medication">Medication details</div>
-                <div className="Script__info--section Script__drug">{formatDrug(scriptData)}</div>
-                {scriptData.compounded && <div className="Script__info--section Script__compounded">To be compounded</div>}
-                <div className="Script__info--section Script__substitute">{`${scriptData.substitutePermitted ? 'Brand substitution allowed' : 'Brand substitution not permitted'}`}</div>
-                <div className="Script__info--section Script__dosage">Dosage: {scriptData.dosage}</div>
-                <div className="Script__info--section Script__quantity">Quantity: {scriptData.quantity}</div>
+        <div className="container">
+          <div className="script__container">
+            {isPending && <Spinner />}
+
+            {error && <div className="error">{error.message}</div>}
+
+            {scriptData && <>
+              <div className="Script__info">
+                <div className="Script__medication">
+                  <div className="Script__title Script__title--medication">Medication details</div>
+                  <div className="Script__info--section Script__drug">{formatDrug(scriptData)}</div>
+                  {scriptData.compounded && <div className="Script__info--section Script__compounded">To be compounded</div>}
+                  <div className="Script__info--section Script__substitute">{`${scriptData.substitutePermitted ? 'Brand substitution allowed' : 'Brand substitution not permitted'}`}</div>
+                  <div className="Script__info--section Script__dosage">Dosage: {scriptData.dosage}</div>
+                  <div className="Script__info--section Script__quantity">Quantity: {scriptData.quantity}</div>
                   <div className="Script__info--section Script__repeats">Repeats: {scriptData.repeats}</div>
+                </div>
+
+                <div className="Script__pbs">
+                  <div className="Script__title Script__title--pbs">PBS details</div>
+                  <div className="Script__info--section Script__pbs">{`${scriptData.pbsRx ? 'PBS prescription' : 'Non-PBS prescription'}`}</div>
+
+                  {scriptData.authRequired && <div className="Script__authority">
+                    <div className="Script__info--section Script__authCode">Authority code: {scriptData.authCode}</div>
+                    <div className="Script__info--section Script__authNum">Authority Rx No: {scriptData.authRxNumber}</div>
+                    <div className="Script__info--section Script__indications">Clinical justification for use of item: {scriptData.justification}</div>
+                  </div>}
+                  <div className="Script__info--section Script__date">Date prescribed: {formatDate(scriptData.date)}</div>
+                </div>
               </div>
 
-              <div className="Script__pbs">
-                <div className="Script__title Script__title--pbs">PBS details</div>
-                <div className="Script__info--section Script__pbs">{`${scriptData.pbsRx ? 'PBS prescription' : 'Non-PBS prescription'}`}</div>
 
-                {scriptData.authRequired && <div className="Script__authority">
-                  <div className="Script__info--section Script__authCode">Authority code: {scriptData.authCode}</div>
-                  <div className="Script__info--section Script__authNum">Authority Rx No: {scriptData.authRxNumber}</div>
-                  <div className="Script__info--section Script__indications">Clinical justification for use of item: {scriptData.justification}</div>
-                </div>}
-                <div className="Script__info--section Script__date">Date prescribed: {formatDate(scriptData.date)}</div>
-              </div>                
-            </div>
-            
-            
-            <div className="ProviderForm__btns">
+              <div className="ProviderForm__btns">
 
-            <Link onClick={resetData} className="re-prescribe btn-primary" to='/form' state={{ 
-              newRx: true,
-              rePrescribe: true,
-              scriptData: scriptData,
-            }}>
-              <svg xmlns="http://www.w3.org/2000/svg" className="icon arrow-icon" viewBox="0 0 512 512"><path d="M448 256L272 88v96C103.57 184 64 304.77 64 424c48.61-62.24 91.6-96 208-96v96z" fill="#ffffff" stroke="currentColor" stroke-linejoin="round" stroke-width="10"/></svg>
-              {/* <img src={arrow} alt="" className="icon"/> */}
-              <span>Re-prescribe</span>
-              </Link>
-            {/* <Link to="/scripts" className="cancel-btn ProviderForm__btn">Go back</Link> */}
-            
-            <Button classLabel={`${addStatus ? 'fav-btn fav-btn--added' : 'fav-btn'}`} handleClick={() => {
-              setShowModal(true);
-            }}>
-              <svg className="icon star-icon" xmlns="http://www.w3.org/2000/svg" enableBackground="new 0 0 24 24" height="23px" viewBox="0 0 24 24" width="22px" fill={`${addStatus ? '#FFBF00' : '#ffffff'}`}><g><path d="M0,0h24v24H0V0z" fill="none"/><path d="M0,0h24v24H0V0z" fill="none"/></g><g><path d="M12,17.27L18.18,21l-1.64-7.03L22,9.24l-7.19-0.61L12,2L9.19,8.63L2,9.24l5.46,4.73L5.82,21L12,17.27z"/></g></svg>
-              {/* <img src={starWhite} alt="" className="icon"/> */}
-              <span>{`${addStatus ? 'Added!' : 'Add to favourites'}`}</span>
-            </Button>
- 
-            </div>
+                <Link onClick={resetData} className="re-prescribe btn-primary" to='/form' state={{
+                  newRx: true,
+                  rePrescribe: true,
+                  scriptData: scriptData,
+                }}>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="icon arrow-icon" viewBox="0 0 512 512"><path d="M448 256L272 88v96C103.57 184 64 304.77 64 424c48.61-62.24 91.6-96 208-96v96z" fill="#ffffff" stroke="currentColor" stroke-linejoin="round" stroke-width="10" /></svg>
+                  {/* <img src={arrow} alt="" className="icon"/> */}
+                  <span>Re-prescribe</span>
+                </Link>
+                {/* <Link to="/scripts" className="cancel-btn ProviderForm__btn">Go back</Link> */}
+
+                <Button classLabel={`${addStatus ? 'fav-btn fav-btn--added' : 'fav-btn'}`} handleClick={() => {
+                  setShowModal(true);
+                }}>
+                  <svg className="icon star-icon" xmlns="http://www.w3.org/2000/svg" enableBackground="new 0 0 24 24" height="23px" viewBox="0 0 24 24" width="22px" fill={`${addStatus ? '#FFBF00' : '#ffffff'}`}><g><path d="M0,0h24v24H0V0z" fill="none" /><path d="M0,0h24v24H0V0z" fill="none" /></g><g><path d="M12,17.27L18.18,21l-1.64-7.03L22,9.24l-7.19-0.61L12,2L9.19,8.63L2,9.24l5.46,4.73L5.82,21L12,17.27z" /></g></svg>
+                  {/* <img src={starWhite} alt="" className="icon"/> */}
+                  <span>{`${addStatus ? 'Added!' : 'Add to favourites'}`}</span>
+                </Button>
+
+              </div>
             </>
-          }
+            }
+          </div>
         </div>
-        
-       
-        
-        
-
-      </div>
-      
-      
-    </StyledViewScript>
-
+      </StyledViewScript>
     </ContentContainer>
-    
     <p className="bottom-text">Patient details are not saved in OptomRx. Only medication details are be available for review.</p>
-    </>
+  </>
   )
 }
 
