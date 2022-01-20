@@ -10,11 +10,16 @@ const StyledModal = styled.div`
 	width: 100%;
 	overflow: auto;
 	background-color: rgba(25, 33, 43, 0.4);
-  /* opacity: 0.4; */
+
 	justify-content: center;
 	align-items: center;
+  animation-name: fadeIn;
+  animation-duration: 150ms;
+  animation-timing-function: linear;
+
 
   .Modal__content {
+  
     background-color: #fff;
     width: 520px;
     padding: 2rem;
@@ -23,6 +28,30 @@ const StyledModal = styled.div`
     align-items: flex-start;
     border-radius: 6px;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 2px 3px 0px, rgba(60, 64, 67, 0.15) 0px 6px 10px 4px;
+    animation-name: grow;
+    animation-duration: 150ms;
+    animation-timing-function: ease-out;
+  }
+
+  @keyframes grow {
+    0% {
+      transform: scale(0.75);
+      opacity: 0.1;
+    }
+
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0.1;
+    }
+    100% {
+      opacity: 1;
+    }
   }
 
   .Modal__header {

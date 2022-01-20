@@ -11,7 +11,7 @@ import PageHeader from '../utils/PageHeader/PageHeader';
 
 const Home = ({ setToast, setPage, firstSignIn, setFirstSignIn }) => {
   const { user } =  useAuthContext();
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(true);
 
   // Adjust current page for accessibility and styling
   useEffect(() => {
