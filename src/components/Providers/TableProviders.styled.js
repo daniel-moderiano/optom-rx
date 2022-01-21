@@ -72,7 +72,7 @@ const StyledTableProviders = styled.table`
       .default {
         color: var(--neutral);
         border: 0.1rem solid #4a7188; 
-        width: 7.1rem;
+        width: 8rem;
         display: inline-flex;
         align-items: center;
         justify-content: center;
@@ -84,7 +84,7 @@ const StyledTableProviders = styled.table`
       }
 
       .default--selected {
-        width: 7.1rem;
+        width: 8rem;
         color: #fff;
         border: 0.1rem solid #1A6899; 
         background-color: #1A6899;
@@ -265,7 +265,7 @@ const StyledTableProviders = styled.table`
     }
   }
 
-  @media(max-width: 326px) {
+  @media(max-width: 360px) {
     .btns {
       flex-direction: column;
       align-items: flex-start;

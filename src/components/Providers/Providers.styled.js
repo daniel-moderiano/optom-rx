@@ -24,7 +24,7 @@ const StyledProviders = styled.div`
   }
 
   .Providers__add-btn {
-    width: 161px;
+    max-width: 170px;
     margin-top: 1.85rem;
   }
 

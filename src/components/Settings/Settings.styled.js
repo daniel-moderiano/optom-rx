@@ -159,7 +159,7 @@ const StyledSettings = styled.div`
 
   .button {
     padding: 6px 14px 8px 14px;
-    width: 180px;
+    width: 196px;
     margin-top: 0.5rem;
   }
 
@@ -326,11 +326,6 @@ const StyledSettings = styled.div`
     justify-content: center;
   }
 
-  .button {
-    width: 180px;
-  }
-
-  
   /* Landscape phones and down */
   @media (max-width: 590px) { 
  
