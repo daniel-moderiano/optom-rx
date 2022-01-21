@@ -162,6 +162,9 @@ const StyledRxForm = styled.form`
 
   .quantity-field, .repeats-field {
     width: 5rem;
+    .alert-container {
+        width: 20rem;
+      }
   }
 
   .pbsRx {
@@ -371,6 +374,14 @@ const StyledRxForm = styled.form`
         width: 11rem;
       }
     }
+  }
+
+  @media (max-width: 380px) {
+    .quantity-field, .repeats-field {
+      .alert-container {
+        width: 11rem;
+      }
+    }   
   }
 
 `
