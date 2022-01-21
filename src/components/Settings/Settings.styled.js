@@ -34,6 +34,10 @@ const StyledSettings = styled.div`
     }
   }
 
+  .displayName-form {
+    padding-top: 1.25rem;
+  }
+
   .change-email {
     padding: 1.5rem 0 2rem 0;
     display: flex;
@@ -78,7 +82,7 @@ const StyledSettings = styled.div`
     .email-group {
       display: flex;
       align-items: center;
-      margin-bottom: 0.75rem;
+      margin-bottom: 1.5rem;
 
       
 
@@ -140,7 +144,7 @@ const StyledSettings = styled.div`
     margin-top: 1rem;
 
     .button {
-      margin: 0 0.5rem 0 0;
+      margin: -0.25rem 0.5rem 0 0;
     }
   }
         
@@ -151,15 +155,14 @@ const StyledSettings = styled.div`
 
   .warning {
     margin-top: 0.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     font-size: 0.9rem;
   }
 
   .button {
     padding: 6px 14px 8px 14px;
-    max-width: 180px;
-    min-width: 155px;
-    margin-top: 1rem;
+    width: 180px;
+    margin-top: 0.5rem;
   }
 
  
@@ -325,6 +328,10 @@ const StyledSettings = styled.div`
     justify-content: center;
   }
 
+  .button {
+    width: 180px;
+  }
+
   
   /* Landscape phones and down */
   @media (max-width: 590px) { 
@@ -356,7 +363,7 @@ const StyledSettings = styled.div`
 
     .changePassword-btns {
       display: flex;
-      
+      flex-direction: column;
       align-items: flex-start;
       justify-content: center;
 

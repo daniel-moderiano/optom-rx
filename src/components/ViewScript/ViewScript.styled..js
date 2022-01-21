@@ -123,7 +123,7 @@ const StyledViewScript = styled.div`
 
       .re-prescribe {
         width: 90%;
-        margin: 0 0 1rem 0;
+        margin: 0 0 1.5rem 0;
       }
     }
   }

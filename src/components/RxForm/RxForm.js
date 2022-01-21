@@ -1415,8 +1415,8 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
       </Fieldset>
 
       <div className="ProviderForm__btns">
-        <Button type="submit">Generate prescription</Button>
-        <Link to="/" className="cancel-btn btn-secondary">Cancel</Link>
+        <Button type="submit" classLabel="submit-btn">Generate prescription</Button>
+        <Link to="/" className="cancel-btn btn-secondary button">Cancel</Link>
         
       </div>
 

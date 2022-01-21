@@ -277,7 +277,7 @@ const StyledRxForm = styled.form`
   }
 
   .ProviderForm__btns {
-    padding: 2.75rem 0 2rem 20rem;
+    padding: 2.75rem 0 0 20rem;
     width: 100%;
     display: flex;
     align-items: center;
@@ -292,7 +292,7 @@ const StyledRxForm = styled.form`
   /* Landscape phones and down */
   @media (max-width: 920px) { 
     .ProviderForm__btns {
-      padding: 2.75rem 0 2rem 0rem;
+      padding: 2.75rem 0 0 0rem;
     }
 
     .scriptNo {
@@ -344,7 +344,7 @@ const StyledRxForm = styled.form`
       align-items: center;
       justify-content: center;
 
-      .ProviderForm__btn {
+      .button {
         width: 90%;
         margin: 0;
         text-align: center;
@@ -372,16 +372,6 @@ const StyledRxForm = styled.form`
       }
     }
   }
-
-  @media (max-width: 370px) {
-    
-    .quantity-field, .repeats-field {
-      .alert-container {
-        width: 11rem;
-      }
-    }   
-  }
-
 
 `
 

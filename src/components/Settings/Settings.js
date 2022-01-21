@@ -720,7 +720,7 @@ const Settings = ({ user, setToast, setPage }) => {
             {changeEmailPending ? (
               <Dots color="white"/>
             ) : (
-              'Update'
+              'Change'
             )}
           </Button>
         </div>
@@ -866,7 +866,7 @@ const Settings = ({ user, setToast, setPage }) => {
                 
                   <input type="text" className="hidden" />
 
-                  <Button handleClick={() => setShowEmailModal(true)}>Update email</Button>
+                  <Button handleClick={() => setShowEmailModal(true)}>Change email</Button>
 
               </div>         
           </div>
