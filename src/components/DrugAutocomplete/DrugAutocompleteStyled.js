@@ -2,22 +2,7 @@ import styled from "styled-components";
 
 const StyledDrugAutocomplete = styled.div`
   position: relative;
-  border: none;
-  margin: 0;
-  padding: 0;
   width: 26rem;
-
-
-  .visually-hidden {
-    border: 0;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
-  }
 
   .items-list {
     position: absolute;
@@ -215,22 +200,14 @@ const StyledDrugAutocomplete = styled.div`
       width: 100%;
     }
 
- 
     .brandOnly-container {
-      
-      /* Tooltip container */
       .tooltip {
-        
         .tooltip-text {
-   
           left: -16rem;
-  
           top: 50%;
           margin-top: -0.05rem;
           transform: translateY(-50%);
    
-
-          /* Tooltip arrow */
           &::after {
             content: "";
             position: absolute;
@@ -247,15 +224,11 @@ const StyledDrugAutocomplete = styled.div`
     }
   }
 
-  /* Landscape phones and down */
   @media (max-width: 590px) { 
     width: 100%;
     max-width: 26rem;
 
     .brandOnly-container {
-      /* display: flex;
-      align-items: center;
-      justify-content: space-between; */
       max-width: 26rem;
       width: 100%;
     }
@@ -272,18 +245,16 @@ const StyledDrugAutocomplete = styled.div`
 
   @media (max-width: 420px) {
     .brandOnly-container {
-      
-      /* Tooltip container */
       .tooltip {
-        
-    .tooltip-text {
+        .tooltip-text {
           width: 10rem;
           left: -10.5rem;
+        }
+      }
     }
   }
-}}
 
-@media (max-width: 420px) {
+  @media (max-width: 420px) {
     .drug-collapse {
       margin-top: 2.25rem;
     }

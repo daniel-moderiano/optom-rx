@@ -21,25 +21,11 @@ const StyledAddressAutocomplete = styled.fieldset`
   }
 
   .postcode-field {
-    
-      max-width: 6rem;
-    
-    
+    max-width: 6rem;
   }
 
   .street-address {
     margin-bottom: 1rem;
-  }
-
-  .visually-hidden {
-    border: 0;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
   }
 
   button {
@@ -77,7 +63,7 @@ const StyledAddressAutocomplete = styled.fieldset`
   }
 
    /* Landscape phones and down */
-   @media (max-width: 590px) { 
+  @media (max-width: 590px) { 
     width: 100%;
     max-width: 26rem;
 
