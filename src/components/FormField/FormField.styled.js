@@ -4,7 +4,7 @@ const StyledFormField = styled.div`
   margin: 0.85rem 0;
   position: relative;
   width: 26rem;
-  height: 80px;
+  min-height: 80px;
 
   input {
     margin-top: 0.5rem;
@@ -72,6 +72,8 @@ const StyledFormField = styled.div`
   /* Unique styling for checkbox fields */
   &.checkbox {
     width: 24rem;
+    min-height: 0;
+    
     
     label {
       display: grid;
@@ -129,13 +131,18 @@ const StyledFormField = styled.div`
     }
   }
 
+  .all-alerts {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
   .alert-container {
     display: flex;
     align-items: center;
-    margin-top: 0.2rem;
-    /* margin-bottom: -0.5rem; */
+    margin-top: 0.65rem;
     width: 26rem;
-    /* height: 16px; */
+    height: 0;
     font-size: 0.8rem;
 
     .alert--error {
@@ -170,6 +177,10 @@ const StyledFormField = styled.div`
       margin-left: -0.04rem;
       margin-right: 0.2rem;
     }
+  }
+
+  .subalert-container {
+    height: 16px;
   }
 
   .show {

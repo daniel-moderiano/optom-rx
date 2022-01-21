@@ -1333,7 +1333,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
           value={drugData.quantity} 
           onChange={(event) => handleChange(setDrugData, event)} 
           alert={drugAlerts.quantity}
-          // subAlert={drugAlerts.maxQuantity}
+          subAlert={drugAlerts.maxQuantity}
           className="quantity-field form-field"
           required
           describedBy = {Object.keys(drugAlerts.quantity).length === 0 ? null : 'quantity-alert'}
@@ -1346,7 +1346,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
           value={drugData.repeats} 
           onChange={(event) => handleChange(setDrugData, event)} 
           alert={drugAlerts.repeats}
-          // subAlert={drugAlerts.maxRepeats}
+          subAlert={drugAlerts.maxRepeats}
           className="repeats-field form-field"
           required
           describedBy = {Object.keys(drugAlerts.repeats).length === 0 ? null : 'repeats-alert'}

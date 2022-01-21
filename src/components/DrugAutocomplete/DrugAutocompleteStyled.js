@@ -92,6 +92,10 @@ const StyledDrugAutocomplete = styled.div`
     margin: 0.5rem 0;
   }
 
+  .compounded {
+    margin-bottom: 1rem;
+  }
+
   .brandOnly-container {
     display: flex;
     align-items: center;
