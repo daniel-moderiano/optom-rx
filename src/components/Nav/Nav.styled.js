@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 const StyledNav = styled.nav`
-
   .Nav__list {
     list-style: none;
     display: flex;
@@ -14,11 +13,9 @@ const StyledNav = styled.nav`
       .Nav__link--std {
         text-decoration: none;
         color: ${props => props.user ? '#FFF' : 'var(--primary-color)'};
-        /* text-transform: uppercase; */
         font-family: var(--font-stack-segoe);
         font-weight: 400;
         font-size: 1.05rem;
-        /* letter-spacing: 0.05rem; */
         padding-bottom: 5px;  // Adds space btween link and underline
         position: relative;
         background-color: transparent;
@@ -26,7 +23,6 @@ const StyledNav = styled.nav`
         padding: 0 0 5px 0;
         margin: 0;
         box-sizing: border-box;
-        
         
         &:before,
         &:after {
@@ -89,7 +85,6 @@ const StyledNav = styled.nav`
       }
 
       [aria-current=page] {
-       
         &:before,
         &:after {
           opacity: 1;
@@ -118,7 +113,6 @@ const StyledNav = styled.nav`
       }
 
       .Nav__link--login, .Nav__link--signup {
-        
         &:before,
         &:after {
           background-color: var(--primary-color);
@@ -173,12 +167,10 @@ const StyledNav = styled.nav`
 
       .Nav__list-item {
         padding: 1.1rem 0;
-        /* border-bottom: 1px solid #eaf0f7; */
-
 
         .Nav__link {
           color: var(--primary-color);
-
+          
           &:before,
           &:after {
             background-color: var(--primary-color);
@@ -192,8 +184,6 @@ const StyledNav = styled.nav`
       margin: 0;
       padding: 0;
     }
-    
-
   }
 `
 

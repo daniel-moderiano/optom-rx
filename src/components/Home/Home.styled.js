@@ -1,25 +1,6 @@
 import styled from "styled-components";
 
 const StyledHome = styled.div`
-  .Home__title {
-    font-family: var(--font-stack-segoe);
-    font-weight: 600;
-    color: var(--title-color);
-    font-size: 2.2rem;
-    line-height: 2rem;
-    margin: 0 0 0.5rem 0;
-    padding: 0;
-  }
-
-  .Home__description {
-    color: #57606a;
-    margin: 0;
-    padding: 0;
-    font-size: 1.25rem;
-    line-height: 1.5rem;
-    margin-bottom: 1.5rem;
-  }
-
   .Home__link {
     max-width: 160px;
   }
@@ -50,7 +31,6 @@ const StyledHome = styled.div`
         .st3{fill:#E0E0D1;}
 
         .st4{fill:#FFFFFF;}
-    
       }
     }
 
@@ -65,30 +45,8 @@ const StyledHome = styled.div`
       }
     }
   }
- 
 
-  /* Landscape phone to portrait tablet */
   @media (max-width: 450px) { 
-    .Home__title {
-      font-family: var(--font-stack-segoe);
-      font-weight: 600;
-      color: var(--title-color);
-      font-size: 1.65rem;
-      line-height: 1.5rem;
-      margin: 0 0 0.5rem 0;
-      padding: 0;
-    }
-
-    .Home__description {
-      color: #57606a;
-      margin: 0;
-      padding: 0;
-      font-size: 1.1rem;
-      line-height: 1.25rem;
-      margin-bottom: 1.5rem;
-    }
-
-
     .Modal {
       .Modal__content {
         width: 90%;
