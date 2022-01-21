@@ -4,6 +4,7 @@ import Dots from '../utils/Dots/Dots';
 import { sendPasswordResetEmail, getAuth } from 'firebase/auth'
 import { StyledResetPassword } from './ResetPassword.styled';
 import { useNavigate } from "react-router-dom";
+import Button from '../utils/Button/Button'
 
 const ResetPassword = ({ setToast, setPage }) => {
   let navigate = useNavigate();
@@ -108,7 +109,7 @@ const ResetPassword = ({ setToast, setPage }) => {
 
   return (
     <StyledResetPassword className="Login">
-      <div className="login-container">
+      <div className="Login__container">
         <h2 className="Login__title">Reset your password</h2>
 
         <form className='Login__form' noValidate onSubmit={(event) => {
@@ -133,13 +134,13 @@ const ResetPassword = ({ setToast, setPage }) => {
             autocomplete="username"
           />
 
-          <button className="login-btn">
-          {isPending ? (
-              <Dots color="white" />
-              ) : (
-            'Send password reset email'
+          <Button classLabel="Login__btn" type="submit">
+            {isPending ? (
+                <Dots color="white" />
+                ) : (
+              'Send password reset email'
             )} 
-          </button>
+          </Button>
 
         </form>
       </div>
