@@ -147,9 +147,9 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
   const [requiredFields] = useState({
     drug: [
       'activeIngredient',
+      'dosage',
       'quantity',
       'repeats',
-      'dosage',
     ],
     patient: [
       'fullName',
@@ -157,8 +157,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
       'suburb',
       'postcode',
       'state',
-      // 'medicareNumber',
-      // 'medicareRefNumber',
     ],
     provider: [
       'fullName',
@@ -927,7 +925,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
       }
       // If the user has clicked a prescribe or re-prescribe button to get here then newRx should still be present, but this additional logic must be run
       if (state.rePrescribe) {
-        console.log(state.scriptData);
         // State will have scriptData attached. Set it to local state here at form initialisation
         setDrugData((prevData) => ({
           ...prevData,
@@ -982,6 +979,26 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
     const drugForm = document.querySelector('.drug-form');
     const patientForm = document.querySelector('.patient-form');
     const miscForm = document.querySelector('.misc-form');
+
+    // TODO: consider using the following algorithms if the user partially enters medicare information 
+
+    // Check for exactly 10 digits
+    // if (value.trim()[0] === '0') {
+    //   negativeInlineValidation(setPatientAlerts, 'Medicare number must not start with zero', event.target);
+    //   showErrorClass(event.target);
+    // } else if (!(/^[0-9]{10}$/).test(value.trim())) {
+    //   negativeInlineValidation(setPatientAlerts, 'Medicare number must be exactly 10 digits long', event.target);
+    // } else {
+    //   positiveInlineValidation(setPatientAlerts, event.target);
+    // }
+
+    // Check for digits 1-9, and only a single digit
+    // if (!(/^[1-9]{1}$/).test(value.trim())) {
+    //   negativeInlineValidation(setPatientAlerts, 'IRN must be a single digit between 1 through 9', event.target);
+    // } else {
+    //   positiveInlineValidation(setPatientAlerts, event.target);
+    // }
+
 
      // Validation is conditional upon whether medicare details were intended to be included by the user or not
      requiredFields.patient.forEach((field) => {
@@ -1067,8 +1084,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
       ...provider,
     })
   }  
-
-      // box-shadow: 0 0 0 1px #a360ac;
 
   const customStyles = {
     control: (base, state) => ({
@@ -1240,6 +1255,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
           fetchDrug={fetchDrug}
           showTooltip={showTooltip}
           tooltipText={tooltipText}
+          rePrescribe={state.rePrescribe ? true : false}
         />
 
         {/* Must include quantity and repeats to meet requirements */}

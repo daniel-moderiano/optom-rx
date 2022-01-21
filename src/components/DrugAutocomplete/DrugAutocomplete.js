@@ -3,11 +3,18 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import { StyledDrugAutocomplete } from './DrugAutocompleteStyled';
 import FormField from '../FormField/FormField';
 
-const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAlerts, fetchDrug, showTooltip, tooltipText }) => {
+const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAlerts, fetchDrug, showTooltip, tooltipText, rePrescribe }) => {
   // useRef allows us to store the equivalent of a 'global' component variable without losing data on re-render, but avoiding the async problems that can arise with state
   const currentFocus = useRef(-1);
   // Controls the UI state of the collapsed input fields
   const [expand, setExpand] = useState(false);
+
+  // If re-prescribing a medication, expand the drug autocomplete section on script form load
+  useEffect(() => {
+    if (rePrescribe) {
+      setExpand(true);
+    }
+  }, [rePrescribe])
 
   const showSuccessClass = (element) => {
     element.classList.remove('error');
@@ -354,7 +361,7 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
           required
           describedBy = {Object.keys(alerts.activeIngredient).length === 0 ? null : 'activeIngredient-alert'}
         />
-        <button type="button" onClick={() => setExpand(true)}>Enter manually</button>
+        <button type="button" className='drug-expand' onClick={() => setExpand(true)}>Enter manually</button>
 
       <div className={`drug-collapse ${expand ? 'show' : 'hide'}`}>
         <FormField 

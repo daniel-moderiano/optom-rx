@@ -10,7 +10,6 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider, alerts, se
 
   // Ensure the address field is expanded if the user attempts to submit by entering only street address and leaving other fields untouched
   useEffect(() => {
-    console.log();
     if (Object.keys(alerts.suburb).length !== 0 || Object.keys(alerts.state).length !== 0 || Object.keys(alerts.postcode).length !== 0) {
       setExpand(true);
     }
