@@ -82,7 +82,7 @@ const StyledAddressAutocomplete = styled.fieldset`
     max-width: 26rem;
 
     #autocomplete-provider-alert, #autocomplete-patient-alert {
-      width: 50%;
+      width: 55%;
     }
 
     #postcode-alert {

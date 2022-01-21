@@ -322,7 +322,7 @@ const StyledRxForm = styled.form`
 
     .quantity-field, .repeats-field {
       .alert-container {
-        width: 12rem;
+        width: 20rem;
       }
     }   
 
@@ -356,6 +356,7 @@ const StyledRxForm = styled.form`
       }
     }
 
+
     .medicareFields {
       .medicareNumber-field {
         width: 8.5rem;
@@ -370,6 +371,15 @@ const StyledRxForm = styled.form`
         width: 11rem;
       }
     }
+  }
+
+  @media (max-width: 370px) {
+    
+    .quantity-field, .repeats-field {
+      .alert-container {
+        width: 11rem;
+      }
+    }   
   }
 
 

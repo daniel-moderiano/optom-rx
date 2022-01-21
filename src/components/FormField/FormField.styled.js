@@ -83,7 +83,7 @@ const StyledFormField = styled.div`
       display: grid;
       grid-template-areas: "checkbox label";
       grid-template-columns: 1.7rem auto;
-      align-items: center;
+      align-items: flex-start;
       
       .label-text {
         grid-area: label;
@@ -92,7 +92,7 @@ const StyledFormField = styled.div`
 
       input {
         grid-area: checkbox;
-        margin: 0;
+        margin: 0.1rem 0 0 0;
         padding: 0;
         height: 16px;
         width: 16px;
@@ -120,7 +120,7 @@ const StyledFormField = styled.div`
         position: absolute;
         width: 5px;
         height: 10px;
-        top: 0.25rem;
+        top: 0.2rem;
         left: 0.35rem;
         border: solid white;
         border-width: 0 2px 2px 0;

@@ -261,7 +261,7 @@ const StyledDrugAutocomplete = styled.div`
     }
 
     #activeIngredient-alert {
-      width: 50%;
+      width: 55%;
     }
 
     #postcode-alert {
