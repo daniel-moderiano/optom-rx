@@ -252,15 +252,6 @@ const StyledProviders = styled.div`
       }
     }
   }
-
-   /* Landscape phone to portrait tablet */
-   @media (max-width: 360px) { 
-    .Providers__add-btn {   
-      max-width: 250px;
-      width: 100%;
-    }
-  }
-
 `
 
 export { StyledProviders }
