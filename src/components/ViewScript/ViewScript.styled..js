@@ -53,9 +53,9 @@ const StyledViewScript = styled.div`
     .Script__title {
       background-color: #F9FAFB;
       padding: 0.75rem 0.75rem;
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       font-family: var(--font-stack-segoe);
-      font-weight: 300;
+      font-weight: 400;
       color: #48515B;
       border-top: none;
     }

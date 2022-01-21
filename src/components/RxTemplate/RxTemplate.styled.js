@@ -13,15 +13,6 @@ const StyledRxTemplate = styled.div`
   border-radius: 6px;
   box-shadow: var(--small-shadow);
 
-  .RxTemplate__title {
-    font-family: var(--font-stack-myriad);
-    font-weight: 400;
-    color: var(--title-color);
-    font-size: 2.5rem;
-    padding: 0;
-    margin: 1rem 0 0 0;
-  }
-
   .ui-description {
     display: flex;
     justify-content: space-between;
@@ -37,58 +28,33 @@ const StyledRxTemplate = styled.div`
     margin-top: 1rem;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px, rgba(0, 0, 0, 0.05) 0px 0px 1px 0px;
     border-radius: 6px;
+    line-height: 1.5rem;
 
     .ui__title {
-      margin: 0;
+      margin: 0 0 0.25rem 0;
+      padding: 0.75rem 1rem;
       background-color: #F9FAFB;
-      padding: 0.75rem 0.75rem;
-      /* margin-top: 0.5rem; */
-      /* color: #48515B; */
-      /* text-align: left;
-      font-size: 0.75rem;
-      line-height: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05rem;
-      font-family: var(--font-stack-segoe-semibold); */
       font-size: 1.3rem;
-      font-family: var(--font-title);
-      color: var(--title-color);
+      font-family: var(--font-stack-segoe);
+      font-weight: 400;
+      color: #48515B;
       border-top: none;
-      font-weight: normal;
-      /* border-bottom: 1px solid #D1D6DB; */
     }
 
     .ui-info {
-      padding: 0.5rem 0.75rem;
+      padding: 0.5rem 1rem 0 1rem;
       font-size: 0.9rem;
       color: #48515B;
-      line-height: 1.5rem;
       max-width: 450px;
     }
 
-    .ui-medication {
-      padding-bottom: 0.5rem;
+    section {
+      padding-bottom: 0.75rem;
     }
 
-    .ui-provider {
-      padding-bottom: 0.5rem;
-    }
-
-
-    .ui-patient {
-      padding-bottom: 0.5rem;
-    }
-
-
-    .ui-miscellaneous {
-      padding-bottom: 0.5rem;
-    }
-
-    .ui-justification {
+    .ui-auth, .ui-justification {
       padding-top: 0.5rem;
     }
-
-
   }
 
 

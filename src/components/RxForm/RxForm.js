@@ -1255,7 +1255,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
           fetchDrug={fetchDrug}
           showTooltip={showTooltip}
           tooltipText={tooltipText}
-          rePrescribe={state.rePrescribe ? true : false}
         />
 
         {/* Must include quantity and repeats to meet requirements */}

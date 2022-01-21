@@ -3,18 +3,11 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import { StyledDrugAutocomplete } from './DrugAutocompleteStyled';
 import FormField from '../FormField/FormField';
 
-const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAlerts, fetchDrug, showTooltip, tooltipText, rePrescribe }) => {
+const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAlerts, fetchDrug, showTooltip, tooltipText }) => {
   // useRef allows us to store the equivalent of a 'global' component variable without losing data on re-render, but avoiding the async problems that can arise with state
   const currentFocus = useRef(-1);
   // Controls the UI state of the collapsed input fields
   const [expand, setExpand] = useState(false);
-
-  // If re-prescribing a medication, expand the drug autocomplete section on script form load
-  useEffect(() => {
-    if (rePrescribe) {
-      setExpand(true);
-    }
-  }, [rePrescribe])
 
   const showSuccessClass = (element) => {
     element.classList.remove('error');

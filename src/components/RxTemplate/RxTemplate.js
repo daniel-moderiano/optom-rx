@@ -187,9 +187,13 @@ const RxTemplate = ({ data, setToast, setPage }) => {
            {/* Script ID or authority Rx number should go above the medication once finalised, and perhaps with a border bottom */}
            <section className="ui-medication">
             <h4 className="ui__title">Medication</h4>
-              <div className="ui-info ui-medication__name">
+              <div className="ui-info ui-medication__primary-info">
                 {formatDrug(drugData.activeIngredient, drugData.brandName)}
+                <div className="ui-medication__dosage">Dosage: {drugData.dosage}</div>
+                <div className="ui-medication__quantity">{`Quantity: ${drugData.quantity}`}</div>
+                <div className="ui-medication__repeats">{`Repeats: ${drugData.repeats}`}</div>
               </div>
+              
               <div className="ui-info med-parameters">
                 {drugData.substitutePermitted 
                   ? <div className="ui-brandSub--yes">Brand substitution permitted</div>
@@ -199,19 +203,11 @@ const RxTemplate = ({ data, setToast, setPage }) => {
                   && <div className="ui-compounded">To be compounded</div>
                 } 
               </div>
-              
-              <div className="ui-info ui-medication__dosage">Dosage: {drugData.dosage}</div>
-              <div className="ui-quantityRepeats">
-                <div className="ui-info ui-medication__quantity">{`Quantity: ${drugData.quantity}`}</div>
-                <div className="ui-info ui-medication__repeats">{`Repeats: ${drugData.repeats}`}</div>
-              </div>
-              
           </section>
 
           <section className="ui-miscellaneous">
             {/* Include Script ID and Authority Rx number here */}
             <h4 className="ui__title">PBS and Other</h4>
-              
               {drugData.pbsRx 
                 ? <div className="ui-info ui-pbsRx ui-pbsRx--selected">PBS prescription</div>
                 : <div className="ui-info ui-pbsRx ui-pbsRx">Private (non-PBS) prescription</div>
@@ -222,7 +218,7 @@ const RxTemplate = ({ data, setToast, setPage }) => {
                 <div className="ui-justification">
                   <div className="ui-prevAuth">{`Patient has previously received authority: ${miscData.prevAuth ? 'Yes' : 'No'}`}</div>
                   <div className="ui-age">{miscData.age && `Patient's age: ${miscData.age}`}</div>
-                  <div className="ui-justification">{`Clinical justification for use of item: ${miscData.justification}`}</div>
+                  <div className="ui-justification">{`Clinical justification for use of item: ${miscData.justification === "" ? 'None provided' : miscData.justification}`}</div>
                 </div>
               </div>)}
           </section>
