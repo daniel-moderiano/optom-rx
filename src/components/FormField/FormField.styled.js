@@ -57,6 +57,7 @@ const StyledFormField = styled.div`
 
   .label-text {
     display: block;
+    position: relative;
   }
 
   input[type=number] {
@@ -181,9 +182,25 @@ const StyledFormField = styled.div`
 
   .tickCircle {
     position: absolute;
-    width: 15px;
-    top: 21px;
-    right: -0.35rem;
+    width: 22px;
+    /* height: 17px; */
+    top: 39px;
+    right: 10px;
+    background-color: #fff;
+    padding-left: 0.3rem;
+    
+  }
+
+  
+
+  .tick {
+    position: absolute;
+    /* width: 18px; */
+    top: 38px;
+    right: 10px;
+
+    background-color: #fff;
+    display: none;
   }
 
    
@@ -203,9 +220,17 @@ const StyledFormField = styled.div`
       width: 100%;
       max-width: 24rem;
     }
+
+    .tickCircle {
+      position: absolute;
+      width: 17px;
+      top: 19px;
+      right: -7px;
+      background-color: transparent;
+      padding: 0;
+    }
   }
 
-  
 `
 
 export { StyledFormField }

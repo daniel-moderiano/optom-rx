@@ -33,9 +33,10 @@ const FormField = (props) => {
             />
             {fieldType === ('checkbox') && <span className={`checkmark ${checked ? 'show' : 'hide'}`}></span>}
             <svg xmlns="http://www.w3.org/2000/svg" className="tickCircle hide" viewBox="0 0 512 512">
-              <path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" fill="#0a7e00" stroke="#0a7e00" strokeMiterlimit="10" strokeWidth="32"/>
-              <path fill="#0a7e00" stroke="#fff" strokeLinecap="round" strokeLinejoin="round" strokeWidth="36" d="M352 176L217.6 336 160 272"/>
+              <path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" fill="#fff" stroke="#0a7e00" strokeMiterlimit="10" strokeWidth="25"/>
+              <path fill="#fff" stroke="#0a7e00" strokeLinecap="round" strokeLinejoin="round" strokeWidth="27" d="M352 176L217.6 336 160 272"/>
             </svg>
+
         </label>
       </div>
 
@@ -54,7 +55,7 @@ const FormField = (props) => {
             </svg>)
           }
           {(alert.type === 'success') && 
-            (<svg xmlns="http://www.w3.org/2000/svg" className="alert-icon alert-icon--success" viewBox="0 0 512 512" width="15px">
+            (<svg xmlns="http://www.w3.org/2000/svg" className="alert-icon alert-icon--success" viewBox="0 0 512 512" width="16px">
               <path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" fill="none" stroke="#096600" strokeMiterlimit="10" strokeWidth="32"/>
               <path fill="none" stroke="#096600" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32" d="M352 176L217.6 336 160 272"/>
             </svg>)
