@@ -23,11 +23,10 @@ const StyledSignup = styled.div`
 
   .Signup__title {
     width: 100%;
-    font-family: var(--font-title);
     font-weight: 400;
     color: var(--title-color);
     font-size: 2.2rem;
-    margin: 0 0 1.5rem 0;
+    margin: 0 0 1.6rem 0;
   }
 
   .Signup__form {
@@ -113,7 +112,6 @@ const StyledSignup = styled.div`
   }
 
   
-  /* Landscape phones and down */
   @media (max-width: 550px) { 
     .Signup__title {
       text-align: center;
@@ -140,11 +138,9 @@ const StyledSignup = styled.div`
         font-size: 0.9rem;
       }
     }
-
   }
 
   @media (max-width: 400px) {
-
     .Signup__title {
       font-size: 2rem;
     }
@@ -168,12 +164,7 @@ const StyledSignup = styled.div`
         font-size: 0.9rem;
       }   
     }
-
-
-
-}
-
-
+  }
   
 `
 export { StyledSignup }

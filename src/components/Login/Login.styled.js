@@ -10,17 +10,11 @@ const StyledLogin = styled.div`
   flex-direction: column;
   margin-bottom: 4rem;
 
-  .Spinner {
-    margin-top: -4rem;
-  }
-
-
-
   /* The actual white space around the form */
   .Login__container {
     background-color: #FFFFFF;
     box-shadow: 0 1.6px 3.6px 0 rgb(0 0 0 / 13%), 0 0.3px 0.9px 0 rgb(0 0 0 / 11%);
-    padding: 2.5rem 3.5rem 0.85rem 3.5rem;
+    padding: 2.4rem 3.5rem 0.85rem 3.5rem;
     width: 90%;
     max-width: 31rem;
     display: flex;
@@ -30,11 +24,10 @@ const StyledLogin = styled.div`
 
   .Login__title {
     width: 100%;
-    font-family: var(--font-title);
     font-weight: 400;
     color: var(--title-color);
     font-size: 2.2rem;
-    margin: 0 0 1.5rem 0;
+    margin: 0 0 1.6rem 0;
   }
 
   .Login__form {
@@ -53,7 +46,6 @@ const StyledLogin = styled.div`
       top: 38px;
     }
   
-
     /* Strictly styling the backend error container above the login button */
     .error-container {
       display: flex;
@@ -81,7 +73,7 @@ const StyledLogin = styled.div`
   }  
 
   /* Adding keyboard only focus styles */
-  .reset-password, .signup-link {
+  .signup-link {
     &:focus {
       outline: 2px solid #104362;
       outline-offset: 1px;
@@ -122,7 +114,6 @@ const StyledLogin = styled.div`
     }
   }
 
-
   .forgot-password {
     text-align: center;
     color: #48515B;
@@ -138,7 +129,6 @@ const StyledLogin = styled.div`
   }
 
   
-  /* Landscape phones and down */
   @media (max-width: 550px) { 
     .Login__title {
       text-align: center;
@@ -164,16 +154,14 @@ const StyledLogin = styled.div`
       .signup-link {
         font-size: 0.9rem;
       }
-    }
-
-    
+    }    
   }
 
   @media (max-width: 400px) {
-
     .Login__title {
       font-size: 2rem;
     }
+
     .Login__form {
       width: 90%;
 
@@ -193,9 +181,6 @@ const StyledLogin = styled.div`
         font-size: 0.9rem;
       }   
     }
-
-    
-    
   }
 
 `
