@@ -152,13 +152,8 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
           case name === 'phoneNumber':
             // Consider trimming the input of any spaces, hyphens, or parens
             if (!(/^((0[2-8]\d{8})|(13(00|\d{4})(\d{6})?))$/).test(value.trim())) {
-              if (value.substring(0, 2) === '13') {
-                // Provide business specific error message
-                negativeInlineValidation(setProviderAlerts, 'Australian business numbers are either 6 digits and begin with 13, or 10 digits and begin with 1300', event.target);
-              } else {
-                // Provide general error message
-                negativeInlineValidation(setProviderAlerts, 'Australian phone numbers contain 10 digits and begin with 02, 03, 04, 07 or 08', event.target);
-              }
+              // Provide general error message
+              negativeInlineValidation(setProviderAlerts, 'A valid Australian phone number is required', event.target);
             } else {
               positiveInlineValidation(setProviderAlerts, event.target);
             }
