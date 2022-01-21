@@ -28,7 +28,7 @@ const StyledAddressAutocomplete = styled.fieldset`
   }
 
   .street-address {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
   }
 
   .visually-hidden {

@@ -1176,6 +1176,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
                   required
                   aria-labelledby="react-select-id"
                   label="Select provider"
+                  
                 /> 
                 </label>
               </>

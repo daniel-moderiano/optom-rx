@@ -85,7 +85,7 @@ const StyledDrugAutocomplete = styled.div`
   }
 
   .activeIngredient {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
   }
 
   .checkbox {

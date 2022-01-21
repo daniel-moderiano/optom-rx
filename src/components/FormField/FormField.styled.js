@@ -4,7 +4,7 @@ const StyledFormField = styled.div`
   margin: 0.85rem 0;
   position: relative;
   width: 26rem;
-  /* height: 80px; */
+  height: 80px;
 
   input {
     margin-top: 0.5rem;
@@ -183,25 +183,24 @@ const StyledFormField = styled.div`
   .tickCircle {
     position: absolute;
     width: 22px;
-    /* height: 17px; */
     top: 39px;
     right: 10px;
     background-color: #fff;
     padding-left: 0.3rem;
-    
+    animation-name: fadeIn;
+    animation-timing-function: ease;
+    animation-duration: 100ms;
   }
 
-  
-
-  .tick {
-    position: absolute;
-    /* width: 18px; */
-    top: 38px;
-    right: 10px;
-
-    background-color: #fff;
-    display: none;
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
+
 
    
   /* Landscape phones and down */
