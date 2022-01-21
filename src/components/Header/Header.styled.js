@@ -7,12 +7,10 @@ const StyledHeader = styled.header`
   justify-content: space-between;
   align-items: center;
   padding: ${props => props.user ? '0 1.5rem' : '1rem 3rem 1.5rem 3rem'};
-  margin: 0;
   width: 100%;
   height: ${props => props.user ? '3.8rem' : '5.8rem'};
   flex-shrink: 0;
  
-
   h1 {
     margin: ${props => props.user ? '0.6rem 0 0.1rem 0' : '0.85rem 0 0 0'};
     width: 7rem;

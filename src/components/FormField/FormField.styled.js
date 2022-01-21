@@ -6,7 +6,6 @@ const StyledFormField = styled.div`
   width: 26rem;
   height: 80px;
 
-
   input {
     margin-top: 0.5rem;
     padding: 0.55rem 0.85rem 0.6rem 0.85rem;   
@@ -32,7 +31,6 @@ const StyledFormField = styled.div`
   }
 
   input:focus {
-    /* outline: 2px solid #a360ac; */
     outline: 2px solid #104362;
     outline-offset: 2px;
   }
@@ -58,10 +56,6 @@ const StyledFormField = styled.div`
   .label-text {
     display: block;
     position: relative;
-
-    .asterisk {
-      color: var(--error);
-    }
   }
 
   input[type=number] {
@@ -72,12 +66,10 @@ const StyledFormField = styled.div`
     width: 100%;
   }
 
-  
   /* Unique styling for checkbox fields */
   &.checkbox {
     width: 24rem;
     height: auto;
-    
     
     label {
       display: grid;
@@ -146,28 +138,22 @@ const StyledFormField = styled.div`
     align-items: flex-start;
     margin-top: 0.2rem;
     width: 26rem;
-    /* height: 0; */
     font-size: 0.8rem;
 
     .alert--error {
       color: var(--error);
-      
     }
 
     .alert--success {
       color: var(--success-text);
-      /* font-size: 0.8rem; */
       margin-bottom: 0.05rem;
     }
 
     .alert--neutral {
       color: var(--neutral);
-      /* font-size: 0.8rem; */
-      /* margin-bottom: 0.1rem; */
     }
 
     .alert--helper {
-      /* font-size: 0.8rem; */
       color: #5A6572;
       width: 100%;
     }
@@ -183,10 +169,6 @@ const StyledFormField = styled.div`
       margin-right: 0.2rem;
       margin-top: 0.05rem;
     }
-  }
-
-  .subalert-container {
-  
   }
 
   .show {
@@ -218,13 +200,9 @@ const StyledFormField = styled.div`
     }
   }
 
-
-   
-  /* Landscape phones and down */
   @media (max-width: 768px) { 
     width: 100%;
     max-width: 26rem;
-
 
     input {
       width: 100%;
