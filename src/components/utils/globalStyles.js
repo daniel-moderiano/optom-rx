@@ -201,6 +201,7 @@ const GlobalStyles = createGlobalStyle`
     height: 100vh;
     width: 100%;
     color: var(--text);
+    font-family: var(--font-stack-segoe);
 
     p {
       margin: 0;

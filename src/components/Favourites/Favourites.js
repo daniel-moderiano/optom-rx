@@ -164,22 +164,23 @@ const Favourites = ({ setToast }) => {
       
       <h2 className="Favourites__title">Favourites</h2>
       
-      <div className="Scripts__container">
+      <div className="Favourites__container">
         {isPending && <Spinner />}
 
-        {error && <div className='list-container'>
+        {error && 
           <ul className='fav-list fav-list--none'>
-            <div className="list-header list-header--none">Favourites</div>
+            <div className="list-header">Favourites</div>
               <li className="fav-item fav-item--none">
                 No favourites added yet
               </li>
           </ul>   
-        </div>}
+   }
 
         
       </div>
-      {favourites && <div className='list-container'>
-          {favourites.length > 0 ? (<ul className='fav-list'>
+      {favourites && <>
+          {favourites.length > 0 ? (
+          <ul className='fav-list'>
             <div className="list-header">Favourites</div>
             {favourites.map((fav) => (
               <li key={fav.scriptID} className="fav-item">
@@ -210,13 +211,12 @@ const Favourites = ({ setToast }) => {
             ))}
           </ul>   
           ) : (
-            <ul className='fav-list fav-list--none'>
-            <div className="list-header list-header--none">Prescriptions</div>
-              <li className="fav-item fav-item--none">No favourites added yet
-              </li>
+          <ul className='fav-list fav-list--none'>
+            <div className="list-header">Favourites</div>
+            <li className="fav-item fav-item--none">No favourites added yet</li>
           </ul>   
           )}
-        </div>}  
+        </>}  
       
     </StyledFavourites>
   </>)
