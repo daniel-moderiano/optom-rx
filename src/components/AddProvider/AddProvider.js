@@ -116,7 +116,7 @@ const AddProvider = ({ googleLoaded, setToast, setPage }) => {
   return (
     <ContentContainer>
       <StyledAddProvider>
-        <PageHeader title="Add provider" description="Enter details to add a new prescriber"/>
+        <PageHeader title="Add prescriber" description="Prescriber details will appear on your prescriptions"/>
         <div className="form-container">
           <span className="form-title">Prescriber details</span>
           <ProviderForm 
@@ -128,7 +128,7 @@ const AddProvider = ({ googleLoaded, setToast, setPage }) => {
             handleSubmit={handleSubmit}
             handleCancel={cancelEdit}
             toggleBooleanState={() => toggleBooleanState(setProviderData, providerData, 'prefix')}
-            submitBtn="Add provider"
+            submitBtn="Add prescriber"
             cancelBtn="Cancel"
             pending={isPending}
           />

@@ -107,7 +107,7 @@ const EditProvider = ({ googleLoaded, setToast, setPage }) => {
   return (
     <ContentContainer>
       <StyledEditProvider>
-        <PageHeader title="Edit provider" description="Change any details and then save changes"/>        
+        <PageHeader title="Edit prescriber" description="Prescriber details will appear on your prescriptions"/>        
         <div className="form-container">
           <span className="form-title">Prescriber details</span>
           <ProviderForm 

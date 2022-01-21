@@ -8,15 +8,12 @@ const StyledFavourites = styled.div`
 
   .Favourites__title {
     padding: 0;
-
-    margin: 0;
-
-
-    font-size: 1.65rem;
-    font-weight: 200;
+    margin: -0.75rem 0 0 0;
+    font-size: 1.6rem;
+    font-weight: 300;
     font-family: var(--font-stack-segoe);
     color: var(--title-color);
-
+    display: none;
   }
 
 
@@ -53,15 +50,21 @@ const StyledFavourites = styled.div`
 
     .list-header {
       background-color: #F9FAFB;
-      padding: 0.75rem 1.5rem;
+      padding: 1rem 1.5rem 1.1rem 1.5rem;
+
       color: #48515B;
       font-size: 0.75rem;
       line-height: 0.85rem;
       text-align: left;
-      text-transform: uppercase;
+      /* text-transform: uppercase;
       letter-spacing: 0.05rem;
-      font-weight: 600;
+      font-weight: 600; */
       border-top: none;
+
+      font-size: 1.5rem;
+      font-family: var(--font-stack-segoe);
+      font-weight: 300;
+      color: #48515B;
     }
 
     .fav-list:nth-child(even) {
@@ -244,7 +247,9 @@ const StyledFavourites = styled.div`
 
   /* Landscape phone to portrait tablet */
   @media (max-width: 550px) { 
-
+    .Favourites__title {
+      display: block;
+    }
     
     
     .fav-list {

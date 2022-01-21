@@ -70,7 +70,7 @@ const GlobalStyles = createGlobalStyle`
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 2.5rem;
+    height: 2.4rem;
     border: 1px solid transparent;
     background-color: var(--primary-color);
     color: rgb(255, 255, 255);
@@ -111,7 +111,7 @@ const GlobalStyles = createGlobalStyle`
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 2.5rem;
+    height: 2.4rem;
     border: 1px solid transparent;
     background-color: var(--btn-secondary);
     color: var(--btn-secondary-text);
@@ -157,7 +157,7 @@ const GlobalStyles = createGlobalStyle`
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 2.5rem;
+    height: 2.4rem;
     background-color: #fff;
     color: #0b4740;
     border: 1px solid #0b4740;

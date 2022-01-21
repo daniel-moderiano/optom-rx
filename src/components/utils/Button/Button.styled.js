@@ -12,7 +12,7 @@ const StyledButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 2.5rem;
+  height: 2.4rem;
   border: 1px solid transparent;
 
   &.button--primary {
@@ -72,6 +72,7 @@ const StyledButton = styled.button`
     outline: 2px solid #104362;
     outline-offset: 2px;
   }
+
 `
 
 export { StyledButton }

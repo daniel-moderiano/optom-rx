@@ -161,16 +161,15 @@ const Favourites = ({ setToast }) => {
           <Button design="delete" handleClick={() => deleteFavourite(selectedScript)}>Delete</Button>
         </div>
       </Modal>}
-      <h2 className="Favourites__title">Favourite scripts</h2>
-      {/* <p className="Scripts__description">Scripts you have saved to your favourites will appear here, and can be prescribed in one simple click</p> */}
-
+      
+      <h2 className="Favourites__title">Favourites</h2>
       
       <div className="Scripts__container">
         {isPending && <Spinner />}
 
         {error && <div className='list-container'>
           <ul className='fav-list fav-list--none'>
-            <div className="list-header list-header--none">Prescriptions</div>
+            <div className="list-header list-header--none">Favourites</div>
               <li className="fav-item fav-item--none">
                 No favourites added yet
               </li>
@@ -181,7 +180,7 @@ const Favourites = ({ setToast }) => {
       </div>
       {favourites && <div className='list-container'>
           {favourites.length > 0 ? (<ul className='fav-list'>
-            <div className="list-header">Prescriptions</div>
+            <div className="list-header">Favourites</div>
             {favourites.map((fav) => (
               <li key={fav.scriptID} className="fav-item">
                 <div className="item-name">

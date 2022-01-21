@@ -727,7 +727,7 @@ const Settings = ({ user, setToast, setPage }) => {
         </form>
       </Modal>}
 
-      <PageHeader title="Settings" />
+      <PageHeader title="Settings" description="Adjust basic profile and account settings"/>
 
       <div className="Settings-container">
         {user.emailVerified ? (<>

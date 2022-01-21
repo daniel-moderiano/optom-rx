@@ -35,7 +35,7 @@ const Providers = ({ setToast, setPage }) => {
   return (
     <ContentContainer earlyPadding={true}>
       <StyledProviders className="Providers">
-        <PageHeader title="Prescribers" description="Use this section to add provider details that can be used in your prescriptions"/>
+        <PageHeader title="Prescribers" description="Add and modify prescriber details for your prescriptions"/>
 
         <Link className="Providers__add-btn btn-primary" to={`/add-provider`}>Add new provider</Link> 
 

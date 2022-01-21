@@ -1130,7 +1130,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
 
   return (
     <ContentContainer>
-      <PageHeader title="New prescription" description="Fill out the details required to prescribe"/>
+      <PageHeader title="New prescription" description="Complete all sections required for your prescription"/>
 <StyledRxForm 
       className="rxform" 
       onSubmit={(e) => {
@@ -1144,7 +1144,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
       noValidate>
       <div className="scriptNo" data-testid="scriptNo">Script number: {isLoading ? 'Loading...' : miscData.scriptID}</div>
 
-      <Fieldset className="provider-form select-fieldset" legend="Provider Details">
+      <Fieldset className="provider-form select-fieldset" legend="Prescriber details">
 
         <div className="provider-controls">
           {isPending && <Spinner />}
@@ -1182,7 +1182,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
       
       </Fieldset>
 
-      <Fieldset className="patient-form" legend="Patient Details">
+      <Fieldset className="patient-form" legend="Patient details">
       {/* Legal requirements include only the patient's name and address */}
 
         {/* A max length for these fields based on the physical space available on the Rx pad is possible, however there should be virtually no cases where this is a problem. If anything, a warning alert could be added for fields such as full name, and street address/suburb where the char length exceeds 40 */}
@@ -1243,7 +1243,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
       </Fieldset>
 
       {/* Note there must be enough info to identify the medicine, including form and strength */}
-      <Fieldset className="drug-form" legend="Medication Details">
+      <Fieldset className="drug-form" legend="Medication details">
 
         <DrugAutocomplete 
           data={drugData}
@@ -1329,7 +1329,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
       </Fieldset>
 
       {/* Note there must be enough info to identify the medicine, including form and strength */}
-      <Fieldset className="misc-form" legend="Authority Details">
+      <Fieldset className="misc-form" legend="Authority details">
         <FormField 
           fieldType="checkbox" 
           name="authRequired"

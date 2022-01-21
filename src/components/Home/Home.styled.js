@@ -20,13 +20,8 @@ const StyledHome = styled.div`
     margin-bottom: 1.5rem;
   }
 
-  .Home__links {
-    display: flex;
-    
-    .Home__link--prescribers {
-      margin-left: 1.5rem;
-    }
-    
+  .Home__link {
+    max-width: 160px;
   }
 
   .Modal {
@@ -99,20 +94,6 @@ const StyledHome = styled.div`
         width: 90%;
         text-align: left;
         max-width: 500px;
-      }
-    }
-    
-
-    .Home__links {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-
-      .Home__link {
-        margin: 0 0 1rem 0;
-        max-width: 250px;
-        width: 100%;
       }
     }
   }

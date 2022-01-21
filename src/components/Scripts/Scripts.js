@@ -32,7 +32,7 @@ const Scripts = ({ setToast, setPage }) => {
   return (
     <ContentContainer earlyPadding={true}>
       <StyledScripts className="Scripts" >
-        <PageHeader title="Scripts"  />
+        <PageHeader title="Scripts" description="Review previous prescriptions you have written" />
         
         <div className="Scripts__container">
           {isPending && <Spinner />}
