@@ -80,7 +80,7 @@ const StyledDrugAutocomplete = styled.div`
     padding-bottom: 0.75rem;
 
     .brand-checkbox {
-      margin-top: 1.25rem;
+      margin-top: 0.85rem;
     }
   }
 
@@ -93,7 +93,7 @@ const StyledDrugAutocomplete = styled.div`
   }
 
   .compounded {
-    margin-bottom: 1rem;
+    margin-bottom: 0.85rem;
   }
 
   .brandOnly-container {

@@ -95,6 +95,10 @@ const RxTemplate = ({ data, setToast, setPage }) => {
     return `${miscData.date.substring(8)}/${miscData.date.substring(5, 7)}/${miscData.date.substring(0, 4)}`;
   };
 
+  const formatMedicareNumber = () => {
+    return `${patientData.medicareNumber.trim().substring(0, 4)} ${patientData.medicareNumber.trim().substring(4, 9)} ${patientData.medicareNumber.trim().substring(9, 10)}-${patientData.medicareRefNumber}`;
+  }
+
   const saveRx = async () => {
     setIsPending(true);
 
@@ -171,9 +175,9 @@ const RxTemplate = ({ data, setToast, setPage }) => {
                 <div className="ui-patient__addressLine2">{`${patientData.suburb} ${patientData.state} ${patientData.postcode}`}</div>
               </div>
 
-              {!patientData.noMedicare && 
+              {(patientData.medicareNumber.trim() !== "" && patientData.medicareRefNumber !== "") && 
                 <div className="ui-info ui-medicare">
-                  <div className="ui-patient__medicareNumber">Medicare number: {`${patientData.medicareNumber.substring(0, 4)} ${patientData.medicareNumber.substring(4, 9)} ${patientData.medicareNumber.substring(9, 10)}-${patientData.medicareRefNumber}`}
+                  <div className="ui-patient__medicareNumber">Medicare number: {formatMedicareNumber()}
                   </div>
                 </div>
               }
@@ -251,6 +255,12 @@ const RxTemplate = ({ data, setToast, setPage }) => {
                 <div className="patient__medicareNumber">
                   {`${patientData.medicareNumber.substring(0, 4)} ${patientData.medicareNumber.substring(4, 9)} ${patientData.medicareNumber.substring(9, 10)}-${patientData.medicareRefNumber}`}
                 </div>
+              }
+
+              {(patientData.medicareNumber.trim() !== "" && patientData.medicareRefNumber !== "") && 
+                <div className="patient__medicareNumber">
+                {formatMedicareNumber()}
+              </div>
               }
               
               <div className="patient__contactDetails">
@@ -330,10 +340,10 @@ const RxTemplate = ({ data, setToast, setPage }) => {
           <section className="patient">
             <div className="container">
 
-              {!patientData.noMedicare && 
+              {(patientData.medicareNumber.trim() !== "" && patientData.medicareRefNumber !== "") && 
                 <div className="patient__medicareNumber">
-                  {`${patientData.medicareNumber.substring(0, 4)} ${patientData.medicareNumber.substring(4, 9)} ${patientData.medicareNumber.substring(9, 10)}-${patientData.medicareRefNumber}`}
-                </div>
+                {formatMedicareNumber()}
+              </div>
               }
               
               <div className="patient__contactDetails">
@@ -419,11 +429,11 @@ const RxTemplate = ({ data, setToast, setPage }) => {
                 <div className="patient__fullName">{patientData.fullName}</div>
                 <div className="patient__streetAddress">{`${patientData.subpremise} ${patientData.streetAddress}`}</div>
                 <div className="patient__addressLine2">{`${patientData.suburb} ${patientData.state} ${patientData.postcode}`}</div>
-                {/* Unsure if including this here */}
-                {!patientData.noMedicare && 
-                  <div className="patient__medicareNumber">
-                  {`${patientData.medicareNumber.substring(0, 4)} ${patientData.medicareNumber.substring(4, 9)} ${patientData.medicareNumber.substring(9, 10)}-${patientData.medicareRefNumber}`}
-                  </div>
+                
+                {(patientData.medicareNumber.trim() !== "" && patientData.medicareRefNumber !== "") && 
+                <div className="patient__medicareNumber">
+                  {formatMedicareNumber()}
+                </div>
                 }
                 
               </div>
@@ -499,13 +509,13 @@ const RxTemplate = ({ data, setToast, setPage }) => {
                 <div className="patient__fullName">{patientData.fullName}</div>
                 <div className="patient__streetAddress">{`${patientData.subpremise} ${patientData.streetAddress}`}</div>
                 <div className="patient__addressLine2">{`${patientData.suburb} ${patientData.state} ${patientData.postcode}`}</div>
-                {/* Unsure if including this here */}
-                {!patientData.noMedicare && 
-                  <div className="patient__medicareNumber">
-                  {`${patientData.medicareNumber.substring(0, 4)} ${patientData.medicareNumber.substring(4, 9)} ${patientData.medicareNumber.substring(9, 10)}-${patientData.medicareRefNumber}`}
-                  </div>
-                }
                 
+                {(patientData.medicareNumber.trim() !== "" && patientData.medicareRefNumber !== "") && 
+                <div className="patient__medicareNumber">
+                  {formatMedicareNumber()}
+                </div>
+                }
+
               </div>
             </div>
           </section>

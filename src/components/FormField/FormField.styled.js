@@ -58,6 +58,10 @@ const StyledFormField = styled.div`
   .label-text {
     display: block;
     position: relative;
+
+    .asterisk {
+      color: var(--error);
+    }
   }
 
   input[type=number] {

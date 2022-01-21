@@ -62,7 +62,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
     state: {},
     medicareNumber: {},
     medicareRefNumber: {},
-    noMedicare: {},
   });
 
   const [providerAlerts, setProviderAlerts] = useState({
@@ -116,7 +115,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
     state: '',
     medicareNumber: '',
     medicareRefNumber: '',
-    noMedicare: false,
     ...existingData.patientData,
   });
 
@@ -833,27 +831,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
           case name === 'postcode':
             validateRequiredField(setPatientAlerts, event.target);
             break;
-
-          case name === 'medicareNumber':
-            // Check for exactly 10 digits
-            if (value.trim()[0] === '0') {
-              negativeInlineValidation(setPatientAlerts, 'Medicare number must not start with zero', event.target);
-              showErrorClass(event.target);
-            } else if (!(/^[0-9]{10}$/).test(value.trim())) {
-              negativeInlineValidation(setPatientAlerts, 'Medicare number must be exactly 10 digits long', event.target);
-            } else {
-              positiveInlineValidation(setPatientAlerts, event.target);
-            }
-            break;
-
-          case name === 'medicareRefNumber':
-            // Check for digits 1-9, and only a single digit
-            if (!(/^[1-9]{1}$/).test(value.trim())) {
-              negativeInlineValidation(setPatientAlerts, 'IRN must be a single digit between 1 through 9', event.target);
-            } else {
-              positiveInlineValidation(setPatientAlerts, event.target);
-            }
-            break;
         
           default:
             break;
@@ -935,7 +912,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
           state: '',
           medicareNumber: '',
           medicareRefNumber: '',
-          noMedicare: false,
         });
 
         setMiscData((prevData) => ({
@@ -1009,11 +985,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
 
      // Validation is conditional upon whether medicare details were intended to be included by the user or not
      requiredFields.patient.forEach((field) => {
-      if (patientData.noMedicare && field === 'medicareNumber') {
-        // Do not validate
-      } else if (patientData.noMedicare && field === 'medicareRefNumber') {
-        // Do not validate
-      } else {
+
         // Validate as normal
         const input = patientForm.querySelector(`[name="${field}"]`);
 
@@ -1025,7 +997,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
           valid = false;
           negativeInlineValidation(setPatientAlerts, 'This field cannot be left blank', input);
         }
-      }      
+          
     });
 
     requiredFields.drug.forEach((field) => {
@@ -1221,8 +1193,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
           googleLoaded={googleLoaded}
         />
 
-        {/* Fieldset may be more appropriate here? */}
-        {!patientData.noMedicare &&
         <div className="medicareFields">
           {/* Validation requires a 10-digit number. Further checks are beyond the scopy of this application */}
           <FormField 
@@ -1253,18 +1223,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
             describedBy = {Object.keys(patientAlerts.medicareRefNumber).length === 0 ? null : 'medicareRefNumber-alert'}
           />
         </div>
-        }     
-
-        <FormField 
-          fieldType="checkbox" 
-          name="noMedicare"
-          label="Do not include Medicare details" 
-          onChange={() => toggleBooleanState(setPatientData, patientData, 'noMedicare')}
-          checked={patientData.noMedicare}
-          className="checkbox noMedicare"
-          enterFunc={(event) => changeOnEnter(event, setPatientData, patientData)}
-        />  
-
+  
         
       </Fieldset>
 
