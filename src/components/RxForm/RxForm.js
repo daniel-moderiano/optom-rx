@@ -825,6 +825,39 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
             }));
             validateRequiredField(setPatientAlerts, event.target);
             break;
+
+          case name === 'medicareNumber':
+            if ((/^[0-9]{10}$/).test(value.trim())) {
+              positiveInlineValidation(setPatientAlerts, event.target);
+            } else {
+              // ignore
+              event.target.classList.remove('success');
+              // Remove the tick icon
+              const tick = event.target.parentNode.querySelector('.tickCircle');
+              tick.classList.remove('show');
+              tick.classList.add("hide");
+            }
+            break;
+
+          case name === 'medicareRefNumber':
+            if ((/^[1-9]{1}$/).test(value.trim())) {
+              positiveInlineValidation(setPatientAlerts, event.target);
+            } else {
+              // ignore
+              event.target.classList.remove('success');
+              // Remove the tick icon
+              const tick = event.target.parentNode.querySelector('.tickCircle');
+              tick.classList.remove('show');
+              tick.classList.add("hide");
+            }
+            break;
+
+    // Check for digits 1-9, and only a single digit
+    // if (!(/^[1-9]{1}$/).test(value.trim())) {
+    //   negativeInlineValidation(setPatientAlerts, 'IRN must be a single digit between 1 through 9', event.target);
+    // } else {
+    //   positiveInlineValidation(setPatientAlerts, event.target);
+    // }
     
           case name === 'postcode':
             validateRequiredField(setPatientAlerts, event.target);
