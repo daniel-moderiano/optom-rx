@@ -4,7 +4,7 @@ const StyledFormField = styled.div`
   margin: 0.85rem 0;
   position: relative;
   width: 26rem;
-  min-height: 80px;
+  height: 80px;
 
   input {
     margin-top: 0.5rem;
@@ -72,7 +72,7 @@ const StyledFormField = styled.div`
   /* Unique styling for checkbox fields */
   &.checkbox {
     width: 24rem;
-    min-height: 0;
+    height: auto;
     
     
     label {
@@ -139,10 +139,10 @@ const StyledFormField = styled.div`
 
   .alert-container {
     display: flex;
-    align-items: center;
-    margin-top: 0.65rem;
+    align-items: flex-start;
+    margin-top: 0.2rem;
     width: 26rem;
-    height: 0;
+    /* height: 0; */
     font-size: 0.8rem;
 
     .alert--error {
@@ -171,16 +171,18 @@ const StyledFormField = styled.div`
     .alert-icon {
       margin-right: 0.25rem;
       flex-shrink: 0;
+      margin-top: 0.1rem;
     }
 
     .alert-icon--neutral {
       margin-left: -0.04rem;
       margin-right: 0.2rem;
+      margin-top: 0.05rem;
     }
   }
 
   .subalert-container {
-    height: 16px;
+  
   }
 
   .show {

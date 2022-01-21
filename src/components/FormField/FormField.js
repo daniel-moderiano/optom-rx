@@ -75,9 +75,9 @@ const FormField = (props) => {
 }
 
       {/* SubAlert is used for a second alert either applying to the same field, or for an adjacent related field where it makes more sense to group alerts */}
-      {Object.keys(subAlert).length > 0 && 
+      {(Object.keys(subAlert).length > 0 && Object.keys(alert).length === 0)  && 
       // Consider adding a cross icon above in the label for visually impaired users
-        <div className="alert-container subalert-container" id={`${id ? id + '-alert' : name + '-alert'}`} role="alert">
+        <div className={`alert-container subalert-container`} id={`${id ? id + '-alert' : name + '-alert'}`} role="alert">
           {(subAlert.type === 'error') && 
             (<svg xmlns="http://www.w3.org/2000/svg" className="alert-icon alert-icon--error" viewBox="0 0 512 512" width="16px">
               <path d="M85.57 446.25h340.86a32 32 0 0028.17-47.17L284.18 82.58c-12.09-22.44-44.27-22.44-56.36 0L57.4 399.08a32 32 0 0028.17 47.17z" fill="none" stroke="#B3000F" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32"/>
