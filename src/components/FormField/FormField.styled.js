@@ -6,6 +6,7 @@ const StyledFormField = styled.div`
   width: 26rem;
   height: 80px;
 
+
   input {
     margin-top: 0.5rem;
     padding: 0.55rem 0.85rem 0.6rem 0.85rem;   
@@ -52,7 +53,6 @@ const StyledFormField = styled.div`
     font-size: 0.9rem;
     display: flex;
     flex-direction: column;
-    
   }
 
   .label-text {
@@ -221,12 +221,10 @@ const StyledFormField = styled.div`
 
    
   /* Landscape phones and down */
-  @media (max-width: 590px) { 
+  @media (max-width: 768px) { 
     width: 100%;
     max-width: 26rem;
-    /* display: flex;
-    flex-direction: column;
-    align-items: center; */
+
 
     input {
       width: 100%;

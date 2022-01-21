@@ -4,7 +4,7 @@ const StyledAddressAutocomplete = styled.fieldset`
   border: none;
   margin: 0;
   padding: 0;
-  width: 24rem;
+  width: 26rem;
   position: relative;
 
   /* Show and hide classes control the sub-fields display (i.e. fields other than autocomplete) */
