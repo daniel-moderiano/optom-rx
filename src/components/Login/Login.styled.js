@@ -14,13 +14,15 @@ const StyledLogin = styled.div`
     margin-top: -4rem;
   }
 
+
+
   /* The actual white space around the form */
   .Login__container {
     background-color: #FFFFFF;
     box-shadow: 0 1.6px 3.6px 0 rgb(0 0 0 / 13%), 0 0.3px 0.9px 0 rgb(0 0 0 / 11%);
-    padding: 1.5rem 3.7rem 0.85rem 3.7rem;
+    padding: 2.5rem 3.5rem 0.85rem 3.5rem;
     width: 90%;
-    max-width: 30rem;
+    max-width: 31rem;
     display: flex;
     align-items: flex-end;
     flex-direction: column;
@@ -32,7 +34,7 @@ const StyledLogin = styled.div`
     font-weight: 400;
     color: var(--title-color);
     font-size: 2.2rem;
-    margin: 1rem 0 0.75rem 0;
+    margin: 0 0 1.5rem 0;
   }
 
   .Login__form {
@@ -43,7 +45,14 @@ const StyledLogin = styled.div`
 
     .form-field {
       width: 100%;
+      height: auto;
+      margin: 0 0 1.25rem 0;      
     }
+
+    .toggle-password {
+      top: 38px;
+    }
+  
 
     /* Strictly styling the backend error container above the login button */
     .error-container {
@@ -66,7 +75,7 @@ const StyledLogin = styled.div`
 
     .Login__btn {
       margin-top: 2rem;
-      margin: 1.7rem 0 0.5rem 0;
+      margin: 1.5rem 0 0.5rem 0;
       width: 100%;
     }     
   }  
@@ -132,29 +141,61 @@ const StyledLogin = styled.div`
   @media (max-width: 550px) { 
     .Login__title {
       text-align: center;
+      font-size: 2.1rem;
     }
 
     .Login__container {
-      padding: 1rem 1.5rem;
+      padding: 1.5rem 1.5rem 1rem 1.5rem;
       width: 100%;
       align-items: center;
     }
 
     .Login__form {
-      width: 90%;
+      width: 85%;
     }
 
     .signup-option {
       justify-content: center;
       font-size: 0.9rem;
       width: 90%;
+      margin-top: 1rem;
 
       .signup-link {
         font-size: 0.9rem;
       }
     }
+
+    
   }
 
+  @media (max-width: 400px) {
+
+    .Login__title {
+      font-size: 2rem;
+    }
+    .Login__form {
+      width: 90%;
+
+      .toggle-password {
+        top: 34px;
+      }
+    }
+
+    .button {
+      font-size: 0.9rem;
+      height: 2.2rem;
+    }
+
+    .form-field {
+      input {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+      }   
+    }
+
+    
+    
+  }
 
 `
 export { StyledLogin }

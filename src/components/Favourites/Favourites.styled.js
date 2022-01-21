@@ -122,32 +122,11 @@ const StyledFavourites = styled.div`
         }
       }
 
-      a {
-        /* min-width: 80px; */
-        background-color: var(--primary-color);
-        color: rgb(255, 255, 255);
-        border: none;
+      .prescribe {
         margin-right: 1.5rem;
-        text-decoration: none;
+        padding: 6px 13px 8px 13px;
+        height: auto;
         font-size: 0.9rem;
-        font-family: var(--font-stack-segoe);
-        box-sizing: border-box;
-        cursor: pointer;
-        padding: 6px 14px 8px 14px;
-        border-radius: 2px;
-
-        &:active {
-          transform: scale(0.98);
-        }
-
-        &:hover {
-          background-color: var(--btn-primary-hover);
-        }
-
-        &:focus {
-          outline: 2px solid #104362;
-          outline-offset: 2px;
-        }
       }
 
       .delete-btn {

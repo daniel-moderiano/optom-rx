@@ -111,28 +111,33 @@ const StyledSignup = styled.div`
   @media (max-width: 550px) { 
     .Signup__title {
       text-align: center;
+      font-size: 2.1rem;
     }
 
     .Signup__container {
-      padding: 1rem 1.5rem;
+      padding: 1.5rem 1.5rem 1rem 1.5rem;
       width: 100%;
       align-items: center;
     }
 
     .Signup__form {
-      width: 90%;
+      width: 85%;
     }
 
-    .login-option {
+    .Login-option {
       justify-content: center;
       font-size: 0.9rem;
       width: 90%;
+      margin-top: 1rem;
 
       .login-link {
         font-size: 0.9rem;
       }
     }
+
   }
+
+
   
 `
 export { StyledSignup }

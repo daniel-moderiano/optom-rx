@@ -193,7 +193,7 @@ const Favourites = ({ setToast }) => {
                 <div className="actions">
                   <span className="cell-title">Actions</span>
                   <div className="btns">
-                    <Link className="" to='/form' state={{ 
+                    <Link className="btn-primary prescribe" to='/form' state={{ 
                       newRx: true,
                       rePrescribe: true,
                       scriptData: fav,
