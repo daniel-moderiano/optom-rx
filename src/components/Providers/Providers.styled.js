@@ -4,8 +4,6 @@ const StyledProviders = styled.div`
 
   .Providers__list {
     position: relative;
-
-    
   }
 
   .no-providers-text {
@@ -27,36 +25,9 @@ const StyledProviders = styled.div`
   }
 
   .Providers__add-btn {
-    display: inline-block;
-    font-size: 1rem;
-    font-family: var(--font-stack-segoe);
-    box-sizing: border-box;
-    cursor: pointer;
-    padding: 6px 16px 8px 16px;
-    border-radius: 2px;
-    min-width: 80px;
-    background-color: var(--primary-color);
-    color: rgb(255, 255, 255);
-    border: 1px solid var(--primary-color); 
-    text-decoration: none;
-    margin-top: 0.75rem;
-    
-    &:hover {
-      background-color: var(--btn-primary-hover);
-      border: 1px solid var(--btn-primary-hover);
-    }
-
-    &:active {
-      transform: scale(0.98);
-    }
-
-    &:focus {
-      outline: 2px solid #104362;
-      outline-offset: 2px;
-    }
+    width: 161px;
   }
 
-  
 
   .table {
     width: 100%;
@@ -105,7 +76,6 @@ const StyledProviders = styled.div`
       }
     }
   }
-
 
  
   .Modal {
@@ -158,9 +128,7 @@ const StyledProviders = styled.div`
       .cancel {
         margin-right: 1rem;
       }
-    }
-
-    
+    }    
   }
 
   .table-none {
@@ -173,13 +141,11 @@ const StyledProviders = styled.div`
     margin-top: 2rem;
   }
 
-
   .Providers__table {
 
     margin-top: 2rem;
     border-collapse: collapse;
     width: 100%;
-
 
     .table__header-row {
       border-bottom: 1px solid #646e6d;
@@ -196,7 +162,6 @@ const StyledProviders = styled.div`
     }
 
     tr {
-      
       margin: 0;
       border-bottom: 1px solid #dfe1e1;
 
@@ -205,7 +170,6 @@ const StyledProviders = styled.div`
         padding: 0.5rem 0;
         text-align: left;
         font-size: 0.9rem;
-        /* vertical-align: middle; */
       }
 
       .name-cell, .name-header {
@@ -214,8 +178,6 @@ const StyledProviders = styled.div`
 
       .actions-cell {
         padding: 0 0.5rem;
-
-        
 
         .table__action {
           font-size: 0.85rem;
@@ -253,55 +215,12 @@ const StyledProviders = styled.div`
         max-width: 10rem;
       }
 
-      
-
       .actions-header {
         padding-left: 0.5rem;
       }
-
-      .default-header {
-        text-align: center
-      }
-
-      .default-cell {
-
-        .checkbox {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-
-          label {
-            width: 16px;
-            position: relative;
-
-            .checkmark {
-              position: absolute;
-              width: 5px;
-              height: 10px;
-              top: 2px;
-              left: 0.35rem;
-              border: solid white;
-              border-width: 0 2px 2px 0;
-              -webkit-transform: rotate(45deg);
-              -ms-transform: rotate(45deg);
-              transform: rotate(45deg);
-            }
-          }
-        }  
-      }
     }
-
   }
   
-  .checkbox {
-    width: auto;
-
-    
-  }
-
-  @media (max-width: 800px) { 
-    /* padding: 3rem 3rem; */
-  }
   
   @media(max-width: 700px) {
     .table {
@@ -337,9 +256,7 @@ const StyledProviders = styled.div`
 
    /* Landscape phone to portrait tablet */
    @media (max-width: 360px) { 
-    .Providers__add-btn {
-      text-align: center;
-      
+    .Providers__add-btn {   
       max-width: 250px;
       width: 100%;
     }

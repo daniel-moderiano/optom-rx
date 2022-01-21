@@ -37,7 +37,7 @@ const Providers = ({ setToast, setPage }) => {
       <StyledProviders className="Providers">
         <PageHeader title="Prescribers" description="Use this section to add provider details that can be used in your prescriptions"/>
 
-        <Link className="Providers__add-btn" to={`/add-provider`}>Add new provider</Link> 
+        <Link className="Providers__add-btn btn-primary" to={`/add-provider`}>Add new provider</Link> 
 
         <div className="Providers__container">
           {isPending && <Spinner />}
