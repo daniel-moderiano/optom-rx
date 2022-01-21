@@ -2,19 +2,13 @@ import styled from "styled-components";
 
 const StyledEditProvider = styled.div`
   .form-container {
-    border: none;
     padding: 2rem 0;
-    background-color: #fff;
     display: flex;
     align-items: flex-start;
-    width: 100%;
     border-bottom: 1px solid #dfe1e1;
     border-top: 1px solid #dfe1e1;
-    margin: 0;
 
     .form-title {
-      display: block;
-      padding: 0;
       font-size: 1.65rem;
       font-weight: 200;
       font-family: var(--font-stack-segoe);
