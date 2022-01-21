@@ -28,68 +28,6 @@ const Signup = ({ setPage, setFirstSignIn }) => {
     setPage('signup');
   }, [setPage])
 
-
-  // Inline form validation
-  useEffect(() => {
-    // Event propagation will capture all focusout events from login form
-    const signupValidation = () => {
-      document.querySelector('.Signup__form').addEventListener('focusout', (event) => {
-        const { name, value } = event.target;
-        switch (true) {
-          case name === 'email':
-            // Check for blank field
-            if (value.trim().length === 0) {
-              setEmailAlert({
-                  message: "Please enter an email address.",
-                  type: 'error',
-                }
-              );
-              event.target.classList.add('error');
-            } else {
-              event.target.classList.remove('error');
-              setEmailAlert({});
-            }
-            break;
-
-          case name === 'password':
-            // Check for blank field
-            if (value.trim().length === 0) {
-              setPasswordAlert({
-                  message: "Please enter a password.",
-                  type: 'error',
-                }
-              );
-              event.target.classList.add('error');
-            } else {
-              event.target.classList.remove('error');
-              setPasswordAlert({});
-            }
-            break;
-
-          case name === 'displayName':
-            // Check for blank field
-            if (value.trim().length === 0) {
-              setDisplayNameAlert({
-                  message: "Please enter a display name.",
-                  type: 'error',
-                }
-              );
-              event.target.classList.add('error');
-            } else {
-              event.target.classList.remove('error');
-              setDisplayNameAlert({});
-            }
-            break;
-
-          default:
-            break;
-        }
-      });
-    };
-
-    signupValidation();
-  }, []);
-
    // Ensure form is validated before calling form submission function (to generate Rx)
    const isFormValid = () => {
     let valid = true;

@@ -13,9 +13,9 @@ const StyledSignup = styled.div`
   .Signup__container {
     background-color: #FFFFFF;
     box-shadow: 0 1.6px 3.6px 0 rgb(0 0 0 / 13%), 0 0.3px 0.9px 0 rgb(0 0 0 / 11%);
-    padding: 1.5rem 3.7rem 0.85rem 3.7rem;
+    padding: 2.5rem 3.5rem 0.85rem 3.5rem;
     width: 90%;
-    max-width: 30rem;
+    max-width: 31rem;
     display: flex;
     align-items: flex-end;
     flex-direction: column;
@@ -27,7 +27,7 @@ const StyledSignup = styled.div`
     font-weight: 400;
     color: var(--title-color);
     font-size: 2.2rem;
-    margin: 1rem 0 0.75rem 0;
+    margin: 0 0 1.5rem 0;
   }
 
   .Signup__form {
@@ -38,6 +38,12 @@ const StyledSignup = styled.div`
 
     .form-field {
       width: 100%;
+      height: auto;
+      margin: 0 0 1.25rem 0;      
+    }
+
+    .toggle-password {
+      top: 38px;
     }
   
     /* Strictly styling the backend error container above the login button */
@@ -61,7 +67,7 @@ const StyledSignup = styled.div`
 
     .Signup__btn {
       margin-top: 2rem;
-      margin: 1.7rem 0 0.5rem 0;
+      margin: 1.5rem 0 0.5rem 0;
       width: 100%;
     } 
   }
@@ -124,7 +130,7 @@ const StyledSignup = styled.div`
       width: 85%;
     }
 
-    .Login-option {
+    .login-option {
       justify-content: center;
       font-size: 0.9rem;
       width: 90%;
@@ -136,6 +142,36 @@ const StyledSignup = styled.div`
     }
 
   }
+
+  @media (max-width: 400px) {
+
+    .Signup__title {
+      font-size: 2rem;
+    }
+
+    .Signup__form {
+      width: 90%;
+
+      .toggle-password {
+        top: 34px;
+      }
+    }
+
+    .button {
+      font-size: 0.9rem;
+      height: 2.2rem;
+    }
+
+    .form-field {
+      input {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+      }   
+    }
+
+
+
+}
 
 
   

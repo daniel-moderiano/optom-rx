@@ -129,6 +129,7 @@ const StyledLogin = styled.div`
     font-size: 0.9rem;
     text-decoration: none;
     border-radius: 2px;
+    margin-top: 0.25rem;
 
     &:hover {
       background-color: transparent;
