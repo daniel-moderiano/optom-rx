@@ -1,5 +1,6 @@
 import { useEffect } from "react";
-import { StyledModal } from "./Modal.styled"
+import { StyledModal } from "./Modal.styled";
+
 
 const Modal = ({ title, children, closeModal }) => {
 

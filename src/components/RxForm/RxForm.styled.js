@@ -179,7 +179,7 @@ const StyledRxForm = styled.form`
     border-radius: 6px;
     display: flex;
     flex-direction: column;
-
+    transform-origin: top;
   }
 
   /* Style the button that is used to open and close the collapsible content */
@@ -198,6 +198,7 @@ const StyledRxForm = styled.form`
     color: #48515B;
     border-radius: 6px 6px 0 0;
     cursor: pointer;
+    
 
     &:focus {
       outline: 2px solid #a360ac;
@@ -247,6 +248,8 @@ const StyledRxForm = styled.form`
     padding: 1rem 1rem 1.25rem 1rem;
     font-size: 0.9rem;
     color: #48515B;
+
+    
     
     .indication__extra {
 

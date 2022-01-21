@@ -9,6 +9,7 @@ import Button from '../utils/Button/Button';
 import ContentContainer from '../utils/ContentContainer/ContentContainer';
 import PageHeader from '../utils/PageHeader/PageHeader';
 
+
 const Home = ({ setToast, setPage, firstSignIn, setFirstSignIn }) => {
   const { user } =  useAuthContext();
   const [showModal, setShowModal] = useState(false);
@@ -35,6 +36,7 @@ const Home = ({ setToast, setPage, firstSignIn, setFirstSignIn }) => {
     }
   }, [firstSignIn, setFirstSignIn, user])
 
+  
  
   return (
     <ContentContainer earlyPadding={true}>
@@ -50,6 +52,7 @@ const Home = ({ setToast, setPage, firstSignIn, setFirstSignIn }) => {
           <div className="Favourites">
             <Favourites setToast={setToast}/>
           </div>
+
         
         {showModal && (
         <Modal title="Verify your email" closeModal={() => setShowModal(false)}>

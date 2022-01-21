@@ -1,11 +1,9 @@
 import styled from "styled-components";
 
 const StyledSettings = styled.div`
-
   .settings-container {
     display: flex;
     flex-direction: column;
-
   }
 
   .hidden {
@@ -22,13 +20,13 @@ const StyledSettings = styled.div`
     font-weight: 200;
     font-family: var(--font-stack-segoe);
     color: var(--title-color);
-
   }
 
   .displayName-form, .password-form, .delete-account, .email-form {
     padding: 1.75rem 0 2rem 0;
     display: flex;
     flex-direction: column;
+    
     .PasswordContainer {
       max-width: 26rem;
     }

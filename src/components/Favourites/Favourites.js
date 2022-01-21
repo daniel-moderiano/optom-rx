@@ -136,6 +136,7 @@ const Favourites = ({ setToast }) => {
     }
   };
 
+
   return (<>
      
     <StyledFavourites className="Scripts">

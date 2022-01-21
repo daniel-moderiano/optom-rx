@@ -130,6 +130,25 @@ const StyledFavourites = styled.div`
   }
 
   .Modal {
+    .exit-fade {
+      animation-name: shrink;
+      animation-duration: 150ms;
+      animation-timing-function: ease-in;
+
+      
+      @keyframes shrink {
+        100% {
+          transform: scale(0.75);
+          opacity: 0.1;
+        }
+
+        0% {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+    }
+
     .error-container {
       margin-top: 1.25rem;
       background-color: #FBE9E7;
