@@ -14,14 +14,14 @@ const StyledFormField = styled.div`
     font-size: 1rem;
     font-family: var(--font-stack-segoe);
     background-color: #fff;
-    transition: border 0.5s ease-in-out;
+    transition: border-color 150ms ease-in-out;
 
     &.error {
-      border: 0.1rem solid var(--error);
+      border: 1px solid var(--error);
     }
 
     &.success {
-      border: 0.1rem solid var(--success);
+      border: 1px solid var(--success);
     }
   }
 
@@ -151,7 +151,7 @@ const StyledFormField = styled.div`
     .alert--neutral {
       color: var(--neutral);
       /* font-size: 0.8rem; */
-      margin-bottom: 0.1rem;
+      /* margin-bottom: 0.1rem; */
     }
 
     .alert--helper {
@@ -163,6 +163,11 @@ const StyledFormField = styled.div`
     .alert-icon {
       margin-right: 0.25rem;
       flex-shrink: 0;
+    }
+
+    .alert-icon--neutral {
+      margin-left: -0.04rem;
+      margin-right: 0.2rem;
     }
   }
 

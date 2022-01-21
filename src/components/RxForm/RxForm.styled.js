@@ -73,13 +73,13 @@ const StyledRxForm = styled.form`
     .solo-alert-container {
       display: flex;
       align-items: center;
-      margin: -0.2rem 0 0.75rem -0.1rem;
+      margin: -0.2rem 0 0.75rem 0rem;
       width: 24rem;
 
       .alert--neutral {
         color: var(--neutral);
         font-size: 0.8rem;
-        margin-bottom: 0.1rem;
+        /* margin-bottom: 0.1rem; */
       }
 
       .alert-icon {
@@ -214,13 +214,20 @@ const StyledRxForm = styled.form`
       margin: 0;
       padding: 0;
       background-color: transparent;
+      border-radius: 2px;
 
       &:focus {
-        outline: 2px solid #a360ac;
-        /* For a soft box shadow */
-        /* box-shadow: 0 0 3pt 2pt cornflowerblue; */
+        outline: 2px solid #104362;
+        outline-offset: 1px;
+      }
+
+      &:focus:not(:focus-visible) {
+        outline: none
+      }
+
+      &:focus-visible {
+        outline: 2px solid #104362;
         outline-offset: 2px;
-          
       }
     }
   }
