@@ -5,7 +5,6 @@ const StyledRxTemplate = styled.div`
   flex-direction: column;
   margin: 2rem 0;
   background-color: #FFFFFF;
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px, rgba(0, 0, 0, 0.05) 0px 0px 1px 0px;
   padding: 3.5rem 5.5rem;
   max-width: 1140px;
   width: 100%;
@@ -16,7 +15,7 @@ const StyledRxTemplate = styled.div`
   .ui-description {
     display: flex;
     justify-content: space-between;
-    padding-top: 1.5rem;
+    padding-top: 0.5rem;
     padding-left: 0.1rem;
     font-size: 0.9rem;
     color: #48515B;
@@ -59,77 +58,25 @@ const StyledRxTemplate = styled.div`
 
 
   .RxTemplate__btns {
-
-    margin: 2rem 0 2rem 0;
+    margin: 2rem 0 0 0;
     display: flex;
     justify-content: space-between;
     width: 100%;
-    /* padding-left: 0.75rem; */
+
+    svg {
+      width: 20px;
+      margin-right: 0.5rem;
+      margin-top: 0.1rem;
+    }
 
     .primary-btns {
       display: flex;
       align-items: center;
       justify-content: center;
-      /* height: 2.6rem; */
     }
 
-    .RxTemplate__btn {
-      height: 2.6rem;
-      display: flex;
-      align-items: center;
-      font-size: 1rem;
-      font-family: var(--font-stack-segoe);
-      box-sizing: border-box;
-      cursor: pointer;
-      padding: 8px 16px 10px 16px;
-      border-radius: 2px;
-
-      svg {
-        width: 20px;
-        
-        margin-right: 0.5rem;
-        margin-top: 0.1rem;
-      }
-
-      &:active {
-        transform: scale(0.98);
-      }
-    }
-
-    .btn-finish, .btn-print {
-      min-width: 80px;
-      background-color: var(--primary-color);
-      color: rgb(255, 255, 255);
-      /* background-color: #fff;
-      color: var(--primary-color);
-      border: 0.1rem solid var(--primary-color); */
-      border: none;
+    .btn-print {
       margin-right: 1.5rem;
-      text-decoration: none;       
-    }
-
-    .btn-finish {
-      height: 2.6rem;
-      width: 169px;
-      justify-content: center;
-    }
-    
-    .btn-finish:hover, .btn-print:hover {
-      background-color: var(--btn-primary-hover);
-    }
-          
-    .btn-edit {
-      height: 2.6rem;
-      display: block;
-      text-decoration: none;
-      background-color: var(--btn-secondary);
-      color: var(--btn-secondary-text);
-      border: none;            
-    }
-
-    .btn-edit:hover {
-      background-color: var(--btn-secondary-hover);
-      color: #21252A;
     }
   }
 
@@ -140,10 +87,20 @@ const StyledRxTemplate = styled.div`
   /* Landscape phone to portrait tablet */
   @media (max-width: 768px) { 
     padding: 3rem 3rem;
+
+    .ui-container {
+      .ui__title {
+        padding: 0.5rem 1rem;
+        font-size: 1.2rem;
+        font-weight: 400;
+      }
+    }
+    
   }
 
-  /* Landscape phone to portrait tablet */
   @media (max-width: 550px) { 
+    padding: 3rem 2.5rem;
+
     .Modal {
       .Modal__content {
         width: 90%;
@@ -151,9 +108,7 @@ const StyledRxTemplate = styled.div`
         max-width: 500px;
       }
     }
-  }
 
-  @media (max-width: 550px) { 
     .ui-description {
       flex-direction: column;
     }
@@ -163,7 +118,6 @@ const StyledRxTemplate = styled.div`
       align-items: center;
       justify-content: center;
       
-
       .primary-btns {
         flex-direction: column;
         align-items: center;
@@ -172,27 +126,30 @@ const StyledRxTemplate = styled.div`
         width: 100%;
       }
 
-      .RxTemplate__btn {
-        padding: 8px 16px 10px 16px;
+      .button {
         width: 90%;
-        align-items: center;
-        justify-content: center;
         margin: 0;
         max-width: 300px;
       }
 
       .btn-print {
         margin: 0 0 1.5rem 0;
-        max-width: 300px;
-      }
-
-      .btn-edit {
-        display: block;
-        text-align: center;
-        max-width: 300px;
       }
     }
+  }
 
+  @media (max-width: 475px) {
+    .ui-container {
+      .ui__title {
+        padding: 0.4rem 1rem;
+        font-size: 1.1rem;
+        font-weight: 400;
+      }
+    }
+  }
+
+  @media (max-width: 400px) {
+    padding: 3rem 1.5rem;
   }
 
   /* Print styles are created to match the dimensions of the physical Rx form */
