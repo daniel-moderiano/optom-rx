@@ -360,7 +360,6 @@ const StyledRxTemplate = styled.div`
       }
     }
 
-
     .left-container {
       display: block;
       margin: 0;
@@ -371,28 +370,15 @@ const StyledRxTemplate = styled.div`
       display: block;
       position: absolute;
       left: 456px;
-
-     
     }
 
-    .bottom-container--right {
-      display: block;
-      margin: 0;
-      line-height: normal;
-      position: relative;
-      top: 814px;
-      left: 410px;
-      font-size: 14.5px;
-      width: 400px;
-
+    .lower-containers {
       .doctor-copy {
         position: absolute;
         font-style: italic;
-        left: 178px;
         font-size: 15px;
-        width: 250px;
       }
-      
+
       .container {
         position: relative;
         width: 100%;
@@ -455,16 +441,11 @@ const StyledRxTemplate = styled.div`
 
         .authNumbers {
           position: absolute;
-            left: 190px;
-            top: 0;
-            width: 200px;
-            text-align: right;
-          .authRxNo {
-            
-          }
+          left: 190px;
+          top: 0;
+          width: 200px;
+          text-align: right;
         }
-
-        
       }
 
       .medication {
@@ -472,7 +453,6 @@ const StyledRxTemplate = styled.div`
         left: 70px;
         top: 222px;
         width: 390px;
-        /* border-bottom: 1px solid #b8b8b8; */
         padding: 2px 0;
 
         .medication__activeIngredient {
@@ -481,10 +461,8 @@ const StyledRxTemplate = styled.div`
 
         .medication__compounded {
           margin: 0.4rem 0 0.3rem 0;
-          /* font-style: italic; */
           text-transform: uppercase;
         }
-
 
         .medication__brandName {
           font-weight: bold;
@@ -503,9 +481,6 @@ const StyledRxTemplate = styled.div`
           border-top: 1px solid #b8b8b8;
           margin-top: 0.2rem;
           padding-top: 0.2rem;
-          /* position: absolute;
-          bottom: -22px;
-          right: 2px; */
         }
       }
 
@@ -515,6 +490,21 @@ const StyledRxTemplate = styled.div`
         .extra-details {
           margin-bottom: 0.75rem;
         }
+      }
+    }
+
+    .bottom-container--right {
+      display: block;
+      margin: 0;
+      line-height: normal;
+      position: relative;
+      top: 814px;
+      left: 410px;
+      font-size: 14.5px;
+      width: 400px;
+
+      .doctor-copy {
+        left: 178px;
       }
     }
 
@@ -529,134 +519,7 @@ const StyledRxTemplate = styled.div`
       width: 400px;
 
       .doctor-copy {
-        position: absolute;
-        font-style: italic;
         left: 208px;
-        font-size: 15px;
-      }
-      
-      .container {
-        position: relative;
-        width: 100%;
-        height: 100%;
-      }
-
-      .provider-upper {
-        position: absolute;
-        width: 450px;
-        top: 8px;
-
-        .provider__contact-upper {
-          position: absolute;
-          left: 70px;
-          top: 20px;
-
-          .provider__streetAddress {
-            max-width: 330px;
-          }
-        }
-
-        .provider__contact-lower {
-          position: absolute;
-          left: 70px;
-          top: 76px;
-          display: flex;
-          justify-content: space-between;
-          width: 390px;
-        }
-      }
-
-      .patient {
-        position: relative;
-
-        .container {
-          display: flex;
-          position: absolute;
-          width: auto;
-          top: 114px;
-          left: 70px;
-          align-items: flex-start;
-
-          .patient__contactDetails {
-            width: 340px;
-            margin-left: 6px;
-          }
-
-          .patient__medicareNumber {
-            display: flex;
-            justify-content: space-between;
-            width: 150px;
-          }
-        }        
-      }
-
-      .miscellaneous {
-        position: absolute;
-        top: 196px;
-        left: 70px;
-
-        .authNumbers {
-          position: absolute;
-            left: 190px;
-            top: 0;
-            width: 200px;
-            text-align: right;
-          .authRxNo {
-            
-          }
-        }
-
-        
-      }
-
-      .medication {
-        position: absolute;
-        left: 70px;
-        top: 222px;
-        width: 390px;
-        /* border-bottom: 1px solid #b8b8b8; */
-        padding: 2px 0;
-
-        .medication__activeIngredient {
-          width: 400px;
-        }
-
-        .medication__compounded {
-          margin: 0.4rem 0 0.3rem 0;
-          /* font-style: italic; */
-          text-transform: uppercase;
-        }
-
-
-        .medication__brandName {
-          font-weight: bold;
-        }
-
-        .quantityRepeats {
-          display: flex;
-          justify-content: space-between;
-          width: 170px;
-        }
-
-        .item-printed-line {
-          display: flex;
-          justify-content: space-between;
-          width: 390px;
-          border-top: 1px solid #b8b8b8;
-          margin-top: 0.2rem;
-          padding-top: 0.2rem;
-          /* position: absolute;
-          bottom: -22px;
-          right: 2px; */
-        }
-      }
-
-      .authority {
-        margin-top: 0.75rem;
-
-        .extra-details {
-          margin-bottom: 0.75rem;
-        }
       }
     }
 

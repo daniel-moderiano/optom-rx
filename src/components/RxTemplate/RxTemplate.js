@@ -319,8 +319,8 @@ const RxTemplate = ({ data, setToast, setPage }) => {
           </section>}
         </div>
         </div>
-       
 
+        <div className="lower-containers">
         {drugData.authRequired && <div className="bottom-container--left">
           <span className="doctor-copy">--Prescriber's Copy--</span>
           <section className="provider-upper">
@@ -480,6 +480,9 @@ const RxTemplate = ({ data, setToast, setPage }) => {
 
 
         </div>}
+        </div>
+       
+        
 
         <div className="RxTemplate__btns">
           <div className="primary-btns">
