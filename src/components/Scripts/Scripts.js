@@ -1,7 +1,7 @@
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { StyledScripts } from './Scripts.styled';
 import { useScripts } from '../../hooks/useScripts';
-import Table from './Table';
+import ScriptsTable from './ScriptsTable';
 import Spinner from '../utils/Spinner/Spinner';
 import { useEffect } from 'react';
 import ContentContainer from '../utils/ContentContainer/ContentContainer';
@@ -15,7 +15,7 @@ const Scripts = ({ setToast, setPage }) => {
   // Adjust current page for accessibility and styling
   useEffect(() => {
     setPage('scripts');
-  }, [setPage])
+  }, [setPage]);
 
   // This effect will fire an error alert if the fetch fails. 
   useEffect(() => {
@@ -39,24 +39,24 @@ const Scripts = ({ setToast, setPage }) => {
 
           {error &&
             <table className="table table-none">
-                <thead className="tableRowHeader">
-                  <tr>
-                    <th className="tableHeader">Script ID</th>
-                    <th className="tableHeader">Medication</th>
-                    <th className="tableHeader">Date prescribed</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr className="tableRowItems">
-                    <td className="tableCellNone" colSpan="3">No scripts written yet</td>
-                  </tr>
-                </tbody>
-              </table>
+              <thead className="tableRowHeader">
+                <tr>
+                  <th className="tableHeader">Script ID</th>
+                  <th className="tableHeader">Medication</th>
+                  <th className="tableHeader">Date prescribed</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="tableRowItems">
+                  <td className="tableCellNone" colSpan="3">No scripts written yet</td>
+                </tr>
+              </tbody>
+            </table>
           }
 
           {scripts && <div className='table-container'>
             {scripts.length > 0 ? (
-              <Table data={scripts} rowsPerPage={15}/>            
+              <ScriptsTable data={scripts} rowsPerPage={15}/>            
             ) : (
               <table className="table table-none">
                 <thead className="tableRowHeader">
