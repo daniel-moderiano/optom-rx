@@ -27,12 +27,8 @@ export const useCollection = (collectionName, docQuery) => {
     const unsub = onSnapshot(ref, 
       (snapshot) => {
         setIsPending(false);
-        // In the event the user is offline, the snapshot will still return using a local cache version, and this will default to an empty docs array. Handle this accordingly
-        // if (snapshot.metadata.fromCache && snapshot.docs.length === 0) {
-        //   setError("An unknown error occurred loading providers");
-        // }
-        // Successful result obtained here, adjust pending state
-        
+        // In the event the user is offline, the snapshot will still return using a local cache version, and this will default to an empty docs array. 
+    
         let results = [];
         snapshot.docs.forEach((doc) => {
           results.push({ ...doc.data(), id: doc.id })
@@ -43,13 +39,11 @@ export const useCollection = (collectionName, docQuery) => {
         // Error is caught with this callback syntax
         setError(error);
         setIsPending(false);
-        console.log(error);
     });
 
     return () => unsub()
 
   }, [collectionName, docQueryCurrent])
 
-  // Reference the documents using destructuring in any component
   return { documents, isPending, error }
 }
