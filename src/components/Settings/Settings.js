@@ -1,7 +1,6 @@
 import { StyledSettings } from "./Settings.styled"
 import FormField from '../FormField/FormField'
-import { useState } from "react"
-import { useEffect } from "react";
+import { useState, useEffect } from "react"
 import { updateProfile, deleteUser, reauthenticateWithCredential, EmailAuthProvider, updatePassword, sendEmailVerification, updateEmail } from "firebase/auth";
 import { collection, deleteDoc, doc, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../firebase/config";
@@ -16,7 +15,8 @@ import Dots from '../utils/Dots/Dots';
 
 const Settings = ({ user, setToast, setPage }) => {
   const { logout } = useLogout();
-  const [displayName, setDisplayName] = useState('Test');
+
+  const [displayName, setDisplayName] = useState('');
 
   const [currentPassword, setCurrentPassword] = useState('');
   const [currentPasswordAlert, setCurrentPasswordAlert] = useState({});
@@ -35,9 +35,9 @@ const Settings = ({ user, setToast, setPage }) => {
 
   const [showModal, setShowModal] = useState(false);
   const [showEmailModal, setShowEmailModal] = useState(false);
+  const [showVerifyModal, setShowVerifyModal] = useState(false);
 
   const [namePending, setNamePending] = useState(false);
-
   const [deletePending, setDeletePending] = useState(false);
 
   const [changePasswordPending, setChangePasswordPending] = useState(false);
@@ -46,20 +46,15 @@ const Settings = ({ user, setToast, setPage }) => {
   const [newEmail, setNewEmail] = useState('');
   const [newEmailAlert, setNewEmailAlert] = useState({});
   
-  const [showVerifyModal, setShowVerifyModal] = useState(false);
-
   const [showDeleteConfirmPassword, setShowDeleteConfirmPassword] = useState(false);
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [showEmailConfirmPassword, setShowEmailConfirmPassword] = useState(false);
   
-  const { email } = user;
-
   useEffect(() => {
     setDisplayName(user.displayName);
-    // setCurrentEmail(email);
-  }, [user, email]);
+  }, [user]);
 
   // Adjust current page for accessibility and styling
   useEffect(() => {
@@ -241,7 +236,7 @@ const Settings = ({ user, setToast, setPage }) => {
     } 
 
     // Check for no change in email
-    if (emailConfirmPasswordInput.value === email) {
+    if (emailConfirmPasswordInput.value === user.email) {
       if (!inputFocused) {
         emailConfirmPasswordInput.focus();
         inputFocused = true;
@@ -300,9 +295,10 @@ const Settings = ({ user, setToast, setPage }) => {
     }
   };
 
+  // Used to reauthenticate a user. This avoids an error when performing sensitive account functions like delete or email update
   const refreshCredentials = async (password) => {
     // Must be called once the user has entered their password, else it will just error
-    const credential = EmailAuthProvider.credential(email, password);
+    const credential = EmailAuthProvider.credential(user.email, password);
     await reauthenticateWithCredential(user, credential);
   }
 
@@ -337,7 +333,6 @@ const Settings = ({ user, setToast, setPage }) => {
       setChangeEmailPending(false);
     }
 
-    // Act based on the result
     if (reauthenticated) {
       try {
         await updateEmail(user, newEmail);
@@ -396,7 +391,6 @@ const Settings = ({ user, setToast, setPage }) => {
 
   const performPasswordUpdate = async () => {
     setChangePasswordPending(true);
-
     let reauthenticated = false;
 
     try {
@@ -407,7 +401,6 @@ const Settings = ({ user, setToast, setPage }) => {
       setChangePasswordPending(false);
     }
 
-    // Act based on the result
     if (reauthenticated) {
       try {
         await updatePassword(user, newPassword);
@@ -472,7 +465,6 @@ const Settings = ({ user, setToast, setPage }) => {
       {showModal && <Modal title="Delete account" closeModal={() => setShowModal(false)} type="delete" errorMessage="This action is permanent and cannot be undone.">
         <div className="provider-display">
           <div className="provider-label">Please enter your password to continue</div>
-          {/* <div className="provider-summary">{`${selectedProvider.fullName} (${selectedProvider.location})`}</div> */}
         </div>
         <form className='Login__form' noValidate onSubmit={(event) => {
           event.preventDefault();
@@ -480,7 +472,6 @@ const Settings = ({ user, setToast, setPage }) => {
             performDeleteAccount();
           }
         }}>
-
           <PasswordContainer showPassword={showDeleteConfirmPassword} handleClick={() => setShowDeleteConfirmPassword((prevState) => (!prevState))}>
             <FormField 
               id="current-password"
@@ -513,7 +504,7 @@ const Settings = ({ user, setToast, setPage }) => {
       {showEmailModal && <Modal title="Change email" closeModal={() => setShowEmailModal(false)}>
         <div className="update-display">
           <div className="update-label">Current email address:</div>
-          <div className="update-summary">{email}</div>
+          <div className="update-summary">{user.email}</div>
         </div>
         <form className='Login__form' noValidate onSubmit={(event) => {
           event.preventDefault();
@@ -535,7 +526,6 @@ const Settings = ({ user, setToast, setPage }) => {
             required
             describedBy={Object.keys(newEmailAlert).length === 0 ? null : 'newEmail-alert'}
           />  
-
 
           <PasswordContainer showPassword={showEmailConfirmPassword} handleClick={() => setShowEmailConfirmPassword((prevState) => (!prevState))}>
             <FormField 
@@ -590,28 +580,21 @@ const Settings = ({ user, setToast, setPage }) => {
           </form>
 
           <div className="change-email">
-                <div className="form-title">Change email</div>
-          <div className="current-email">{email}</div>
+            <div className="form-title">Change email</div>
+            <div className="current-email">{user.email}</div>
             <div className="email-group">
-            
-            <div className="verified">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="alert-icon alert-icon--success" viewBox="0 0 512 512" width="17px">
+              <div className="verified">
+                <svg xmlns="http://www.w3.org/2000/svg" className="alert-icon alert-icon--success" viewBox="0 0 512 512" width="17px">
                   <path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" fill="none" stroke="#096600" strokeMiterlimit="10" strokeWidth="32"/>
                   <path fill="none" stroke="#096600" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32" d="M352 176L217.6 336 160 272"/>
                 </svg>
                 <span>Verified</span>
               </div>
-     
-            
             </div>
 
             <Button handleClick={() => setShowEmailModal(true)} >Update email</Button>
-        
-            </div>
+          </div>
 
-                
-
-          
           <form className='password-form' noValidate onSubmit={(event) => {
             event.preventDefault();
             setCurrentPasswordAlert({});
@@ -624,44 +607,44 @@ const Settings = ({ user, setToast, setPage }) => {
           }}>
             <div className="form-title">Change password</div>
 
-          <PasswordContainer showPassword={showCurrentPassword} handleClick={() => setShowCurrentPassword((prevState) => (!prevState))}>
+            <PasswordContainer showPassword={showCurrentPassword} handleClick={() => setShowCurrentPassword((prevState) => (!prevState))}>
+                <FormField 
+                  fieldType={`${showCurrentPassword ? 'text' : 'password'}`}
+                  name="currentPassword"
+                  label="Current password" 
+                  value={currentPassword} 
+                  onChange={(event) => setCurrentPassword(event.target.value)} 
+                  alert={currentPasswordAlert}
+                  required
+                  describedBy='currentPassword-alert'
+                />  
+            </PasswordContainer>   
+
+            <PasswordContainer showPassword={showNewPassword} handleClick={() => setShowNewPassword((prevState) => (!prevState))}>
               <FormField 
-                fieldType={`${showCurrentPassword ? 'text' : 'password'}`}
-                name="currentPassword"
-                label="Current password" 
-                value={currentPassword} 
-                onChange={(event) => setCurrentPassword(event.target.value)} 
-                alert={currentPasswordAlert}
+                fieldType={`${showNewPassword ? 'text' : 'password'}`}
+                name="newPassword"
+                label="New password" 
+                value={newPassword} 
+                onChange={(event) => setNewPassword(event.target.value)} 
+                alert={newPasswordAlert}
                 required
-                describedBy='currentPassword-alert'
+                describedBy='newPassword-alert'
               />  
-          </PasswordContainer>   
+            </PasswordContainer>   
 
-          <PasswordContainer showPassword={showNewPassword} handleClick={() => setShowNewPassword((prevState) => (!prevState))}>
-            <FormField 
-              fieldType={`${showNewPassword ? 'text' : 'password'}`}
-              name="newPassword"
-              label="New password" 
-              value={newPassword} 
-              onChange={(event) => setNewPassword(event.target.value)} 
-              alert={newPasswordAlert}
-              required
-              describedBy='newPassword-alert'
-            />  
-          </PasswordContainer>   
-
-          <PasswordContainer showPassword={showConfirmPassword} handleClick={() => setShowConfirmPassword((prevState) => (!prevState))}>
-            <FormField 
-              fieldType={`${showConfirmPassword ? 'text' : 'password'}`}
-              name="confirmPassword"
-              label="Confirm password" 
-              value={confirmPassword} 
-              onChange={(event) => setConfirmPassword(event.target.value)} 
-              alert={confirmPasswordAlert}
-              required
-              describedBy='confirmPassword-alert'
-            />  
-          </PasswordContainer>   
+            <PasswordContainer showPassword={showConfirmPassword} handleClick={() => setShowConfirmPassword((prevState) => (!prevState))}>
+              <FormField 
+                fieldType={`${showConfirmPassword ? 'text' : 'password'}`}
+                name="confirmPassword"
+                label="Confirm password" 
+                value={confirmPassword} 
+                onChange={(event) => setConfirmPassword(event.target.value)} 
+                alert={confirmPasswordAlert}
+                required
+                describedBy='confirmPassword-alert'
+              />  
+            </PasswordContainer>   
             
             <div className="changePassword-btns">
               <Button type="submit">
@@ -674,57 +657,42 @@ const Settings = ({ user, setToast, setPage }) => {
               <Link to="/reset-password" className="reset-password" onClick={logout}>Forgot password?</Link>
             </div>
           </form>
-            
-        
-        
-        </>) : (
-          <div className="no-email">
-            {/* <p className="no-email-desc">Please verify an email address to access all account settings, receive notifications, and reset your password</p> */}
-            {/* <p className="spam-msg">Make sure to check your spam/junk folder</p> */}
-            
-
+          </>
+          ) : (
+            <div className="no-email">
               <div className="change-email">
                 <div className="form-title">Change email</div>
                 <p className="no-email-desc">Please verify your email address to access all account settings, receive notifications, and reset your password</p>
-           
-                  <div className="current-email">{email}</div>
-            
-                    
-              
+                <div className="current-email">{user.email}</div>
 
-                  <div className="email-group">
-                  
-                  
+                <div className="email-group">
                   <div className="unverified">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="alert-icon alert-icon--neutral" viewBox="0 0 512 512" width="17px">
-                        <path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" fill="none" stroke="#9a6700" strokeMiterlimit="10" strokeWidth="32"/>
-                        <path d="M250.26 166.05L256 288l5.73-121.95a5.74 5.74 0 00-5.79-6h0a5.74 5.74 0 00-5.68 6z" fill="none" stroke="#9a6700" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32"/>
-                        <path d="M256 367.91a20 20 0 1120-20 20 20 0 01-20 20z" fill="#9a6700"/>
-                      </svg>
-                      <span>Unverified</span>
-                    </div>
-                    <button className="resend" onClick={resendEmailVerification}>Resend verification email</button>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="alert-icon alert-icon--neutral" viewBox="0 0 512 512" width="17px">
+                      <path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" fill="none" stroke="#9a6700" strokeMiterlimit="10" strokeWidth="32"/>
+                      <path d="M250.26 166.05L256 288l5.73-121.95a5.74 5.74 0 00-5.79-6h0a5.74 5.74 0 00-5.68 6z" fill="none" stroke="#9a6700" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32"/>
+                      <path d="M256 367.91a20 20 0 1120-20 20 20 0 01-20 20z" fill="#9a6700"/>
+                    </svg>
+                    <span>Unverified</span>
                   </div>
-                
-                  <input type="text" className="hidden" />
+                  <button className="resend" onClick={resendEmailVerification}>Resend verification email</button>
+                </div>
 
-                  <Button handleClick={() => setShowEmailModal(true)}>Change email</Button>
-
+                <Button handleClick={() => setShowEmailModal(true)}>Change email</Button>
               </div>         
+            </div>
+          )}
+
+          <div className="delete-account">
+            <div className="form-title form-title--delete">Delete account</div>
+            <p className="warning">Once you delete your account, it is permanent. Please be sure.</p>
+            <Button handleClick={() => setShowModal(true)} design="delete" >
+              Delete account
+            </Button>
           </div>
 
-        )}
-        <div className="delete-account">
-          <div className="form-title form-title--delete">Delete account</div>
-          <p className="warning">Once you delete your account, it is permanent. Please be sure.</p>
-          <Button handleClick={() => setShowModal(true)} design="delete" >
-            Delete account
-          </Button>
         </div>
-      </div>
-    </StyledSettings>
+      </StyledSettings>
     </ContentContainer>
-    
   )
 }
 

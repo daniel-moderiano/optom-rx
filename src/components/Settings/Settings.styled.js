@@ -54,7 +54,6 @@ const StyledSettings = styled.div`
       margin-top: 0.75rem;
       display: flex;
       align-items: center;
-      
 
       .unverified, .verified {
         display: flex;
@@ -74,7 +73,6 @@ const StyledSettings = styled.div`
       .verified {
         color: var(--success-text);
       }
-    
     }
 
     .email-group {
@@ -105,10 +103,8 @@ const StyledSettings = styled.div`
       background-color: transparent;
       border: none;
       color: #48515B;
-      /* color: var(--focus); */
       font-size: 0.9rem;
       font-family: var(--font-stack-segoe);
-      /* font-weight: bold; */
       padding: 0;
       margin: 0 0 0.05rem 1rem;
 
@@ -162,14 +158,11 @@ const StyledSettings = styled.div`
   }
 
   .reset-password {
-    /* width: 100%; */
-    /* text-align: right; */
     background-color: transparent;
     border: none;
     color: #48515B;
     font-size: 1rem;
     font-family: var(--font-stack-segoe);
-    /* font-weight: bold; */
     padding: 0;
     margin: 0 0 0 1rem;
     text-decoration: none;
