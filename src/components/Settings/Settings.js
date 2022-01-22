@@ -53,7 +53,7 @@ const Settings = ({ user, setToast, setPage }) => {
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [showEmailConfirmPassword, setShowEmailConfirmPassword] = useState(false);
-
+  
   const { email } = user;
 
   useEffect(() => {
@@ -76,19 +76,17 @@ const Settings = ({ user, setToast, setPage }) => {
     setNewEmail('');
     setShowDeleteConfirmPassword(false);
     setShowEmailConfirmPassword(false);
-  }, [showModal, showEmailModal])
+  }, [showModal, showEmailModal]);
 
 
   const updateName = async () => {
     setNamePending(true);
-
     try {
       await updateProfile(user, {
         displayName: displayName,
       });
 
       setNamePending(false);
-
       setToast((prevData) => ({
         ...prevData,
         visible: true,
@@ -97,7 +95,6 @@ const Settings = ({ user, setToast, setPage }) => {
       }));
     } catch (error) {
       setNamePending(false);
-
       setToast((prevData) => ({
         ...prevData,
         visible: true,
@@ -108,7 +105,6 @@ const Settings = ({ user, setToast, setPage }) => {
   };
 
   const deleteAccount = async () => {
-    
     // Gather a reference to all of the user's prescribers
     const presRef = collection(db, 'providers');
     const presQuery = query(presRef, where('uid', '==', user.uid));
@@ -139,48 +135,6 @@ const Settings = ({ user, setToast, setPage }) => {
       }));
     }
   };
-
-   // Inline form validation
-   useEffect(() => {
-    // Event propagation will capture all focusout events from login form
-    const passwordFormValidation = () => {
-      document.querySelector('.password-form').addEventListener('focusout', (event) => {
-        const { name, value } = event.target;
-        switch (true) {
-          case name === 'currentPassword':
-            // Check for non empty field
-            if (value.trim().length !== 0) {
-              event.target.classList.remove('error');
-              setCurrentPasswordAlert({});
-            }
-            break;
-
-          case name === 'newPassword':
-            // Check for non empty field
-            if (value.trim().length !== 0) {
-              event.target.classList.remove('error');
-              setNewPasswordAlert({});
-            }
-            break;
-
-          case name === 'confirmPassword':
-            // Check for non empty field
-            if (value.trim().length !== 0) {
-              event.target.classList.remove('error');
-              setConfirmPasswordAlert({});
-            }
-            break;
-          default:
-            break;
-        }
-      });
-    };
-
-    if (user.emailVerified) {
-      passwordFormValidation();
-    }
-    
-  }, [user.emailVerified]);
 
   // Ensure form is validated before calling form submission function
   const isModalFormValid = () => {
@@ -301,10 +255,10 @@ const Settings = ({ user, setToast, setPage }) => {
       valid = false;
     } 
 
-    
     return valid;
   };
 
+  // Non-specific error handling for any relevant forms submitting data
   const errorHandling = (errorCode, alertSetFunc) => {
     switch (errorCode) {
       case 'auth/wrong-password':
@@ -313,36 +267,18 @@ const Settings = ({ user, setToast, setPage }) => {
           type: 'error',
         });
         break;
-      case 'auth/too-many-requests':
-        alertSetFunc({
-          message: 'Failed to authorise too many times. Please wait a few minutes before trying again.',
-          type: 'error',
-        });
-        break;
-      case 'auth/network-request-failed':
-        alertSetFunc({
-          message: "We couldn't connect to the network. Please check your internet connection and try again.",
-          type: 'error',
-        });
-        break;
-    
-      default:
-        alertSetFunc({
-          message: 'An unknown server error occured. Please try again.',
-          type: 'error',
-        });
-        break;
-    }
-  };
-
-  const errorHandleNewPassword = (errorCode, alertSetFunc) => {
-    switch (errorCode) {
       case 'auth/weak-password':
         alertSetFunc({
           message: "Please create a password at least six characters in length. ",
           type: 'error',
         });
         break;
+      case 'auth/invalid-email':
+        alertSetFunc({
+          message: "Please enter a valid email address.",
+          type: 'error',
+        });
+        break;
       case 'auth/too-many-requests':
         alertSetFunc({
           message: 'Failed to authorise too many times. Please wait a few minutes before trying again.',
@@ -355,7 +291,6 @@ const Settings = ({ user, setToast, setPage }) => {
           type: 'error',
         });
         break;
-    
       default:
         alertSetFunc({
           message: 'An unknown server error occured. Please try again.',
@@ -365,86 +300,49 @@ const Settings = ({ user, setToast, setPage }) => {
     }
   };
 
-  // This function is/returns a Promise
-  const refreshCredentialsForDelete = async () => {
+  const refreshCredentials = async (password) => {
     // Must be called once the user has entered their password, else it will just error
-    const credential = EmailAuthProvider.credential(email, deleteConfirmPassword);
+    const credential = EmailAuthProvider.credential(email, password);
+    await reauthenticateWithCredential(user, credential);
+  }
+
+  const performDeleteAccount = async () => {
+    setDeletePending(true);
+    let reauthenticated = false;
 
     try {
-      // Attempt re-authentication
-      await reauthenticateWithCredential(user, credential);
-      // Clear passwords
-      setdeleteConfirmPassword('');
-      return true;
-      
+      await refreshCredentials(deleteConfirmPassword);
+      reauthenticated = true;
     } catch (error) {
-      console.log(error);
       errorHandling(error.code, setdeleteConfirmPasswordAlert);
-      return false;
-    }
-  };
-
-  // Combine the credentials and actual deleting of account using async flow
-  const performDeleteFunctions = async () => {
-    setDeletePending(true);
-    // Check that the credential confirmation was successful
-    const confirmed = await refreshCredentialsForDelete();
-    // Act based on the result
-    if (confirmed) {
-      deleteAccount();
       setDeletePending(false);
-    } else {
-      // Do nothing, refreshCredentials function hadnles errors and directs user to fix mistakes
+    }
+
+    // Act based on the result
+    if (reauthenticated) {
+      deleteAccount();
       setDeletePending(false);
     }
   }
 
-  // This function is/returns a Promise
-  const refreshCredentialsForPassword = async () => {
-    // Must be called once the user has entered their password, else it will just error
-    const credential = EmailAuthProvider.credential(email, currentPassword);
-
-    try {
-      // Attempt re-authentication
-      await reauthenticateWithCredential(user, credential);
-      return true;
-      
-    } catch (error) {
-      errorHandling(error.code, setCurrentPasswordAlert)
-      return false;
-    }
-  };
-
-  // This function is/returns a Promise
-  const refreshCredentialsForEmail = async () => {
-    // Must be called once the user has entered their password, else it will just error
-    const credential = EmailAuthProvider.credential(email, emailConfirmPassword);
-
-    try {
-      // Attempt re-authentication
-      await reauthenticateWithCredential(user, credential);
-      return true;
-      
-    } catch (error) {
-      // errorHandling(error.code, setEmailAlert)
-      // TODO: Email error handling
-      console.log(error);
-      return false;
-    }
-  };
-
-  // Combine the credentials and actual deleting of account using async flow
   const performEmailUpdate = async () => {
     setChangeEmailPending(true);
-    // Check that the credential confirmation was successful
-    const confirmed = await refreshCredentialsForEmail();
+    let reauthenticated = false;
+
+    try {
+      await refreshCredentials(emailConfirmPassword);
+      reauthenticated = true;
+    } catch (error) {
+      errorHandling(error.code, setEmailConfirmPasswordAlert)
+      setChangeEmailPending(false);
+    }
+
     // Act based on the result
-    if (confirmed) {
+    if (reauthenticated) {
       try {
         await updateEmail(user, newEmail);
         setShowEmailModal(false);
         setChangeEmailPending(false);
-
         setToast((prevData) => ({
           ...prevData,
           visible: true,
@@ -452,38 +350,65 @@ const Settings = ({ user, setToast, setPage }) => {
           message: 'Email updated successfully'
         }));
         
-        try {
-          await sendEmailVerification(user)
-        } catch (error) {
-          console.log(error);
-        } finally {
-          // Timeout is purely to not overwhelm the user with modals flying one after the other
-          setTimeout(() => {
-            setShowVerifyModal(true);
-          }, 1000)
-          
-        }
+        sendEmailVerification(user);
+        // Timeout is purely to not overwhelm the user with modals flying one after the other
+        setTimeout(() => {
+          setShowVerifyModal(true);
+        }, 1000);
         
-  
       } catch (error) {
-        console.log(error);
         setChangeEmailPending(false);
-        // TODO: email update error handling
+        switch (error.code) {
+          case 'auth/invalid-email':
+            setNewEmailAlert({
+              message: "Please enter a valid email address.",
+              type: 'error',
+            });
+            break;
+          case 'auth/email-already-in-use':
+            setNewEmailAlert({
+              message: "This email is already in use. Try another.",
+              type: 'error',
+            });
+            break;
+          case 'auth/too-many-requests':
+            setEmailConfirmPasswordAlert({
+              message: 'Failed to authorise too many times. Please wait a few minutes before trying again.',
+              type: 'error',
+            });
+            break;
+          case 'auth/network-request-failed':
+            setEmailConfirmPasswordAlert({
+              message: "We couldn't connect to the network. Please check your internet connection and try again.",
+              type: 'error',
+            });
+            break;
+          default:
+            setEmailConfirmPasswordAlert({
+              message: 'An unknown server error occured. Please try again.',
+              type: 'error',
+            });
+            break;
+        }
       }
-    } else {
-      setChangeEmailPending(false);
-      // Do nothing, refreshCredentials function hadnles errors and directs user to fix mistakes
     }
   };
 
-  // Combine the credentials and actual deleting of account using async flow
   const performPasswordUpdate = async () => {
     setChangePasswordPending(true);
 
-    // Check that the credential confirmation was successful
-    const confirmed = await refreshCredentialsForPassword();
+    let reauthenticated = false;
+
+    try {
+      await refreshCredentials(currentPassword);
+      reauthenticated = true;
+    } catch (error) {
+      errorHandling(error.code, setCurrentPasswordAlert);
+      setChangePasswordPending(false);
+    }
+
     // Act based on the result
-    if (confirmed) {
+    if (reauthenticated) {
       try {
         await updatePassword(user, newPassword);
         setCurrentPassword('');
@@ -492,9 +417,7 @@ const Settings = ({ user, setToast, setPage }) => {
         setShowCurrentPassword(false);
         setShowNewPassword(false);
         setShowConfirmPassword(false);
-
         setChangePasswordPending(false);
-
         setToast((prevData) => ({
           ...prevData,
           visible: true,
@@ -504,11 +427,8 @@ const Settings = ({ user, setToast, setPage }) => {
         
       } catch (error) {
         setChangePasswordPending(false);
-        errorHandleNewPassword(error.code, setNewPasswordAlert)
+        errorHandling(error.code, setNewPasswordAlert)
       }
-    } else {
-      // Do nothing, refreshCredentials function hadnles errors and directs user to fix mistakes
-      setChangePasswordPending(false);
     }
   };
 
@@ -524,80 +444,30 @@ const Settings = ({ user, setToast, setPage }) => {
     }
   };
 
+  // Used for manual user-initiated resending of verification email
   const resendEmailVerification = async () => {
     try {
       await sendEmailVerification(user);
-      console.log('Email sent');
+      setToast((prevData) => ({
+        ...prevData,
+        visible: true,
+        type: 'success',
+        message: 'A verification email has been sent to your email address'
+      }));
     } catch (error) {
-      console.log(error.code);
+      setToast((prevData) => ({
+        ...prevData,
+        visible: true,
+        type: 'error',
+        message: 'An error occurred while trying to send the email'
+      }));
     }
   }
 
   return (
     <ContentContainer>
       <StyledSettings className="Settings">
-      {showVerifyModal && <Modal title="Verify your email" closeModal={() => setShowVerifyModal(false)}>
-  
-        <div className="verify-container">
-          <p className="verify-message">An email verification link has been sent to your email address. Follow the link to verify your email and activate all features.</p>
-          <div className="img-container">
-            {/* <img className="email-icon" src={emailIcon} alt="Email icon" /> */}
-
-      <svg className="email-svg" version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-        viewBox="0 0 64 64" aria-describedby='email-svg-title'>
-          <title id='email-svg-title'>Email icon</title>
-          <g id="Layer_1">
-            <g>
-              <circle className="st0" cx="32" cy="32" r="32"/>
-            </g>
-            <g>
-              <g className="st1">
-                <path className="st2" d="M52,44c0,2.2-1.8,4-4,4H16c-2.2,0-4-1.8-4-4V24c0-2.2,1.8-4,4-4h32c2.2,0,4,1.8,4,4V44z"/>
-              </g>
-              <g>
-                <path className="st3" d="M52,42c0,2.2-1.8,4-4,4H16c-2.2,0-4-1.8-4-4V22c0-2.2,1.8-4,4-4h32c2.2,0,4,1.8,4,4V42z"/>
-              </g>
-              <g className="st1">
-                <g>
-                  <path className="st2" d="M35.5,30.2c-1.9-2.1-5.1-2.1-7,0L13,43.2c-0.2,0.2-0.3,0.4-0.5,0.6c0.7,1.3,2,2.2,3.4,2.2h32
-                    c1.5,0,2.7-0.9,3.4-2.2c-0.1-0.2-0.3-0.4-0.5-0.6L35.5,30.2z"/>
-                </g>
-              </g>
-              <g>
-                <g>
-                  <path className="st3" d="M35.5,32c-1.9-1.9-5.1-1.9-7,0L13,43.5c-0.2,0.2-0.3,0.3-0.5,0.5c0.7,1.2,2,1.9,3.4,1.9h32
-                    c1.5,0,2.7-0.8,3.4-1.9c-0.1-0.2-0.3-0.3-0.5-0.5L35.5,32z"/>
-                </g>
-              </g>
-              <g className="st1">
-                <g>
-                  <path className="st2" d="M12.6,20.2c0.7-1.3,2-2.2,3.4-2.2h32c1.5,0,2.7,0.9,3.4,2.2c-0.1,0.2-0.3,0.4-0.5,0.6l-15.4,13
-                    c-1.9,2.1-5.1,2.1-7,0L12.6,20.2z"/>
-                </g>
-              </g>
-              <g>
-                <g>
-                  <path className="st4" d="M28.5,32c1.9,1.9,5.1,1.9,7,0L51,20.5c0.2-0.2,0.3-0.3,0.5-0.5c-0.7-1.2-2-1.9-3.4-1.9H16
-                    c-1.5,0-2.7,0.8-3.4,1.9c0.1,0.2,0.3,0.3,0.5,0.5L28.5,32z"/>
-                </g>
-              </g>
-            </g>
-          </g>
-          <g id="Layer_2">
-          </g>
-          </svg>
-
-          </div>
-        </div>
-
-  
-
-      <div className="modal-btns">
-        <Button design="ghost" handleClick={() => setShowVerifyModal(false)}>Continue to app</Button>
-      </div>
- 
-
-      </Modal>}
+      {showVerifyModal && (<Modal title="Verify your email" closeModal={() => setShowModal(false)} type="emailVerify"/>)}
 
       {showModal && <Modal title="Delete account" closeModal={() => setShowModal(false)} type="delete" errorMessage="This action is permanent and cannot be undone.">
         <div className="provider-display">
@@ -606,13 +476,9 @@ const Settings = ({ user, setToast, setPage }) => {
         </div>
         <form className='Login__form' noValidate onSubmit={(event) => {
           event.preventDefault();
-          // Ensure form validation passes
           if (isModalFormValid()) {
-            // Refresh credentials
-            performDeleteFunctions();
-              
+            performDeleteAccount();
           }
-          
         }}>
 
           <PasswordContainer showPassword={showDeleteConfirmPassword} handleClick={() => setShowDeleteConfirmPassword((prevState) => (!prevState))}>
@@ -631,47 +497,33 @@ const Settings = ({ user, setToast, setPage }) => {
             />
           </PasswordContainer>
 
-          
-
-        <div className="Modal__buttons">
-          <Button design="secondary" classLabel="cancel" handleClick={() => setShowModal(false)}>Cancel</Button>
-          <Button type="submit" design="delete">
-            {deletePending ? (
-              <Dots color="white"/>
-            ) : (
-              'Delete'
-            )}
-          </Button>
-        </div>
+          <div className="Modal__buttons">
+            <Button design="secondary" classLabel="cancel" handleClick={() => setShowModal(false)}>Cancel</Button>
+            <Button type="submit" design="delete">
+              {deletePending ? (
+                <Dots color="white"/>
+              ) : (
+                'Delete'
+              )}
+            </Button>
+          </div>
         </form>
       </Modal>}
 
       {showEmailModal && <Modal title="Change email" closeModal={() => setShowEmailModal(false)}>
-        {/* <div className="neutral-container">
-          <div className="neutral-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" className="alert-icon alert-icon--neutral" viewBox="0 0 512 512" width="24px">
-              <path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" fill="#00477A" stroke="#00477A" strokeMiterlimit="10" strokeWidth="32"/>
-              <path d="M250.26 166.05L256 288l5.73-121.95a5.74 5.74 0 00-5.79-6h0a5.74 5.74 0 00-5.68 6z" fill="#00477A" stroke="#ffffff" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32"/>
-              <path d="M256 367.91a20 20 0 1120-20 20 20 0 01-20 20z" fill="#ffffff"/>
-            </svg>
-          </div>
-          <div className="neutral-text">
-            Changes to email require you to re-enter your password
-          </div>
-        </div> */}
         <div className="update-display">
           <div className="update-label">Current email address:</div>
           <div className="update-summary">{email}</div>
         </div>
         <form className='Login__form' noValidate onSubmit={(event) => {
           event.preventDefault();
+          setNewEmailAlert({});
+          setEmailConfirmPasswordAlert({})
           // Ensure form validation passes
           if (isEmailFormValid()) {
             // Refresh credentials
-            performEmailUpdate();
-              
-          }
-          
+            performEmailUpdate();  
+          } 
         }}>
           <FormField 
             fieldType="text" 
@@ -700,7 +552,6 @@ const Settings = ({ user, setToast, setPage }) => {
               autocomplete="current-password"
             />
           </PasswordContainer>          
-
 
         <div className="Modal__buttons">
           <Button design="secondary" classLabel="cancel" handleClick={() => setShowEmailModal(false)}>Cancel</Button>
@@ -763,6 +614,9 @@ const Settings = ({ user, setToast, setPage }) => {
           
           <form className='password-form' noValidate onSubmit={(event) => {
             event.preventDefault();
+            setCurrentPasswordAlert({});
+            setNewPasswordAlert({});
+            setConfirmPasswordAlert({});
             // Ensure form validation passes
             if (isPasswordFormValid() && comparePasswords()) {
               performPasswordUpdate();

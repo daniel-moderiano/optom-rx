@@ -80,9 +80,7 @@ const StyledSettings = styled.div`
     .email-group {
       display: flex;
       align-items: center;
-      margin-bottom: 1.5rem;
-
-      
+      margin-bottom: 1.5rem;      
 
       .unverified, .verified {
         display: flex;
@@ -163,7 +161,6 @@ const StyledSettings = styled.div`
     margin-top: 0.5rem;
   }
 
- 
   .reset-password {
     /* width: 100%; */
     /* text-align: right; */
@@ -269,69 +266,20 @@ const StyledSettings = styled.div`
     }
   }
 
-  .verify-container {
-    margin-top: 1rem;
 
-    .img-container {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 2rem 0 1.5rem 0;
-
-      .email-svg {
-        width: 75px;
-        pointer-events: none;
-        enable-background:new 0 0 64 64;
-
-        .st0{fill: #77B3D4;}
-
-        .st1{opacity:0.2;}
-
-        .st2{fill:#231F20;}
-
-        .st3{fill:#E0E0D1;}
-
-        .st4{fill:#FFFFFF;}
-    
-      }
-    }
-  }
-
-  .modal-btns {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-
-  /* Landscape phones and down */
   @media (max-width: 590px) { 
- 
     .email-form {
       .email-group {
         width: 100%;
       }
     }
-
-    .Modal {
-      .Modal__content {
-        width: 90%;
-        text-align: left;
-        max-width: 500px;
-      }
-    }
-    
-    
   }
-            
-            
+                
   @media(max-width: 450px) {
     .settings-btn {
       margin-left: 0;
       margin-right: 0;
     }
-
 
     .changePassword-btns {
       display: flex;
@@ -350,24 +298,20 @@ const StyledSettings = styled.div`
         margin: 0;
         margin-top: 1rem;
       }
-
     }
   }
 
   @media (max-width: 768px) {
-
-      .form-title {
-        font-size: 1.5rem;
-      }
+    .form-title {
+      font-size: 1.5rem;
+    }
   }
 
   @media (max-width: 475px) {
-
-      .form-title {
-        font-size: 1.35rem;
-      }
+    .form-title {
+      font-size: 1.35rem;
+    }
   }
-
 
 `
 
