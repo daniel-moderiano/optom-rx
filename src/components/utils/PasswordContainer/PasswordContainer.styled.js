@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 const StyledPasswordContainer = styled.div`
   width: 100%;
-  /* max-width: 26rem; */
   position: relative;
 
   /* Eye icon */

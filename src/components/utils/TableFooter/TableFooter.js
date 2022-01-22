@@ -33,7 +33,6 @@ const TableFooter = ({ pages, setPage, page, slice }) => {
 
   return (
     <StyledTableFooter className="TableFooter">
-        
       <button className="arrow arrow-left" onClick={decrementPage}>&laquo;</button>
       {/* For each page, create a page button numbered by index */}
       {pages.map((pageNum, index) => (

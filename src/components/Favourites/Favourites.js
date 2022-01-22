@@ -155,7 +155,7 @@ const Favourites = ({ user, setToast }) => {
           )}
         </>}  
     
-      {showModal && (<Modal title="Delete provider" closeModal={() => setShowModal(false)} type="delete" errorMessage="This will permanently delete the following favourite">
+      {showModal && (<Modal title="Delete provider" closeModal={() => setShowModal(false)} type="delete" errorMessage="This will permanently delete the following favourite.">
         <div className="provider-display">
           <div className="provider-label">Selected script</div>
           <div className="provider-summary">{`${selectedScript.customName === "" ? formatDrug(selectedScript) : selectedScript.customName}`}</div>

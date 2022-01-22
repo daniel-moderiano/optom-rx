@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
 const StyledTableFooter = styled.div`
-
-  /* background-color: #f1f1f1; */
   padding-top: 0.8rem;
   width: 100%;
   font-weight: 500;
@@ -22,8 +20,6 @@ const StyledTableFooter = styled.div`
     &:hover {
       cursor: pointer;
     }
-
-    
   }
 
   .arrow-right {
