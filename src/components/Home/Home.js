@@ -5,15 +5,12 @@ import Favourites from '../Favourites/Favourites';
 import { useEffect, useState } from 'react';
 import { sendEmailVerification } from 'firebase/auth';
 import Modal from '../utils/Modal/Modal';
-import Button from '../utils/Button/Button';
 import ContentContainer from '../utils/ContentContainer/ContentContainer';
 import PageHeader from '../utils/PageHeader/PageHeader';
 
 const Home = ({ setToast, setPage, firstSignIn, setFirstSignIn }) => {
   const { user } =  useAuthContext();
   const [showModal, setShowModal] = useState(false);
-
-  console.log(user);
 
   // Adjust current page for accessibility and styling
   useEffect(() => {

@@ -64,16 +64,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
     medicareRefNumber: {},
   });
 
-  const [providerAlerts, setProviderAlerts] = useState({
-    fullName: {},
-    streetAddress: {},
-    suburb: {},
-    postcode: {},
-    state: {},
-    phoneNumber: {},
-    prescriberNumber: {},
-  });
-
   const [miscAlerts, setMiscAlerts] = useState({
     date: {},   
     authRxNumber: {},    
@@ -158,21 +148,10 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
       'postcode',
       'state',
     ],
-    provider: [
-      'fullName',
-      'streetAddress',
-      'suburb',
-      'postcode',
-      'state',
-      'phoneNumber',
-      'prescriberNumber',
-    ],
     misc: [
       'date'
     ],
   });
-
-  const [showProviderForm, setShowProviderForm] = useState(false);
 
   // Adjust current page for accessibility and styling
   useEffect(() => {
@@ -886,7 +865,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
     drugDataValidation();
     miscDataValidation();
 
-  }, [validateRequiredField, positiveInlineValidation, negativeInlineValidation, showProviderForm]);
+  }, [validateRequiredField, positiveInlineValidation, negativeInlineValidation]);
 
 
   // Check remove a visible error or alert from the brand name input where it changes from being required to not
@@ -1012,43 +991,41 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
     const drugForm = document.querySelector('.drug-form');
     const patientForm = document.querySelector('.patient-form');
     const miscForm = document.querySelector('.misc-form');
+    const medicareNumberInput = document.querySelector('#medicareNumber');
+    const medicareRefNumberInput = document.querySelector('#medicareRefNumber');
 
-    // TODO: consider using the following algorithms if the user partially enters medicare information 
-
-    // Check for exactly 10 digits
-    // if (value.trim()[0] === '0') {
-    //   negativeInlineValidation(setPatientAlerts, 'Medicare number must not start with zero', event.target);
-    //   showErrorClass(event.target);
-    // } else if (!(/^[0-9]{10}$/).test(value.trim())) {
-    //   negativeInlineValidation(setPatientAlerts, 'Medicare number must be exactly 10 digits long', event.target);
-    // } else {
-    //   positiveInlineValidation(setPatientAlerts, event.target);
-    // }
-
-    // Check for digits 1-9, and only a single digit
-    // if (!(/^[1-9]{1}$/).test(value.trim())) {
-    //   negativeInlineValidation(setPatientAlerts, 'IRN must be a single digit between 1 through 9', event.target);
-    // } else {
-    //   positiveInlineValidation(setPatientAlerts, event.target);
-    // }
-
-
-     // Validation is conditional upon whether medicare details were intended to be included by the user or not
-     requiredFields.patient.forEach((field) => {
-
-        // Validate as normal
-        const input = patientForm.querySelector(`[name="${field}"]`);
-
-        if (input.value.trim().length === 0) {
-          if (!inputFocused) {
-            input.focus();
-            inputFocused = true;
-          }
-          valid = false;
-          negativeInlineValidation(setPatientAlerts, 'This field cannot be left blank', input);
+    requiredFields.patient.forEach((field) => {
+      const input = patientForm.querySelector(`[name="${field}"]`);
+      if (input.value.trim().length === 0) {
+        if (!inputFocused) {
+          input.focus();
+          inputFocused = true;
         }
-          
+        valid = false;
+        negativeInlineValidation(setPatientAlerts, 'This field cannot be left blank', input);
+      }  
     });
+
+    
+    // If the user has attempted to enter medicare information, we should validate it for correct input here, and by default check the IRN input
+    if (medicareNumberInput.value.trim() !== "") {
+      if (!(/^[0-9]{10}$/).test(medicareNumberInput.value.trim())) {
+        negativeInlineValidation(setPatientAlerts, 'Medicare number must be exactly 10 digits long', medicareNumberInput);
+        if (!inputFocused) {
+          medicareNumberInput.focus();
+          inputFocused = true;
+        }
+        valid = false;
+      }
+      if (!(/^[1-9]{1}$/).test(medicareRefNumberInput.value.trim())) {
+        negativeInlineValidation(setPatientAlerts, 'IRN must be a single digit between 1 through 9', medicareRefNumberInput);
+        if (!inputFocused) {
+          medicareRefNumberInput.focus();
+          inputFocused = true;
+        }
+        valid = false;
+      }
+    }
 
     requiredFields.drug.forEach((field) => {
       const input = drugForm.querySelector(`[name="${field}"]`);
@@ -1063,17 +1040,13 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
     });
 
 
+    // Brand name field should only be validated if the user has selected that brand name is required in some way
     if (drugData.brandOnly || drugData.includeBrand) {
       if(!validateFieldForEmpty(setDrugAlerts, document.querySelector('#brandName'))) {
-        // if (!inputFocused) {
-        //   document.querySelector('#brandName').focus();
-        //   inputFocused = true;
-        // }
         valid = false;
       }
     }
 
-  
     requiredFields.misc.forEach((field) => {
       const input = miscForm.querySelector(`[name="${field}"]`);
       if (input.value.trim().length === 0) {
@@ -1086,13 +1059,10 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
       }
     });
 
-    
-
     // Finally, check for any active error alerts that were not detected with the more basic submission validation
     if (document.querySelectorAll('.alert--error').length > 0) {
       valid = false;
     }
-
     return valid;
   };
 
@@ -1118,23 +1088,14 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
     })
   }  
 
+  // Sets the CSS styles for React Select component
   const customStyles = {
     control: (base, state) => ({
       ...base,
-      // border: state.isFocused ? '1px solid #104362' : '1px solid rgb(144, 147, 150)',
-      // boxShadow: state.isFocused ? '0 0 0 1px #104362' : '0',
-      '&:hover': { 
-        borderColor: state.isFocused ? '#104362' : 'rgb(178, 182, 185)',
-        cursor: 'pointer'
-      },
-
       border: state.isFocused ? '1px solid rgb(144, 147, 150)' : '1px solid rgb(144, 147, 150)',
       boxShadow: state.isFocused ? '0' : '0',
-
-      
       outline: state.isFocused ? "2px solid #104362" : 'none',
-        outlineOffset: state.isFocused ? "2px" : 'none',
-      
+      outlineOffset: state.isFocused ? "2px" : 'none',
       width: '26rem',
       padding: '0.12rem 0 0.11rem 0.85rem',
       borderRadius: '4px',
@@ -1142,12 +1103,16 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
       marginTop: '0.5rem',
       marginBottom: '0.5rem',
 
+      '&:hover': { 
+        borderColor: state.isFocused ? '#104362' : 'rgb(178, 182, 185)',
+        cursor: 'pointer'
+      },
+
       "@media (max-width: 590px)": {
         width: "100%",
         maxWidth: "26rem",
         marginRight: "1.5rem",
       },
-
     }),
 
     menu: (base, state) => ({
@@ -1178,7 +1143,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
       <div className="scriptNo" data-testid="scriptNo">Script number: {isLoading ? 'Loading...' : miscData.scriptID}</div>
 
       <Fieldset className="provider-form select-fieldset" legend="Prescriber details">
-
         <div className="provider-controls">
           {isPending && <Spinner />}
           {providers && (<>
@@ -1205,14 +1169,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
             )}
           </>)}
         </div>
-        
-
-        
-            
-      
-        
-       
-      
       </Fieldset>
 
       <Fieldset className="patient-form" legend="Patient details">

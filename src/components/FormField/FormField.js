@@ -5,13 +5,10 @@ const FormField = (props) => {
 
   const ariaDescribe = describedBy ? { "aria-describedby": describedBy } : {};
   const autocompleteText = autocomplete ? { "autoComplete": autocomplete } : {};
-  
-  // const ariaAlert = alert === {} ? {} : { "aria-describedby": `${id ? id : name}-alert` };
 
   <input type="text" name="expire" id="expire" aria-labelledby="expLabel expDesc"></input>
   return (
     <StyledFormField className={className}>
-      {/* Input nested in label to avoid the need for htmlFor + id. A <span> may be wrapped around the label text to add more styling options */}
       <div className="container">
         <label className="form-field__label" htmlFor={id ? id : name}>
           <span className="label-text">{label}</span>
@@ -36,12 +33,8 @@ const FormField = (props) => {
               <path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" fill="#fff" stroke="#0a7e00" strokeMiterlimit="10" strokeWidth="25"/>
               <path fill="#fff" stroke="#0a7e00" strokeLinecap="round" strokeLinejoin="round" strokeWidth="27" d="M352 176L217.6 336 160 272"/>
             </svg>
-
         </label>
       </div>
-
-      
-
       
       {/* Pass the alert prop as an object only where alerts are required (default null) that contains both the message to display in the alert, and the type of alert, e.g. error, warning, success */}
 
@@ -68,11 +61,9 @@ const FormField = (props) => {
               <path d="M256 367.91a20 20 0 1120-20 20 20 0 01-20 20z" fill="#014083"/>
             </svg>)
           }
-
-          
           <span className={`alert alert--${alert.type}`}>{alert.message}</span>
         </div>
-}
+      }
 
       {/* SubAlert is used for a second alert either applying to the same field, or for an adjacent related field where it makes more sense to group alerts */}
       {(Object.keys(subAlert).length > 0 && Object.keys(alert).length === 0)  && 
@@ -101,10 +92,7 @@ const FormField = (props) => {
           }
           <span className={`alert alert--${subAlert.type}`}>{subAlert.message}</span>
         </div>
-      }
-
-     
-      
+      } 
     </StyledFormField> 
   );
 }
