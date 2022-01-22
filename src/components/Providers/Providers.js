@@ -27,7 +27,7 @@ const Providers = ({ setToast, setPage }) => {
         ...prevData,
         visible: true,
         type: 'error',
-        message: 'No internet connection detected'
+        message: 'An error occurred while fetching prescribers.'
       }));
     }
   }, [error, setToast]);
@@ -43,24 +43,24 @@ const Providers = ({ setToast, setPage }) => {
           {isPending && <Spinner />}
 
           {providers && <>
-              {providers.length > 0 ? (
-                <TableProviders data={providers} rowsPerPage={10} setToast={setToast} />
-              ) : (
-                <table className="table table-none">
-                  <thead className="tableRowHeader">
-                    <tr>
-                      <th className="tableHeader">Name</th>
-                      <th className="tableHeader">Location</th>
-                      <th className="tableHeader actions-header">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr className="tableRowItems">
-                      <td data-title="Providers" className="tableCellNone" colSpan="3">No providers added yet</td>
-                    </tr>
-                  </tbody>
-                </table>
-              )}
+            {providers.length > 0 ? (
+              <TableProviders data={providers} rowsPerPage={10} setToast={setToast} user={user} />
+            ) : (
+              <table className="table table-none">
+                <thead className="tableRowHeader">
+                  <tr>
+                    <th className="tableHeader">Name</th>
+                    <th className="tableHeader">Location</th>
+                    <th className="tableHeader actions-header">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="tableRowItems">
+                    <td data-title="Providers" className="tableCellNone" colSpan="3">No providers added yet</td>
+                  </tr>
+                </tbody>
+              </table>
+            )}
           </>}
         </div>
       </StyledProviders>

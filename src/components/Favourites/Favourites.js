@@ -155,27 +155,15 @@ const Favourites = ({ user, setToast }) => {
           )}
         </>}  
     
-      {showModal && (<Modal title="Delete provider" closeModal={() => setShowModal(false)}>
-          <div className="error-container">
-            <div className="error-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" className="alert-icon alert-icon--neutral" viewBox="0 0 512 512" width="24px">
-                <path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" fill="#D12323" stroke="#D12323" strokeMiterlimit="10" strokeWidth="32"/>
-                <path d="M250.26 166.05L256 288l5.73-121.95a5.74 5.74 0 00-5.79-6h0a5.74 5.74 0 00-5.68 6z" fill="#D12323" stroke="#ffffff" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32"/>
-                <path d="M256 367.91a20 20 0 1120-20 20 20 0 01-20 20z" fill="#ffffff"/>
-              </svg>
-            </div>
-            <div className="error-text">
-              This will permanently delete the following favourite
-            </div>
-          </div>
-          <div className="provider-display">
-            <div className="provider-label">Selected script</div>
-            <div className="provider-summary">{`${selectedScript.customName === "" ? formatDrug(selectedScript) : selectedScript.customName}`}</div>
-          </div>
-          <div className="Modal__buttons">
-            <Button classLabel="cancel" design="secondary" handleClick={() => setShowModal(false)}>Cancel</Button>
-            <Button design="delete" handleClick={() => deleteFavourite(selectedScript)}>Delete</Button>
-          </div>
+      {showModal && (<Modal title="Delete provider" closeModal={() => setShowModal(false)} type="delete" errorMessage="This will permanently delete the following favourite">
+        <div className="provider-display">
+          <div className="provider-label">Selected script</div>
+          <div className="provider-summary">{`${selectedScript.customName === "" ? formatDrug(selectedScript) : selectedScript.customName}`}</div>
+        </div>
+        <div className="Modal__buttons">
+          <Button classLabel="cancel" design="secondary" handleClick={() => setShowModal(false)}>Cancel</Button>
+          <Button design="delete" handleClick={() => deleteFavourite(selectedScript)}>Delete</Button>
+        </div>
       </Modal>)}
     </StyledFavourites>
   )

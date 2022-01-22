@@ -199,27 +199,6 @@ const StyledSettings = styled.div`
   }
 
   .Modal {
-    .error-container {
-      margin-top: 1.25rem;
-      background-color: #FBE9E7;
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      padding: 1rem;
-      border-radius: 2px;
-
-      .error-icon {
-        line-height: 0;
-        margin-right: 0.5rem;
-      }
-
-      .error-text {
-        color: #C02121;
-        font-size: 0.9rem;
-        font-weight: 600;
-      }
-    }
-
     .neutral-container {
       margin-top: 1.25rem;
       background-color: #eaeef1;

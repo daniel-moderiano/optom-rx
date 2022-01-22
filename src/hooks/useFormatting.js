@@ -76,5 +76,14 @@ export const useFormatting = () => {
     return `${date.substring(8)}/${date.substring(5, 7)}/${date.substring(0, 4)}`;
   };
 
-  return { abbreviateStateName, formatDrug, formatDate }
+  // Present a user freindly summary based on whether the user has a practice name in their prescriber details
+  const formatLocation = (practice, streetAddress, suburb) => {
+    if (practice === "") {
+      return `${streetAddress}, ${suburb}`;
+    } else {
+      return `${practice}, ${suburb}`;
+    }
+  };
+
+  return { abbreviateStateName, formatDrug, formatDate, formatLocation }
 }

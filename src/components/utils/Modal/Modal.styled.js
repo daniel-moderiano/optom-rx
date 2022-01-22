@@ -10,16 +10,13 @@ const StyledModal = styled.div`
 	width: 100%;
 	overflow: auto;
 	background-color: rgba(25, 33, 43, 0.4);
-
 	justify-content: center;
 	align-items: center;
   animation-name: fadeIn;
   animation-duration: 150ms;
   animation-timing-function: linear;
 
-
   .Modal__content {
-  
     background-color: #fff;
     width: 520px;
     padding: 2rem;
@@ -31,27 +28,6 @@ const StyledModal = styled.div`
     animation-name: grow;
     animation-duration: 150ms;
     animation-timing-function: ease-out;
-  }
-
-  @keyframes grow {
-    0% {
-      transform: scale(0.75);
-      opacity: 0.1;
-    }
-
-    100% {
-      transform: scale(1);
-      opacity: 1;
-    }
-  }
-
-  @keyframes fadeIn {
-    0% {
-      opacity: 0.1;
-    }
-    100% {
-      opacity: 1;
-    }
   }
 
   .Modal__header {
@@ -74,6 +50,28 @@ const StyledModal = styled.div`
     width: 100%;
   }
 
+  /* For delete modals only */
+  .error-container {
+    margin-top: 1.25rem;
+    background-color: #FBE9E7;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1rem;
+    border-radius: 2px;
+
+    .error-icon {
+      line-height: 0;
+      margin-right: 0.5rem;
+    }
+
+    .error-text {
+      color: #C02121;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+  }
+
   .Modal__close {
     padding: 0;
     margin: 0;
@@ -94,6 +92,27 @@ const StyledModal = styled.div`
       color: black;
       text-decoration: none;
       cursor: pointer;
+    }
+  }
+
+  @keyframes grow {
+    0% {
+      transform: scale(0.75);
+      opacity: 0.1;
+    }
+
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0.1;
+    }
+    100% {
+      opacity: 1;
     }
   }
 

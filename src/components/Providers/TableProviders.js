@@ -6,35 +6,25 @@ import TableFooter from "../utils/TableFooter/TableFooter";
 import { Link } from "react-router-dom";
 import { doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { db } from "../../firebase/config";
-import { useAuthContext } from "../../hooks/useAuthContext";
-import { useCollection } from "../../hooks/useCollection";
 import Button from '../utils/Button/Button'
-
 import Modal from "../utils/Modal/Modal";
+import { useFormatting } from "../../hooks/useFormatting";
 
-// ! The table container and element must be defined outside this component to allow tbody conditional rendering. This will end up being a tbody only type component
-
-const TableProviders = ({ data, rowsPerPage, setToast }) => {
+const TableProviders = ({ data, rowsPerPage, setToast, user }) => {
   // Start on page 1
   const [page, setPage] = useState(1);
   // Gather the data slices for each page and the range of pages needed 
   const { dataSlice, range } = useTable(data, page, rowsPerPage);
 
+  const { formatLocation } = useFormatting();
+
   const [showModal, setShowModal] = useState(false);
-  
+  const [isPending, setIsPending] = useState(false);
   const [selectedProvider, setSelectedProvider] = useState({
     fullName: '',
     location: '',
     id: '',
   });
-
-  const { user } = useAuthContext();
-  // This should be called using the curernt user ID to query the collection
-  const { documents: providers } = useCollection('providers', ['uid', '==', user.uid]);
-
-  const [isPending, setIsPending] = useState(false);
-  const [error, setError] = useState(null);
-
 
   // Update both the UI checkboxes and backend to ensure only one provider can be set default at any one time
   const setAsDefault = async (currentProviders, provID) => {
@@ -66,9 +56,7 @@ const TableProviders = ({ data, rowsPerPage, setToast }) => {
             await updateDoc(doc(db, 'providers', currentProviders[i].id), {
               default: true
             }); 
-  
             break;
-            
           } else {
             // Do not reset any defaults and end the loop here
             break;
@@ -86,8 +74,6 @@ const TableProviders = ({ data, rowsPerPage, setToast }) => {
       }));
     } catch (error) {
       setIsPending(false);
-      setError(error);
-
       setToast((prevData) => ({
         ...prevData,
         visible: true,
@@ -95,17 +81,12 @@ const TableProviders = ({ data, rowsPerPage, setToast }) => {
         message: 'An error occurred while updating defaults'
       }));
     }
-     
   };
 
-  // Delete providers using the provider ID (documetn ID in firestore)
-  // TODO: modal confirming that provider should be deleted
   const deleteProvider = async (provID) => {
-
     try {
       await deleteDoc(doc(db, 'providers', provID));
-
-
+      setShowModal(false);
       setToast((prevData) => ({
         ...prevData,
         visible: true,
@@ -113,27 +94,15 @@ const TableProviders = ({ data, rowsPerPage, setToast }) => {
         message: 'Provider has been removed'
       }));
 
-      
     } catch (error) {
-
+      setShowModal(false);
       setToast((prevData) => ({
         ...prevData,
         visible: true,
         type: 'error',
         message: 'An error occurred while deleting providers'
       }));
-    } finally {
-      setShowModal(false);
-    }
-    
-  };
-
-  const formatLocation = (practice, streetAddress, suburb) => {
-    if (practice === "") {
-      return `${streetAddress}, ${suburb}`;
-    } else {
-      return `${practice}, ${suburb}`;
-    }
+    }     
   };
 
    // Default to cancel button when user hits enter after pressing delete, aiming avoiding accidental deletes
@@ -148,7 +117,6 @@ const TableProviders = ({ data, rowsPerPage, setToast }) => {
     } 
   }
 
-  
   // Add event listener only once on initial render
   useEffect(() => {
     window.addEventListener('keydown', cancelOnEnter);
@@ -160,29 +128,6 @@ const TableProviders = ({ data, rowsPerPage, setToast }) => {
 
   return (
     <>
-      {showModal && <Modal title="Delete provider" closeModal={() => setShowModal(false)}>
-        <div className="error-container">
-          <div className="error-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" className="alert-icon alert-icon--neutral" viewBox="0 0 512 512" width="24px">
-              <path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" fill="#D12323" stroke="#D12323" strokeMiterlimit="10" strokeWidth="32"/>
-              <path d="M250.26 166.05L256 288l5.73-121.95a5.74 5.74 0 00-5.79-6h0a5.74 5.74 0 00-5.68 6z" fill="#D12323" stroke="#ffffff" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32"/>
-              <path d="M256 367.91a20 20 0 1120-20 20 20 0 01-20 20z" fill="#ffffff"/>
-            </svg>
-          </div>
-          <div className="error-text">
-            This will permanently delete the following provider details
-          </div>
-        </div>
-        <div className="provider-display">
-          <div className="provider-label">Selected provider</div>
-          <div className="provider-summary">{`${selectedProvider.fullName} (${selectedProvider.location})`}</div>
-        </div>
-        <div className="Modal__buttons">
-          <Button classLabel="cancel" design="secondary" handleClick={() => setShowModal(false)}>Cancel</Button>
-          <Button design="delete" handleClick={() => deleteProvider(selectedProvider.id)}>Delete</Button>
-        </div>
-      </Modal>}
-
       <table className="table data-table" aria-describedby="Providers__description">
           
           <thead className="tableRowHeader">
@@ -217,7 +162,7 @@ const TableProviders = ({ data, rowsPerPage, setToast }) => {
                       }}>Delete</button>
                     </div>
                  
-                  <button className={`${(provider.default && !isPending) ? 'table__action default--selected' : 'table__action default'}`} onClick={(event) => setAsDefault(providers, provider.id)}>
+                  <button className={`${(provider.default && !isPending) ? 'table__action default--selected' : 'table__action default'}`} onClick={() => setAsDefault(data, provider.id)}>
                     {isPending ? (
                       'Updating...'
                       ) : (
@@ -234,7 +179,19 @@ const TableProviders = ({ data, rowsPerPage, setToast }) => {
           </tbody>
           
       </table>
+
       <TableFooter pages={range} slice={dataSlice} setPage={setPage} page={page} />
+
+      {showModal && <Modal title="Delete provider" closeModal={() => setShowModal(false)} type="delete" errorMessage="This will permanently delete the following provider details">
+        <div className="provider-display">
+          <div className="provider-label">Selected provider</div>
+          <div className="provider-summary">{`${selectedProvider.fullName} (${selectedProvider.location})`}</div>
+        </div>
+        <div className="Modal__buttons">
+          <Button classLabel="cancel" design="secondary" handleClick={() => setShowModal(false)}>Cancel</Button>
+          <Button design="delete" handleClick={() => deleteProvider(selectedProvider.id)}>Delete</Button>
+        </div>
+      </Modal>}
     </>
   )};
 
