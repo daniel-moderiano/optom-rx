@@ -10,42 +10,23 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 import { useState, useEffect } from "react";
 import Dots from '../utils/Dots/Dots';
 import PageHeader from '../utils/PageHeader/PageHeader';
-import ContentContainer from "../utils/ContentContainer/ContentContainer";
 import Button from '../utils/Button/Button';
-
+import { useFormatting } from "../../hooks/useFormatting";
 
 const RxTemplate = ({ data, setToast, setPage }) => {
   // Deconstructing for cleanliness of code and easier-to-understand operations
   const { drugData, patientData, providerData, miscData } = data;
-  const [isPending, setIsPending] = useState(false)
- 
+  const { formatDrug, formatDate, formatPhoneNumber, formatMedicareNumber } = useFormatting();
   let navigate = useNavigate();
-
   const { user } = useAuthContext();
+
+  const [isPending, setIsPending] = useState(false)
 
   // Adjust current page for accessibility and styling
   useEffect(() => {
     setPage(null);
   }, [setPage])
 
-  const formatPhoneNumber = (phoneNumber) => {
-    if (phoneNumber.substring(0, 2) === '04') {
-      // Format as mobile phone number
-      return `${phoneNumber.substring(0, 4)} ${phoneNumber.substring(4, 7)} ${phoneNumber.substring(7, 10)}`;
-    } else if (phoneNumber.substring(0, 2) === '13') {
-      // Format as business number, depending on total length
-      if (phoneNumber.length === 6) {
-        // Format as 6 digit '13' number
-        return `${phoneNumber.substring(0, 2)} ${phoneNumber.substring(2, 4)} ${phoneNumber.substring(4, 6)}`;
-      } else {
-        // Format as 1300 number
-        return `${phoneNumber.substring(0, 4)} ${phoneNumber.substring(4, 7)} ${phoneNumber.substring(7, 10)}`;
-      }
-    } else {
-      // Format as standard 10 digit landline number
-      return `(${phoneNumber.substring(0, 2)}) ${phoneNumber.substring(2, 6)} ${phoneNumber.substring(6, 10)}`;
-    }
-  };
 
   // Controls when to split a line to ensure the address is displayed as well as practicable
   const formatProvAddress = () => {
@@ -61,44 +42,6 @@ const RxTemplate = ({ data, setToast, setPage }) => {
     }
   }
   
-  // Finalised drug format is dependant on whether the Rx has brand name included/only selected
-  const formatDrug = (activeIngredient, brandName) => {
-    const capitalised = activeIngredient[0].toUpperCase() + activeIngredient.substring(1);
-    // Brand name only
-    if (drugData.brandOnly) {
-      if (!capitalised.includes('eye')) {
-        if (capitalised.includes('spray')) {
-          return `${brandName} ${capitalised.substr(capitalised.indexOf('spray'), 5)}`;
-        } else {
-          return brandName;
-        }
-      } else {
-        return `${brandName} ${capitalised.substr(capitalised.indexOf('eye'))}`;
-      }
-    }    
-    // Brand name NOT to be included
-    if (!drugData.includeBrand) {  
-      return capitalised;
-    }
-    // Brand name included in addition to active ingredient
-    if (!capitalised.includes('eye')) {
-      if (capitalised.includes('spray')) {
-        return `${capitalised.replace('spray', `(${brandName}) spray`)}`;
-      } else {
-        return `${capitalised.replace(',', ` (${brandName}),`)}`;
-      }
-    } else {
-      return `${capitalised.replace('eye', `(${brandName}) eye`)}`;
-    }
-  };
-
-  const formatDate = () => {
-    return `${miscData.date.substring(8)}/${miscData.date.substring(5, 7)}/${miscData.date.substring(0, 4)}`;
-  };
-
-  const formatMedicareNumber = () => {
-    return `${patientData.medicareNumber.trim().substring(0, 4)} ${patientData.medicareNumber.trim().substring(4, 9)} ${patientData.medicareNumber.trim().substring(9, 10)}-${patientData.medicareRefNumber}`;
-  }
 
   const saveRx = async () => {
     setIsPending(true);
@@ -147,7 +90,7 @@ const RxTemplate = ({ data, setToast, setPage }) => {
       {/* If the template is rendered without a full set of data, many functions will fail. Hence this is rendered conditionally. Check is performed against presence of patient data  */}
       {Object.keys(patientData).length > 0 ? <>
         <div className="ui-description">
-          <div className="ui-info ui-date">{formatDate()}</div>
+          <div className="ui-info ui-date">{formatDate(miscData.date)}</div>
           <div className="ui-info ui-scriptNo">Script No: {miscData.scriptID}</div>
         </div>
         <div data-testid="ui" className="ui-container">
@@ -178,7 +121,7 @@ const RxTemplate = ({ data, setToast, setPage }) => {
 
               {(patientData.medicareNumber.trim() !== "" && patientData.medicareRefNumber !== "") && 
                 <div className="ui-info ui-medicare">
-                  <div className="ui-patient__medicareNumber">Medicare number: {formatMedicareNumber()}
+                  <div className="ui-patient__medicareNumber">Medicare number: {formatMedicareNumber(patientData.medicareNumber, patientData.medicareRefNumber)}
                   </div>
                 </div>
               }
@@ -189,7 +132,7 @@ const RxTemplate = ({ data, setToast, setPage }) => {
            <section className="ui-medication">
             <h4 className="ui__title">Medication</h4>
               <div className="ui-info ui-medication__primary-info">
-                {formatDrug(drugData.activeIngredient, drugData.brandName)}
+                {formatDrug(drugData)}
                 <div className="ui-medication__dosage">Dosage: {drugData.dosage}</div>
                 <div className="ui-medication__quantity">{`Quantity: ${drugData.quantity}`}</div>
                 <div className="ui-medication__repeats">{`Repeats: ${drugData.repeats}`}</div>
@@ -256,7 +199,7 @@ const RxTemplate = ({ data, setToast, setPage }) => {
 
               {(patientData.medicareNumber.trim() !== "" && patientData.medicareRefNumber !== "") && 
                 <div className="patient__medicareNumber">
-                {formatMedicareNumber()}
+                {formatMedicareNumber(patientData.medicareNumber, patientData.medicareRefNumber)}
               </div>
               }
               
@@ -270,7 +213,7 @@ const RxTemplate = ({ data, setToast, setPage }) => {
 
           <section className="miscellaneous">
             {/* Include Script ID and Authority Rx number here */}
-            <div className="date">{formatDate()}</div>
+            <div className="date">{formatDate(miscData.date)}</div>
             {drugData.pbsRx 
               ? <div className="pbsSelected"><img className="pbsTick" src={tickbox} alt="" /></div>
               : <div className="nonPbs"><span className="nonPbs-marker">XXXXXXXXXXX</span>Non-PBS</div>
@@ -283,7 +226,7 @@ const RxTemplate = ({ data, setToast, setPage }) => {
           <section className="medication">
             <h4 className="medication__title">Medication</h4>
             <div data-testid="drugName" className="medication__activeIngredient">
-              {formatDrug(drugData.activeIngredient, drugData.brandName)}
+              {formatDrug(drugData)}
             </div>
             {drugData.compounded 
               && <div className="medication__compounded">To be compounded</div>
@@ -339,7 +282,7 @@ const RxTemplate = ({ data, setToast, setPage }) => {
 
               {(patientData.medicareNumber.trim() !== "" && patientData.medicareRefNumber !== "") && 
                 <div className="patient__medicareNumber">
-                {formatMedicareNumber()}
+                {formatMedicareNumber(patientData.medicareNumber, patientData.medicareRefNumber)}
               </div>
               }
               
@@ -353,7 +296,7 @@ const RxTemplate = ({ data, setToast, setPage }) => {
 
           <section className="miscellaneous">
             {/* Include Script ID and Authority Rx number here */}
-            <div className="date">{formatDate()}</div>
+            <div className="date">{formatDate(miscData.date)}</div>
             {drugData.pbsRx 
               ? <div className="pbsSelected"><img className="pbsTick" src={tickbox} alt="" /></div>
               : <div className="nonPbs"><span className="nonPbs-marker">XXXXXXXXXXX</span>Non-PBS</div>
@@ -365,7 +308,7 @@ const RxTemplate = ({ data, setToast, setPage }) => {
           {/* Script ID or authority Rx number should go above the medication once finalised, and perhaps with a border bottom */}
           <section className="medication">
             <div className="medication__activeIngredient">
-              {formatDrug(drugData.activeIngredient, drugData.brandName)}
+              {formatDrug(drugData)}
             </div>
             {drugData.compounded 
               && <div className="medication__compounded">To be compounded</div>
@@ -429,7 +372,7 @@ const RxTemplate = ({ data, setToast, setPage }) => {
                 
                 {(patientData.medicareNumber.trim() !== "" && patientData.medicareRefNumber !== "") && 
                 <div className="patient__medicareNumber">
-                  {formatMedicareNumber()}
+                  {formatMedicareNumber(patientData.medicareNumber, patientData.medicareRefNumber)}
                 </div>
                 }
                 
@@ -438,7 +381,7 @@ const RxTemplate = ({ data, setToast, setPage }) => {
           </section>
 
           <section className="miscellaneous">
-            <div className="date">{formatDate()}</div>
+            <div className="date">{formatDate(miscData.date)}</div>
             {drugData.authRequired && <div className="authNumbers">
               <div className="authRxNo">{`Authority Script No: ${miscData.authRxNumber}`}</div>
             </div>}
@@ -446,7 +389,7 @@ const RxTemplate = ({ data, setToast, setPage }) => {
 
           <section className="medication">
             <div className="medication__activeIngredient">
-              {formatDrug(drugData.activeIngredient, drugData.brandName)}
+              {formatDrug(drugData)}
             </div>
             {drugData.compounded 
               && <div className="medication__compounded">To be compounded</div>
@@ -509,7 +452,7 @@ const RxTemplate = ({ data, setToast, setPage }) => {
                 
                 {(patientData.medicareNumber.trim() !== "" && patientData.medicareRefNumber !== "") && 
                 <div className="patient__medicareNumber">
-                  {formatMedicareNumber()}
+                  {formatMedicareNumber(patientData.medicareNumber, patientData.medicareRefNumber)}
                 </div>
                 }
 
@@ -518,7 +461,7 @@ const RxTemplate = ({ data, setToast, setPage }) => {
           </section>
 
           <section className="miscellaneous">
-            <div className="date">{formatDate()}</div>
+            <div className="date">{formatDate(miscData.date)}</div>
             {drugData.authRequired && <div className="authNumbers">
               <div className="authRxNo">{`Authority Script No: ${miscData.authRxNumber}`}</div>
             </div>}
@@ -526,7 +469,7 @@ const RxTemplate = ({ data, setToast, setPage }) => {
 
           <section className="medication">
             <div className="medication__activeIngredient">
-              {formatDrug(drugData.activeIngredient, drugData.brandName)}
+              {formatDrug(drugData)}
             </div>
             {drugData.compounded 
               && <div className="medication__compounded">To be compounded</div>
@@ -561,7 +504,7 @@ const RxTemplate = ({ data, setToast, setPage }) => {
           <div className="primary-btns">
             <Button classLabel="btn-print" handleClick={() => {window.print()}}>
               {/* <img src={printOutline} alt="" /> */}
-              <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path d="M384 368h24a40.12 40.12 0 0040-40V168a40.12 40.12 0 00-40-40H104a40.12 40.12 0 00-40 40v160a40.12 40.12 0 0040 40h24" fill="none" stroke="#ffffff" stroke-linejoin="round" stroke-width="32"/><rect x="128" y="240" width="256" height="208" rx="24.32" ry="24.32" fill="none" stroke="#ffffff" stroke-linejoin="round" stroke-width="32"/><path d="M384 128v-24a40.12 40.12 0 00-40-40H168a40.12 40.12 0 00-40 40v24" fill="none" stroke="#ffffff" stroke-linejoin="round" stroke-width="32"/><circle cx="392" cy="184" r="24" fill="#ffffff"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path d="M384 368h24a40.12 40.12 0 0040-40V168a40.12 40.12 0 00-40-40H104a40.12 40.12 0 00-40 40v160a40.12 40.12 0 0040 40h24" fill="none" stroke="#ffffff" strokeLinejoin="round" strokeWidth="32"/><rect x="128" y="240" width="256" height="208" rx="24.32" ry="24.32" fill="none" stroke="#ffffff" strokeLinejoin="round" strokeWidth="32"/><path d="M384 128v-24a40.12 40.12 0 00-40-40H168a40.12 40.12 0 00-40 40v24" fill="none" stroke="#ffffff" strokeLinejoin="round" strokeWidth="32"/><circle cx="392" cy="184" r="24" fill="#ffffff"/></svg>
               Print
             </Button>
             <Button classLabel="btn-finish" handleClick={saveRx}>
@@ -569,7 +512,7 @@ const RxTemplate = ({ data, setToast, setPage }) => {
                 <Dots color="white"/>
               ) : (<>
                 {/* <img src={saveOutline} alt="" /> */}
-                <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path d="M380.93 57.37A32 32 0 00358.3 48H94.22A46.21 46.21 0 0048 94.22v323.56A46.21 46.21 0 0094.22 464h323.56A46.36 46.36 0 00464 417.78V153.7a32 32 0 00-9.37-22.63zM256 416a64 64 0 1164-64 63.92 63.92 0 01-64 64zm48-224H112a16 16 0 01-16-16v-64a16 16 0 0116-16h192a16 16 0 0116 16v64a16 16 0 01-16 16z" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path d="M380.93 57.37A32 32 0 00358.3 48H94.22A46.21 46.21 0 0048 94.22v323.56A46.21 46.21 0 0094.22 464h323.56A46.36 46.36 0 00464 417.78V153.7a32 32 0 00-9.37-22.63zM256 416a64 64 0 1164-64 63.92 63.92 0 01-64 64zm48-224H112a16 16 0 01-16-16v-64a16 16 0 0116-16h192a16 16 0 0116 16v64a16 16 0 01-16 16z" fill="none" stroke="#ffffff" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32"/></svg>
                 Save and Finish
               </>)}
             </Button>

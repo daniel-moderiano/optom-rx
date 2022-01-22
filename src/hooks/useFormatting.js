@@ -85,5 +85,31 @@ export const useFormatting = () => {
     }
   };
 
-  return { abbreviateStateName, formatDrug, formatDate, formatLocation }
+  // Present phone number in common Australian formats for print
+  const formatPhoneNumber = (phoneNumber) => {
+    if (phoneNumber.substring(0, 2) === '04') {
+      // Format as mobile phone number
+      return `${phoneNumber.substring(0, 4)} ${phoneNumber.substring(4, 7)} ${phoneNumber.substring(7, 10)}`;
+    } else if (phoneNumber.substring(0, 2) === '13') {
+      // Format as business number, depending on total length
+      if (phoneNumber.length === 6) {
+        // Format as 6 digit '13' number
+        return `${phoneNumber.substring(0, 2)} ${phoneNumber.substring(2, 4)} ${phoneNumber.substring(4, 6)}`;
+      } else {
+        // Format as 1300 number
+        return `${phoneNumber.substring(0, 4)} ${phoneNumber.substring(4, 7)} ${phoneNumber.substring(7, 10)}`;
+      }
+    } else {
+      // Format as standard 10 digit landline number
+      return `(${phoneNumber.substring(0, 2)}) ${phoneNumber.substring(2, 6)} ${phoneNumber.substring(6, 10)}`;
+    }
+  };
+
+  // No consensus exists for preferred medicare number presentation, so this may be modified as needed
+  const formatMedicareNumber = (medicareNumber, medicareRefNumber) => {
+    return `${medicareNumber.trim().substring(0, 4)} ${medicareNumber.trim().substring(4, 9)} ${medicareNumber.trim().substring(9, 10)}-${medicareRefNumber}`;
+  }
+
+
+  return { abbreviateStateName, formatDrug, formatDate, formatLocation, formatPhoneNumber, formatMedicareNumber }
 }
