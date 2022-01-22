@@ -60,6 +60,97 @@ const StyledProviders = styled.div`
       border-top-right-radius: 6px;
     }
 
+    .tableCell {
+      padding: 0.8rem 1.5rem;
+      font-size: 0.9rem;
+      color: #48515B;
+      border-bottom: 1px solid #D1D6DB;
+      vertical-align: middle;
+
+    
+      .table__action {
+        font-size: 0.85rem;
+        font-family: var(--font-stack-segoe);
+        box-sizing: border-box;
+        text-decoration: none;
+        cursor: pointer;
+        padding: 2px 8px 5px 8px;
+        border-radius: 2px;
+        background-color: #fff;
+        box-sizing: border-box;
+        height: 1.75rem;
+
+        &:focus {
+          outline: 2px solid #104362;
+          outline-offset: 1px;
+        }
+
+        &:focus:not(:focus-visible) {
+          outline: none
+        }
+
+        &:focus-visible {
+          outline: 2px solid #104362;
+          outline-offset: 2px;
+        }
+
+        &:active {
+          transform: scale(0.98);
+        }
+      }
+
+      .default {
+        color: var(--neutral);
+        border: 0.1rem solid #4a7188; 
+        width: 8rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    
+        &:hover {
+          background-color: #f8fafa;
+          border: 0.1rem solid var(--neutral);
+        }
+      }
+
+      .default--selected {
+        width: 8rem;
+        color: #fff;
+        border: 0.1rem solid #1A6899; 
+        background-color: #1A6899;
+        
+        
+        &:hover {
+          border: 0.1rem solid #1A6899; 
+          background-color: #185F8C;
+        }
+      }
+
+      .edit {
+        margin-right: 0.8rem;
+        color: var(--btn-positive);
+        border: 0.1rem solid var(--btn-positive); 
+        
+        &:hover {
+          color: var(--btn-positive-hover-text);
+          background-color: var(--btn-positive-hover);
+          border: 0.1rem solid var(--btn-positive);
+        }
+      }
+
+      .delete {
+        border: 0.1rem solid var(--btn-negative); 
+        color: var(--btn-negative);
+        margin-right: 0.8rem;
+
+        &:hover {
+          background-color: var(--btn-negative-hover);
+          color: var(--btn-negative-hover-text);
+          border: 0.1rem solid var(--btn-negative); 
+        }
+      }
+    } 
+
     .tableCellNone {
       height: 7rem;
       text-align: center;
@@ -74,60 +165,6 @@ const StyledProviders = styled.div`
         border-bottom: none;
       }
     }
-  }
-
- 
-  .Modal {
-    .error-container {
-      margin-top: 1.25rem;
-      background-color: #FBE9E7;
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      padding: 1rem;
-      border-radius: 2px;
-
-      .error-icon {
-        line-height: 0;
-        margin-right: 0.5rem;
-      }
-
-      .error-text {
-        color: #C02121;
-        font-size: 0.9rem;
-        font-weight: 600;
-      }
-    }
-
-    .provider-display {
-      padding-top: 1.25rem;
-      margin-bottom: 2rem;
-      .provider-label {
-        font-size: 0.85rem;
-        color: #5A6572;
-        margin-bottom: 0.4rem;
-      }
-    }
-
-    .Modal__buttons {
-      padding-top: 0.5rem;
-      display: flex;
-      width: 100%;
-      align-items: center;
-      justify-content: flex-end;
-      
-
-      .button {
-        font-size: 0.9rem;
-        min-width: 80px;
-        width: 100px;
-        height: 35px;
-      }
-   
-      .cancel {
-        margin-right: 1rem;
-      }
-    }    
   }
 
   .table-none {
@@ -219,6 +256,59 @@ const StyledProviders = styled.div`
       }
     }
   }
+
+  .Modal {
+    .error-container {
+      margin-top: 1.25rem;
+      background-color: #FBE9E7;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 1rem;
+      border-radius: 2px;
+
+      .error-icon {
+        line-height: 0;
+        margin-right: 0.5rem;
+      }
+
+      .error-text {
+        color: #C02121;
+        font-size: 0.9rem;
+        font-weight: 600;
+      }
+    }
+
+    .provider-display {
+      padding-top: 1.25rem;
+      margin-bottom: 2rem;
+      .provider-label {
+        font-size: 0.85rem;
+        color: #5A6572;
+        margin-bottom: 0.4rem;
+      }
+    }
+
+    .Modal__buttons {
+      padding-top: 0.5rem;
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: flex-end;
+      
+
+      .button {
+        font-size: 0.9rem;
+        min-width: 80px;
+        width: 100px;
+        height: 35px;
+      }
+   
+      .cancel {
+        margin-right: 1rem;
+      }
+    }    
+  }
   
   
   @media(max-width: 700px) {
@@ -242,14 +332,6 @@ const StyledProviders = styled.div`
 
     .TableFooter {
       justify-content: center;
-    }
-
-    .Modal {
-      .Modal__content {
-        width: 90%;
-        text-align: left;
-        max-width: 500px;
-      }
     }
   }
 `

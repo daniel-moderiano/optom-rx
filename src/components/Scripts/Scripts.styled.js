@@ -13,7 +13,7 @@ const StyledScripts = styled.div`
     }
   }
 
-  .table {
+  .table, .data-table {
     width: 100%;
     border-collapse: separate;
     border-radius: 6px;
@@ -50,6 +50,12 @@ const StyledScripts = styled.div`
       padding: 0.8rem 1.5rem;
       font-size: 0.9rem;
       color: #5A6572;
+
+      .tableRowItems:last-child {
+        .tableCell {
+          border-bottom: none;
+        }
+      }
     }
 
     .tableCell {
@@ -100,8 +106,9 @@ const StyledScripts = styled.div`
     }
   }
 
-  @media (max-width: 550px) { 
-    .table {
+
+  @media (max-width: 700px) { 
+    .data-table {
       border: none;
       box-shadow: none;
       padding: 0;
@@ -164,18 +171,6 @@ const StyledScripts = styled.div`
 
       .tableRowItems:nth-child(even) {
         background-color: #FFFFFF;
-      }
-    }
-
-    .table-none {
-      box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
-      border-collapse: separate;
-      border-radius: 6px;
-      border-spacing: 0;
-      -moz-border-radius:6px;
-
-      .tableHeader {
-        font-size: 0;
       }
     }
 

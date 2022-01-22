@@ -16,7 +16,7 @@ const ScriptsTable = ({ data, rowsPerPage }) => {
 
   return (
     <>
-      <table className="table" aria-describedby="Scripts__description">
+      <table className="table data-table" aria-describedby="Scripts__description">
         <thead className="tableRowHeader">
           <tr role="row">
             <th role="columnheader" className="tableHeader" scope="col">Script ID</th>
