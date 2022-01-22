@@ -5,7 +5,6 @@ import { db } from "../../firebase/config";
 import PrescriberForm from "../PrescriberForm/PrescriberForm";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { StyledAddProvider } from "./AddProvider.styled";
-import Fieldset from "../utils/Fieldset/Fieldset";
 import ContentContainer from '../utils/ContentContainer/ContentContainer';
 import PageHeader from '../utils/PageHeader/PageHeader';
 
@@ -16,7 +15,6 @@ const AddProvider = ({ googleLoaded, setToast, setPage }) => {
 
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState(null);
-
 
   const [providerData, setProviderData] = useState({
     prefix: false,
@@ -57,8 +55,6 @@ const AddProvider = ({ googleLoaded, setToast, setPage }) => {
     }));
   };
 
-  
-
   const handleSubmit = async (event) => {
     event.preventDefault(); 
     setIsPending(true);
@@ -70,9 +66,10 @@ const AddProvider = ({ googleLoaded, setToast, setPage }) => {
         uid: user.uid,
       });
 
+      // Must reset state here before naviagting back to the previous page (component will no longer be mounted otherwise)
       setIsPending(false);
 
-      // Either a toast message here, or navigate back to Providers page and use an app-wide Toast alert system to show a toast on navigation back
+      // Confirm save via toast message, and return to the previous page
       setToast((prevData) => ({
         ...prevData,
         visible: true,
@@ -80,33 +77,18 @@ const AddProvider = ({ googleLoaded, setToast, setPage }) => {
         message: 'New provider added'
       }));
 
-      // Reset form both via state update and removal of UI classes (success classes)
-      setProviderData({
-        prefix: false,
-        fullName: '',
-        qualifications: '',
-        practiceName: '',
-        streetAddress: '',
-        subpremise: '',
-        suburb: '',
-        postcode: '',
-        state: '',
-        phoneNumber: '',
-        prescriberNumber: '',
-      });
-
       navigate('/providers');
     } catch (error) {
       setIsPending(false);
-      setError(error);
+      
+      // Throw error toast on screen, no further rendering is required, nor any specific error handling
       setToast((prevData) => ({
         ...prevData,
         visible: true,
         type: 'error',
         message: 'Failed to complete request'
       }));
-    }
-    
+    }     
   };
 
   const cancelEdit = () => {

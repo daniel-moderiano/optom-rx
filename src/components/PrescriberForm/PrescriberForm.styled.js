@@ -23,7 +23,6 @@ const StyledPrescriberForm = styled.form`
     display: flex;
 
     .submit {
-      min-width: 130px;
       margin-right: 1.5rem;
     }
   }
@@ -49,7 +48,6 @@ const StyledPrescriberForm = styled.form`
 
       .submit {
         margin-bottom: 1.5rem;
-        min-width: none;
       }
     }
   }

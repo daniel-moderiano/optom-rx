@@ -18,6 +18,7 @@ const StyledButton = styled.button`
   &.button--primary {
     background-color: var(--primary-color);
     color: rgb(255, 255, 255);
+    min-width: 140px;  // To avoid shrinking when switching to pending dots
 
     &:hover {
       background-color: var(--btn-primary-hover);
