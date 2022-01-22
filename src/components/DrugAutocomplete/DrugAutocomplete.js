@@ -17,11 +17,12 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
   const changeOnEnter = (event, setFunc, data) => {
     // If the enter key is pressed
     if (event.keyCode === 13) {
+      event.preventDefault();
       toggle(setFunc, data, event.target.name);
     }
   }
 
-  // Simply hide the items list but don't alter the items on the list
+  // Hide the items list but don't alter the items on the list
   const hideItemsList = () => {
     // Check for null in cases where component is dismounting/ed
     if (document.querySelector('.items-list')) {
@@ -30,12 +31,11 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
     }
   };
 
-  // Simply show the items list but don't alter the items on the list
+  // Show the items list but don't alter the items on the list
   const showItemsList = () => {
     document.querySelector('.items-list').classList.remove('hide');
     document.querySelector('.items-list').classList.add('show-list');
   };
-
 
   // Remove all items within the list, rather than the list itself
   const removeList = () => {
@@ -54,7 +54,6 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
     }));
   }
 
-  // TODO: refactor this bullshit
   // Capture the selection made in the items list via event propagation
   const clickSuggestion = useCallback((event) => {
     const parent = event.target.parentNode;
@@ -171,24 +170,6 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
       item.classList.add('item-click');
       itemsList.appendChild(item);  
     }
-
-    // // Append each list item from the source array of matches
-    // matchArr.forEach((match) => {
-    //   // Operation in template literal is capitalising first letter
-    //   const boldActiveName = boldLetters(`${(match['tpuu-or-mpp-pt'][0].toUpperCase() + match['tpuu-or-mpp-pt'].substring(1))}`);
-    //   const boldBrandName = boldLetters(`${match['brand-name']}`);
-
-    //   const item = document.createElement('div');
-    //   // Using spans will allow alternate styling of active ingredient and brand name if desired
-    //   item.innerHTML = `<span class="item-active item-click">${boldActiveName}</span> <span class="item-brand item-click">(${boldBrandName})</span>`;
-    //   // Add dataset information here to update state when the user selects an item
-    //   item.dataset.code = match['item-code'];
-    //   item.dataset.activeIngredient = match['tpuu-or-mpp-pt'];
-    //   item.dataset.brandName = match['brand-name'];
-    //   item.classList.add('item');
-    //   item.classList.add('item-click');
-    //   itemsList.appendChild(item);     
-    // }); 
   }, []);
 
   // Leave this dependency array empty to ensure this runs only once on first mount
@@ -331,30 +312,28 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
     if (event.target.value === "") {
       matches = [];
     }
-
     createList(matches);
   }
 
   return (
     <StyledDrugAutocomplete className="autocomplete-container">
-
-        <FormField 
-          id="activeIngredient"
-          name="activeIngredient"
-          label="Active ingredient" 
-          placeholder="Enter active ingredient or brand name"
-          value={data.activeIngredient} 
-          onChange={(event) => {
-            removeVerification();
-            handleChange(event);
-            handleSearch(event);
-          }}
-          alert={alerts.activeIngredient}
-          className="activeIngredient form-field"
-          required
-          describedBy = {Object.keys(alerts.activeIngredient).length === 0 ? null : 'activeIngredient-alert'}
-        />
-        <button type="button" className='drug-expand' onClick={() => setExpand(true)}>Enter manually</button>
+      <FormField 
+        id="activeIngredient"
+        name="activeIngredient"
+        label="Active ingredient" 
+        placeholder="Enter active ingredient or brand name"
+        value={data.activeIngredient} 
+        onChange={(event) => {
+          removeVerification();
+          handleChange(event);
+          handleSearch(event);
+        }}
+        alert={alerts.activeIngredient}
+        className="activeIngredient form-field"
+        required
+        describedBy = {Object.keys(alerts.activeIngredient).length === 0 ? null : 'activeIngredient-alert'}
+      />
+      <button type="button" className='drug-expand' onClick={() => setExpand(true)}>Enter manually</button>
 
       <div className={`drug-collapse ${expand ? 'show' : 'hide'}`}>
         <FormField 
@@ -397,12 +376,9 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
               <circle cx="250" cy="348" r="20"/>
             </svg>
             <div className="tooltip-text" dangerouslySetInnerHTML={{ __html: tooltipText }}></div>
-          </div>
-          
-          
+          </div>          
         </div>
            
-
         <FormField 
           fieldType="checkbox" 
           name="substitutePermitted"
@@ -422,8 +398,6 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
           className="checkbox compounded"
           enterFunc={(event) => changeOnEnter(event, setData, data)}
         />  
-
-        
       </div>
     </StyledDrugAutocomplete>
   );
