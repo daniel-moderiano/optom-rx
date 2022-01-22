@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import useTable from "../../hooks/useTable";
 import TableFooter from "../utils/TableFooter/TableFooter";
 import { Link } from "react-router-dom";
-import { StyledTableProviders } from "./TableProviders.styled";
 import { doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import { useAuthContext } from "../../hooks/useAuthContext";
@@ -184,7 +183,7 @@ const TableProviders = ({ data, rowsPerPage, setToast }) => {
         </div>
       </Modal>}
 
-      <StyledTableProviders className="table" aria-describedby="Providers__description">
+      <table className="table data-table" aria-describedby="Providers__description">
           
           <thead className="tableRowHeader">
             <tr role="row">
@@ -234,7 +233,7 @@ const TableProviders = ({ data, rowsPerPage, setToast }) => {
           
           </tbody>
           
-      </StyledTableProviders>
+      </table>
       <TableFooter pages={range} slice={dataSlice} setPage={setPage} page={page} />
     </>
   )};

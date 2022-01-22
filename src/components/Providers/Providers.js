@@ -42,8 +42,7 @@ const Providers = ({ setToast, setPage }) => {
         <div className="Providers__container">
           {isPending && <Spinner />}
 
-          {providers && <div className='table__container'>
-            <div className="Providers__list">
+          {providers && <>
               {providers.length > 0 ? (
                 <TableProviders data={providers} rowsPerPage={10} setToast={setToast} />
               ) : (
@@ -62,10 +61,7 @@ const Providers = ({ setToast, setPage }) => {
                   </tbody>
                 </table>
               )}
-                  
-            </div>  
-          </div>}
-
+          </>}
         </div>
       </StyledProviders>
     </ContentContainer>

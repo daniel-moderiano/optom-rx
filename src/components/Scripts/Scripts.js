@@ -54,7 +54,7 @@ const Scripts = ({ setToast, setPage }) => {
             </table>
           }
 
-          {scripts && <div className='table-container'>
+          {scripts && <>
             {scripts.length > 0 ? (
               <ScriptsTable data={scripts} rowsPerPage={15}/>            
             ) : (
@@ -73,7 +73,7 @@ const Scripts = ({ setToast, setPage }) => {
                 </tbody>
               </table>
             )}
-          </div>}  
+          </>}  
         </div>
         
       </StyledScripts>
