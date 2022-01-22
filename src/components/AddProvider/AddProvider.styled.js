@@ -19,7 +19,7 @@ const StyledAddProvider = styled.div`
       margin-right: 1rem;
     }
 
-    .ProviderForm {
+    .PrescriberForm {
       margin-top: -0.2rem;
     }
   }

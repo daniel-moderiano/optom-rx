@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { addDoc, collection } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import { db } from "../../firebase/config";
-import ProviderForm from "../ProviderForm/ProviderForm";
+import PrescriberForm from "../PrescriberForm/PrescriberForm";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { StyledAddProvider } from "./AddProvider.styled";
 import Fieldset from "../utils/Fieldset/Fieldset";
@@ -119,7 +119,7 @@ const AddProvider = ({ googleLoaded, setToast, setPage }) => {
         <PageHeader title="Add prescriber" description="Prescriber details will appear on your prescriptions"/>
         <div className="form-container">
           <span className="form-title">Prescriber details</span>
-          <ProviderForm 
+          <PrescriberForm 
             googleLoaded={googleLoaded} 
             data={providerData}
             setData={setProviderData}

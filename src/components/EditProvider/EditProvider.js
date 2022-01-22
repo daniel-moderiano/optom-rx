@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { doc, updateDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../../firebase/config";
-import ProviderForm from "../ProviderForm/ProviderForm";
+import PrescriberForm from "../PrescriberForm/PrescriberForm";
 import { StyledEditProvider } from "./EditProvider.styled";
 import Fieldset from "../utils/Fieldset/Fieldset";
 import { useProvider } from "../../hooks/useProvider";
@@ -110,7 +110,7 @@ const EditProvider = ({ googleLoaded, setToast, setPage }) => {
         <PageHeader title="Edit prescriber" description="Prescriber details will appear on your prescriptions"/>        
         <div className="form-container">
           <span className="form-title">Prescriber details</span>
-          <ProviderForm 
+          <PrescriberForm 
             googleLoaded={googleLoaded} 
             data={providerData}
             setData={setProviderData}
