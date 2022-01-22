@@ -1,25 +1,20 @@
-import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { doc, updateDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../../firebase/config";
 import PrescriberForm from "../PrescriberForm/PrescriberForm";
 import { StyledEditProvider } from "./EditProvider.styled";
-import Fieldset from "../utils/Fieldset/Fieldset";
-import { useProvider } from "../../hooks/useProvider";
 import ContentContainer from '../utils/ContentContainer/ContentContainer';
 import PageHeader from '../utils/PageHeader/PageHeader';
 
 const EditProvider = ({ googleLoaded, setToast, setPage }) => {
   const { id } = useParams();
-
   let navigate = useNavigate();
 
-  const { provider, isPending, error } = useProvider(id);
+  // Extract the selected provider data passed via React Router state
+  const { state: existingData } = useLocation();
 
   const [localPending, setLocalPending] = useState(false);
-  const [localError, setLocalError] = useState(null);
-
   const [providerData, setProviderData] = useState({
     prefix: false,
     fullName: '',
@@ -39,6 +34,14 @@ const EditProvider = ({ googleLoaded, setToast, setPage }) => {
   useEffect(() => {
     setPage(null);
   }, [setPage])
+
+  // Set local provider data state to data passed along via React Router state
+  useEffect(() => {
+    setProviderData((prevData) => ({
+      ...prevData,
+      ...existingData,
+    }));
+  }, [existingData]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -70,7 +73,7 @@ const EditProvider = ({ googleLoaded, setToast, setPage }) => {
 
       setLocalPending(false);
 
-      // Either a toast message here, or navigate back to Providers page and use an app-wide Toast alert system to show a toast on navigation back
+      // Inform the user the changes have been successfully applied, then return to the previous page
       setToast((prevData) => ({
         ...prevData,
         visible: true,
@@ -81,7 +84,8 @@ const EditProvider = ({ googleLoaded, setToast, setPage }) => {
       navigate('/providers');
     } catch (error) {
       setLocalPending(false);
-      setLocalError(error);
+
+      // Only an error toast is necessary. Specific error handling is not useful or necessary
       setToast((prevData) => ({
         ...prevData,
         visible: true,
@@ -95,14 +99,6 @@ const EditProvider = ({ googleLoaded, setToast, setPage }) => {
   const cancelEdit = () => {
     navigate('/providers');
   }
-
-  // Update the local state data once the provider data is fetched from the server
-  useEffect(() => {
-    setProviderData((prevData) => ({
-      ...prevData,
-      ...provider,
-    }));
-  }, [provider]);
 
   return (
     <ContentContainer>
@@ -118,10 +114,8 @@ const EditProvider = ({ googleLoaded, setToast, setPage }) => {
             handleSubmit={handleSubmit}
             handleCancel={cancelEdit}
             toggleBooleanState={() => toggleBooleanState(setProviderData, providerData, 'prefix')}
-            submitBtn="Save changes"
-            cancelBtn="Cancel"
+            submitBtnLabel="Save changes"
             pending={localPending}
-            formPending={isPending}
           />
         </div>
       </StyledEditProvider>

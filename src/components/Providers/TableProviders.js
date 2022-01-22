@@ -203,7 +203,11 @@ const TableProviders = ({ data, rowsPerPage, setToast }) => {
                 <td role="cell" data-title="Actions" className="tableCell actions-cell">
                   <div className="btns">
                     <div className="non-default">
-                      <Link className="table__action edit" to={`/edit/${provider.id}`}>Edit</Link>
+                      <Link 
+                        className="table__action edit" 
+                        to={`/edit/${provider.id}`}
+                        state={ {...provider} }
+                      >Edit</Link>
                       <button className="table__action delete" onClick={() => {
                         setShowModal(true);
                         setSelectedProvider({

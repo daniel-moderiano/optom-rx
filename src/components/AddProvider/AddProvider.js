@@ -10,12 +10,9 @@ import PageHeader from '../utils/PageHeader/PageHeader';
 
 const AddProvider = ({ googleLoaded, setToast, setPage }) => {
   const { user } = useAuthContext();
-
   let navigate = useNavigate();
 
   const [isPending, setIsPending] = useState(false);
-  const [error, setError] = useState(null);
-
   const [providerData, setProviderData] = useState({
     prefix: false,
     fullName: '',
@@ -36,6 +33,7 @@ const AddProvider = ({ googleLoaded, setToast, setPage }) => {
     setPage(null);
   }, [setPage])
 
+  
   const handleChange = (event) => {
     const { name, value } = event.target;
     setProviderData((prevData) => ({
@@ -80,7 +78,7 @@ const AddProvider = ({ googleLoaded, setToast, setPage }) => {
       navigate('/providers');
     } catch (error) {
       setIsPending(false);
-      
+
       // Throw error toast on screen, no further rendering is required, nor any specific error handling
       setToast((prevData) => ({
         ...prevData,
