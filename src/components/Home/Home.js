@@ -19,35 +19,26 @@ const Home = ({ setToast, setPage, firstSignIn, setFirstSignIn }) => {
     setPage('home');
   }, [setPage]);
 
+
   useEffect(() => {
-    
     // If the user has just signed up for an account and hits the home page for the first time, display the email modal
     if (firstSignIn) {
       setShowModal(true);
       setFirstSignIn(false);
-      sendEmailVerification(user)
-        .then(() => {
-          console.log('Email sent');
-        })
-        .catch((err) => {
-          // Not relevant to display error or success to user, they will be able to manually resend if no email is received. The manual resend has success/error UI handlers
-          console.log(err);
-        })  
+      // Not relevant to display error or success to user, they will be able to manually resend if no email is received. The manual resend has success/error UI handlers. Hence no .then or .catch is included
+      sendEmailVerification(user);
     }
   }, [firstSignIn, setFirstSignIn, user])
 
-  
  
   return (
     <ContentContainer earlyPadding={true}>
       <StyledHome className="Home" >
-        
         <PageHeader title={`Welcome, ${user.displayName}`} description="Create a new script or prescribe one of your favourites"/>
 
-        <div className="Home__links">
+
           <Link className="Home__link btn-primary" to='/form' state={ { newRx: true } }>New prescription</Link>
-          {/* <Link className="Home__link Home__link--prescribers btn-ghost" to="/providers">View prescribers</Link> */}
-        </div>
+
 
           <div className="Favourites">
             <Favourites setToast={setToast}/>

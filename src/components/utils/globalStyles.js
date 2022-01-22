@@ -74,7 +74,6 @@ const GlobalStyles = createGlobalStyle`
     border: 1px solid transparent;
     background-color: var(--primary-color);
     color: rgb(255, 255, 255);
-    min-width: 140px;  // To avoid shrinking when switching to pending dots
 
     &:hover {
       background-color: var(--btn-primary-hover);

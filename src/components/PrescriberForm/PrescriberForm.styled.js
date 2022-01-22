@@ -24,6 +24,7 @@ const StyledPrescriberForm = styled.form`
 
     .submit {
       margin-right: 1.5rem;
+      min-width: 140px;  // Ensures the button doesn't shrink in pending mode
     }
   }
 

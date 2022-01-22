@@ -46,18 +46,6 @@ const StyledHome = styled.div`
       }
     }
   }
-
-  @media (max-width: 450px) { 
-
-
-    .Modal {
-      .Modal__content {
-        width: 90%;
-        text-align: left;
-        max-width: 500px;
-      }
-    }
-  }
 `
 
 export { StyledHome }
