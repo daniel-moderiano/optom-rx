@@ -23,9 +23,12 @@ const StyledDrugAutocomplete = styled.div`
       overflow: hidden;
       border-top: 1px solid #e6e6e6;
       width: 100%;
-      /* height: 2rem; */
       text-align: left;
       line-height: 1.9rem;
+
+      .item-brand, .item-active, .item-bold {
+        pointer-events: none;
+      }
     }
 
     .item:hover {
@@ -96,11 +99,9 @@ const StyledDrugAutocomplete = styled.div`
       .question-icon {
         opacity: 0.5;
         width: 22px;
-        /* margin-top: 0.3rem; */
       }
 
       .question-icon:hover {
-        /* cursor: pointer; */
         opacity: 1.0;
       }
 
@@ -150,16 +151,11 @@ const StyledDrugAutocomplete = styled.div`
       }
     }
 
-    .hide {
-      display: none;
-    }
-
     .show {
       display: inline-block;
     }
   }
   
-
   button {
     position: absolute;
     right: 0.3rem;
@@ -209,14 +205,8 @@ const StyledDrugAutocomplete = styled.div`
           transform: translateY(-50%);
    
           &::after {
-            content: "";
-            position: absolute;
-            top: 50%;
             left: 100%;
-            margin-top: -4px;
             margin-left: 0px;
-            border-width: 5px;
-            border-style: solid;
             border-color: transparent transparent transparent #555;
           }
         }
