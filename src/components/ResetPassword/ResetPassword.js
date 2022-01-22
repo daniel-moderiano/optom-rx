@@ -92,9 +92,7 @@ const ResetPassword = ({ setToast, setPage }) => {
         type: 'success',
         message: 'Email reset link sent'
       }));
-      setEmail('');
       navigate('/login');
-
     } catch (error) {
       setIsPending(false);
       errorHandling(error.code)

@@ -21,7 +21,6 @@ export const useSignup = () => {
         case 'auth/email-already-in-use':
           setError('This email is already in use. Try another.')
           break;
-        
         case 'auth/invalid-email':
           setError('Please enter a valid email address.')
           break;
@@ -40,7 +39,6 @@ export const useSignup = () => {
     };
 
     try {
-      
       // Firebase function to sign up user. Once resolved, confirm with a context state change
       const res = await createUserWithEmailAndPassword(auth, email, password);
 
@@ -58,13 +56,12 @@ export const useSignup = () => {
   
       setIsPending(false);
       dispatch({ type: 'LOGIN', payload: res.user });
+      // Ensure a first time user receives any relevant first time user features (like email verification)
       setFirstSignIn(true);
-      
     } catch (err) {
       setIsPending(false);
       errorHandling(err.code);
     }
-
   }
   return { error, isPending, signup }
 }

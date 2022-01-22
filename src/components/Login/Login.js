@@ -10,12 +10,11 @@ import PasswordContainer from '../utils/PasswordContainer/PasswordContainer';
 
 const Login = ({ setPage }) => {
   const { error, login, isPending } = useLogin();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
   const [emailAlert, setEmailAlert] = useState({});
   const [passwordAlert, setPasswordAlert] = useState({});
-
   const [showPassword, setShowPassword] = useState(false);
 
   // Adjust current page for accessibility and styling
@@ -64,11 +63,8 @@ const Login = ({ setPage }) => {
   };
 
   
-
   return (
     <StyledLogin className="Login">
-
-
       <div className="Login__container">
         <h2 className="Login__title">Log in</h2>
 
@@ -78,9 +74,7 @@ const Login = ({ setPage }) => {
           if (isFormValid()) {
             login(email, password);
           }
-          
         }}>
-
           <FormField 
             fieldType="email" 
             name="email"
@@ -111,7 +105,6 @@ const Login = ({ setPage }) => {
             />
           </PasswordContainer>
          
-
           {error && <div className="error-container">
             <svg xmlns="http://www.w3.org/2000/svg" className="alert-icon alert-icon--error" viewBox="0 0 512 512" width="16px">
               <path d="M85.57 446.25h340.86a32 32 0 0028.17-47.17L284.18 82.58c-12.09-22.44-44.27-22.44-56.36 0L57.4 399.08a32 32 0 0028.17 47.17z" fill="none" stroke="#B60000" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32"/>
@@ -130,20 +123,14 @@ const Login = ({ setPage }) => {
           </Button>
 
           <Link to="/reset-password" className="forgot-password">Forgot password?</Link>
-        </form>
-       
-
-        
+        </form>        
         
         <div className="signup-option">
           <span className="signup-msg">Don't have an account?</span>
           <Link to="/signup" className="signup-link">Sign Up.</Link>
         </div>
-
         
-       
       </div>
-
     </StyledLogin>
   )
 }

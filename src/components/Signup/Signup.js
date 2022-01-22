@@ -10,18 +10,19 @@ import PasswordContainer from "../utils/PasswordContainer/PasswordContainer";
 
 const Signup = ({ setPage, setFirstSignIn }) => {
   const { error, isPending, signup } = useSignup();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [displayName, setDisplayName] = useState('');
-
   const [emailAlert, setEmailAlert] = useState({});
+  const [displayNameAlert, setDisplayNameAlert] = useState({});
+  const [showPassword, setShowPassword] = useState(false);
+
+  // Initialise with password helper message
   const [passwordAlert, setPasswordAlert] = useState({
     type: 'helper',
     message: 'Password must contain at least 6 characters.'
   });
-  const [displayNameAlert, setDisplayNameAlert] = useState({});
-
-  const [showPassword, setShowPassword] = useState(false);
 
   // Adjust current page for accessibility and styling
   useEffect(() => {
@@ -81,13 +82,11 @@ const Signup = ({ setPage, setFirstSignIn }) => {
       displayNameInput.classList.add('error');
       valid = false;
     } 
-
     return valid;
   };
 
   return (
     <StyledSignup className="Signup">
-
       <div className="Signup__container">
         <h2 className="Signup__title">Sign up</h2>
 
@@ -97,22 +96,20 @@ const Signup = ({ setPage, setFirstSignIn }) => {
           if (isFormValid()) {
             signup(email, password, displayName, setFirstSignIn);
           }
-          
         }}>
-
-        <FormField 
-          fieldType="email" 
-          name="email"
-          label="Email" 
-          value={email} 
-          onChange={(event) => setEmail(event.target.value)} 
-          className="auth-field form-field"
-          alert={emailAlert}
-          autoFocus
-          required
-          describedBy={Object.keys(emailAlert).length === 0 ? null : 'email-alert'}
-          autocomplete="username"
-        />
+          <FormField 
+            fieldType="email" 
+            name="email"
+            label="Email" 
+            value={email} 
+            onChange={(event) => setEmail(event.target.value)} 
+            className="auth-field form-field"
+            alert={emailAlert}
+            autoFocus
+            required
+            describedBy={Object.keys(emailAlert).length === 0 ? null : 'email-alert'}
+            autocomplete="username"
+          />
 
           <PasswordContainer showPassword={showPassword} handleClick={() => setShowPassword((prevState) => (!prevState))}>
             <FormField 
@@ -124,9 +121,8 @@ const Signup = ({ setPage, setFirstSignIn }) => {
               onChange={(event) => setPassword(event.target.value)} 
               className="auth-field form-field pass-field"
               alert={passwordAlert}
-              // describedBy="password-desc"
               required
-              describedBy={Object.keys(passwordAlert).length === 0 ? null : 'new-password-alert'}
+              describedBy='new-password-alert'
               autocomplete="new-password"
             />
           </PasswordContainer>
@@ -139,11 +135,9 @@ const Signup = ({ setPage, setFirstSignIn }) => {
             onChange={(event) => setDisplayName(event.target.value)} 
             className="auth-field form-field displayName-field"
             alert={displayNameAlert}
-            // describedBy="display-desc"
             describedBy={Object.keys(displayNameAlert).length === 0 ? null : 'displayName-alert'}
             required
           />
-
 
           {error && <div className="error-container">
             <svg xmlns="http://www.w3.org/2000/svg" className="alert-icon alert-icon--error" viewBox="0 0 512 512" width="16px">
@@ -161,8 +155,8 @@ const Signup = ({ setPage, setFirstSignIn }) => {
             'Sign up'
             )} 
           </Button>
-
         </form>
+
         <div className="login-option">
           <div className="login-group">
             <span className="login-msg">Already have an account?</span>

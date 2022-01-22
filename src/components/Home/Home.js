@@ -13,6 +13,8 @@ const Home = ({ setToast, setPage, firstSignIn, setFirstSignIn }) => {
   const { user } =  useAuthContext();
   const [showModal, setShowModal] = useState(false);
 
+  console.log(user);
+
   // Adjust current page for accessibility and styling
   useEffect(() => {
     setPage('home');
