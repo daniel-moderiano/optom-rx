@@ -121,7 +121,6 @@ const AddProvider = ({ googleLoaded, setToast, setPage }) => {
           <span className="form-title">Prescriber details</span>
           <ProviderForm 
             googleLoaded={googleLoaded} 
-            standalone={true} 
             data={providerData}
             setData={setProviderData}
             handleChange={handleChange}

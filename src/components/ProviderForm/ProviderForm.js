@@ -5,10 +5,13 @@ import { StyledProviderForm } from './ProviderForm.styled.js'
 import Dots from "../utils/Dots/Dots";
 import LoadOverlay from "../utils/LoadOverlay/LoadOverlay";
 import Button from '../utils/Button/Button';
+import { useValidation } from "../../hooks/useValidation";
 
 // ! Legal requirements include the prescriber's name, address, and contact details, and prescriber number
 
-const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBooleanState, googleLoaded, standalone, handleSubmit, handleCancel, submitBtn, cancelBtn, pending, formPending }) => {
+const ProviderForm = ({ data, setData, handleChange, toggleBooleanState, googleLoaded, handleSubmit, handleCancel, submitBtn, cancelBtn, pending, formPending }) => {
+
+  const { positiveValidationUI, negativeValidationUI, validateRequiredField } = useValidation();
 
   const [providerAlerts, setProviderAlerts] = useState({
     fullName: {},
@@ -19,69 +22,6 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
     phoneNumber: {},
     prescriberNumber: {},
   });
-
-  // UI functions
-  const showErrorClass = (element) => {
-    element.classList.add('error');
-    element.classList.remove('success');
-
-    // Remove the tick icon
-    const tick = element.parentNode.querySelector('.tickCircle');
-    tick.classList.remove('show');
-    tick.classList.add("hide");
-  }
-
-  const showSuccessClass = (element) => {
-    element.classList.remove('error');
-    element.classList.add('success');
-
-    // Add the tick icon
-    const tick = element.parentNode.querySelector('.tickCircle');
-    tick.classList.remove('hide');
-    tick.classList.add("show");
-  }
-
-   // Show positive feedback once a validation requirements are met
-   const positiveInlineValidation = useCallback((setAlertFunc, field) => {
-    showSuccessClass(field);
-    setAlertFunc((prevAlerts) => ({
-      ...prevAlerts,
-      [field.name]: {}
-    }));
-  }, []);
-
-  // Show positive feedback once a validation requirements are met
-  const negativeInlineValidation = useCallback((setAlertFunc, alertMsg, field) => {
-    showErrorClass(field);
-    setAlertFunc((prevAlerts) => ({
-      ...prevAlerts,
-      [field.name]: {
-        message: alertMsg,
-        type: 'error',
-      }
-    }));
-  }, []);
-
-  // Provide positive and negative feedback for a field requiring any non-empty input
-  const validateRequiredField = useCallback((setAlertFunc, field) => {
-    // Validate full name here
-    if (field.value.trim().length === 0) {
-      setAlertFunc((prevAlerts) => ({
-        ...prevAlerts,
-        [field.name]: {
-          message: "This field cannot be left blank",
-          type: 'error',
-        }
-      }));
-      showErrorClass(field);
-    } else {
-      showSuccessClass(field);
-      setAlertFunc((prevAlerts) => ({
-        ...prevAlerts,
-        [field.name]: {}
-      }));
-    }
-  }, []);
 
   // Ensure final address entered is formatted with abbreviated state code
   const formatAddressState = (stateInput) => {
@@ -121,118 +61,59 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
 
   // Standlone form validation on focusout events
   useEffect(() => {
-    if (standalone) {
-      document.querySelector('.ProviderForm--standalone').addEventListener('focusout', (event) => {
-        const { name, value } = event.target
-        switch (true) {
-          case name === 'fullName':
-            validateRequiredField(setProviderAlerts, event.target);
-            break;
-  
-          case name === 'streetAddress':
-            validateRequiredField(setProviderAlerts, event.target);
-            break;
-          
-          case name === 'suburb':
-            validateRequiredField(setProviderAlerts, event.target);
-            break;
-    
-          case name === 'state':
-            setData((prevData) => ({
-              ...prevData, 
-              [name]: formatAddressState(value), 
-            }));
-            validateRequiredField(setProviderAlerts, event.target);
-            break;
-    
-          case name === 'postcode':
-            validateRequiredField(setProviderAlerts, event.target);
-            break;
-  
-          case name === 'phoneNumber':
-            // Consider trimming the input of any spaces, hyphens, or parens
-            if (!(/^((0[2-8]\d{8})|(13(00|\d{4})(\d{6})?))$/).test(value.trim())) {
-              // Provide general error message
-              negativeInlineValidation(setProviderAlerts, 'A valid Australian phone number is required', event.target);
-            } else {
-              positiveInlineValidation(setProviderAlerts, event.target);
-            }
-            break;
-  
-          case name === 'prescriberNumber':
-            // Check for digits only
-            if (!(/^[0-9]{7}$/).test(value.trim())) {
-              // Sets an alert object in the state, which will immediately cause the component to render an alert message
-              negativeInlineValidation(setProviderAlerts, 'Prescriber number must be a seven digit number', event.target);
-            } else {
-              positiveInlineValidation(setProviderAlerts, event.target);
-            }
-            break;
+    console.log('No infinite loop!');
+    document.querySelector('.ProviderForm').addEventListener('focusout', (event) => {
+      const { name, value } = event.target
+      switch (true) {
+        case name === 'fullName':
+          validateRequiredField(setProviderAlerts, event.target);
+          break;
+
+        case name === 'streetAddress':
+          validateRequiredField(setProviderAlerts, event.target);
+          break;
         
-          default:
-            break;
-        }
-      });
-    } else {
-      document.querySelector('.ProviderForm--integrated').addEventListener('focusout', (event) => {
-        const { name, value } = event.target
-        switch (true) {
-          case name === 'fullName':
-            validateRequiredField(setAlerts, event.target);
-            break;
+        case name === 'suburb':
+          validateRequiredField(setProviderAlerts, event.target);
+          break;
   
-          case name === 'streetAddress':
-            validateRequiredField(setAlerts, event.target);
-            break;
-          
-          case name === 'suburb':
-            validateRequiredField(setAlerts, event.target);
-            break;
-    
-          case name === 'state':
-            setData((prevData) => ({
-              ...prevData, 
-              [name]: formatAddressState(value), 
-            }));
-            validateRequiredField(setAlerts, event.target);
-            break;
-    
-          case name === 'postcode':
-            validateRequiredField(setAlerts, event.target);
-            break;
+        case name === 'state':
+          setData((prevData) => ({
+            ...prevData, 
+            [name]: formatAddressState(value), 
+          }));
+          validateRequiredField(setProviderAlerts, event.target);
+          break;
   
-          case name === 'phoneNumber':
-            // Consider trimming the input of any spaces, hyphens, or parens
-            if (!(/^((0[2-8]\d{8})|(13(00|\d{4})(\d{6})?))$/).test(value.trim())) {
-              if (value.substring(0, 2) === '13') {
-                // Provide business specific error message
-                negativeInlineValidation(setAlerts, 'Australian business numbers are either 6 digits and begin with 13, or 10 digits and begin with 1300', event.target);
-              } else {
-                // Provide general error message
-                negativeInlineValidation(setAlerts, 'Australian phone numbers contain 10 digits and begin with 02, 03, 04, 07 or 08', event.target);
-              }
-            } else {
-              positiveInlineValidation(setAlerts, event.target);
-            }
-            break;
-  
-          case name === 'prescriberNumber':
-            // Check for digits only
-            if (!(/^[0-9]{7}$/).test(value.trim())) {
-              // Sets an alert object in the state, which will immediately cause the component to render an alert message
-              negativeInlineValidation(setAlerts, 'Prescriber number must be a seven digit number', event.target);
-            } else {
-              positiveInlineValidation(setAlerts, event.target);
-            }
-            break;
-        
-          default:
-            break;
-        }
-      });
-    }
-    
-  }, [negativeInlineValidation, positiveInlineValidation, validateRequiredField, standalone, setAlerts, setData]);
+        case name === 'postcode':
+          validateRequiredField(setProviderAlerts, event.target);
+          break;
+
+        case name === 'phoneNumber':
+          // Consider trimming the input of any spaces, hyphens, or parens
+          if (!(/^((0[2-8]\d{8})|(13(00|\d{4})(\d{6})?))$/).test(value.trim())) {
+            // Provide general error message
+            negativeValidationUI(setProviderAlerts, 'A valid Australian phone number is required', event.target);
+          } else {
+            positiveValidationUI(setProviderAlerts, event.target);
+          }
+          break;
+
+        case name === 'prescriberNumber':
+          // Check for digits only
+          if (!(/^[0-9]{7}$/).test(value.trim())) {
+            // Sets an alert object in the state, which will immediately cause the component to render an alert message
+            negativeValidationUI(setProviderAlerts, 'Prescriber number must be a seven digit number', event.target);
+          } else {
+            positiveValidationUI(setProviderAlerts, event.target);
+          }
+          break;
+      
+        default:
+          break;
+      }
+    });    
+  }, [setData, negativeValidationUI, positiveValidationUI, validateRequiredField]);
 
   // Ensure form is validated before calling form submission function (standalone form only)
   const checkFormValidation = () => {
@@ -248,7 +129,7 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
       'prescriberNumber',
     ];
 
-    const form = document.querySelector('.ProviderForm--standalone');
+    const form = document.querySelector('.ProviderForm');
 
     requiredFields.forEach((field) => {
       const input = form.querySelector(`[name="${field}"]`);
@@ -258,7 +139,7 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
           inputFocused = true;
         }
         valid = false;
-        negativeInlineValidation(setProviderAlerts, 'This field cannot be left blank', input);
+        negativeValidationUI(setProviderAlerts, 'This field cannot be left blank', input);
       }
     });
 
@@ -266,10 +147,7 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
   }
 
   return (
-    <>
-      {/* The standalone form allows all 'in house' state management and validation, but has the optiona of overwriting data with custom state if required */}
-      {/* Standalone form should submit providers to firebase using user ID as document ID */}
-      {standalone &&  <StyledProviderForm className="ProviderForm ProviderForm--standalone" autoComplete="off" noValidate>
+      <StyledProviderForm className="ProviderForm" autoComplete="off" noValidate>
         <div className="fields">
           {formPending && <LoadOverlay />}
           <FormField 
@@ -278,9 +156,9 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
             label="Full name" 
             value={data.fullName} 
             onChange={handleChange} 
-            alert={alerts ? alerts.fullName : providerAlerts.fullName}
+            alert={providerAlerts.fullName}
             required
-            describedBy={Object.keys(alerts ? alerts.fullName : providerAlerts.fullName).length === 0 ? null : 'fullName-alert'}
+            describedBy={Object.keys(providerAlerts.fullName).length === 0 ? null : 'fullName-alert'}
           />    
 
           <FormField 
@@ -321,12 +199,10 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
             setData={setData}
             handleChange={handleChange}
             provider={true}   
-            alerts={alerts ? alerts : providerAlerts}
-            setAlerts={setAlerts ? setAlerts : setProviderAlerts} 
+            alerts={providerAlerts}
+            setAlerts={setProviderAlerts} 
             googleLoaded={googleLoaded}
           />
-
-          {/* Because this is intended for use only in Australia, present and validate phone numbers in national format, which includes 10 digits for landline and mobile numbers, as follows: 02 1234 4321 [telephone], or 0400 000 000 [mobile]. Note that 13 numbers may be 6 or 10 digits, and indicates an Australia wide number. This shouldn't be appropriate for any optical practices, but should be able to be inputted regardless */}
 
           <FormField 
             fieldType="text" 
@@ -334,12 +210,12 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
             label="Phone number" 
             value={data.phoneNumber} 
             onChange={handleChange} 
-            alert={alerts ? alerts.phoneNumber : providerAlerts.phoneNumber}
+            alert={providerAlerts.phoneNumber}
             id="phoneNumber"
             maxlength="10"
             className="phoneNo-field form-field"
             required
-            describedBy = {Object.keys(alerts ? alerts.phoneNumber : providerAlerts.phoneNumber).length === 0 ? null : 'phoneNumber-alert'}
+            describedBy = {Object.keys(providerAlerts.phoneNumber).length === 0 ? null : 'phoneNumber-alert'}
           />
 
           <FormField 
@@ -348,16 +224,14 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
             label="Prescriber number" 
             value={data.prescriberNumber} 
             onChange={handleChange} 
-            alert={alerts ? alerts.prescriberNumber : providerAlerts.prescriberNumber}
+            alert={providerAlerts.prescriberNumber}
             maxlength="7"
             className="prescriberNo-field form-field"
             required
-            describedBy = {Object.keys(alerts ? alerts.prescriberNumber : providerAlerts.prescriberNumber).length === 0 ? null : 'prescriberNumber-alert'}
+            describedBy = {Object.keys(providerAlerts.prescriberNumber).length === 0 ? null : 'prescriberNumber-alert'}
           />
         </div>
        
-
-        {/* Only visible on standalone forms */}
         <div className="ProviderForm__btns">
           {submitBtn && <Button classLabel="submit" handleClick={(event) => {
             event.preventDefault(); 
@@ -372,7 +246,6 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
             )}
           </Button>}
 
-            
           {cancelBtn && 
             <Button design="secondary" classLabel="cancel" handleClick={(event) => {
               event.preventDefault(); 
@@ -381,97 +254,9 @@ const ProviderForm = ({ data, setData, handleChange, alerts, setAlerts, toggleBo
               {cancelBtn}
             </Button>
           }
-          
-          
-          
         </div>
-        
-
-       
-       
-      </StyledProviderForm>}
-
-      {/* The non standalone form uses the App/RxForm state instead of local state, and is intedend to integrate within the RxForm component */}
-      {!standalone && <StyledProviderForm className="ProviderForm ProviderForm--integrated">
-        <FormField 
-          fieldType="text" 
-          name="fullName"
-          label="Full name" 
-          value={data.fullName} 
-          onChange={(event) => handleChange(event)} 
-          alert={alerts.fullName}
-        />    
-
-        <FormField 
-          fieldType="checkbox" 
-          name="prefix"
-          label="Include 'Dr' in provider name" 
-          onChange={() => toggleBooleanState(setData, data, 'prefix')}
-          checked={data.prefix}
-          className="checkbox prefix-field"
-          enterFunc={(event) => {
-            if (event.keyCode === 13) {
-              toggleBooleanState(setData, data, event.target.name);
-            }
-          }}
-        />  
-
-        <FormField 
-          fieldType="text" 
-          name="qualifications"
-          label="Abbreviated qualifications (optional)" 
-          placeholder="e.g. BMedSci(VisSc), MOpt"
-          value={data.qualifications} 
-          onChange={(event) => handleChange(event)} 
-          maxlength="40"
-        />
-
-        {/* Practice name is only relevant for providers, and even then you might consider omitting this, as there is really no room on the computerised for for practice name */}
-        <FormField 
-          name="practiceName"
-          label="Practice name (optional)" 
-          value={data.practiceName} 
-          onChange={(event) => handleChange(event)} 
-        />
-
-        <AddressAutocomplete 
-          data={data}
-          setData={setData}
-          handleChange={(event) => handleChange(event)}
-          provider={true}   
-          alerts={alerts}
-          setAlerts={setAlerts} 
-          googleLoaded={googleLoaded}
-        />
-
-        {/* Because this is intended for use only in Australia, present and validate phone numbers in national format, which includes 10 digits for landline and mobile numbers, as follows: 02 1234 4321 [telephone], or 0400 000 000 [mobile]. Note that 13 numbers may be 6 or 10 digits, and indicates an Australia wide number. This shouldn't be appropriate for any optical practices, but should be able to be inputted regardless */}
-
-        <FormField 
-          fieldType="text" 
-          name="phoneNumber"
-          label="Phone number" 
-          value={data.phoneNumber} 
-          onChange={(event) => handleChange(event)} 
-          alert={alerts.phoneNumber}
-          id="phoneNumber"
-          maxlength="10"
-          className="phoneNo-field form-field"
-        />
-
-        <FormField 
-          fieldType="text" 
-          name="prescriberNumber"
-          label="Prescriber number" 
-          value={data.prescriberNumber} 
-          onChange={(event) => handleChange(event)} 
-          alert={alerts.prescriberNumber}
-          maxlength="7"
-          className="prescriberNo-field form-field"
-        />
-      </StyledProviderForm>}
-    </>
-      
-  )
+      </StyledProviderForm>
+    )
 }
 
 export default ProviderForm;
