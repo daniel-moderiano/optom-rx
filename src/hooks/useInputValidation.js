@@ -23,7 +23,7 @@ const applySuccessStyling = (element) => {
   tick.classList.add("show");
 }
 
-export const useValidation = () => {
+export const useInputValidation = () => {
   // ! useCallbacks are absolutely necessary as these functions are most commonly used in useEffect hooks
 
    // Show positive UI feedback on a form field. Used in a conditional that validates form field
