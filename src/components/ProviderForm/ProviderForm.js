@@ -1,15 +1,15 @@
 import FormField from "../FormField/FormField";
 import AddressAutocomplete from "../AddressAutocomplete/AddressAutocomplete";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { StyledProviderForm } from './ProviderForm.styled.js'
 import Dots from "../utils/Dots/Dots";
 import LoadOverlay from "../utils/LoadOverlay/LoadOverlay";
 import Button from '../utils/Button/Button';
 import { useValidation } from "../../hooks/useValidation";
 
-// ! Legal requirements include the prescriber's name, address, and contact details, and prescriber number
+// ! Legal requirements include the prescriber's name, address, contact details, and prescriber number
 
-const ProviderForm = ({ data, setData, handleChange, toggleBooleanState, googleLoaded, handleSubmit, handleCancel, submitBtn, cancelBtn, pending, formPending }) => {
+const ProviderForm = ({ data, setData, handleChange, toggleBooleanState, googleLoaded, handleSubmit, handleCancel, submitBtnLabel, pending, formPending }) => {
 
   const { positiveValidationUI, negativeValidationUI, validateRequiredField } = useValidation();
 
@@ -61,7 +61,6 @@ const ProviderForm = ({ data, setData, handleChange, toggleBooleanState, googleL
 
   // Standlone form validation on focusout events
   useEffect(() => {
-    console.log('No infinite loop!');
     document.querySelector('.ProviderForm').addEventListener('focusout', (event) => {
       const { name, value } = event.target
       switch (true) {
@@ -150,6 +149,7 @@ const ProviderForm = ({ data, setData, handleChange, toggleBooleanState, googleL
       <StyledProviderForm className="ProviderForm" autoComplete="off" noValidate>
         <div className="fields">
           {formPending && <LoadOverlay />}
+
           <FormField 
             fieldType="text" 
             name="fullName"
@@ -233,27 +233,29 @@ const ProviderForm = ({ data, setData, handleChange, toggleBooleanState, googleL
         </div>
        
         <div className="ProviderForm__btns">
-          {submitBtn && <Button classLabel="submit" handleClick={(event) => {
-            event.preventDefault(); 
-            if (checkFormValidation()) {
-              handleSubmit(event);
-            }
-          }}>
+          <Button 
+            classLabel="submit" 
+            handleClick={(event) => {
+              event.preventDefault(); 
+              if (checkFormValidation()) {
+                handleSubmit(event);
+              }
+            }}>
             {pending ? (
               <Dots color="white" />
               ) : (
-              `${submitBtn}`
+              `${submitBtnLabel}`
             )}
-          </Button>}
+          </Button>
 
-          {cancelBtn && 
-            <Button design="secondary" classLabel="cancel" handleClick={(event) => {
+          <Button 
+            design="secondary" 
+            handleClick={(event) => {
               event.preventDefault(); 
               handleCancel();
             }}>
-              {cancelBtn}
-            </Button>
-          }
+            Cancel
+          </Button>
         </div>
       </StyledProviderForm>
     )

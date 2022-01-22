@@ -27,9 +27,9 @@ const StyledProviderForm = styled.form`
       margin-right: 1.5rem;
     }
               
-    .cancel-btn {
+    /* .cancel-btn {
       min-width: 80px;
-    }
+    } */
   }
 
   

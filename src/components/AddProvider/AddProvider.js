@@ -127,8 +127,7 @@ const AddProvider = ({ googleLoaded, setToast, setPage }) => {
             handleSubmit={handleSubmit}
             handleCancel={cancelEdit}
             toggleBooleanState={() => toggleBooleanState(setProviderData, providerData, 'prefix')}
-            submitBtn="Add prescriber"
-            cancelBtn="Cancel"
+            submitBtnLabel="Add prescriber"
             pending={isPending}
           />
         </div>
