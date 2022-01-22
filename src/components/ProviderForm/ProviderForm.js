@@ -6,12 +6,15 @@ import Dots from "../utils/Dots/Dots";
 import LoadOverlay from "../utils/LoadOverlay/LoadOverlay";
 import Button from '../utils/Button/Button';
 import { useValidation } from "../../hooks/useValidation";
+import { useFormatting } from "../../hooks/useFormatting";
 
 // ! Legal requirements include the prescriber's name, address, contact details, and prescriber number
 
 const ProviderForm = ({ data, setData, handleChange, toggleBooleanState, googleLoaded, handleSubmit, handleCancel, submitBtnLabel, pending, formPending }) => {
 
+  // Hook usage for formatting and validation purposes
   const { positiveValidationUI, negativeValidationUI, validateRequiredField } = useValidation();
+  const { abbreviateStateName } = useFormatting();
 
   const [providerAlerts, setProviderAlerts] = useState({
     fullName: {},
@@ -23,43 +26,7 @@ const ProviderForm = ({ data, setData, handleChange, toggleBooleanState, googleL
     prescriberNumber: {},
   });
 
-  // Ensure final address entered is formatted with abbreviated state code
-  const formatAddressState = (stateInput) => {
-    let formatted = '';
-    switch (true) {
-      case (/South Australia/i).test(stateInput):
-        formatted = 'SA'
-        break;
-      
-      case (/Queensland/i).test(stateInput):
-      formatted = 'QLD'
-      break;
-
-      case (/New South Wales/i).test(stateInput):
-        formatted = 'NSW'
-        break;
-
-      case (/Tasmania/i).test(stateInput):
-        formatted = 'TAS'
-        break;
-
-      case (/Victoria/i).test(stateInput):
-        formatted = 'VIC'
-        break;
-
-      case (/Western Australia/i).test(stateInput):
-        formatted = 'WA'
-        break;
-
-      default:
-        formatted = stateInput;
-        break;
-      }
-
-    return formatted;
-  }
-
-  // Standlone form validation on focusout events
+  // Inline form validation using focusout as a trigger. All included functions are written in useCallback to ensure this is only run once initially (no duplicate listeners).
   useEffect(() => {
     document.querySelector('.ProviderForm').addEventListener('focusout', (event) => {
       const { name, value } = event.target
@@ -79,7 +46,7 @@ const ProviderForm = ({ data, setData, handleChange, toggleBooleanState, googleL
         case name === 'state':
           setData((prevData) => ({
             ...prevData, 
-            [name]: formatAddressState(value), 
+            [name]: abbreviateStateName(value), 
           }));
           validateRequiredField(setProviderAlerts, event.target);
           break;
@@ -112,12 +79,15 @@ const ProviderForm = ({ data, setData, handleChange, toggleBooleanState, googleL
           break;
       }
     });    
-  }, [setData, negativeValidationUI, positiveValidationUI, validateRequiredField]);
+  }, [setData, negativeValidationUI, positiveValidationUI, validateRequiredField, abbreviateStateName]);
 
-  // Ensure form is validated before calling form submission function (standalone form only)
+
+  // Ensure form is validated with no empty required fields before calling form submission function
   const checkFormValidation = () => {
     let valid = true;
     let inputFocused = false;
+
+    // Fields that must not be left empty
     const requiredFields = [
       'fullName',
       'streetAddress',
@@ -130,6 +100,7 @@ const ProviderForm = ({ data, setData, handleChange, toggleBooleanState, googleL
 
     const form = document.querySelector('.ProviderForm');
 
+    // Validate each field for empty value, but do not provide any positive feedback UI
     requiredFields.forEach((field) => {
       const input = form.querySelector(`[name="${field}"]`);
       if (input.value.trim().length === 0) {
@@ -141,7 +112,6 @@ const ProviderForm = ({ data, setData, handleChange, toggleBooleanState, googleL
         negativeValidationUI(setProviderAlerts, 'This field cannot be left blank', input);
       }
     });
-
     return valid;
   }
 
