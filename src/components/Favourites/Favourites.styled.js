@@ -1,7 +1,11 @@
 import styled from "styled-components";
 
 const StyledFavourites = styled.div`
-  margin-top: 4rem;
+  margin-top: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   
   .Favourites__title {
     margin: -0.75rem 0 0 0;
@@ -124,31 +128,7 @@ const StyledFavourites = styled.div`
     }
   }
 
-
-  .Spinner {
-    margin-top: 2rem;
-  }
-
   .Modal {
-    .exit-fade {
-      animation-name: shrink;
-      animation-duration: 150ms;
-      animation-timing-function: ease-in;
-
-      
-      @keyframes shrink {
-        100% {
-          transform: scale(0.75);
-          opacity: 0.1;
-        }
-
-        0% {
-          transform: scale(1);
-          opacity: 1;
-        }
-      }
-    }
-
     .error-container {
       margin-top: 1.25rem;
       background-color: #FBE9E7;
@@ -186,7 +166,6 @@ const StyledFavourites = styled.div`
       width: 100%;
       align-items: center;
       justify-content: flex-end;
-      
 
       .button {
         font-size: 0.9rem;
@@ -203,8 +182,11 @@ const StyledFavourites = styled.div`
 
   /* Landscape phone to portrait tablet */
   @media (max-width: 550px) { 
+    align-items: flex-start;
+
     .Favourites__title {
       display: block;
+      margin-top: 0.5rem;
     }
     
     .fav-list {
@@ -212,7 +194,6 @@ const StyledFavourites = styled.div`
       box-shadow: none;
 
       .list-header {
-        /* text-align: center; */
         display: none;
       }
 
@@ -258,7 +239,6 @@ const StyledFavourites = styled.div`
 
         .actions {
           position: relative;
-          
           width: 100%;
           border: none;
           display: flex;
@@ -268,13 +248,6 @@ const StyledFavourites = styled.div`
             padding: 1rem 1rem 0.9rem 1rem;
           }
         }
-      }
-    }
-
-    .Modal {
-      .Modal__content {
-        width: 90%;
-        text-align: left;
       }
     }
 
@@ -288,7 +261,6 @@ const StyledFavourites = styled.div`
         color: #5A6572;
         box-shadow: none;
         border: 1px dashed rgba(0, 0, 0, 0.1);
-
         border-radius: 6px; 
 
         &:hover {

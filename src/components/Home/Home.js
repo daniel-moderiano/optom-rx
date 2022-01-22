@@ -37,7 +37,7 @@ const Home = ({ setToast, setPage, firstSignIn, setFirstSignIn }) => {
 
           <Link className="Home__link btn-primary" to='/form' state={ { newRx: true } }>New prescription</Link>
           <div className="Favourites">
-            <Favourites setToast={setToast}/>
+            <Favourites user={user} setToast={setToast}/>
           </div>
 
         {showModal && (

@@ -37,9 +37,39 @@ export const useFormatting = () => {
         abbreviatedName = fullStateName;
         break;
       }
-
     return abbreviatedName;
   }, []);
 
-  return { abbreviateStateName }
+  // Create a more UI friendly summary of active ingredient +/- brand name. Requires multiple drug data parameters, hence a general script data parameter is passes that includes all of these (and more)
+  const formatDrug = (script) => {
+    const capitalised = script.activeIngredient[0].toUpperCase() + script.activeIngredient.substring(1);
+    // Brand name only
+    if (script.brandOnly) {
+      if (!capitalised.includes('eye')) {
+        if (capitalised.includes('spray')) {
+          return `${script.brandName} ${capitalised.substr(capitalised.indexOf('spray'), 5)}`;
+        } else {
+          return script.brandName;
+        }
+      } else {
+        return `${script.brandName} ${capitalised.substr(capitalised.indexOf('eye'))}`;
+      }
+    }    
+    // Brand name NOT to be included
+    if (!script.includeBrand) {
+      return capitalised;
+    }
+    // Brand name included in addition to active ingredient
+    if (!capitalised.includes('eye')) {
+      if (capitalised.includes('spray')) {
+        return `${capitalised.replace('spray', `(${script.brandName}) spray`)}`;
+      } else {
+        return `${capitalised.replace(',', ` (${script.brandName}),`)}`;
+      }
+    } else {
+      return `${capitalised.replace('eye', `(${script.brandName}) eye`)}`;
+    }
+  };
+
+  return { abbreviateStateName, formatDrug }
 }
