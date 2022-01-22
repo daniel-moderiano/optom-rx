@@ -134,25 +134,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
     ...existingData.miscData,
   });
 
-  const [requiredFields] = useState({
-    drug: [
-      'activeIngredient',
-      'dosage',
-      'quantity',
-      'repeats',
-    ],
-    patient: [
-      'fullName',
-      'streetAddress',
-      'suburb',
-      'postcode',
-      'state',
-    ],
-    misc: [
-      'date'
-    ],
-  });
-
   // Adjust current page for accessibility and styling
   useEffect(() => {
     setPage('form');
@@ -981,33 +962,45 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
     }));
   };
 
-  
-
   // Ensure form is validated before calling form submission function (to generate Rx)
   const checkFormValidation = () => {
     let valid = true;
     let inputFocused = false;
 
-    const drugForm = document.querySelector('.drug-form');
-    const patientForm = document.querySelector('.patient-form');
-    const miscForm = document.querySelector('.misc-form');
-    const medicareNumberInput = document.querySelector('#medicareNumber');
-    const medicareRefNumberInput = document.querySelector('#medicareRefNumber');
-
-    
-
-    requiredFields.patient.forEach((field) => {
-      const input = patientForm.querySelector(`[name="${field}"]`);
+    const performInputValidation = (fieldName, setAlertFunc) => {
+      const input = document.querySelector(`[name="${fieldName}"]`)
       if (input.value.trim().length === 0) {
         if (!inputFocused) {
           input.focus();
           inputFocused = true;
         }
         valid = false;
-        negativeInlineValidation(setPatientAlerts, 'This field cannot be left blank', input);
-      }  
-    });
+        negativeInlineValidation(setAlertFunc, 'This field cannot be left blank', input);
+      }
+    }
 
+    const requiredFields = {
+      drug: [
+        'activeIngredient',
+        'dosage',
+        'quantity',
+        'repeats',
+      ],
+      patient: [
+        'fullName',
+        'streetAddress',
+        'suburb',
+        'postcode',
+        'state',
+      ],
+    }
+
+    const medicareNumberInput = document.querySelector('#medicareNumber');
+    const medicareRefNumberInput = document.querySelector('#medicareRefNumber');
+
+    requiredFields.patient.forEach((field) => {
+      performInputValidation(field, setPatientAlerts);
+    });
     
     // If the user has attempted to enter medicare information, we should validate it for correct input here, and by default check the IRN input
     if (medicareNumberInput.value.trim() !== "") {
@@ -1030,15 +1023,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
     }
 
     requiredFields.drug.forEach((field) => {
-      const input = drugForm.querySelector(`[name="${field}"]`);
-      if (input.value.trim().length === 0) {
-        if (!inputFocused) {
-          input.focus();
-          inputFocused = true;
-        }
-        valid = false;
-        negativeInlineValidation(setDrugAlerts, 'This field cannot be left blank', input);
-      }
+      performInputValidation(field, setDrugAlerts);
     });
 
 
@@ -1049,17 +1034,8 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
       }
     }
 
-    requiredFields.misc.forEach((field) => {
-      const input = miscForm.querySelector(`[name="${field}"]`);
-      if (input.value.trim().length === 0) {
-        if (!inputFocused) {
-          input.focus();
-          inputFocused = true;
-        }
-        valid = false;
-        negativeInlineValidation(setMiscAlerts, 'This field cannot be left blank', input);
-      }
-    });
+    // Only a single miscellaneous field is required to validate
+    performInputValidation('date', setMiscAlerts);
 
     // Finally, check for any active error alerts that were not detected with the more basic submission validation
     if (document.querySelectorAll('.alert--error').length > 0) {
@@ -1067,6 +1043,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
     }
     return valid;
   };
+
 
   useEffect(() => {
     if (providers) {

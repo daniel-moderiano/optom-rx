@@ -98,11 +98,9 @@ const PrescriberForm = ({ data, setData, handleChange, toggleBooleanState, googl
       'prescriberNumber',
     ];
 
-    const form = document.querySelector('.PrescriberForm');
-
     // Validate each field for empty value, but do not provide any positive feedback UI
     requiredFields.forEach((field) => {
-      const input = form.querySelector(`[name="${field}"]`);
+      const input = document.querySelector(`[name="${field}"]`);
       if (input.value.trim().length === 0) {
         if (!inputFocused) {
           input.focus();
