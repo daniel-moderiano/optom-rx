@@ -63,7 +63,6 @@ const StyledToast = styled.div`
         padding: 0;
         margin: 0;
         font-size: 1rem;
-        /* color: #677383; */
       }
     }
   }

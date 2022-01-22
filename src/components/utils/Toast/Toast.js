@@ -7,7 +7,7 @@ const Toast = ({ params }) => {
   // params.type = 'success';
   // params.message = "An error occurred while loading favourites"
   return (
-    <StyledToast className="toast" visible={params.visible}>
+    <StyledToast className="toast" visible={params.visible} role="status">
       <div className="toast-container">
 
         {(params.type === 'success') && ( <div className="toast-type">
@@ -44,13 +44,10 @@ const Toast = ({ params }) => {
         </div>)}
         
         <div className="toast-text">
-          {/* {(params.type === 'success') && <h5 className="toast-title">Success!</h5>}
-          {(params.type === 'error') && <h5 className="toast-title">Error!</h5>} */}
           <p className="toast-description">{params.message}</p>
         </div>
 
       </div>
-      
     </StyledToast>
   )
 }

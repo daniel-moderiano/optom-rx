@@ -89,7 +89,7 @@ const App = () => {
           ...prevData,
           visible: false, 
         }))
-      }, 2000);
+      }, 4000);
     }
   }, [toastParams.visible])
 
