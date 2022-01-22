@@ -23,7 +23,6 @@ const applySuccessStyling = (element) => {
   tick.classList.add("show");
 }
 
-
 export const useValidation = () => {
   // ! useCallbacks are absolutely necessary as these functions are most commonly used in useEffect hooks
 
