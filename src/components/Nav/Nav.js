@@ -5,13 +5,13 @@ import { useState } from "react";
 import Hamburger from '../Hamburger/Hamburger'
 
 
-const Nav = ({ user, resetData, currentPage }) => {
-  // Conditionally display nav links based on user auth state (logged in or not)
+const Nav = ({ user, currentPage }) => {
   const { logout } = useLogout();
 
   const [showNav, setShowNav] = useState(false);
   const [toggleHamburger, setToggleHamburger] = useState(false);
   
+  // Aria current page attributes that adjust depending on the current active page state
   const ariaForm = currentPage === 'form' ? { "aria-current": "page" } : {};
   const ariaLogin = currentPage === 'login' ? { "aria-current": "page" } : {};
   const ariaSignup = currentPage === 'signup' ? { "aria-current": "page" } : {};
@@ -19,6 +19,7 @@ const Nav = ({ user, resetData, currentPage }) => {
   const ariaSettings = currentPage === 'settings' ? { "aria-current": "page" } : {};
   const ariaPrescribers = currentPage === 'prescribers' ? { "aria-current": "page" } : {};
 
+  // Shows or hides the Nav menu on mobile
   const toggleNav = () => {
     setShowNav((prevState) => (!prevState));
     setToggleHamburger((prevState) => (!prevState));
