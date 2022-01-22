@@ -110,6 +110,20 @@ export const useFormatting = () => {
     return `${medicareNumber.trim().substring(0, 4)} ${medicareNumber.trim().substring(4, 9)} ${medicareNumber.trim().substring(9, 10)}-${medicareRefNumber}`;
   }
 
+  // Controls when to split a line to ensure the address is displayed as well as practicable
+  const formatProviderAddress = (providerData) => {
+    if (providerData.subpremise.length > 20) {
+      return (<>
+        <div className="provider__subpremise">{providerData.subpremise}</div>
+        <div className="provider__streetAddress">{providerData.streetAddress}</div>
+      </>);
+    } else {
+      return (<div className="provider__streetAddress">
+        {`${providerData.subpremise} ${providerData.streetAddress}`}
+      </div>);
+    }
+  }
 
-  return { abbreviateStateName, formatDrug, formatDate, formatLocation, formatPhoneNumber, formatMedicareNumber }
+
+  return { abbreviateStateName, formatDrug, formatDate, formatLocation, formatPhoneNumber, formatMedicareNumber, formatProviderAddress }
 }

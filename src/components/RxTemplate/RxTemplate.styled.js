@@ -84,7 +84,6 @@ const StyledRxTemplate = styled.div`
     display: none;
   }
 
-  /* Landscape phone to portrait tablet */
   @media (max-width: 768px) { 
     padding: 3rem 3rem;
 
@@ -100,14 +99,6 @@ const StyledRxTemplate = styled.div`
 
   @media (max-width: 550px) { 
     padding: 3rem 2.5rem;
-
-    .Modal {
-      .Modal__content {
-        width: 90%;
-        text-align: left;
-        max-width: 500px;
-      }
-    }
 
     .ui-description {
       flex-direction: column;
@@ -177,23 +168,24 @@ const StyledRxTemplate = styled.div`
       padding: 0;
     }
 
-    .left-container {
-      display: block;
-      margin: 0;
-      line-height: normal;
-      
+    /* Styles all relevant components in the two upper scripts, since they are all relatively positioned to their left and right parent containers respectively */
+    .upper-containers {
+      .provider-upper {
+        position: absolute;
+        width: 450px;
+      }
+
       .container {
         position: relative;
         width: 100%;
         height: 100%;
-        
       }
 
       .provider-upper {
         position: absolute;
         width: 450px;
       }
-
+          
       .provider__contact-upper {
         position: absolute;
         left: 90px;
@@ -227,7 +219,6 @@ const StyledRxTemplate = styled.div`
 
       .patient__medicareNumber {
         position: absolute;
-       
         top: 138px;
         left: 140px;
         width: 150px;
@@ -309,7 +300,6 @@ const StyledRxTemplate = styled.div`
 
         .medication__compounded {
           margin: 0.4rem 0 0.3rem 0;
-          /* font-style: italic; */
           text-transform: uppercase;
         }
 
@@ -353,7 +343,6 @@ const StyledRxTemplate = styled.div`
             height: 100%;
             width: 100%;
           }
-          
         }
       }
 
@@ -371,185 +360,19 @@ const StyledRxTemplate = styled.div`
       }
     }
 
+
+    .left-container {
+      display: block;
+      margin: 0;
+      line-height: normal;   
+    }
+
     .right-container {
       display: block;
       position: absolute;
       left: 456px;
 
-      .container {
-        position: relative;
-        width: 100%;
-        height: 100%;
-      }
-
-      .provider-upper {
-        position: absolute;
-        width: 450px;
-      }
-
-      .provider__contact-upper {
-        position: absolute;
-        left: 90px;
-        top: 20px;
-
-        .provider__streetAddress {
-          max-width: 330px;
-        }
-      }
-
-      .provider__contact-lower {
-        position: absolute;
-        left: 90px;
-        top: 103px;
-        display: flex;
-        justify-content: space-between;
-        width: 300px;
-      }
-
-      .patient {
-        position: absolute;
-      }
-
-      .patient__contactDetails {
-        position: absolute;
-        left: 100px;
-        top: 240px;
-        width: 330px;
-        font-weight: bold;
-      }
-
-      .patient__medicareNumber {
-        position: absolute;
-        display: flex;
-        justify-content: space-between;
-        top: 138px;
-        left: 140px;
-        width: 150px;
-        font-weight: bold;
-      }
-
-      .miscellaneous {
-        position: absolute;
-        top: 311px;
-        left: 40px;
-
-        .scriptNo {
-          position: absolute;
-          left: 190px;
-          top: 52px;
-          width: 200px;
-          text-align: right;
-          
-        }
-
-        .pbsSelected {
-          width: 17px;
-          height: 17px;
-          display: block;
-          /* Without position the img will size relative to the miscellaneous div above */
-          position: absolute;
-          top: 20px;
-
-          .pbsTick {
-            display: block;
-            height: 100%;
-            width: 100%;
-          }
-        }
-
-        .nonPbs {
-          position: absolute;
-          top: 27px;
-          left: -18px;
-          padding-top: 12px;
-          width: 80px;
-          box-sizing: border-box;
-
-          .nonPbs-marker {
-            bottom: 17px;
-            left: -16px;
-            position: absolute;
-            width: 150px;
-            font-size: 17px;
-          }
-        }
-        
-        .brandSub {
-          position: absolute;
-          left: 148px;
-          top: 12px;
-          font-size: 24px;
-          width: 18px;
-
-          .largeTick {
-            display: block;
-            height: 100%;
-            width: 100%;
-          }
-        }
-      }
-
-      .medication {
-        position: absolute;
-        left: 102px;
-        top: 386px;
-        width: 330px;
-        border-bottom: 1px solid #b8b8b8;
-        padding: 2px 0;
-
-        .medication__activeIngredient {
-          font-weight: bold;
-          max-width: 330px;
-        }
-
-        .medication__compounded {
-          margin: 0.4rem 0 0.3rem 0;
-          /* font-style: italic; */
-          text-transform: uppercase;
-        }
-
-        .medication__brandName {
-          font-weight: bold;
-        }
-
-        .quantityRepeats {
-          display: flex;
-          justify-content: space-between;
-          width: 170px;
-        }
-
-        .item-printed {
-          position: absolute;
-          bottom: -22px;
-          right: 2px;
-        }
-      }
-
-      .provider-lower {
-        position: absolute;
-        left: 102px;
-        top: 536px;
-        width: 330px;
-
-        .provider__fullName--low {
-          position: absolute;
-          top: 16px;
-        }
-        
-      }
-
-      .authority {
-        border-top: 1px solid #b8b8b8;
-        padding-top: 3px;
-        position: absolute;
-        left: 102px;
-        top: 574px;
-        width: 330px;
-      }
-
-      .provider__fullName {
-        font-weight: bold;
-      }
+     
     }
 
     .bottom-container--right {
