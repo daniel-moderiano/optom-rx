@@ -12,6 +12,12 @@ const StyledRxTemplate = styled.div`
   border-radius: 6px;
   box-shadow: var(--small-shadow);
 
+  .RxTemplate__subtitle {
+    font-weight: 400;
+    color: #363C45;
+    max-width: 500px;
+  }
+
   .ui-description {
     display: flex;
     justify-content: space-between;
@@ -372,6 +378,7 @@ const StyledRxTemplate = styled.div`
       left: 456px;
     }
 
+    /* Styles all relevant components in the two lower scripts, since they are all relatively positioned to their left and right parent containers respectively */
     .lower-containers {
       .doctor-copy {
         position: absolute;
