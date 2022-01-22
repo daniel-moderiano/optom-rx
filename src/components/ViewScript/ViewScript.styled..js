@@ -3,13 +3,6 @@ import styled from "styled-components";
 const StyledViewScript = styled.div`
   position: relative;
 
-  .script__container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-  }
-
   .ProviderForm__btns {
     margin: 2rem 0 0rem 0;
     display: flex;
@@ -21,8 +14,6 @@ const StyledViewScript = styled.div`
     }
 
     .icon {
-      padding: 0;
-      line-height: 0;
       margin-right: 0.2rem;
       margin-left: 13px;
       width: 24px;
@@ -97,17 +88,6 @@ const StyledViewScript = styled.div`
    
       .cancel {
         margin-right: 1rem;
-      }
-    }
-  }
-
-  /* Landscape phone to portrait tablet */
-  @media (max-width: 550px) { 
-    .Modal {
-      .Modal__content {
-        width: 90%;
-        text-align: left;
-        max-width: 500px;
       }
     }
   }

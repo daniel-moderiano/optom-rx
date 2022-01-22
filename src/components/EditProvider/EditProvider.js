@@ -13,7 +13,6 @@ const EditProvider = ({ googleLoaded, setToast, setPage }) => {
 
   // Extract the selected provider data passed via React Router state
   const { state: existingData } = useLocation();
-  console.log(existingData);
 
   const [localPending, setLocalPending] = useState(false);
   const [providerData, setProviderData] = useState({

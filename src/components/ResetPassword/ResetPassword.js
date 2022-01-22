@@ -11,7 +11,6 @@ const ResetPassword = ({ setToast, setPage }) => {
 
   const [email, setEmail] = useState('');
   const [emailAlert, setEmailAlert] = useState({});
-
   const [isPending, setIsPending] = useState(false);
 
   useEffect(() => {
@@ -21,15 +20,11 @@ const ResetPassword = ({ setToast, setPage }) => {
   // Ensure form is validated before calling form submission function
   const isFormValid = () => {
     let valid = true;
-
     const emailInput = document.querySelector('input[name="email"]');
   
-
     // Check for blank field
     if (emailInput.value.trim().length === 0) {
-      
-        emailInput.focus();
-    
+      emailInput.focus();
       setEmailAlert({
           message: "Please enter an email address.",
           type: 'error',
@@ -38,7 +33,6 @@ const ResetPassword = ({ setToast, setPage }) => {
       emailInput.classList.add('error');
       valid = false;
     } 
-
     return valid;
   };
 

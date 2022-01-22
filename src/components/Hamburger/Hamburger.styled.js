@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 const StyledHamburger = styled.button`
-
   display: none;
   border-radius: 2px;
   border: none;
@@ -35,7 +34,6 @@ const StyledHamburger = styled.button`
 
 
   @media (max-width: 768px) {
-   
     display: block;
     cursor: pointer;
 
@@ -51,7 +49,6 @@ const StyledHamburger = styled.button`
       transform: translateY(-8px) rotate(-45deg);
     }
   }
-
 `
 
 export { StyledHamburger }

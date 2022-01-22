@@ -71,5 +71,10 @@ export const useFormatting = () => {
     }
   };
 
-  return { abbreviateStateName, formatDrug }
+  // Format to aus-friendly and typical date format, given a default HTML date input format
+  const formatDate = (date) => {
+    return `${date.substring(8)}/${date.substring(5, 7)}/${date.substring(0, 4)}`;
+  };
+
+  return { abbreviateStateName, formatDrug, formatDate }
 }
