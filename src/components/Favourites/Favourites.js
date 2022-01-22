@@ -1,7 +1,6 @@
 import { StyledFavourites } from './Favourites.styled'
 import Spinner from '../utils/Spinner/Spinner';
 import { useEffect } from 'react';
-import { useFavourites } from '../../hooks/useFavourites';
 import { doc, arrayRemove, updateDoc } from 'firebase/firestore';
 import { db } from '../../firebase/config';
 import { useState } from 'react';
@@ -9,9 +8,10 @@ import { Link } from 'react-router-dom';
 import Modal from '../utils/Modal/Modal';
 import Button from '../utils/Button/Button'
 import { useFormatting } from '../../hooks/useFormatting';
+import { useUserData } from '../../hooks/useUserData';
 
 const Favourites = ({ user, setToast }) => {
-  const { documents: favourites, isPending, error } = useFavourites(user.uid);
+  const { documents: favourites, isPending, error } = useUserData(user.uid, 'favourites');
   const { formatDrug } = useFormatting();
 
   const [showModal, setShowModal] = useState(false);

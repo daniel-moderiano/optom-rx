@@ -18,6 +18,5 @@ export const useLogout = () => {
         console.log(err.message);
       })
   }
-
   return { logout }
 }

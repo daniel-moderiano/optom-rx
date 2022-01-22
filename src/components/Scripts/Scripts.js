@@ -1,16 +1,16 @@
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { StyledScripts } from './Scripts.styled';
-import { useScripts } from '../../hooks/useScripts';
 import ScriptsTable from './ScriptsTable';
 import Spinner from '../utils/Spinner/Spinner';
 import { useEffect } from 'react';
 import ContentContainer from '../utils/ContentContainer/ContentContainer';
 import PageHeader from '../utils/PageHeader/PageHeader';
+import { useUserData } from '../../hooks/useUserData';
 
 const Scripts = ({ setToast, setPage }) => {
   const { user } = useAuthContext();
-  // const { scripts, isPending, error } = useScripts(user.uid);
-  const { scripts, isPending, error } = useScripts(user.uid);
+  // Note the scripts array here is an unusual morph of JSON and normal arrays, and the reverse function will not work unless you first stringify then parse it
+  const { documents: scripts, isPending, error } = useUserData(user.uid, 'scripts');
 
   // Adjust current page for accessibility and styling
   useEffect(() => {
@@ -56,7 +56,7 @@ const Scripts = ({ setToast, setPage }) => {
 
           {scripts && <>
             {scripts.length > 0 ? (
-              <ScriptsTable data={scripts} rowsPerPage={15}/>            
+              <ScriptsTable data={JSON.parse(JSON.stringify(scripts)).reverse()} rowsPerPage={15}/>            
             ) : (
               <table className="table table-none">
                 <thead className="tableRowHeader">
