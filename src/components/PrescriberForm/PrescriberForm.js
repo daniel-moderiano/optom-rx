@@ -7,7 +7,6 @@ import LoadOverlay from "../utils/LoadOverlay/LoadOverlay";
 import Button from '../utils/Button/Button';
 import { useInputValidation } from "../../hooks/useInputValidation";
 import { useFormatting } from "../../hooks/useFormatting";
-import { useFormValidation } from "../../hooks/useFormValidation";
 
 // ! Legal requirements include the prescriber's name, address, contact details, and prescriber number
 
@@ -15,7 +14,6 @@ const PrescriberForm = ({ data, setData, handleChange, toggleBooleanState, googl
 
   // Hook usage for formatting and validation purposes
   const { positiveValidationUI, negativeValidationUI, validateRequiredField } = useInputValidation();
-  const { validateForm } = useFormValidation();
   const { abbreviateStateName } = useFormatting();
 
   const [providerAlerts, setProviderAlerts] = useState({
@@ -27,17 +25,6 @@ const PrescriberForm = ({ data, setData, handleChange, toggleBooleanState, googl
     phoneNumber: {},
     prescriberNumber: {},
   });
-
-  // Fields that must not be left empty
-  const requiredFields = [
-    'fullName',
-    'streetAddress',
-    'suburb',
-    'postcode',
-    'state',
-    'phoneNumber',
-    'prescriberNumber',
-  ];
 
   // Inline form validation using focusout as a trigger. All included functions are written in useCallback to ensure this is only run once initially (no duplicate listeners).
   useEffect(() => {
@@ -94,6 +81,39 @@ const PrescriberForm = ({ data, setData, handleChange, toggleBooleanState, googl
     });    
   }, [setData, negativeValidationUI, positiveValidationUI, validateRequiredField, abbreviateStateName]);
 
+
+  // Ensure form is validated with no empty required fields before calling form submission function
+  const checkFormValidation = () => {
+    let valid = true;
+    let inputFocused = false;
+
+    // Fields that must not be left empty
+    const requiredFields = [
+      'fullName',
+      'streetAddress',
+      'suburb',
+      'postcode',
+      'state',
+      'phoneNumber',
+      'prescriberNumber',
+    ];
+
+    const form = document.querySelector('.PrescriberForm');
+
+    // Validate each field for empty value, but do not provide any positive feedback UI
+    requiredFields.forEach((field) => {
+      const input = form.querySelector(`[name="${field}"]`);
+      if (input.value.trim().length === 0) {
+        if (!inputFocused) {
+          input.focus();
+          inputFocused = true;
+        }
+        valid = false;
+        negativeValidationUI(setProviderAlerts, 'This field cannot be left blank', input);
+      }
+    });
+    return valid;
+  }
 
   return (
       <StyledPrescriberForm className="PrescriberForm" autoComplete="off" noValidate>
@@ -187,7 +207,7 @@ const PrescriberForm = ({ data, setData, handleChange, toggleBooleanState, googl
             classLabel="submit" 
             handleClick={(event) => {
               event.preventDefault(); 
-              if (validateForm(requiredFields, document.querySelector('.PrescriberForm'), setProviderAlerts)) {
+              if (checkFormValidation()) {
                 handleSubmit(event);
               }
             }}>

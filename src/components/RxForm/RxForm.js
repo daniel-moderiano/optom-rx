@@ -994,6 +994,8 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
     const medicareNumberInput = document.querySelector('#medicareNumber');
     const medicareRefNumberInput = document.querySelector('#medicareRefNumber');
 
+    
+
     requiredFields.patient.forEach((field) => {
       const input = patientForm.querySelector(`[name="${field}"]`);
       if (input.value.trim().length === 0) {

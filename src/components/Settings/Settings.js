@@ -155,6 +155,7 @@ const Settings = ({ user, setToast, setPage }) => {
     return valid;
   };
 
+
   // Ensure form is validated before calling form submission function
   const isPasswordFormValid = () => {
     let valid = true;
