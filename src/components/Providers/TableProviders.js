@@ -65,7 +65,6 @@ const TableProviders = ({ data, rowsPerPage, setToast, user }) => {
       }
 
       setIsPending(false);
-
       setToast((prevData) => ({
         ...prevData,
         visible: true,
@@ -126,42 +125,40 @@ const TableProviders = ({ data, rowsPerPage, setToast, user }) => {
     }
   }, [])
 
-  return (
-    <>
+  return (<>
       <table className="table data-table" aria-describedby="Providers__description">
-          
-          <thead className="tableRowHeader">
-            <tr role="row">
-              <th role="columnheader" className="tableHeader" scope="col">Name</th>
-              <th role="columnheader"className="tableHeader" scope="col">Location</th>
-              <th role="columnheader" className="tableHeader actions-header" scope="col">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
+        <thead className="tableRowHeader">
+          <tr role="row">
+            <th role="columnheader" className="tableHeader" scope="col">Name</th>
+            <th role="columnheader"className="tableHeader" scope="col">Location</th>
+            <th role="columnheader" className="tableHeader actions-header" scope="col">Actions</th>
+          </tr>
+        </thead>
 
-            {dataSlice.map((provider) => (
-              <tr role="row" className="tableRowItems" key={provider.id}>
-                <td role="cell" data-title="Name" className="tableCell">{provider.fullName}</td>
-                <td role="cell" data-title="Location" className="tableCell">{formatLocation(provider.practiceName, provider.streetAddress, provider.suburb)}</td>
+        <tbody>
+          {dataSlice.map((provider) => (
+            <tr role="row" className="tableRowItems" key={provider.id}>
+              <td role="cell" data-title="Name" className="tableCell">{provider.fullName}</td>
+              <td role="cell" data-title="Location" className="tableCell">{formatLocation(provider.practiceName, provider.streetAddress, provider.suburb)}</td>
 
-                <td role="cell" data-title="Actions" className="tableCell actions-cell">
-                  <div className="btns">
-                    <div className="non-default">
-                      <Link 
-                        className="table__action edit" 
-                        to={`/edit/${provider.id}`}
-                        state={ {...provider} }
-                      >Edit</Link>
-                      <button className="table__action delete" onClick={() => {
-                        setShowModal(true);
-                        setSelectedProvider({
-                          fullName: provider.fullName,
-                          location: formatLocation(provider.practiceName, provider.streetAddress, provider.suburb),
-                          id: provider.id,
-                        })
-                      }}>Delete</button>
-                    </div>
-                 
+              <td role="cell" data-title="Actions" className="tableCell actions-cell">
+                <div className="btns">
+                  <div className="non-default">
+                    <Link 
+                      className="table__action edit" 
+                      to={`/edit/${provider.id}`}
+                      state={ {...provider} }
+                    >Edit</Link>
+                    <button className="table__action delete" onClick={() => {
+                      setShowModal(true);
+                      setSelectedProvider({
+                        fullName: provider.fullName,
+                        location: formatLocation(provider.practiceName, provider.streetAddress, provider.suburb),
+                        id: provider.id,
+                      })
+                    }}>Delete</button>
+                  </div>
+                
                   <button className={`${(provider.default && !isPending) ? 'table__action default--selected' : 'table__action default'}`} onClick={() => setAsDefault(data, provider.id)}>
                     {isPending ? (
                       'Updating...'
@@ -169,15 +166,11 @@ const TableProviders = ({ data, rowsPerPage, setToast, user }) => {
                       `${provider.default ? 'Remove default' : 'Make default'}`
                     )}
                   </button>
-                  </div>
-                  
-                </td>
-              </tr>
-            ))}
-         
-          
-          </tbody>
-          
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
       </table>
 
       <TableFooter pages={range} slice={dataSlice} setPage={setPage} page={page} />
