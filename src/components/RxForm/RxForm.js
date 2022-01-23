@@ -150,26 +150,31 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
     if (providers) {
       let providerSelectOptions = [];
 
-      providers.forEach((provider) => {
-        // Check for a default provider
-        if (provider.default) {
-          // Update the select element accordingly
-          setChosenProvider({ 
-            label: `${provider.fullName} (${(provider.practiceName !== "") ? provider.practiceName + `, ${provider.suburb}` : provider.suburb})`,
-            value: provider.id });
-          // Also set state to provider data to ensure the form is pre-filled
-          setProviderData({
-            ...provider,
-          })
-        };
-
-        // Regardless of default status, add the provider to the select option list
+      providers.forEach((provider, index) => {
+        // Add the provider to the select option list
         providerSelectOptions.push({
           value: provider.id,
           label: `${provider.fullName} (${(provider.practiceName !== "") ? provider.practiceName + `, ${provider.suburb}` : provider.suburb})`,
         });
-      });
 
+        // Set the first provider as selected. If a default exists, this will be replaced
+        if (index === 0) {
+          setChosenProvider(providerSelectOptions[0]);
+          setProviderData({
+            ...provider,
+          })
+        }
+
+        // Check for a default provider
+        if (provider.default) {
+          // Update the select element accordingly
+          setChosenProvider(providerSelectOptions[index]);
+          // Also set state to provider data to ensure the form is pre-filled. Do NOT use previous data. Overwrite.
+          setProviderData({
+            ...provider,
+          })
+        };
+      });
       setSelectOptions(providerSelectOptions);
     }
   }, [providers]);
@@ -456,12 +461,12 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
 
 
   // --- DATA FORMAT/PRESENTATION FUNCTIONS ---
-  
+
   // Used to convert the raw PBS text describing indications for a medication, and formats it to UI freindly format
   const formatIndications = (indicationStr) => {
     // One or two medications use the term 'treatment criteria' instead of 'clinical criteria'. There is no real world implications of the difference, so clinical criteria is set as the standard here
     if (indicationStr.includes('Treatment criteria')) {
-      indicationStr.replace('Treatment criteria', 'Clinical criteria');
+      indicationStr = indicationStr.replace('Treatment criteria', 'Clinical criteria');
     }
 
     // Ciclosporin has an absurdly complex indication criteria. Do not even bother with this, link to the PBS site instead
