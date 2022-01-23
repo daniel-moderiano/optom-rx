@@ -17,6 +17,7 @@ import ContentContainer from '../utils/ContentContainer/ContentContainer';
 import PageHeader from '../utils/PageHeader/PageHeader';
 import Button from '../utils/Button/Button';
 import { useInputValidation } from "../../hooks/useInputValidation";
+import { useFormatting } from '../../hooks/useFormatting';
 
 // ! Multiple optometrist items are not permitted to be prescribed on the same form; each must use an individual form
 
@@ -29,6 +30,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
   const [{ pbsInfo, pbsError, pbsLoading }, fetchDrug, clearPbsState] = usePBSFetch(existingData.pbsData);
 
   const { positiveValidationUI, negativeValidationUI, validateRequiredField } = useInputValidation();
+  const { abbreviateStateName } = useFormatting();
 
   const [authorityMessage, setAuthorityMessage] = useState('Please select a medication for authority requirements')
 
@@ -42,7 +44,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
 
   // State (at this stage) is only provided if generating a new Rx. Hence the numbers fetch should only be performed when state exists
   const { state } = useLocation();
-  
+
   const [numbersLoaded, setNumbersLoaded] = useState(false);
 
   const [chosenProvider, setChosenProvider] = useState("");
@@ -69,9 +71,9 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
   });
 
   const [miscAlerts, setMiscAlerts] = useState({
-    date: {},   
-    authRxNumber: {},    
-    authCode: {},    
+    date: {},
+    authRxNumber: {},
+    authCode: {},
     scriptID: {},
     justification: {},
     prevAuth: {},
@@ -151,7 +153,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
         // Check for a default provider
         if (provider.default) {
           // Update the select element accordingly
-          setChosenProvider({ label: `${provider.fullName} (${(provider.practiceName !== "") ? provider.practiceName + `, ${provider.suburb}`: provider.suburb})`, value: provider.id });
+          setChosenProvider({ label: `${provider.fullName} (${(provider.practiceName !== "") ? provider.practiceName + `, ${provider.suburb}` : provider.suburb})`, value: provider.id });
           // Also set state to provider data to ensure the form is pre-filled
           setProviderData({
             ...provider,
@@ -187,9 +189,8 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
     const clinical = indicationStr.includes('Clinical criteria');
     const treatment = indicationStr.includes('Treatment criteria');
 
-
     // TODO: consider link to PBS site for ciclosporin
-    
+
     if (clinical) {
       // Extract the main general indication (prior to any specific criteria). Will work even where there is no additional text
       const mainIndication = indicationStr.split('Clinical criteria')[0].trim();
@@ -202,8 +203,8 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
 
       if (specificCriteria.split('AND').length > 1) {
         const postAnd = specificCriteria.split('AND')[1];
-        const dotPoints = postAnd.split('* ').filter((point) => point !== " ");      
-  
+        const dotPoints = postAnd.split('* ').filter((point) => point !== " ");
+
         const mapPoints = () => {
           const ul = document.createElement('ul');
           dotPoints.forEach((point) => {
@@ -239,7 +240,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
         </div>`;
         setIndication(html);
       }
-  
+
 
     } else if (treatment) {
       // Extract the main general indication (prior to any specific criteria). Will work even where there is no additional text
@@ -253,8 +254,8 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
 
       if (specificCriteria.split('AND').length > 1) {
         const postAnd = specificCriteria.split('AND')[1];
-        const dotPoints = postAnd.split('* ').filter((point) => point !== " ");      
-  
+        const dotPoints = postAnd.split('* ').filter((point) => point !== " ");
+
         const mapPoints = () => {
           const ul = document.createElement('ul');
           dotPoints.forEach((point) => {
@@ -289,10 +290,10 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
         </div>`;
         setIndication(html);
       }
-  
+
     } else {
       // Must be just a single indication
-      
+
       const html = `<div className="indication">
         <div className="indication__main">${indicationStr}</div>
       </div>`;
@@ -300,7 +301,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
 
     }
   }
-  
+
   const authorityStatus = useCallback(() => {
     // PBS info-related effects here
     if (pbsInfo) {
@@ -364,7 +365,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
 
   // Identify whether a drug on the PBS is restricted or not, and display indications for use on restricted items
   const restrictedStatus = useCallback(() => {
-  
+
     // PBS info-related effects here
     if (pbsInfo) {
       // Check for restricted status
@@ -397,11 +398,11 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
           // Remove the indication to the local drugData state to allow certain conditional renders
           setDrugData((prevData) => ({
             ...prevData,
-            indications:'',
+            indications: '',
           }));
           // setAuthorityMessage('This prescription does not require authority');
           break;
-      
+
         // All 'A' class items are also restricted with indications or Treatment criteria
         case 'A':
           setDrugAlerts((prevAlerts) => ({
@@ -453,7 +454,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
       } else {
         setAuthorityMessage('This prescription does not require authority');
       }
-    } 
+    }
   }, [pbsInfo, drugData.verified, clearPbsInfo, clearPbsState, drugData.pbsRx]);
 
   const quantityRepeatStatus = useCallback(() => {
@@ -484,7 +485,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
       } else {
         setAuthorityMessage('This prescription does not require authority');
       }
-    } 
+    }
 
   }, [pbsInfo, drugData.verified, clearPbsInfo, clearPbsState, drugData.pbsRx]);
 
@@ -523,13 +524,13 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
         setTooltipText('');
       }
     }
-    
+
     // Hide the tooltip if the user changes the medication manually, but leave the lemi/lmbc settings unchanged
     if (!drugData.verified) {
       if (showTooltip) {
         setShowTooltip((prevData) => !prevData);
       }
-    } 
+    }
   }, [pbsInfo, drugData.verified, setShowTooltip, showTooltip]);
 
   // Can utilise a useEffect such as this to set state or UI elements based on PBS data being fetched or lost
@@ -568,7 +569,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
   }, [drugData.maxRepeats, drugData.maxQuantity, drugData.pbsRx]);
 
 
-  const changeOnEnter = (event, setFunc, data) => {    
+  const changeOnEnter = (event, setFunc, data) => {
     // If the enter key is pressed
     if (event.keyCode === 13) {
       event.preventDefault();
@@ -580,48 +581,11 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
   const handleChange = (set, event) => {
     const { name, value } = event.target;
     set((prevData) => ({
-      ...prevData, 
-      [name]: value 
+      ...prevData,
+      [name]: value
     }));
   };
 
-  
-
-  // Ensure final address entered is formatted with abbreviated state code
-  const formatAddressState = (stateInput) => {
-    let formatted = '';
-    switch (true) {
-      case (/South Australia/i).test(stateInput):
-        formatted = 'SA'
-        break;
-      
-      case (/Queensland/i).test(stateInput):
-      formatted = 'QLD'
-      break;
-
-      case (/New South Wales/i).test(stateInput):
-        formatted = 'NSW'
-        break;
-
-      case (/Tasmania/i).test(stateInput):
-        formatted = 'TAS'
-        break;
-
-      case (/Victoria/i).test(stateInput):
-        formatted = 'VIC'
-        break;
-
-      case (/Western Australia/i).test(stateInput):
-        formatted = 'WA'
-        break;
-
-      default:
-        formatted = stateInput;
-        break;
-    }
-
-    return formatted;
-  }
 
   // Set useNumbers hook variables to local state
   const setNumbers = useCallback(() => {
@@ -663,7 +627,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
               negativeValidationUI(setDrugAlerts, 'Please enter a quantity of 1 or more (with no leading zeroes)', event.target);
             } else {
               positiveValidationUI(setDrugAlerts, event.target);
-            }  
+            }
             break;
 
           // Can be zero, and for non-PBS prescriptions, there is technically no upper limits
@@ -678,10 +642,10 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
               positiveValidationUI(setDrugAlerts, event.target);
             }
             break;
-        
+
           case name === 'dosage':
             validateRequiredField(setDrugAlerts, event.target);
-            break;        
+            break;
           default:
             break;
         }
@@ -699,15 +663,15 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
           case name === 'streetAddress':
             validateRequiredField(setPatientAlerts, event.target);
             break;
-          
+
           case name === 'suburb':
             validateRequiredField(setPatientAlerts, event.target);
             break;
-    
+
           case name === 'state':
             setPatientData((prevData) => ({
-              ...prevData, 
-              [name]: formatAddressState(value), 
+              ...prevData,
+              [name]: abbreviateStateName(value),
             }));
             validateRequiredField(setPatientAlerts, event.target);
             break;
@@ -741,7 +705,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
           case name === 'postcode':
             validateRequiredField(setPatientAlerts, event.target);
             break;
-        
+
           default:
             break;
         }
@@ -765,7 +729,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
     drugDataValidation();
     miscDataValidation();
 
-  }, [validateRequiredField, positiveValidationUI, negativeValidationUI]);
+  }, [validateRequiredField, positiveValidationUI, negativeValidationUI, abbreviateStateName]);
 
 
   // Check remove a visible error or alert from the brand name input where it changes from being required to not
@@ -801,13 +765,13 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
           repeats: '',
           dosage: '',
           itemCode: '',
-          substitutePermitted: true,    
-          brandOnly: false, 
-          includeBrand: false,    
-          pbsRx: false,   
+          substitutePermitted: true,
+          brandOnly: false,
+          includeBrand: false,
+          pbsRx: false,
           compounded: false,
-          verified: false,   
-          indications: '', 
+          verified: false,
+          indications: '',
           authRequired: false,
           maxQuantity: '',
           maxRepeats: '',
@@ -826,14 +790,14 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
 
         setMiscData((prevData) => ({
           ...prevData,
-          authRxNumber: '',  
-          authCode: '',    
-          scriptID: '',   
+          authRxNumber: '',
+          authCode: '',
+          scriptID: '',
           justification: '',
           prevAuth: false,
           age: '',
         }));
-     
+
       }
       // If the user has clicked a prescribe or re-prescribe button to get here then newRx should still be present, but this additional logic must be run
       if (state.rePrescribe) {
@@ -846,12 +810,12 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
           repeats: state.scriptData.repeats,
           dosage: state.scriptData.dosage,
           itemCode: state.scriptData.itemCode,
-          substitutePermitted: state.scriptData.substitutePermitted,    
-          brandOnly: state.scriptData.brandOnly, 
-          includeBrand: state.scriptData.includeBrand,    
-          pbsRx: state.scriptData.pbsRx,   
+          substitutePermitted: state.scriptData.substitutePermitted,
+          brandOnly: state.scriptData.brandOnly,
+          includeBrand: state.scriptData.includeBrand,
+          pbsRx: state.scriptData.pbsRx,
           compounded: state.scriptData.compounded,
-          verified: state.scriptData.verified,   
+          verified: state.scriptData.verified,
         }));
 
         // Leave the verified status intact from the original script. Re-call the fetchDrug function; thereby updating all the authority, maxQuantity/repeats, PBS indications, and other related PBS/LEMI features
@@ -920,7 +884,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
     requiredFields.patient.forEach((field) => {
       performInputValidation(field, setPatientAlerts);
     });
-    
+
     // If the user has attempted to enter medicare information, we should validate it for correct input here, and by default check the IRN input
     if (medicareNumberInput.value.trim() !== "") {
       if (!(/^[0-9]{10}$/).test(medicareNumberInput.value.trim())) {
@@ -964,10 +928,9 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
 
   useEffect(() => {
     if (providers) {
-      
       setSelectOptions(providers.map((provider) => ({
         value: provider.id,
-        label: `${provider.fullName} (${(provider.practiceName !== "") ? provider.practiceName + `, ${provider.suburb}`: provider.suburb})`,
+        label: `${provider.fullName} (${(provider.practiceName !== "") ? provider.practiceName + `, ${provider.suburb}` : provider.suburb})`,
       })));
     }
   }, [providers]);
@@ -982,7 +945,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
     setProviderData({
       ...provider,
     })
-  }  
+  }
 
   // Sets the CSS styles for React Select component
   const customStyles = {
@@ -999,7 +962,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
       marginTop: '0.5rem',
       marginBottom: '0.5rem',
 
-      '&:hover': { 
+      '&:hover': {
         borderColor: state.isFocused ? '#104362' : 'rgb(178, 182, 185)',
         cursor: 'pointer'
       },
@@ -1024,291 +987,273 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
 
   return (
     <ContentContainer>
-      <PageHeader title="New prescription" description="Complete all sections required for your prescription"/>
-<StyledRxForm 
-      className="rxform" 
-      onSubmit={(e) => {
-        e.preventDefault(); 
-        if (checkFormValidation()) {          
+      <PageHeader title="New prescription" description="Complete all sections required for your prescription" />
+      <StyledRxForm
+        className="rxform"
+        onSubmit={(e) => {
+          e.preventDefault();
+          if (checkFormValidation()) {
 
-          handleSubmit(drugData, patientData, providerData, miscData, pbsInfo)
-        }
-      }}
-      autoComplete="off"
-      noValidate>
-      <div className="scriptNo" data-testid="scriptNo">Script number: {isLoading ? 'Loading...' : miscData.scriptID}</div>
+            handleSubmit(drugData, patientData, providerData, miscData, pbsInfo)
+          }
+        }}
+        autoComplete="off"
+        noValidate
+      >
 
-      <Fieldset className="provider-form select-fieldset" legend="Prescriber details">
-        <div className="provider-controls">
-          {isPending && <Spinner />}
-          {providers && (<>
-            {(providers.length > 0) ? (
-              <>
-                <label id="react-select-id">Select provider
-                <Select 
-                  options={selectOptions} 
-                  isSearchable={false}
-                  value={chosenProvider}
-                  onChange={handleSelectChange}
-                  styles={customStyles}
-                  placeholder="Select provider..."
-                  id="react-select"
-                  required
-                  aria-labelledby="react-select-id"
-                  label="Select provider"
-                  
-                /> 
-                </label>
-              </>
-            ) : (
-              <Link className="provider-addBtn provider-addBtn--solo" to="/add-provider">Add new provider</Link>
-            )}
-          </>)}
-        </div>
-      </Fieldset>
+        <div className="scriptNo" data-testid="scriptNo">Script number: {isLoading ? 'Loading...' : miscData.scriptID}</div>
 
-      <Fieldset className="patient-form" legend="Patient details">
-      {/* Legal requirements include only the patient's name and address */}
+        <Fieldset className="provider-form select-fieldset" legend="Prescriber details">
+          <div className="provider-controls">
+            {isPending && <Spinner />}
+            {providers && (<>
+              {(providers.length > 0) ? (
+                <>
+                  <label id="react-select-id">Select provider
+                    <Select
+                      options={selectOptions}
+                      isSearchable={false}
+                      value={chosenProvider}
+                      onChange={handleSelectChange}
+                      styles={customStyles}
+                      placeholder="Select provider..."
+                      id="react-select"
+                      required
+                      aria-labelledby="react-select-id"
+                      label="Select provider"
 
-        {/* A max length for these fields based on the physical space available on the Rx pad is possible, however there should be virtually no cases where this is a problem. If anything, a warning alert could be added for fields such as full name, and street address/suburb where the char length exceeds 40 */}
-        <FormField 
-          fieldType="text" 
-          name="fullName"
-          label="Full name" 
-          value={patientData.fullName} 
-          onChange={(event) => handleChange(setPatientData, event)} 
-          alert={patientAlerts.fullName}
-          autoFocus
-          required
-          describedBy = {Object.keys(patientAlerts.fullName).length === 0 ? null : 'fullName-alert'}
-        />
+                    />
+                  </label>
+                </>
+              ) : (
+                <Link className="provider-addBtn provider-addBtn--solo" to="/add-provider">Add new provider</Link>
+              )}
+            </>)}
+          </div>
+        </Fieldset>
 
-        <AddressAutocomplete 
-          data={patientData}
-          setData={setPatientData}
-          handleChange={(event) => handleChange(setPatientData, event)}      
-          provider={false}   
-          alerts={patientAlerts}
-          setAlerts={setPatientAlerts} 
-          googleLoaded={googleLoaded}
-        />
-
-        <div className="medicareFields">
-          {/* Validation requires a 10-digit number. Further checks are beyond the scopy of this application */}
-          <FormField 
-            fieldType="text" 
-            name="medicareNumber"
-            label="Medicare number" 
-            value={patientData.medicareNumber} 
-            onChange={(event) => handleChange(setPatientData, event)} 
-            alert={patientAlerts.medicareNumber}
-            subAlert={patientAlerts.medicareRefNumber}
-            maxlength="10"
-            className="medicareNumber-field medicare-field form-field"
+        <Fieldset className="patient-form" legend="Patient details">
+          {/* Legal requirements include only the patient's name and address */}
+          <FormField
+            fieldType="text"
+            name="fullName"
+            label="Full name"
+            value={patientData.fullName}
+            onChange={(event) => handleChange(setPatientData, event)}
+            alert={patientAlerts.fullName}
+            autoFocus
             required
-            describedBy = {Object.keys(patientAlerts.medicareNumber).length === 0 ? null : 'medicareNumber-alert'}
+            describedBy={Object.keys(patientAlerts.fullName).length === 0 ? null : 'fullName-alert'}
           />
 
-          {/* Validation dictates only a single digit from 1-9 */}
-          <FormField 
-            fieldType="text" 
-            name="medicareRefNumber"
-            label="IRN" 
-            value={patientData.medicareRefNumber} 
-            onChange={(event) => handleChange(setPatientData, event)} 
-            // alert={patientAlerts.medicareRefNumber}
-            maxlength="1"
-            className="irn-field medicare-field form-field"
-            required
-            describedBy = {Object.keys(patientAlerts.medicareRefNumber).length === 0 ? null : 'medicareRefNumber-alert'}
+          <AddressAutocomplete
+            data={patientData}
+            setData={setPatientData}
+            handleChange={(event) => handleChange(setPatientData, event)}
+            provider={false}
+            alerts={patientAlerts}
+            setAlerts={setPatientAlerts}
+            googleLoaded={googleLoaded}
           />
-        </div>
-  
-        
-      </Fieldset>
 
-      {/* Note there must be enough info to identify the medicine, including form and strength */}
-      <Fieldset className="drug-form" legend="Medication details">
+          <div className="medicareFields">
+            {/* Validation requires a 10-digit number. Further checks are beyond the scopy of this application */}
+            <FormField
+              fieldType="text"
+              name="medicareNumber"
+              label="Medicare number"
+              value={patientData.medicareNumber}
+              onChange={(event) => handleChange(setPatientData, event)}
+              alert={patientAlerts.medicareNumber}
+              subAlert={patientAlerts.medicareRefNumber}
+              maxlength="10"
+              className="medicareNumber-field medicare-field form-field"
+              describedBy={Object.keys(patientAlerts.medicareNumber).length === 0 ? null : 'medicareNumber-alert'}
+            />
 
-        <DrugAutocomplete 
-          data={drugData}
-          setData={setDrugData}
-          handleChange={(event) => handleChange(setDrugData, event)}  
-          toggle={toggleBooleanState}
-          alerts={drugAlerts}
-          setAlerts={setDrugAlerts}
-          fetchDrug={fetchDrug}
-          showTooltip={showTooltip}
-          tooltipText={tooltipText}
-        />
+            {/* Validation dictates only a single digit from 1-9 */}
+            <FormField
+              fieldType="text"
+              name="medicareRefNumber"
+              label="IRN"
+              value={patientData.medicareRefNumber}
+              onChange={(event) => handleChange(setPatientData, event)}
+              // alert={patientAlerts.medicareRefNumber}
+              maxlength="1"
+              className="irn-field medicare-field form-field"
+              describedBy={Object.keys(patientAlerts.medicareRefNumber).length === 0 ? null : 'medicareRefNumber-alert'}
+            />
+          </div>
+        </Fieldset>
 
-        {/* Must include quantity and repeats to meet requirements */}
-        <FormField 
-          fieldType="text" 
-          name="dosage"
-          label="Dosage directions" 
-          value={drugData.dosage} 
-          onChange={(event) => handleChange(setDrugData, event)} 
-          alert={drugAlerts.dosage}
-          required
-          describedBy = {Object.keys(drugAlerts.dosage).length === 0 ? null : 'dosage-alert'}
-        />
+        {/* There must be enough info to identify the medicine, including form and strength, and informatiom regarding dosage, quantity, and repeats */}
+        <Fieldset className="drug-form" legend="Medication details">
+          <DrugAutocomplete
+            data={drugData}
+            setData={setDrugData}
+            handleChange={(event) => handleChange(setDrugData, event)}
+            toggle={toggleBooleanState}
+            alerts={drugAlerts}
+            setAlerts={setDrugAlerts}
+            fetchDrug={fetchDrug}
+            showTooltip={showTooltip}
+            tooltipText={tooltipText}
+          />
 
-        <FormField 
-          fieldType="checkbox" 
-          name="pbsRx"
-          label="PBS prescription" 
-          onChange={() => toggleBooleanState(setDrugData, drugData, 'pbsRx')}
-          checked={drugData.pbsRx}
-          className="checkbox pbsRx"
-          alert={drugAlerts.pbsRx}
-          enterFunc={(event) => changeOnEnter(event, setDrugData, drugData)}
-        />  
+          <FormField
+            fieldType="text"
+            name="dosage"
+            label="Dosage directions"
+            value={drugData.dosage}
+            onChange={(event) => handleChange(setDrugData, event)}
+            alert={drugAlerts.dosage}
+            required
+            describedBy={Object.keys(drugAlerts.dosage).length === 0 ? null : 'dosage-alert'}
+          />
 
-        {/* TODO: consider a dropdown UI expandable div */}
-        {/* TODO: Add PBS site link for ciclosporin specifically */}
-        {(drugData.verified && drugData.indications.length > 0 && drugData.pbsRx) && 
-          <div className="indications">
-            <div className="indications__btn collapsible" onClick={
-              (event) => {
-                event.preventDefault(); 
-                setExpandIndication((prevState) => !prevState);
-              }}>
+          <FormField
+            fieldType="checkbox"
+            name="pbsRx"
+            label="PBS prescription"
+            onChange={() => toggleBooleanState(setDrugData, drugData, 'pbsRx')}
+            checked={drugData.pbsRx}
+            className="checkbox pbsRx"
+            alert={drugAlerts.pbsRx}
+            enterFunc={(event) => changeOnEnter(event, setDrugData, drugData)}
+          />
+
+          {(drugData.verified && drugData.indications.length > 0 && drugData.pbsRx) &&
+            <div className="indications">
+              <div className="indications__btn collapsible" onClick={
+                (event) => {
+                  event.preventDefault();
+                  setExpandIndication((prevState) => !prevState);
+                }}>
                 <button type="button" onClick={
-              (event) => {
-                event.preventDefault(); 
-                event.stopPropagation();
-                setExpandIndication((prevState) => !prevState);
-              }}>Restricted benefit:</button>
+                  (event) => {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    setExpandIndication((prevState) => !prevState);
+                  }}>Restricted benefit:</button>
+              </div>
+              <div className={`indications__content ${expandIndication ? 'expand' : 'collapse'}`} dangerouslySetInnerHTML={{ __html: indication }}></div>
             </div>
-            <div className={`indications__content ${expandIndication ? 'expand' : 'collapse' }`} dangerouslySetInnerHTML={{ __html: indication }}></div>    
-          </div>
-        }  
+          }
 
-        <FormField 
-          fieldType="number" 
-          name="quantity"
-          label="Quantity" 
-          value={drugData.quantity} 
-          onChange={(event) => handleChange(setDrugData, event)} 
-          alert={drugAlerts.quantity}
-          subAlert={drugAlerts.maxQuantity}
-          className="quantity-field form-field"
-          required
-          describedBy = {Object.keys(drugAlerts.quantity).length === 0 ? null : 'quantity-alert'}
-        />
-
-        <FormField 
-          fieldType="number" 
-          name="repeats"
-          label="Repeats" 
-          value={drugData.repeats} 
-          onChange={(event) => handleChange(setDrugData, event)} 
-          alert={drugAlerts.repeats}
-          subAlert={drugAlerts.maxRepeats}
-          className="repeats-field form-field"
-          required
-          describedBy = {Object.keys(drugAlerts.repeats).length === 0 ? null : 'repeats-alert'}
-        /> 
-
-      </Fieldset>
-
-      {/* Note there must be enough info to identify the medicine, including form and strength */}
-      <Fieldset className="misc-form" legend="Authority details">
-        <FormField 
-          fieldType="checkbox" 
-          name="authRequired"
-          label="Authority required" 
-          onChange={() => toggleBooleanState(setDrugData, drugData, 'authRequired')}
-          checked={drugData.authRequired}
-          className="checkbox authRequired"
-          enterFunc={(event) => changeOnEnter(event, setDrugData, drugData)}
-        />  
-              
-        {(drugData.authRequired && drugData.pbsRx) ? <>
-          <div className="numbers" data-testid="numbers">
-            
-            {/* drugData.authRequired should be auto-selected once PBS integration is complete, but should also have an option to set manually */}
-            {drugData.authRequired && <div className="authRxNo" data-testid="authRxNo">Authority script number: {isLoading ? 'Loading...' : miscData.authRxNumber}</div>}
-            {isError && <div className="numbers__error">Something went wrong</div>}
-          </div>
-
-          {/* Consider a variable message beside or below this saying 'not required for this medication' or similar */}
-          <FormField 
-            fieldType="text" 
-            name="authCode"
-            label="Authority code (where applicable)" 
-            value={miscData.authCode} 
-            onChange={(event) => handleChange(setMiscData, event)} 
-            alert={miscAlerts.authCode}
-            describedBy = {Object.keys(miscAlerts.authCode).length === 0 ? null : 'authCode-alert'}
+          <FormField
+            fieldType="number"
+            name="quantity"
+            label="Quantity"
+            value={drugData.quantity}
+            onChange={(event) => handleChange(setDrugData, event)}
+            alert={drugAlerts.quantity}
+            subAlert={drugAlerts.maxQuantity}
+            className="quantity-field form-field"
+            required
+            describedBy={Object.keys(drugAlerts.quantity).length === 0 ? null : 'quantity-alert'}
           />
 
-          <div className="retention">
-          <div className="retention">
-        <div className="justification-field">
-          <label htmlFor="justification">
-            Clinical justification for use of item
-            <textarea className="textarea-justification" name="justification" value={miscData.justification} id="justification" cols="30" rows="3" onChange={(event) => handleChange(setMiscData, event)} ></textarea>
-          </label>
-        </div>
-          <FormField 
-            fieldType="number" 
-            name="age"
-            label="Patient's age if under 18" 
-            value={miscData.age} 
-            onChange={(event) => handleChange(setMiscData, event)} 
-            alert={miscAlerts.age}
-            className="age-field"
+          <FormField
+            fieldType="number"
+            name="repeats"
+            label="Repeats"
+            value={drugData.repeats}
+            onChange={(event) => handleChange(setDrugData, event)}
+            alert={drugAlerts.repeats}
+            subAlert={drugAlerts.maxRepeats}
+            className="repeats-field form-field"
+            required
+            describedBy={Object.keys(drugAlerts.repeats).length === 0 ? null : 'repeats-alert'}
+          />
+        </Fieldset>
+
+        <Fieldset className="misc-form" legend="Authority details">
+          <FormField
+            fieldType="checkbox"
+            name="authRequired"
+            label="Authority required"
+            onChange={() => toggleBooleanState(setDrugData, drugData, 'authRequired')}
+            checked={drugData.authRequired}
+            className="checkbox authRequired"
+            enterFunc={(event) => changeOnEnter(event, setDrugData, drugData)}
           />
 
-          <FormField 
-            fieldType="checkbox" 
-            name="prevAuth"
-            label="Patient has received authority for this medicine before" 
-            onChange={() => toggleBooleanState(setMiscData, miscData, 'prevAuth')}
-            checked={miscData.prevAuth}
-            className="checkbox prevAuth"
-            enterFunc={(event) => changeOnEnter(event, setMiscData, miscData)}
-          />  
-        </div>
-       
-          </div>
+          {(drugData.authRequired && drugData.pbsRx) ? <>
+            <div className="numbers" data-testid="numbers">
+
+              {/* drugData.authRequired should be auto-selected once PBS integration is complete, but should also have an option to set manually */}
+              {drugData.authRequired && <div className="authRxNo" data-testid="authRxNo">Authority script number: {isLoading ? 'Loading...' : miscData.authRxNumber}</div>}
+              {isError && <div className="numbers__error">Something went wrong</div>}
+            </div>
+
+            {/* Consider a variable message beside or below this saying 'not required for this medication' or similar */}
+            <FormField
+              fieldType="text"
+              name="authCode"
+              label="Authority code (where applicable)"
+              value={miscData.authCode}
+              onChange={(event) => handleChange(setMiscData, event)}
+              alert={miscAlerts.authCode}
+              describedBy={Object.keys(miscAlerts.authCode).length === 0 ? null : 'authCode-alert'}
+            />
+
+            <div className="retention">
+              <div className="retention">
+                <div className="justification-field">
+                  <label htmlFor="justification">
+                    Clinical justification for use of item
+                    <textarea className="textarea-justification" name="justification" value={miscData.justification} id="justification" cols="30" rows="3" onChange={(event) => handleChange(setMiscData, event)} ></textarea>
+                  </label>
+                </div>
+                <FormField
+                  fieldType="number"
+                  name="age"
+                  label="Patient's age if under 18"
+                  value={miscData.age}
+                  onChange={(event) => handleChange(setMiscData, event)}
+                  alert={miscAlerts.age}
+                  className="age-field"
+                />
+
+                <FormField
+                  fieldType="checkbox"
+                  name="prevAuth"
+                  label="Patient has received authority for this medicine before"
+                  onChange={() => toggleBooleanState(setMiscData, miscData, 'prevAuth')}
+                  checked={miscData.prevAuth}
+                  className="checkbox prevAuth"
+                  enterFunc={(event) => changeOnEnter(event, setMiscData, miscData)}
+                />
+              </div>
+            </div>
           </> : (
-            
-            <div className="solo-alert-container"> 
+            <div className="solo-alert-container">
               <svg xmlns="http://www.w3.org/2000/svg" className="alert-icon alert-icon--neutral" viewBox="0 0 512 512" width="17px">
-                <path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" fill="none" stroke="#014083" strokeMiterlimit="10" strokeWidth="32"/>
-                <path d="M250.26 166.05L256 288l5.73-121.95a5.74 5.74 0 00-5.79-6h0a5.74 5.74 0 00-5.68 6z" fill="none" stroke="#014083" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32"/>
-                <path d="M256 367.91a20 20 0 1120-20 20 20 0 01-20 20z" fill="#014083"/>
+                <path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" fill="none" stroke="#014083" strokeMiterlimit="10" strokeWidth="32" />
+                <path d="M250.26 166.05L256 288l5.73-121.95a5.74 5.74 0 00-5.79-6h0a5.74 5.74 0 00-5.68 6z" fill="none" stroke="#014083" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32" />
+                <path d="M256 367.91a20 20 0 1120-20 20 20 0 01-20 20z" fill="#014083" />
               </svg>
               <span className={`alert alert--neutral`}>{authorityMessage}</span>
             </div>
-          )
-        }
+          )}
 
-        <FormField 
-          fieldType="date" 
-          name="date"
-          label="Date" 
-          value={miscData.date} 
-          onChange={(event) => handleChange(setMiscData, event)} 
-          alert={miscAlerts.date}
-          required
-        />
+          <FormField
+            fieldType="date"
+            name="date"
+            label="Date"
+            value={miscData.date}
+            onChange={(event) => handleChange(setMiscData, event)}
+            alert={miscAlerts.date}
+            required
+          />
+        </Fieldset>
 
-      </Fieldset>
+        <div className="ProviderForm__btns">
+          <Button type="submit" classLabel="submit-btn">Generate prescription</Button>
+          <Link to="/" className="cancel-btn btn-secondary button">Cancel</Link>
+        </div>
 
-      <div className="ProviderForm__btns">
-        <Button type="submit" classLabel="submit-btn">Generate prescription</Button>
-        <Link to="/" className="cancel-btn btn-secondary button">Cancel</Link>
-        
-      </div>
-
-     
-      
-      
-    </StyledRxForm>
+      </StyledRxForm>
     </ContentContainer>
   )
 }
