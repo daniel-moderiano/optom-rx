@@ -125,7 +125,7 @@ const PrescriberForm = ({ data, setData, toggleBooleanState, googleLoaded, handl
             name="fullName"
             label="Full name" 
             value={data.fullName} 
-            onChange={(event) => handleChange(setData, event)} 
+            onChange={(event) => handleChange(event, setData)} 
             alert={providerAlerts.fullName}
             required
             describedBy={Object.keys(providerAlerts.fullName).length === 0 ? null : 'fullName-alert'}
@@ -152,7 +152,7 @@ const PrescriberForm = ({ data, setData, toggleBooleanState, googleLoaded, handl
             label="Abbreviated qualifications (optional)" 
             placeholder="e.g. BMedSci(VisSc), MOpt"
             value={data.qualifications} 
-            onChange={handleChange} 
+            onChange={(event) => handleChange(event, setData)} 
             maxlength="40"
           />
 
@@ -161,13 +161,13 @@ const PrescriberForm = ({ data, setData, toggleBooleanState, googleLoaded, handl
             name="practiceName"
             label="Practice name (optional)" 
             value={data.practiceName} 
-            onChange={handleChange} 
+            onChange={(event) => handleChange(event, setData)} 
           />
 
           <AddressAutocomplete 
             data={data}
             setData={setData}
-            handleChange={handleChange}
+            handleChange={(event) => handleChange(event, setData)}
             provider={true}   
             alerts={providerAlerts}
             setAlerts={setProviderAlerts} 
@@ -179,7 +179,7 @@ const PrescriberForm = ({ data, setData, toggleBooleanState, googleLoaded, handl
             name="phoneNumber"
             label="Phone number" 
             value={data.phoneNumber} 
-            onChange={handleChange} 
+            onChange={(event) => handleChange(event, setData)} 
             alert={providerAlerts.phoneNumber}
             id="phoneNumber"
             maxlength="10"
@@ -193,7 +193,7 @@ const PrescriberForm = ({ data, setData, toggleBooleanState, googleLoaded, handl
             name="prescriberNumber"
             label="Prescriber number" 
             value={data.prescriberNumber} 
-            onChange={handleChange} 
+            onChange={(event) => handleChange(event, setData)} 
             alert={providerAlerts.prescriberNumber}
             maxlength="7"
             className="prescriberNo-field form-field"

@@ -12,7 +12,6 @@ import { useInputChanges } from "../../hooks/useInputChanges";
 const AddProvider = ({ googleLoaded, setToast, setPage }) => {
   const { user } = useAuthContext();
   let navigate = useNavigate();
-  const { handleChange } = useInputChanges();
 
   const [isPending, setIsPending] = useState(false);
   const [providerData, setProviderData] = useState({
@@ -105,7 +104,6 @@ const AddProvider = ({ googleLoaded, setToast, setPage }) => {
             googleLoaded={googleLoaded} 
             data={providerData}
             setData={setProviderData}
-            handleChange={handleChange}
             handleSubmit={handleSubmit}
             handleCancel={cancelEdit}
             toggleBooleanState={() => toggleBooleanState(setProviderData, providerData, 'prefix')}
