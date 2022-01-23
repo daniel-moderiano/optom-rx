@@ -1,3 +1,4 @@
+/*global google*/ // Used to ignore the breaking 'google isn't defined' error
 import { useState, useEffect, useCallback } from "react";
 import FormField from "../FormField/FormField";
 import AddressAutocomplete from "../AddressAutocomplete/AddressAutocomplete";
@@ -14,7 +15,8 @@ import { Link } from "react-router-dom";
 import Spinner from "../utils/Spinner/Spinner";
 import ContentContainer from '../utils/ContentContainer/ContentContainer';
 import PageHeader from '../utils/PageHeader/PageHeader';
-import Button from '../utils/Button/Button'
+import Button from '../utils/Button/Button';
+import { useInputValidation } from "../../hooks/useInputValidation";
 
 // ! Multiple optometrist items are not permitted to be prescribed on the same form; each must use an individual form
 
@@ -25,6 +27,8 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
   const { documents: providers, isPending, error } = useCollection('providers', ['uid', '==', user.uid]);
 
   const [{ pbsInfo, pbsError, pbsLoading }, fetchDrug, clearPbsState] = usePBSFetch(existingData.pbsData);
+
+  const { positiveValidationUI, negativeValidationUI, validateRequiredField } = useInputValidation();
 
   const [authorityMessage, setAuthorityMessage] = useState('Please select a medication for authority requirements')
 
@@ -572,27 +576,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
     }
   }
 
-  // UI functions
-  const showErrorClass = (element) => {
-    element.classList.add('error');
-    element.classList.remove('success');
-
-    // Remove the tick icon
-    const tick = element.parentNode.querySelector('.tickCircle');
-    tick.classList.remove('show');
-    tick.classList.add("hide");
-  }
-
-  const showSuccessClass = (element) => {
-    element.classList.remove('error');
-    element.classList.add('success');
-
-    // Add the tick icon
-    const tick = element.parentNode.querySelector('.tickCircle');
-    tick.classList.remove('hide');
-    tick.classList.add("show");
-  }
-
   // Pass a set function to handle change, rather than hardcoding with a certain setState function
   const handleChange = (set, event) => {
     const { name, value } = event.target;
@@ -602,23 +585,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
     }));
   };
 
-  // Will return true or false depending on whether the validated field is empty (not valid/false) or not
-  const validateFieldForEmpty = (setFuncAlert, field) => {
-    // Validate full name here
-    if (field.value.trim().length === 0) {
-      setFuncAlert((prevAlerts) => ({
-        ...prevAlerts,
-        [field.name]: {
-          message: "This field cannot be left blank",
-          type: 'error',
-        }
-      }));
-      showErrorClass(field);
-      return false;
-    } else {
-      return true;
-    }
-  }
+  
 
   // Ensure final address entered is formatted with abbreviated state code
   const formatAddressState = (stateInput) => {
@@ -665,47 +632,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
     }))
   }, [authRxNo, scriptNo])
 
-  // Show positive feedback once a validation requirements are met
-  const positiveInlineValidation = useCallback((setAlertFunc, field) => {
-    showSuccessClass(field);
-    setAlertFunc((prevAlerts) => ({
-      ...prevAlerts,
-      [field.name]: {}
-    }));
-  }, []);
-
-  // Show positive feedback once a validation requirements are met
-  const negativeInlineValidation = useCallback((setAlertFunc, alertMsg, field) => {
-    showErrorClass(field);
-    setAlertFunc((prevAlerts) => ({
-      ...prevAlerts,
-      [field.name]: {
-        message: alertMsg,
-        type: 'error',
-      }
-    }));
-  }, []);
-
-  // Provide positive and negative feedback for a field requiring any non-empty input
-  const validateRequiredField = useCallback((setAlertFunc, field) => {
-    // Validate full name here
-    if (field.value.trim().length === 0) {
-      setAlertFunc((prevAlerts) => ({
-        ...prevAlerts,
-        [field.name]: {
-          message: "This field cannot be left blank",
-          type: 'error',
-        }
-      }));
-      showErrorClass(field);
-    } else {
-      showSuccessClass(field);
-      setAlertFunc((prevAlerts) => ({
-        ...prevAlerts,
-        [field.name]: {}
-      }));
-    }
-  }, []);
 
   // Inline form validation
   useEffect(() => {
@@ -731,12 +657,12 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
           case name === 'quantity':
             // Verify as standard
             if (value.trim().length === 0) {
-              negativeInlineValidation(setDrugAlerts, 'This field cannot be left blank', event.target);
+              negativeValidationUI(setDrugAlerts, 'This field cannot be left blank', event.target);
             } else if (!(/^[1-9][0-9]*$/).test(value.trim())) {
               // Checks for non-zero number with no theoretical limit
-              negativeInlineValidation(setDrugAlerts, 'Please enter a quantity of 1 or more (with no leading zeroes)', event.target);
+              negativeValidationUI(setDrugAlerts, 'Please enter a quantity of 1 or more (with no leading zeroes)', event.target);
             } else {
-              positiveInlineValidation(setDrugAlerts, event.target);
+              positiveValidationUI(setDrugAlerts, event.target);
             }  
             break;
 
@@ -744,12 +670,12 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
           case name === 'repeats':
             // Verify as standard
             if (value.trim().length === 0) {
-              negativeInlineValidation(setDrugAlerts, 'This field cannot be left blank', event.target);
+              negativeValidationUI(setDrugAlerts, 'This field cannot be left blank', event.target);
             } else if (!(/^([1-9][0-9]*)|(0)$/).test(value.trim())) {
               // Checks for non-zero number with no theoretical limit
-              negativeInlineValidation(setDrugAlerts, 'Please enter a valid number (no leading zeroes)', event.target);
+              negativeValidationUI(setDrugAlerts, 'Please enter a valid number (no leading zeroes)', event.target);
             } else {
-              positiveInlineValidation(setDrugAlerts, event.target);
+              positiveValidationUI(setDrugAlerts, event.target);
             }
             break;
         
@@ -788,7 +714,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
 
           case name === 'medicareNumber':
             if ((/^[0-9]{10}$/).test(value.trim())) {
-              positiveInlineValidation(setPatientAlerts, event.target);
+              positiveValidationUI(setPatientAlerts, event.target);
             } else {
               // ignore
               event.target.classList.remove('success');
@@ -801,7 +727,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
 
           case name === 'medicareRefNumber':
             if ((/^[1-9]{1}$/).test(value.trim())) {
-              positiveInlineValidation(setPatientAlerts, event.target);
+              positiveValidationUI(setPatientAlerts, event.target);
             } else {
               // ignore
               event.target.classList.remove('success');
@@ -812,13 +738,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
             }
             break;
 
-    // Check for digits 1-9, and only a single digit
-    // if (!(/^[1-9]{1}$/).test(value.trim())) {
-    //   negativeInlineValidation(setPatientAlerts, 'IRN must be a single digit between 1 through 9', event.target);
-    // } else {
-    //   positiveInlineValidation(setPatientAlerts, event.target);
-    // }
-    
           case name === 'postcode':
             validateRequiredField(setPatientAlerts, event.target);
             break;
@@ -846,7 +765,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
     drugDataValidation();
     miscDataValidation();
 
-  }, [validateRequiredField, positiveInlineValidation, negativeInlineValidation]);
+  }, [validateRequiredField, positiveValidationUI, negativeValidationUI]);
 
 
   // Check remove a visible error or alert from the brand name input where it changes from being required to not
@@ -975,7 +894,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
           inputFocused = true;
         }
         valid = false;
-        negativeInlineValidation(setAlertFunc, 'This field cannot be left blank', input);
+        negativeValidationUI(setAlertFunc, 'This field cannot be left blank', input);
       }
     }
 
@@ -1005,7 +924,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
     // If the user has attempted to enter medicare information, we should validate it for correct input here, and by default check the IRN input
     if (medicareNumberInput.value.trim() !== "") {
       if (!(/^[0-9]{10}$/).test(medicareNumberInput.value.trim())) {
-        negativeInlineValidation(setPatientAlerts, 'Medicare number must be exactly 10 digits long', medicareNumberInput);
+        negativeValidationUI(setPatientAlerts, 'Medicare number must be exactly 10 digits long', medicareNumberInput);
         if (!inputFocused) {
           medicareNumberInput.focus();
           inputFocused = true;
@@ -1013,7 +932,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
         valid = false;
       }
       if (!(/^[1-9]{1}$/).test(medicareRefNumberInput.value.trim())) {
-        negativeInlineValidation(setPatientAlerts, 'IRN must be a single digit between 1 through 9', medicareRefNumberInput);
+        negativeValidationUI(setPatientAlerts, 'IRN must be a single digit between 1 through 9', medicareRefNumberInput);
         if (!inputFocused) {
           medicareRefNumberInput.focus();
           inputFocused = true;
@@ -1029,9 +948,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
 
     // Brand name field should only be validated if the user has selected that brand name is required in some way
     if (drugData.brandOnly || drugData.includeBrand) {
-      if(!validateFieldForEmpty(setDrugAlerts, document.querySelector('#brandName'))) {
-        valid = false;
-      }
+      performInputValidation('brandName', setDrugAlerts);
     }
 
     // Only a single miscellaneous field is required to validate

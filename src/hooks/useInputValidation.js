@@ -68,5 +68,6 @@ export const useInputValidation = () => {
     }
   }, []);
 
+
   return { positiveValidationUI, negativeValidationUI, validateRequiredField }
 }
