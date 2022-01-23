@@ -23,7 +23,7 @@ const StyledFavourites = styled.div`
     border-radius: 6px;
     -moz-border-radius:6px;
     background-color: #fff;
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px, rgba(0, 0, 0, 0.05) 0px 0px 1px 0px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
 
     .list-header {
       background-color: #F9FAFB;
@@ -34,6 +34,7 @@ const StyledFavourites = styled.div`
       font-size: 1.5rem;
       font-weight: 300;
       color: #48515B;
+      border-radius: 6px;
     }
 
     .fav-list:nth-child(even) {
@@ -183,7 +184,7 @@ const StyledFavourites = styled.div`
         margin-bottom: 2rem;
         border-radius: 6px;
         -moz-border-radius:6px;
-        box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px, rgba(0, 0, 0, 0.05) 0px 0px 1px 0px;
+        box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
         border-top: none;
 
         &:hover {

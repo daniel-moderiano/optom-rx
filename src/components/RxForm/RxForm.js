@@ -146,6 +146,8 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
     setPage('form');
   }, [setPage])
 
+  // --- REACT SELECT FUNCTIONS ---
+
   // Used to fill the React Select component options using providers fetched from firestore. Will also set the selected option to the default provider if one exists
   useEffect(() => {
     // Do not run unless a providers collection exists (i.e. has been fetched from firebase)
@@ -175,6 +177,287 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
       setSelectOptions(providerSelectOptions);
     }
   }, [providers]);
+
+  // A handle change function specifically for the select element. Sets both the input state and providerData based on selection
+  const handleSelectChange = (event) => {
+    setChosenProvider(event);
+    // Use the unique document ID to grab the provider from the fetched providers array
+    const providerId = event.value;
+    // Note the provider is returned from array.filter as an array, hence destructuring
+    const [provider] = providers.filter((provider) => provider.id === providerId);
+    setProviderData({
+      ...provider,
+    })
+  }
+  
+  // Sets the CSS styles for React Select component
+  const customStyles = {
+    control: (base, state) => ({
+      ...base,
+      border: state.isFocused ? '1px solid rgb(144, 147, 150)' : '1px solid rgb(144, 147, 150)',
+      boxShadow: state.isFocused ? '0' : '0',
+      outline: state.isFocused ? "2px solid #104362" : 'none',
+      outlineOffset: state.isFocused ? "2px" : 'none',
+      width: '26rem',
+      padding: '0.12rem 0 0.11rem 0.85rem',
+      borderRadius: '4px',
+      fontSize: "1rem",
+      marginTop: '0.5rem',
+      marginBottom: '0.5rem',
+
+      '&:hover': {
+        borderColor: state.isFocused ? '#104362' : 'rgb(178, 182, 185)',
+        cursor: 'pointer'
+      },
+
+      "@media (max-width: 590px)": {
+        width: "100%",
+        maxWidth: "26rem",
+        marginRight: "1.5rem",
+      },
+    }),
+
+    menu: (base, state) => ({
+      ...base,
+      maxWidth: "26rem",
+    }),
+
+    valueContainer: (provided, state) => ({
+      ...provided,
+      paddingLeft: '0',
+    }),
+  }
+
+
+  // --- FORM VALIDATION FUNCTIONS ---
+
+  // Inline form validation
+  useEffect(() => {
+    // Validation functions are split via form to utilise event propagation within the form
+    const patientDataValidation = () => {
+      document.querySelector('.patient-form').addEventListener('focusout', (event) => {
+        const { name, value } = event.target
+        switch (true) {
+          case name === 'fullName':
+            validateRequiredField(setPatientAlerts, event.target);
+            break;
+
+          case name === 'streetAddress':
+            validateRequiredField(setPatientAlerts, event.target);
+            break;
+
+          case name === 'suburb':
+            validateRequiredField(setPatientAlerts, event.target);
+            break;
+
+          case name === 'state':
+            setPatientData((prevData) => ({
+              ...prevData,
+              [name]: abbreviateStateName(value),
+            }));
+            validateRequiredField(setPatientAlerts, event.target);
+            break;
+
+          case name === 'medicareNumber':
+            if ((/^[0-9]{10}$/).test(value.trim())) {
+              positiveValidationUI(setPatientAlerts, event.target);
+            } else {
+              // ignore
+              event.target.classList.remove('success');
+              // Remove the tick icon
+              const tick = event.target.parentNode.querySelector('.tickCircle');
+              tick.classList.remove('show');
+              tick.classList.add("hide");
+            }
+            break;
+
+          case name === 'medicareRefNumber':
+            if ((/^[1-9]{1}$/).test(value.trim())) {
+              positiveValidationUI(setPatientAlerts, event.target);
+            } else {
+              // ignore
+              event.target.classList.remove('success');
+              // Remove the tick icon
+              const tick = event.target.parentNode.querySelector('.tickCircle');
+              tick.classList.remove('show');
+              tick.classList.add("hide");
+            }
+            break;
+
+          case name === 'postcode':
+            validateRequiredField(setPatientAlerts, event.target);
+            break;
+
+          default:
+            break;
+        }
+      });
+    };
+
+    const drugDataValidation = () => {
+      document.querySelector('.drug-form').addEventListener('focusout', (event) => {
+        const { name, value } = event.target
+        switch (true) {
+          case name === 'activeIngredient':
+            validateRequiredField(setDrugAlerts, event.target);
+            break;
+
+          case name === 'brandName':
+            if (value.trim().length > 0) {
+              event.target.classList.remove('error')
+              setDrugAlerts((prevAlerts) => ({
+                ...prevAlerts,
+                brandName: {}
+              }));
+            }
+            break;
+
+          case name === 'quantity':
+            // Verify as standard
+            if (value.trim().length === 0) {
+              negativeValidationUI(setDrugAlerts, 'This field cannot be left blank', event.target);
+            } else if (!(/^[1-9][0-9]*$/).test(value.trim())) {
+              // Checks for non-zero number with no theoretical limit
+              negativeValidationUI(setDrugAlerts, 'Please enter a quantity of 1 or more (with no leading zeroes)', event.target);
+            } else {
+              positiveValidationUI(setDrugAlerts, event.target);
+            }
+            break;
+
+          // Can be zero, and for non-PBS prescriptions, there is technically no upper limits
+          case name === 'repeats':
+            // Verify as standard
+            if (value.trim().length === 0) {
+              negativeValidationUI(setDrugAlerts, 'This field cannot be left blank', event.target);
+            } else if (!(/^([1-9][0-9]*)|(0)$/).test(value.trim())) {
+              // Checks for non-zero number with no theoretical limit
+              negativeValidationUI(setDrugAlerts, 'Please enter a valid number (no leading zeroes)', event.target);
+            } else {
+              positiveValidationUI(setDrugAlerts, event.target);
+            }
+            break;
+
+          case name === 'dosage':
+            validateRequiredField(setDrugAlerts, event.target);
+            break;
+          default:
+            break;
+        }
+      });
+    };
+    
+    // Although only a single field is being validated, the switch statement should remain in case more fields need to be added
+    const miscDataValidation = () => {
+      document.querySelector('.misc-form').addEventListener('focusout', (event) => {
+        const { name } = event.target
+        switch (true) {
+          case name === 'date':
+            validateRequiredField(setMiscAlerts, event.target);
+            break;
+          default:
+            break;
+        }
+      });
+    };
+
+    patientDataValidation();
+    drugDataValidation();
+    miscDataValidation();
+  }, [validateRequiredField, positiveValidationUI, negativeValidationUI, abbreviateStateName]);
+
+  // Remove a visible error or alert from the brand name input when it changes from being required to not being required
+  useEffect(() => {
+    if (!drugData.includeBrand && !drugData.brandOnly) {
+      document.querySelector('#brandName').classList.remove('error');
+      setDrugAlerts((prevAlerts) => ({
+        ...prevAlerts,
+        brandName: {}
+      }));
+    };
+    // It is optional to include a function here that provides a warning when one of these are checked to true and the brand name input is empty, but this is opposite to expected user flow and will likely cause annoyance more than anything else
+  }, [drugData.includeBrand, drugData.brandOnly]);
+
+    // Ensure form is validated before calling form submission function (to generate Rx)
+  // TODO: Form can submit even if no provider is selected!!
+  const checkFormValidation = () => {
+    let valid = true;
+    let inputFocused = false;
+
+    const performInputValidation = (fieldName, setAlertFunc) => {
+      const input = document.querySelector(`[name="${fieldName}"]`)
+      if (input.value.trim().length === 0) {
+        if (!inputFocused) {
+          input.focus();
+          inputFocused = true;
+        }
+        valid = false;
+        negativeValidationUI(setAlertFunc, 'This field cannot be left blank', input);
+      }
+    }
+
+    const requiredFields = {
+      drug: [
+        'activeIngredient',
+        'dosage',
+        'quantity',
+        'repeats',
+      ],
+      patient: [
+        'fullName',
+        'streetAddress',
+        'suburb',
+        'postcode',
+        'state',
+      ],
+    }
+
+    const medicareNumberInput = document.querySelector('#medicareNumber');
+    const medicareRefNumberInput = document.querySelector('#medicareRefNumber');
+
+    requiredFields.patient.forEach((field) => {
+      performInputValidation(field, setPatientAlerts);
+    });
+
+    // If the user has attempted to enter medicare information, we should validate it for correct input here, and by default check the IRN input
+    if (medicareNumberInput.value.trim() !== "") {
+      if (!(/^[0-9]{10}$/).test(medicareNumberInput.value.trim())) {
+        negativeValidationUI(setPatientAlerts, 'Medicare number must be exactly 10 digits long', medicareNumberInput);
+        if (!inputFocused) {
+          medicareNumberInput.focus();
+          inputFocused = true;
+        }
+        valid = false;
+      }
+      if (!(/^[1-9]{1}$/).test(medicareRefNumberInput.value.trim())) {
+        negativeValidationUI(setPatientAlerts, 'IRN must be a single digit between 1 through 9', medicareRefNumberInput);
+        if (!inputFocused) {
+          medicareRefNumberInput.focus();
+          inputFocused = true;
+        }
+        valid = false;
+      }
+    }
+
+    requiredFields.drug.forEach((field) => {
+      performInputValidation(field, setDrugAlerts);
+    });
+
+
+    // Brand name field should only be validated if the user has selected that brand name is required in some way
+    if (drugData.brandOnly || drugData.includeBrand) {
+      performInputValidation('brandName', setDrugAlerts);
+    }
+
+    // Only a single miscellaneous field is required to validate
+    performInputValidation('date', setMiscAlerts);
+
+    // Finally, check for any active error alerts that were not detected with the more basic submission validation
+    if (document.querySelectorAll('.alert--error').length > 0) {
+      valid = false;
+    }
+    return valid;
+  };
+
 
 
   // Remove all PBS related information from local state
@@ -584,166 +867,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
   }, [drugData.maxRepeats, drugData.maxQuantity, drugData.pbsRx]);
 
 
-  // Set local state with authRxNo and scriptNo fetched from firestore. Activates only when the numbers have been fetched
-  useEffect(() => {
-    if (numbersLoaded) {
-      setMiscData((prevData) => ({
-        ...prevData,
-        scriptID: scriptNo,
-        authRxNumber: authRxNo,
-      }))
-    }
-  }, [numbersLoaded, authRxNo, scriptNo])
-  
-
-
-  // Inline form validation
-  useEffect(() => {
-    // Event propagation will capture all focusout events from patient form
-    const drugDataValidation = () => {
-      document.querySelector('.drug-form').addEventListener('focusout', (event) => {
-        const { name, value } = event.target
-        switch (true) {
-          case name === 'activeIngredient':
-            validateRequiredField(setDrugAlerts, event.target);
-            break;
-
-          case name === 'brandName':
-            if (value.trim().length > 0) {
-              event.target.classList.remove('error')
-              setDrugAlerts((prevAlerts) => ({
-                ...prevAlerts,
-                brandName: {}
-              }));
-            }
-            break;
-
-          case name === 'quantity':
-            // Verify as standard
-            if (value.trim().length === 0) {
-              negativeValidationUI(setDrugAlerts, 'This field cannot be left blank', event.target);
-            } else if (!(/^[1-9][0-9]*$/).test(value.trim())) {
-              // Checks for non-zero number with no theoretical limit
-              negativeValidationUI(setDrugAlerts, 'Please enter a quantity of 1 or more (with no leading zeroes)', event.target);
-            } else {
-              positiveValidationUI(setDrugAlerts, event.target);
-            }
-            break;
-
-          // Can be zero, and for non-PBS prescriptions, there is technically no upper limits
-          case name === 'repeats':
-            // Verify as standard
-            if (value.trim().length === 0) {
-              negativeValidationUI(setDrugAlerts, 'This field cannot be left blank', event.target);
-            } else if (!(/^([1-9][0-9]*)|(0)$/).test(value.trim())) {
-              // Checks for non-zero number with no theoretical limit
-              negativeValidationUI(setDrugAlerts, 'Please enter a valid number (no leading zeroes)', event.target);
-            } else {
-              positiveValidationUI(setDrugAlerts, event.target);
-            }
-            break;
-
-          case name === 'dosage':
-            validateRequiredField(setDrugAlerts, event.target);
-            break;
-          default:
-            break;
-        }
-      });
-    };
-
-    const patientDataValidation = () => {
-      document.querySelector('.patient-form').addEventListener('focusout', (event) => {
-        const { name, value } = event.target
-        switch (true) {
-          case name === 'fullName':
-            validateRequiredField(setPatientAlerts, event.target);
-            break;
-
-          case name === 'streetAddress':
-            validateRequiredField(setPatientAlerts, event.target);
-            break;
-
-          case name === 'suburb':
-            validateRequiredField(setPatientAlerts, event.target);
-            break;
-
-          case name === 'state':
-            setPatientData((prevData) => ({
-              ...prevData,
-              [name]: abbreviateStateName(value),
-            }));
-            validateRequiredField(setPatientAlerts, event.target);
-            break;
-
-          case name === 'medicareNumber':
-            if ((/^[0-9]{10}$/).test(value.trim())) {
-              positiveValidationUI(setPatientAlerts, event.target);
-            } else {
-              // ignore
-              event.target.classList.remove('success');
-              // Remove the tick icon
-              const tick = event.target.parentNode.querySelector('.tickCircle');
-              tick.classList.remove('show');
-              tick.classList.add("hide");
-            }
-            break;
-
-          case name === 'medicareRefNumber':
-            if ((/^[1-9]{1}$/).test(value.trim())) {
-              positiveValidationUI(setPatientAlerts, event.target);
-            } else {
-              // ignore
-              event.target.classList.remove('success');
-              // Remove the tick icon
-              const tick = event.target.parentNode.querySelector('.tickCircle');
-              tick.classList.remove('show');
-              tick.classList.add("hide");
-            }
-            break;
-
-          case name === 'postcode':
-            validateRequiredField(setPatientAlerts, event.target);
-            break;
-
-          default:
-            break;
-        }
-      });
-    };
-
-    const miscDataValidation = () => {
-      document.querySelector('.misc-form').addEventListener('focusout', (event) => {
-        const { name } = event.target
-        switch (true) {
-          case name === 'date':
-            validateRequiredField(setMiscAlerts, event.target);
-            break;
-          default:
-            break;
-        }
-      });
-    };
-
-    patientDataValidation();
-    drugDataValidation();
-    miscDataValidation();
-
-  }, [validateRequiredField, positiveValidationUI, negativeValidationUI, abbreviateStateName]);
-
-
-  // Check remove a visible error or alert from the brand name input where it changes from being required to not
-  useEffect(() => {
-    if (!drugData.includeBrand && !drugData.brandOnly) {
-      document.querySelector('#brandName').classList.remove('error');
-      setDrugAlerts((prevAlerts) => ({
-        ...prevAlerts,
-        brandName: {}
-      }));
-    };
-    // It is optional to include a function here that provides a warning when one of these are checked to true and the brand name input is empty, but this is opposite to expected user flow and will likely cause annoyance more than anything else
-  }, [drugData.includeBrand, drugData.brandOnly]);
-
   // Generate the unique script and authRx numbers, and attach them to the local RxForm state. This is only performed when loading the RxForm component using 'Create new prescription' btn
   useEffect(() => {
     if (state) {
@@ -752,9 +875,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
         // Use .then() to ensure the above scriptNo and authRxNo variables are set prior to attempting to set data state with them
         fetchNumbers().then(() => {
           setNumbersLoaded((prevData) => prevData ? prevData : !prevData);
-        }).catch((error) => {
-          console.log(error);
-        })
+        });
 
         // Also reset all existing data 
         resetData();
@@ -826,141 +947,19 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
     }
   }, [state, fetchNumbers, resetData, fetchDrug]);
 
-
+  // Set local state with authRxNo and scriptNo fetched from firestore. Activates only when the numbers have been fetched, which is performed as part of generating a newRx
+  useEffect(() => {
+    if (numbersLoaded) {
+      setMiscData((prevData) => ({
+        ...prevData,
+        scriptID: scriptNo,
+        authRxNumber: authRxNo,
+      }))
+    }
+  }, [numbersLoaded, authRxNo, scriptNo])
  
-  // Ensure form is validated before calling form submission function (to generate Rx)
-  // TODO: Form can submit even if no provider is selected!!
-  const checkFormValidation = () => {
-    let valid = true;
-    let inputFocused = false;
-
-    const performInputValidation = (fieldName, setAlertFunc) => {
-      const input = document.querySelector(`[name="${fieldName}"]`)
-      if (input.value.trim().length === 0) {
-        if (!inputFocused) {
-          input.focus();
-          inputFocused = true;
-        }
-        valid = false;
-        negativeValidationUI(setAlertFunc, 'This field cannot be left blank', input);
-      }
-    }
-
-    const requiredFields = {
-      drug: [
-        'activeIngredient',
-        'dosage',
-        'quantity',
-        'repeats',
-      ],
-      patient: [
-        'fullName',
-        'streetAddress',
-        'suburb',
-        'postcode',
-        'state',
-      ],
-    }
-
-    const medicareNumberInput = document.querySelector('#medicareNumber');
-    const medicareRefNumberInput = document.querySelector('#medicareRefNumber');
-
-    requiredFields.patient.forEach((field) => {
-      performInputValidation(field, setPatientAlerts);
-    });
-
-    // If the user has attempted to enter medicare information, we should validate it for correct input here, and by default check the IRN input
-    if (medicareNumberInput.value.trim() !== "") {
-      if (!(/^[0-9]{10}$/).test(medicareNumberInput.value.trim())) {
-        negativeValidationUI(setPatientAlerts, 'Medicare number must be exactly 10 digits long', medicareNumberInput);
-        if (!inputFocused) {
-          medicareNumberInput.focus();
-          inputFocused = true;
-        }
-        valid = false;
-      }
-      if (!(/^[1-9]{1}$/).test(medicareRefNumberInput.value.trim())) {
-        negativeValidationUI(setPatientAlerts, 'IRN must be a single digit between 1 through 9', medicareRefNumberInput);
-        if (!inputFocused) {
-          medicareRefNumberInput.focus();
-          inputFocused = true;
-        }
-        valid = false;
-      }
-    }
-
-    requiredFields.drug.forEach((field) => {
-      performInputValidation(field, setDrugAlerts);
-    });
 
 
-    // Brand name field should only be validated if the user has selected that brand name is required in some way
-    if (drugData.brandOnly || drugData.includeBrand) {
-      performInputValidation('brandName', setDrugAlerts);
-    }
-
-    // Only a single miscellaneous field is required to validate
-    performInputValidation('date', setMiscAlerts);
-
-    // Finally, check for any active error alerts that were not detected with the more basic submission validation
-    if (document.querySelectorAll('.alert--error').length > 0) {
-      valid = false;
-    }
-    return valid;
-  };
-
-
-
-
-  // A handle change function specifically for the select element. Sets both the input state and providerData based on selection
-  const handleSelectChange = (event) => {
-    setChosenProvider(event);
-    // Use the unique document ID to grab the provider from the fetched providers array
-    const providerId = event.value;
-    // Note the provider is returned from array.filter as an array, hence destructuring
-    const [provider] = providers.filter((provider) => provider.id === providerId);
-    setProviderData({
-      ...provider,
-    })
-  }
-
-  // Sets the CSS styles for React Select component
-  const customStyles = {
-    control: (base, state) => ({
-      ...base,
-      border: state.isFocused ? '1px solid rgb(144, 147, 150)' : '1px solid rgb(144, 147, 150)',
-      boxShadow: state.isFocused ? '0' : '0',
-      outline: state.isFocused ? "2px solid #104362" : 'none',
-      outlineOffset: state.isFocused ? "2px" : 'none',
-      width: '26rem',
-      padding: '0.12rem 0 0.11rem 0.85rem',
-      borderRadius: '4px',
-      fontSize: "1rem",
-      marginTop: '0.5rem',
-      marginBottom: '0.5rem',
-
-      '&:hover': {
-        borderColor: state.isFocused ? '#104362' : 'rgb(178, 182, 185)',
-        cursor: 'pointer'
-      },
-
-      "@media (max-width: 590px)": {
-        width: "100%",
-        maxWidth: "26rem",
-        marginRight: "1.5rem",
-      },
-    }),
-
-    menu: (base, state) => ({
-      ...base,
-      maxWidth: "26rem",
-    }),
-
-    valueContainer: (provided, state) => ({
-      ...provided,
-      paddingLeft: '0',
-    }),
-  }
 
   return (
     <ContentContainer>
