@@ -7,10 +7,12 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 import { StyledAddProvider } from "./AddProvider.styled";
 import ContentContainer from '../utils/ContentContainer/ContentContainer';
 import PageHeader from '../utils/PageHeader/PageHeader';
+import { useInputChanges } from "../../hooks/useInputChanges";
 
 const AddProvider = ({ googleLoaded, setToast, setPage }) => {
   const { user } = useAuthContext();
   let navigate = useNavigate();
+  const { handleChange } = useInputChanges();
 
   const [isPending, setIsPending] = useState(false);
   const [providerData, setProviderData] = useState({
@@ -34,13 +36,13 @@ const AddProvider = ({ googleLoaded, setToast, setPage }) => {
   }, [setPage])
 
   
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setProviderData((prevData) => ({
-      ...prevData, 
-      [name]: value 
-    }));
-  };
+  // const handleChange = (event) => {
+  //   const { name, value } = event.target;
+  //   setProviderData((prevData) => ({
+  //     ...prevData, 
+  //     [name]: value 
+  //   }));
+  // };
 
   const toggleBooleanState = (setData, data, boolToChange) => {
     let newState = true;

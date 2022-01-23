@@ -1,9 +1,8 @@
 // Define functions that handle input changes to various types of form inputs. These are frequently used around the app
 
 export const useInputChanges = () => {
-
   // General text input change handler
-  const handleChange = (setFunc, event) => {
+  const handleChange = (event, setFunc) => {
     const { name, value } = event.target;
     setFunc((prevData) => ({
       ...prevData, 

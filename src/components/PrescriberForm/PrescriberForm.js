@@ -7,14 +7,16 @@ import LoadOverlay from "../utils/LoadOverlay/LoadOverlay";
 import Button from '../utils/Button/Button';
 import { useInputValidation } from "../../hooks/useInputValidation";
 import { useFormatting } from "../../hooks/useFormatting";
+import { useInputChanges } from "../../hooks/useInputChanges";
 
 // ! Legal requirements include the prescriber's name, address, contact details, and prescriber number
 
-const PrescriberForm = ({ data, setData, handleChange, toggleBooleanState, googleLoaded, handleSubmit, handleCancel, submitBtnLabel, pending, formPending }) => {
+const PrescriberForm = ({ data, setData, toggleBooleanState, googleLoaded, handleSubmit, handleCancel, submitBtnLabel, pending, formPending }) => {
 
   // Hook usage for formatting and validation purposes
   const { positiveValidationUI, negativeValidationUI, validateRequiredField } = useInputValidation();
   const { abbreviateStateName } = useFormatting();
+  const { handleChange } = useInputChanges();
 
   const [providerAlerts, setProviderAlerts] = useState({
     fullName: {},
@@ -123,7 +125,7 @@ const PrescriberForm = ({ data, setData, handleChange, toggleBooleanState, googl
             name="fullName"
             label="Full name" 
             value={data.fullName} 
-            onChange={handleChange} 
+            onChange={(event) => handleChange(setData, event)} 
             alert={providerAlerts.fullName}
             required
             describedBy={Object.keys(providerAlerts.fullName).length === 0 ? null : 'fullName-alert'}

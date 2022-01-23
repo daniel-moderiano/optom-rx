@@ -1021,7 +1021,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
             name="fullName"
             label="Full name"
             value={patientData.fullName}
-            onChange={(event) => handleChange(setPatientData, event)}
+            onChange={(event) => handleChange(event, setPatientData)}
             alert={patientAlerts.fullName}
             autoFocus
             required
@@ -1031,7 +1031,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
           <AddressAutocomplete
             data={patientData}
             setData={setPatientData}
-            handleChange={(event) => handleChange(setPatientData, event)}
+            handleChange={(event) => handleChange(event, setPatientData)}
             provider={false}
             alerts={patientAlerts}
             setAlerts={setPatientAlerts}
@@ -1045,7 +1045,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
               name="medicareNumber"
               label="Medicare number"
               value={patientData.medicareNumber}
-              onChange={(event) => handleChange(setPatientData, event)}
+              onChange={(event) => handleChange(event, setPatientData)}
               alert={patientAlerts.medicareNumber}
               subAlert={patientAlerts.medicareRefNumber}
               maxlength="10"
@@ -1059,7 +1059,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
               name="medicareRefNumber"
               label="IRN"
               value={patientData.medicareRefNumber}
-              onChange={(event) => handleChange(setPatientData, event)}
+              onChange={(event) => handleChange(event, setPatientData)}
               // alert={patientAlerts.medicareRefNumber}
               maxlength="1"
               className="irn-field medicare-field form-field"
@@ -1073,7 +1073,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
           <DrugAutocomplete
             data={drugData}
             setData={setDrugData}
-            handleChange={(event) => handleChange(setDrugData, event)}
+            handleChange={(event) => handleChange(event, setDrugData)}
             toggle={toggleBooleanState}
             alerts={drugAlerts}
             setAlerts={setDrugAlerts}
@@ -1087,7 +1087,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
             name="dosage"
             label="Dosage directions"
             value={drugData.dosage}
-            onChange={(event) => handleChange(setDrugData, event)}
+            onChange={(event) => handleChange(event, setDrugData)}
             alert={drugAlerts.dosage}
             required
             describedBy={Object.keys(drugAlerts.dosage).length === 0 ? null : 'dosage-alert'}
@@ -1127,7 +1127,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
             name="quantity"
             label="Quantity"
             value={drugData.quantity}
-            onChange={(event) => handleChange(setDrugData, event)}
+            onChange={(event) => handleChange(event, setDrugData)}
             alert={drugAlerts.quantity}
             subAlert={drugAlerts.maxQuantity}
             className="quantity-field form-field"
@@ -1140,7 +1140,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
             name="repeats"
             label="Repeats"
             value={drugData.repeats}
-            onChange={(event) => handleChange(setDrugData, event)}
+            onChange={(event) => handleChange(event, setDrugData)}
             alert={drugAlerts.repeats}
             subAlert={drugAlerts.maxRepeats}
             className="repeats-field form-field"
@@ -1174,7 +1174,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
               name="authCode"
               label="Authority code (where applicable)"
               value={miscData.authCode}
-              onChange={(event) => handleChange(setMiscData, event)}
+              onChange={(event) => handleChange(event, setMiscData)}
               alert={miscAlerts.authCode}
               describedBy={Object.keys(miscAlerts.authCode).length === 0 ? null : 'authCode-alert'}
             />
@@ -1184,7 +1184,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
                 <div className="justification-field">
                   <label htmlFor="justification">
                     Clinical justification for use of item
-                    <textarea className="textarea-justification" name="justification" value={miscData.justification} id="justification" cols="30" rows="3" onChange={(event) => handleChange(setMiscData, event)} ></textarea>
+                    <textarea className="textarea-justification" name="justification" value={miscData.justification} id="justification" cols="30" rows="3" onChange={(event) => handleChange(event, setMiscData)} ></textarea>
                   </label>
                 </div>
                 <FormField
@@ -1192,7 +1192,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
                   name="age"
                   label="Patient's age if under 18"
                   value={miscData.age}
-                  onChange={(event) => handleChange(setMiscData, event)}
+                  onChange={(event) => handleChange(event, setMiscData)}
                   alert={miscAlerts.age}
                   className="age-field"
                 />
@@ -1224,7 +1224,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
             name="date"
             label="Date"
             value={miscData.date}
-            onChange={(event) => handleChange(setMiscData, event)}
+            onChange={(event) => handleChange(event, setMiscData)}
             alert={miscAlerts.date}
             required
           />
