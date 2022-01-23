@@ -1,4 +1,3 @@
-/*global google*/ // Used to ignore the breaking 'google isn't defined' error
 import { useState, useEffect, useCallback } from "react";
 import FormField from "../FormField/FormField";
 import AddressAutocomplete from "../AddressAutocomplete/AddressAutocomplete";
@@ -18,8 +17,9 @@ import PageHeader from '../utils/PageHeader/PageHeader';
 import Button from '../utils/Button/Button';
 import { useInputValidation } from "../../hooks/useInputValidation";
 import { useFormatting } from '../../hooks/useFormatting';
+import { useInputChanges } from "../../hooks/useInputChanges";
 
-// ! Multiple optometrist items are not permitted to be prescribed on the same form; each must use an individual form
+// Multiple items are not permitted to be prescribed on the same form; each must use an individual form (applies to optometrists only)
 
 const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }) => {
   const [{ scriptNo, authRxNo, isError, isLoading }, fetchNumbers] = useNumbers();
@@ -31,6 +31,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
 
   const { positiveValidationUI, negativeValidationUI, validateRequiredField } = useInputValidation();
   const { abbreviateStateName } = useFormatting();
+  const { handleChange, toggleBooleanState, handleEnterKeyOnCheckbox } = useInputChanges();
 
   const [authorityMessage, setAuthorityMessage] = useState('Please select a medication for authority requirements')
 
@@ -145,23 +146,36 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
     setPage('form');
   }, [setPage])
 
-  // Update the default option in the providers select with a default provider (if available) 
+  // Used to fill the React Select component options using providers fetched from firestore. Will also set the selected option to the default provider if one exists
   useEffect(() => {
-    // Do not run unless a providers collection exists (i.e. before fetch has occured, or potentially for guest forms)
+    // Do not run unless a providers collection exists (i.e. has been fetched from firebase)
     if (providers) {
+      let providerSelectOptions = [];
+
       providers.forEach((provider) => {
         // Check for a default provider
         if (provider.default) {
           // Update the select element accordingly
-          setChosenProvider({ label: `${provider.fullName} (${(provider.practiceName !== "") ? provider.practiceName + `, ${provider.suburb}` : provider.suburb})`, value: provider.id });
+          setChosenProvider({ 
+            label: `${provider.fullName} (${(provider.practiceName !== "") ? provider.practiceName + `, ${provider.suburb}` : provider.suburb})`,
+            value: provider.id });
           // Also set state to provider data to ensure the form is pre-filled
           setProviderData({
             ...provider,
           })
-        }
-      })
+        };
+
+        // Regardless of default status, add the provider to the select option list
+        providerSelectOptions.push({
+          value: provider.id,
+          label: `${provider.fullName} (${(provider.practiceName !== "") ? provider.practiceName + `, ${provider.suburb}` : provider.suburb})`,
+        });
+      });
+
+      setSelectOptions(providerSelectOptions);
     }
   }, [providers]);
+
 
   // Remove all PBS related information from local state
   const clearPbsInfo = useCallback(() => {
@@ -185,6 +199,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
 
   }, []);
 
+  
   const formatIndications = (indicationStr) => {
     const clinical = indicationStr.includes('Clinical criteria');
     const treatment = indicationStr.includes('Treatment criteria');
@@ -569,22 +584,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
   }, [drugData.maxRepeats, drugData.maxQuantity, drugData.pbsRx]);
 
 
-  const changeOnEnter = (event, setFunc, data) => {
-    // If the enter key is pressed
-    if (event.keyCode === 13) {
-      event.preventDefault();
-      toggleBooleanState(setFunc, data, event.target.name);
-    }
-  }
-
-  // Pass a set function to handle change, rather than hardcoding with a certain setState function
-  const handleChange = (set, event) => {
-    const { name, value } = event.target;
-    set((prevData) => ({
-      ...prevData,
-      [name]: value
-    }));
-  };
 
 
   // Set useNumbers hook variables to local state
@@ -833,19 +832,9 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
     }
   }, [numbersLoaded, setNumbers])
 
-  // Used to toggle any boolean data in the data states
-  const toggleBooleanState = (setFunc, data, boolToChange) => {
-    let newState = true;
-    if (data[boolToChange]) {
-      newState = false;
-    }
-    setFunc((prevData) => ({
-      ...prevData,
-      [boolToChange]: newState,
-    }));
-  };
-
+ 
   // Ensure form is validated before calling form submission function (to generate Rx)
+  // TODO: Form can submit even if no provider is selected!!
   const checkFormValidation = () => {
     let valid = true;
     let inputFocused = false;
@@ -926,14 +915,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
   };
 
 
-  useEffect(() => {
-    if (providers) {
-      setSelectOptions(providers.map((provider) => ({
-        value: provider.id,
-        label: `${provider.fullName} (${(provider.practiceName !== "") ? provider.practiceName + `, ${provider.suburb}` : provider.suburb})`,
-      })));
-    }
-  }, [providers]);
+
 
   // A handle change function specifically for the select element. Sets both the input state and providerData based on selection
   const handleSelectChange = (event) => {
@@ -1119,7 +1101,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
             checked={drugData.pbsRx}
             className="checkbox pbsRx"
             alert={drugAlerts.pbsRx}
-            enterFunc={(event) => changeOnEnter(event, setDrugData, drugData)}
+            enterFunc={(event) => handleEnterKeyOnCheckbox(event, setDrugData, drugData)}
           />
 
           {(drugData.verified && drugData.indications.length > 0 && drugData.pbsRx) &&
@@ -1175,7 +1157,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
             onChange={() => toggleBooleanState(setDrugData, drugData, 'authRequired')}
             checked={drugData.authRequired}
             className="checkbox authRequired"
-            enterFunc={(event) => changeOnEnter(event, setDrugData, drugData)}
+            enterFunc={(event) => handleEnterKeyOnCheckbox(event, setDrugData, drugData)}
           />
 
           {(drugData.authRequired && drugData.pbsRx) ? <>
@@ -1222,7 +1204,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
                   onChange={() => toggleBooleanState(setMiscData, miscData, 'prevAuth')}
                   checked={miscData.prevAuth}
                   className="checkbox prevAuth"
-                  enterFunc={(event) => changeOnEnter(event, setMiscData, miscData)}
+                  enterFunc={(event) => handleEnterKeyOnCheckbox(event, setMiscData, miscData)}
                 />
               </div>
             </div>
