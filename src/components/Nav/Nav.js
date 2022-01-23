@@ -5,7 +5,7 @@ import { useState } from "react";
 import Hamburger from '../Hamburger/Hamburger'
 
 
-const Nav = ({ user, currentPage }) => {
+const Nav = ({ user, currentPage, resetData }) => {
   const { logout } = useLogout();
 
   const [showNav, setShowNav] = useState(false);
@@ -49,7 +49,10 @@ const Nav = ({ user, currentPage }) => {
               className="Nav__link Nav__link--std" 
               to="/form" 
               role="menuitem" 
-              onClick={closeNav}
+              onClick={() => {
+                resetData();
+                closeNav(); 
+              }}
               {...ariaForm}
               
               state={ { newRx: true } }>New Rx</Link>

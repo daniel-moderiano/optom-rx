@@ -2,7 +2,7 @@ import Nav from "../Nav/Nav"
 import { StyledHeader } from "./Header.styled"
 import { useNavigate } from "react-router-dom";
 
-const Header = ({ user, currentPage }) => {
+const Header = ({ user, currentPage, resetData }) => {
   let navigate = useNavigate();
 
   return (
@@ -21,7 +21,7 @@ const Header = ({ user, currentPage }) => {
           </svg>  
         </div>
       </h1>      
-      <Nav user={user} currentPage={currentPage}/>
+      <Nav user={user} currentPage={currentPage} resetData={resetData}/>
     </StyledHeader>
   )
 }

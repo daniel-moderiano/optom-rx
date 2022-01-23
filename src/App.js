@@ -60,7 +60,8 @@ const App = () => {
   const [currentPage, setCurrentPage] = useState(null);
   const [firstSignIn, setFirstSignIn] = useState(false);
 
-  const resetAllData = useCallback(() => {
+  // Primarily a UI-based function. Data will always be reset for new Rx within the Rx form, but resetting data here on click of any link generating a new Rx avoid the flash of text on initial render containing the old data. Bad look.
+  const resetAllData = () => {
     setData({
       drugData: {
         substitutePermitted: true,
@@ -77,7 +78,7 @@ const App = () => {
       },
       pbsData: null,
     });
-  }, [ausDate]);
+  };
 
   // A global toast listener that fades out any toast message after one second
   useEffect(() => {
@@ -164,7 +165,7 @@ const App = () => {
             <Route path="/" element={
               <>
               {!user && <Navigate to="/login" />}
-              {user && <Home setToast={setToastParams} setPage={setCurrentPage} firstSignIn={firstSignIn} setFirstSignIn={setFirstSignIn}/>}
+              {user && <Home setToast={setToastParams} setPage={setCurrentPage} firstSignIn={firstSignIn} setFirstSignIn={setFirstSignIn} resetData={resetAllData}/>}
               </>
             } />
 
@@ -177,7 +178,7 @@ const App = () => {
 
             <Route path="/form" element={
               <>
-              {user && <RxForm handleSubmit={handleSubmit} googleLoaded={googleLoaded} existingData={data} resetData={resetAllData} setPage={setCurrentPage}/> }
+              {user && <RxForm handleSubmit={handleSubmit} googleLoaded={googleLoaded} existingData={data} setPage={setCurrentPage}/> }
               {!user && <Navigate to="/login"/>}
               </>
             }/>

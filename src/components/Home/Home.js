@@ -8,7 +8,7 @@ import Modal from '../utils/Modal/Modal';
 import ContentContainer from '../utils/ContentContainer/ContentContainer';
 import PageHeader from '../utils/PageHeader/PageHeader';
 
-const Home = ({ setToast, setPage, firstSignIn, setFirstSignIn }) => {
+const Home = ({ setToast, setPage, firstSignIn, setFirstSignIn, resetData }) => {
   const { user } =  useAuthContext();
   const [showModal, setShowModal] = useState(false);
 
@@ -34,7 +34,7 @@ const Home = ({ setToast, setPage, firstSignIn, setFirstSignIn }) => {
       <StyledHome className="Home" >
         <PageHeader title={`Welcome, ${user.displayName}`} description="Create a new script or prescribe one of your favourites"/>
 
-          <Link className="Home__link btn-primary" to='/form' state={ { newRx: true } }>New prescription</Link>
+          <Link className="Home__link btn-primary" to='/form' onClick={resetData} state={ { newRx: true } }>New prescription</Link>
           <div className="Favourites">
             <Favourites user={user} setToast={setToast}/>
           </div>
