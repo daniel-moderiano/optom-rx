@@ -22,13 +22,12 @@ import { useInputChanges } from "../../hooks/useInputChanges";
 // Multiple items are not permitted to be prescribed on the same form; each must use an individual form (applies to optometrists only)
 
 const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }) => {
-  const [{ scriptNo, authRxNo, numbersError, numbersLoading }, fetchNumbers] = useNumbers();
+  // State is only provided if generating a new Rx. This signals certain functions to run (i.e. fetch numbers)
+  const { state } = useLocation();
   const { user } = useAuthContext();
-
+  const [{ scriptNo, authRxNo, numbersError, numbersLoading }, fetchNumbers] = useNumbers();
   const { documents: providers, isPending, error } = useCollection('providers', ['uid', '==', user.uid]);
-
   const [{ pbsInfo, pbsError, pbsLoading }, fetchDrug, clearPbsState] = usePBSFetch(existingData.pbsData);
-
   const { positiveValidationUI, negativeValidationUI, validateRequiredField } = useInputValidation();
   const { abbreviateStateName } = useFormatting();
   const { handleChange, toggleBooleanState, handleEnterKeyOnCheckbox } = useInputChanges();
@@ -42,13 +41,9 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
   const [tooltipText, setTooltipText] = useState('');
 
   const [selectOptions, setSelectOptions] = useState([]);
-
-  // State (at this stage) is only provided if generating a new Rx. Hence the numbers fetch should only be performed when state exists
-  const { state } = useLocation();
+  const [chosenProvider, setChosenProvider] = useState("");
 
   const [numbersLoaded, setNumbersLoaded] = useState(false);
-
-  const [chosenProvider, setChosenProvider] = useState("");
 
   const [drugAlerts, setDrugAlerts] = useState({
     name: {},
@@ -145,6 +140,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
   useEffect(() => {
     setPage('form');
   }, [setPage])
+
 
   // --- REACT SELECT FUNCTIONS ---
 
@@ -459,6 +455,86 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
   };
 
 
+  // --- DATA FORMAT/PRESENTATION FUNCTIONS ---
+  
+  // Used to convert the raw PBS text describing indications for a medication, and formats it to UI freindly format
+  const formatIndications = (indicationStr) => {
+    // One or two medications use the term 'treatment criteria' instead of 'clinical criteria'. There is no real world implications of the difference, so clinical criteria is set as the standard here
+    if (indicationStr.includes('Treatment criteria')) {
+      indicationStr.replace('Treatment criteria', 'Clinical criteria');
+    }
+
+    // Ciclosporin has an absurdly complex indication criteria. Do not even bother with this, link to the PBS site instead
+    if (drugData.itemCode === '12663L') {
+      const html = `<div className="indication">
+        <div className="indication__main">This medication has complex restrictions, please review the <a target="_blank" href="https://www.pbs.gov.au/medicine/item/12663L">PBS listing</a></div>
+      </div>`;
+      setIndication(html);
+      return;
+    }
+  
+    // If the term 'criteria' exists in the string, it means there is an indication + further constraints. Format accordingly
+    if (indicationStr.includes('Clinical criteria')) {
+      const mainIndication = indicationStr.split('Clinical criteria')[0].trim();
+      const splitIndication = indicationStr.split('Clinical criteria');
+      const specificCriteria = splitIndication[1];
+
+      // Format the initial clinical criteria point, always appearing before an 'AND' in the string
+      let preAnd = specificCriteria.split('AND')[0];
+      preAnd = preAnd.replace(':', '').replace('*', '').trim();
+      preAnd = preAnd.slice(0, preAnd.length - 1);
+
+      // Format dot points that exist after an 'AND' in the string, if they exist
+      if (specificCriteria.split('AND').length > 1) {
+        const postAnd = specificCriteria.split('AND')[1];
+        const dotPoints = postAnd.split('* ').filter((point) => point !== " ");
+
+        const mapPoints = () => {
+          const ul = document.createElement('ul');
+          dotPoints.forEach((point) => {
+            const li = document.createElement('li');
+            li.classList.add('indication__list-item');
+            li.textContent = point;
+            ul.appendChild(li);
+          });
+          return ul.outerHTML;
+        }
+        const html = `
+          <div class="indication">
+            <div class="indication__main">${mainIndication}</div>
+            <div class="indication__extra">
+              <div class="indication__clinical">Clinical criteria:</div>
+                <ul class="indication__list">
+                  <li class="indication__list-item">${preAnd}</li>
+                </ul>
+              <div class="indication__and">AND</div>
+              ${mapPoints()}
+            </div>     
+          </div>`;
+        setIndication(html);
+      } else {
+        // Ignore the above if there is no 'AND' with additional points
+        const html = `<div class="indication">
+          <div class="indication__main">${mainIndication}</div>
+          <div class="indication__extra">
+          <div class="indication__clinical">Clinical criteria:</div>
+            <ul class="indication__list">
+              <li class="indication__list-item">${preAnd}</li>
+            </ul>
+          </div>
+        </div>`;
+        setIndication(html);
+      }
+    } else {
+      // If 'criteria' doesn't appear in the string, it must only be a single indication with no constraints
+      const html = `<div className="indication">
+        <div className="indication__main">${indicationStr}</div>
+      </div>`;
+      setIndication(html);
+    }
+  }
+
+
 
   // Remove all PBS related information from local state
   const clearPbsInfo = useCallback(() => {
@@ -483,122 +559,8 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
   }, []);
 
   
-  const formatIndications = (indicationStr) => {
-    const clinical = indicationStr.includes('Clinical criteria');
-    const treatment = indicationStr.includes('Treatment criteria');
-
-    // TODO: consider link to PBS site for ciclosporin
-
-    if (clinical) {
-      // Extract the main general indication (prior to any specific criteria). Will work even where there is no additional text
-      const mainIndication = indicationStr.split('Clinical criteria')[0].trim();
-      const splitIndication = indicationStr.split('Clinical criteria');
-      // Add 'Clinical criteria' to final html and format accordingly
-      const specificCriteria = splitIndication[1];
-      let preAnd = specificCriteria.split('AND')[0];
-      preAnd = preAnd.replace(':', '').replace('*', '').trim();
-      preAnd = preAnd.slice(0, preAnd.length - 1);
-
-      if (specificCriteria.split('AND').length > 1) {
-        const postAnd = specificCriteria.split('AND')[1];
-        const dotPoints = postAnd.split('* ').filter((point) => point !== " ");
-
-        const mapPoints = () => {
-          const ul = document.createElement('ul');
-          dotPoints.forEach((point) => {
-            const li = document.createElement('li');
-            li.classList.add('indication__list-item');
-            li.textContent = point;
-            ul.appendChild(li);
-          });
-          return ul.outerHTML;
-        }
-        const html = `<div class="indication">
-
-          <div class="indication__main">${mainIndication}</div>
-          <div class="indication__extra">
-            <div class="indication__clinical">Clinical criteria:</div>
-              <ul class="indication__list">
-                <li class="indication__list-item">${preAnd}</li>
-              </ul>
-            <div class="indication__and">AND</div>
-            ${mapPoints()}
-          </div>     
-        </div>`;
-        setIndication(html);
-      } else {
-        const html = `<div class="indication">
-          <div class="indication__main">${mainIndication}</div>
-          <div class="indication__extra">
-          <div class="indication__clinical">Clinical criteria:</div>
-            <ul class="indication__list">
-              <li class="indication__list-item">${preAnd}</li>
-            </ul>
-          </div>
-        </div>`;
-        setIndication(html);
-      }
 
 
-    } else if (treatment) {
-      // Extract the main general indication (prior to any specific criteria). Will work even where there is no additional text
-      const mainIndication = indicationStr.split('Treatment criteria')[0].trim();
-      const splitIndication = indicationStr.split('Treatment criteria');
-      // Add 'Treatment criteria' to final html and format accordingly
-      const specificCriteria = splitIndication[1];
-      let preAnd = specificCriteria.split('AND')[0];
-      preAnd = preAnd.replace(':', '').replace('*', '').trim();
-      preAnd = preAnd.slice(0, preAnd.length - 1);
-
-      if (specificCriteria.split('AND').length > 1) {
-        const postAnd = specificCriteria.split('AND')[1];
-        const dotPoints = postAnd.split('* ').filter((point) => point !== " ");
-
-        const mapPoints = () => {
-          const ul = document.createElement('ul');
-          dotPoints.forEach((point) => {
-            const li = document.createElement('li');
-            li.classList.add('indication__list-item');
-            li.textContent = point;
-            ul.appendChild(li);
-          });
-          return ul.outerHTML;
-        }
-        const html = `<div class="indication">
-          <div class="indication__main">${mainIndication}</div>
-          <div class="indication__extra">
-          <div class="indication__clinical">Treatment criteria:</div>
-            <ul class="indication__list">
-              <li class="indication__list-item">${preAnd}</li>
-            </ul>
-          <div class="indication__and">AND</div>
-          ${mapPoints()}
-          </div>
-        </div>`;
-        setIndication(html);
-      } else {
-        const html = `<div class="indication">
-          <div class="indication__main">${mainIndication}</div>
-          <div class="indication__extra">
-          <div class="indication__clinical">Treatment criteria:</div>
-            <ul class="indication__list">
-              <li class="indication__list-item">${preAnd}</li>
-            </ul>
-          </div>
-        </div>`;
-        setIndication(html);
-      }
-
-    } else {
-      // Must be just a single indication
-
-      const html = `<div className="indication">
-        <div className="indication__main">${indicationStr}</div>
-      </div>`;
-      setIndication(html);
-
-    }
-  }
 
   const authorityStatus = useCallback(() => {
     // PBS info-related effects here

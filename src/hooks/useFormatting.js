@@ -124,6 +124,5 @@ export const useFormatting = () => {
     }
   }
 
-
   return { abbreviateStateName, formatDrug, formatDate, formatLocation, formatPhoneNumber, formatMedicareNumber, formatProviderAddress }
 }

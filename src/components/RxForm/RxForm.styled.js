@@ -249,7 +249,9 @@ const StyledRxForm = styled.form`
     font-size: 0.9rem;
     color: #48515B;
 
-    
+    a {
+      color: var(--neutral);
+    }
     
     .indication__extra {
 
