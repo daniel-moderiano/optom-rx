@@ -21,7 +21,7 @@ import { useInputChanges } from "../../hooks/useInputChanges";
 
 // Multiple items are not permitted to be prescribed on the same form; each must use an individual form (applies to optometrists only)
 
-const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }) => {
+const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage }) => {
   // State is only provided if generating a new Rx. This signals certain functions to run (i.e. fetch numbers)
   const { state } = useLocation();
   const { user } = useAuthContext();
@@ -142,6 +142,101 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
   }, [setPage])
 
 
+  // --- FORM INITIALISATION FUNCTIONS ---
+
+  // Generate the unique script and authRx numbers, and attach them to the local RxForm state. This is only performed when loading the RxForm component using 'Create new prescription' btn
+  useEffect(() => {
+    try {
+      if (state.newRx) {
+        // Use .then() to ensure the above scriptNo and authRxNo variables are set prior to attempting to set data state with them
+        fetchNumbers().then(() => {
+          setNumbersLoaded((prevData) => prevData ? prevData : !prevData);
+        });
+
+        // Also reset all existing data 
+        setDrugData({
+          activeIngredient: '',
+          brandName: '',
+          quantity: '',
+          repeats: '',
+          dosage: '',
+          itemCode: '',
+          substitutePermitted: true,
+          brandOnly: false,
+          includeBrand: false,
+          pbsRx: false,
+          compounded: false,
+          verified: false,
+          indications: '',
+          authRequired: false,
+          maxQuantity: '',
+          maxRepeats: '',
+        });
+
+        setPatientData({
+          fullName: '',
+          streetAddress: '',
+          subpremise: '',
+          suburb: '',
+          postcode: '',
+          state: '',
+          medicareNumber: '',
+          medicareRefNumber: '',
+        });
+
+        setMiscData((prevData) => ({
+          ...prevData,
+          authRxNumber: '',
+          authCode: '',
+          scriptID: '',
+          justification: '',
+          prevAuth: false,
+          age: '',
+        }));
+
+      }
+      // If the user has clicked a prescribe or re-prescribe button to get here then newRx should still be present, but this additional logic must be run
+      if (state.rePrescribe) {
+        // State will have scriptData attached. Set it to local state here at form initialisation
+        setDrugData((prevData) => ({
+          ...prevData,
+          activeIngredient: state.scriptData.activeIngredient,
+          brandName: state.scriptData.brandName,
+          quantity: state.scriptData.quantity,
+          repeats: state.scriptData.repeats,
+          dosage: state.scriptData.dosage,
+          itemCode: state.scriptData.itemCode,
+          substitutePermitted: state.scriptData.substitutePermitted,
+          brandOnly: state.scriptData.brandOnly,
+          includeBrand: state.scriptData.includeBrand,
+          pbsRx: state.scriptData.pbsRx,
+          compounded: state.scriptData.compounded,
+          verified: state.scriptData.verified,
+        }));
+
+        // Leave the verified status intact from the original script. Re-call the fetchDrug function; thereby updating all the authority, maxQuantity/repeats, PBS indications, and other related PBS/LEMI features
+
+        // It is possible the drug data will be different from when the drug was initially prescribed. This will update when the fetch call is made, but some of the original script parameters (e.g. max quantity, repeats, or LEMI) may be inappropriate, and the user will not be aware. Consider a modal for scripts older than X months warning the user, or even manually add later if PBS undergoes major changes down the line
+        fetchDrug(state.scriptData.itemCode);
+      }
+    } catch (error) {
+      // If the Rx is not newly generated, a reference error will be thrown, where state is null. No action required.
+    }
+  }, [state, fetchNumbers, fetchDrug]);
+
+  // Set local state with authRxNo and scriptNo fetched from firestore. Activates only when the numbers have been fetched, which is performed as part of generating a newRx
+  useEffect(() => {
+    if (numbersLoaded) {
+      setMiscData((prevData) => ({
+        ...prevData,
+        scriptID: scriptNo,
+        authRxNumber: authRxNo,
+      }))
+    }
+  }, [numbersLoaded, authRxNo, scriptNo])
+ 
+
+  
   // --- REACT SELECT FUNCTIONS ---
 
   // Used to fill the React Select component options using providers fetched from firestore. Will also set the selected option to the default provider if one exists
@@ -378,8 +473,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
     // It is optional to include a function here that provides a warning when one of these are checked to true and the brand name input is empty, but this is opposite to expected user flow and will likely cause annoyance more than anything else
   }, [drugData.includeBrand, drugData.brandOnly]);
 
-    // Ensure form is validated before calling form submission function (to generate Rx)
-  // TODO: Form can submit even if no provider is selected!!
+  // Returns boolean indicating if form is valid or not, and also highlights invalid fields on UI
   const checkFormValidation = () => {
     let valid = true;
     let inputFocused = false;
@@ -463,7 +557,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
   // --- DATA FORMAT/PRESENTATION FUNCTIONS ---
 
   // Used to convert the raw PBS text describing indications for a medication, and formats it to UI freindly format
-  const formatIndications = (indicationStr) => {
+  const formatIndications = useCallback((indicationStr) => {
     // One or two medications use the term 'treatment criteria' instead of 'clinical criteria'. There is no real world implications of the difference, so clinical criteria is set as the standard here
     if (indicationStr.includes('Treatment criteria')) {
       indicationStr = indicationStr.replace('Treatment criteria', 'Clinical criteria');
@@ -537,8 +631,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
       </div>`;
       setIndication(html);
     }
-  }
-
+  }, [drugData.itemCode])
 
 
   // Remove all PBS related information from local state
@@ -720,7 +813,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
         setAuthorityMessage('This prescription does not require authority');
       }
     }
-  }, [pbsInfo, drugData.verified, clearPbsInfo, clearPbsState, drugData.pbsRx]);
+  }, [pbsInfo, drugData.verified, clearPbsInfo, clearPbsState, drugData.pbsRx, formatIndications]);
 
   const quantityRepeatStatus = useCallback(() => {
 
@@ -834,97 +927,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
   }, [drugData.maxRepeats, drugData.maxQuantity, drugData.pbsRx]);
 
 
-  // Generate the unique script and authRx numbers, and attach them to the local RxForm state. This is only performed when loading the RxForm component using 'Create new prescription' btn
-  useEffect(() => {
-    if (state) {
-      // Checks for newRx button having been pressed
-      if (state.newRx) {
-        // Use .then() to ensure the above scriptNo and authRxNo variables are set prior to attempting to set data state with them
-        fetchNumbers().then(() => {
-          setNumbersLoaded((prevData) => prevData ? prevData : !prevData);
-        });
-
-        // Also reset all existing data 
-        resetData();
-        setDrugData({
-          activeIngredient: '',
-          brandName: '',
-          quantity: '',
-          repeats: '',
-          dosage: '',
-          itemCode: '',
-          substitutePermitted: true,
-          brandOnly: false,
-          includeBrand: false,
-          pbsRx: false,
-          compounded: false,
-          verified: false,
-          indications: '',
-          authRequired: false,
-          maxQuantity: '',
-          maxRepeats: '',
-        });
-
-        setPatientData({
-          fullName: '',
-          streetAddress: '',
-          subpremise: '',
-          suburb: '',
-          postcode: '',
-          state: '',
-          medicareNumber: '',
-          medicareRefNumber: '',
-        });
-
-        setMiscData((prevData) => ({
-          ...prevData,
-          authRxNumber: '',
-          authCode: '',
-          scriptID: '',
-          justification: '',
-          prevAuth: false,
-          age: '',
-        }));
-
-      }
-      // If the user has clicked a prescribe or re-prescribe button to get here then newRx should still be present, but this additional logic must be run
-      if (state.rePrescribe) {
-        // State will have scriptData attached. Set it to local state here at form initialisation
-        setDrugData((prevData) => ({
-          ...prevData,
-          activeIngredient: state.scriptData.activeIngredient,
-          brandName: state.scriptData.brandName,
-          quantity: state.scriptData.quantity,
-          repeats: state.scriptData.repeats,
-          dosage: state.scriptData.dosage,
-          itemCode: state.scriptData.itemCode,
-          substitutePermitted: state.scriptData.substitutePermitted,
-          brandOnly: state.scriptData.brandOnly,
-          includeBrand: state.scriptData.includeBrand,
-          pbsRx: state.scriptData.pbsRx,
-          compounded: state.scriptData.compounded,
-          verified: state.scriptData.verified,
-        }));
-
-        // Leave the verified status intact from the original script. Re-call the fetchDrug function; thereby updating all the authority, maxQuantity/repeats, PBS indications, and other related PBS/LEMI features
-
-        // It is possible the drug data will be different from when the drug was initially prescribed. This will update when the fetch call is made, but some of the original script parameters (e.g. max quantity, repeats, or LEMI) may be inappropriate, and the user will not be aware. Consider a modal for scripts older than X months warning the user, or even manually add later if PBS undergoes major changes down the line
-        fetchDrug(state.scriptData.itemCode);
-      }
-    }
-  }, [state, fetchNumbers, resetData, fetchDrug]);
-
-  // Set local state with authRxNo and scriptNo fetched from firestore. Activates only when the numbers have been fetched, which is performed as part of generating a newRx
-  useEffect(() => {
-    if (numbersLoaded) {
-      setMiscData((prevData) => ({
-        ...prevData,
-        scriptID: scriptNo,
-        authRxNumber: authRxNo,
-      }))
-    }
-  }, [numbersLoaded, authRxNo, scriptNo])
- 
 
 
 
