@@ -43,24 +43,6 @@ const EditProvider = ({ googleLoaded, setToast, setPage }) => {
     }));
   }, [existingData]);
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setProviderData((prevData) => ({
-      ...prevData, 
-      [name]: value 
-    }));
-  };
-
-  const toggleBooleanState = (setData, data, boolToChange) => {
-    let newState = true;
-    if (data[boolToChange]) {
-      newState = false;
-    }
-    setData((prevData) => ({
-      ...prevData,
-      [boolToChange]: newState,
-    }));
-  };
 
   const handleSubmit = async () => {
     setLocalPending(true);
@@ -110,10 +92,8 @@ const EditProvider = ({ googleLoaded, setToast, setPage }) => {
             googleLoaded={googleLoaded} 
             data={providerData}
             setData={setProviderData}
-            handleChange={handleChange}
             handleSubmit={handleSubmit}
             handleCancel={cancelEdit}
-            toggleBooleanState={() => toggleBooleanState(setProviderData, providerData, 'prefix')}
             submitBtnLabel="Save changes"
             pending={localPending}
           />

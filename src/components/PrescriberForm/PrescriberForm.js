@@ -11,12 +11,12 @@ import { useInputChanges } from "../../hooks/useInputChanges";
 
 // ! Legal requirements include the prescriber's name, address, contact details, and prescriber number
 
-const PrescriberForm = ({ data, setData, toggleBooleanState, googleLoaded, handleSubmit, handleCancel, submitBtnLabel, pending, formPending }) => {
+const PrescriberForm = ({ data, setData, googleLoaded, handleSubmit, handleCancel, submitBtnLabel, pending, formPending }) => {
 
   // Hook usage for formatting and validation purposes
   const { positiveValidationUI, negativeValidationUI, validateRequiredField } = useInputValidation();
   const { abbreviateStateName } = useFormatting();
-  const { handleChange } = useInputChanges();
+  const { handleChange, toggleBooleanState, handleEnterKeyOnCheckbox } = useInputChanges();
 
   const [providerAlerts, setProviderAlerts] = useState({
     fullName: {},
@@ -135,15 +135,10 @@ const PrescriberForm = ({ data, setData, toggleBooleanState, googleLoaded, handl
             fieldType="checkbox" 
             name="prefix"
             label="Include 'Dr' in provider name" 
-            onChange={toggleBooleanState}
+            onChange={() => toggleBooleanState(setData, data, 'prefix')}
             checked={data.prefix}
             className="checkbox prefix-field"
-            enterFunc={(event) => {
-              if (event.keyCode === 13) {
-                event.preventDefault();
-                toggleBooleanState(setData, data, event.target.name);
-              }
-            }}
+            enterFunc={(event) => handleEnterKeyOnCheckbox(event, setData, data)}
           />  
 
           <FormField 
