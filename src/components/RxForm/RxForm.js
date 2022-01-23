@@ -22,7 +22,7 @@ import { useInputChanges } from "../../hooks/useInputChanges";
 // Multiple items are not permitted to be prescribed on the same form; each must use an individual form (applies to optometrists only)
 
 const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }) => {
-  const [{ scriptNo, authRxNo, isError, isLoading }, fetchNumbers] = useNumbers();
+  const [{ scriptNo, authRxNo, numbersError, numbersLoading }, fetchNumbers] = useNumbers();
   const { user } = useAuthContext();
 
   const { documents: providers, isPending, error } = useCollection('providers', ['uid', '==', user.uid]);
@@ -584,16 +584,17 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
   }, [drugData.maxRepeats, drugData.maxQuantity, drugData.pbsRx]);
 
 
-
-
-  // Set useNumbers hook variables to local state
-  const setNumbers = useCallback(() => {
-    setMiscData((prevData) => ({
-      ...prevData,
-      scriptID: scriptNo,
-      authRxNumber: authRxNo,
-    }))
-  }, [authRxNo, scriptNo])
+  // Set local state with authRxNo and scriptNo fetched from firestore. Activates only when the numbers have been fetched
+  useEffect(() => {
+    if (numbersLoaded) {
+      setMiscData((prevData) => ({
+        ...prevData,
+        scriptID: scriptNo,
+        authRxNumber: authRxNo,
+      }))
+    }
+  }, [numbersLoaded, authRxNo, scriptNo])
+  
 
 
   // Inline form validation
@@ -825,12 +826,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
     }
   }, [state, fetchNumbers, resetData, fetchDrug]);
 
-  // Set local state with authRxNo and scriptNo fetched from firestore. Activates only when the numbers have been fetched on a first time new Rx 
-  useEffect(() => {
-    if (numbersLoaded) {
-      setNumbers();
-    }
-  }, [numbersLoaded, setNumbers])
 
  
   // Ensure form is validated before calling form submission function (to generate Rx)
@@ -983,7 +978,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
         noValidate
       >
 
-        <div className="scriptNo" data-testid="scriptNo">Script number: {isLoading ? 'Loading...' : miscData.scriptID}</div>
+        <div className="scriptNo" data-testid="scriptNo">Script number: {numbersLoading ? 'Loading...' : miscData.scriptID}</div>
 
         <Fieldset className="provider-form select-fieldset" legend="Prescriber details">
           <div className="provider-controls">
@@ -1039,7 +1034,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
           />
 
           <div className="medicareFields">
-            {/* Validation requires a 10-digit number. Further checks are beyond the scopy of this application */}
             <FormField
               fieldType="text"
               name="medicareNumber"
@@ -1053,14 +1047,13 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
               describedBy={Object.keys(patientAlerts.medicareNumber).length === 0 ? null : 'medicareNumber-alert'}
             />
 
-            {/* Validation dictates only a single digit from 1-9 */}
+            {/* The alert for this field is attached to medicareNumber field for UI pruposes since these fields are 'linked' conceptually */}
             <FormField
               fieldType="text"
               name="medicareRefNumber"
               label="IRN"
               value={patientData.medicareRefNumber}
               onChange={(event) => handleChange(event, setPatientData)}
-              // alert={patientAlerts.medicareRefNumber}
               maxlength="1"
               className="irn-field medicare-field form-field"
               describedBy={Object.keys(patientAlerts.medicareRefNumber).length === 0 ? null : 'medicareRefNumber-alert'}
@@ -1164,8 +1157,8 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, resetData, setPage }
             <div className="numbers" data-testid="numbers">
 
               {/* drugData.authRequired should be auto-selected once PBS integration is complete, but should also have an option to set manually */}
-              {drugData.authRequired && <div className="authRxNo" data-testid="authRxNo">Authority script number: {isLoading ? 'Loading...' : miscData.authRxNumber}</div>}
-              {isError && <div className="numbers__error">Something went wrong</div>}
+              {drugData.authRequired && <div className="authRxNo" data-testid="authRxNo">Authority script number: {numbersLoading ? 'Loading...' : miscData.authRxNumber}</div>}
+              {numbersError && <div className="numbers__error">Something went wrong</div>}
             </div>
 
             {/* Consider a variable message beside or below this saying 'not required for this medication' or similar */}

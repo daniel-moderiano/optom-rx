@@ -33,18 +33,7 @@ const AddProvider = ({ googleLoaded, setToast, setPage }) => {
     setPage(null);
   }, [setPage])
 
-
-  const toggleBooleanState = (setData, data, boolToChange) => {
-    let newState = true;
-    if (data[boolToChange]) {
-      newState = false;
-    }
-    setData((prevData) => ({
-      ...prevData,
-      [boolToChange]: newState,
-    }));
-  };
-
+  
   const handleSubmit = async (event) => {
     event.preventDefault(); 
     setIsPending(true);

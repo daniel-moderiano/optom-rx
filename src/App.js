@@ -61,7 +61,6 @@ const App = () => {
   const [firstSignIn, setFirstSignIn] = useState(false);
 
   const resetAllData = useCallback(() => {
-    console.log('Reset all data');
     setData({
       drugData: {
         substitutePermitted: true,

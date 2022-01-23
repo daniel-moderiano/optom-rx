@@ -1,15 +1,13 @@
 import { db } from "../firebase/config";
 import { useCallback, useState } from "react";
-
-// Firebase imports
 import { doc, runTransaction } from "firebase/firestore";
 
 // A hook that fetches the current script number from the backend, using a single getDoc call (as opposed to snapshot real time updates), and subsequently increments this number and updates the backend ready for subsequent calls
 export const useNumbers = () => {
   const [scriptNo, setScriptNo] = useState('');
   const [authRxNo, setAuthRxNo] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
+  const [numbersLoading, setNumbersLoading] = useState(false);
+  const [numbersError, setNumbersError] = useState(false);
 
   // Correctly increment the base auth Rx number to be updated on the backend
   const incrementScriptNumber = (prevNumber) => {
@@ -60,8 +58,8 @@ export const useNumbers = () => {
 
   const fetchData = useCallback(() => {
     // Initialise error and loading state
-    setIsLoading(true);
-    setIsError(false);
+    setNumbersLoading(true);
+    setNumbersError(false);
 
     // Note there will only ever be one 'current' field in each document in this collection. There are only two documents: scriptNo and authRxNo. They should never need to be called separately.
     const scriptNoRef = doc(db, 'numbers', 'scriptNo');
@@ -83,11 +81,10 @@ export const useNumbers = () => {
       setScriptNo(newScriptNo);
     })
     .catch((error) => {
-      console.log(error);
-      setIsError(true);
+      setNumbersError(error);
     })  
     .finally(() => {
-      setIsLoading(false);
+      setNumbersLoading(false);
     }) 
 
     const authTransaction = runTransaction(db, (transaction) => {
@@ -101,17 +98,15 @@ export const useNumbers = () => {
       setAuthRxNo(generateAuthRxNumber(newAuthRxNo));
     })
     .catch((error) => {
-      console.log(error);
-      setIsError(true);
+      setNumbersError(error);
     })   
     .finally(() => {
-      setIsLoading(false);
+      setNumbersLoading(false);
     }) 
 
     return Promise.all([scriptTransaction, authTransaction]);
-
   }, []);
 
   // Reference the documents using destructuring in any component
-  return [{ scriptNo, authRxNo, isLoading, isError }, fetchData]
+  return [{ scriptNo, authRxNo, numbersLoading, numbersError }, fetchData]
 }

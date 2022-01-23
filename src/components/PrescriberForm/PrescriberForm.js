@@ -151,7 +151,7 @@ const PrescriberForm = ({ data, setData, googleLoaded, handleSubmit, handleCance
             maxlength="40"
           />
 
-          {/* Practice name is only relevant for providers, and even then you might consider omitting this, as there is really no room on the computerised for for practice name */}
+          {/* Practice name is only used for display purposes to quickly identify the provider to the user */}
           <FormField 
             name="practiceName"
             label="Practice name (optional)" 
