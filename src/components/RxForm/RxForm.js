@@ -27,7 +27,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage }) => {
   const { user } = useAuthContext();
   const [{ scriptNo, authRxNo, numbersError, numbersLoading }, fetchNumbers] = useNumbers();
   const { documents: providers, isPending, error } = useCollection('providers', ['uid', '==', user.uid]);
-  const [{ pbsInfo, pbsError, pbsLoading }, fetchDrug, clearPbsState] = usePBSFetch(existingData.pbsData);
+  const [{ pbsInfo, pbsError, pbsLoading }, fetchDrug, clearPbsState, setPbsInfo] = usePBSFetch(existingData.pbsData);
   const { positiveValidationUI, negativeValidationUI, validateRequiredField } = useInputValidation();
   const { abbreviateStateName } = useFormatting();
   const { handleChange, toggleBooleanState, handleEnterKeyOnCheckbox } = useInputChanges();
@@ -195,7 +195,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage }) => {
         }));
 
       }
-      // If the user has clicked a prescribe or re-prescribe button to get here then newRx should still be present, but this additional logic must be run
+      // If the user has clicked a prescribe or re-prescribe button to get here then newRx will still be true, but this additional logic must be run to initialise drug data
       if (state.rePrescribe) {
         // State will have scriptData attached. Set it to local state here at form initialisation
         setDrugData((prevData) => ({
@@ -234,9 +234,8 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage }) => {
       }))
     }
   }, [numbersLoaded, authRxNo, scriptNo])
- 
 
-  
+
   // --- REACT SELECT FUNCTIONS ---
 
   // Used to fill the React Select component options using providers fetched from firestore. Will also set the selected option to the default provider if one exists
@@ -285,7 +284,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage }) => {
       ...provider,
     })
   }
-  
+
   // Sets the CSS styles for React Select component
   const customStyles = {
     control: (base, state) => ({
@@ -441,7 +440,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage }) => {
         }
       });
     };
-    
+
     // Although only a single field is being validated, the switch statement should remain in case more fields need to be added
     const miscDataValidation = () => {
       document.querySelector('.misc-form').addEventListener('focusout', (event) => {
@@ -571,7 +570,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage }) => {
       setIndication(html);
       return;
     }
-  
+
     // If the term 'criteria' exists in the string, it means there is an indication + further constraints. Format accordingly
     if (indicationStr.includes('Clinical criteria')) {
       const mainIndication = indicationStr.split('Clinical criteria')[0].trim();
@@ -634,6 +633,16 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage }) => {
   }, [drugData.itemCode])
 
 
+
+
+
+
+
+
+
+
+
+
   // Remove all PBS related information from local state
   const clearPbsInfo = useCallback(() => {
     setDrugData((prevData) => ({
@@ -656,8 +665,27 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage }) => {
 
   }, []);
 
-  
 
+  useEffect(() => {
+    // Toggle any PBS-related functionality if there is a change in verified status. 
+    if (!drugData.verified) {
+      clearPbsInfo();
+      setPbsInfo(null);
+      setDrugAlerts((prevAlerts) => ({
+        ...prevAlerts,
+        pbsRx: {
+          message: 'Select a medication from the dropdown list for PBS information',
+          type: 'neutral',
+        }
+      }));
+      // Only bother with an authority message to select a dropdown medication IF the user is trying to prescribe on PBS
+      if (drugData.pbsRx) {
+        setAuthorityMessage('Select a medication from the dropdown list for authority information');
+      } else {
+        setAuthorityMessage('This prescription does not require authority');
+      }
+    }
+  }, [drugData.verified, drugData.pbsRx, clearPbsInfo, setPbsInfo])
 
 
   const authorityStatus = useCallback(() => {
@@ -681,7 +709,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage }) => {
             ...prevData,
             authCode: pbsInfo['streamline-code'],
           }));
-          // TODO: Success class added to streamline code
         } else {
           setMiscAlerts((prevAlerts) => ({
             ...prevAlerts,
@@ -699,27 +726,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage }) => {
         setAuthorityMessage('This prescription does not require authority');
       }
     }
-
-    // Toggle any PBS-related functionality if there is a change in verified status. 
-    if (!drugData.verified) {
-      clearPbsInfo();
-      clearPbsState();
-      setDrugAlerts((prevAlerts) => ({
-        ...prevAlerts,
-        pbsRx: {
-          message: 'Select a medication from the dropdown list for PBS information',
-          type: 'neutral',
-        }
-      }));
-      // Only bother with an authority message to select a dropdown medication IF the user is trying to prescribe on PBS
-      if (drugData.pbsRx) {
-        setAuthorityMessage('Select a medication from the dropdown list for authority information');
-      } else {
-        setAuthorityMessage('This prescription does not require authority');
-      }
-    }
-
-  }, [pbsInfo, drugData.verified, clearPbsInfo, clearPbsState, drugData.pbsRx]);
+  }, [pbsInfo, drugData.pbsRx]);
 
   // Identify whether a drug on the PBS is restricted or not, and display indications for use on restricted items
   const restrictedStatus = useCallback(() => {
@@ -794,58 +801,40 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage }) => {
         }
       }));
     }
-
-    // Toggle any PBS-related functionality if there is a change in verified status. 
-    if (!drugData.verified) {
-      clearPbsInfo();
-      clearPbsState();
-      setDrugAlerts((prevAlerts) => ({
-        ...prevAlerts,
-        pbsRx: {
-          message: 'Select a medication from the dropdown list for PBS information',
-          type: 'neutral',
-        }
-      }));
-      // Only bother with an authority message to select a dropdown medication IF the user is trying to prescribe on PBS
-      if (drugData.pbsRx) {
-        setAuthorityMessage('Select a medication from the dropdown list for authority information');
-      } else {
-        setAuthorityMessage('This prescription does not require authority');
-      }
-    }
-  }, [pbsInfo, drugData.verified, clearPbsInfo, clearPbsState, drugData.pbsRx, formatIndications]);
+  }, [pbsInfo, drugData.pbsRx, formatIndications]);
 
   const quantityRepeatStatus = useCallback(() => {
 
     // PBS info-related effects here
-    if (pbsInfo) {
+    if (pbsInfo && drugData.pbsRx) {
       // All PBS drugs have restrictions on quantity and repeats; set to local state
       setDrugData((prevData) => ({
         ...prevData,
         maxRepeats: pbsInfo['repeats'],
         maxQuantity: pbsInfo['mq'],
       }));
-    }
 
-    // Toggle any PBS-related functionality if there is a change in verified status. 
-    if (!drugData.verified) {
-      clearPbsInfo();
-      clearPbsState();
       setDrugAlerts((prevAlerts) => ({
         ...prevAlerts,
-        pbsRx: {
-          message: 'Select a medication from the dropdown list for PBS information',
+        maxQuantity: {
+          message: `Maximum allowed quantity under the PBS is ${drugData.maxQuantity}`,
+          type: 'neutral',
+        },
+        maxRepeats: {
+          message: `Maximum allowed repeats under the PBS is ${drugData.maxRepeats}`,
           type: 'neutral',
         }
       }));
-      if (drugData.pbsRx) {
-        setAuthorityMessage('Select a medication from the dropdown list for authority information');
-      } else {
-        setAuthorityMessage('This prescription does not require authority');
-      }
+    } else {
+      setDrugAlerts((prevAlerts) => ({
+        ...prevAlerts,
+        maxQuantity: {},
+        maxRepeats: {},
+      }));
     }
 
-  }, [pbsInfo, drugData.verified, clearPbsInfo, clearPbsState, drugData.pbsRx]);
+  }, [pbsInfo, drugData.pbsRx, drugData.maxQuantity, drugData.maxRepeats]);
+
 
   // Identify whether a drug on the PBS is restricted or not, and display indications for use on restricted items
   const lemiStatus = useCallback(() => {
@@ -883,11 +872,17 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage }) => {
       }
     }
 
-    // Hide the tooltip if the user changes the medication manually, but leave the lemi/lmbc settings unchanged
+    // Hide the tooltip if the user changes the medication manually, and restore LEMI settings to default
     if (!drugData.verified) {
       if (showTooltip) {
         setShowTooltip((prevData) => !prevData);
+        setTooltipText('');
       }
+      setDrugData((prevData) => ({
+        ...prevData,
+        brandOnly: false,
+        includeBrand: false,
+      }));
     }
   }, [pbsInfo, drugData.verified, setShowTooltip, showTooltip]);
 
@@ -901,32 +896,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage }) => {
   }, [restrictedStatus, authorityStatus, quantityRepeatStatus, lemiStatus, pbsInfo])
 
 
-  // Used to manage alerts on max quantity and repeats under the PBS
-  useEffect(() => {
-    // Ensures the call happens when a max quantity and repeat are added
-    if (drugData.maxQuantity.length > 0 && drugData.maxRepeats.length > 0 && drugData.pbsRx) {
-      setDrugAlerts((prevAlerts) => ({
-        ...prevAlerts,
-        maxQuantity: {
-          message: `Maximum allowed quantity under the PBS is ${drugData.maxQuantity}`,
-          type: 'neutral',
-        },
-        maxRepeats: {
-          message: `Maximum allowed repeats under the PBS is ${drugData.maxRepeats}`,
-          type: 'neutral',
-        }
-      }));
-    } else {
-      // If the above condition isn't met, it means the quantity and repeat values are gone, so no valid PBS drug exists. hence remove all alerts
-      setDrugAlerts((prevAlerts) => ({
-        ...prevAlerts,
-        maxQuantity: {},
-        maxRepeats: {},
-      }));
-    }
-  }, [drugData.maxRepeats, drugData.maxQuantity, drugData.pbsRx]);
-
-
 
 
 
@@ -938,14 +907,12 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage }) => {
         onSubmit={(e) => {
           e.preventDefault();
           if (checkFormValidation()) {
-
             handleSubmit(drugData, patientData, providerData, miscData, pbsInfo)
           }
         }}
         autoComplete="off"
         noValidate
       >
-
         <div className="scriptNo" data-testid="scriptNo">Script number: {numbersLoading ? 'Loading...' : miscData.scriptID}</div>
 
         <Fieldset className="provider-form select-fieldset" legend="Prescriber details">
@@ -980,7 +947,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage }) => {
         <Fieldset className="patient-form" legend="Patient details">
           {/* Legal requirements include only the patient's name and address */}
           <FormField
-            fieldType="text"
             name="fullName"
             label="Full name"
             value={patientData.fullName}
@@ -1003,7 +969,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage }) => {
 
           <div className="medicareFields">
             <FormField
-              fieldType="text"
               name="medicareNumber"
               label="Medicare number"
               value={patientData.medicareNumber}
@@ -1017,7 +982,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage }) => {
 
             {/* The alert for this field is attached to medicareNumber field for UI pruposes since these fields are 'linked' conceptually */}
             <FormField
-              fieldType="text"
               name="medicareRefNumber"
               label="IRN"
               value={patientData.medicareRefNumber}
@@ -1044,7 +1008,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage }) => {
           />
 
           <FormField
-            fieldType="text"
             name="dosage"
             label="Dosage directions"
             value={drugData.dosage}
@@ -1131,7 +1094,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage }) => {
 
             {/* Consider a variable message beside or below this saying 'not required for this medication' or similar */}
             <FormField
-              fieldType="text"
               name="authCode"
               label="Authority code (where applicable)"
               value={miscData.authCode}

@@ -56,7 +56,7 @@ const StyledDrugAutocomplete = styled.div`
   }
 
   .hide {
-    display: none;
+    display: none !important;
   }
 
   .show-list {

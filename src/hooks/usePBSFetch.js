@@ -46,5 +46,5 @@ export const usePBSFetch = (localPbsInfo) => {
     setPbsInfo(null);
   }, [])
 
-  return [{ pbsInfo, pbsLoading, pbsError }, fetchDrug, clearPbsState];
+  return [{ pbsInfo, pbsLoading, pbsError }, fetchDrug, clearPbsState, setPbsInfo];
 }
