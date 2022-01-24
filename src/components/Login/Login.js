@@ -85,7 +85,6 @@ const Login = ({ setPage }) => {
             alert={emailAlert}
             autoFocus
             required
-            describedBy={Object.keys(emailAlert).length === 0 ? null : 'email-alert'}
             autocomplete="username"
           />
 
@@ -100,7 +99,6 @@ const Login = ({ setPage }) => {
               className="auth-field form-field pass-field"
               alert={passwordAlert}
               required
-              describedBy={Object.keys(passwordAlert).length === 0 ? null : 'password-alert'}
               autocomplete="current-password"
             />
           </PasswordContainer>

@@ -484,7 +484,6 @@ const Settings = ({ user, setToast, setPage }) => {
               className="auth-field form-field"
               alert={deleteConfirmPasswordAlert}
               required
-              describedBy={Object.keys(deleteConfirmPasswordAlert).length === 0 ? null : 'current-password-alert'}
               autocomplete="current-password"
             />
           </PasswordContainer>
@@ -525,7 +524,6 @@ const Settings = ({ user, setToast, setPage }) => {
             onChange={(event) => setNewEmail(event.target.value)} 
             alert={newEmailAlert}
             required
-            describedBy={Object.keys(newEmailAlert).length === 0 ? null : 'newEmail-alert'}
           />  
 
           <PasswordContainer showPassword={showEmailConfirmPassword} handleClick={() => setShowEmailConfirmPassword((prevState) => (!prevState))}>
@@ -539,8 +537,6 @@ const Settings = ({ user, setToast, setPage }) => {
               className="auth-field form-field"
               alert={emailConfirmPasswordAlert}
               required
-              describedBy={Object.keys(emailConfirmPasswordAlert).length === 0 ? null : 'current-password-alert'}
-              autocomplete="current-password"
             />
           </PasswordContainer>          
 
@@ -617,7 +613,6 @@ const Settings = ({ user, setToast, setPage }) => {
                   onChange={(event) => setCurrentPassword(event.target.value)} 
                   alert={currentPasswordAlert}
                   required
-                  describedBy='currentPassword-alert'
                 />  
             </PasswordContainer>   
 
@@ -630,7 +625,6 @@ const Settings = ({ user, setToast, setPage }) => {
                 onChange={(event) => setNewPassword(event.target.value)} 
                 alert={newPasswordAlert}
                 required
-                describedBy='newPassword-alert'
               />  
             </PasswordContainer>   
 
@@ -643,7 +637,6 @@ const Settings = ({ user, setToast, setPage }) => {
                 onChange={(event) => setConfirmPassword(event.target.value)} 
                 alert={confirmPasswordAlert}
                 required
-                describedBy='confirmPassword-alert'
               />  
             </PasswordContainer>   
             

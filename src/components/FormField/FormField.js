@@ -25,7 +25,7 @@ const FormField = (props) => {
               onChange={onChange} 
               maxLength={maxlength}
               checked={checked}
-              className={checked ? 'checked' : 'unchecked'}
+              className={checked && 'checked'}
               onKeyDown={enterFunc}
               required={required}
               autoFocus={autoFocus ? true : false}

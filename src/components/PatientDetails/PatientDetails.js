@@ -15,7 +15,6 @@ const PatientDetails = ({ data, setData, alerts, setAlerts, googleLoaded }) => {
         alert={alerts.fullName}
         autoFocus
         required
-        describedBy={Object.keys(alerts.fullName).length === 0 ? null : 'fullName-alert'}
       />
 
       <AddressAutocomplete
@@ -38,7 +37,6 @@ const PatientDetails = ({ data, setData, alerts, setAlerts, googleLoaded }) => {
           subAlert={alerts.medicareRefNumber}
           maxlength="10"
           className="medicareNumber-field medicare-field form-field"
-          describedBy={Object.keys(alerts.medicareNumber).length === 0 ? null : 'medicareNumber-alert'}
         />
 
         {/* The alert for this field is attached to medicareNumber field for UI pruposes since these fields are 'linked' conceptually */}
@@ -49,7 +47,6 @@ const PatientDetails = ({ data, setData, alerts, setAlerts, googleLoaded }) => {
           onChange={(event) => handleChange(event, setData)}
           maxlength="1"
           className="irn-field medicare-field form-field"
-          describedBy={Object.keys(alerts.medicareRefNumber).length === 0 ? null : 'medicareRefNumber-alert'}
         />
       </div>
   </>);

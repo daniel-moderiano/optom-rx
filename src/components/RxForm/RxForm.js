@@ -808,7 +808,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
             onChange={(event) => handleChange(event, setDrugData)}
             alert={drugAlerts.dosage}
             required
-            describedBy={Object.keys(drugAlerts.dosage).length === 0 ? null : 'dosage-alert'}
           />
 
           <FormField
@@ -836,7 +835,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
             subAlert={drugAlerts.maxQuantity}
             className="quantity-field form-field"
             required
-            describedBy={Object.keys(drugAlerts.quantity).length === 0 ? null : 'quantity-alert'}
           />
 
           <FormField
@@ -849,7 +847,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
             subAlert={drugAlerts.maxRepeats}
             className="repeats-field form-field"
             required
-            describedBy={Object.keys(drugAlerts.repeats).length === 0 ? null : 'repeats-alert'}
           />
         </Fieldset>
 
@@ -879,7 +876,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
               value={miscData.authCode}
               onChange={(event) => handleChange(event, setMiscData)}
               alert={miscAlerts.authCode}
-              describedBy={Object.keys(miscAlerts.authCode).length === 0 ? null : 'authCode-alert'}
             />
 
             <div className="retention">

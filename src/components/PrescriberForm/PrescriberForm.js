@@ -128,7 +128,6 @@ const PrescriberForm = ({ data, setData, googleLoaded, handleSubmit, handleCance
             onChange={(event) => handleChange(event, setData)} 
             alert={providerAlerts.fullName}
             required
-            describedBy={Object.keys(providerAlerts.fullName).length === 0 ? null : 'fullName-alert'}
           />    
 
           <FormField 
@@ -180,7 +179,6 @@ const PrescriberForm = ({ data, setData, googleLoaded, handleSubmit, handleCance
             maxlength="10"
             className="phoneNo-field form-field"
             required
-            describedBy = {Object.keys(providerAlerts.phoneNumber).length === 0 ? null : 'phoneNumber-alert'}
           />
 
           <FormField 
@@ -193,7 +191,6 @@ const PrescriberForm = ({ data, setData, googleLoaded, handleSubmit, handleCance
             maxlength="7"
             className="prescriberNo-field form-field"
             required
-            describedBy = {Object.keys(providerAlerts.prescriberNumber).length === 0 ? null : 'prescriberNumber-alert'}
           />
         </div>
        

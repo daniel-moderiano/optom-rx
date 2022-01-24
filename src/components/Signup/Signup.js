@@ -107,7 +107,6 @@ const Signup = ({ setPage, setFirstSignIn }) => {
             alert={emailAlert}
             autoFocus
             required
-            describedBy={Object.keys(emailAlert).length === 0 ? null : 'email-alert'}
             autocomplete="username"
           />
 
@@ -122,7 +121,6 @@ const Signup = ({ setPage, setFirstSignIn }) => {
               className="auth-field form-field pass-field"
               alert={passwordAlert}
               required
-              describedBy='new-password-alert'
               autocomplete="new-password"
             />
           </PasswordContainer>
@@ -135,7 +133,6 @@ const Signup = ({ setPage, setFirstSignIn }) => {
             onChange={(event) => setDisplayName(event.target.value)} 
             className="auth-field form-field displayName-field"
             alert={displayNameAlert}
-            describedBy={Object.keys(displayNameAlert).length === 0 ? null : 'displayName-alert'}
             required
           />
 

@@ -155,7 +155,6 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider, alerts, se
         alert={alerts.streetAddress}
         className="street-address form-field"
         required
-        describedBy = {Object.keys(alerts.streetAddress).length === 0 ? null : `${provider ? 'autocomplete-provider' : 'autocomplete-patient'}-alert`}
       />
       <button type="button" onClick={() => setExpand(true)}>Enter manually</button>      
 
@@ -175,7 +174,6 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider, alerts, se
           onChange={handleChange} 
           alert={alerts.suburb}
           required
-          describedBy = {Object.keys(alerts.suburb).length === 0 ? null : 'suburb-alert'}
         />
 
         <FormField 
@@ -186,7 +184,6 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider, alerts, se
           alert={alerts.state}
           className="form-field"
           required
-          describedBy = {Object.keys(alerts.state).length === 0 ? null : 'state-alert'}
         />
 
         <FormField 
@@ -198,7 +195,6 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider, alerts, se
           className="postcode-field"
           maxlength="4"
           required
-          describedBy = {Object.keys(alerts.postcode).length === 0 ? null : 'postcode-alert'}
         />
       </div>
     </StyledAddressAutocomplete>

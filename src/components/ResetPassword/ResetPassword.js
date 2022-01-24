@@ -122,7 +122,6 @@ const ResetPassword = ({ setToast, setPage }) => {
             alert={emailAlert}
             autoFocus
             required
-            describedBy={Object.keys(emailAlert).length === 0 ? null : 'email-alert'}
             autocomplete="username"
           />
 

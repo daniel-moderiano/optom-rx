@@ -145,7 +145,6 @@ const ViewScript = ({ setToast, resetData, setPage }) => {
                 message: "This script will be displayed in your favourites list using this name."
               }}
               autoFocus
-              describedBy='customName-alert'
             />
             <div className="Modal__buttons">
               <Button classLabel="cancel" design="secondary" handleClick={() => setShowModal(false)}>Cancel</Button>
