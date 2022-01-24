@@ -31,8 +31,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
 
   const [authorityMessage, setAuthorityMessage] = useState('Please select a medication for authority requirements')
 
-  const [indicationHTML, setIndicationHTML] = useState('');
-
   const [showTooltip, setShowTooltip] = useState(true);
   const [tooltipText, setTooltipText] = useState('');
 
