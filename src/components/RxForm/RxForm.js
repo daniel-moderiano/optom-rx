@@ -18,6 +18,7 @@ import Button from '../utils/Button/Button';
 import { useInputValidation } from "../../hooks/useInputValidation";
 import { useFormatting } from '../../hooks/useFormatting';
 import { useInputChanges } from "../../hooks/useInputChanges";
+import PrescriberDetails from "../PrescriberDetails/PrescriberDetails";
 
 // Multiple items are not permitted to be prescribed on the same form; each must use an individual form (applies to optometrists only)
 
@@ -39,9 +40,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage }) => {
 
   const [showTooltip, setShowTooltip] = useState(true);
   const [tooltipText, setTooltipText] = useState('');
-
-  const [selectOptions, setSelectOptions] = useState([]);
-  const [chosenProvider, setChosenProvider] = useState("");
 
   const [numbersLoaded, setNumbersLoaded] = useState(false);
 
@@ -234,94 +232,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage }) => {
       }))
     }
   }, [numbersLoaded, authRxNo, scriptNo])
-
-
-  // --- REACT SELECT FUNCTIONS ---
-
-  // Used to fill the React Select component options using providers fetched from firestore. Will also set the selected option to the default provider if one exists
-  useEffect(() => {
-    // Do not run unless a providers collection exists (i.e. has been fetched from firebase)
-    if (providers) {
-      let providerSelectOptions = [];
-
-      providers.forEach((provider, index) => {
-        // Add the provider to the select option list
-        providerSelectOptions.push({
-          value: provider.id,
-          label: `${provider.fullName} (${(provider.practiceName !== "") ? provider.practiceName + `, ${provider.suburb}` : provider.suburb})`,
-        });
-
-        // Set the first provider as selected. If a default exists, this will be replaced
-        if (index === 0) {
-          setChosenProvider(providerSelectOptions[0]);
-          setProviderData({
-            ...provider,
-          })
-        }
-
-        // Check for a default provider
-        if (provider.default) {
-          // Update the select element accordingly
-          setChosenProvider(providerSelectOptions[index]);
-          // Also set state to provider data to ensure the form is pre-filled. Do NOT use previous data. Overwrite.
-          setProviderData({
-            ...provider,
-          })
-        };
-      });
-      setSelectOptions(providerSelectOptions);
-    }
-  }, [providers]);
-
-  // A handle change function specifically for the select element. Sets both the input state and providerData based on selection
-  const handleSelectChange = (event) => {
-    setChosenProvider(event);
-    // Use the unique document ID to grab the provider from the fetched providers array
-    const providerId = event.value;
-    // Note the provider is returned from array.filter as an array, hence destructuring
-    const [provider] = providers.filter((provider) => provider.id === providerId);
-    setProviderData({
-      ...provider,
-    })
-  }
-
-  // Sets the CSS styles for React Select component
-  const customStyles = {
-    control: (base, state) => ({
-      ...base,
-      border: state.isFocused ? '1px solid rgb(144, 147, 150)' : '1px solid rgb(144, 147, 150)',
-      boxShadow: state.isFocused ? '0' : '0',
-      outline: state.isFocused ? "2px solid #104362" : 'none',
-      outlineOffset: state.isFocused ? "2px" : 'none',
-      width: '26rem',
-      padding: '0.12rem 0 0.11rem 0.85rem',
-      borderRadius: '4px',
-      fontSize: "1rem",
-      marginTop: '0.5rem',
-      marginBottom: '0.5rem',
-
-      '&:hover': {
-        borderColor: state.isFocused ? '#104362' : 'rgb(178, 182, 185)',
-        cursor: 'pointer'
-      },
-
-      "@media (max-width: 590px)": {
-        width: "100%",
-        maxWidth: "26rem",
-        marginRight: "1.5rem",
-      },
-    }),
-
-    menu: (base, state) => ({
-      ...base,
-      maxWidth: "26rem",
-    }),
-
-    valueContainer: (provided, state) => ({
-      ...provided,
-      paddingLeft: '0',
-    }),
-  }
 
 
   // --- FORM VALIDATION FUNCTIONS ---
@@ -635,42 +545,30 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage }) => {
 
 
 
- 
-
-
-
-
-
-
-
-  // Remove all PBS related information from local state
-  const clearPbsInfo = useCallback(() => {
-    setDrugData((prevData) => ({
-      ...prevData,
-      authRequired: false,
-      indications: '',
-      maxQuantity: '',
-      maxRepeats: '',
-    }));
-
-    setMiscData((prevData) => ({
-      ...prevData,
-      authCode: '',
-    }));
-
-    setMiscAlerts((prevAlerts) => ({
-      ...prevAlerts,
-      authCode: {}
-    }));
-
-  }, []);
-
 
   // Effect to 'reset' all PBS and LEMI-related information whenever there is loss of verified status (i.e. user manually enters data in active ingredient or brand name inputs)
   useEffect(() => {
     if (!drugData.verified) {
-      clearPbsInfo();
       setPbsInfo(null);
+      setDrugData((prevData) => ({
+        ...prevData,
+        authRequired: false,
+        indications: '',
+        maxQuantity: '',
+        maxRepeats: '',
+        brandOnly: false,
+        includeBrand: false,
+      }));
+  
+      setMiscData((prevData) => ({
+        ...prevData,
+        authCode: '',
+      }));
+  
+      setMiscAlerts((prevAlerts) => ({
+        ...prevAlerts,
+        authCode: {}
+      }));
       setDrugAlerts((prevAlerts) => ({
         ...prevAlerts,
         pbsRx: {
@@ -678,6 +576,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage }) => {
           type: 'neutral',
         }
       }));
+      setShowTooltip(false);
 
       // Only bother with an authority message to select a dropdown medication IF the user is trying to prescribe on PBS
       if (drugData.pbsRx) {
@@ -685,18 +584,8 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage }) => {
       } else {
         setAuthorityMessage('This prescription does not require authority');
       }
-
-      // Hide the tooltip, and restore LEMI settings to default active ingredient only
-      if (!drugData.verified) {
-        setShowTooltip(false);
-        setDrugData((prevData) => ({
-          ...prevData,
-          brandOnly: false,
-          includeBrand: false,
-        }));
-      }
     }
-  }, [drugData.verified, drugData.pbsRx, clearPbsInfo, setPbsInfo])
+  }, [drugData.verified, drugData.pbsRx, setPbsInfo])
 
 
   const authorityStatus = useCallback(() => {
@@ -737,7 +626,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage }) => {
               type: 'neutral',
             }
           }));
-          
         }
       } else {
         setDrugData((prevData) => ({
@@ -883,8 +771,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage }) => {
 
 
 
-
-
   return (
     <ContentContainer>
       <PageHeader title="New prescription" description="Complete all sections required for your prescription" />
@@ -901,34 +787,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage }) => {
       >
         <div className="scriptNo" data-testid="scriptNo">Script number: {numbersLoading ? 'Loading...' : miscData.scriptID}</div>
 
-        <Fieldset className="provider-form select-fieldset" legend="Prescriber details">
-          <div className="provider-controls">
-            {isPending && <Spinner />}
-            {providers && (<>
-              {(providers.length > 0) ? (
-                <>
-                  <label id="react-select-id">Select provider
-                    <Select
-                      options={selectOptions}
-                      isSearchable={false}
-                      value={chosenProvider}
-                      onChange={handleSelectChange}
-                      styles={customStyles}
-                      placeholder="Select provider..."
-                      id="react-select"
-                      required
-                      aria-labelledby="react-select-id"
-                      label="Select provider"
-
-                    />
-                  </label>
-                </>
-              ) : (
-                <Link className="provider-addBtn provider-addBtn--solo" to="/add-provider">Add new provider</Link>
-              )}
-            </>)}
-          </div>
-        </Fieldset>
+        <PrescriberDetails setData={setProviderData}/>
 
         <Fieldset className="patient-form" legend="Patient details">
           {/* Legal requirements include only the patient's name and address */}
