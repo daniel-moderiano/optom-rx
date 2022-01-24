@@ -9,54 +9,9 @@ const StyledRxForm = styled.form`
     color: #48515B;
   }
 
-  .provider-form  {
-    border-top: 1px solid #dfe1e1;
-    /* margin-top: 2.5rem; */
-    padding-bottom: 2.95rem;
-  }
-  
-  .ProviderForm{
-    margin-top: -0.55rem;
-
-    .container {
-      width: 24rem;
-    }
-  }
-
-  .provider-controls {
+  .add-new-btn {
     margin-top: 0.65rem;
-    position: relative;
-
-    label {
-      font-size: 0.9rem;
-    }
   }
-
-  .provider-addBtn {
-      /* width: 12rem; */
-      display: inline-block;
-      font-size: 1rem;
-      font-family: var(--font-stack-segoe);
-      box-sizing: border-box;
-      cursor: pointer;
-      padding: 6px 16px 8px 16px;
-      border-radius: 2px;
-      min-width: 80px;
-      background-color: var(--primary-color);
-      color: rgb(255, 255, 255);
-      border: 1px solid var(--primary-color); 
-      text-decoration: none;
-      
-      &:hover {
-        background-color: var(--btn-primary-hover);
-        border: 1px solid var(--btn-primary-hover);
-      }
-      &:active {
-        transform: scale(0.98);
-      }
-     
-  
-    }
 
   .misc-form {
 

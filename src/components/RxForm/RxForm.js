@@ -5,13 +5,10 @@ import { StyledRxForm } from "./RxForm.styled";
 import DrugAutocomplete from "../DrugAutocomplete/DrugAutocomplete";
 import Fieldset from "../utils/Fieldset/Fieldset";
 import { useAuthContext } from "../../hooks/useAuthContext";
-import { useCollection } from "../../hooks/useCollection";
 import { useLocation } from "react-router";
 import { useNumbers } from '../../hooks/useNumbers';
 import { usePBSFetch } from "../../hooks/usePBSFetch";
-import Select from 'react-select';
 import { Link } from "react-router-dom";
-import Spinner from "../utils/Spinner/Spinner";
 import ContentContainer from '../utils/ContentContainer/ContentContainer';
 import PageHeader from '../utils/PageHeader/PageHeader';
 import Button from '../utils/Button/Button';
@@ -22,12 +19,11 @@ import PrescriberDetails from "../PrescriberDetails/PrescriberDetails";
 
 // Multiple items are not permitted to be prescribed on the same form; each must use an individual form (applies to optometrists only)
 
-const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage }) => {
+const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast }) => {
+  // console.log('Rendering Rx Form');
   // State is only provided if generating a new Rx. This signals certain functions to run (i.e. fetch numbers)
   const { state } = useLocation();
-  const { user } = useAuthContext();
   const [{ scriptNo, authRxNo, numbersError, numbersLoading }, fetchNumbers] = useNumbers();
-  const { documents: providers, isPending, error } = useCollection('providers', ['uid', '==', user.uid]);
   const [{ pbsInfo, pbsError, pbsLoading }, fetchDrug, setPbsInfo] = usePBSFetch(existingData.pbsData);
   const { positiveValidationUI, negativeValidationUI, validateRequiredField } = useInputValidation();
   const { abbreviateStateName } = useFormatting();
@@ -787,7 +783,9 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage }) => {
       >
         <div className="scriptNo" data-testid="scriptNo">Script number: {numbersLoading ? 'Loading...' : miscData.scriptID}</div>
 
-        <PrescriberDetails setData={setProviderData}/>
+        <Fieldset className="provider-form select-fieldset" legend="Prescriber details">
+          <PrescriberDetails setData={setProviderData} setToast={setToast}/>
+        </Fieldset>   
 
         <Fieldset className="patient-form" legend="Patient details">
           {/* Legal requirements include only the patient's name and address */}

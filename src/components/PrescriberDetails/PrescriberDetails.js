@@ -1,4 +1,3 @@
-import Fieldset from "../utils/Fieldset/Fieldset";
 import Spinner from "../utils/Spinner/Spinner";
 import Select from 'react-select';
 import { Link } from "react-router-dom";
@@ -6,10 +5,9 @@ import { useCollection } from "../../hooks/useCollection";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useEffect, useState } from "react";
 
-const PrescriberDetails = ({ setData }) => {
+const PrescriberDetails = ({ setData, setToast }) => {
   const { user } = useAuthContext();
-  const { documents: providers, isPending, error } = useCollection('providers', ['uid', '==', user.uid]);
-
+  const { documents: providers, isPending } = useCollection('providers', ['uid', '==', user.uid]);
   const [selectOptions, setSelectOptions] = useState([]);
   const [chosenProvider, setChosenProvider] = useState("");
 
@@ -100,33 +98,30 @@ const PrescriberDetails = ({ setData }) => {
     }),
   }
 
-  return (
-    <Fieldset className="provider-form select-fieldset" legend="Prescriber details">
-      <div className="provider-controls">
-        {isPending && <Spinner />}
-        {providers && (<>
-          {(providers.length > 0) ? (
-            <>
-              <label id="react-select-id">Select provider
-                <Select
-                  options={selectOptions}
-                  isSearchable={false}
-                  value={chosenProvider}
-                  onChange={handleSelectChange}
-                  styles={customStyles}
-                  placeholder="Select provider..."
-                  id="react-select"
-                  aria-labelledby="react-select-id"
-                  label="Select prescriber"
-                />
-              </label>
-            </>
-          ) : (
-            <Link className="provider-addBtn provider-addBtn--solo" to="/add-provider">Add new provider</Link>
-          )}
-        </>)}
-      </div>
-    </Fieldset>
+  return (<>
+      {isPending && <Spinner />}
+
+      {providers && (<>
+        {(providers.length > 0) ? (
+          <>
+            <label id="react-select-id">Select prescriber
+              <Select
+                options={selectOptions}
+                isSearchable={false}
+                value={chosenProvider}
+                onChange={handleSelectChange}
+                styles={customStyles}
+                placeholder="Select prescriber..."
+                id="react-select"
+                aria-labelledby="react-select-id"
+              />
+            </label>
+          </>
+        ) : (
+          <Link className="btn-primary add-new-btn" to="/add-provider">Add new provider</Link>
+        )}
+      </>)}
+    </>   
   );
 };
 

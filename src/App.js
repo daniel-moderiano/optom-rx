@@ -178,7 +178,7 @@ const App = () => {
 
             <Route path="/form" element={
               <>
-              {user && <RxForm handleSubmit={handleSubmit} googleLoaded={googleLoaded} existingData={data} setPage={setCurrentPage}/> }
+              {user && <RxForm handleSubmit={handleSubmit} googleLoaded={googleLoaded} existingData={data} setPage={setCurrentPage} setToast={setToastParams}/> }
               {!user && <Navigate to="/login"/>}
               </>
             }/>
