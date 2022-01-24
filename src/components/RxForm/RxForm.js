@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
 import FormField from "../FormField/FormField";
-import AddressAutocomplete from "../AddressAutocomplete/AddressAutocomplete";
 import { StyledRxForm } from "./RxForm.styled";
 import DrugAutocomplete from "../DrugAutocomplete/DrugAutocomplete";
 import Fieldset from "../utils/Fieldset/Fieldset";
@@ -16,6 +15,7 @@ import { useFormatting } from '../../hooks/useFormatting';
 import { useInputChanges } from "../../hooks/useInputChanges";
 import PrescriberDetails from "../PrescriberDetails/PrescriberDetails";
 import PatientDetails from "../PatientDetails/PatientDetails";
+import Indications from "../Indications/Indications";
 
 
 // Multiple items are not permitted to be prescribed on the same form; each must use an individual form (applies to optometrists only)
@@ -31,8 +31,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
 
   const [authorityMessage, setAuthorityMessage] = useState('Please select a medication for authority requirements')
 
-  const [indication, setIndication] = useState('');
-  const [expandIndication, setExpandIndication] = useState(false);
+  const [indicationHTML, setIndicationHTML] = useState('');
 
   const [showTooltip, setShowTooltip] = useState(true);
   const [tooltipText, setTooltipText] = useState('');
@@ -470,10 +469,10 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
 
     // Ciclosporin has an absurdly complex indication criteria. Do not even bother with this, link to the PBS site instead
     if (drugData.itemCode === '12663L') {
-      const html = `<div className="indication">
-        <div className="indication__main">This medication has complex restrictions, please review the <a target="_blank" href="https://www.pbs.gov.au/medicine/item/12663L">PBS listing</a></div>
+      const html = `<div className="Indication">
+        <div className="Indication__main">This medication has complex restrictions, please review the <a target="_blank" href="https://www.pbs.gov.au/medicine/item/12663L">PBS listing</a></div>
       </div>`;
-      setIndication(html);
+      setIndicationHTML(html);
       return;
     }
 
@@ -504,37 +503,37 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
           return ul.outerHTML;
         }
         const html = `
-          <div class="indication">
-            <div class="indication__main">${mainIndication}</div>
-            <div class="indication__extra">
-              <div class="indication__clinical">Clinical criteria:</div>
-                <ul class="indication__list">
-                  <li class="indication__list-item">${preAnd}</li>
+          <div class="Indication">
+            <div class="Indication__main">${mainIndication}</div>
+            <div class="Indication__extra">
+              <div class="Indication__clinical">Clinical criteria:</div>
+                <ul class="Indication__list">
+                  <li class="Indication__list-item">${preAnd}</li>
                 </ul>
-              <div class="indication__and">AND</div>
+              <div class="Indication__and">AND</div>
               ${mapPoints()}
             </div>     
           </div>`;
-        setIndication(html);
+        setIndicationHTML(html);
       } else {
         // Ignore the above if there is no 'AND' with additional points
-        const html = `<div class="indication">
-          <div class="indication__main">${mainIndication}</div>
-          <div class="indication__extra">
-          <div class="indication__clinical">Clinical criteria:</div>
-            <ul class="indication__list">
-              <li class="indication__list-item">${preAnd}</li>
+        const html = `<div class="Indication">
+          <div class="Indication__main">${mainIndication}</div>
+          <div class="Indication__extra">
+          <div class="Indication__clinical">Clinical criteria:</div>
+            <ul class="Indication__list">
+              <li class="Indication__list-item">${preAnd}</li>
             </ul>
           </div>
         </div>`;
-        setIndication(html);
+        setIndicationHTML(html);
       }
     } else {
       // If 'criteria' doesn't appear in the string, it must only be a single indication with no constraints
-      const html = `<div className="indication">
-        <div className="indication__main">${indicationStr}</div>
+      const html = `<div className="Indication">
+        <div className="Indication__main">${indicationStr}</div>
       </div>`;
-      setIndication(html);
+      setIndicationHTML(html);
     }
   }, [drugData.itemCode])
 
@@ -910,21 +909,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
           />
 
           {(drugData.verified && drugData.indications.length > 0 && drugData.pbsRx) &&
-            <div className="indications">
-              <div className="indications__btn collapsible" onClick={
-                (event) => {
-                  event.preventDefault();
-                  setExpandIndication((prevState) => !prevState);
-                }}>
-                <button type="button" onClick={
-                  (event) => {
-                    event.preventDefault();
-                    event.stopPropagation();
-                    setExpandIndication((prevState) => !prevState);
-                  }}>Restricted benefit:</button>
-              </div>
-              <div className={`indications__content ${expandIndication ? 'expand' : 'collapse'}`} dangerouslySetInnerHTML={{ __html: indication }}></div>
-            </div>
+            <Indications indicationHTML={indicationHTML}/>
           }
 
           <FormField
