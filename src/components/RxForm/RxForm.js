@@ -15,6 +15,8 @@ import { useInputValidation } from "../../hooks/useInputValidation";
 import { useFormatting } from '../../hooks/useFormatting';
 import { useInputChanges } from "../../hooks/useInputChanges";
 import PrescriberDetails from "../PrescriberDetails/PrescriberDetails";
+import PatientDetails from "../PatientDetails/PatientDetails";
+
 
 // Multiple items are not permitted to be prescribed on the same form; each must use an individual form (applies to optometrists only)
 
@@ -863,52 +865,13 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
         </Fieldset>   
 
         <Fieldset className="patient-form" legend="Patient details">
-          {/* Legal requirements include only the patient's name and address */}
-          <FormField
-            name="fullName"
-            label="Full name"
-            value={patientData.fullName}
-            onChange={(event) => handleChange(event, setPatientData)}
-            alert={patientAlerts.fullName}
-            autoFocus
-            required
-            describedBy={Object.keys(patientAlerts.fullName).length === 0 ? null : 'fullName-alert'}
-          />
-
-          <AddressAutocomplete
-            data={patientData}
-            setData={setPatientData}
-            handleChange={(event) => handleChange(event, setPatientData)}
-            provider={false}
-            alerts={patientAlerts}
+          <PatientDetails 
+            data={patientData} 
+            setData={setPatientData} 
+            alerts={patientAlerts} 
             setAlerts={setPatientAlerts}
             googleLoaded={googleLoaded}
           />
-
-          <div className="medicareFields">
-            <FormField
-              name="medicareNumber"
-              label="Medicare number"
-              value={patientData.medicareNumber}
-              onChange={(event) => handleChange(event, setPatientData)}
-              alert={patientAlerts.medicareNumber}
-              subAlert={patientAlerts.medicareRefNumber}
-              maxlength="10"
-              className="medicareNumber-field medicare-field form-field"
-              describedBy={Object.keys(patientAlerts.medicareNumber).length === 0 ? null : 'medicareNumber-alert'}
-            />
-
-            {/* The alert for this field is attached to medicareNumber field for UI pruposes since these fields are 'linked' conceptually */}
-            <FormField
-              name="medicareRefNumber"
-              label="IRN"
-              value={patientData.medicareRefNumber}
-              onChange={(event) => handleChange(event, setPatientData)}
-              maxlength="1"
-              className="irn-field medicare-field form-field"
-              describedBy={Object.keys(patientAlerts.medicareRefNumber).length === 0 ? null : 'medicareRefNumber-alert'}
-            />
-          </div>
         </Fieldset>
 
         {/* There must be enough info to identify the medicine, including form and strength, and informatiom regarding dosage, quantity, and repeats */}
