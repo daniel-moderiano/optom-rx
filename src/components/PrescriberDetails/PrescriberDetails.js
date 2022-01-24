@@ -5,13 +5,11 @@ import { useCollection } from "../../hooks/useCollection";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useEffect, useState } from "react";
 
-const PrescriberDetails = ({ setData, setToast }) => {
+const PrescriberDetails = ({ setData }) => {
   const { user } = useAuthContext();
   const { documents: providers, isPending } = useCollection('providers', ['uid', '==', user.uid]);
   const [selectOptions, setSelectOptions] = useState([]);
   const [chosenProvider, setChosenProvider] = useState("");
-
-  // --- REACT SELECT FUNCTIONS ---
 
   // Used to fill the React Select component options using providers fetched from firestore. Will also set the selected option to the default provider if one exists
   useEffect(() => {

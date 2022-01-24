@@ -6,12 +6,12 @@ import { useCallback, useState } from 'react';
 export const usePBSFetch = (localPbsInfo) => {
   const [pbsInfo, setPbsInfo] = useState(localPbsInfo);
   const [pbsLoading, setPbsLoading] = useState(false);
-  const [pbsError, setPbsError] = useState(false);
+  const [pbsError, setPbsError] = useState(null);
 
   // Fetch the drug data from firestore using item code as document ID
   const fetchDrug = useCallback(async (itemCode) => {
     setPbsLoading(true);
-    setPbsError(false);
+    setPbsError(null);
     // Item code will not exist for non-PBS medication, no state update
     if (itemCode === "") {
       setPbsInfo(null);
@@ -33,7 +33,7 @@ export const usePBSFetch = (localPbsInfo) => {
         setPbsInfo(null);
       }
     } catch (error) {
-      setPbsError(true);
+      setPbsError(error);
     }
     setPbsLoading(false); 
   }, []);

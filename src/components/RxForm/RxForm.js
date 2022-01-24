@@ -4,7 +4,6 @@ import AddressAutocomplete from "../AddressAutocomplete/AddressAutocomplete";
 import { StyledRxForm } from "./RxForm.styled";
 import DrugAutocomplete from "../DrugAutocomplete/DrugAutocomplete";
 import Fieldset from "../utils/Fieldset/Fieldset";
-import { useAuthContext } from "../../hooks/useAuthContext";
 import { useLocation } from "react-router";
 import { useNumbers } from '../../hooks/useNumbers';
 import { usePBSFetch } from "../../hooks/usePBSFetch";
@@ -135,6 +134,16 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
     setPage('form');
   }, [setPage])
 
+  useEffect(() => {
+    if (pbsError) {
+      setToast((prevData) => ({
+        ...prevData,
+        visible: true,
+        type: 'error',
+        message: 'An error occurred while loading PBS information'
+      }));
+    }
+  }, [pbsError, setToast]);
 
   // --- FORM INITIALISATION FUNCTIONS ---
 
