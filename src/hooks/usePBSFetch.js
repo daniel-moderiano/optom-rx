@@ -30,21 +30,13 @@ export const usePBSFetch = (localPbsInfo) => {
         setPbsInfo({ ...docSnap.data() })
       } else {
         // doc.data() will be undefined in this case, no state update
-        console.log('No such document, check for PBS updates');
         setPbsInfo(null);
       }
     } catch (error) {
       setPbsError(true);
-      console.log(error);
     }
-
-    setPbsLoading(false);
-    
+    setPbsLoading(false); 
   }, []);
 
-  const clearPbsState = useCallback(() => {
-    setPbsInfo(null);
-  }, [])
-
-  return [{ pbsInfo, pbsLoading, pbsError }, fetchDrug, clearPbsState, setPbsInfo];
+  return [{ pbsInfo, pbsLoading, pbsError }, fetchDrug, setPbsInfo];
 }

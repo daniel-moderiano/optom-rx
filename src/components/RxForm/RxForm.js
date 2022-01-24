@@ -27,7 +27,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage }) => {
   const { user } = useAuthContext();
   const [{ scriptNo, authRxNo, numbersError, numbersLoading }, fetchNumbers] = useNumbers();
   const { documents: providers, isPending, error } = useCollection('providers', ['uid', '==', user.uid]);
-  const [{ pbsInfo, pbsError, pbsLoading }, fetchDrug, clearPbsState, setPbsInfo] = usePBSFetch(existingData.pbsData);
+  const [{ pbsInfo, pbsError, pbsLoading }, fetchDrug, setPbsInfo] = usePBSFetch(existingData.pbsData);
   const { positiveValidationUI, negativeValidationUI, validateRequiredField } = useInputValidation();
   const { abbreviateStateName } = useFormatting();
   const { handleChange, toggleBooleanState, handleEnterKeyOnCheckbox } = useInputChanges();
@@ -635,7 +635,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage }) => {
 
 
 
-
+ 
 
 
 
@@ -666,8 +666,8 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage }) => {
   }, []);
 
 
+  // Effect to 'reset' all PBS and LEMI-related information whenever there is loss of verified status (i.e. user manually enters data in active ingredient or brand name inputs)
   useEffect(() => {
-    // Toggle any PBS-related functionality if there is a change in verified status. 
     if (!drugData.verified) {
       clearPbsInfo();
       setPbsInfo(null);
@@ -678,11 +678,22 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage }) => {
           type: 'neutral',
         }
       }));
+
       // Only bother with an authority message to select a dropdown medication IF the user is trying to prescribe on PBS
       if (drugData.pbsRx) {
         setAuthorityMessage('Select a medication from the dropdown list for authority information');
       } else {
         setAuthorityMessage('This prescription does not require authority');
+      }
+
+      // Hide the tooltip, and restore LEMI settings to default active ingredient only
+      if (!drugData.verified) {
+        setShowTooltip(false);
+        setDrugData((prevData) => ({
+          ...prevData,
+          brandOnly: false,
+          includeBrand: false,
+        }));
       }
     }
   }, [drugData.verified, drugData.pbsRx, clearPbsInfo, setPbsInfo])
@@ -838,9 +849,10 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage }) => {
 
   // Identify whether a drug on the PBS is restricted or not, and display indications for use on restricted items
   const lemiStatus = useCallback(() => {
-    // PBS info-related effects here
     if (pbsInfo) {
-      // Check for lemi and/or lmbc status
+      // All PBS medications will have at least default active ingredient only prescribing, so show tooltip
+      setShowTooltip(true);
+
       if (pbsInfo['lemi']) {
         // Medicine is recommended to prescribe by brand only
         setDrugData((prevData) => ({
@@ -849,7 +861,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage }) => {
         }));
         setTooltipText(`<span>This item is included on the <a target="_blank" href="https://www.safetyandquality.gov.au/publications-and-resources/resource-library/list-excluded-medicinal-items-lemi">List of Excluded Medicinal Items (LEMI)</a>, and should be prescribed by brand name only for practical and safety reasons</span>`);
       } else if (pbsInfo['lmbc']) {
-        // Medicine is recommended to have brand name included
+        // Medicine is recommended to include brand name, but not prescribe by brand only
         setDrugData((prevData) => ({
           ...prevData,
           brandOnly: false,
@@ -865,26 +877,8 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage }) => {
         }));
         setTooltipText('<span>This item should be prescribed by active ingredient only</span>');
       }
-      // Show tooltip
-      if (!showTooltip) {
-        setShowTooltip((prevData) => !prevData);
-        setTooltipText('');
-      }
     }
-
-    // Hide the tooltip if the user changes the medication manually, and restore LEMI settings to default
-    if (!drugData.verified) {
-      if (showTooltip) {
-        setShowTooltip((prevData) => !prevData);
-        setTooltipText('');
-      }
-      setDrugData((prevData) => ({
-        ...prevData,
-        brandOnly: false,
-        includeBrand: false,
-      }));
-    }
-  }, [pbsInfo, drugData.verified, setShowTooltip, showTooltip]);
+  }, [pbsInfo, setShowTooltip]);
 
   // Can utilise a useEffect such as this to set state or UI elements based on PBS data being fetched or lost
   // Note that these PBS-related functions MUST only be performed on drug data with the verified: true tag
