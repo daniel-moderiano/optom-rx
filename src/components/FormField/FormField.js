@@ -2,10 +2,13 @@ import Alert from "../utils/Alert/Alert";
 import { StyledFormField } from "./FormField.styled";
 
 const FormField = (props) => {
-  const { fieldType, id, name, label, value, placeholder, onChange, className, alert, subAlert, maxlength, checked, enterFunc, required, autoFocus, describedBy, autocomplete } = props;
+  const { fieldType, id, name, label, value, placeholder, onChange, className, alert, subAlert, maxlength, checked, enterFunc, required, autoFocus, autocomplete } = props;
 
-  const ariaDescribe = describedBy ? { "aria-describedby": describedBy } : {};
-  const autocompleteText = autocomplete ? { "autoComplete": autocomplete } : {};
+  // Used in conjunction with aria-describedby. Alert IDs will prefer ID, otherwise default to name
+  const alertID = `${id ? id + '-alert' : name + '-alert'}`;
+
+  // Check if there is either an alert or subalert present. If so, aria-describedby attribute must be present
+  const ariaDescribe = (Object.keys(alert).length > 0 || Object.keys(subAlert).length) ? { "aria-describedby": alertID } : {};
 
   <input type="text" name="expire" id="expire" aria-labelledby="expLabel expDesc"></input>
   return (
@@ -26,8 +29,8 @@ const FormField = (props) => {
               onKeyDown={enterFunc}
               required={required}
               autoFocus={autoFocus ? true : false}
+              autoComplete={autocomplete ? autocomplete : false}
               {...ariaDescribe}
-              {...autocompleteText}
             />
             {fieldType === ('checkbox') && <span className={`checkmark ${checked ? 'show' : 'hide'}`}></span>}
             <svg xmlns="http://www.w3.org/2000/svg" className="tickCircle hide" viewBox="0 0 512 512">
@@ -38,14 +41,13 @@ const FormField = (props) => {
       </div>
       
       {/* Pass the alert prop as an object only where alerts are required (default null) that contains both the message to display in the alert, and the type of alert, e.g. error, warning, success */}
-
       {Object.keys(alert).length > 0 &&
-        <Alert type={alert.type} message={alert.message} id={`${id ? id + '-alert' : name + '-alert'}`}/>
+        <Alert type={alert.type} message={alert.message} id={alertID}/>
       }
 
       {/* SubAlert is used for a second alert either applying to the same field, or for an adjacent related field where it makes more sense to group alerts */}
       {(Object.keys(subAlert).length > 0 && Object.keys(alert).length === 0)  && 
-        <Alert type={subAlert.type} message={subAlert.message} id={`${id ? id + '-alert' : name + '-alert'}`} subAlert={true}/>
+        <Alert type={subAlert.type} message={subAlert.message} id={alertID} subAlert={true}/>
       } 
     </StyledFormField> 
   );
