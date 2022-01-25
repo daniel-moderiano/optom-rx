@@ -7,10 +7,12 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 import { StyledAddProvider } from "./AddProvider.styled";
 import ContentContainer from '../utils/ContentContainer/ContentContainer';
 import PageHeader from '../utils/PageHeader/PageHeader';
+import { useImmediateToast } from '../../hooks/useImmediateToast';
 
 const AddProvider = ({ googleLoaded, setToast, setPage }) => {
   const { user } = useAuthContext();
   let navigate = useNavigate();
+  const { showSuccessToast, showErrorToast } = useImmediateToast();
 
   const [isPending, setIsPending] = useState(false);
   const [providerData, setProviderData] = useState({
@@ -49,24 +51,14 @@ const AddProvider = ({ googleLoaded, setToast, setPage }) => {
       setIsPending(false);
 
       // Confirm save via toast message, and return to the previous page
-      setToast((prevData) => ({
-        ...prevData,
-        visible: true,
-        type: 'success',
-        message: 'New provider added'
-      }));
+      showSuccessToast(setToast, 'New prescriber added')
 
       navigate('/providers');
     } catch (error) {
       setIsPending(false);
 
       // Throw error toast on screen, no further rendering is required, nor any specific error handling
-      setToast((prevData) => ({
-        ...prevData,
-        visible: true,
-        type: 'error',
-        message: 'Failed to complete request'
-      }));
+      showErrorToast(setToast, 'An error occurred while adding prescriber')
     }     
   };
 

@@ -17,6 +17,7 @@ import PatientDetails from "../PatientDetails/PatientDetails";
 import { useHandleLEMI } from "../../hooks/useHandleLEMI";
 import MedicationDetails from "../MedicationDetails/MedicationDetails";
 import ExtraAuthorityDetails from "../AuthorityDetails/ExtraAuthorityDetails";
+import { useConditionalToast } from "../../hooks/useConditionalToast";
 
 // Multiple items are not permitted to be prescribed on the same form; each must use an individual form (applies to optometrists only)
 
@@ -393,13 +394,9 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
   // Remove a visible error or alert from the brand name input when it changes from being required to not being required
   useEffect(() => {
     if (!drugData.includeBrand && !drugData.brandOnly) {
-      document.querySelector('#brandName').classList.remove('error');
-      setDrugAlerts((prevAlerts) => ({
-        ...prevAlerts,
-        brandName: {}
-      }));
+      removeAllValidation(document.querySelector('#brandName'), setDrugAlerts)
     };
-  }, [drugData.includeBrand, drugData.brandOnly]);
+  }, [drugData.includeBrand, drugData.brandOnly, removeAllValidation]);
 
   // Returns boolean indicating if form is valid or not, and also highlights invalid fields on UI
   const checkFormValidation = () => {
@@ -484,17 +481,8 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
 
   // --- PBS FUNCTIONS ---
 
-  // Alert user when there is an error fetching the PBS data (on drug select)
-  useEffect(() => {
-    if (pbsError) {
-      setToast((prevData) => ({
-        ...prevData,
-        visible: true,
-        type: 'error',
-        message: 'An error occurred while loading PBS information'
-      }));
-    }
-  }, [pbsError, setToast]);
+  // Alert the user if there is an error fetching PBS data
+  useConditionalToast(pbsError, setToast, 'An error occurred while loading PBS information');
 
   // Remove all relevant PBS and verified-dependent information when there is loss of verified status (i.e. user manually adjusts active ingredient or brand name field)
   useEffect(() => {
