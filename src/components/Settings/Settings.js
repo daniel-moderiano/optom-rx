@@ -1,9 +1,8 @@
 import { StyledSettings } from "./Settings.styled"
 import FormField from '../FormField/FormField'
 import { useState, useEffect } from "react"
-import { deleteUser, reauthenticateWithCredential, EmailAuthProvider, updatePassword, sendEmailVerification, updateEmail } from "firebase/auth";
-import { collection, deleteDoc, doc, getDocs, query, where } from "firebase/firestore";
-import { db } from "../../firebase/config";
+import { reauthenticateWithCredential, EmailAuthProvider, updatePassword, sendEmailVerification, updateEmail } from "firebase/auth";
+
 import { useLogout } from '../../hooks/useLogout';
 import Modal from "../utils/Modal/Modal";
 import { Link } from "react-router-dom";
@@ -14,6 +13,8 @@ import PageHeader from '../utils/PageHeader/PageHeader';
 import Dots from '../utils/Dots/Dots';
 import { useImmediateToast } from '../../hooks/useImmediateToast';
 import ChangeDisplayName from "./ChangeDisplayName";
+import { useErrorHandling } from '../../hooks/useErrorHandling';
+import DeleteAccount from "./DeleteAccount";
 
 const Settings = ({ user, setToast, setPage }) => {
   const { logout } = useLogout();
@@ -25,8 +26,7 @@ const Settings = ({ user, setToast, setPage }) => {
   const [newPasswordAlert, setNewPasswordAlert] = useState({});
   const [newPassword, setNewPassword] = useState('');
 
-  const [deleteConfirmPasswordAlert, setdeleteConfirmPasswordAlert] = useState({});
-  const [deleteConfirmPassword, setdeleteConfirmPassword] = useState('');
+
 
   const [confirmPasswordAlert, setConfirmPasswordAlert] = useState({});
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -34,12 +34,9 @@ const Settings = ({ user, setToast, setPage }) => {
   const [emailConfirmPassword, setEmailConfirmPassword] = useState('');  
   const [emailConfirmPasswordAlert, setEmailConfirmPasswordAlert] = useState({});
 
-  const [showModal, setShowModal] = useState(false);
+
   const [showEmailModal, setShowEmailModal] = useState(false);
   const [showVerifyModal, setShowVerifyModal] = useState(false);
-
-
-  const [deletePending, setDeletePending] = useState(false);
 
   const [changePasswordPending, setChangePasswordPending] = useState(false);
   const [changeEmailPending, setChangeEmailPending] = useState(false);
@@ -47,13 +44,13 @@ const Settings = ({ user, setToast, setPage }) => {
   const [newEmail, setNewEmail] = useState('');
   const [newEmailAlert, setNewEmailAlert] = useState({});
   
-  const [showDeleteConfirmPassword, setShowDeleteConfirmPassword] = useState(false);
+
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [showEmailConfirmPassword, setShowEmailConfirmPassword] = useState(false);
   
- 
+  const { handleErrorCode } = useErrorHandling();
 
   // Adjust current page for accessibility and styling
   useEffect(() => {
@@ -65,58 +62,9 @@ const Settings = ({ user, setToast, setPage }) => {
     setNewEmailAlert({});
     setEmailConfirmPasswordAlert({});
     setEmailConfirmPassword('');
-    setdeleteConfirmPassword('');
-    setdeleteConfirmPasswordAlert('');
     setNewEmail('');
-    setShowDeleteConfirmPassword(false);
     setShowEmailConfirmPassword(false);
-  }, [showModal, showEmailModal]);
-
-  const deleteAccount = async () => {
-    // Gather a reference to all of the user's prescribers
-    const presRef = collection(db, 'providers');
-    const presQuery = query(presRef, where('uid', '==', user.uid));
-    const docsSnap  = await getDocs(presQuery);
-
-    try {
-      // Delete all of the user's prescribers
-      docsSnap.forEach((doc) => deleteDoc(doc.ref));
-      // Delete the user's document in firestore
-      await deleteDoc(doc(db, 'users', user.uid))     
-      // Delete the user iteself from firebase auth
-      await deleteUser(user);
-      // Finally, logout
-      logout();
-      showSuccessToast(setToast, 'Account deleted');
-    } catch (error) {
-      showErrorToast(setToast, 'An error occurred while deleting account');
-    }
-  };
-
-  // Ensure form is validated before calling form submission function
-  const isModalFormValid = () => {
-    let valid = true;
-    let inputFocused = false;
-
-    const deleteConfirmPasswordInput = document.querySelector('input[name="deleteConfirmPassword"]');
-
-    // Check for blank field
-    if (deleteConfirmPasswordInput.value.trim().length === 0) {
-      if (!inputFocused) {
-        deleteConfirmPasswordInput.focus();
-        inputFocused = true;
-      }
-      setdeleteConfirmPasswordAlert({
-          message: "Please enter a password.",
-          type: 'error',
-        }
-      );
-      deleteConfirmPasswordInput.classList.add('error');
-      valid = false;
-    } 
-    return valid;
-  };
-
+  }, [showEmailModal]);
 
   // Ensure form is validated before calling form submission function
   const isPasswordFormValid = () => {
@@ -216,48 +164,6 @@ const Settings = ({ user, setToast, setPage }) => {
     return valid;
   };
 
-  // Non-specific error handling for any relevant forms submitting data
-  const errorHandling = (errorCode, alertSetFunc) => {
-    switch (errorCode) {
-      case 'auth/wrong-password':
-        alertSetFunc({
-          message: "That's an incorrect password. Try again.",
-          type: 'error',
-        });
-        break;
-      case 'auth/weak-password':
-        alertSetFunc({
-          message: "Please create a password at least six characters in length. ",
-          type: 'error',
-        });
-        break;
-      case 'auth/invalid-email':
-        alertSetFunc({
-          message: "Please enter a valid email address.",
-          type: 'error',
-        });
-        break;
-      case 'auth/too-many-requests':
-        alertSetFunc({
-          message: 'Failed to authorise too many times. Please wait a few minutes before trying again.',
-          type: 'error',
-        });
-        break;
-      case 'auth/network-request-failed':
-        alertSetFunc({
-          message: "We couldn't connect to the network. Please check your internet connection and try again.",
-          type: 'error',
-        });
-        break;
-      default:
-        alertSetFunc({
-          message: 'An unknown server error occured. Please try again.',
-          type: 'error',
-        });
-        break;
-    }
-  };
-
   // Used to reauthenticate a user. This avoids an error when performing sensitive account functions like delete or email update
   const refreshCredentials = async (password) => {
     // Must be called once the user has entered their password, else it will just error
@@ -265,24 +171,6 @@ const Settings = ({ user, setToast, setPage }) => {
     await reauthenticateWithCredential(user, credential);
   }
 
-  const performDeleteAccount = async () => {
-    setDeletePending(true);
-    let reauthenticated = false;
-
-    try {
-      await refreshCredentials(deleteConfirmPassword);
-      reauthenticated = true;
-    } catch (error) {
-      errorHandling(error.code, setdeleteConfirmPasswordAlert);
-      setDeletePending(false);
-    }
-
-    // Act based on the result
-    if (reauthenticated) {
-      deleteAccount();
-      setDeletePending(false);
-    }
-  }
 
   const performEmailUpdate = async () => {
     setChangeEmailPending(true);
@@ -292,7 +180,7 @@ const Settings = ({ user, setToast, setPage }) => {
       await refreshCredentials(emailConfirmPassword);
       reauthenticated = true;
     } catch (error) {
-      errorHandling(error.code, setEmailConfirmPasswordAlert)
+      handleErrorCode(error.code, setEmailConfirmPasswordAlert)
       setChangeEmailPending(false);
     }
 
@@ -355,7 +243,7 @@ const Settings = ({ user, setToast, setPage }) => {
       await refreshCredentials(currentPassword);
       reauthenticated = true;
     } catch (error) {
-      errorHandling(error.code, setCurrentPasswordAlert);
+      handleErrorCode(error.code, setCurrentPasswordAlert);
       setChangePasswordPending(false);
     }
 
@@ -373,7 +261,7 @@ const Settings = ({ user, setToast, setPage }) => {
         
       } catch (error) {
         setChangePasswordPending(false);
-        errorHandling(error.code, setNewPasswordAlert)
+        handleErrorCode(error.code, setNewPasswordAlert)
       }
     }
   };
@@ -403,45 +291,9 @@ const Settings = ({ user, setToast, setPage }) => {
   return (
     <ContentContainer>
       <StyledSettings className="Settings">
-      {showVerifyModal && (<Modal title="Verify your email" closeModal={() => setShowModal(false)} type="emailVerify"/>)}
+      {showVerifyModal && (<Modal title="Verify your email" closeModal={() => setShowVerifyModal(false)} type="emailVerify"/>)}
 
-      {showModal && <Modal title="Delete account" closeModal={() => setShowModal(false)} type="delete" errorMessage="This action is permanent and cannot be undone.">
-        <div className="provider-display">
-          <div className="provider-label">Please enter your password to continue</div>
-        </div>
-        <form className='Login__form' noValidate onSubmit={(event) => {
-          event.preventDefault();
-          if (isModalFormValid()) {
-            performDeleteAccount();
-          }
-        }}>
-          <PasswordContainer showPassword={showDeleteConfirmPassword} handleClick={() => setShowDeleteConfirmPassword((prevState) => (!prevState))}>
-            <FormField 
-              id="current-password"
-              fieldType={`${showDeleteConfirmPassword ? 'text' : 'password'}`}
-              name="deleteConfirmPassword"
-              label="Password" 
-              value={deleteConfirmPassword} 
-              onChange={(event) => setdeleteConfirmPassword(event.target.value)} 
-              className="auth-field form-field"
-              alert={deleteConfirmPasswordAlert}
-              required
-              autocomplete="current-password"
-            />
-          </PasswordContainer>
-
-          <div className="Modal__buttons">
-            <Button design="secondary" classLabel="cancel" handleClick={() => setShowModal(false)}>Cancel</Button>
-            <Button type="submit" design="delete">
-              {deletePending ? (
-                <Dots color="white"/>
-              ) : (
-                'Delete'
-              )}
-            </Button>
-          </div>
-        </form>
-      </Modal>}
+    
 
       {showEmailModal && <Modal title="Change email" closeModal={() => setShowEmailModal(false)}>
         <div className="update-display">
@@ -601,13 +453,7 @@ const Settings = ({ user, setToast, setPage }) => {
             </div>
           )}
 
-          <div className="delete-account">
-            <div className="form-title form-title--delete">Delete account</div>
-            <p className="warning">Once you delete your account, it is permanent. Please be sure.</p>
-            <Button handleClick={() => setShowModal(true)} design="delete" >
-              Delete account
-            </Button>
-          </div>
+          <DeleteAccount user={user} setToast={setToast}/>
 
         </div>
       </StyledSettings>
