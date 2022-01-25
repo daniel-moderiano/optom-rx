@@ -468,30 +468,29 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
     }
   }, [pbsError, setToast]);
 
-  // Remove all PBS related information from local state
-  const clearPbsInfo = useCallback(() => {
-    setDrugData((prevData) => ({
-      ...prevData,
-      authRequired: false,
-      indications: '',
-      maxQuantity: '',
-      maxRepeats: '',
-    }));
-
-    setMiscData((prevData) => ({
-      ...prevData,
-      authCode: '',
-    }));
-
-    setMiscAlerts((prevAlerts) => ({
-      ...prevAlerts,
-      authCode: {}
-    }));
-
-  }, []);
-
-
+  // Remove all relevant PBS and verified-dependent information when there is loss of verified status (i.e. user manually adjusts active ingredient or brand name field)
   useEffect(() => {
+    const clearPbsInfo = () => {
+      setDrugData((prevData) => ({
+        ...prevData,
+        authRequired: false,
+        indications: '',
+        maxQuantity: '',
+        maxRepeats: '',
+      }));
+  
+      setMiscData((prevData) => ({
+        ...prevData,
+        authCode: '',
+      }));
+  
+      setMiscAlerts((prevAlerts) => ({
+        ...prevAlerts,
+        authCode: {}
+      }));
+  
+    }
+  
     // Toggle any PBS-related functionality if there is a change in verified status. 
     if (!drugData.verified) {
       clearPbsInfo();
@@ -524,7 +523,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
         }));
       }
     }
-  }, [drugData.verified, drugData.pbsRx, clearPbsInfo, setPbsInfo])
+  }, [drugData.verified, drugData.pbsRx, setPbsInfo])
 
 
   // ! Successfully remove verified functions
@@ -664,19 +663,37 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
     }
   }, [pbsInfo, drugData.pbsRx]);
 
+    // ! Successfully remove verified functions
   const quantityRepeatStatus = useCallback(() => {
     // PBS info-related effects here
-    if (pbsInfo) {
+    if (pbsInfo && drugData.pbsRx) {
       // All PBS drugs have restrictions on quantity and repeats; set to local state
       setDrugData((prevData) => ({
         ...prevData,
         maxRepeats: pbsInfo['repeats'],
         maxQuantity: pbsInfo['mq'],
       }));
+
+      setDrugAlerts((prevAlerts) => ({
+        ...prevAlerts,
+        maxQuantity: {
+          message: `Maximum allowed quantity under the PBS is ${drugData.maxQuantity}`,
+          type: 'neutral',
+        },
+        maxRepeats: {
+          message: `Maximum allowed repeats under the PBS is ${drugData.maxRepeats}`,
+          type: 'neutral',
+        }
+      }));
+    } else {
+      // If the above condition isn't met, it means the quantity and repeat values are gone, so no valid PBS drug exists. hence remove all alerts
+      setDrugAlerts((prevAlerts) => ({
+        ...prevAlerts,
+        maxQuantity: {},
+        maxRepeats: {},
+      }));
     }
-
-
-  }, [pbsInfo]);
+  }, [pbsInfo, drugData.maxQuantity, drugData.maxRepeats, drugData.pbsRx]);
 
   // ! Successfully remove verified functions
   // Identify whether a drug on the PBS is restricted or not, and display indications for use on restricted items
@@ -723,32 +740,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
     quantityRepeatStatus();
     lemiStatus();
   }, [restrictedStatus, authorityStatus, quantityRepeatStatus, lemiStatus, pbsInfo])
-
-
-  // Used to manage alerts on max quantity and repeats under the PBS
-  useEffect(() => {
-    // Ensures the call happens when a max quantity and repeat are added
-    if (drugData.maxQuantity.length > 0 && drugData.maxRepeats.length > 0 && drugData.pbsRx) {
-      setDrugAlerts((prevAlerts) => ({
-        ...prevAlerts,
-        maxQuantity: {
-          message: `Maximum allowed quantity under the PBS is ${drugData.maxQuantity}`,
-          type: 'neutral',
-        },
-        maxRepeats: {
-          message: `Maximum allowed repeats under the PBS is ${drugData.maxRepeats}`,
-          type: 'neutral',
-        }
-      }));
-    } else {
-      // If the above condition isn't met, it means the quantity and repeat values are gone, so no valid PBS drug exists. hence remove all alerts
-      setDrugAlerts((prevAlerts) => ({
-        ...prevAlerts,
-        maxQuantity: {},
-        maxRepeats: {},
-      }));
-    }
-  }, [drugData.maxRepeats, drugData.maxQuantity, drugData.pbsRx]);
 
   
 
