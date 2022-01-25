@@ -4,6 +4,7 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useAuthContext } from '../hooks/useAuthContext';
 import { db } from "../firebase/config";
 import { doc, setDoc } from "firebase/firestore";
+import { useErrorHandling } from "./useErrorHandling";
 
 // Custom hook to handle user signing in
 export const useSignup = () => {
@@ -11,32 +12,11 @@ export const useSignup = () => {
   const [error, setError] = useState(null);
   const [isPending, setIsPending] = useState(false);
   const { dispatch } = useAuthContext();
+  const { handleLoginSignupError } = useErrorHandling();
 
   const signup = async (email, password, displayName, setFirstSignIn) => {
     setError(null);
     setIsPending(true);
-
-    const errorHandling = (errorCode) => {
-      switch (errorCode) {
-        case 'auth/email-already-in-use':
-          setError('This email is already in use. Try another.')
-          break;
-        case 'auth/invalid-email':
-          setError('Please enter a valid email address.')
-          break;
-        case 'auth/weak-password':
-          setError('Please create a password at least six characters in length.')
-          break;
-
-        case 'auth/network-request-failed':
-          setError("We couldn't connect to the network. Please check your internet connection and try again.")
-          break;
-      
-        default:
-          setError('An unknown server error occured. Please try again.')
-          break;
-      }
-    };
 
     try {
       // Firebase function to sign up user. Once resolved, confirm with a context state change
@@ -60,7 +40,7 @@ export const useSignup = () => {
       setFirstSignIn(true);
     } catch (err) {
       setIsPending(false);
-      errorHandling(err.code);
+      handleLoginSignupError(err.code, setError);
     }
   }
   return { error, isPending, signup }

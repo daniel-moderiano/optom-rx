@@ -12,7 +12,7 @@ import { useImmediateToast } from '../../hooks/useImmediateToast';
 import { useLogout } from "../../hooks/useLogout";
 
 const DeleteAccount = ({ user, setToast, refreshCredentials }) => {
-  const { handleErrorCode } = useErrorHandling();
+  const { handleSettingsError } = useErrorHandling();
   const { logout } = useLogout();
 const { showSuccessToast, showErrorToast } = useImmediateToast(); 
   const [showModal, setShowModal] = useState(false);
@@ -84,7 +84,7 @@ const { showSuccessToast, showErrorToast } = useImmediateToast();
       await refreshCredentials(deleteConfirmPassword);
       reauthenticated = true;
     } catch (error) {
-      handleErrorCode(error.code, setdeleteConfirmPasswordAlert);
+      handleSettingsError(error.code, setdeleteConfirmPasswordAlert);
       setDeletePending(false);
     }
 

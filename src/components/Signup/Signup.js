@@ -29,8 +29,8 @@ const Signup = ({ setPage, setFirstSignIn }) => {
     setPage('signup');
   }, [setPage])
 
-   // Ensure form is validated before calling form submission function (to generate Rx)
-   const isFormValid = () => {
+  // Ensure form is validated before calling form submission function (to generate Rx)
+  const isFormValid = () => {
     let valid = true;
     let inputFocused = false;
 

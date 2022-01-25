@@ -11,7 +11,7 @@ import { useImmediateToast } from '../../hooks/useImmediateToast';
 
 const ChangeEmail = ({ user, setToast, refreshCredentials, verified }) => {
   const { showSuccessToast, showErrorToast } = useImmediateToast(); 
-  const { handleErrorCode } = useErrorHandling();
+  const { handleSettingsError } = useErrorHandling();
   const [emailConfirmPassword, setEmailConfirmPassword] = useState('');  
   const [emailConfirmPasswordAlert, setEmailConfirmPasswordAlert] = useState({});
   const [showEmailModal, setShowEmailModal] = useState(false);
@@ -79,7 +79,7 @@ const ChangeEmail = ({ user, setToast, refreshCredentials, verified }) => {
       await refreshCredentials(emailConfirmPassword);
       reauthenticated = true;
     } catch (error) {
-      handleErrorCode(error.code, setEmailConfirmPasswordAlert)
+      handleSettingsError(error.code, setEmailConfirmPasswordAlert)
       setChangeEmailPending(false);
     }
 

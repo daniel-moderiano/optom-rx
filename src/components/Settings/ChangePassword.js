@@ -10,7 +10,7 @@ import { useLogout } from "../../hooks/useLogout";
 import { Link } from "react-router-dom";
 
 const ChangePassword = ({ user, setToast, refreshCredentials }) => {
-  const { handleErrorCode } = useErrorHandling();
+  const { handleSettingsError } = useErrorHandling();
   const { showSuccessToast } = useImmediateToast(); 
   const { logout } = useLogout();
 
@@ -96,7 +96,7 @@ const ChangePassword = ({ user, setToast, refreshCredentials }) => {
       await refreshCredentials(currentPassword);
       reauthenticated = true;
     } catch (error) {
-      handleErrorCode(error.code, setCurrentPasswordAlert);
+      handleSettingsError(error.code, setCurrentPasswordAlert);
       setChangePasswordPending(false);
     }
 
@@ -114,7 +114,7 @@ const ChangePassword = ({ user, setToast, refreshCredentials }) => {
         
       } catch (error) {
         setChangePasswordPending(false);
-        handleErrorCode(error.code, setNewPasswordAlert)
+        handleSettingsError(error.code, setNewPasswordAlert)
       }
     }
   };

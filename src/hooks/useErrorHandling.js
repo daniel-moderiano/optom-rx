@@ -1,6 +1,6 @@
 // Non-specific error handling for any relevant forms submitting auth data. Uses firebase known errors.
 export const useErrorHandling = () => {
-  const handleErrorCode = (errorCode, alertSetFunc) => {
+  const handleSettingsError = (errorCode, alertSetFunc) => {
     switch (errorCode) {
       case 'auth/wrong-password':
         alertSetFunc({
@@ -41,5 +41,34 @@ export const useErrorHandling = () => {
     }
   }
 
-  return { handleErrorCode };
+  const handleLoginSignupError = (errorCode, setError) => {
+    switch (errorCode) {
+      case 'auth/invalid-email':
+        setError('Please enter a valid email address.')
+        break;
+      case 'auth/wrong-password':
+        setError("That's an incorrect password. Try again.")
+        break;
+      case 'auth/user-not-found':
+        setError("We couldn't find an account with that email address. Check for typos and try again.")
+        break;
+      case 'auth/too-many-requests':
+        setError('Failed to login too many times. Please wait a few minutes before trying again.')
+        break;
+      case 'auth/network-request-failed':
+        setError("We couldn't connect to the network. Please check your internet connection and try again.")
+        break;
+      case 'auth/email-already-in-use':
+        setError('This email is already in use. Try another.')
+        break;
+      case 'auth/weak-password':
+        setError('Please create a password at least six characters in length.')
+        break;
+      default:
+        setError('An unknown server error occured. Please try again.')
+        break;
+    }
+  }
+
+  return { handleSettingsError, handleLoginSignupError };
 };

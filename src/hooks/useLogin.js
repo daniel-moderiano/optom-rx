@@ -2,6 +2,7 @@ import { useState } from "react"
 import { auth } from "../firebase/config";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useAuthContext } from '../hooks/useAuthContext';
+import { useErrorHandling } from "./useErrorHandling";
 
 // Custom hook to handle user signing in
 export const useLogin = () => {
@@ -9,30 +10,7 @@ export const useLogin = () => {
   const [error, setError] = useState(null);
   const [isPending, setIsPending] = useState(false);
   const { dispatch } = useAuthContext();
-
-  const errorHandling = (errorCode) => {
-    switch (errorCode) {
-      case 'auth/invalid-email':
-        setError('Please enter a valid email address.')
-        break;
-      case 'auth/wrong-password':
-        setError("That's an incorrect password. Try again.")
-        break;
-      case 'auth/user-not-found':
-        setError("We couldn't find an account with that email address. Check for typos and try again.")
-        break;
-      case 'auth/too-many-requests':
-        setError('Failed to login too many times. Please wait a few minutes before trying again.')
-        break;
-      case 'auth/network-request-failed':
-        setError("We couldn't connect to the network. Please check your internet connection and try again.")
-        break;
-    
-      default:
-        setError('An unknown server error occured. Please try again.')
-        break;
-    }
-  };
+  const { handleLoginSignupError } = useErrorHandling();
 
   const login = (email, password) => {
     setError(null);
@@ -45,7 +23,7 @@ export const useLogin = () => {
       })
       .catch((err) => {
         setIsPending(false);
-        errorHandling(err.code);
+        handleLoginSignupError(err.code, setError);
       })
   }
 
