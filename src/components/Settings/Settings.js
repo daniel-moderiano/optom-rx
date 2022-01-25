@@ -1,7 +1,7 @@
 import { StyledSettings } from "./Settings.styled"
 import FormField from '../FormField/FormField'
 import { useState, useEffect } from "react"
-import { updateProfile, deleteUser, reauthenticateWithCredential, EmailAuthProvider, updatePassword, sendEmailVerification, updateEmail } from "firebase/auth";
+import { deleteUser, reauthenticateWithCredential, EmailAuthProvider, updatePassword, sendEmailVerification, updateEmail } from "firebase/auth";
 import { collection, deleteDoc, doc, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import { useLogout } from '../../hooks/useLogout';
@@ -13,12 +13,11 @@ import PasswordContainer from '../utils/PasswordContainer/PasswordContainer';
 import PageHeader from '../utils/PageHeader/PageHeader';
 import Dots from '../utils/Dots/Dots';
 import { useImmediateToast } from '../../hooks/useImmediateToast';
+import ChangeDisplayName from "./ChangeDisplayName";
 
 const Settings = ({ user, setToast, setPage }) => {
   const { logout } = useLogout();
-  const { showSuccessToast, showErrorToast } = useImmediateToast();
-
-  const [displayName, setDisplayName] = useState('');
+  const { showSuccessToast, showErrorToast } = useImmediateToast(); 
 
   const [currentPassword, setCurrentPassword] = useState('');
   const [currentPasswordAlert, setCurrentPasswordAlert] = useState({});
@@ -39,7 +38,7 @@ const Settings = ({ user, setToast, setPage }) => {
   const [showEmailModal, setShowEmailModal] = useState(false);
   const [showVerifyModal, setShowVerifyModal] = useState(false);
 
-  const [namePending, setNamePending] = useState(false);
+
   const [deletePending, setDeletePending] = useState(false);
 
   const [changePasswordPending, setChangePasswordPending] = useState(false);
@@ -54,9 +53,7 @@ const Settings = ({ user, setToast, setPage }) => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [showEmailConfirmPassword, setShowEmailConfirmPassword] = useState(false);
   
-  useEffect(() => {
-    setDisplayName(user.displayName);
-  }, [user]);
+ 
 
   // Adjust current page for accessibility and styling
   useEffect(() => {
@@ -74,22 +71,6 @@ const Settings = ({ user, setToast, setPage }) => {
     setShowDeleteConfirmPassword(false);
     setShowEmailConfirmPassword(false);
   }, [showModal, showEmailModal]);
-
-
-  const updateName = async () => {
-    setNamePending(true);
-    try {
-      await updateProfile(user, {
-        displayName: displayName,
-      });
-
-      setNamePending(false);
-      showSuccessToast(setToast, 'Display name updated');
-    } catch (error) {
-      setNamePending(false);
-      showErrorToast(setToast, 'An error occurred while changing name');
-    }
-  };
 
   const deleteAccount = async () => {
     // Gather a reference to all of the user's prescribers
@@ -518,24 +499,7 @@ const Settings = ({ user, setToast, setPage }) => {
 
       <div className="Settings-container">
         {user.emailVerified ? (<>
-          <form className="displayName-form" >
-            <div className="form-title">Change display name</div>
-            <FormField 
-              fieldType="text" 
-              name="displayName"
-              label="Display name" 
-              value={displayName} 
-              onChange={(event) => setDisplayName(event.target.value)} 
-            />  
-            <input type="text" className="hidden" />
-            <Button handleClick={updateName} >
-              {namePending ? (
-                <Dots color="white"/>
-              ) : (
-                'Update display name'
-              )}
-            </Button>
-          </form>
+          <ChangeDisplayName user={user} setToast={setToast}/>
 
           <div className="change-email">
             <div className="form-title">Change email</div>
