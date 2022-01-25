@@ -18,6 +18,8 @@ import { useHandleLEMI } from "../../hooks/useHandleLEMI";
 import MedicationDetails from "../MedicationDetails/MedicationDetails";
 import ExtraAuthorityDetails from "../AuthorityDetails/ExtraAuthorityDetails";
 import { useConditionalToast } from "../../hooks/useConditionalToast";
+import { useNewRx } from "../../hooks/useNewRx";
+import { useRxFormValidation } from "../../hooks/useRxFormValidation";
 
 // Multiple items are not permitted to be prescribed on the same form; each must use an individual form (applies to optometrists only)
 
@@ -27,9 +29,11 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
   const [{ scriptNo, authRxNo, numbersError, numbersLoading }, fetchNumbers] = useNumbers();
   const [{ pbsInfo, pbsError }, fetchDrug, setPbsInfo] = usePBSFetch(existingData.pbsData);
   const { positiveValidationUI, negativeValidationUI, validateRequiredField, removeAllValidation } = useInputValidation();
+  const { patientDataValidation, drugDataValidation, miscDataValidation } = useRxFormValidation();
   const { abbreviateStateName } = useFormatting();
   const { handleChange, toggleBooleanState, handleEnterKeyOnCheckbox } = useInputChanges();
   const { LEMIText, handleLEMIInfo } = useHandleLEMI();
+  const { resetFormData, resetFormValidation } = useNewRx();
 
   const [showTooltip, setShowTooltip] = useState(true);
 
@@ -144,72 +148,8 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
           setNumbersLoaded((prevData) => prevData ? prevData : !prevData);
         });
 
-        // Also reset all existing data 
-        setDrugData({
-          activeIngredient: '',
-          brandName: '',
-          quantity: '',
-          repeats: '',
-          dosage: '',
-          itemCode: '',
-          substitutePermitted: true,
-          brandOnly: false,
-          includeBrand: false,
-          pbsRx: false,
-          compounded: false,
-          verified: false,
-          indications: '',
-          authRequired: false,
-          maxQuantity: '',
-          maxRepeats: '',
-        });
-
-        setPatientData({
-          fullName: '',
-          streetAddress: '',
-          subpremise: '',
-          suburb: '',
-          postcode: '',
-          state: '',
-          medicareNumber: '',
-          medicareRefNumber: '',
-        });
-
-        setMiscData((prevData) => ({
-          ...prevData,
-          authRxNumber: '',
-          authCode: '',
-          scriptID: '',
-          justification: '',
-          prevAuth: false,
-          age: '',
-        }));
-
-        // Remove any and all validation and alerts
-        document.querySelector('.patient-form').querySelectorAll('input').forEach((input) => {
-          removeAllValidation(input, setPatientAlerts);
-        })
-        document.querySelector('.drug-form').querySelectorAll('input').forEach((input) => {
-          if (input.name === 'pbsRx') {
-            // Do nothing
-          } else {
-            removeAllValidation(input, setDrugAlerts);
-          }
-        });
-
-        // Close any expanded address or medication sections
-        if (document.querySelector('.AddressAutocomplete').classList.contains('expanded')) {
-          document.querySelector('.address-expand').click();
-        }
-
-        if (document.querySelector('.DrugAutocomplete').classList.contains('expanded')) {
-          document.querySelector('.drug-expand').click();
-        }
-
-
-
-
-
+        resetFormData(setDrugData, setPatientData, setMiscData);
+        resetFormValidation(setDrugAlerts, setPatientAlerts);
       }
       // If the user has clicked a prescribe or re-prescribe button to get here then newRx will still be true, but this additional logic must be run to initialise drug data
       if (state.rePrescribe) {
@@ -241,7 +181,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
     } catch (error) {
       // If the Rx is not newly generated, a reference error will be thrown, where state is null. No action required.
     }
-  }, [state, fetchNumbers, fetchDrug, removeAllValidation]);
+  }, [state, fetchNumbers, fetchDrug, resetFormValidation, resetFormData]);
 
   // Set local state with authRxNo and scriptNo fetched from firestore. Activates only when the numbers have been fetched, which is performed as part of generating a newRx
   useEffect(() => {
@@ -259,137 +199,10 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
 
   // Inline form validation
   useEffect(() => {
-    // Validation functions are split via form to utilise event propagation within the form
-    const patientDataValidation = () => {
-      document.querySelector('.patient-form').addEventListener('focusout', (event) => {
-        const { name, value } = event.target
-        switch (true) {
-          case name === 'fullName':
-            validateRequiredField(setPatientAlerts, event.target);
-            break;
-
-          case name === 'streetAddress':
-            validateRequiredField(setPatientAlerts, event.target);
-            break;
-
-          case name === 'suburb':
-            validateRequiredField(setPatientAlerts, event.target);
-            break;
-
-          case name === 'state':
-            setPatientData((prevData) => ({
-              ...prevData,
-              [name]: abbreviateStateName(value),
-            }));
-            validateRequiredField(setPatientAlerts, event.target);
-            break;
-
-          case name === 'medicareNumber':
-            if ((/^[0-9]{10}$/).test(value.trim())) {
-              positiveValidationUI(setPatientAlerts, event.target);
-            } else {
-              // ignore
-              event.target.classList.remove('success');
-              // Remove the tick icon
-              const tick = event.target.parentNode.querySelector('.tickCircle');
-              tick.classList.remove('show');
-              tick.classList.add("hide");
-            }
-            break;
-
-          case name === 'medicareRefNumber':
-            if ((/^[1-9]{1}$/).test(value.trim())) {
-              positiveValidationUI(setPatientAlerts, event.target);
-            } else {
-              // ignore
-              event.target.classList.remove('success');
-              // Remove the tick icon
-              const tick = event.target.parentNode.querySelector('.tickCircle');
-              tick.classList.remove('show');
-              tick.classList.add("hide");
-            }
-            break;
-
-          case name === 'postcode':
-            validateRequiredField(setPatientAlerts, event.target);
-            break;
-
-          default:
-            break;
-        }
-      });
-    };
-
-    const drugDataValidation = () => {
-      document.querySelector('.drug-form').addEventListener('focusout', (event) => {
-        const { name, value } = event.target
-        switch (true) {
-          case name === 'activeIngredient':
-            validateRequiredField(setDrugAlerts, event.target);
-            break;
-
-          case name === 'brandName':
-            if (value.trim().length > 0) {
-              event.target.classList.remove('error')
-              setDrugAlerts((prevAlerts) => ({
-                ...prevAlerts,
-                brandName: {}
-              }));
-            }
-            break;
-
-          case name === 'quantity':
-            // Verify as standard
-            if (value.trim().length === 0) {
-              negativeValidationUI(setDrugAlerts, 'This field cannot be left blank', event.target);
-            } else if (!(/^[1-9][0-9]*$/).test(value.trim())) {
-              // Checks for non-zero number with no theoretical limit
-              negativeValidationUI(setDrugAlerts, 'Please enter a quantity of 1 or more (with no leading zeroes)', event.target);
-            } else {
-              positiveValidationUI(setDrugAlerts, event.target);
-            }
-            break;
-
-          // Can be zero, and for non-PBS prescriptions, there is technically no upper limits
-          case name === 'repeats':
-            // Verify as standard
-            if (value.trim().length === 0) {
-              negativeValidationUI(setDrugAlerts, 'This field cannot be left blank', event.target);
-            } else if (!(/^([1-9][0-9]*)|(0)$/).test(value.trim())) {
-              // Checks for non-zero number with no theoretical limit
-              negativeValidationUI(setDrugAlerts, 'Please enter a valid number (no leading zeroes)', event.target);
-            } else {
-              positiveValidationUI(setDrugAlerts, event.target);
-            }
-            break;
-
-          case name === 'dosage':
-            validateRequiredField(setDrugAlerts, event.target);
-            break;
-          default:
-            break;
-        }
-      });
-    };
-
-    // Although only a single field is being validated, the switch statement should remain in case more fields need to be added
-    const miscDataValidation = () => {
-      document.querySelector('.misc-form').addEventListener('focusout', (event) => {
-        const { name } = event.target
-        switch (true) {
-          case name === 'date':
-            validateRequiredField(setMiscAlerts, event.target);
-            break;
-          default:
-            break;
-        }
-      });
-    };
-
-    patientDataValidation();
-    drugDataValidation();
-    miscDataValidation();
-  }, [validateRequiredField, positiveValidationUI, negativeValidationUI, abbreviateStateName]);
+    patientDataValidation(setPatientAlerts, setPatientData);
+    drugDataValidation(setDrugAlerts);
+    miscDataValidation(setMiscAlerts);
+  }, [drugDataValidation, patientDataValidation, miscDataValidation]);
 
   // Remove a visible error or alert from the brand name input when it changes from being required to not being required
   useEffect(() => {
