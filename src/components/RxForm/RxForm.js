@@ -25,7 +25,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
   const { state } = useLocation();
   const [{ scriptNo, authRxNo, numbersError, numbersLoading }, fetchNumbers] = useNumbers();
   const [{ pbsInfo, pbsError }, fetchDrug, setPbsInfo] = usePBSFetch(existingData.pbsData);
-  const { positiveValidationUI, negativeValidationUI, validateRequiredField } = useInputValidation();
+  const { positiveValidationUI, negativeValidationUI, validateRequiredField, removeAllValidation } = useInputValidation();
   const { abbreviateStateName } = useFormatting();
   const { handleChange, toggleBooleanState, handleEnterKeyOnCheckbox } = useInputChanges();
   const { LEMIText, handleLEMIInfo } = useHandleLEMI();
@@ -184,6 +184,31 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
           age: '',
         }));
 
+        // Remove any and all validation and alerts
+        document.querySelector('.patient-form').querySelectorAll('input').forEach((input) => {
+          removeAllValidation(input, setPatientAlerts);
+        })
+        document.querySelector('.drug-form').querySelectorAll('input').forEach((input) => {
+          if (input.name === 'pbsRx') {
+            // Do nothing
+          } else {
+            removeAllValidation(input, setDrugAlerts);
+          }
+        });
+
+        // Close any expanded address or medication sections
+        if (document.querySelector('.AddressAutocomplete').classList.contains('expanded')) {
+          document.querySelector('.address-expand').click();
+        }
+
+        if (document.querySelector('.DrugAutocomplete').classList.contains('expanded')) {
+          document.querySelector('.drug-expand').click();
+        }
+
+
+
+
+
       }
       // If the user has clicked a prescribe or re-prescribe button to get here then newRx will still be true, but this additional logic must be run to initialise drug data
       if (state.rePrescribe) {
@@ -208,11 +233,14 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
 
         // It is possible the drug data will be different from when the drug was initially prescribed. This will update when the fetch call is made, but some of the original script parameters (e.g. max quantity, repeats, or LEMI) may be inappropriate, and the user will not be aware. Consider a modal for scripts older than X months warning the user, or even manually add later if PBS undergoes major changes down the line
         fetchDrug(state.scriptData.itemCode);
+
+        // Finally, expand the medication details section
+        document.querySelector('.drug-expand').click();
       }
     } catch (error) {
       // If the Rx is not newly generated, a reference error will be thrown, where state is null. No action required.
     }
-  }, [state, fetchNumbers, fetchDrug]);
+  }, [state, fetchNumbers, fetchDrug, removeAllValidation]);
 
   // Set local state with authRxNo and scriptNo fetched from firestore. Activates only when the numbers have been fetched, which is performed as part of generating a newRx
   useEffect(() => {

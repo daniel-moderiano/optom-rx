@@ -3,7 +3,7 @@ import { useInputChanges } from "../../hooks/useInputChanges";
 import Indications from "../Indications/Indications";
 import DrugAutocomplete from "../DrugAutocomplete/DrugAutocomplete";
 
-const MedicationDetails = ({ data, setData, alerts, setAlerts, fetchDrug, showTooltip, LEMIText }) => {
+const MedicationDetails = ({ data, setData, alerts, setAlerts, fetchDrug, showTooltip, LEMIText, manuallyCollapse }) => {
   const { handleChange, toggleBooleanState, handleEnterKeyOnCheckbox } = useInputChanges();
 
   return (<>
@@ -18,6 +18,7 @@ const MedicationDetails = ({ data, setData, alerts, setAlerts, fetchDrug, showTo
       fetchDrug={fetchDrug}
       showTooltip={showTooltip}
       tooltipText={LEMIText}
+      manuallyCollapse={false}
     />
 
     <FormField

@@ -13,7 +13,7 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
   const showSuccessClass = (element) => {
     element.classList.remove('error');
     element.classList.add('success');
-  }
+  };
 
   // Toggle the checkboxes in the form on enter keypress, but don't submit the form
   const changeOnEnter = (event, setFunc, data) => {
@@ -286,7 +286,7 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
 
 
   return (
-    <StyledDrugAutocomplete className="autocomplete-container">
+    <StyledDrugAutocomplete className={`${expand ? 'DrugAutocomplete expanded' : 'DrugAutocomplete collapsed'}`}>
       <FormField 
         id="activeIngredient"
         name="activeIngredient"
@@ -302,7 +302,7 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
         className="activeIngredient form-field"
         required
       />
-      <button type="button" className='drug-expand' onClick={() => setExpand(true)}>Enter manually</button>
+      <button type="button" className='drug-expand' onClick={() => setExpand(prevState => (!prevState))}>{expand ? 'Hide extra fields' : 'Enter manually'}</button>
 
       <div className={`drug-collapse ${expand ? 'show' : 'hide'}`}>
         <FormField 

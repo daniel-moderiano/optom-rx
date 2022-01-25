@@ -68,6 +68,18 @@ export const useInputValidation = () => {
     }
   }, []);
 
+  const removeAllValidation = useCallback((element, setAlertFunc) => {
+    element.classList.remove('error');
+    element.classList.remove('success');
+    const tick = element.parentNode.querySelector('.tickCircle');
+    tick.classList.remove('show');
+    tick.classList.add("hide");
+    setAlertFunc((prevAlerts) => ({
+      ...prevAlerts,
+      [element.name]: {}
+    }));
+  }, [])
 
-  return { positiveValidationUI, negativeValidationUI, validateRequiredField }
+
+  return { positiveValidationUI, negativeValidationUI, validateRequiredField, removeAllValidation }
 }

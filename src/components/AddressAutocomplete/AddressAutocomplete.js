@@ -143,7 +143,7 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider, alerts, se
  
 
   return (
-    <StyledAddressAutocomplete>
+    <StyledAddressAutocomplete className={`${expand ? 'AddressAutocomplete expanded' : 'AddressAutocomplete collapsed'}`}>
       <legend className="visually-hidden">Patient Address</legend>
       <FormField
         name="streetAddress"
@@ -156,7 +156,8 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider, alerts, se
         className="street-address form-field"
         required
       />
-      <button type="button" onClick={() => setExpand(true)}>Enter manually</button>      
+
+      <button type="button" className="address-expand" onClick={() => setExpand(prevState => (!prevState))}>{expand ? 'Hide extra fields' : 'Enter manually'}</button>
 
       <div className={`address-collapse ${expand ? 'show' : 'hide'} ${provider ? 'address-collapse--provider' : 'address-collapse--patient'}`}>
         <FormField 
