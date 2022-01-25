@@ -1,7 +1,6 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import FormField from "../FormField/FormField";
 import { StyledRxForm } from "./RxForm.styled";
-import DrugAutocomplete from "../DrugAutocomplete/DrugAutocomplete";
 import Fieldset from "../utils/Fieldset/Fieldset";
 import { useLocation } from "react-router";
 import { useNumbers } from '../../hooks/useNumbers';
@@ -15,8 +14,8 @@ import { useFormatting } from '../../hooks/useFormatting';
 import { useInputChanges } from "../../hooks/useInputChanges";
 import PrescriberDetails from "../PrescriberDetails/PrescriberDetails";
 import PatientDetails from "../PatientDetails/PatientDetails";
-import Indications from "../Indications/Indications";
 import { useHandleLEMI } from "../../hooks/useHandleLEMI";
+import DrugDetails from "../DrugDetails/DrugDetails";
 
 // Multiple items are not permitted to be prescribed on the same form; each must use an individual form (applies to optometrists only)
 
@@ -627,7 +626,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
       }
     }
 
-  
     const handleRestrictionInfo = (fetchedPBSData) => {
      // Check for restricted status
       switch (fetchedPBSData['restriction-flag']) {
@@ -686,10 +684,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
       handleRestrictionInfo(pbsInfo);
       handleAuthorityInfo(pbsInfo);
       handleMaxParametersInfo(pbsInfo);
-      // Show tooltip
-      if (!showTooltip) {
-        setShowTooltip(true);
-      }
+      setShowTooltip(true);
     }
   }, [pbsInfo, drugData.pbsRx, drugData.maxQuantity, drugData.maxRepeats, showTooltip, handleLEMIInfo])
 
@@ -724,66 +719,16 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
           />
         </Fieldset>
 
-        {/* There must be enough info to identify the medicine, including form and strength, and informatiom regarding dosage, quantity, and repeats */}
+
         <Fieldset className="drug-form" legend="Medication details">
-          <DrugAutocomplete
-            data={drugData}
-            setData={setDrugData}
-            handleChange={(event) => handleChange(event, setDrugData)}
-            toggle={toggleBooleanState}
-            alerts={drugAlerts}
+          <DrugDetails 
+            data={drugData} 
+            setData={setDrugData} 
+            alerts={drugAlerts} 
             setAlerts={setDrugAlerts}
             fetchDrug={fetchDrug}
             showTooltip={showTooltip}
-            tooltipText={LEMIText}
-          />
-
-          <FormField
-            name="dosage"
-            label="Dosage directions"
-            value={drugData.dosage}
-            onChange={(event) => handleChange(event, setDrugData)}
-            alert={drugAlerts.dosage}
-            required
-          />
-
-          <FormField
-            fieldType="checkbox"
-            name="pbsRx"
-            label="PBS prescription"
-            onChange={() => toggleBooleanState(setDrugData, drugData, 'pbsRx')}
-            checked={drugData.pbsRx}
-            className="checkbox pbsRx"
-            alert={drugAlerts.pbsRx}
-            enterFunc={(event) => handleEnterKeyOnCheckbox(event, setDrugData, drugData)}
-          />
-
-          {(drugData.verified && drugData.indications.length > 0 && drugData.pbsRx) &&
-            <Indications indicationsData={drugData.indications}/>
-          }
-
-          <FormField
-            fieldType="number"
-            name="quantity"
-            label="Quantity"
-            value={drugData.quantity}
-            onChange={(event) => handleChange(event, setDrugData)}
-            alert={drugAlerts.quantity}
-            subAlert={drugAlerts.maxQuantity}
-            className="quantity-field form-field"
-            required
-          />
-
-          <FormField
-            fieldType="number"
-            name="repeats"
-            label="Repeats"
-            value={drugData.repeats}
-            onChange={(event) => handleChange(event, setDrugData)}
-            alert={drugAlerts.repeats}
-            subAlert={drugAlerts.maxRepeats}
-            className="repeats-field form-field"
-            required
+            LEMIText={LEMIText}
           />
         </Fieldset>
 
