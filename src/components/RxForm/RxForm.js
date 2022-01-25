@@ -10,7 +10,6 @@ import ContentContainer from '../utils/ContentContainer/ContentContainer';
 import PageHeader from '../utils/PageHeader/PageHeader';
 import Button from '../utils/Button/Button';
 import { useInputValidation } from "../../hooks/useInputValidation";
-import { useFormatting } from '../../hooks/useFormatting';
 import { useInputChanges } from "../../hooks/useInputChanges";
 import PrescriberDetails from "../PrescriberDetails/PrescriberDetails";
 import PatientDetails from "../PatientDetails/PatientDetails";
@@ -28,15 +27,13 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
   const { state } = useLocation();
   const [{ scriptNo, authRxNo, numbersError, numbersLoading }, fetchNumbers] = useNumbers();
   const [{ pbsInfo, pbsError }, fetchDrug, setPbsInfo] = usePBSFetch(existingData.pbsData);
-  const { positiveValidationUI, negativeValidationUI, validateRequiredField, removeAllValidation } = useInputValidation();
+  const { negativeValidationUI, removeAllValidation } = useInputValidation();
   const { patientDataValidation, drugDataValidation, miscDataValidation } = useRxFormValidation();
-  const { abbreviateStateName } = useFormatting();
   const { handleChange, toggleBooleanState, handleEnterKeyOnCheckbox } = useInputChanges();
   const { LEMIText, handleLEMIInfo } = useHandleLEMI();
   const { resetFormData, resetFormValidation } = useNewRx();
 
   const [showTooltip, setShowTooltip] = useState(true);
-
   const [numbersLoaded, setNumbersLoaded] = useState(false);
 
   const [drugAlerts, setDrugAlerts] = useState({
@@ -369,7 +366,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
     }
   }, [drugData.verified, drugData.pbsRx, setPbsInfo, pbsInfo])
 
-  // Function to call relevant data handlers when PBS information is successfully fetched
+  // Function to call relevant data handlers when PBS information is successfully fetched. A long section of code. Organised as best as practicable, but fragile. Any changes will likely have unexpected effects.
   useEffect(() => {
     const handleMaxParametersInfo = (fetchedPBSData) => {
       // PBS info-related effects here
