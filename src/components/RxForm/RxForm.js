@@ -498,21 +498,24 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
     if (!drugData.verified) {
       clearPbsInfo();
       setPbsInfo(null);
+      setShowTooltip(false);
       setDrugAlerts((prevAlerts) => ({
         ...prevAlerts,
         authRequired: {
           message: 'This prescription does not require authority',
           type: 'neutral',
-        }
-      }));
-      setDrugAlerts((prevAlerts) => ({
-        ...prevAlerts,
+        },
         pbsRx: {
           message: 'Select a medication from the dropdown list for PBS information',
           type: 'neutral',
         }
       }));
-      setShowTooltip(false);
+      setDrugAlerts((prevAlerts) => ({
+        ...prevAlerts,
+        maxQuantity: {},
+        maxRepeats: {},
+      }));
+
       // Only bother with an authority message to select a dropdown medication IF the user is trying to prescribe on PBS
       if (drugData.pbsRx) {
         setDrugAlerts((prevAlerts) => ({
@@ -530,30 +533,25 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
           pbsRx: {
             message: 'This item is not available on the PBS',
             type: 'neutral',
-          }
-        }));
-        setDrugAlerts((prevAlerts) => ({
-          ...prevAlerts,
+          },
           authRequired: {
             message: 'This prescription does not require authority',
             type: 'neutral',
           }
         }));
       }
-      
     }
   }, [drugData.verified, drugData.pbsRx, setPbsInfo, pbsInfo])
 
 
-    // ! Successfully remove verified functions
-  const quantityRepeatStatus = useCallback(() => {
+  const handleMaxParametersInfo = useCallback((fetchedPBSData) => {
     // PBS info-related effects here
-    if (pbsInfo && drugData.pbsRx) {
+    if (drugData.pbsRx) {
       // All PBS drugs have restrictions on quantity and repeats; set to local state
       setDrugData((prevData) => ({
         ...prevData,
-        maxRepeats: pbsInfo['repeats'],
-        maxQuantity: pbsInfo['mq'],
+        maxRepeats: fetchedPBSData['repeats'],
+        maxQuantity: fetchedPBSData['mq'],
       }));
 
       setDrugAlerts((prevAlerts) => ({
@@ -575,7 +573,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
         maxRepeats: {},
       }));
     }
-  }, [pbsInfo, drugData.maxQuantity, drugData.maxRepeats, drugData.pbsRx]);
+  }, [drugData.pbsRx, drugData.maxQuantity, drugData.maxRepeats])
 
 
   const handleAuthorityInfo = useCallback((fetchedPBSData) => {
@@ -722,23 +720,18 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
   }, []);
 
 
-  // Can utilise a useEffect such as this to set state or UI elements based on PBS data being fetched or lost
-  // Note that these PBS-related functions MUST only be performed on drug data with the verified: true tag
-  useEffect(() => {
-    quantityRepeatStatus();
-  }, [quantityRepeatStatus])
-
   
   // Function to call relevant data handlers when PBS information is successfully fetched
   useEffect(() => {
     if (pbsInfo) {
       handleLEMIInfo(pbsInfo);
       handleRestrictionInfo(pbsInfo);
-      handleAuthorityInfo(pbsInfo)
+      handleAuthorityInfo(pbsInfo);
+      handleMaxParametersInfo(pbsInfo);
     } else {
 
     }
-  }, [pbsInfo, handleLEMIInfo, handleRestrictionInfo, handleAuthorityInfo])
+  }, [pbsInfo, handleLEMIInfo, handleRestrictionInfo, handleAuthorityInfo, handleMaxParametersInfo])
 
   return (
     <ContentContainer>
