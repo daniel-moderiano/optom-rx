@@ -15,7 +15,8 @@ import { useInputChanges } from "../../hooks/useInputChanges";
 import PrescriberDetails from "../PrescriberDetails/PrescriberDetails";
 import PatientDetails from "../PatientDetails/PatientDetails";
 import { useHandleLEMI } from "../../hooks/useHandleLEMI";
-import DrugDetails from "../DrugDetails/DrugDetails";
+import MedicationDetails from "../MedicationDetails/MedicationDetails";
+import ExtraAuthorityDetails from "../AuthorityDetails/ExtraAuthorityDetails";
 
 // Multiple items are not permitted to be prescribed on the same form; each must use an individual form (applies to optometrists only)
 
@@ -721,7 +722,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
 
 
         <Fieldset className="drug-form" legend="Medication details">
-          <DrugDetails 
+          <MedicationDetails 
             data={drugData} 
             setData={setDrugData} 
             alerts={drugAlerts} 
@@ -746,51 +747,12 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
 
           {(drugData.authRequired && drugData.pbsRx) && <>
             <div className="numbers" data-testid="numbers">
-
               {/* drugData.authRequired should be auto-selected once PBS integration is complete, but should also have an option to set manually */}
               {drugData.authRequired && <div className="authRxNo" data-testid="authRxNo">Authority script number: {numbersLoading ? 'Loading...' : miscData.authRxNumber}</div>}
               {numbersError && <div className="numbers__error">Something went wrong</div>}
             </div>
 
-            {/* Consider a variable message beside or below this saying 'not required for this medication' or similar */}
-            <FormField
-              name="authCode"
-              label="Authority code (where applicable)"
-              value={miscData.authCode}
-              onChange={(event) => handleChange(event, setMiscData)}
-              alert={miscAlerts.authCode}
-            />
-
-            <div className="retention">
-              <div className="retention">
-                <div className="justification-field">
-                  <label htmlFor="justification">
-                    Clinical justification for use of item
-                    <textarea className="textarea-justification" name="justification" value={miscData.justification} id="justification" cols="30" rows="3" onChange={(event) => handleChange(event, setMiscData)} ></textarea>
-                  </label>
-                </div>
-
-                <FormField
-                  fieldType="number"
-                  name="age"
-                  label="Patient's age if under 18"
-                  value={miscData.age}
-                  onChange={(event) => handleChange(event, setMiscData)}
-                  alert={miscAlerts.age}
-                  className="age-field"
-                />
-
-                <FormField
-                  fieldType="checkbox"
-                  name="prevAuth"
-                  label="Patient has received authority for this medicine before"
-                  onChange={() => toggleBooleanState(setMiscData, miscData, 'prevAuth')}
-                  checked={miscData.prevAuth}
-                  className="checkbox prevAuth"
-                  enterFunc={(event) => handleEnterKeyOnCheckbox(event, setMiscData, miscData)}
-                />
-              </div>
-            </div>
+            <ExtraAuthorityDetails data={miscData} setData={setMiscData} alerts={miscAlerts} />
           </>}
 
           <FormField
