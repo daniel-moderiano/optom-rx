@@ -11,7 +11,7 @@ import { db } from "../../firebase/config";
 import { useImmediateToast } from '../../hooks/useImmediateToast';
 import { useLogout } from "../../hooks/useLogout";
 
-const DeleteAccount = ({ user, setToast }) => {
+const DeleteAccount = ({ user, setToast, refreshCredentials }) => {
   const { handleErrorCode } = useErrorHandling();
   const { logout } = useLogout();
 const { showSuccessToast, showErrorToast } = useImmediateToast(); 
@@ -74,14 +74,6 @@ const { showSuccessToast, showErrorToast } = useImmediateToast();
       showErrorToast(setToast, 'An error occurred while deleting account');
     }
   };
-
-  // Used to reauthenticate a user. This avoids an error when performing sensitive account functions like delete or email update
-  const refreshCredentials = async (password) => {
-    // Must be called once the user has entered their password, else it will just error
-    const credential = EmailAuthProvider.credential(user.email, password);
-    await reauthenticateWithCredential(user, credential);
-  }
-
 
   // Combine all actions into a single function that handles credentials and delete operations
   const performDeleteAccount = async () => {
