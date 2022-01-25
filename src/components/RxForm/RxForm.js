@@ -493,35 +493,37 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
   useEffect(() => {
     // Toggle any PBS-related functionality if there is a change in verified status. 
     if (!drugData.verified) {
-    clearPbsInfo();
-    setPbsInfo(null);
-    setDrugAlerts((prevAlerts) => ({
-      ...prevAlerts,
-      pbsRx: {
-        message: 'Select a medication from the dropdown list for PBS information',
-        type: 'neutral',
-      }
-    }));
+      clearPbsInfo();
+      setPbsInfo(null);
+      setDrugAlerts((prevAlerts) => ({
+        ...prevAlerts,
+        pbsRx: {
+          message: 'Select a medication from the dropdown list for PBS information',
+          type: 'neutral',
+        }
+      }));
+      setShowTooltip(false);
 
-    // Only bother with an authority message to select a dropdown medication IF the user is trying to prescribe on PBS
-    if (drugData.pbsRx) {
-      setDrugAlerts((prevAlerts) => ({
-        ...prevAlerts,
-        authRequired: {
-          message: 'Select a medication from the dropdown list for authority information',
-          type: 'neutral',
-        }
-      }));
-    } else {
-      setDrugAlerts((prevAlerts) => ({
-        ...prevAlerts,
-        authRequired: {
-          message: 'This prescription does not require authority',
-          type: 'neutral',
-        }
-      }));
+      // Only bother with an authority message to select a dropdown medication IF the user is trying to prescribe on PBS
+      if (drugData.pbsRx) {
+        setDrugAlerts((prevAlerts) => ({
+          ...prevAlerts,
+          authRequired: {
+            message: 'Select a medication from the dropdown list for authority information',
+            type: 'neutral',
+          }
+        }));
+      } else {
+        setDrugAlerts((prevAlerts) => ({
+          ...prevAlerts,
+          authRequired: {
+            message: 'This prescription does not require authority',
+            type: 'neutral',
+          }
+        }));
+      }
     }
-  }}, [drugData.verified, drugData.pbsRx, clearPbsInfo, setPbsInfo])
+  }, [drugData.verified, drugData.pbsRx, clearPbsInfo, setPbsInfo])
 
 
   // ! Successfully remove verified functions
@@ -568,6 +570,18 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
           }
         }));
       }
+    } else {
+      setDrugData((prevData) => ({
+        ...prevData,
+        authRequired: false,
+      }));
+      setDrugAlerts((prevAlerts) => ({
+        ...prevAlerts,
+        authRequired: {
+          message: 'This prescription does not require authority',
+          type: 'neutral',
+        }
+      }));
     }
   }, [pbsInfo, drugData.pbsRx]);
 
@@ -650,7 +664,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
   }, [pbsInfo, drugData.pbsRx]);
 
   const quantityRepeatStatus = useCallback(() => {
-
     // PBS info-related effects here
     if (pbsInfo) {
       // All PBS drugs have restrictions on quantity and repeats; set to local state
@@ -724,18 +737,10 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
       }
       // Show tooltip
       if (!showTooltip) {
-        setShowTooltip((prevData) => !prevData);
-        setTooltipText('');
+        setShowTooltip(true);
       }
     }
-    
-    // Hide the tooltip if the user changes the medication manually, but leave the lemi/lmbc settings unchanged
-    if (!drugData.verified) {
-      if (showTooltip) {
-        setShowTooltip((prevData) => !prevData);
-      }
-    } 
-  }, [pbsInfo, drugData.verified, setShowTooltip, showTooltip]);
+  }, [pbsInfo, setShowTooltip, showTooltip]);
 
   // Can utilise a useEffect such as this to set state or UI elements based on PBS data being fetched or lost
   // Note that these PBS-related functions MUST only be performed on drug data with the verified: true tag
