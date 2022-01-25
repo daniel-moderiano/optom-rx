@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import FormField from "../FormField/FormField";
 import PasswordContainer from "../utils/PasswordContainer/PasswordContainer";
 import { useErrorHandling } from '../../hooks/useErrorHandling';
-import { deleteUser, reauthenticateWithCredential, EmailAuthProvider, updatePassword, sendEmailVerification, updateEmail } from "firebase/auth";
+import { deleteUser } from "firebase/auth";
 import { collection, deleteDoc, doc, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import { useImmediateToast } from '../../hooks/useImmediateToast';

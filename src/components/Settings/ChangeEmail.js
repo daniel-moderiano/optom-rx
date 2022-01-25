@@ -9,8 +9,8 @@ import { sendEmailVerification, updateEmail } from "firebase/auth";
 import { useImmediateToast } from '../../hooks/useImmediateToast';
 
 
-const ChangeEmail = ({ user, setToast, refreshCredentials }) => {
-  const { showSuccessToast } = useImmediateToast(); 
+const ChangeEmail = ({ user, setToast, refreshCredentials, verified }) => {
+  const { showSuccessToast, showErrorToast } = useImmediateToast(); 
   const { handleErrorCode } = useErrorHandling();
   const [emailConfirmPassword, setEmailConfirmPassword] = useState('');  
   const [emailConfirmPasswordAlert, setEmailConfirmPasswordAlert] = useState({});
@@ -134,23 +134,56 @@ const ChangeEmail = ({ user, setToast, refreshCredentials }) => {
     }
   };
 
+  // Used for manual user-initiated resending of verification email
+  const resendEmailVerification = async () => {
+    try {
+      await sendEmailVerification(user);
+      showSuccessToast(setToast, 'A verification email has been sent to your email address');
+    } catch (error) {
+      showErrorToast(setToast, 'An error occurred while trying to send the email')
+    }
+  }
+
   return (<>
-    <div className="change-email">
-      <div className="form-title">Change email</div>
-      <div className="current-email">{user.email}</div>
-      <div className="email-group">
-        <div className="verified">
-          <svg xmlns="http://www.w3.org/2000/svg" className="alert-icon alert-icon--success" viewBox="0 0 512 512" width="17px">
-            <path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" fill="none" stroke="#096600" strokeMiterlimit="10" strokeWidth="32"/>
-            <path fill="none" stroke="#096600" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32" d="M352 176L217.6 336 160 272"/>
-          </svg>
-          <span>Verified</span>
+    {verified ? (
+      <div className="change-email">
+        <div className="form-title">Change email</div>
+        <div className="current-email">{user.email}</div>
+        <div className="email-group">
+          <div className="verified">
+            <svg xmlns="http://www.w3.org/2000/svg" className="alert-icon alert-icon--success" viewBox="0 0 512 512" width="17px">
+              <path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" fill="none" stroke="#096600" strokeMiterlimit="10" strokeWidth="32"/>
+              <path fill="none" stroke="#096600" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32" d="M352 176L217.6 336 160 272"/>
+            </svg>
+            <span>Verified</span>
+          </div>
         </div>
+
+        <Button handleClick={() => setShowEmailModal(true)} >Update email</Button>
       </div>
+    ) : (
+      <div className="no-email">
+        <div className="change-email">
+          <div className="form-title">Change email</div>
+          <p className="no-email-desc">Please verify your email address to access all account settings, receive notifications, and reset your password</p>
+          <div className="current-email">{user.email}</div>
 
-      <Button handleClick={() => setShowEmailModal(true)} >Update email</Button>
-    </div>
+          <div className="email-group">
+            <div className="unverified">
+              <svg xmlns="http://www.w3.org/2000/svg" className="alert-icon alert-icon--neutral" viewBox="0 0 512 512" width="17px">
+                <path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" fill="none" stroke="#9a6700" strokeMiterlimit="10" strokeWidth="32"/>
+                <path d="M250.26 166.05L256 288l5.73-121.95a5.74 5.74 0 00-5.79-6h0a5.74 5.74 0 00-5.68 6z" fill="none" stroke="#9a6700" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32"/>
+                <path d="M256 367.91a20 20 0 1120-20 20 20 0 01-20 20z" fill="#9a6700"/>
+              </svg>
+              <span>Unverified</span>
+            </div>
+            <button className="resend" onClick={resendEmailVerification}>Resend verification email</button>
+          </div>
 
+          <Button handleClick={() => setShowEmailModal(true)}>Change email</Button>
+        </div>         
+      </div>
+    )}
     
     {showEmailModal && <Modal title="Change email" closeModal={() => setShowEmailModal(false)}>
         <div className="update-display">
