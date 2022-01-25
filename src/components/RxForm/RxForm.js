@@ -695,42 +695,40 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
     }
   }, [pbsInfo, drugData.maxQuantity, drugData.maxRepeats, drugData.pbsRx]);
 
-  // ! Successfully remove verified functions
-  // Identify whether a drug on the PBS is restricted or not, and display indications for use on restricted items
-  const lemiStatus = useCallback(() => {
-    // PBS info-related effects here
-    if (pbsInfo) {
-      // Check for lemi and/or lmbc status
-      if (pbsInfo['lemi']) {
-        // Medicine is recommended to prescribe by brand only
-        setDrugData((prevData) => ({
-          ...prevData,
-          brandOnly: true,
-        }));
-        setTooltipText(`<span>This item is included on the <a target="_blank" href="https://www.safetyandquality.gov.au/publications-and-resources/resource-library/list-excluded-medicinal-items-lemi">List of Excluded Medicinal Items (LEMI)</a>, and should be prescribed by brand name only for practical and safety reasons</span>`);
-      } else if (pbsInfo['lmbc']) {
-        // Medicine is recommended to have brand name included
-        setDrugData((prevData) => ({
-          ...prevData,
-          brandOnly: false,
-          includeBrand: true,
-        }));
-        setTooltipText(`<span>This item is included on the <a target="_blank" href="https://www.safetyandquality.gov.au/publications-and-resources/resource-library/list-medicines-brand-consideration-lmbc">List of Medicines for Brand Consideration (LMBC)</a>. Prescribers should consider prescribing by brand as well as active ingredient for patient safety</span>`);
-      } else {
-        // Neither LEMI nor LMBC listed; prescribe by active ingredient only
-        setDrugData((prevData) => ({
-          ...prevData,
-          brandOnly: false,
-          includeBrand: false,
-        }));
-        setTooltipText('<span>This item should be prescribed by active ingredient only</span>');
-      }
-      // Show tooltip
-      if (!showTooltip) {
-        setShowTooltip(true);
-      }
+  const handleLEMIInfo = useCallback((fetchedPBSData) => {
+    // Check for lemi and/or lmbc status
+    if (fetchedPBSData['lemi']) {
+      // Medicine is recommended to prescribe by brand only
+      setDrugData((prevData) => ({
+        ...prevData,
+        brandOnly: true,
+      }));
+      setTooltipText(`<span>This item is included on the <a target="_blank" href="https://www.safetyandquality.gov.au/publications-and-resources/resource-library/list-excluded-medicinal-items-lemi">List of Excluded Medicinal Items (LEMI)</a>, and should be prescribed by brand name only for practical and safety reasons</span>`);
+    } else if (fetchedPBSData['lmbc']) {
+      // Medicine is recommended to have brand name included
+      setDrugData((prevData) => ({
+        ...prevData,
+        brandOnly: false,
+        includeBrand: true,
+      }));
+      setTooltipText(`<span>This item is included on the <a target="_blank" href="https://www.safetyandquality.gov.au/publications-and-resources/resource-library/list-medicines-brand-consideration-lmbc">List of Medicines for Brand Consideration (LMBC)</a>. Prescribers should consider prescribing by brand as well as active ingredient for patient safety</span>`);
+    } else {
+      // Neither LEMI nor LMBC listed; prescribe by active ingredient only
+      setDrugData((prevData) => ({
+        ...prevData,
+        brandOnly: false,
+        includeBrand: false,
+      }));
+      setTooltipText('<span>This item should be prescribed by active ingredient only</span>');
     }
-  }, [pbsInfo, setShowTooltip, showTooltip]);
+    // Show tooltip
+    if (!showTooltip) {
+      setShowTooltip(true);
+    }
+  }, [showTooltip]);
+
+  // ! Successfully remove verified functions
+
 
   // Can utilise a useEffect such as this to set state or UI elements based on PBS data being fetched or lost
   // Note that these PBS-related functions MUST only be performed on drug data with the verified: true tag
@@ -738,10 +736,17 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
     restrictedStatus();
     authorityStatus();
     quantityRepeatStatus();
-    lemiStatus();
-  }, [restrictedStatus, authorityStatus, quantityRepeatStatus, lemiStatus, pbsInfo])
+  }, [restrictedStatus, authorityStatus, quantityRepeatStatus, pbsInfo])
 
   
+  // Function to call relevant data handlers when PBS information is successfully fetched
+  useEffect(() => {
+    if (pbsInfo) {
+      handleLEMIInfo(pbsInfo);
+    } else {
+
+    }
+  }, [pbsInfo, handleLEMIInfo])
 
   return (
     <ContentContainer>
