@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import FormField from "../FormField/FormField";
 import { StyledRxForm } from "./RxForm.styled";
 import Fieldset from "../utils/Fieldset/Fieldset";
 import { useLocation } from "react-router";
@@ -10,12 +9,11 @@ import ContentContainer from '../utils/ContentContainer/ContentContainer';
 import PageHeader from '../utils/PageHeader/PageHeader';
 import Button from '../utils/Button/Button';
 import { useInputValidation } from "../../hooks/useInputValidation";
-import { useInputChanges } from "../../hooks/useInputChanges";
 import PrescriberDetails from "../PrescriberDetails/PrescriberDetails";
 import PatientDetails from "../PatientDetails/PatientDetails";
 import { useHandleLEMI } from "../../hooks/useHandleLEMI";
 import MedicationDetails from "../MedicationDetails/MedicationDetails";
-import ExtraAuthorityDetails from "../AuthorityDetails/ExtraAuthorityDetails";
+import AuthorityDetails from "../AuthorityDetails/AuthorityDetails";
 import { useConditionalToast } from "../../hooks/useConditionalToast";
 import { useNewRx } from "../../hooks/useNewRx";
 import { useRxFormValidation } from "../../hooks/useRxFormValidation";
@@ -29,7 +27,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
   const [{ pbsInfo, pbsError }, fetchDrug, setPbsInfo] = usePBSFetch(existingData.pbsData);
   const { negativeValidationUI, removeAllValidation } = useInputValidation();
   const { patientDataValidation, drugDataValidation, miscDataValidation } = useRxFormValidation();
-  const { handleChange, toggleBooleanState, handleEnterKeyOnCheckbox } = useInputChanges();
   const { LEMIText, handleLEMIInfo } = useHandleLEMI();
   const { resetFormData, resetFormValidation } = useNewRx();
 
@@ -189,7 +186,9 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
         authRxNumber: authRxNo,
       }))
     }
-  }, [numbersLoaded, authRxNo, scriptNo])
+  }, [numbersLoaded, authRxNo, scriptNo]);
+
+  useConditionalToast(numbersError, 'An error occurred while loading script/authority numbers');
 
 
   // --- FORM VALIDATION FUNCTIONS ---
@@ -546,7 +545,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
           />
         </Fieldset>
 
-
         <Fieldset className="drug-form" legend="Medication details">
           <MedicationDetails 
             data={drugData} 
@@ -560,35 +558,16 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
         </Fieldset>
 
         <Fieldset className="misc-form" legend="Authority details">
-          <FormField
-            fieldType="checkbox"
-            name="authRequired"
-            label="Authority required"
-            onChange={() => toggleBooleanState(setDrugData, drugData, 'authRequired')}
-            checked={drugData.authRequired}
-            className="checkbox authRequired"
-            enterFunc={(event) => handleEnterKeyOnCheckbox(event, setDrugData, drugData)}
-            alert={drugAlerts.authRequired}
-          />
-
-          {(drugData.authRequired && drugData.pbsRx) && <>
-            <div className="numbers" data-testid="numbers">
-              {/* drugData.authRequired should be auto-selected once PBS integration is complete, but should also have an option to set manually */}
-              {drugData.authRequired && <div className="authRxNo" data-testid="authRxNo">Authority script number: {numbersLoading ? 'Loading...' : miscData.authRxNumber}</div>}
-              {numbersError && <div className="numbers__error">Something went wrong</div>}
-            </div>
-
-            <ExtraAuthorityDetails data={miscData} setData={setMiscData} alerts={miscAlerts} />
-          </>}
-
-          <FormField
-            fieldType="date"
-            name="date"
-            label="Date"
-            value={miscData.date}
-            onChange={(event) => handleChange(event, setMiscData)}
-            alert={miscAlerts.date}
-            required
+          <AuthorityDetails 
+            drugData={drugData} 
+            setDrugData={setDrugData} 
+            drugAlerts={drugAlerts}
+            miscData={miscData} 
+            setMiscDta={setMiscData} 
+            miscAlerts={miscAlerts}
+            fetchDrug={fetchDrug}
+            showTooltip={showTooltip}
+            numbersLoading={numbersLoading}
           />
         </Fieldset>
 
