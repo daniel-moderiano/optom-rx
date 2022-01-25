@@ -28,9 +28,4 @@ const Alert = ({ id, type, message, subAlert }) => {
   );
 };
 
-Alert.defaultProps = {
-  subAlert: false,
-}
-
-
 export default Alert;

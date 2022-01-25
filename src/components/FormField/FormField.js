@@ -25,11 +25,11 @@ const FormField = (props) => {
               onChange={onChange} 
               maxLength={maxlength}
               checked={checked}
-              className={checked && 'checked'}
+              className={checked ? 'checked' : undefined}
               onKeyDown={enterFunc}
               required={required}
               autoFocus={autoFocus ? true : false}
-              autoComplete={autocomplete ? autocomplete : false}
+              autoComplete={autocomplete ? autocomplete : undefined}
               {...ariaDescribe}
             />
             {fieldType === ('checkbox') && <span className={`checkmark ${checked ? 'show' : 'hide'}`}></span>}

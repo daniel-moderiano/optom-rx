@@ -338,7 +338,11 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
             enterFunc={(event) => changeOnEnter(event, setData, data)}
           /> 
 
-          <Tooltip showTooltip={showTooltip} tooltipText={tooltipText}/>      
+          <Tooltip 
+            showTooltip={showTooltip} 
+            tooltipText={tooltipText}
+            ariaLabel="Show more information on brand name vs active ingredient prescribing for this medication"
+          />      
         </div>
            
         <FormField 
