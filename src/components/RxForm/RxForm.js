@@ -131,8 +131,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
     setPage('form');
   }, [setPage])
 
-  console.log(pbsInfo);
-
 
   // --- FORM INITIALISATION FUNCTIONS ---
 
@@ -543,7 +541,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
     }
   }, [drugData.verified, drugData.pbsRx, setPbsInfo, pbsInfo])
 
-
   const handleMaxParametersInfo = useCallback((fetchedPBSData) => {
     // PBS info-related effects here
     if (drugData.pbsRx) {
@@ -575,7 +572,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
     }
   }, [drugData.pbsRx, drugData.maxQuantity, drugData.maxRepeats])
 
-
   const handleAuthorityInfo = useCallback((fetchedPBSData) => {
     // All authority required items will have flag 'A'. Set auth status accordingly
     if (fetchedPBSData['restriction-flag'] === 'A' && drugData.pbsRx) {
@@ -588,15 +584,12 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
         authRequired: {
           message: 'This item requires an authority prescription',
           type: 'neutral',
+        },
+        pbsRx: {
+          message: 'This item is available on the PBS (authority required)',
+          type: 'neutral',
         }
       }));
-      setDrugAlerts((prevAlerts) => ({
-      ...prevAlerts,
-      pbsRx: {
-        message: 'This item is available on the PBS (authority required)',
-        type: 'neutral',
-      }
-    }));
       if (fetchedPBSData['streamline-code'].length > 0) {
         setMiscAlerts((prevAlerts) => ({
           ...prevAlerts,
@@ -665,7 +658,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
     }
   }, [showTooltip]);
 
-  
   const handleRestrictionInfo = useCallback((fetchedPBSData) => {
    // Check for restricted status
     switch (fetchedPBSData['restriction-flag']) {
@@ -718,8 +710,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
         break;
     }
   }, []);
-
-
   
   // Function to call relevant data handlers when PBS information is successfully fetched
   useEffect(() => {
@@ -728,10 +718,9 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
       handleRestrictionInfo(pbsInfo);
       handleAuthorityInfo(pbsInfo);
       handleMaxParametersInfo(pbsInfo);
-    } else {
-
     }
   }, [pbsInfo, handleLEMIInfo, handleRestrictionInfo, handleAuthorityInfo, handleMaxParametersInfo])
+
 
   return (
     <ContentContainer>
