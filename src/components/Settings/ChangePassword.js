@@ -1,147 +1,199 @@
 import Button from "../utils/Button/Button";
-import Modal from '../utils/Modal/Modal';
 import Dots from '../utils/Dots/Dots';
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import FormField from "../FormField/FormField";
 import PasswordContainer from "../utils/PasswordContainer/PasswordContainer";
 import { useErrorHandling } from '../../hooks/useErrorHandling';
-import { deleteUser } from "firebase/auth";
-import { collection, deleteDoc, doc, getDocs, query, where } from "firebase/firestore";
-import { db } from "../../firebase/config";
+import { updatePassword } from "firebase/auth";
 import { useImmediateToast } from '../../hooks/useImmediateToast';
 import { useLogout } from "../../hooks/useLogout";
+import { Link } from "react-router-dom";
 
 const ChangePassword = ({ user, setToast, refreshCredentials }) => {
   const { handleErrorCode } = useErrorHandling();
+  const { showSuccessToast } = useImmediateToast(); 
   const { logout } = useLogout();
-  const { showSuccessToast, showErrorToast } = useImmediateToast(); 
-  const [showModal, setShowModal] = useState(false);
-  const [deleteConfirmPasswordAlert, setdeleteConfirmPasswordAlert] = useState({});
-  const [deletePending, setDeletePending] = useState(false);
+
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [currentPasswordAlert, setCurrentPasswordAlert] = useState({});
+
+  const [newPasswordAlert, setNewPasswordAlert] = useState({});
+  const [newPassword, setNewPassword] = useState('');
+
+  const [confirmPasswordAlert, setConfirmPasswordAlert] = useState({});
+  const [confirmPassword, setConfirmPassword] = useState('');
+
+  const [changePasswordPending, setChangePasswordPending] = useState(false);
+
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   
-  const [deleteConfirmPassword, setdeleteConfirmPassword] = useState('');
-  const [showDeleteConfirmPassword, setShowDeleteConfirmPassword] = useState(false);
-
-  // Clear any lingering data and alerts when modal is open/closed
-  useEffect(() => {
-    setdeleteConfirmPassword('');
-    setdeleteConfirmPasswordAlert({});
-    setShowDeleteConfirmPassword(false);
-  }, [showModal]);
-
   // Ensure form is validated before calling form submission function
-  const isModalFormValid = () => {
+  const isPasswordFormValid = () => {
     let valid = true;
     let inputFocused = false;
 
-    const deleteConfirmPasswordInput = document.querySelector('input[name="deleteConfirmPassword"]');
+    const currentPasswordInput = document.querySelector('input[name="currentPassword"]');
+    const newPasswordInput = document.querySelector('input[name="newPassword"]');
+    const confirmPasswordInput = document.querySelector('input[name="confirmPassword"]');
 
     // Check for blank field
-    if (deleteConfirmPasswordInput.value.trim().length === 0) {
+    if (currentPasswordInput.value.trim().length === 0) {
       if (!inputFocused) {
-        deleteConfirmPasswordInput.focus();
+        currentPasswordInput.focus();
         inputFocused = true;
       }
-      setdeleteConfirmPasswordAlert({
+      setCurrentPasswordAlert({
           message: "Please enter a password.",
           type: 'error',
         }
       );
-      deleteConfirmPasswordInput.classList.add('error');
+      currentPasswordInput.classList.add('error');
       valid = false;
     } 
+
+     // Check for blank field
+     if (newPasswordInput.value.trim().length === 0) {
+      if (!inputFocused) {
+        newPasswordInput.focus();
+        inputFocused = true;
+      }
+      setNewPasswordAlert({
+          message: "Please enter a password.",
+          type: 'error',
+        }
+      );
+      newPasswordInput.classList.add('error');
+      valid = false;
+    } 
+
+     // Check for blank field
+     if (confirmPasswordInput.value.trim().length === 0) {
+      if (!inputFocused) {
+        confirmPasswordInput.focus();
+        inputFocused = true;
+      }
+      setConfirmPasswordAlert({
+          message: "Please enter a password.",
+          type: 'error',
+        }
+      );
+      confirmPasswordInput.classList.add('error');
+      valid = false;
+    } 
+
     return valid;
   };
 
-  // Deletes the user account, as well as associated data including user document, and any created prescribers
-  const deleteAccount = async () => {
-    // Gather a reference to all of the user's prescribers
-    const presRef = collection(db, 'providers');
-    const presQuery = query(presRef, where('uid', '==', user.uid));
-    const docsSnap  = await getDocs(presQuery);
-
-    try {
-      // Delete all of the user's prescribers
-      docsSnap.forEach((doc) => deleteDoc(doc.ref));
-      // Delete the user's document in firestore
-      await deleteDoc(doc(db, 'users', user.uid))     
-      // Delete the user iteself from firebase auth
-      await deleteUser(user);
-      // Finally, logout
-      logout();
-      showSuccessToast(setToast, 'Account deleted');
-    } catch (error) {
-      showErrorToast(setToast, 'An error occurred while deleting account');
-    }
-  };
-
-  // Combine all actions into a single function that handles credentials and delete operations
-  const performDeleteAccount = async () => {
-    setDeletePending(true);
+  // Combine credential refresh with actual update password operation
+  const performPasswordUpdate = async () => {
+    setChangePasswordPending(true);
     let reauthenticated = false;
 
     try {
-      await refreshCredentials(deleteConfirmPassword);
+      await refreshCredentials(currentPassword);
       reauthenticated = true;
     } catch (error) {
-      handleErrorCode(error.code, setdeleteConfirmPasswordAlert);
-      setDeletePending(false);
+      handleErrorCode(error.code, setCurrentPasswordAlert);
+      setChangePasswordPending(false);
     }
 
-    // Act based on the result
     if (reauthenticated) {
-      deleteAccount();
-      setDeletePending(false);
+      try {
+        await updatePassword(user, newPassword);
+        setCurrentPassword('');
+        setNewPassword('');
+        setConfirmPassword('');
+        setShowCurrentPassword(false);
+        setShowNewPassword(false);
+        setShowConfirmPassword(false);
+        setChangePasswordPending(false);
+        showSuccessToast(setToast, 'Password changed successfully');
+        
+      } catch (error) {
+        setChangePasswordPending(false);
+        handleErrorCode(error.code, setNewPasswordAlert)
+      }
     }
   };
 
-  return (<>
-    <div className="delete-account">
-      <div className="form-title form-title--delete">Delete account</div>
-      <p className="warning">Once you delete your account, it is permanent. Please be sure.</p>
-      <Button handleClick={() => setShowModal(true)} design="delete" >
-        Delete account
-      </Button>
-    </div>
+  // Used for two password alerts to ensure the user entered identical passwords
+  const comparePasswords = () => {
+    if (newPassword === confirmPassword) {
+      return true;
+    } else {
+      setConfirmPasswordAlert({
+        message: "Passwords do not match",
+        type: 'error',
+      });
+      return false;
+    }
+  };
 
-    {showModal && <Modal title="Delete account" closeModal={() => setShowModal(false)} type="delete" errorMessage="This action is permanent and cannot be undone.">
-    <div className="provider-display">
-      <div className="provider-label">Please enter your password to continue</div>
-    </div>
-    <form className='Login__form' noValidate onSubmit={(event) => {
+  
+  return (
+    <form className='password-form' noValidate onSubmit={(event) => {
       event.preventDefault();
-      if (isModalFormValid()) {
-        performDeleteAccount();
+      setCurrentPasswordAlert({});
+      setNewPasswordAlert({});
+      setConfirmPasswordAlert({});
+      // Ensure form validation passes
+      if (isPasswordFormValid() && comparePasswords()) {
+        performPasswordUpdate();
       }
     }}>
-      <PasswordContainer showPassword={showDeleteConfirmPassword} handleClick={() => setShowDeleteConfirmPassword((prevState) => (!prevState))}>
-        <FormField 
-          id="current-password"
-          fieldType={`${showDeleteConfirmPassword ? 'text' : 'password'}`}
-          name="deleteConfirmPassword"
-          label="Password" 
-          value={deleteConfirmPassword} 
-          onChange={(event) => setdeleteConfirmPassword(event.target.value)} 
-          className="auth-field form-field"
-          alert={deleteConfirmPasswordAlert}
-          required
-          autocomplete="current-password"
-        />
-      </PasswordContainer>
+      <div className="form-title">Change password</div>
 
-      <div className="Modal__buttons">
-        <Button design="secondary" classLabel="cancel" handleClick={() => setShowModal(false)}>Cancel</Button>
-        <Button type="submit" design="delete">
-          {deletePending ? (
+      <PasswordContainer showPassword={showCurrentPassword} handleClick={() => setShowCurrentPassword((prevState) => (!prevState))}>
+          <FormField 
+            fieldType={`${showCurrentPassword ? 'text' : 'password'}`}
+            name="currentPassword"
+            label="Current password" 
+            value={currentPassword} 
+            onChange={(event) => setCurrentPassword(event.target.value)} 
+            alert={currentPasswordAlert}
+            required
+          />  
+      </PasswordContainer>   
+
+      <PasswordContainer showPassword={showNewPassword} handleClick={() => setShowNewPassword((prevState) => (!prevState))}>
+        <FormField 
+          fieldType={`${showNewPassword ? 'text' : 'password'}`}
+          name="newPassword"
+          label="New password" 
+          value={newPassword} 
+          onChange={(event) => setNewPassword(event.target.value)} 
+          alert={newPasswordAlert}
+          required
+        />  
+      </PasswordContainer>   
+
+      <PasswordContainer showPassword={showConfirmPassword} handleClick={() => setShowConfirmPassword((prevState) => (!prevState))}>
+        <FormField 
+          fieldType={`${showConfirmPassword ? 'text' : 'password'}`}
+          name="confirmPassword"
+          label="Confirm password" 
+          value={confirmPassword} 
+          onChange={(event) => setConfirmPassword(event.target.value)} 
+          alert={confirmPasswordAlert}
+          required
+        />  
+      </PasswordContainer>   
+      
+      <div className="changePassword-btns">
+        <Button type="submit">
+          {changePasswordPending ? (
             <Dots color="white"/>
           ) : (
-            'Delete'
+            'Update password'
           )}
         </Button>
+        <Link to="/reset-password" className="reset-password" onClick={logout}>Forgot password?</Link>
       </div>
     </form>
-    </Modal>}
-  </>);
+  );
 };
 
 export default ChangePassword;
