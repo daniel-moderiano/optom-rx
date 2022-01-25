@@ -20,6 +20,7 @@ import Indications from "../Indications/Indications";
 // Multiple items are not permitted to be prescribed on the same form; each must use an individual form (applies to optometrists only)
 
 const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast }) => {
+  
   // Location state is only provided if generating a new Rx. This signals certain functions to run (i.e. fetch numbers)
   const { state } = useLocation();
   const [{ scriptNo, authRxNo, numbersError, numbersLoading }, fetchNumbers] = useNumbers();
@@ -129,6 +130,8 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
   useEffect(() => {
     setPage('form');
   }, [setPage])
+
+  console.log(pbsInfo);
 
 
   // --- FORM INITIALISATION FUNCTIONS ---
@@ -503,7 +506,6 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
         }
       }));
       setShowTooltip(false);
-
       // Only bother with an authority message to select a dropdown medication IF the user is trying to prescribe on PBS
       if (drugData.pbsRx) {
         setDrugAlerts((prevAlerts) => ({
@@ -513,15 +515,23 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
             type: 'neutral',
           }
         }));
-      } else {
-        setDrugAlerts((prevAlerts) => ({
+      } 
+    } else {
+
+      setDrugAlerts((prevAlerts) => ({
+        ...prevAlerts,
+        pbsRx: {
+          message: 'This item is not available on the PBS',
+          type: 'neutral',
+        }
+      }));
+      setDrugAlerts((prevAlerts) => ({
           ...prevAlerts,
           authRequired: {
             message: 'This prescription does not require authority',
             type: 'neutral',
           }
         }));
-      }
     }
   }, [drugData.verified, drugData.pbsRx, setPbsInfo])
 
@@ -575,93 +585,13 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
         ...prevData,
         authRequired: false,
       }));
-      setDrugAlerts((prevAlerts) => ({
-        ...prevAlerts,
-        authRequired: {
-          message: 'This prescription does not require authority',
-          type: 'neutral',
-        }
-      }));
     }
   }, [pbsInfo, drugData.pbsRx]);
 
   
   // ! Successfully remove verified functions
   // Identify whether a drug on the PBS is restricted or not, and display indications for use on restricted items
-  const restrictedStatus = useCallback(() => {
-  
-    // PBS info-related effects here
-    if (pbsInfo) {
-      // Check for restricted status
-      switch (pbsInfo['restriction-flag']) {
-        case 'R':
-          setDrugAlerts((prevAlerts) => ({
-            ...prevAlerts,
-            pbsRx: {
-              message: 'This is item is available on the PBS (restrictions apply)',
-              type: 'neutral',
-            }
-          }));
-          // Add the indication to the local drugData state to allow certain conditional renders
-          setDrugData((prevData) => ({
-            ...prevData,
-            indications: pbsInfo.indications.description,
-          }));
-          break;
 
-        case 'U':
-          setDrugAlerts((prevAlerts) => ({
-            ...prevAlerts,
-            pbsRx: {
-              message: 'This is item is available on the PBS (unrestricted)',
-              type: 'neutral',
-            }
-          }));
-          // Remove the indication to the local drugData state to allow certain conditional renders
-          setDrugData((prevData) => ({
-            ...prevData,
-            indications:'',
-          }));
-          break;
-      
-        // All 'A' class items are also restricted with indications or Treatment criteria
-        case 'A':
-          setDrugAlerts((prevAlerts) => ({
-            ...prevAlerts,
-            pbsRx: {
-              message: 'This item is available on the PBS (authority required)',
-              type: 'neutral',
-            }
-          }));
-          setDrugData((prevData) => ({
-            ...prevData,
-            indications: pbsInfo.indications.description,
-          }));
-          if (drugData.pbsRx) {
-            setDrugAlerts((prevAlerts) => ({
-              ...prevAlerts,
-              authRequired: {
-                message: 'This item requires an authority prescription',
-                type: 'neutral',
-              }
-            }));
-          }
-          break;
-
-        default:
-          break;
-      }
-    } else {
-      // clearPbsInfo();
-      setDrugAlerts((prevAlerts) => ({
-        ...prevAlerts,
-        pbsRx: {
-          message: 'This item is not available on the PBS',
-          type: 'neutral',
-        }
-      }));
-    }
-  }, [pbsInfo, drugData.pbsRx]);
 
     // ! Successfully remove verified functions
   const quantityRepeatStatus = useCallback(() => {
@@ -727,26 +657,88 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
     }
   }, [showTooltip]);
 
-  // ! Successfully remove verified functions
+
+  const handleRestrictionInfo = useCallback((fetchedPBSData) => {
+   // Check for restricted status
+   switch (fetchedPBSData['restriction-flag']) {
+    case 'R':
+      setDrugAlerts((prevAlerts) => ({
+        ...prevAlerts,
+        pbsRx: {
+          message: 'This is item is available on the PBS (restrictions apply)',
+          type: 'neutral',
+        }
+      }));
+      // Add the indication to the local drugData state to allow certain conditional renders
+      setDrugData((prevData) => ({
+        ...prevData,
+        indications: fetchedPBSData.indications.description,
+      }));
+      break;
+
+    case 'U':
+      setDrugAlerts((prevAlerts) => ({
+        ...prevAlerts,
+        pbsRx: {
+          message: 'This is item is available on the PBS (unrestricted)',
+          type: 'neutral',
+        }
+      }));
+      // Remove the indication to the local drugData state to allow certain conditional renders
+      setDrugData((prevData) => ({
+        ...prevData,
+        indications:'',
+      }));
+      break;
+  
+    // All 'A' class items are also restricted with indications or Treatment criteria
+    case 'A':
+      setDrugAlerts((prevAlerts) => ({
+        ...prevAlerts,
+        pbsRx: {
+          message: 'This item is available on the PBS (authority required)',
+          type: 'neutral',
+        }
+      }));
+      setDrugData((prevData) => ({
+        ...prevData,
+        indications: fetchedPBSData.indications.description,
+      }));
+      if (drugData.pbsRx) {
+        setDrugAlerts((prevAlerts) => ({
+          ...prevAlerts,
+          authRequired: {
+            message: 'This item requires an authority prescription',
+            type: 'neutral',
+          }
+        }));
+      }
+      break;
+
+    default:
+      break;
+  }
+  }, [drugData.pbsRx]);
+
 
 
   // Can utilise a useEffect such as this to set state or UI elements based on PBS data being fetched or lost
   // Note that these PBS-related functions MUST only be performed on drug data with the verified: true tag
   useEffect(() => {
-    restrictedStatus();
+
     authorityStatus();
     quantityRepeatStatus();
-  }, [restrictedStatus, authorityStatus, quantityRepeatStatus, pbsInfo])
+  }, [authorityStatus, quantityRepeatStatus, pbsInfo])
 
   
   // Function to call relevant data handlers when PBS information is successfully fetched
   useEffect(() => {
     if (pbsInfo) {
       handleLEMIInfo(pbsInfo);
+      handleRestrictionInfo(pbsInfo);
     } else {
-
     }
-  }, [pbsInfo, handleLEMIInfo])
+  }, [pbsInfo, handleLEMIInfo, handleRestrictionInfo])
 
   return (
     <ContentContainer>
