@@ -12,9 +12,11 @@ import ContentContainer from '../utils/ContentContainer/ContentContainer';
 import PasswordContainer from '../utils/PasswordContainer/PasswordContainer';
 import PageHeader from '../utils/PageHeader/PageHeader';
 import Dots from '../utils/Dots/Dots';
+import { useImmediateToast } from '../../hooks/useImmediateToast';
 
 const Settings = ({ user, setToast, setPage }) => {
   const { logout } = useLogout();
+  const { showSuccessToast, showErrorToast } = useImmediateToast();
 
   const [displayName, setDisplayName] = useState('');
 
@@ -82,20 +84,10 @@ const Settings = ({ user, setToast, setPage }) => {
       });
 
       setNamePending(false);
-      setToast((prevData) => ({
-        ...prevData,
-        visible: true,
-        type: 'success',
-        message: 'Display name updated'
-      }));
+      showSuccessToast(setToast, 'Display name updated');
     } catch (error) {
       setNamePending(false);
-      setToast((prevData) => ({
-        ...prevData,
-        visible: true,
-        type: 'error',
-        message: 'An error occurred while changing name'
-      }));
+      showErrorToast(setToast, 'An error occurred while changing name');
     }
   };
 
@@ -114,20 +106,9 @@ const Settings = ({ user, setToast, setPage }) => {
       await deleteUser(user);
       // Finally, logout
       logout();
-
-      setToast((prevData) => ({
-        ...prevData,
-        visible: true,
-        type: 'success',
-        message: 'Account deleted'
-      }));
+      showSuccessToast(setToast, 'Account deleted');
     } catch (error) {
-      setToast((prevData) => ({
-        ...prevData,
-        visible: true,
-        type: 'error',
-        message: 'An error occurred while deleting account'
-      }));
+      showErrorToast(setToast, 'An error occurred while deleting account');
     }
   };
 
@@ -339,12 +320,7 @@ const Settings = ({ user, setToast, setPage }) => {
         await updateEmail(user, newEmail);
         setShowEmailModal(false);
         setChangeEmailPending(false);
-        setToast((prevData) => ({
-          ...prevData,
-          visible: true,
-          type: 'success',
-          message: 'Email updated successfully'
-        }));
+        showSuccessToast(setToast, 'Email updated successfully');
         
         sendEmailVerification(user);
         // Timeout is purely to not overwhelm the user with modals flying one after the other
@@ -412,12 +388,7 @@ const Settings = ({ user, setToast, setPage }) => {
         setShowNewPassword(false);
         setShowConfirmPassword(false);
         setChangePasswordPending(false);
-        setToast((prevData) => ({
-          ...prevData,
-          visible: true,
-          type: 'success',
-          message: 'Password changed successfully'
-        }));
+        showSuccessToast(setToast, 'Password changed successfully');
         
       } catch (error) {
         setChangePasswordPending(false);
@@ -442,19 +413,9 @@ const Settings = ({ user, setToast, setPage }) => {
   const resendEmailVerification = async () => {
     try {
       await sendEmailVerification(user);
-      setToast((prevData) => ({
-        ...prevData,
-        visible: true,
-        type: 'success',
-        message: 'A verification email has been sent to your email address'
-      }));
+      showSuccessToast(setToast, 'A verification email has been sent to your email address');
     } catch (error) {
-      setToast((prevData) => ({
-        ...prevData,
-        visible: true,
-        type: 'error',
-        message: 'An error occurred while trying to send the email'
-      }));
+      showErrorToast(setToast, 'An error occurred while trying to send the email')
     }
   }
 

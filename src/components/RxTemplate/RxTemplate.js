@@ -12,6 +12,7 @@ import Dots from '../utils/Dots/Dots';
 import PageHeader from '../utils/PageHeader/PageHeader';
 import Button from '../utils/Button/Button';
 import { useFormatting } from "../../hooks/useFormatting";
+import { useImmediateToast } from '../../hooks/useImmediateToast';
 
 const RxTemplate = ({ data, setToast, setPage }) => {
   // Deconstructing for cleanliness of code and easier-to-understand operations
@@ -19,6 +20,7 @@ const RxTemplate = ({ data, setToast, setPage }) => {
   const { formatDrug, formatDate, formatPhoneNumber, formatMedicareNumber, formatProviderAddress } = useFormatting();
   let navigate = useNavigate();
   const { user } = useAuthContext();
+  const { showSuccessToast, showErrorToast } = useImmediateToast();
 
   const [isPending, setIsPending] = useState(false)
 
@@ -47,21 +49,11 @@ const RxTemplate = ({ data, setToast, setPage }) => {
       });
 
       setIsPending(false);
-      setToast((prevData) => ({
-        ...prevData,
-        visible: true,
-        type: 'success',
-        message: 'Prescription saved'
-      }));
+      showSuccessToast(setToast, 'Prescription saved');
       navigate('/');
     } catch (error) {
       setIsPending(false);
-      setToast((prevData) => ({
-        ...prevData,
-        visible: true,
-        type: 'error',
-        message: 'There was a problem'
-      }));
+      showErrorToast(setToast, 'An error occurred while saving the script');
     }
   };
 

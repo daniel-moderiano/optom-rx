@@ -4,10 +4,12 @@ import Dots from '../utils/Dots/Dots';
 import { sendPasswordResetEmail, getAuth } from 'firebase/auth'
 import { StyledResetPassword } from './ResetPassword.styled';
 import { useNavigate } from "react-router-dom";
-import Button from '../utils/Button/Button'
+import Button from '../utils/Button/Button';
+import { useImmediateToast } from '../../hooks/useImmediateToast';
 
 const ResetPassword = ({ setToast, setPage }) => {
   let navigate = useNavigate();
+  const { showSuccessToast } = useImmediateToast();
 
   const [email, setEmail] = useState('');
   const [emailAlert, setEmailAlert] = useState({});
@@ -86,12 +88,7 @@ const ResetPassword = ({ setToast, setPage }) => {
     try {
       await sendPasswordResetEmail(auth, email);
       setIsPending(false);
-      setToast((prevData) => ({
-        ...prevData,
-        visible: true,
-        type: 'success',
-        message: 'Email reset link sent'
-      }));
+      showSuccessToast(setToast, 'Reset link has been sent');
       navigate('/login');
     } catch (error) {
       setIsPending(false);

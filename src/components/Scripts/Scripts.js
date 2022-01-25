@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import ContentContainer from '../utils/ContentContainer/ContentContainer';
 import PageHeader from '../utils/PageHeader/PageHeader';
 import { useUserData } from '../../hooks/useUserData';
+import { useConditionalToast } from '../../hooks/useConditionalToast';
 
 const Scripts = ({ setToast, setPage }) => {
   const { user } = useAuthContext();
@@ -17,17 +18,8 @@ const Scripts = ({ setToast, setPage }) => {
     setPage('scripts');
   }, [setPage]);
 
-  // This effect will fire an error alert if the fetch fails. 
-  useEffect(() => {
-    if (error) {
-      setToast((prevData) => ({
-        ...prevData,
-        visible: true,
-        type: 'error',
-        message: 'An error occurred while loading scripts'
-      }));
-    }
-  }, [error, setToast])
+  // This will fire an error alert if the fetch fails. 
+  useConditionalToast(error, setToast, 'An error occurred while loading scripts');
 
   return (
     <ContentContainer earlyPadding={true}>

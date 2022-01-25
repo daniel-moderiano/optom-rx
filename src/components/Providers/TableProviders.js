@@ -9,14 +9,15 @@ import { db } from "../../firebase/config";
 import Button from '../utils/Button/Button'
 import Modal from "../utils/Modal/Modal";
 import { useFormatting } from "../../hooks/useFormatting";
+import { useImmediateToast } from '../../hooks/useImmediateToast';
 
 const TableProviders = ({ data, rowsPerPage, setToast, user }) => {
   // Start on page 1
   const [page, setPage] = useState(1);
   // Gather the data slices for each page and the range of pages needed 
   const { dataSlice, range } = useTable(data, page, rowsPerPage);
-
   const { formatLocation } = useFormatting();
+  const { showSuccessToast, showErrorToast } = useImmediateToast();
 
   const [showModal, setShowModal] = useState(false);
   const [isPending, setIsPending] = useState(false);
@@ -65,20 +66,10 @@ const TableProviders = ({ data, rowsPerPage, setToast, user }) => {
       }
 
       setIsPending(false);
-      setToast((prevData) => ({
-        ...prevData,
-        visible: true,
-        type: 'success',
-        message: 'Provider defaults updated'
-      }));
+      showSuccessToast(setToast, 'Prescriber defaults updated');
     } catch (error) {
       setIsPending(false);
-      setToast((prevData) => ({
-        ...prevData,
-        visible: true,
-        type: 'error',
-        message: 'An error occurred while updating defaults'
-      }));
+      showErrorToast(setToast, 'An error occurred while updating defaults');
     }
   };
 
@@ -86,21 +77,11 @@ const TableProviders = ({ data, rowsPerPage, setToast, user }) => {
     try {
       await deleteDoc(doc(db, 'providers', provID));
       setShowModal(false);
-      setToast((prevData) => ({
-        ...prevData,
-        visible: true,
-        type: 'success',
-        message: 'Provider has been removed'
-      }));
+      showSuccessToast(setToast, 'Prescriber has been removed');
 
     } catch (error) {
       setShowModal(false);
-      setToast((prevData) => ({
-        ...prevData,
-        visible: true,
-        type: 'error',
-        message: 'An error occurred while deleting providers'
-      }));
+      showErrorToast(setToast, 'An error occurred while deleting providers defaults');
     }     
   };
 

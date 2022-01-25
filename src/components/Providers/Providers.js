@@ -8,7 +8,7 @@ import Spinner from '../utils/Spinner/Spinner';
 import { useEffect } from 'react';
 import ContentContainer from '../utils/ContentContainer/ContentContainer'
 import PageHeader from '../utils/PageHeader/PageHeader';
-
+import { useConditionalToast } from '../../hooks/useConditionalToast';
 
 const Providers = ({ setToast, setPage }) => {
   const { user } = useAuthContext();
@@ -20,17 +20,8 @@ const Providers = ({ setToast, setPage }) => {
     setPage('prescribers');
   }, [setPage])
 
-  // This effect will fire an error alert if the fetch fails. 
-  useEffect(() => {
-    if (error) {
-      setToast((prevData) => ({
-        ...prevData,
-        visible: true,
-        type: 'error',
-        message: 'An error occurred while fetching prescribers.'
-      }));
-    }
-  }, [error, setToast]);
+  // Fire an error alert if the fetch fails. 
+  useConditionalToast(error, setToast, 'An error occurred while fetching prescribers')
 
   return (
     <ContentContainer earlyPadding={true}>

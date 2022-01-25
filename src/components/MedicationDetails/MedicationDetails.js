@@ -3,7 +3,7 @@ import { useInputChanges } from "../../hooks/useInputChanges";
 import Indications from "../Indications/Indications";
 import DrugAutocomplete from "../DrugAutocomplete/DrugAutocomplete";
 
-const MedicationDetails = ({ data, setData, alerts, setAlerts, fetchDrug, showTooltip, LEMIText, manuallyCollapse }) => {
+const MedicationDetails = ({ data, setData, alerts, setAlerts, fetchDrug, showTooltip, LEMIText }) => {
   const { handleChange, toggleBooleanState, handleEnterKeyOnCheckbox } = useInputChanges();
 
   return (<>

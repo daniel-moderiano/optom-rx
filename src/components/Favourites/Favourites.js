@@ -9,10 +9,13 @@ import Modal from '../utils/Modal/Modal';
 import Button from '../utils/Button/Button'
 import { useFormatting } from '../../hooks/useFormatting';
 import { useUserData } from '../../hooks/useUserData';
+import { useImmediateToast } from '../../hooks/useImmediateToast';
+import { useConditionalToast } from '../../hooks/useConditionalToast';
 
 const Favourites = ({ user, setToast }) => {
   const { documents: favourites, isPending, error } = useUserData(user.uid, 'favourites');
   const { formatDrug } = useFormatting();
+  const { showSuccessToast, showErrorToast } = useImmediateToast();
 
   const [showModal, setShowModal] = useState(false);
   const [selectedScript, setSelectedScript] = useState({
@@ -64,17 +67,8 @@ const Favourites = ({ user, setToast }) => {
     }
   }, []);
  
-  // This effect will fire an error alert if the fetch fails. 
-  useEffect(() => {
-    if (error) {
-      setToast((prevData) => ({
-        ...prevData,
-        visible: true,
-        type: 'error',
-        message: 'An error occurred while loading favourites'
-      }));
-    }
-  }, [error, setToast])
+  // Listen for fetch fail and alert user as a result
+  useConditionalToast(error, setToast, 'An error occurred while loading favourites');
 
   // Remove favourite from firestore database
   const deleteFavourite = async (scriptToDelete) => {
@@ -86,21 +80,11 @@ const Favourites = ({ user, setToast }) => {
       });
 
       setShowModal(false);
-      setToast((prevData) => ({
-        ...prevData,
-        visible: true,
-        type: 'success',
-        message: 'Deleted script',
-      }));
+      showSuccessToast(setToast, 'Deleted script');
 
     } catch (err) {
       setShowModal(false);
-      setToast((prevData) => ({
-        ...prevData,
-        visible: true,
-        type: 'error',
-        message: 'An error occurred while deleting favourites'
-      }));
+      showErrorToast(setToast, 'An error occurred while deleting favourites');
     } 
   }
 

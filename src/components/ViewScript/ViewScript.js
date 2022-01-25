@@ -13,11 +13,13 @@ import Button from '../utils/Button/Button'
 import './ViewScript.css';
 import { useFormatting } from '../../hooks/useFormatting';
 import Spinner from "../utils/Spinner/Spinner";
+import { useImmediateToast } from '../../hooks/useImmediateToast'
 
 const ViewScript = ({ setToast, resetData, setPage }) => {
   const { user } = useAuthContext();
   const { id } = useParams();
   const { formatDrug, formatDate } = useFormatting();
+  const { showSuccessToast, showErrorToast } = useImmediateToast();
 
   // Extract the selected provider data passed via React Router state
   const { state: existingData } = useLocation();
@@ -58,22 +60,12 @@ const ViewScript = ({ setToast, resetData, setPage }) => {
         setFavPending(false);
         setAddStatus(true);
         setShowModal(false);
-        setToast((prevData) => ({
-          ...prevData,
-          visible: true,
-          type: 'success',
-          message: 'Prescription saved to favourites'
-        }));
+        showSuccessToast(setToast, 'Prescription saved to favourites')
 
       } catch (error) {
         setFavPending(false);
         setShowModal(false);
-        setToast((prevData) => ({
-          ...prevData,
-          visible: true,
-          type: 'error',
-          message: 'An error occurred while adding favourites'
-        }));
+        showErrorToast(setToast, 'An error occurred while adding favourites');
       } 
     }
   }
@@ -122,7 +114,6 @@ const ViewScript = ({ setToast, resetData, setPage }) => {
                 setShowModal(true);
               }}>
                 <svg className="icon star-icon" xmlns="http://www.w3.org/2000/svg" enableBackground="new 0 0 24 24" height="23px" viewBox="0 0 24 24" width="22px" fill={`${addStatus ? '#FFBF00' : '#ffffff'}`}><g><path d="M0,0h24v24H0V0z" fill="none" /><path d="M0,0h24v24H0V0z" fill="none" /></g><g><path d="M12,17.27L18.18,21l-1.64-7.03L22,9.24l-7.19-0.61L12,2L9.19,8.63L2,9.24l5.46,4.73L5.82,21L12,17.27z" /></g></svg>
-                {/* <img src={starWhite} alt="" className="icon"/> */}
                 <span>{`${addStatus ? 'Added!' : 'Add to favourites'}`}</span>
               </Button>
             </div>

@@ -6,10 +6,12 @@ import PrescriberForm from "../PrescriberForm/PrescriberForm";
 import { StyledEditProvider } from "./EditProvider.styled";
 import ContentContainer from '../utils/ContentContainer/ContentContainer';
 import PageHeader from '../utils/PageHeader/PageHeader';
+import { useImmediateToast } from '../../hooks/useImmediateToast';
 
 const EditProvider = ({ googleLoaded, setToast, setPage }) => {
   const { id } = useParams();
   let navigate = useNavigate();
+  const { showSuccessToast, showErrorToast } = useImmediateToast();
 
   // Extract the selected provider data passed via React Router state
   const { state: existingData } = useLocation();
@@ -56,24 +58,14 @@ const EditProvider = ({ googleLoaded, setToast, setPage }) => {
       setLocalPending(false);
 
       // Inform the user the changes have been successfully applied, then return to the previous page
-      setToast((prevData) => ({
-        ...prevData,
-        visible: true,
-        type: 'success',
-        message: 'Provider details updated'
-      }));
+      showSuccessToast(setToast, 'Prescriber details updated')
 
       navigate('/providers');
     } catch (error) {
       setLocalPending(false);
 
       // Only an error toast is necessary. Specific error handling is not useful or necessary
-      setToast((prevData) => ({
-        ...prevData,
-        visible: true,
-        type: 'error',
-        message: 'Failed to complete request'
-      }));
+      showErrorToast(setToast, 'An error occurred while saving changes')
     }
     
   };
