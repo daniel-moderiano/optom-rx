@@ -490,6 +490,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
 
   }, []);
 
+
   useEffect(() => {
     // Toggle any PBS-related functionality if there is a change in verified status. 
     if (!drugData.verified) {
@@ -674,38 +675,10 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
       }));
     }
 
-    // Toggle any PBS-related functionality if there is a change in verified status. 
-    if (!drugData.verified) {
-      clearPbsInfo();
-      setPbsInfo(null);
-      setDrugAlerts((prevAlerts) => ({
-        ...prevAlerts,
-        pbsRx: {
-          message: 'Select a medication from the dropdown list for PBS information',
-          type: 'neutral',
-        }
-      }));
-      if (drugData.pbsRx) {
-        setDrugAlerts((prevAlerts) => ({
-          ...prevAlerts,
-          authRequired: {
-            message: 'Select a medication from the dropdown list for authority information',
-            type: 'neutral',
-          }
-        }));
-      } else {
-        setDrugAlerts((prevAlerts) => ({
-          ...prevAlerts,
-          authRequired: {
-            message: 'This prescription does not require authority',
-            type: 'neutral',
-          }
-        }));
-      }
-    } 
 
-  }, [pbsInfo, drugData.verified, clearPbsInfo, setPbsInfo, drugData.pbsRx]);
+  }, [pbsInfo]);
 
+  // ! Successfully remove verified functions
   // Identify whether a drug on the PBS is restricted or not, and display indications for use on restricted items
   const lemiStatus = useCallback(() => {
     // PBS info-related effects here
