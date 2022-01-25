@@ -25,24 +25,6 @@ const StyledRxForm = styled.form`
       font-size: 0.9rem;
     }
 
-    .solo-alert-container {
-      display: flex;
-      align-items: center;
-      margin: -0.2rem 0 0.75rem 0rem;
-      width: 24rem;
-
-      .alert--neutral {
-        color: var(--neutral);
-        font-size: 0.8rem;
-        /* margin-bottom: 0.1rem; */
-      }
-
-      .alert-icon {
-        margin-right: 0.2rem;
-        flex-shrink: 0;
-      }
-    }
-
     .retention {
       display: flex;
       flex-direction: column;
@@ -156,13 +138,6 @@ const StyledRxForm = styled.form`
 
   /* Landscape phones and down */
   @media (max-width: 590px) { 
-    .misc-form {
-      .solo-alert-container {
-        max-width: 24rem;
-        width: 100%;
-      }
-    }
-
     .medicareFields {
       .alert-container {
         width: 20rem;

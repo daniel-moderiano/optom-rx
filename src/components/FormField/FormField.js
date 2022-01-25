@@ -25,6 +25,7 @@ const FormField = (props) => {
               onChange={onChange} 
               maxLength={maxlength}
               checked={checked}
+              // Use undefined in a conditional to avoid setting classname to false. 
               className={checked ? 'checked' : undefined}
               onKeyDown={enterFunc}
               required={required}
