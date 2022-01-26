@@ -99,7 +99,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
     ...existingData.patientData,
   });
 
-  const [providerData, setProviderData] = useState({
+  const [prescriberData, setPrescriberData] = useState({
     prefix: false,
     fullName: '',
     qualifications: '',
@@ -111,7 +111,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
     state: '',
     phoneNumber: '',
     prescriberNumber: '',
-    ...existingData.providerData,
+    ...existingData.prescriberData,
   });
 
   const [miscData, setMiscData] = useState({
@@ -527,7 +527,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
         onSubmit={(e) => {
           e.preventDefault();
           if (checkFormValidation()) {
-            handleSubmit(drugData, patientData, providerData, miscData, pbsInfo)
+            handleSubmit(drugData, patientData, prescriberData, miscData, pbsInfo)
           }
         }}
         autoComplete="off"
@@ -535,8 +535,8 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
       >
         <div className="scriptNo" data-testid="scriptNo">Script number: {numbersLoading ? 'Loading...' : miscData.scriptID}</div>
 
-        <Fieldset className="provider-form select-fieldset" legend="Prescriber details">
-          <PrescriberDetails setData={setProviderData} setToast={setToast}/>
+        <Fieldset className="prescriber-form select-fieldset" legend="Prescriber details">
+          <PrescriberDetails setData={setPrescriberData} setToast={setToast}/>
         </Fieldset>   
 
         <Fieldset className="patient-form" legend="Patient details">
@@ -575,7 +575,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
           />
         </Fieldset>
 
-        <div className="ProviderForm__btns">
+        <div className="PrescriberForm__btns">
           <Button type="submit" classLabel="submit-btn">Generate prescription</Button>
           <Link to="/" className="cancel-btn btn-secondary button">Cancel</Link>
         </div>

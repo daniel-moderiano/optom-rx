@@ -41,7 +41,7 @@ const data = {
     "medicareNumber":"5151515151",
     "medicareRefNumber":"3"
   },
-  providerData: {
+  prescriberData: {
     "prefix":true,
     "fullName":"Sarah Smoker",
     "qualifications":"BMedSc(VisSc), MOpt",
@@ -88,7 +88,7 @@ const dataPbs = {
     "medicareNumber":"5151515151",
     "medicareRefNumber":"3"
   },
-  providerData: {
+  prescriberData: {
     "prefix":true,
     "fullName":"Sarah Smoker",
     "qualifications":"BMedSc(VisSc), MOpt",
@@ -184,7 +184,7 @@ const dataNoDate = {
     "medicareNumber":"5151515151",
     "medicareRefNumber":"3"
   },
-  providerData: {
+  prescriberData: {
     "prefix":true,
     "fullName":"Sarah Smoker",
     "qualifications":"BMedSc(VisSc), MOpt",
@@ -264,11 +264,11 @@ describe('Provider data input tests', () => {
     render(
       <BrowserRouter>
       <AuthContext.Provider value={{ user: { uid: '1' } }}>
-        <RxForm existingData={{ providerData: { prescriberNumber: '7033149' } }}/>
+        <RxForm existingData={{ prescriberData: { prescriberNumber: '7033149' } }}/>
       </AuthContext.Provider>
       </BrowserRouter>
     );  
-    const editBtn = screen.getByText(/edit selected provider/i);
+    const editBtn = screen.getByText(/edit selected prescriber/i);
     fireEvent.click(editBtn);
     const presNo = screen.getByLabelText(/prescriber number/i);
     expect(presNo.value).toBe('7033149');
@@ -282,7 +282,7 @@ describe('Provider data input tests', () => {
       </AuthContext.Provider>
       </BrowserRouter>
     );  
-    const editBtn = screen.getByText(/edit selected provider/i);
+    const editBtn = screen.getByText(/edit selected prescriber/i);
     fireEvent.click(editBtn);
     const firstNameInput = screen.getByLabelText(/prescriber number/i);
     fireEvent.change(firstNameInput, { target: { value: '01234567' } })
@@ -297,9 +297,9 @@ describe('Provider data input tests', () => {
       </AuthContext.Provider>
       </BrowserRouter>
     );  
-    const editBtn = screen.getByText(/edit selected provider/i);
+    const editBtn = screen.getByText(/edit selected prescriber/i);
     fireEvent.click(editBtn);
-    const checkbox = screen.getByLabelText(/Include 'Dr' in provider name/i);
+    const checkbox = screen.getByLabelText(/Include 'Dr' in prescriber name/i);
     fireEvent.keyDown(checkbox, {key: 'Enter', code: 'Enter', keyCode: 13})
     expect(checkbox.checked).toBe(true);
   });
@@ -337,8 +337,8 @@ describe('Inline data validation', () => {
       </AuthContext.Provider>
       </BrowserRouter>
     );
-    // Must ensure the provider form is visible with this button press
-    const editBtn = screen.getByText(/edit selected provider/i);
+    // Must ensure the prescriber form is visible with this button press
+    const editBtn = screen.getByText(/edit selected prescriber/i);
     fireEvent.click(editBtn);
   })
 
@@ -544,7 +544,7 @@ describe('Inline data validation', () => {
 });
 
 describe('Form validation on submit', () => {
-  test('Identifies invalid field on submission attempt (provider section)', () => {
+  test('Identifies invalid field on submission attempt (prescriber section)', () => {
     render(
       <BrowserRouter>
       <AuthContext.Provider value={{ user: { uid: '1' } }}>
@@ -552,7 +552,7 @@ describe('Form validation on submit', () => {
       </AuthContext.Provider>
       </BrowserRouter>
     );
-    const editBtn = screen.getByText(/edit selected provider/i);
+    const editBtn = screen.getByText(/edit selected prescriber/i);
     fireEvent.click(editBtn);
     const input = screen.getByLabelText(/prescriber number/i);
     const submit = screen.getByRole('button', { name: 'Generate prescription' });
@@ -570,7 +570,7 @@ describe('Form validation on submit', () => {
       </AuthContext.Provider>
       </BrowserRouter>
     );
-    const editBtn = screen.getByText(/edit selected provider/i);
+    const editBtn = screen.getByText(/edit selected prescriber/i);
     fireEvent.click(editBtn);
     const input = screen.getByLabelText(/medicare number/i);
     const submit = screen.getByRole('button', { name: 'Generate prescription' });
@@ -588,7 +588,7 @@ describe('Form validation on submit', () => {
       </AuthContext.Provider>
       </BrowserRouter>
     );
-    const editBtn = screen.getByText(/edit selected provider/i);
+    const editBtn = screen.getByText(/edit selected prescriber/i);
     fireEvent.click(editBtn);
     const input = screen.getByLabelText(/active ingredient/i);
     const submit = screen.getByRole('button', { name: 'Generate prescription' });
@@ -606,7 +606,7 @@ describe('Form validation on submit', () => {
       </AuthContext.Provider>
       </BrowserRouter>
     );
-    const editBtn = screen.getByText(/edit selected provider/i);
+    const editBtn = screen.getByText(/edit selected prescriber/i);
     fireEvent.click(editBtn);
     const submit = screen.getByRole('button', { name: 'Generate prescription' });
     fireEvent.click(submit);
@@ -623,7 +623,7 @@ describe('Form validation on submit', () => {
       </AuthContext.Provider>
       </BrowserRouter>
     );
-    const editBtn = screen.getByText(/edit selected provider/i);
+    const editBtn = screen.getByText(/edit selected prescriber/i);
     fireEvent.click(editBtn);
     const submit = screen.getByRole('button', { name: 'Generate prescription' });
     fireEvent.click(submit);
@@ -640,7 +640,7 @@ describe('Form validation on submit', () => {
       </AuthContext.Provider>
       </BrowserRouter>
     );
-    const editBtn = screen.getByText(/edit selected provider/i);
+    const editBtn = screen.getByText(/edit selected prescriber/i);
     fireEvent.click(editBtn);
     const submit = screen.getByRole('button', { name: 'Generate prescription' });
     fireEvent.click(submit);
@@ -648,8 +648,8 @@ describe('Form validation on submit', () => {
   });
 });
 
-describe('Provider select tests', () => {
-  // Instead of the preset AuthContextProvider, use AuthContext export, then recreate as provider by appending '.Proivider'. This allows us to inject manual values for testing
+describe('Prescriber select tests', () => {
+  // Instead of the preset AuthContextProvider, use AuthContext export, then recreate as prescriber by appending '.Proivider'. This allows us to inject manual values for testing
   beforeEach(() => {
     render(
       <BrowserRouter>
@@ -660,9 +660,9 @@ describe('Provider select tests', () => {
     );
   })
 
-  test('Provider select element initialises with "---Select provider--- option"', () => {
-    const input = screen.getByLabelText(/select provider/i);
-    expect(input.value).toBe('---Select provider---');
+  test('Prescriber select element initialises with "---Select prescriber--- option"', () => {
+    const input = screen.getByLabelText(/select prescriber/i);
+    expect(input.value).toBe('---Select prescriber---');
   });
 });
 

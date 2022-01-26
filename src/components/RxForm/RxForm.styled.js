@@ -13,7 +13,7 @@ const StyledRxForm = styled.form`
     margin-top: 0.65rem;
   }
 
-  .provider-form {
+  .prescriber-form {
     border-top: 1px solid #dfe1e1;
   }
 
@@ -106,7 +106,7 @@ const StyledRxForm = styled.form`
     margin: 1.25rem 0 1.5rem 0;
   }
 
-  .ProviderForm__btns {
+  .PrescriberForm__btns {
     padding: 2.75rem 0 0 20rem;
     width: 100%;
     display: flex;
@@ -120,7 +120,7 @@ const StyledRxForm = styled.form`
   
   /* Landscape phones and down */
   @media (max-width: 920px) { 
-    .ProviderForm__btns {
+    .PrescriberForm__btns {
       padding: 2.75rem 0 0 0rem;
     }
 
@@ -156,7 +156,7 @@ const StyledRxForm = styled.form`
             
   /* Portrait phones */ 
   @media(max-width: 450px) {
-    .ProviderForm__btns {
+    .PrescriberForm__btns {
       flex-direction: column;
       align-items: center;
       justify-content: center;
