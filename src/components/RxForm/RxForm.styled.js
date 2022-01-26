@@ -13,6 +13,10 @@ const StyledRxForm = styled.form`
     margin-top: 0.65rem;
   }
 
+  .provider-form {
+    border-top: 1px solid #dfe1e1;
+  }
+
   .misc-form {
     .authRequired {
       margin: 0.9rem 0 0.5rem 0;

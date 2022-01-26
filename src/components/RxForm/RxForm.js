@@ -173,7 +173,10 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
         document.querySelector('.drug-expand').click();
       }
     } catch (error) {
-      // If the Rx is not newly generated, a reference error will be thrown, where state is null. No action required.
+      // If the Rx is not newly generated, a reference error will be thrown, where state is null. This occurs when the user clicks the make changes button. Expand the drug select in this case
+      if (document.querySelector('.DrugAutocomplete').classList.contains('collapsed')) {
+        document.querySelector('.drug-expand').click();
+      }
     }
   }, [state, fetchNumbers, fetchDrug, resetFormValidation, resetFormData]);
 
