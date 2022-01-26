@@ -7,9 +7,10 @@ import PasswordContainer from "../utils/PasswordContainer/PasswordContainer";
 import { useErrorHandling } from '../../hooks/useErrorHandling';
 import { sendEmailVerification, updateEmail } from "firebase/auth";
 import { useImmediateToast } from '../../hooks/useImmediateToast';
+import { useAuthContext } from "../../hooks/useAuthContext";
 
-
-const ChangeEmail = ({ user, setToast, refreshCredentials, verified }) => {
+const ChangeEmail = ({ setToast, refreshCredentials, verified }) => {
+  const { user } = useAuthContext();
   const { showSuccessToast, showErrorToast } = useImmediateToast(); 
   const { handleSettingsError } = useErrorHandling();
   const [emailConfirmPassword, setEmailConfirmPassword] = useState('');  

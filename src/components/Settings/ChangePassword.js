@@ -8,8 +8,10 @@ import { updatePassword } from "firebase/auth";
 import { useImmediateToast } from '../../hooks/useImmediateToast';
 import { useLogout } from "../../hooks/useLogout";
 import { Link } from "react-router-dom";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
-const ChangePassword = ({ user, setToast, refreshCredentials }) => {
+const ChangePassword = ({ setToast, refreshCredentials }) => {
+  const { user } = useAuthContext();
   const { handleSettingsError } = useErrorHandling();
   const { showSuccessToast } = useImmediateToast(); 
   const { logout } = useLogout();

@@ -5,8 +5,10 @@ import { useState, useEffect } from "react";
 import Dots from "../utils/Dots/Dots";
 import { useImmediateToast } from "../../hooks/useImmediateToast";
 import { updateProfile } from "firebase/auth";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
-const ChangeDisplayName = ({ user, setToast }) => {
+const ChangeDisplayName = ({ setToast }) => {
+  const { user } = useAuthContext();
   const { showSuccessToast, showErrorToast } = useImmediateToast(); 
 
   const [displayName, setDisplayName] = useState('');

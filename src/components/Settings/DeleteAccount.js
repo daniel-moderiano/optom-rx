@@ -10,11 +10,13 @@ import { collection, deleteDoc, doc, getDocs, query, where } from "firebase/fire
 import { db } from "../../firebase/config";
 import { useImmediateToast } from '../../hooks/useImmediateToast';
 import { useLogout } from "../../hooks/useLogout";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
-const DeleteAccount = ({ user, setToast, refreshCredentials }) => {
+const DeleteAccount = ({ setToast, refreshCredentials }) => {
   const { handleSettingsError } = useErrorHandling();
   const { logout } = useLogout();
   const { showSuccessToast, showErrorToast } = useImmediateToast(); 
+  const { user } = useAuthContext();
 
   const [showModal, setShowModal] = useState(false);
   const [deleteConfirmPasswordAlert, setdeleteConfirmPasswordAlert] = useState({});

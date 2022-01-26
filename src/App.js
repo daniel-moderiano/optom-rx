@@ -155,7 +155,7 @@ const App = () => {
     <StyledApp className="App">
       {authIsReady && (<>
         <GlobalStyles />
-        <Header user={user} resetData={resetAllData} currentPage={currentPage}/>
+        <Header resetData={resetAllData} currentPage={currentPage}/>
 
         <Main >
           <Routes>
@@ -169,7 +169,7 @@ const App = () => {
             <Route path="/settings" element={
               <>
               {!user && <Navigate to="/login" />}
-              {user && <Settings user={user} setToast={setToastParams} setPage={setCurrentPage} />}
+              {user && <Settings setToast={setToastParams} setPage={setCurrentPage} />}
               </>
             } />
 

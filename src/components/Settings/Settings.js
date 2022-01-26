@@ -7,8 +7,11 @@ import DeleteAccount from "./DeleteAccount";
 import ChangeEmail from "./ChangeEmail";
 import { useEffect } from "react";
 import ChangePassword from "./ChangePassword";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
-const Settings = ({ user, setToast, setPage }) => {
+const Settings = ({ setToast, setPage }) => {
+  const { user } = useAuthContext();
+
   // Adjust current page for accessibility and styling
   useEffect(() => {
     setPage('settings');
@@ -27,14 +30,14 @@ const Settings = ({ user, setToast, setPage }) => {
       <PageHeader title="Settings" description="Adjust basic profile and account settings"/>
       <div className="Settings-container">
         {user.emailVerified ? (<>
-          <ChangeDisplayName user={user} setToast={setToast}/>
-          <ChangeEmail user={user} setToast={setToast} refreshCredentials={refreshCredentials} verified={true}/>
-          <ChangePassword user={user} setToast={setToast} refreshCredentials={refreshCredentials} verified={true}/>
+          <ChangeDisplayName setToast={setToast}/>
+          <ChangeEmail setToast={setToast} refreshCredentials={refreshCredentials} verified={true}/>
+          <ChangePassword setToast={setToast} refreshCredentials={refreshCredentials} verified={true}/>
           </>
           ) : (
-            <ChangeEmail user={user} setToast={setToast} refreshCredentials={refreshCredentials} verified={false}/>
+            <ChangeEmail setToast={setToast} refreshCredentials={refreshCredentials} verified={false}/>
           )}
-          <DeleteAccount user={user} setToast={setToast} refreshCredentials={refreshCredentials}/>
+          <DeleteAccount setToast={setToast} refreshCredentials={refreshCredentials}/>
         </div>
       </StyledSettings>
     </ContentContainer>

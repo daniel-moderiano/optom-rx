@@ -1,9 +1,11 @@
 import Nav from "../Nav/Nav"
 import { StyledHeader } from "./Header.styled"
 import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
-const Header = ({ user, currentPage, resetData }) => {
+const Header = ({ currentPage, resetData }) => {
   let navigate = useNavigate();
+  const { user } = useAuthContext();
 
   return (
     <StyledHeader className="Header" user={user} role="banner" aria-labelledby="optomrx-logo">

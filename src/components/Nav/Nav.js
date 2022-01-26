@@ -3,9 +3,11 @@ import { StyledNav } from "./Nav.styled";
 import { useLogout } from "../../hooks/useLogout";
 import { useState } from "react";
 import Hamburger from "../utils/Hamburger/Hamburger";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
-const Nav = ({ user, currentPage, resetData }) => {
+const Nav = ({ currentPage, resetData }) => {
   const { logout } = useLogout();
+  const { user } = useAuthContext();
 
   const [showNav, setShowNav] = useState(false);
   const [toggleHamburger, setToggleHamburger] = useState(false);
