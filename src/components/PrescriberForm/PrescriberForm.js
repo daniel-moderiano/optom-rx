@@ -9,11 +9,7 @@ import { useInputValidation } from "../../hooks/useInputValidation";
 import { useFormatting } from "../../hooks/useFormatting";
 import { useInputChanges } from "../../hooks/useInputChanges";
 
-// ! Legal requirements include the prescriber's name, address, contact details, and prescriber number
-
 const PrescriberForm = ({ data, setData, googleLoaded, handleSubmit, handleCancel, submitBtnLabel, pending, formPending }) => {
-
-  // Hook usage for formatting and validation purposes
   const { positiveValidationUI, negativeValidationUI, validateRequiredField } = useInputValidation();
   const { abbreviateStateName } = useFormatting();
   const { handleChange, toggleBooleanState, handleEnterKeyOnCheckbox } = useInputChanges();
@@ -83,7 +79,6 @@ const PrescriberForm = ({ data, setData, googleLoaded, handleSubmit, handleCance
     });    
   }, [setData, negativeValidationUI, positiveValidationUI, validateRequiredField, abbreviateStateName]);
 
-
   // Ensure form is validated with no empty required fields before calling form submission function
   const checkFormValidation = () => {
     let valid = true;
@@ -116,6 +111,7 @@ const PrescriberForm = ({ data, setData, googleLoaded, handleSubmit, handleCance
   }
 
   return (
+    // Legal requirements include the prescriber's name, address, contact details, and prescriber number
       <StyledPrescriberForm className="PrescriberForm" autoComplete="off" noValidate>
         <div className="fields">
           {formPending && <LoadOverlay />}

@@ -5,6 +5,7 @@ import { useCollection } from "../../hooks/useCollection";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useEffect, useState } from "react";
 
+// Created to improve parent RxForm readability only
 const PrescriberDetails = ({ setData }) => {
   const { user } = useAuthContext();
   const { documents: providers, isPending } = useCollection('providers', ['uid', '==', user.uid]);

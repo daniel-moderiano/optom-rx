@@ -28,7 +28,7 @@ const StyledPrescriberForm = styled.form`
     }
   }
 
-  
+  /* Landscape phones/portrait tables */
   @media (max-width: 590px) { 
     width: 100%;
     display: flex;
@@ -36,6 +36,7 @@ const StyledPrescriberForm = styled.form`
     align-items: center;
   }
 
+  /* Portrait phones */
   @media(max-width: 450px) {
     .PrescriberForm__btns {
       flex-direction: column;

@@ -2,6 +2,7 @@ import FormField from "../FormField/FormField";
 import AddressAutocomplete from "../AddressAutocomplete/AddressAutocomplete";
 import { useInputChanges } from "../../hooks/useInputChanges";
 
+// Created to help parent RxFprm component readability
 const PatientDetails = ({ data, setData, alerts, setAlerts, googleLoaded }) => {
   const { handleChange } = useInputChanges();
 
