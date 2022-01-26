@@ -80,6 +80,10 @@ const StyledRxTemplate = styled.div`
       justify-content: center;
     }
 
+    .btn-finish {
+      min-width: 172px;
+    }
+
     .btn-print {
       margin-right: 1.5rem;
     }

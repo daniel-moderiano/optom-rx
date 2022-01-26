@@ -120,6 +120,10 @@ const StyledRxForm = styled.form`
       padding: 2.75rem 0 0 0rem;
     }
 
+    .add-new-btn {
+      width: 170px;
+    }
+
     .scriptNo {
       text-align: left;
     }

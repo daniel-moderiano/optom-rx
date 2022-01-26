@@ -33,6 +33,7 @@ const AuthorityDetails = ({ drugData, setDrugData, drugAlerts, miscData, setMisc
 
         <div className="retention">
           <div className="retention">
+            
             <div className="justification-field">
               <label htmlFor="justification">
                 Clinical justification for use of item
