@@ -15,7 +15,7 @@ const AddPrescriber = ({ googleLoaded, setToast, setPage }) => {
   const { showSuccessToast, showErrorToast } = useImmediateToast();
 
   const [isPending, setIsPending] = useState(false);
-  const [providerData, setProviderData] = useState({
+  const [prescriberData, setPrescriberData] = useState({
     prefix: false,
     fullName: '',
     qualifications: '',
@@ -36,15 +36,15 @@ const AddPrescriber = ({ googleLoaded, setToast, setPage }) => {
   }, [setPage])
 
   
-  // Used when the user submits the form - saves a new provider referenced by their user ID
+  // Used when the user submits the form - saves a new prescriber referenced by their user ID
   const handleSubmit = async (event) => {
     event.preventDefault(); 
     setIsPending(true);
 
     try {
       // Update data on backend
-      await addDoc(collection(db, 'providers'), {
-        ...providerData,
+      await addDoc(collection(db, 'prescribers'), {
+        ...prescriberData,
         uid: user.uid,
       });
 
@@ -53,7 +53,7 @@ const AddPrescriber = ({ googleLoaded, setToast, setPage }) => {
 
       // Confirm save via toast message, and return to the previous page
       showSuccessToast(setToast, 'New prescriber added')
-      navigate('/providers');
+      navigate('/prescribers');
     } catch (error) {
       setIsPending(false);
       // Throw error toast on screen, no further rendering is required, nor any specific error handling
@@ -62,7 +62,7 @@ const AddPrescriber = ({ googleLoaded, setToast, setPage }) => {
   };
 
   const cancelEdit = () => {
-    navigate('/providers');
+    navigate('/prescribers');
   }
 
   return (
@@ -73,8 +73,8 @@ const AddPrescriber = ({ googleLoaded, setToast, setPage }) => {
           <span className="form-title">Prescriber details</span>
           <PrescriberForm 
             googleLoaded={googleLoaded} 
-            data={providerData}
-            setData={setProviderData}
+            data={prescriberData}
+            setData={setPrescriberData}
             handleSubmit={handleSubmit}
             handleCancel={cancelEdit}
             submitBtnLabel="Add prescriber"
