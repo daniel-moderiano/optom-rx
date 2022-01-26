@@ -49,7 +49,7 @@ const Nav = ({ currentPage, resetData }) => {
           <li className="Nav__list-item" role="none">
             <Link 
               className="Nav__link Nav__link--std" 
-              to="/form" 
+              to="/new-prescription" 
               role="menuitem" 
               onClick={() => {
                 resetData();

@@ -125,7 +125,7 @@ const PrescribersTable = ({ data, rowsPerPage, setToast, user }) => {
                   <div className="non-default">
                     <Link 
                       className="table__action edit" 
-                      to={`/edit/${prescriber.id}`}
+                      to={`/edit-prescriber/${prescriber.id}`}
                       state={ {...prescriber} }
                     >Edit</Link>
                     <button className="table__action delete" onClick={() => {

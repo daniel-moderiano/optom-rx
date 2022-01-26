@@ -146,7 +146,7 @@ const App = () => {
     }));
 
     // New React Router v6 syntax using navigate. State is passed in a similar way and accessed with useLocation
-    navigate('/template');
+    navigate('/review-prescription');
   };
 
   
@@ -173,7 +173,7 @@ const App = () => {
               </>
             } />
 
-            <Route path="/form" element={
+            <Route path="/new-prescription" element={
               <>
               {user && <RxForm handleSubmit={handleSubmit} googleLoaded={googleLoaded} existingData={data} setPage={setCurrentPage} setToast={setToastParams}/> }
               {!user && <Navigate to="/login"/>}
@@ -194,14 +194,14 @@ const App = () => {
               </>
             }/>
 
-            <Route path="/template" element={
+            <Route path="/review-prescription" element={
               <>
               {user && <RxTemplate data={data} setToast={setToastParams} setPage={setCurrentPage}/>}
               {!user && <Navigate to="/login"/>}
               </>
             }/>
 
-            <Route path="/edit/:id" element={
+            <Route path="/edit-prescriber/:id" element={
               <>
               {user && <EditPrescriber googleLoaded={googleLoaded} setToast={setToastParams} setPage={setCurrentPage}/>}
               {!user && <Navigate to="/login"/>}

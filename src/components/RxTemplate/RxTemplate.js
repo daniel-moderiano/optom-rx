@@ -486,7 +486,7 @@ const RxTemplate = ({ data, setToast, setPage }) => {
             </Button>
           </div>
 
-          <Link className="btn-secondary button" to="/form">Make changes</Link>
+          <Link className="btn-secondary button" to="/new-prescription">Make changes</Link>
         </div>
       </> : <h3 className="RxTemplate__subtitle">We couldn't find any prescription data, please write a new prescription and try again.</h3>}
 

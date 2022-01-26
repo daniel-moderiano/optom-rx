@@ -99,7 +99,7 @@ const ViewScript = ({ setToast, resetData, setPage }) => {
             </div>
 
             <div className="PrescriberForm__btns">
-              <Link  className="re-prescribe btn-primary" to='/form' state={{
+              <Link  className="re-prescribe btn-primary" to='/new-prescription' state={{
                 newRx: true,
                 rePrescribe: true,
                 scriptData: scriptData,
