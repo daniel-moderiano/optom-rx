@@ -1,19 +1,19 @@
 
 import { useCollection } from '../../hooks/useCollection';
 import { useAuthContext } from '../../hooks/useAuthContext';
-import { StyledProviders } from "./Providers.styled";
+import { StyledPrescribers } from './Prescribers.styled';
 import { Link } from "react-router-dom";
-import TableProviders from './TableProviders';
+import PrescribersTable from './PrescribersTable';
 import Spinner from '../utils/Spinner/Spinner';
 import { useEffect } from 'react';
 import ContentContainer from '../utils/ContentContainer/ContentContainer'
 import PageHeader from '../utils/PageHeader/PageHeader';
 import { useConditionalToast } from '../../hooks/useConditionalToast';
 
-const Providers = ({ setToast, setPage }) => {
+const Prescribers = ({ setToast, setPage }) => {
   const { user } = useAuthContext();
   // This should be called using the curernt user ID to query the collection
-  const { documents: providers, isPending, error } = useCollection('providers', ['uid', '==', user.uid]);
+  const { documents: prescribers, isPending, error } = useCollection('prescribers', ['uid', '==', user.uid]);
 
   // Adjust current page for accessibility and styling
   useEffect(() => {
@@ -25,17 +25,17 @@ const Providers = ({ setToast, setPage }) => {
 
   return (
     <ContentContainer earlyPadding={true}>
-      <StyledProviders className="Providers">
+      <StyledPrescribers className="Prescribers">
         <PageHeader title="Prescribers" description="Add and modify prescriber details for your prescriptions"/>
 
-        <Link className="Providers__add-btn btn-primary" to={`/add-prescriber`}>Add new provider</Link> 
+        <Link className="Prescribers__add-btn btn-primary" to={`/add-prescriber`}>Add new prescriber</Link> 
 
-        <div className="Providers__container">
+        <div className="Prescribers__container">
           {isPending && <Spinner />}
 
-          {providers && <>
-            {providers.length > 0 ? (
-              <TableProviders data={providers} rowsPerPage={10} setToast={setToast} user={user} />
+          {prescribers && <>
+            {prescribers.length > 0 ? (
+              <PrescribersTable data={prescribers} rowsPerPage={10} setToast={setToast} user={user} />
             ) : (
               <table className="table table-none">
                 <thead className="tableRowHeader">
@@ -47,16 +47,16 @@ const Providers = ({ setToast, setPage }) => {
                 </thead>
                 <tbody>
                   <tr className="tableRowItems">
-                    <td data-title="Providers" className="tableCellNone" colSpan="3">No providers added yet</td>
+                    <td data-title="Prescribers" className="tableCellNone" colSpan="3">No prescribers added yet</td>
                   </tr>
                 </tbody>
               </table>
             )}
           </>}
         </div>
-      </StyledProviders>
+      </StyledPrescribers>
     </ContentContainer>
   )
 }
 
-export default Providers;
+export default Prescribers;

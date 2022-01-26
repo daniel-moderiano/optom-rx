@@ -11,7 +11,7 @@ import Modal from "../utils/Modal/Modal";
 import { useFormatting } from "../../hooks/useFormatting";
 import { useImmediateToast } from '../../hooks/useImmediateToast';
 
-const TableProviders = ({ data, rowsPerPage, setToast, user }) => {
+const PrescribersTable = ({ data, rowsPerPage, setToast, user }) => {
   // Start on page 1
   const [page, setPage] = useState(1);
   // Gather the data slices for each page and the range of pages needed 
@@ -22,38 +22,38 @@ const TableProviders = ({ data, rowsPerPage, setToast, user }) => {
 
   const [showModal, setShowModal] = useState(false);
   const [isPending, setIsPending] = useState(false);
-  const [selectedProvider, setSelectedProvider] = useState({
+  const [selectedPrescriber, setSelectedPrescriber] = useState({
     fullName: '',
     location: '',
     id: '',
   });
 
-  // Update both the UI checkboxes and backend to ensure only one provider can be set default at any one time
-  const setAsDefault = async (currentProviders, provID) => {
+  // Update both the UI checkboxes and backend to ensure only one prescriber can be set default at any one time
+  const setAsDefault = async (currentPrescribers, provID) => {
     let prevDefault = null;
     setIsPending(true);
 
     try {
-      // Remove the current default and record which provider this was
-      for (let i = 0; i < currentProviders.length; i++) {
-        // Identify the current default provider
-        if (currentProviders[i].default) {
-          prevDefault = currentProviders[i].id;
+      // Remove the current default and record which prescriber this was
+      for (let i = 0; i < currentPrescribers.length; i++) {
+        // Identify the current default prescriber
+        if (currentPrescribers[i].default) {
+          prevDefault = currentPrescribers[i].id;
           // In any case, remove the current default user
-          await updateDoc(doc(db, 'providers', currentProviders[i].id), {
+          await updateDoc(doc(db, 'prescribers', currentPrescribers[i].id), {
             default: false
           }); 
           break;
         }       
       }
 
-      for (let i = 0; i < currentProviders.length; i++) {
-        // When reaching the provider that the user click on
-        if (currentProviders[i].id === provID) {
+      for (let i = 0; i < currentPrescribers.length; i++) {
+        // When reaching the prescriber that the user click on
+        if (currentPrescribers[i].id === provID) {
           // Check that this is not the previous default
           if (provID !== prevDefault) {
             // And update defaults if so, ending the loop here
-            await updateDoc(doc(db, 'providers', currentProviders[i].id), {
+            await updateDoc(doc(db, 'prescribers', currentPrescribers[i].id), {
               default: true
             }); 
             break;
@@ -72,14 +72,14 @@ const TableProviders = ({ data, rowsPerPage, setToast, user }) => {
   };
 
 
-  const deleteProvider = async (provID) => {
+  const deletePrescriber = async (provID) => {
     try {
-      await deleteDoc(doc(db, 'providers', provID));
+      await deleteDoc(doc(db, 'prescribers', provID));
       setShowModal(false);
       showSuccessToast(setToast, 'Prescriber has been removed');
     } catch (error) {
       setShowModal(false);
-      showErrorToast(setToast, 'An error occurred while deleting providers defaults');
+      showErrorToast(setToast, 'An error occurred while deleting prescribers defaults');
     }     
   };
 
@@ -105,7 +105,7 @@ const TableProviders = ({ data, rowsPerPage, setToast, user }) => {
   }, [])
 
   return (<>
-      <table className="table data-table" aria-describedby="Providers__description">
+      <table className="table data-table" aria-describedby="Prescribers__description">
         <thead className="tableRowHeader">
           <tr role="row">
             <th role="columnheader" className="tableHeader" scope="col">Name</th>
@@ -115,34 +115,34 @@ const TableProviders = ({ data, rowsPerPage, setToast, user }) => {
         </thead>
 
         <tbody>
-          {dataSlice.map((provider) => (
-            <tr role="row" className="tableRowItems" key={provider.id}>
-              <td role="cell" data-title="Name" className="tableCell">{provider.fullName}</td>
-              <td role="cell" data-title="Location" className="tableCell">{formatLocation(provider.practiceName, provider.streetAddress, provider.suburb)}</td>
+          {dataSlice.map((prescriber) => (
+            <tr role="row" className="tableRowItems" key={prescriber.id}>
+              <td role="cell" data-title="Name" className="tableCell">{prescriber.fullName}</td>
+              <td role="cell" data-title="Location" className="tableCell">{formatLocation(prescriber.practiceName, prescriber.streetAddress, prescriber.suburb)}</td>
 
               <td role="cell" data-title="Actions" className="tableCell actions-cell">
                 <div className="btns">
                   <div className="non-default">
                     <Link 
                       className="table__action edit" 
-                      to={`/edit/${provider.id}`}
-                      state={ {...provider} }
+                      to={`/edit/${prescriber.id}`}
+                      state={ {...prescriber} }
                     >Edit</Link>
                     <button className="table__action delete" onClick={() => {
                       setShowModal(true);
-                      setSelectedProvider({
-                        fullName: provider.fullName,
-                        location: formatLocation(provider.practiceName, provider.streetAddress, provider.suburb),
-                        id: provider.id,
+                      setSelectedPrescriber({
+                        fullName: prescriber.fullName,
+                        location: formatLocation(prescriber.practiceName, prescriber.streetAddress, prescriber.suburb),
+                        id: prescriber.id,
                       })
                     }}>Delete</button>
                   </div>
                 
-                  <button className={`${(provider.default && !isPending) ? 'table__action default--selected' : 'table__action default'}`} onClick={() => setAsDefault(data, provider.id)}>
+                  <button className={`${(prescriber.default && !isPending) ? 'table__action default--selected' : 'table__action default'}`} onClick={() => setAsDefault(data, prescriber.id)}>
                     {isPending ? (
                       'Updating...'
                       ) : (
-                      `${provider.default ? 'Remove default' : 'Make default'}`
+                      `${prescriber.default ? 'Remove default' : 'Make default'}`
                     )}
                   </button>
                 </div>
@@ -154,17 +154,17 @@ const TableProviders = ({ data, rowsPerPage, setToast, user }) => {
 
       <TableFooter pages={range} slice={dataSlice} setPage={setPage} page={page} />
 
-      {showModal && <Modal title="Delete provider" closeModal={() => setShowModal(false)} type="delete" errorMessage="This will permanently delete the following provider details">
-        <div className="provider-display">
-          <div className="provider-label">Selected provider</div>
-          <div className="provider-summary">{`${selectedProvider.fullName} (${selectedProvider.location})`}</div>
+      {showModal && <Modal title="Delete prescriber" closeModal={() => setShowModal(false)} type="delete" errorMessage="This will permanently delete the following prescriber details">
+        <div className="prescriber-display">
+          <div className="prescriber-label">Selected prescriber</div>
+          <div className="prescriber-summary">{`${selectedPrescriber.fullName} (${selectedPrescriber.location})`}</div>
         </div>
         <div className="Modal__buttons">
           <Button classLabel="cancel" design="secondary" handleClick={() => setShowModal(false)}>Cancel</Button>
-          <Button design="delete" handleClick={() => deleteProvider(selectedProvider.id)}>Delete</Button>
+          <Button design="delete" handleClick={() => deletePrescriber(selectedPrescriber.id)}>Delete</Button>
         </div>
       </Modal>}
     </>
   )};
 
-export default TableProviders;
+export default PrescribersTable;

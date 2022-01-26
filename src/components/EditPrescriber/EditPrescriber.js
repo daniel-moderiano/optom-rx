@@ -3,21 +3,21 @@ import { doc, updateDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../../firebase/config";
 import PrescriberForm from "../PrescriberForm/PrescriberForm";
-import { StyledEditProvider } from "./EditProvider.styled";
+import { StyledEditPrescriber } from "./EditPrescriber.styled";
 import ContentContainer from '../utils/ContentContainer/ContentContainer';
 import PageHeader from '../utils/PageHeader/PageHeader';
 import { useImmediateToast } from '../../hooks/useImmediateToast';
 
-const EditProvider = ({ googleLoaded, setToast, setPage }) => {
+const EditPrescriber = ({ googleLoaded, setToast, setPage }) => {
   const { id } = useParams();
   let navigate = useNavigate();
   const { showSuccessToast, showErrorToast } = useImmediateToast();
 
-  // Extract the selected provider data passed via React Router state
+  // Extract the selected prescriber data passed via React Router state
   const { state: existingData } = useLocation();
 
   const [localPending, setLocalPending] = useState(false);
-  const [providerData, setProviderData] = useState({
+  const [prescriberData, setPrescriberData] = useState({
     prefix: false,
     fullName: '',
     qualifications: '',
@@ -37,9 +37,9 @@ const EditProvider = ({ googleLoaded, setToast, setPage }) => {
     setPage(null);
   }, [setPage])
 
-  // Set local provider data state to data passed along via React Router state
+  // Set local prescriber data state to data passed along via React Router state
   useEffect(() => {
-    setProviderData((prevData) => ({
+    setPrescriberData((prevData) => ({
       ...prevData,
       ...existingData,
     }));
@@ -52,13 +52,13 @@ const EditProvider = ({ googleLoaded, setToast, setPage }) => {
 
     try {
       // Update data on backend
-      await updateDoc(doc(db, 'providers', id), {
-        ...providerData,
+      await updateDoc(doc(db, 'prescribers', id), {
+        ...prescriberData,
       });
       setLocalPending(false);
       // Inform the user the changes have been successfully applied, then return to the previous page
       showSuccessToast(setToast, 'Prescriber details updated')
-      navigate('/providers');
+      navigate('/prescribers');
     } catch (error) {
       setLocalPending(false);
       // Only an error toast is necessary. Specific error handling is not useful or necessary
@@ -68,28 +68,28 @@ const EditProvider = ({ googleLoaded, setToast, setPage }) => {
   };
 
   const cancelEdit = () => {
-    navigate('/providers');
+    navigate('/prescribers');
   }
 
   return (
     <ContentContainer>
-      <StyledEditProvider>
+      <StyledEditPrescriber>
         <PageHeader title="Edit prescriber" description="Prescriber details will appear on your prescriptions"/>        
         <div className="form-container">
           <span className="form-title">Prescriber details</span>
           <PrescriberForm 
             googleLoaded={googleLoaded} 
-            data={providerData}
-            setData={setProviderData}
+            data={prescriberData}
+            setData={setPrescriberData}
             handleSubmit={handleSubmit}
             handleCancel={cancelEdit}
             submitBtnLabel="Save changes"
             pending={localPending}
           />
         </div>
-      </StyledEditProvider>
+      </StyledEditPrescriber>
     </ContentContainer>
   )
 }
 
-export default EditProvider
+export default EditPrescriber

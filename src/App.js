@@ -9,9 +9,9 @@ import Signup from "./components/Signup/Signup";
 import Login from "./components/Login/Login";
 import { useAuthContext } from './hooks/useAuthContext';
 import Home from './components/Home/Home';
-import Providers from "./components/Providers/Providers";
+import Prescribers from "./components/Prescribers/Prescribers";
 import './App.css';
-import EditProvider from "./components/EditProvider/EditProvider";
+import EditPrescriber from "./components/EditPrescriber/EditPrescriber";
 import Toast from "./components/utils/Toast/Toast";
 import AddPrescriber from "./components/AddPrescriber/AddPrescriber";
 import Main from "./components/Main/Main";
@@ -44,7 +44,7 @@ const App = () => {
       authRequired: false,
     },
     patientData: {},
-    providerData: {},
+    prescriberData: {},
     miscData: {
       date: ausDate,
     },
@@ -69,7 +69,7 @@ const App = () => {
         authRequired: false,
       },
       patientData: {},
-      providerData: {},
+      prescriberData: {},
       miscData: {
         date: ausDate,
       },
@@ -127,7 +127,7 @@ const App = () => {
   }, [googleLoaded])
 
   // Combine all the data from the RxForm component
-  const handleSubmit = (drugData, patientData, providerData, miscData, pbsData) => {
+  const handleSubmit = (drugData, patientData, prescriberData, miscData, pbsData) => {
     setData((prevData) => ({
       ...prevData,
       drugData: {
@@ -136,8 +136,8 @@ const App = () => {
       patientData: {
         ...patientData
       },
-      providerData: {
-        ...providerData
+      prescriberData: {
+        ...prescriberData
       },
       miscData: {
         ...miscData
@@ -203,7 +203,7 @@ const App = () => {
 
             <Route path="/edit/:id" element={
               <>
-              {user && <EditProvider googleLoaded={googleLoaded} setToast={setToastParams} setPage={setCurrentPage}/>}
+              {user && <EditPrescriber googleLoaded={googleLoaded} setToast={setToastParams} setPage={setCurrentPage}/>}
               {!user && <Navigate to="/login"/>}
               </>
             }/>
@@ -217,7 +217,7 @@ const App = () => {
 
             <Route path="/prescribers" element={
               <>
-              {user && <Providers googleLoaded={googleLoaded} setToast={setToastParams} setPage={setCurrentPage}/>}
+              {user && <Prescribers googleLoaded={googleLoaded} setToast={setToastParams} setPage={setCurrentPage}/>}
               {!user && <Navigate to="/login" />}
               </>
             }/> 

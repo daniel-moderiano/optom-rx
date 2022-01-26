@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-const StyledProviders = styled.div`
-  .Providers__container {
+const StyledPrescribers = styled.div`
+  .Prescribers__container {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -12,8 +12,8 @@ const StyledProviders = styled.div`
     }
   }
 
-  .Providers__add-btn {
-    max-width: 170px;
+  .Prescribers__add-btn {
+    max-width: 175px;
     margin-top: 1.85rem;
   }
 
@@ -170,10 +170,10 @@ const StyledProviders = styled.div`
   }
 
   .Modal {
-    .provider-display {
+    .prescriber-display {
       padding-top: 1.25rem;
       margin-bottom: 2rem;
-      .provider-label {
+      .prescriber-label {
         font-size: 0.85rem;
         color: #5A6572;
         margin-bottom: 0.4rem;
@@ -287,4 +287,4 @@ const StyledProviders = styled.div`
   } 
 `
 
-export { StyledProviders }
+export { StyledPrescribers }

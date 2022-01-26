@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const StyledEditProvider = styled.div`
+const StyledEditPrescriber = styled.div`
   .form-container {
     padding: 2rem 0;
     display: flex;
@@ -58,4 +58,4 @@ const StyledEditProvider = styled.div`
 
 `
 
-export { StyledEditProvider }
+export { StyledEditPrescriber }
