@@ -1,3 +1,4 @@
+/* Separate stylesheet for text outside of parent container, but part of the viewScript page */
 .bottom-text {
   margin: -2rem 0 1rem 0;
   padding: 0 1rem;
@@ -9,8 +10,8 @@
   text-align: center;
 }
 
+/* Landscape phones/portrait tables */
 @media(max-width: 768px) {
-  
   .bottom-text {
     width: 90%;
   }

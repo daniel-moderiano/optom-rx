@@ -92,6 +92,7 @@ const StyledViewScript = styled.div`
     }
   }
 
+  /* Portrait phones */
   @media (max-width: 470px) { 
     .ProviderForm__btns {
       flex-direction: column;

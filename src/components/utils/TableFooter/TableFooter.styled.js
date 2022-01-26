@@ -75,6 +75,11 @@ const StyledTableFooter = styled.div`
     color: #2c3e50;
     background: #ffffff;
   }
+
+  /* Landscape phones/portrait tables */
+  @media (max-width: 768px) { 
+    justify-content: center;
+  }
 `
 
 export { StyledTableFooter }

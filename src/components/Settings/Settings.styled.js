@@ -260,6 +260,14 @@ const StyledSettings = styled.div`
   }
 
 
+  /* Landscape phones/portrait tables */
+  @media (max-width: 768px) {
+    .form-title {
+      font-size: 1.5rem;
+    }
+  }
+
+  /* Landscape phones/portrait tables - smaller screen where form width breaks */
   @media (max-width: 590px) { 
     .email-form {
       .email-group {
@@ -267,8 +275,13 @@ const StyledSettings = styled.div`
       }
     }
   }
-                
+        
+  /* Portrait phones */
   @media(max-width: 450px) {
+    .form-title {
+      font-size: 1.35rem;
+    }
+
     .settings-btn {
       margin-left: 0;
       margin-right: 0;
@@ -293,19 +306,6 @@ const StyledSettings = styled.div`
       }
     }
   }
-
-  @media (max-width: 768px) {
-    .form-title {
-      font-size: 1.5rem;
-    }
-  }
-
-  @media (max-width: 475px) {
-    .form-title {
-      font-size: 1.35rem;
-    }
-  }
-
 `
 
 export { StyledSettings }

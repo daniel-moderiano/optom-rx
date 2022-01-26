@@ -56,12 +56,10 @@ const ViewScript = ({ setToast, resetData, setPage }) => {
             customName: customName,
           })
         });
-
         setFavPending(false);
         setAddStatus(true);
         setShowModal(false);
         showSuccessToast(setToast, 'Prescription saved to favourites')
-
       } catch (error) {
         setFavPending(false);
         setShowModal(false);

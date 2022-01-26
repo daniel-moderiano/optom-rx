@@ -71,7 +71,6 @@ const StyledSignup = styled.div`
     } 
   }
 
-
   .login-option {
     margin: 1.25rem 0 0.75rem 0;
     padding-top: 1.25rem;
@@ -111,7 +110,7 @@ const StyledSignup = styled.div`
     }
   }
 
-  
+  /* Landscape phones/portrait tables */
   @media (max-width: 550px) { 
     .Signup__title {
       text-align: center;
@@ -140,6 +139,7 @@ const StyledSignup = styled.div`
     }
   }
 
+  /* Portrait phones */
   @media (max-width: 400px) {
     .Signup__title {
       font-size: 2rem;

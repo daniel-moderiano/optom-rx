@@ -12,11 +12,12 @@ const ChangeDisplayName = ({ user, setToast }) => {
   const [displayName, setDisplayName] = useState('');
   const [namePending, setNamePending] = useState(false);
 
+  // Ensure the current display name is made visible to user
   useEffect(() => {
     setDisplayName(user.displayName);
   }, [user]);
 
-  
+  // Can perform this update without refreshing credentials 
   const updateName = async () => {
     setNamePending(true);
     try {
@@ -31,7 +32,6 @@ const ChangeDisplayName = ({ user, setToast }) => {
       showErrorToast(setToast, 'An error occurred while changing name');
     }
   };
-
 
   return (
     <form className="displayName-form" >

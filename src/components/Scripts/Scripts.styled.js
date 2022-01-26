@@ -97,13 +97,8 @@ const StyledScripts = styled.div`
     margin-top: 2rem;
   }
 
-  @media (max-width: 768px) { 
-    .TableFooter {
-      justify-content: center;
-    }
-  }
 
-
+  /* Convert to card display when table width reaches breaking point (not specific to device) */
   @media (max-width: 700px) { 
     .data-table {
       border: none;

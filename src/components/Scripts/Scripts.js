@@ -29,6 +29,7 @@ const Scripts = ({ setToast, setPage }) => {
         <div className="Scripts__container">
           {isPending && <Spinner />}
 
+        {/* Present an empty table if scripts can't be fetched, or none exist (below) */}
           {error &&
             <table className="table table-none">
               <thead className="tableRowHeader">

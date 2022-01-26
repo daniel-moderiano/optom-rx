@@ -71,10 +71,11 @@ const ChangeEmail = ({ user, setToast, refreshCredentials, verified }) => {
     return valid;
   };
 
+  // Used to handle all operations involved with email update
   const performEmailUpdate = async () => {
     setChangeEmailPending(true);
     let reauthenticated = false;
-
+    // Refresh the user's credential regardless of when they last signed in
     try {
       await refreshCredentials(emailConfirmPassword);
       reauthenticated = true;
@@ -82,7 +83,7 @@ const ChangeEmail = ({ user, setToast, refreshCredentials, verified }) => {
       handleSettingsError(error.code, setEmailConfirmPasswordAlert)
       setChangeEmailPending(false);
     }
-
+    // Once succesfully reauthenticated, proceed with opertaions
     if (reauthenticated) {
       try {
         await updateEmail(user, newEmail);
@@ -98,6 +99,7 @@ const ChangeEmail = ({ user, setToast, refreshCredentials, verified }) => {
         
       } catch (error) {
         setChangeEmailPending(false);
+        // Custom error handling is needed because alerts are not fixed to one input
         switch (error.code) {
           case 'auth/invalid-email':
             setNewEmailAlert({
@@ -145,6 +147,7 @@ const ChangeEmail = ({ user, setToast, refreshCredentials, verified }) => {
   }
 
   return (<>
+    {/* Present the relevant form depending on whether a verified user email already exists */}
     {verified ? (
       <div className="change-email">
         <div className="form-title">Change email</div>

@@ -92,6 +92,7 @@ const ChangePassword = ({ user, setToast, refreshCredentials }) => {
     setChangePasswordPending(true);
     let reauthenticated = false;
 
+    // Refresh the user's credentials regardless of recent sign in or not
     try {
       await refreshCredentials(currentPassword);
       reauthenticated = true;
@@ -99,7 +100,7 @@ const ChangePassword = ({ user, setToast, refreshCredentials }) => {
       handleSettingsError(error.code, setCurrentPasswordAlert);
       setChangePasswordPending(false);
     }
-
+    // Proceed with operations once user reauthenticates
     if (reauthenticated) {
       try {
         await updatePassword(user, newPassword);
@@ -132,14 +133,20 @@ const ChangePassword = ({ user, setToast, refreshCredentials }) => {
     }
   };
 
-  
+  // Used to remove errors on resubmission of the form to avoid over-punishment or confusion
+  const refreshAllValidation = () => {
+    setCurrentPasswordAlert({});
+    setNewPasswordAlert({});
+    setConfirmPasswordAlert({});
+    document.querySelector('.password-form').querySelectorAll('input').forEach((input) => {
+      input.classList.remove('error');
+    })
+  }
+
   return (
     <form className='password-form' noValidate onSubmit={(event) => {
       event.preventDefault();
-      setCurrentPasswordAlert({});
-      setNewPasswordAlert({});
-      setConfirmPasswordAlert({});
-      // Ensure form validation passes
+      refreshAllValidation();
       if (isPasswordFormValid() && comparePasswords()) {
         performPasswordUpdate();
       }

@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { StyledTableFooter } from "./TableFooter.styled";
 
 // The table footer will control the display of page buttons, which is dependent on the props passed
+// ! If the number of pages icnrease, this component grows and grows in width. Not a scalable solution 
 const TableFooter = ({ pages, setPage, page, slice }) => {
   // If the current page contains only one element and it is deleted, move to the previous page
   useEffect(() => {
@@ -14,20 +15,16 @@ const TableFooter = ({ pages, setPage, page, slice }) => {
 
   // Arrow button navigation
   const incrementPage = () => {
-    // If not already on the last page
+    // If not already on the last page, increment
     if (page !== pages.length) {
       setPage(page + 1)
-    } else {
-      // do nothing
-    }
+    } 
   }
 
   const decrementPage = () => {
-    // If not on the first page
+    // If not on the first page, decrement
     if (page > 1) {
       setPage(page - 1)
-    } else {
-      // do nothing
     }
   }
 

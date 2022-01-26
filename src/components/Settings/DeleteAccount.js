@@ -14,11 +14,11 @@ import { useLogout } from "../../hooks/useLogout";
 const DeleteAccount = ({ user, setToast, refreshCredentials }) => {
   const { handleSettingsError } = useErrorHandling();
   const { logout } = useLogout();
-const { showSuccessToast, showErrorToast } = useImmediateToast(); 
+  const { showSuccessToast, showErrorToast } = useImmediateToast(); 
+
   const [showModal, setShowModal] = useState(false);
   const [deleteConfirmPasswordAlert, setdeleteConfirmPasswordAlert] = useState({});
   const [deletePending, setDeletePending] = useState(false);
-  
   const [deleteConfirmPassword, setdeleteConfirmPassword] = useState('');
   const [showDeleteConfirmPassword, setShowDeleteConfirmPassword] = useState(false);
 
@@ -80,6 +80,7 @@ const { showSuccessToast, showErrorToast } = useImmediateToast();
     setDeletePending(true);
     let reauthenticated = false;
 
+    // First refresh credentials (even if the user recently signed in)
     try {
       await refreshCredentials(deleteConfirmPassword);
       reauthenticated = true;
@@ -87,8 +88,7 @@ const { showSuccessToast, showErrorToast } = useImmediateToast();
       handleSettingsError(error.code, setdeleteConfirmPasswordAlert);
       setDeletePending(false);
     }
-
-    // Act based on the result
+    // Proceed with operations if the user provides correct sign in detais;
     if (reauthenticated) {
       deleteAccount();
       setDeletePending(false);

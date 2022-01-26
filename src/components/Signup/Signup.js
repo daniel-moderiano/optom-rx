@@ -7,7 +7,6 @@ import Dots from "../utils/Dots/Dots";
 import Button from '../utils/Button/Button'
 import PasswordContainer from "../utils/PasswordContainer/PasswordContainer";
 
-
 const Signup = ({ setPage, setFirstSignIn }) => {
   const { error, isPending, signup } = useSignup();
 
@@ -92,7 +91,6 @@ const Signup = ({ setPage, setFirstSignIn }) => {
 
         <form className="Signup__form" noValidate onSubmit={(event) => {
           event.preventDefault();
-          // Check form validity before calling submit function
           if (isFormValid()) {
             signup(email, password, displayName, setFirstSignIn);
           }
