@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const StyledAddProvider = styled.div`
+const StyledAddPrescriber = styled.div`
   .form-container {
     padding: 2rem 0;
     display: flex;
@@ -57,4 +57,4 @@ const StyledAddProvider = styled.div`
   }
 `
 
-export { StyledAddProvider }
+export { StyledAddPrescriber }

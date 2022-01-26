@@ -13,7 +13,7 @@ import Providers from "./components/Providers/Providers";
 import './App.css';
 import EditProvider from "./components/EditProvider/EditProvider";
 import Toast from "./components/utils/Toast/Toast";
-import AddProvider from "./components/AddProvider/AddProvider";
+import AddPrescriber from "./components/AddPrescriber/AddPrescriber";
 import Main from "./components/Main/Main";
 import Scripts from "./components/Scripts/Scripts";
 import ViewScript from "./components/ViewScript/ViewScript";
@@ -208,14 +208,14 @@ const App = () => {
               </>
             }/>
 
-            <Route path="/add-provider" element={
+            <Route path="/add-prescriber" element={
               <>
-              {user && <AddProvider googleLoaded={googleLoaded} setToast={setToastParams} setPage={setCurrentPage}/>}
+              {user && <AddPrescriber googleLoaded={googleLoaded} setToast={setToastParams} setPage={setCurrentPage}/>}
               {!user && <Navigate to="/login"/>}
               </>
             }/>
 
-            <Route path="/providers" element={
+            <Route path="/prescribers" element={
               <>
               {user && <Providers googleLoaded={googleLoaded} setToast={setToastParams} setPage={setCurrentPage}/>}
               {!user && <Navigate to="/login" />}

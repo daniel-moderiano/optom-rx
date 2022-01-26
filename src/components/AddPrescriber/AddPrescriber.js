@@ -4,12 +4,12 @@ import { useState, useEffect } from "react";
 import { db } from "../../firebase/config";
 import PrescriberForm from "../PrescriberForm/PrescriberForm";
 import { useAuthContext } from "../../hooks/useAuthContext";
-import { StyledAddProvider } from "./AddProvider.styled";
+import { StyledAddPrescriber } from "./AddPrescriber.styled";
 import ContentContainer from '../utils/ContentContainer/ContentContainer';
 import PageHeader from '../utils/PageHeader/PageHeader';
 import { useImmediateToast } from '../../hooks/useImmediateToast';
 
-const AddProvider = ({ googleLoaded, setToast, setPage }) => {
+const AddPrescriber = ({ googleLoaded, setToast, setPage }) => {
   const { user } = useAuthContext();
   let navigate = useNavigate();
   const { showSuccessToast, showErrorToast } = useImmediateToast();
@@ -67,7 +67,7 @@ const AddProvider = ({ googleLoaded, setToast, setPage }) => {
 
   return (
     <ContentContainer>
-      <StyledAddProvider>
+      <StyledAddPrescriber>
         <PageHeader title="Add prescriber" description="Prescriber details will appear on your prescriptions"/>
         <div className="form-container">
           <span className="form-title">Prescriber details</span>
@@ -81,9 +81,9 @@ const AddProvider = ({ googleLoaded, setToast, setPage }) => {
             pending={isPending}
           />
         </div>
-      </StyledAddProvider>
+      </StyledAddPrescriber>
     </ContentContainer>
   )
 }
 
-export default AddProvider
+export default AddPrescriber;
