@@ -213,9 +213,9 @@ const StyledSettings = styled.div`
       }
     }
 
-    .provider-display {
+    .prescriber-display {
       padding-top: 1.25rem;
-      .provider-label {
+      .prescriber-label {
         font-size: 0.85rem;
         color: #5A6572;
         margin-bottom: 0.4rem;

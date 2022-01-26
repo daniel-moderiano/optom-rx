@@ -56,7 +56,7 @@ const DeleteAccount = ({ user, setToast, refreshCredentials }) => {
   // Deletes the user account, as well as associated data including user document, and any created prescribers
   const deleteAccount = async () => {
     // Gather a reference to all of the user's prescribers
-    const presRef = collection(db, 'providers');
+    const presRef = collection(db, 'prescribers');
     const presQuery = query(presRef, where('uid', '==', user.uid));
     const docsSnap  = await getDocs(presQuery);
 
@@ -105,8 +105,8 @@ const DeleteAccount = ({ user, setToast, refreshCredentials }) => {
     </div>
 
     {showModal && <Modal title="Delete account" closeModal={() => setShowModal(false)} type="delete" errorMessage="This action is permanent and cannot be undone.">
-    <div className="provider-display">
-      <div className="provider-label">Please enter your password to continue</div>
+    <div className="prescriber-display">
+      <div className="prescriber-label">Please enter your password to continue</div>
     </div>
     <form className='Login__form' noValidate onSubmit={(event) => {
       event.preventDefault();
