@@ -62,7 +62,6 @@ const StyledRxTemplate = styled.div`
     }
   }
 
-
   .RxTemplate__btns {
     margin: 2rem 0 0 0;
     display: flex;
@@ -90,6 +89,7 @@ const StyledRxTemplate = styled.div`
     display: none;
   }
 
+  /* Landscape phones/portrait tables */
   @media (max-width: 768px) { 
     padding: 3rem 3rem;
 
@@ -100,9 +100,9 @@ const StyledRxTemplate = styled.div`
         font-weight: 400;
       }
     }
-    
   }
 
+  /* Landscape phones/portrait tables, where previous styling begins to break */
   @media (max-width: 550px) { 
     padding: 3rem 2.5rem;
 
@@ -135,6 +135,7 @@ const StyledRxTemplate = styled.div`
     }
   }
 
+  /* Portrait phones */
   @media (max-width: 475px) {
     .ui-container {
       .ui__title {
@@ -145,11 +146,12 @@ const StyledRxTemplate = styled.div`
     }
   }
 
+  /* Portrait phones (smaller screens) */
   @media (max-width: 400px) {
     padding: 3rem 1.5rem;
   }
 
-  /* Print styles are created to match the dimensions of the physical Rx form */
+  /* Print styles are created to match the dimensions of the physical Rx form. These are slightly printer dependent, but should transfer reasonably well across machines */
   @media print {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 15px;

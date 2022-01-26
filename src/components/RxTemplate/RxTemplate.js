@@ -15,7 +15,7 @@ import { useFormatting } from "../../hooks/useFormatting";
 import { useImmediateToast } from '../../hooks/useImmediateToast';
 
 const RxTemplate = ({ data, setToast, setPage }) => {
-  // Deconstructing for cleanliness of code and easier-to-understand operations
+  // Deconstructing data for cleanliness of code and easier-to-understand operations
   const { drugData, patientData, providerData, miscData } = data;
   const { formatDrug, formatDate, formatPhoneNumber, formatMedicareNumber, formatProviderAddress } = useFormatting();
   let navigate = useNavigate();
@@ -82,7 +82,6 @@ const RxTemplate = ({ data, setToast, setPage }) => {
               </div>
             </div>
             <div className="ui-info ui-provider__prescriberNumber">Prescriber number: {providerData.prescriberNumber}</div>
-
           </section>
 
           <section className="ui-patient">
@@ -99,10 +98,8 @@ const RxTemplate = ({ data, setToast, setPage }) => {
                 </div>
               </div>
             }
-
           </section>
 
-          {/* Script ID or authority Rx number should go above the medication once finalised, and perhaps with a border bottom */}
           <section className="ui-medication">
             <h4 className="ui__title">Medication</h4>
             <div className="ui-info ui-medication__primary-info">
@@ -124,7 +121,6 @@ const RxTemplate = ({ data, setToast, setPage }) => {
           </section>
 
           <section className="ui-miscellaneous">
-            {/* Include Script ID and Authority Rx number here */}
             <h4 className="ui__title">PBS and Other</h4>
             {drugData.pbsRx
               ? <div className="ui-info ui-pbsRx ui-pbsRx--selected">PBS prescription</div>

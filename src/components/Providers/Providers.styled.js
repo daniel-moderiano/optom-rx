@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 const StyledProviders = styled.div`
-
   .Providers__container {
     display: flex;
     align-items: center;
@@ -202,6 +201,7 @@ const StyledProviders = styled.div`
     }    
   }
   
+  /* Landscape phones/portrait tables. Converts table to card view */
   @media(max-width: 700px) {
     .data-table {
       border: none;
@@ -269,6 +269,7 @@ const StyledProviders = styled.div`
     }
   }
 
+  /* Portrait phones, specifically smaller screens */
   @media(max-width: 360px) {
     .btns {
       flex-direction: column;

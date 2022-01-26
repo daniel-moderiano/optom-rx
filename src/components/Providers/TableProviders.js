@@ -16,6 +16,7 @@ const TableProviders = ({ data, rowsPerPage, setToast, user }) => {
   const [page, setPage] = useState(1);
   // Gather the data slices for each page and the range of pages needed 
   const { dataSlice, range } = useTable(data, page, rowsPerPage);
+
   const { formatLocation } = useFormatting();
   const { showSuccessToast, showErrorToast } = useImmediateToast();
 
@@ -30,8 +31,6 @@ const TableProviders = ({ data, rowsPerPage, setToast, user }) => {
   // Update both the UI checkboxes and backend to ensure only one provider can be set default at any one time
   const setAsDefault = async (currentProviders, provID) => {
     let prevDefault = null;
-
-    // Begin pending state
     setIsPending(true);
 
     try {
@@ -64,7 +63,6 @@ const TableProviders = ({ data, rowsPerPage, setToast, user }) => {
           }
         } 
       }
-
       setIsPending(false);
       showSuccessToast(setToast, 'Prescriber defaults updated');
     } catch (error) {
@@ -73,20 +71,20 @@ const TableProviders = ({ data, rowsPerPage, setToast, user }) => {
     }
   };
 
+
   const deleteProvider = async (provID) => {
     try {
       await deleteDoc(doc(db, 'providers', provID));
       setShowModal(false);
       showSuccessToast(setToast, 'Prescriber has been removed');
-
     } catch (error) {
       setShowModal(false);
       showErrorToast(setToast, 'An error occurred while deleting providers defaults');
     }     
   };
 
-   // Default to cancel button when user hits enter after pressing delete, aiming avoiding accidental deletes
-   const cancelOnEnter = (event) => {
+  // Default to cancel button when user hits enter after pressing delete, aiming avoiding accidental deletes
+  const cancelOnEnter = (event) => {
     if (event.keyCode === 13) {
       const cancelBtn = document.querySelector('.cancel-btn');
 
