@@ -182,7 +182,7 @@ const StyledRxTemplate = styled.div`
 
     /* Styles all relevant components in the two upper scripts, since they are all relatively positioned to their left and right parent containers respectively */
     .upper-containers {
-      .provider-upper {
+      .prescriber-upper {
         position: absolute;
         width: 450px;
       }
@@ -193,22 +193,22 @@ const StyledRxTemplate = styled.div`
         height: 100%;
       }
 
-      .provider-upper {
+      .prescriber-upper {
         position: absolute;
         width: 450px;
       }
           
-      .provider__contact-upper {
+      .prescriber__contact-upper {
         position: absolute;
         left: 90px;
         top: 20px;
 
-        .provider__streetAddress {
+        .prescriber__streetAddress {
           max-width: 330px;
         }
       }
 
-      .provider__contact-lower {
+      .prescriber__contact-lower {
         position: absolute;
         left: 90px;
         top: 103px;
@@ -332,14 +332,14 @@ const StyledRxTemplate = styled.div`
         }
       }
 
-      .provider-lower {
+      .prescriber-lower {
         display: block;
         position: absolute;
         left: 102px;
         top: 536px;
         width: 330px;
 
-        .provider__fullName--low {
+        .prescriber__fullName--low {
           position: absolute;
           top: 16px;
         }
@@ -367,7 +367,7 @@ const StyledRxTemplate = styled.div`
         width: 330px;
       }
 
-      .provider__fullName {
+      .prescriber__fullName {
         font-weight: bold;
       }
     }
@@ -398,22 +398,22 @@ const StyledRxTemplate = styled.div`
         height: 100%;
       }
 
-      .provider-upper {
+      .prescriber-upper {
         position: absolute;
         width: 450px;
         top: 8px;
 
-        .provider__contact-upper {
+        .prescriber__contact-upper {
           position: absolute;
           left: 70px;
           top: 20px;
 
-          .provider__streetAddress {
+          .prescriber__streetAddress {
             max-width: 330px;
           }
         }
 
-        .provider__contact-lower {
+        .prescriber__contact-lower {
           position: absolute;
           left: 70px;
           top: 76px;

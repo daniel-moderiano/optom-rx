@@ -33,7 +33,7 @@ const dataMobile = {
     "medicareNumber":"5151515151",
     "medicareRefNumber":"3"
   },
-  providerData: {
+  prescriberData: {
     "prefix":true,
     "fullName":"Sarah Smoker",
     "qualifications":"BMedSc(VisSc), MOpt",
@@ -56,7 +56,7 @@ const dataMobile = {
 
 const dataLandline = {
     ...dataMobile,
-    "providerData": {
+    "prescriberData": {
       "prefix":true,
       "fullName":"Sarah Smoker",
       "qualifications":"BMedSc(VisSc), MOpt",
@@ -73,7 +73,7 @@ const dataLandline = {
 
 const dataBusinessSix = {
   ...dataMobile,
-  "providerData": {
+  "prescriberData": {
     "prefix":true,
     "fullName":"Sarah Smoker",
     "qualifications":"BMedSc(VisSc), MOpt",
@@ -90,7 +90,7 @@ const dataBusinessSix = {
 
 const dataBusinessTen = {
   ...dataMobile,
-  "providerData": {
+  "prescriberData": {
     "prefix":true,
     "fullName":"Sarah Smoker",
     "qualifications":"BMedSc(VisSc), MOpt",

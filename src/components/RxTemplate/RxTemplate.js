@@ -16,8 +16,8 @@ import { useImmediateToast } from '../../hooks/useImmediateToast';
 
 const RxTemplate = ({ data, setToast, setPage }) => {
   // Deconstructing data for cleanliness of code and easier-to-understand operations
-  const { drugData, patientData, providerData, miscData } = data;
-  const { formatDrug, formatDate, formatPhoneNumber, formatMedicareNumber, formatProviderAddress } = useFormatting();
+  const { drugData, patientData, prescriberData, miscData } = data;
+  const { formatDrug, formatDate, formatPhoneNumber, formatMedicareNumber, formatPrescriberAddress } = useFormatting();
   let navigate = useNavigate();
   const { user } = useAuthContext();
   const { showSuccessToast, showErrorToast } = useImmediateToast();
@@ -68,20 +68,20 @@ const RxTemplate = ({ data, setToast, setPage }) => {
           <div className="ui-info ui-scriptNo">Script No: {miscData.scriptID}</div>
         </div>
         <div data-testid="ui" className="ui-container">
-          <section className="ui-provider">
-            <h4 className="ui__title">Provider</h4>
+          <section className="ui-prescriber">
+            <h4 className="ui__title">Prescriber</h4>
 
-            <div className="ui-info ui-provider__contact-upper">
-              <div className=" ui-provider__fullName">{`${providerData.prefix ? 'Dr' : ''} ${providerData.fullName}`}</div>
-              {formatProviderAddress(providerData)}
-              <div className=" ui-provider__addressLine2">
-                {`${providerData.suburb} ${providerData.state} ${providerData.postcode}`}
+            <div className="ui-info ui-prescriber__contact-upper">
+              <div className=" ui-prescriber__fullName">{`${prescriberData.prefix ? 'Dr' : ''} ${prescriberData.fullName}`}</div>
+              {formatPrescriberAddress(prescriberData)}
+              <div className=" ui-prescriber__addressLine2">
+                {`${prescriberData.suburb} ${prescriberData.state} ${prescriberData.postcode}`}
               </div>
-              <div className="ui-provider__phoneNumber">
-                {`Phone: ${formatPhoneNumber(providerData.phoneNumber)}`}
+              <div className="ui-prescriber__phoneNumber">
+                {`Phone: ${formatPhoneNumber(prescriberData.phoneNumber)}`}
               </div>
             </div>
-            <div className="ui-info ui-provider__prescriberNumber">Prescriber number: {providerData.prescriberNumber}</div>
+            <div className="ui-info ui-prescriber__prescriberNumber">Prescriber number: {prescriberData.prescriberNumber}</div>
           </section>
 
           <section className="ui-patient">
@@ -140,20 +140,20 @@ const RxTemplate = ({ data, setToast, setPage }) => {
 
         <div className="upper-containers">
           <div className="left-container">
-            <section className="provider-upper">
-              <h4 className="provider__title">Provider</h4>
+            <section className="prescriber-upper">
+              <h4 className="prescriber__title">Prescriber</h4>
               <div className="container">
-                <div className="provider__contact-upper">
-                  <div className="provider__fullName">{`${providerData.prefix ? 'Dr' : ''} ${providerData.fullName}`}</div>
-                  {formatProviderAddress(providerData)}
-                  <div className="provider__addressLine2">
-                    {`${providerData.suburb} ${providerData.state} ${providerData.postcode}`}
+                <div className="prescriber__contact-upper">
+                  <div className="prescriber__fullName">{`${prescriberData.prefix ? 'Dr' : ''} ${prescriberData.fullName}`}</div>
+                  {formatPrescriberAddress(prescriberData)}
+                  <div className="prescriber__addressLine2">
+                    {`${prescriberData.suburb} ${prescriberData.state} ${prescriberData.postcode}`}
                   </div>
                 </div>
-                <div className="provider__contact-lower">
-                  <div className="provider__prescriberNumber">{providerData.prescriberNumber}</div>
-                  <div data-testid="phone" className="provider__phoneNumber">
-                    {`Phone: ${formatPhoneNumber(providerData.phoneNumber)}`}
+                <div className="prescriber__contact-lower">
+                  <div className="prescriber__prescriberNumber">{prescriberData.prescriberNumber}</div>
+                  <div data-testid="phone" className="prescriber__phoneNumber">
+                    {`Phone: ${formatPhoneNumber(prescriberData.phoneNumber)}`}
                   </div>
                 </div>
               </div>
@@ -211,11 +211,11 @@ const RxTemplate = ({ data, setToast, setPage }) => {
             </section>
             {/* Will only ever be 1 item printed, so consider omitting this */}
 
-            <section className="provider-lower">
-              {/* Used to display provider details next to, or below signature space */}
-              <div className={`${providerData.qualifications === "" ? 'provider__fullName provider__fullName--low' : 'provider__fullName'}`}>{`${providerData.prefix ? 'Dr' : ''} ${providerData.fullName}`}</div>
+            <section className="prescriber-lower">
+              {/* Used to display prescriber details next to, or below signature space */}
+              <div className={`${prescriberData.qualifications === "" ? 'prescriber__fullName prescriber__fullName--low' : 'prescriber__fullName'}`}>{`${prescriberData.prefix ? 'Dr' : ''} ${prescriberData.fullName}`}</div>
               {/* Qualifications should only be included in the lower section */}
-              <div className="provider__qualifications">{providerData.qualifications}</div>
+              <div className="prescriber__qualifications">{prescriberData.qualifications}</div>
               <div className="practitionerTick"><img className="optomTick" src={lightTick} alt="" /></div>
             </section>
 
@@ -230,19 +230,19 @@ const RxTemplate = ({ data, setToast, setPage }) => {
           </div>
 
           <div className="right-container">
-            <section className="provider-upper">
+            <section className="prescriber-upper">
               <div className="container">
-                <div className="provider__contact-upper">
-                  <div className="provider__fullName">{`${providerData.prefix ? 'Dr' : ''} ${providerData.fullName}`}</div>
-                  {formatProviderAddress(providerData)}
-                  <div className="provider__addressLine2">
-                    {`${providerData.suburb} ${providerData.state} ${providerData.postcode}`}
+                <div className="prescriber__contact-upper">
+                  <div className="prescriber__fullName">{`${prescriberData.prefix ? 'Dr' : ''} ${prescriberData.fullName}`}</div>
+                  {formatPrescriberAddress(prescriberData)}
+                  <div className="prescriber__addressLine2">
+                    {`${prescriberData.suburb} ${prescriberData.state} ${prescriberData.postcode}`}
                   </div>
                 </div>
-                <div className="provider__contact-lower">
-                  <div className="provider__prescriberNumber">{providerData.prescriberNumber}</div>
-                  <div className="provider__phoneNumber">
-                    {`Phone: ${formatPhoneNumber(providerData.phoneNumber)}`}
+                <div className="prescriber__contact-lower">
+                  <div className="prescriber__prescriberNumber">{prescriberData.prescriberNumber}</div>
+                  <div className="prescriber__phoneNumber">
+                    {`Phone: ${formatPhoneNumber(prescriberData.phoneNumber)}`}
                   </div>
                 </div>
               </div>
@@ -293,11 +293,11 @@ const RxTemplate = ({ data, setToast, setPage }) => {
             </section>
             {/* Will only ever be 1 item printed, so consider omitting this */}
 
-            <section className="provider-lower">
-              {/* Used to display provider details next to, or below signature space */}
-              <div className={`${providerData.qualifications === "" ? 'provider__fullName provider__fullName--low' : 'provider__fullName'}`}>{`${providerData.prefix ? 'Dr' : ''} ${providerData.fullName}`}</div>
+            <section className="prescriber-lower">
+              {/* Used to display prescriber details next to, or below signature space */}
+              <div className={`${prescriberData.qualifications === "" ? 'prescriber__fullName prescriber__fullName--low' : 'prescriber__fullName'}`}>{`${prescriberData.prefix ? 'Dr' : ''} ${prescriberData.fullName}`}</div>
               {/* Qualifications should only be included in the lower section */}
-              <div className="provider__qualifications">{providerData.qualifications}</div>
+              <div className="prescriber__qualifications">{prescriberData.qualifications}</div>
             </section>
 
             {/* Wastes space to render authority section for non-authority required scripts, so render only as needed */}
@@ -311,21 +311,21 @@ const RxTemplate = ({ data, setToast, setPage }) => {
         <div className="lower-containers">
           {drugData.authRequired && <div className="bottom-container--left">
             <span className="doctor-copy">--Prescriber's Copy--</span>
-            <section className="provider-upper">
+            <section className="prescriber-upper">
               <div className="container">
-                <div className="provider__contact-upper">
-                  <div className="provider__fullName">{`${providerData.prefix ? 'Dr' : ''} ${providerData.fullName}`}</div>
-                  {/* Consider appending qualifications after provider name in this copy? */}
-                  {formatProviderAddress(providerData)}
-                  <div className="provider__addressLine2">
-                    {`${providerData.suburb} ${providerData.state} ${providerData.postcode}`}
+                <div className="prescriber__contact-upper">
+                  <div className="prescriber__fullName">{`${prescriberData.prefix ? 'Dr' : ''} ${prescriberData.fullName}`}</div>
+                  {/* Consider appending qualifications after prescriber name in this copy? */}
+                  {formatPrescriberAddress(prescriberData)}
+                  <div className="prescriber__addressLine2">
+                    {`${prescriberData.suburb} ${prescriberData.state} ${prescriberData.postcode}`}
                   </div>
                 </div>
-                <div className="provider__contact-lower">
-                  <div className="provider__phoneNumber">
-                    {`Phone: ${formatPhoneNumber(providerData.phoneNumber)}`}
+                <div className="prescriber__contact-lower">
+                  <div className="prescriber__phoneNumber">
+                    {`Phone: ${formatPhoneNumber(prescriberData.phoneNumber)}`}
                   </div>
-                  <div className="provider__prescriberNumber">Prescriber No. {providerData.prescriberNumber}</div>
+                  <div className="prescriber__prescriberNumber">Prescriber No. {prescriberData.prescriberNumber}</div>
 
                 </div>
               </div>
@@ -391,21 +391,21 @@ const RxTemplate = ({ data, setToast, setPage }) => {
 
           {drugData.authRequired && <div className="bottom-container--right">
             <span className="doctor-copy">--Services Australia/DVA Copy--</span>
-            <section className="provider-upper">
+            <section className="prescriber-upper">
               <div className="container">
-                <div className="provider__contact-upper">
-                  <div className="provider__fullName">{`${providerData.prefix ? 'Dr' : ''} ${providerData.fullName}`}</div>
-                  {/* Consider appending qualifications after provider name in this copy? */}
-                  {formatProviderAddress(providerData)}
-                  <div className="provider__addressLine2">
-                    {`${providerData.suburb} ${providerData.state} ${providerData.postcode}`}
+                <div className="prescriber__contact-upper">
+                  <div className="prescriber__fullName">{`${prescriberData.prefix ? 'Dr' : ''} ${prescriberData.fullName}`}</div>
+                  {/* Consider appending qualifications after prescriber name in this copy? */}
+                  {formatPrescriberAddress(prescriberData)}
+                  <div className="prescriber__addressLine2">
+                    {`${prescriberData.suburb} ${prescriberData.state} ${prescriberData.postcode}`}
                   </div>
                 </div>
-                <div className="provider__contact-lower">
-                  <div className="provider__phoneNumber">
-                    {`Phone: ${formatPhoneNumber(providerData.phoneNumber)}`}
+                <div className="prescriber__contact-lower">
+                  <div className="prescriber__phoneNumber">
+                    {`Phone: ${formatPhoneNumber(prescriberData.phoneNumber)}`}
                   </div>
-                  <div className="provider__prescriberNumber">Prescriber No. {providerData.prescriberNumber}</div>
+                  <div className="prescriber__prescriberNumber">Prescriber No. {prescriberData.prescriberNumber}</div>
 
                 </div>
               </div>
