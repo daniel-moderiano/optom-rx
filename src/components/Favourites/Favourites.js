@@ -138,10 +138,10 @@ const Favourites = ({ user, setToast }) => {
           )}
         </>}  
     
-      {showModal && (<Modal title="Delete provider" closeModal={() => setShowModal(false)} type="delete" errorMessage="This will permanently delete the following favourite.">
-        <div className="provider-display">
-          <div className="provider-label">Selected script</div>
-          <div className="provider-summary">{`${selectedScript.customName === "" ? formatDrug(selectedScript) : selectedScript.customName}`}</div>
+      {showModal && (<Modal title="Delete favourite" closeModal={() => setShowModal(false)} type="delete" errorMessage="This will permanently delete the following favourite.">
+        <div className="favourite-display">
+          <div className="favourite-label">Selected script</div>
+          <div className="favourite-summary">{`${selectedScript.customName === "" ? formatDrug(selectedScript) : selectedScript.customName}`}</div>
         </div>
         <div className="Modal__buttons">
           <Button classLabel="cancel" design="secondary" handleClick={() => setShowModal(false)}>Cancel</Button>

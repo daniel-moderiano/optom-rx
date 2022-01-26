@@ -130,10 +130,10 @@ const StyledFavourites = styled.div`
   }
 
   .Modal {
-    .provider-display {
+    .favourite-display {
       padding-top: 1.25rem;
       margin-bottom: 2rem;
-      .provider-label {
+      .favourite-label {
         font-size: 0.85rem;
         color: #5A6572;
         margin-bottom: 0.4rem;
