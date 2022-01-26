@@ -34,7 +34,7 @@ const ChangeDisplayName = ({ user, setToast }) => {
   };
 
   return (
-    <form className="displayName-form" >
+    <form className="displayName-form" onSubmit={(event) => {event.preventDefault(); updateName();}}>
       <div className="form-title">Change display name</div>
       <FormField 
         fieldType="text" 
@@ -44,7 +44,7 @@ const ChangeDisplayName = ({ user, setToast }) => {
         onChange={(event) => setDisplayName(event.target.value)} 
       />  
       <input type="text" className="hidden" />
-      <Button handleClick={updateName} >
+      <Button type="submit" >
         {namePending ? (
           <Dots color="white"/>
         ) : (
