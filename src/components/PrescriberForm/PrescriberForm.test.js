@@ -1,4 +1,4 @@
-import ProviderForm from './ProviderForm';
+import PrescriberForm from './PrescriberForm';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { AuthContextProvider } from '../../context/AuthContext';
 
@@ -10,7 +10,7 @@ beforeEach(() => {
 
   render(
     <AuthContextProvider>
-      <ProviderForm standalone={true} />
+      <PrescriberForm standalone={true} />
     </AuthContextProvider>  
   );
 });
@@ -20,13 +20,13 @@ afterEach(() => {
   console.error.mockRestore()
 })
 
-describe('Provider data input tests', () => {
-  test('Provider data input initialises with blank values', () => {
+describe('Prescriber data input tests', () => {
+  test('Prescriber data input initialises with blank values', () => {
     const presNo = screen.getByLabelText(/prescriber number/i);
     expect(presNo.value).toBe('');
   });
 
-  test("Provider data input updates state and therefore it's own value when user types in input", () => {
+  test("Prescriber data input updates state and therefore it's own value when user types in input", () => {
     const presNo = screen.getByLabelText(/prescriber number/i);
     fireEvent.change(presNo, { target: { value: '0123456' } })
     expect(presNo.value).toBe('0123456');

@@ -14,7 +14,7 @@ const PrescriberForm = ({ data, setData, googleLoaded, handleSubmit, handleCance
   const { abbreviateStateName } = useFormatting();
   const { handleChange, toggleBooleanState, handleEnterKeyOnCheckbox } = useInputChanges();
 
-  const [providerAlerts, setProviderAlerts] = useState({
+  const [prescriberAlerts, setPrescriberAlerts] = useState({
     fullName: {},
     streetAddress: {},
     suburb: {},
@@ -30,15 +30,15 @@ const PrescriberForm = ({ data, setData, googleLoaded, handleSubmit, handleCance
       const { name, value } = event.target
       switch (true) {
         case name === 'fullName':
-          validateRequiredField(setProviderAlerts, event.target);
+          validateRequiredField(setPrescriberAlerts, event.target);
           break;
 
         case name === 'streetAddress':
-          validateRequiredField(setProviderAlerts, event.target);
+          validateRequiredField(setPrescriberAlerts, event.target);
           break;
         
         case name === 'suburb':
-          validateRequiredField(setProviderAlerts, event.target);
+          validateRequiredField(setPrescriberAlerts, event.target);
           break;
   
         case name === 'state':
@@ -46,20 +46,20 @@ const PrescriberForm = ({ data, setData, googleLoaded, handleSubmit, handleCance
             ...prevData, 
             [name]: abbreviateStateName(value), 
           }));
-          validateRequiredField(setProviderAlerts, event.target);
+          validateRequiredField(setPrescriberAlerts, event.target);
           break;
   
         case name === 'postcode':
-          validateRequiredField(setProviderAlerts, event.target);
+          validateRequiredField(setPrescriberAlerts, event.target);
           break;
 
         case name === 'phoneNumber':
           // Consider trimming the input of any spaces, hyphens, or parens
           if (!(/^((0[2-8]\d{8})|(13(00|\d{4})(\d{6})?))$/).test(value.trim())) {
             // Provide general error message
-            negativeValidationUI(setProviderAlerts, 'A valid Australian phone number is required', event.target);
+            negativeValidationUI(setPrescriberAlerts, 'A valid Australian phone number is required', event.target);
           } else {
-            positiveValidationUI(setProviderAlerts, event.target);
+            positiveValidationUI(setPrescriberAlerts, event.target);
           }
           break;
 
@@ -67,9 +67,9 @@ const PrescriberForm = ({ data, setData, googleLoaded, handleSubmit, handleCance
           // Check for digits only
           if (!(/^[0-9]{7}$/).test(value.trim())) {
             // Sets an alert object in the state, which will immediately cause the component to render an alert message
-            negativeValidationUI(setProviderAlerts, 'Prescriber number must be a seven digit number', event.target);
+            negativeValidationUI(setPrescriberAlerts, 'Prescriber number must be a seven digit number', event.target);
           } else {
-            positiveValidationUI(setProviderAlerts, event.target);
+            positiveValidationUI(setPrescriberAlerts, event.target);
           }
           break;
       
@@ -104,7 +104,7 @@ const PrescriberForm = ({ data, setData, googleLoaded, handleSubmit, handleCance
           inputFocused = true;
         }
         valid = false;
-        negativeValidationUI(setProviderAlerts, 'This field cannot be left blank', input);
+        negativeValidationUI(setPrescriberAlerts, 'This field cannot be left blank', input);
       }
     });
     return valid;
@@ -122,14 +122,14 @@ const PrescriberForm = ({ data, setData, googleLoaded, handleSubmit, handleCance
             label="Full name" 
             value={data.fullName} 
             onChange={(event) => handleChange(event, setData)} 
-            alert={providerAlerts.fullName}
+            alert={prescriberAlerts.fullName}
             required
           />    
 
           <FormField 
             fieldType="checkbox" 
             name="prefix"
-            label="Include 'Dr' in provider name" 
+            label="Include 'Dr' in prescriber name" 
             onChange={() => toggleBooleanState(setData, data, 'prefix')}
             checked={data.prefix}
             className="checkbox prefix-field"
@@ -146,7 +146,7 @@ const PrescriberForm = ({ data, setData, googleLoaded, handleSubmit, handleCance
             maxlength="40"
           />
 
-          {/* Practice name is only used for display purposes to quickly identify the provider to the user */}
+          {/* Practice name is only used for display purposes to quickly identify the prescriber to the user */}
           <FormField 
             name="practiceName"
             label="Practice name (optional)" 
@@ -158,9 +158,9 @@ const PrescriberForm = ({ data, setData, googleLoaded, handleSubmit, handleCance
             data={data}
             setData={setData}
             handleChange={(event) => handleChange(event, setData)}
-            provider={true}   
-            alerts={providerAlerts}
-            setAlerts={setProviderAlerts} 
+            prescriber={true}   
+            alerts={prescriberAlerts}
+            setAlerts={setPrescriberAlerts} 
             googleLoaded={googleLoaded}
           />
 
@@ -170,7 +170,7 @@ const PrescriberForm = ({ data, setData, googleLoaded, handleSubmit, handleCance
             label="Phone number" 
             value={data.phoneNumber} 
             onChange={(event) => handleChange(event, setData)} 
-            alert={providerAlerts.phoneNumber}
+            alert={prescriberAlerts.phoneNumber}
             id="phoneNumber"
             maxlength="10"
             className="phoneNo-field form-field"
@@ -183,7 +183,7 @@ const PrescriberForm = ({ data, setData, googleLoaded, handleSubmit, handleCance
             label="Prescriber number" 
             value={data.prescriberNumber} 
             onChange={(event) => handleChange(event, setData)} 
-            alert={providerAlerts.prescriberNumber}
+            alert={prescriberAlerts.prescriberNumber}
             maxlength="7"
             className="prescriberNo-field form-field"
             required
