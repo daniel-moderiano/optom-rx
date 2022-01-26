@@ -3,7 +3,7 @@ import Header from "./components/Header/Header";
 import GlobalStyles from "./components/utils/globalStyles";
 import RxForm from './components/RxForm/RxForm';
 import RxTemplate from './components/RxTemplate/RxTemplate'
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { Route, useNavigate, Routes, Navigate } from "react-router";
 import Signup from "./components/Signup/Signup";
 import Login from "./components/Login/Login";
@@ -20,9 +20,6 @@ import ViewScript from "./components/ViewScript/ViewScript";
 import Settings from "./components/Settings/Settings";
 import ResetPassword from "./components/ResetPassword/ResetPassword";
 import { StyledApp } from "./App.styled";
-
-
-// ! Medicare details are NOT required for valid Australian prescriptions, even under PBS
 
 const App = () => {
   // Can user the user state to conditionally render or redirect routes (logged in vs out for example)
@@ -127,9 +124,9 @@ const App = () => {
         setGoogleLoaded(googleLoaded => !googleLoaded);
       }
     });
-    
   }, [googleLoaded])
 
+  // Combine all the data from the RxForm component
   const handleSubmit = (drugData, patientData, providerData, miscData, pbsData) => {
     setData((prevData) => ({
       ...prevData,
@@ -242,9 +239,8 @@ const App = () => {
             <Route path="/reset-password" element={
               <ResetPassword setToast={setToastParams} setPage={setCurrentPage}/>
             }/>
-          </Routes>
 
-          
+          </Routes>
         </Main>
         <footer className="footer"></footer>
       </>)}
