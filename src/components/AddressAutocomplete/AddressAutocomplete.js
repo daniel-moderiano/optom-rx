@@ -3,7 +3,7 @@ import FormField from "../FormField/FormField";
 import { useCallback, useEffect, useState } from "react"
 import { StyledAddressAutocomplete } from "./AddressAutocomplete.styled";
 
-const AddressAutocomplete = ({ data, setData, handleChange, provider, alerts, setAlerts, googleLoaded }) => {
+const AddressAutocomplete = ({ data, setData, handleChange, prescriber, alerts, setAlerts, googleLoaded }) => {
   // Use this to control whether the additional address fields should be expanded or not
   const [expand, setExpand] = useState(false);
 
@@ -63,11 +63,11 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider, alerts, se
 
   // Add all the autocomplete functionality to the autocomplete input
   useEffect(() => {
-    const inputs = document.querySelector(`.address-collapse${provider ? '--provider' : '--patient'}`).querySelectorAll('input');
+    const inputs = document.querySelector(`.address-collapse${prescriber ? '--prescriber' : '--patient'}`).querySelectorAll('input');
     // Declare the autocomplete and input variable here; the latter of which will later be initialised to the autocomplete instance. Input gathered with useRef hook, and MUST be initialised inside useEffect, because the component will have been rendered then
     let autocomplete;
-    const input = document.querySelector(`#autocomplete-${provider ? 'provider' : 'patient'}`);
-    const subpremiseInput = document.querySelector(`#subpremise-${provider ? 'provider' : 'patient'}`);  
+    const input = document.querySelector(`#autocomplete-${prescriber ? 'prescriber' : 'patient'}`);
+    const subpremiseInput = document.querySelector(`#subpremise-${prescriber ? 'prescriber' : 'patient'}`);  
     
     // Prevent the default action of submitting the form when enter key is pressed, but ONLY under the condition that the user is selecting an autocomplete suggestion. 
     input.addEventListener('keydown', (event) => {
@@ -139,7 +139,7 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider, alerts, se
       google.maps.event.clearInstanceListeners(input);
       document.querySelectorAll('.pac-container').forEach((container) => container.remove())
     }
-  }, [fillAddress, provider, setAlerts, googleLoaded])
+  }, [fillAddress, prescriber, setAlerts, googleLoaded])
  
 
   return (
@@ -151,7 +151,7 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider, alerts, se
         placeholder="Enter a location"
         value={data.streetAddress}
         onChange={handleChange} 
-        id={provider ? 'autocomplete-provider' : 'autocomplete-patient'}
+        id={prescriber ? 'autocomplete-prescriber' : 'autocomplete-patient'}
         alert={alerts.streetAddress}
         className="street-address form-field"
         required
@@ -159,9 +159,9 @@ const AddressAutocomplete = ({ data, setData, handleChange, provider, alerts, se
 
       <button type="button" className="address-expand" onClick={() => setExpand(prevState => (!prevState))}>{expand ? 'Hide extra fields' : 'Enter manually'}</button>
 
-      <div className={`address-collapse ${expand ? 'show' : 'hide'} ${provider ? 'address-collapse--provider' : 'address-collapse--patient'}`}>
+      <div className={`address-collapse ${expand ? 'show' : 'hide'} ${prescriber ? 'address-collapse--prescriber' : 'address-collapse--patient'}`}>
         <FormField 
-          id={provider ? 'subpremise-provider' : 'subpremise-patient'}
+          id={prescriber ? 'subpremise-prescriber' : 'subpremise-patient'}
           name="subpremise"
           label="Apartment, unit, shop, suite, or floor #" 
           value={data.subpremise} 
