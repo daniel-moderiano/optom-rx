@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const StyledHeader = styled.header`
+/* Using user prop to either show the logged in or logged out styling */
   color: #FFFFFF;
   background-color: ${props => props.user ? 'var(--primary-color)' : 'var(--background)'};
   display: flex;
@@ -28,10 +29,10 @@ const StyledHeader = styled.header`
     }
   }
 
+  /* Avoid messing up the pirnted RxTemplate */
   @media print {
     display: none;
   }
-
 `
 
 export { StyledHeader }

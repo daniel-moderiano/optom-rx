@@ -33,6 +33,7 @@ const StyledHamburger = styled.button`
   }
 
 
+  /* Landscape phones/portrait tables - turn to the actual hamburger icon */
   @media (max-width: 768px) {
     display: block;
     cursor: pointer;
