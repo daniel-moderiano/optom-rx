@@ -70,7 +70,6 @@ const Login = ({ setPage }) => {
 
         <form className='Login__form' noValidate onSubmit={(event) => {
           event.preventDefault();
-          // Ensure form validation passes
           if (isFormValid()) {
             login(email, password);
           }

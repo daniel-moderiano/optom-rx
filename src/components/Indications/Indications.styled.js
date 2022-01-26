@@ -100,6 +100,7 @@ const StyledIndications = styled.div`
     }
   }
 
+  /* Landscape phones/portrait tables */
   @media (max-width: 590px) {
     max-width: 26rem;
     width: 100%;

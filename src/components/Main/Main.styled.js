@@ -9,13 +9,13 @@ const StyledMain = styled.main`
   width: 100%;
   padding: 0 0.5rem;
 
+  /* Critical for RxTemplate to render correctly */
   @media print {
     display: block;
     background-color: #fff;
     width: 100%;
     height: auto;
   }
- 
 `
 
 export { StyledMain }

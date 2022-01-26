@@ -24,6 +24,7 @@ const StyledNav = styled.nav`
         margin: 0;
         box-sizing: border-box;
         
+        /* Nav link underline styling */
         &:before,
         &:after {
           content: '';
@@ -61,10 +62,9 @@ const StyledNav = styled.nav`
         }
 
         &:focus {
-          /* Focus fallback for browsers that do not suppert :focus-visible */
+          /* Focus fallback for browsers that do not support :focus-visible */
           outline: 0.1rem solid white;
           outline-offset: 1px;
-          /* border: 0px solid transparent; */
           border-radius: 2px;
         }
 
@@ -78,12 +78,12 @@ const StyledNav = styled.nav`
           /* Keyboard only focus styling, able to differ from fallback styling if required */
           outline: 0.1rem solid white;
           outline-offset: 1px;
-          /* border: 0px solid transparent; */
           border-radius: 2px;
         }
         
       }
 
+      /* Permanent underline for the active page */
       [aria-current=page] {
         &:before,
         &:after {
@@ -98,6 +98,7 @@ const StyledNav = styled.nav`
         }
       }
 
+      /* Adjust colours for login/signup links */
       .Nav__link--active {
         &:before,
         &:after {

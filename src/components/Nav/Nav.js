@@ -2,8 +2,7 @@ import { Link } from "react-router-dom";
 import { StyledNav } from "./Nav.styled";
 import { useLogout } from "../../hooks/useLogout";
 import { useState } from "react";
-import Hamburger from '../Hamburger/Hamburger'
-
+import Hamburger from "../utils/Hamburger/Hamburger";
 
 const Nav = ({ user, currentPage, resetData }) => {
   const { logout } = useLogout();
@@ -25,6 +24,7 @@ const Nav = ({ user, currentPage, resetData }) => {
     setToggleHamburger((prevState) => (!prevState));
   }
 
+  // Specifically used to close the menu, rather than toggle
   const closeNav = () => {
     setShowNav(false);
     setToggleHamburger(false);

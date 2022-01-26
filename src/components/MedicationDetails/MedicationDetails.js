@@ -3,6 +3,7 @@ import { useInputChanges } from "../../hooks/useInputChanges";
 import Indications from "../Indications/Indications";
 import DrugAutocomplete from "../DrugAutocomplete/DrugAutocomplete";
 
+// Mostly created to help improve readability and size of parent RxForm component.
 const MedicationDetails = ({ data, setData, alerts, setAlerts, fetchDrug, showTooltip, LEMIText }) => {
   const { handleChange, toggleBooleanState, handleEnterKeyOnCheckbox } = useInputChanges();
 
