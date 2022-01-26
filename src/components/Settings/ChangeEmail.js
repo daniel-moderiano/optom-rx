@@ -197,9 +197,7 @@ const ChangeEmail = ({ user, setToast, refreshCredentials, verified }) => {
           event.preventDefault();
           setNewEmailAlert({});
           setEmailConfirmPasswordAlert({})
-          // Ensure form validation passes
           if (isEmailFormValid()) {
-            // Refresh credentials
             performEmailUpdate();  
           } 
         }}>
@@ -211,6 +209,7 @@ const ChangeEmail = ({ user, setToast, refreshCredentials, verified }) => {
             onChange={(event) => setNewEmail(event.target.value)} 
             alert={newEmailAlert}
             required
+            autoFocus
           />  
 
           <PasswordContainer showPassword={showEmailConfirmPassword} handleClick={() => setShowEmailConfirmPassword((prevState) => (!prevState))}>
