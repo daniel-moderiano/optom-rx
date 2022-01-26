@@ -153,6 +153,7 @@ const StyledModal = styled.div`
     }
   }
 
+  /* Portrait phones */
   @media (max-width: 450px) {
     .Modal__content {
       padding: 1.5rem;

@@ -14,7 +14,6 @@ const StyledRxForm = styled.form`
   }
 
   .misc-form {
-
     .authRequired {
       margin: 0.9rem 0 0.5rem 0;
     }
@@ -34,7 +33,6 @@ const StyledRxForm = styled.form`
         input {
           width: 5rem;
         }
-       
       }
 
       .prevAuth {
@@ -69,11 +67,7 @@ const StyledRxForm = styled.form`
         }
       }
     }
-    
-    
-    
   }
-
 
   .medicareFields {
     display: flex;
@@ -108,9 +102,6 @@ const StyledRxForm = styled.form`
     margin: 1.25rem 0 1.5rem 0;
   }
 
-
-
-
   .ProviderForm__btns {
     padding: 2.75rem 0 0 20rem;
     width: 100%;
@@ -122,7 +113,6 @@ const StyledRxForm = styled.form`
     }
   }     
 
-  
   
   /* Landscape phones and down */
   @media (max-width: 920px) { 
@@ -150,14 +140,13 @@ const StyledRxForm = styled.form`
       }
     }   
 
-
     .misc-form .retention .justification-field {
       max-width: 26rem;
       width: 100%;
     }
   }
             
-            
+  /* Portrait phones */ 
   @media(max-width: 450px) {
     .ProviderForm__btns {
       flex-direction: column;
@@ -176,7 +165,6 @@ const StyledRxForm = styled.form`
       }
     }
 
-
     .medicareFields {
       .medicareNumber-field {
         width: 8.5rem;
@@ -192,7 +180,8 @@ const StyledRxForm = styled.form`
       }
     }
   }
-
+  
+  /* Portrait phones - small screens */
   @media (max-width: 380px) {
     .quantity-field, .repeats-field {
       .alert-container {
@@ -200,7 +189,6 @@ const StyledRxForm = styled.form`
       }
     }   
   }
-
 `
 
 export { StyledRxForm }

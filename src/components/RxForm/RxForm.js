@@ -188,6 +188,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
     }
   }, [numbersLoaded, authRxNo, scriptNo]);
 
+  // Advise user if the numbers aren't loaded properly
   useConditionalToast(numbersError, 'An error occurred while loading script/authority numbers');
 
 

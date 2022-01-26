@@ -2,9 +2,8 @@ import { useEffect } from "react";
 import { StyledModal } from "./Modal.styled";
 import Button from "../Button/Button";
 
-
 const Modal = ({ title, children, closeModal, type, errorMessage }) => {
-  // Add user-expected actions when pressing the escape key or clicking outside the modal
+  // Add user-expected actions when pressing the escape key or clicking outside the modal (close the modal)
   useEffect(() => {
     const outsideClick = (event) => {
       if (event.target === document.querySelector('.Modal')) {
@@ -13,8 +12,7 @@ const Modal = ({ title, children, closeModal, type, errorMessage }) => {
     }
 
     const escClose = (event) => {
-      // If Esc key is pressed
-      if (event.keyCode === 27) {
+      if (event.key === 'Escape') {
         closeModal();
       }
     }
