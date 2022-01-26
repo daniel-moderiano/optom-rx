@@ -21,7 +21,13 @@ const Prescribers = ({ setToast, setPage }) => {
   }, [setPage])
 
   // Fire an error alert if the fetch fails. 
-  useConditionalToast(error, setToast, 'An error occurred while fetching prescribers')
+  useConditionalToast(error, setToast, 'An error occurred while fetching prescribers');
+
+  useEffect(() => {
+    if (error) {
+      console.log(error);
+    }
+  }, [error])
 
   return (
     <ContentContainer earlyPadding={true}>

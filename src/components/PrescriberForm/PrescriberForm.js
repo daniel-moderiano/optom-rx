@@ -112,7 +112,12 @@ const PrescriberForm = ({ data, setData, googleLoaded, handleSubmit, handleCance
 
   return (
     // Legal requirements include the prescriber's name, address, contact details, and prescriber number
-      <StyledPrescriberForm className="PrescriberForm" autoComplete="off" noValidate>
+      <StyledPrescriberForm className="PrescriberForm" autoComplete="off" noValidate onSubmit={(event) => {
+        event.preventDefault(); 
+        if (checkFormValidation()) {
+          handleSubmit(event);
+        }
+      }}>
         <div className="fields">
           {formPending && <LoadOverlay />}
 
@@ -191,14 +196,7 @@ const PrescriberForm = ({ data, setData, googleLoaded, handleSubmit, handleCance
         </div>
        
         <div className="PrescriberForm__btns">
-          <Button 
-            classLabel="submit" 
-            handleClick={(event) => {
-              event.preventDefault(); 
-              if (checkFormValidation()) {
-                handleSubmit(event);
-              }
-            }}>
+          <Button classLabel="submit" type="submit">
             {pending ? (
               <Dots color="white" />
               ) : (
