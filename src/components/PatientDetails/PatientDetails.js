@@ -22,7 +22,7 @@ const PatientDetails = ({ data, setData, alerts, setAlerts, googleLoaded }) => {
         data={data}
         setData={setData}
         handleChange={(event) => handleChange(event, setData)}
-        provider={false}
+        prescriber={false}
         alerts={alerts}
         setAlerts={setAlerts}
         googleLoaded={googleLoaded}
