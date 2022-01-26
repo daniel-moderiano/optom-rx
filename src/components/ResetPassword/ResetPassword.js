@@ -6,15 +6,18 @@ import { StyledResetPassword } from './ResetPassword.styled';
 import { useNavigate } from "react-router-dom";
 import Button from '../utils/Button/Button';
 import { useImmediateToast } from '../../hooks/useImmediateToast';
+import { useErrorHandling } from "../../hooks/useErrorHandling";
 
 const ResetPassword = ({ setToast, setPage }) => {
   let navigate = useNavigate();
   const { showSuccessToast } = useImmediateToast();
+  const { handleSettingsError } = useErrorHandling();
 
   const [email, setEmail] = useState('');
   const [emailAlert, setEmailAlert] = useState({});
   const [isPending, setIsPending] = useState(false);
 
+  // Adjust current page for styling and accessibility
   useEffect(() => {
     setPage(null);
   }, [setPage])
@@ -38,49 +41,7 @@ const ResetPassword = ({ setToast, setPage }) => {
     return valid;
   };
 
-  const errorHandling = (errorCode) => {
-    switch (errorCode) {
-      case 'auth/missing-email':
-        setEmailAlert({
-          message: "Please enter an email address.",
-          type: 'error',
-        });
-        break;
-      case 'auth/invalid-email':
-        setEmailAlert({
-          message: "Please enter a valid email address.",
-          type: 'error',
-        });
-        break;
-      case 'auth/user-not-found':
-        setEmailAlert({
-          message: "We couldn't find an account with that email address. Check for typos and try again.",
-          type: 'error',
-        });
-        break;
-      case 'auth/too-many-requests':
-        setEmailAlert({
-          message: 'Failed too many times. Please wait a few minutes before trying again.',
-          type: 'error',
-        });
-        break;
-      case 'auth/network-request-failed':
-        setEmailAlert({
-          message: "We couldn't connect to the network. Please check your internet connection and try again.",
-          type: 'error',
-        });
-        break;
-    
-      default:
-        setEmailAlert({
-          message: 'An unknown server error occured. Please try again.',
-          type: 'error',
-        });
-        break;
-    }
-  };
-
-  // Send verification email, and handle any errors that occur
+  // Attempt to send password link to email provided, and handle any errors that occur
   const resetPassword = async () => {
     setIsPending(true);
     const auth = getAuth();
@@ -92,7 +53,7 @@ const ResetPassword = ({ setToast, setPage }) => {
       navigate('/login');
     } catch (error) {
       setIsPending(false);
-      errorHandling(error.code)
+      handleSettingsError(error.code, setEmailAlert);
     }
   }
 
@@ -103,7 +64,6 @@ const ResetPassword = ({ setToast, setPage }) => {
 
         <form className='Login__form' noValidate onSubmit={(event) => {
           event.preventDefault();
-          // Ensure form validation passes
           if (isFormValid()) {
             resetPassword();
           }

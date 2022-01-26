@@ -8,9 +8,21 @@ export const useErrorHandling = () => {
           type: 'error',
         });
         break;
+      case 'auth/missing-email':
+        alertSetFunc({
+          message: "Please enter an email address.",
+          type: 'error',
+        });
+        break;
       case 'auth/weak-password':
         alertSetFunc({
           message: "Please create a password at least six characters in length. ",
+          type: 'error',
+        });
+        break;
+      case 'auth/user-not-found':
+        alertSetFunc({
+          message: "We couldn't find an account with that email address. Check for typos and try again.",
           type: 'error',
         });
         break;

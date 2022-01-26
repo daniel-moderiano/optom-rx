@@ -65,6 +65,7 @@ const StyledResetPassword = styled.div`
     }     
   }  
 
+  /* Landscape phones/portrait tables */
   @media (max-width: 550px) { 
     .Login__title {
       text-align: center;
@@ -82,6 +83,7 @@ const StyledResetPassword = styled.div`
     }
   }
 
+  /* Portrait phones */
   @media (max-width: 400px) {
     .Login__title {
       font-size: 2rem;
