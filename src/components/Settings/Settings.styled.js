@@ -134,9 +134,41 @@ const StyledSettings = styled.div`
     display: flex;
     align-items: center;
     margin-top: 1rem;
+    height: auto;
 
     .button {
       margin: -0.25rem 0.5rem 0 0;
+    }
+
+    .reset-password {
+      background-color: transparent;
+      border: none;
+      color: #48515B;
+      font-size: 1rem;
+      font-family: var(--font-stack-segoe);
+      padding: 0;
+      margin: 0 0 0.5rem 1rem;
+      text-decoration: none;
+
+      &:hover {
+        background-color: transparent;
+        color: #1B1E22;
+        cursor: pointer;
+      }
+
+      &:focus {
+        outline: 2px solid #104362;
+        outline-offset: 1px;
+      }
+
+      &:focus:not(:focus-visible) {
+        outline: none
+      }
+
+      &:focus-visible {
+        outline: 2px solid #104362;
+        outline-offset: 1px;
+      }
     }
   }
         
@@ -157,36 +189,7 @@ const StyledSettings = styled.div`
     margin-top: 0.5rem;
   }
 
-  .reset-password {
-    background-color: transparent;
-    border: none;
-    color: #48515B;
-    font-size: 1rem;
-    font-family: var(--font-stack-segoe);
-    padding: 0;
-    margin: 0 0 0 1rem;
-    text-decoration: none;
 
-    &:hover {
-      background-color: transparent;
-      color: #1B1E22;
-      cursor: pointer;
-    }
-
-    &:focus {
-      outline: 2px solid #104362;
-      outline-offset: 1px;
-    }
-
-    &:focus:not(:focus-visible) {
-      outline: none
-    }
-
-    &:focus-visible {
-      outline: 2px solid #104362;
-      outline-offset: 1px;
-    }
-  }
 
   .Modal {
     .neutral-container {
