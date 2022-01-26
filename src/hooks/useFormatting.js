@@ -111,18 +111,18 @@ export const useFormatting = () => {
   }
 
   // Controls when to split a line to ensure the address is displayed as well as practicable
-  const formatProviderAddress = (providerData) => {
-    if (providerData.subpremise.length > 20) {
+  const formatPrescriberAddress = (prescriberData) => {
+    if (prescriberData.subpremise.length > 20) {
       return (<>
-        <div className="provider__subpremise">{providerData.subpremise}</div>
-        <div className="provider__streetAddress">{providerData.streetAddress}</div>
+        <div className="prescriber__subpremise">{prescriberData.subpremise}</div>
+        <div className="prescriber__streetAddress">{prescriberData.streetAddress}</div>
       </>);
     } else {
-      return (<div className="provider__streetAddress">
-        {`${providerData.subpremise} ${providerData.streetAddress}`}
+      return (<div className="prescriber__streetAddress">
+        {`${prescriberData.subpremise} ${prescriberData.streetAddress}`}
       </div>);
     }
   }
 
-  return { abbreviateStateName, formatDrug, formatDate, formatLocation, formatPhoneNumber, formatMedicareNumber, formatProviderAddress }
+  return { abbreviateStateName, formatDrug, formatDate, formatLocation, formatPhoneNumber, formatMedicareNumber, formatPrescriberAddress }
 }
