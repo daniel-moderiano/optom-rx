@@ -11,8 +11,7 @@ const StyledDrugAutocomplete = styled.div`
     font-size: 0.9rem;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
     border-radius: 2px;
-    /* max-height: 16rem;  // Use multiples of 2rem while the item height remains 2rem */
-    overflow-y: hidden;  // Scroll or hidden, need to decide which is more appropriate
+    overflow-y: hidden; 
 
     .item {
       cursor: pointer;
@@ -95,7 +94,7 @@ const StyledDrugAutocomplete = styled.div`
     }
   }
   
-  button {
+  .drug-expand {
     position: absolute;
     right: 0.3rem;
     top: 5.6rem;
@@ -129,12 +128,14 @@ const StyledDrugAutocomplete = styled.div`
     }
   }
 
+  /* Specific query as the above items list styling hits a width limit here */
   @media (max-width: 800px) {
     .items-list {
       width: 100%;
     }
   }
 
+  /* Landscape phones/portrait tables */
   @media (max-width: 590px) { 
     width: 100%;
     max-width: 26rem;
@@ -154,12 +155,12 @@ const StyledDrugAutocomplete = styled.div`
     }
   }
 
+  /* Portrait phones */
   @media (max-width: 420px) {
     .drug-collapse {
       margin-top: 2.25rem;
     }
   }
- 
 `
 
 export { StyledDrugAutocomplete }

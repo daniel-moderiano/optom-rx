@@ -28,7 +28,7 @@ const StyledAddressAutocomplete = styled.fieldset`
     margin-bottom: 1rem;
   }
 
-  button {
+  .address-expand {
     position: absolute;
     right: 0.3rem;
     top: 5.6rem;
@@ -62,7 +62,7 @@ const StyledAddressAutocomplete = styled.fieldset`
     }
   }
 
-   /* Landscape phones and down */
+  /* Roughly portrait tablets (small), and landscape phones and down */
   @media (max-width: 590px) { 
     width: 100%;
     max-width: 26rem;
@@ -77,6 +77,7 @@ const StyledAddressAutocomplete = styled.fieldset`
     }
   }
 
+  /* Portrait phones */
   @media (max-width: 420px) {
     margin-bottom: 0.75rem;
   }
