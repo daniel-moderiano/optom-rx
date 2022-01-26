@@ -162,6 +162,7 @@ const StyledFormField = styled.div`
     }
   }
 
+  /* Landscape phones/portrait tables */
   @media (max-width: 768px) { 
     width: 100%;
     max-width: 26rem;
@@ -184,7 +185,6 @@ const StyledFormField = styled.div`
       padding: 0;
     }
   }
-
 `
 
 export { StyledFormField }

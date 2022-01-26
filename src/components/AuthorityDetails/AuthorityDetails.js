@@ -1,6 +1,7 @@
 import { useInputChanges } from "../../hooks/useInputChanges";
 import FormField from "../FormField/FormField";
 
+// Removing the individual form fields from the parent component, but still utilising parent state. This is mainly to help RxForm component readability
 const AuthorityDetails = ({ drugData, setDrugData, drugAlerts, miscData, setMiscData, miscAlerts, numbersLoading }) => {
   const { handleChange, toggleBooleanState, handleEnterKeyOnCheckbox } = useInputChanges();
 
@@ -22,7 +23,6 @@ const AuthorityDetails = ({ drugData, setDrugData, drugAlerts, miscData, setMisc
         {drugData.authRequired && <div className="authRxNo" data-testid="authRxNo">Authority script number: {numbersLoading ? 'Loading...' : miscData.authRxNumber}</div>}
       </div>
 
-      {/* Consider a variable message beside or below this saying 'not required for this medication' or similar */}
       <FormField
           name="authCode"
           label="Authority code (where applicable)"

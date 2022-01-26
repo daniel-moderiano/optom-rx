@@ -33,7 +33,9 @@ const FormField = (props) => {
               autoComplete={autocomplete ? autocomplete : undefined}
               {...ariaDescribe}
             />
+            {/* Optional checkbox element */}
             {fieldType === ('checkbox') && <span className={`checkmark ${checked ? 'show' : 'hide'}`}></span>}
+            {/* Optional tick element */}
             <svg xmlns="http://www.w3.org/2000/svg" className="tickCircle hide" viewBox="0 0 512 512">
               <path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" fill="#fff" stroke="#0a7e00" strokeMiterlimit="10" strokeWidth="25"/>
               <path fill="#fff" stroke="#0a7e00" strokeLinecap="round" strokeLinejoin="round" strokeWidth="27" d="M352 176L217.6 336 160 272"/>

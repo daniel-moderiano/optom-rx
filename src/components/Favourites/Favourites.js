@@ -18,6 +18,8 @@ const Favourites = ({ user, setToast }) => {
   const { showSuccessToast, showErrorToast } = useImmediateToast();
 
   const [showModal, setShowModal] = useState(false);
+
+  // Initialised here to avoid reference errors in the modal when pulling selected script data
   const [selectedScript, setSelectedScript] = useState({
     "maxQuantity": "",
     "authRequired": false,
@@ -48,7 +50,7 @@ const Favourites = ({ user, setToast }) => {
 
   // When delete modal is open, default to cancel button when user hits enter after pressing delete, aiming avoiding accidental deletes
   const cancelOnEnter = (event) => {
-    if (event.keyCode === 13) {
+    if (event.key === 'Enter') {
       const cancelBtn = document.querySelector('.cancel-btn');
 
       if (cancelBtn) {
@@ -78,16 +80,13 @@ const Favourites = ({ user, setToast }) => {
       await updateDoc(docRef, {
         favourites: arrayRemove(scriptToDelete)
       });
-
       setShowModal(false);
       showSuccessToast(setToast, 'Deleted script');
-
     } catch (err) {
       setShowModal(false);
       showErrorToast(setToast, 'An error occurred while deleting favourites');
     } 
   }
-
 
   return (
     <StyledFavourites>

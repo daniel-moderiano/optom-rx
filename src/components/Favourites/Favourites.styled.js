@@ -160,7 +160,7 @@ const StyledFavourites = styled.div`
     }
   }
 
-  /* Landscape phone to portrait tablet */
+  /* Landscape phone to portrait tablet - convert table to cards display */
   @media (max-width: 550px) { 
     align-items: flex-start;
 
@@ -250,12 +250,14 @@ const StyledFavourites = styled.div`
     }
   }
 
+  /* Landscape phones/portrait tables */
   @media (max-width: 768px) {
     .Favourites__title {
       font-size: 1.55rem;
     }
   }
 
+  /* Portrait phones */
   @media (max-width: 475px) {
     .Favourites__title {
       font-size: 1.4rem;
