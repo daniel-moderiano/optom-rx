@@ -46,6 +46,7 @@ const EditProvider = ({ googleLoaded, setToast, setPage }) => {
   }, [existingData]);
 
 
+  // Used when the user submits the form - save/edit details to backend
   const handleSubmit = async () => {
     setLocalPending(true);
 
@@ -54,16 +55,12 @@ const EditProvider = ({ googleLoaded, setToast, setPage }) => {
       await updateDoc(doc(db, 'providers', id), {
         ...providerData,
       });
-
       setLocalPending(false);
-
       // Inform the user the changes have been successfully applied, then return to the previous page
       showSuccessToast(setToast, 'Prescriber details updated')
-
       navigate('/providers');
     } catch (error) {
       setLocalPending(false);
-
       // Only an error toast is necessary. Specific error handling is not useful or necessary
       showErrorToast(setToast, 'An error occurred while saving changes')
     }

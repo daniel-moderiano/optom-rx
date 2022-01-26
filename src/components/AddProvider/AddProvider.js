@@ -36,6 +36,7 @@ const AddProvider = ({ googleLoaded, setToast, setPage }) => {
   }, [setPage])
 
   
+  // Used when the user submits the form - saves a new provider referenced by their user ID
   const handleSubmit = async (event) => {
     event.preventDefault(); 
     setIsPending(true);
@@ -52,11 +53,9 @@ const AddProvider = ({ googleLoaded, setToast, setPage }) => {
 
       // Confirm save via toast message, and return to the previous page
       showSuccessToast(setToast, 'New prescriber added')
-
       navigate('/providers');
     } catch (error) {
       setIsPending(false);
-
       // Throw error toast on screen, no further rendering is required, nor any specific error handling
       showErrorToast(setToast, 'An error occurred while adding prescriber')
     }     

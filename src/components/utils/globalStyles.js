@@ -220,6 +220,8 @@ const GlobalStyles = createGlobalStyle`
     }
   }
 
+  /* Note on media queries. The main breakpoints in use include 920px (form width below this must be adjusted to maintain styling concept), 768px (landscape phone/portrait table and down), approx 550px (more a breakpoint for certain tables rathen than a device), approx 450px (portrait phones and down), and <400px (specific adjustments for smaller phone screens where applicable) */
+
 `
 
 export default GlobalStyles;

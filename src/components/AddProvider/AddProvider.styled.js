@@ -24,7 +24,7 @@ const StyledAddProvider = styled.div`
     }
   }
 
-
+  /* Row layout form reaches width limit here; this is less a device specific breakpoint */
   @media (max-width: 920px) { 
     .form-container {
       flex-direction: column;
@@ -38,6 +38,7 @@ const StyledAddProvider = styled.div`
     }
   }
 
+  /* Landscape phones/portrait tables */
   @media (max-width: 768px) {
     .form-container {
       .form-title {
@@ -45,7 +46,8 @@ const StyledAddProvider = styled.div`
       }
     }
   }
-
+  
+  /* Portrait phones */
   @media (max-width: 475px) {
     .form-container {
       .form-title {
