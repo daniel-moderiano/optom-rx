@@ -3,7 +3,7 @@ import styled from "styled-components";
 const StyledViewScript = styled.div`
   position: relative;
 
-  .ProviderForm__btns {
+  .PrescriberForm__btns {
     margin: 2rem 0 0rem 0;
     display: flex;
     align-items: center;
@@ -94,7 +94,7 @@ const StyledViewScript = styled.div`
 
   /* Portrait phones */
   @media (max-width: 470px) { 
-    .ProviderForm__btns {
+    .PrescriberForm__btns {
       flex-direction: column;
 
       .button {

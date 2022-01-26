@@ -21,7 +21,7 @@ const ViewScript = ({ setToast, resetData, setPage }) => {
   const { formatDrug, formatDate } = useFormatting();
   const { showSuccessToast, showErrorToast } = useImmediateToast();
 
-  // Extract the selected provider data passed via React Router state
+  // Extract the selected prescriber data passed via React Router state
   const { state: existingData } = useLocation();
 
   const [scriptData, setScriptData] = useState(null);
@@ -35,7 +35,7 @@ const ViewScript = ({ setToast, resetData, setPage }) => {
     setPage(null);
   }, [setPage]);
 
-  // Set local provider data state to data passed along via React Router state
+  // Set local prescriber data state to data passed along via React Router state
   useEffect(() => {
     setScriptData((prevData) => ({
       ...prevData,
@@ -98,7 +98,7 @@ const ViewScript = ({ setToast, resetData, setPage }) => {
               </div>
             </div>
 
-            <div className="ProviderForm__btns">
+            <div className="PrescriberForm__btns">
               <Link  className="re-prescribe btn-primary" to='/form' state={{
                 newRx: true,
                 rePrescribe: true,
