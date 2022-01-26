@@ -39,11 +39,10 @@ const StyledFieldset = styled.fieldset`
     clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
     clip: rect(1px, 1px, 1px, 1px);
     white-space: nowrap; /* added line */
-}
+  }
 
-  
-  
-  /* Landscape phones and down */
+    
+  /* Not device specific, but row layout of form breaks at this width */
   @media (max-width: 920px) { 
     flex-direction: column;
     align-items: center;
@@ -60,12 +59,14 @@ const StyledFieldset = styled.fieldset`
     }
   }
 
+  /* Landscape phones/portrait tables */
   @media (max-width: 768px) {
     .legend-label {
       font-size: 1.55rem;
     }
   }
 
+  /* Portrait phones */
   @media (max-width: 475px) {
     .legend-label {
       font-size: 1.4rem;

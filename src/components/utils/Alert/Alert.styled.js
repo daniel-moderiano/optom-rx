@@ -37,6 +37,7 @@ const StyledAlert = styled.div`
     margin-top: 0.05rem;
   }
 
+  /* Landscape phones/portrait tables */
   @media (max-width: 768px) {
     width: 100%;
     max-width: 26rem;

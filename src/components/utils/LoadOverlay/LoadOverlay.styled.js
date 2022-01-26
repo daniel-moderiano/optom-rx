@@ -15,7 +15,6 @@ const StyledLoadOverlay = styled.div`
   .Spinner {
     margin: 0;
   }
-
 `
 
 export { StyledLoadOverlay } 

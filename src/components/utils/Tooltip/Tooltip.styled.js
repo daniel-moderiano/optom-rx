@@ -59,7 +59,7 @@ const StyledTooltip = styled.div`
       opacity: 1;
     }
 
-    
+  /* Landscape phones/portrait tables */
   @media (max-width: 800px) {
     .tooltip-text {
       left: -16rem;
@@ -76,7 +76,7 @@ const StyledTooltip = styled.div`
   
   }
 
-  
+  /* Portrait phones */
   @media (max-width: 420px) {
     .tooltip-text {
       width: 10rem;

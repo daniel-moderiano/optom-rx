@@ -1,5 +1,6 @@
 import { StyledPasswordContainer } from "./PasswordContainer.styled"
 
+// Used to house a FormField input/label, and provide a show/hide functionality
 const PasswordContainer = ({ children, showPassword, handleClick }) => {
   return (
     <StyledPasswordContainer className="PasswordContainer">

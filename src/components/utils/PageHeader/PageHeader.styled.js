@@ -20,6 +20,7 @@ const StyledPageHeader = styled.div`
     line-height: 1.5rem;
   }
 
+  /* Landscape phones/portrait tables */
   @media (max-width: 768px) {
     .title {
       font-size: 2.0rem;
@@ -32,6 +33,7 @@ const StyledPageHeader = styled.div`
     }
   }
 
+  /* Portrait phones */
   @media (max-width: 475px) {
     .title {
       font-size: 1.7rem;

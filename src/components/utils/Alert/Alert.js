@@ -1,5 +1,6 @@
 import { StyledAlert } from "./Alert.styled";
 
+// Used underneath inputs
 const Alert = ({ id, type, message, subAlert }) => {
   return (
     <StyledAlert className={`${subAlert ? 'alert-container subalert-container' : 'alert-container'}`} id={id} role="alert">

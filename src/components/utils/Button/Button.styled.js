@@ -50,7 +50,6 @@ const StyledButton = styled.button`
 
     &:hover {
       background-color: var(--btn-positive-hover);
-      /* color: var(--btn-positive-hover-text); */
       color: #0b4740;
     }
   }
@@ -72,7 +71,6 @@ const StyledButton = styled.button`
     outline: 2px solid #104362;
     outline-offset: 2px;
   }
-
 `
 
 export { StyledButton }

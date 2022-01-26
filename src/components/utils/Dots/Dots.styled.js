@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
+// ! Avoid shorthand animation terminology unless you want this to fail on Safari
 const StyledDots = styled.div`
-  
   position: relative;
   width: 55px;
   height: 6px;
@@ -38,7 +38,6 @@ const StyledDots = styled.div`
     -webkit-animation-timing-function: ease-in-out;
     -webkit-animation-fill-mode: both;
     
-
     &:nth-child(1) {
       left: 0;
     }
@@ -95,9 +94,6 @@ const StyledDots = styled.div`
       opacity: 0;
     }
   }
-  
-
-
 `
 
 export { StyledDots }
