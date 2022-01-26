@@ -62,7 +62,15 @@ const Login = ({ setPage }) => {
     return valid;
   };
 
-  
+  // Used to remove errors on resubmission of the form to avoid over-punishment or confusion
+  const refreshAllValidation = () => {
+    setEmailAlert({});
+    setPasswordAlert({});
+    document.querySelector('.Login__form').querySelectorAll('input').forEach((input) => {
+      input.classList.remove('error');
+    })
+  }
+    
   return (
     <StyledLogin className="Login">
       <div className="Login__container">
@@ -70,6 +78,7 @@ const Login = ({ setPage }) => {
 
         <form className='Login__form' noValidate onSubmit={(event) => {
           event.preventDefault();
+          refreshAllValidation();
           if (isFormValid()) {
             login(email, password);
           }

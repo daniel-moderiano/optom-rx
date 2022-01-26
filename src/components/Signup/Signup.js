@@ -84,6 +84,16 @@ const Signup = ({ setPage, setFirstSignIn }) => {
     return valid;
   };
 
+  // Used to remove errors on resubmission of the form to avoid over-punishment or confusion
+  const refreshAllValidation = () => {
+    setEmailAlert({});
+    setPasswordAlert({});
+    setDisplayNameAlert({});
+    document.querySelector('.Signup__form').querySelectorAll('input').forEach((input) => {
+      input.classList.remove('error');
+    });
+  }
+
   return (
     <StyledSignup className="Signup">
       <div className="Signup__container">
@@ -91,6 +101,7 @@ const Signup = ({ setPage, setFirstSignIn }) => {
 
         <form className="Signup__form" noValidate onSubmit={(event) => {
           event.preventDefault();
+          refreshAllValidation();
           if (isFormValid()) {
             signup(email, password, displayName, setFirstSignIn);
           }
