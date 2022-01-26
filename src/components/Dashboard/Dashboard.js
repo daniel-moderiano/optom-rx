@@ -33,8 +33,8 @@ const Dashboard = ({ setToast, setPage, firstSignIn, setFirstSignIn, resetData }
   return (<>
     <Helmet>
       <title>Dashboard</title>
-      <meta name="description" content="OptomRx dashboard."/>
-      <link rel="canonical" href="/" />
+      <meta name="description" content="Choose a favourite script to quickly write a prescription, or start fresh with a blank prescription."/>
+      <link rel="canonical" href="/dashboard" />
     </Helmet>
     <ContentContainer earlyPadding={true}>
       <StyledDashboard className="Dashboard" >

@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import Dots from '../utils/Dots/Dots';
 import Button from '../utils/Button/Button';
 import PasswordContainer from '../utils/PasswordContainer/PasswordContainer';
+import { Helmet } from 'react-helmet-async';
 
 const Login = ({ setPage }) => {
   const { error, login, isPending } = useLogin();
@@ -71,7 +72,12 @@ const Login = ({ setPage }) => {
     })
   }
     
-  return (
+  return (<>
+    <Helmet>
+      <title>OptomRx - Log in</title>
+      <meta name="description" content="A new tool that lets you write computerised therapeutic prescriptions no matter where you practice."/>
+      <link rel="canonical" href="/dashboard" />
+    </Helmet>
     <StyledLogin className="Login">
       <div className="Login__container">
         <h2 className="Login__title">Log in</h2>
@@ -138,7 +144,7 @@ const Login = ({ setPage }) => {
         
       </div>
     </StyledLogin>
-  )
+  </>)
 }
 
 export default Login;
