@@ -577,7 +577,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
 
         <div className="PrescriberForm__btns">
           <Button type="submit" classLabel="submit-btn">Generate prescription</Button>
-          <Link to="/" className="cancel-btn btn-secondary button">Cancel</Link>
+          <Link to="/dashboard" className="cancel-btn btn-secondary button">Cancel</Link>
         </div>
 
       </StyledRxForm>

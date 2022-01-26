@@ -8,7 +8,7 @@ import { Route, useNavigate, Routes, Navigate } from "react-router";
 import Signup from "./components/Signup/Signup";
 import Login from "./components/Login/Login";
 import { useAuthContext } from './hooks/useAuthContext';
-import Home from './components/Home/Home';
+import Dashboard from './components/Dashboard/Dashboard';
 import Prescribers from "./components/Prescribers/Prescribers";
 import './App.css';
 import EditPrescriber from "./components/EditPrescriber/EditPrescriber";
@@ -20,6 +20,7 @@ import ViewScript from "./components/ViewScript/ViewScript";
 import Settings from "./components/Settings/Settings";
 import ResetPassword from "./components/ResetPassword/ResetPassword";
 import { StyledApp } from "./App.styled";
+import Home from './components/Home/Home';
 
 const App = () => {
   // Can user the user state to conditionally render or redirect routes (logged in vs out for example)
@@ -119,7 +120,6 @@ const App = () => {
 
     // Used to listen for the initial load only
     googleScript.addEventListener('load', () => {
-      console.log('Initial load');
       if (!googleLoaded) {
         setGoogleLoaded(googleLoaded => !googleLoaded);
       }
@@ -161,10 +161,17 @@ const App = () => {
           <Routes>
             <Route path="/" element={
               <>
-              {!user && <Navigate to="/login" />}
-              {user && <Home setToast={setToastParams} setPage={setCurrentPage} firstSignIn={firstSignIn} setFirstSignIn={setFirstSignIn} resetData={resetAllData}/>}
+              {!user && <Home />}
+              {user && <Dashboard setToast={setToastParams} setPage={setCurrentPage} firstSignIn={firstSignIn} setFirstSignIn={setFirstSignIn} resetData={resetAllData}/>}
               </>
             } />
+
+            <Route path="/dashboard" element={
+              <>
+              {!user && <Navigate to="/login" />}
+              {user && <Dashboard setToast={setToastParams} setPage={setCurrentPage} firstSignIn={firstSignIn} setFirstSignIn={setFirstSignIn} resetData={resetAllData}/>}
+              </>
+            } />       
 
             <Route path="/settings" element={
               <>
@@ -175,22 +182,22 @@ const App = () => {
 
             <Route path="/new-prescription" element={
               <>
-              {user && <RxForm handleSubmit={handleSubmit} googleLoaded={googleLoaded} existingData={data} setPage={setCurrentPage} setToast={setToastParams}/> }
               {!user && <Navigate to="/login"/>}
+              {user && <RxForm handleSubmit={handleSubmit} googleLoaded={googleLoaded} existingData={data} setPage={setCurrentPage} setToast={setToastParams}/> }
               </>
             }/>
 
             <Route path="/signup" element={
               <>
               {!user && <Signup setPage={setCurrentPage} setFirstSignIn={setFirstSignIn}/>}
-              {user && <Navigate to="/" />}
+              {user && <Navigate to="/dashboard" />}
               </>
             }/>
               
             <Route path="/login" element={
               <>
               {!user && <Login setPage={setCurrentPage}/>}
-              {user && <Navigate to="/" />}
+              {user && <Navigate to="/dashboard" />}
               </>
             }/>
 
