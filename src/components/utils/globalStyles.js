@@ -38,7 +38,7 @@ const GlobalStyles = createGlobalStyle`
     --warning: #9a6700;
 
     /* Font stacks */
-    --font-stack-segoe: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+    --font-stack-segoe: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   }
 
   .focus-styles {

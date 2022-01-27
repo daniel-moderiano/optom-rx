@@ -21,6 +21,9 @@ import Settings from "./components/Settings/Settings";
 import ResetPassword from "./components/ResetPassword/ResetPassword";
 import { StyledApp } from "./App.styled";
 import Home from './components/Home/Home';
+import AppFooter from './components/Footer/AppFooter';
+import HomeFooter from './components/Footer/HomeFooter';
+
 
 const App = () => {
   // Can user the user state to conditionally render or redirect routes (logged in vs out for example)
@@ -153,8 +156,8 @@ const App = () => {
 
   return (
     <StyledApp className="App">
-      {authIsReady && (<>
-        <GlobalStyles />
+      <GlobalStyles />
+      {authIsReady && (<> 
         <Header resetData={resetAllData} currentPage={currentPage}/>
 
         <Main >
@@ -249,7 +252,8 @@ const App = () => {
 
           </Routes>
         </Main>
-        <footer className="footer"></footer>
+        {user && <AppFooter />}
+        {!user && <HomeFooter />}
       </>)}
       <Toast params={toastParams} />
      
