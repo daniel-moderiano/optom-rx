@@ -12,6 +12,14 @@ const StyledHomeFooter = styled.footer`
     border-top: 1px solid #dee1e4;
     padding: 4rem 0;
     width: 100%;
+
+    .footer-secondary-navigation {
+      display: flex;
+
+      a {
+        padding: 0 1rem;
+      }
+    }
   }
 
   .logo {
