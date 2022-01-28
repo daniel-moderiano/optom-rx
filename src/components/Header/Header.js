@@ -2,14 +2,28 @@ import Nav from "../Nav/Nav"
 import { StyledHeader } from "./Header.styled"
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import { useEffect } from "react";
 
-const Header = ({ currentPage, resetData }) => {
+const Header = ({ currentPage, resetData, setPage }) => {
   let navigate = useNavigate();
   const { user } = useAuthContext();
 
+  const handleLogoClick = () => {
+    if (user) {
+      navigate('/dashboard');
+    } else {
+      navigate('/');
+    }
+  }
+
+  // Adjust current page for accessibility and styling
+  useEffect(() => {
+    setPage(null);
+  }, [setPage])
+
   return (
     <StyledHeader className="Header" user={user} role="banner" aria-labelledby="optomrx-logo">
-      <h1 className="Header__title" onClick={() => navigate('/dashboard')}>
+      <h1 className="Header__title" onClick={handleLogoClick}>
         <div className="logo-container">
           {/* Using inline SVG for easier styling changes in CSS */}
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 166.92 45.53" className="logo" aria-labelledby="optomrx-logo">

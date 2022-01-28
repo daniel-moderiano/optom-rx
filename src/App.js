@@ -158,7 +158,7 @@ const App = () => {
     <StyledApp className="App">
       <GlobalStyles />
       {authIsReady && (<> 
-        <Header resetData={resetAllData} currentPage={currentPage}/>
+        <Header resetData={resetAllData} currentPage={currentPage} setPage={setCurrentPage}/>
 
         <Main >
           <Routes>
