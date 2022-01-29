@@ -61,6 +61,8 @@ const App = () => {
   const [currentPage, setCurrentPage] = useState(null);
   const [firstSignIn, setFirstSignIn] = useState(false);
 
+  const [homeHeader, setHomeHeader] = useState(false);
+
   // Primarily a UI-based function. Data will always be reset for new Rx within the Rx form, but resetting data here on click of any link generating a new Rx avoid the flash of text on initial render containing the old data. Bad look.
   const resetAllData = () => {
     setData({
@@ -158,16 +160,16 @@ const App = () => {
     <StyledApp className="App">
       <GlobalStyles />
       {authIsReady && (<> 
-        <Header resetData={resetAllData} currentPage={currentPage} setPage={setCurrentPage}/>
+        <Header resetData={resetAllData} currentPage={currentPage} setPage={setCurrentPage} homeHeader={homeHeader}/>
         <Routes>
-            <Route path="/" element={
-              <>
-              {!user && <Home />}
-              {user && <Dashboard setToast={setToastParams} setPage={setCurrentPage} firstSignIn={firstSignIn} setFirstSignIn={setFirstSignIn} resetData={resetAllData}/>}
-              </>
-            } />
+          <Route path="/" element={
+            <>
+            {!user && <Home setHomeHeader={setHomeHeader}/>}
+            {user && <Dashboard setToast={setToastParams} setPage={setCurrentPage} firstSignIn={firstSignIn} setFirstSignIn={setFirstSignIn} resetData={resetAllData}/>}
+            </>
+          } />
         </Routes>
-        
+
         <Main >
           <Routes>
             <Route path="/dashboard" element={

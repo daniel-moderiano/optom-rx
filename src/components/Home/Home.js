@@ -1,8 +1,14 @@
 import { StyledHome } from "./Home.styled";
 import { Helmet } from 'react-helmet-async';
 import formHalf from '../../assets/4k-form-half.png'
+import { useEffect } from "react";
 
-const Home = () => {
+const Home = ({ setHomeHeader }) => {
+  // Adjust homeHeader prop to true to adjust header styling specifically for this page
+  useEffect(() => {
+    setHomeHeader(true);
+  }, [setHomeHeader]);
+
   return (<>
     <Helmet>
       <title>Computerised PBS prescriptions for Optometrists | OptomRx</title>
