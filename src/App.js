@@ -159,16 +159,17 @@ const App = () => {
       <GlobalStyles />
       {authIsReady && (<> 
         <Header resetData={resetAllData} currentPage={currentPage} setPage={setCurrentPage}/>
-
-        <Main >
-          <Routes>
+        <Routes>
             <Route path="/" element={
               <>
               {!user && <Home />}
               {user && <Dashboard setToast={setToastParams} setPage={setCurrentPage} firstSignIn={firstSignIn} setFirstSignIn={setFirstSignIn} resetData={resetAllData}/>}
               </>
             } />
-
+        </Routes>
+        
+        <Main >
+          <Routes>
             <Route path="/dashboard" element={
               <>
               {!user && <Navigate to="/login" />}
