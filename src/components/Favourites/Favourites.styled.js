@@ -3,7 +3,7 @@ import styled from "styled-components";
 const StyledFavourites = styled.div`
   margin-top: 3rem;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   flex-direction: column;
   
@@ -13,6 +13,20 @@ const StyledFavourites = styled.div`
     font-weight: 300;
     color: var(--title-color);
     display: none;
+  }
+
+  
+  .list-header {
+    /* background-color: #F9FAFB; */
+    text-align: right;
+    background-color: white;
+    padding: 1rem 1.5rem 1rem 0rem;
+    color: #48515B;
+    line-height: 0.85rem;
+    font-size: 1.6rem;
+    font-weight: 300;
+    color: var(--title-color);
+    border-radius: 6px;
   }
 
   .fav-list {
@@ -26,8 +40,10 @@ const StyledFavourites = styled.div`
     box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
 
     .list-header {
-      background-color: #F9FAFB;
-      padding: 1rem 1.5rem 1.1rem 1.5rem;
+      /* background-color: #F9FAFB; */
+      text-align: right;
+      background-color: white;
+      padding: 1rem 1.5rem 1.1rem 0rem;
       color: #48515B;
       font-size: 0.75rem;
       line-height: 0.85rem;
@@ -41,6 +57,7 @@ const StyledFavourites = styled.div`
       background-color: #F9FAFB;
     }
 
+    
     .fav-item--none {
       display: flex;
       align-items: center;
@@ -54,8 +71,28 @@ const StyledFavourites = styled.div`
       }
     }
 
-    li {
-      padding: 0.6rem 1.5rem;
+    .first-list-item {
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      background-color: #F9FAFB;
+      padding: 0.2rem 1.5rem 0.2rem 1rem;
+      color: #48515B;
+      font-size: 0.75rem;
+      text-align: left;
+      text-transform: uppercase;
+      letter-spacing: 0.05rem;
+      font-family: var(--font-stack-segoe-semibold);
+
+      .actions-span {
+        width: 162px;
+      }
+    }
+
+    .fav-item {
+      padding: 0.6rem 1.5rem 0.6rem 1rem;
       font-size: 0.9rem;
       color: #48515B;
       display: flex;
@@ -168,12 +205,20 @@ const StyledFavourites = styled.div`
       display: block;
       margin-top: 0.5rem;
     }
+
+    .list-header {
+        display: none;
+      }
     
     .fav-list {
       border: none;
       box-shadow: none;
 
       .list-header {
+        display: none;
+      }
+
+      .first-list-item {
         display: none;
       }
 

@@ -103,9 +103,10 @@ const Favourites = ({ user, setToast }) => {
         )}
 
         {favourites && <>
-          {favourites.length > 0 ? (
+          {favourites.length > 0 ? (<>
+            <div className="list-header">Favourites</div>
             <ul className='fav-list'>
-              <div className="list-header">Favourites</div>
+              <li className='first-list-item'><span>Script name</span><span className='actions-span'>Actions</span></li>
               {favourites.map((fav) => (
                 <li key={fav.scriptID} className="fav-item">
                   <div className="item-name">
@@ -130,7 +131,7 @@ const Favourites = ({ user, setToast }) => {
                 </li>
               ))}
             </ul>   
-          ) : (
+          </>) : (
             <ul className='fav-list fav-list--none'>
               <div className="list-header">Favourites</div>
               <li className="fav-item fav-item--none">No favourites added yet</li>

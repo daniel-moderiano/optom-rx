@@ -11,7 +11,7 @@ const Home = () => {
     </Helmet>
     <StyledHome className="Home">
       <section className="Home__intro">
-        <h2 className="Home__title">Write computerised therpaeutic prescriptions with OptomRx</h2>
+        <h2 className="Home__title">Write computerised therpaeutic prescriptions with <strong>OptomRx</strong></h2>
         <p className="subtitle">A free-to-use tool giving Australian optometrists the ability to create professional computerised prescriptions for any therapeutic medications, no matter where you're practicing.</p>
       </section>
       <section className="Home__preview">

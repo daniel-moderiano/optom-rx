@@ -4,7 +4,8 @@ const StyledApp = styled.div`
   display: flex;
   flex-direction: column;
   background-color: var(--background);
-  align-items: center;
+  /* align-items: center; */
+  /* justify-content: space-between; */
 
   /* Ensure the entire app styling does not interfere with RxTemplate printing */
   @media print {

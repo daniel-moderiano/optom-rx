@@ -5,6 +5,7 @@ const StyledHomeFooter = styled.footer`
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: var(--background);
 
   .HomeFooter__container {
     margin: 0 3rem;
