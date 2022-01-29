@@ -3,11 +3,11 @@ import { Helmet } from 'react-helmet-async';
 import formHalf from '../../assets/4k-form-half.png'
 import { useEffect } from "react";
 
-const Home = ({ setHomeHeader }) => {
+const Home = ({ setPage }) => {
   // Adjust homeHeader prop to true to adjust header styling specifically for this page
   useEffect(() => {
-    setHomeHeader(true);
-  }, [setHomeHeader]);
+    setPage('homepage');
+  }, [setPage]);
 
   return (<>
     <Helmet>
@@ -74,6 +74,12 @@ const Home = ({ setHomeHeader }) => {
           
         </section>
         {/* Possible a final seciton here with a call to action to sign up? */}
+        <section className="Home__intro">
+          <div className="content-container">
+            <h2 className="Home__title">Write computerised therpaeutic prescriptions with <strong>OptomRx</strong></h2>
+            <p className="subtitle">A free-to-use tool giving Australian optometrists the ability to create professional computerised prescriptions for any therapeutic medications, no matter where you're practicing.</p>
+          </div>
+        </section>
       </div>
     </StyledHome>
   </>)

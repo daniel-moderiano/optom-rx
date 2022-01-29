@@ -1,16 +1,14 @@
 import styled from "styled-components";
 
 const StyledHome = styled.main`
-  /* max-width: 1140px; */
-  /* margin: 0 1rem; */
-  color: #263238;
-  background-color: var(--background);
+  width: 100%;
 
   .content-container {
     max-width: 1140px;
     margin: 0 1rem;
     text-align: center;
     padding: 1rem;
+    
   }
 
   .Home__title {
@@ -34,16 +32,23 @@ const StyledHome = styled.main`
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    border-top: 1px solid #dee1e4;
+    margin: 0 2.75rem;
+    padding: 1rem 0 5rem 0;
+
+    .content-container {
+      max-width: 960px;
+    }
   }
 
   
   .Home__preview {
-    margin: 6rem 0 0 0;
+    padding: 3rem 0 5rem 0;
     text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #F9FAFB;
+    /* background-color: #F9FAFB; */
 
     .preview-container {
       text-align: center;
@@ -70,15 +75,18 @@ const StyledHome = styled.main`
   }
 
   .Home__features {
-    margin: 6rem 0 0 0;
+    padding: 5rem 0 5rem 0;
+
     text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    background-color: #F9FAFB;
 
     .features__title {
       font-size: 2.6rem;
+      margin: 0;
     }
 
     .features__subtitle {
