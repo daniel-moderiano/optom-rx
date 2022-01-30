@@ -104,6 +104,11 @@ const StyledHome = styled.main`
       .features__card {
         max-width: 300px;
         margin: 0.75rem;
+
+        img {
+          width: 90px;
+          height: 50px;
+        }
       }
     }
   }
