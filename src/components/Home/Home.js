@@ -4,6 +4,7 @@ import formHalf from '../../assets/4k-form-half.png';
 import pbsPaper from '../../assets/pbs-paper.jpg';
 import pbsLogo from '../../assets/pbs-logo.svg'
 import { useEffect } from "react";
+import Button from '../utils/Button/Button'
 
 const Home = ({ setPage }) => {
   // Adjust homeHeader prop to true to adjust header styling specifically for this page
@@ -53,8 +54,8 @@ const Home = ({ setPage }) => {
               <div className="features__card">
                 <span className="card-icon"><img src={pbsLogo} alt="PBS logo" /></span>
                 <h4 className="card__title">Real time PBS data</h4>
-                <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi deserunt, ducimus ipsum iusto harum voluptate iure earum mollitia, eos at accusantium.</p>
-                <button className="card-btn">Learn more</button>
+                <p className="card-text">Receive real-time, up-to-date PBS information on your selected medication as you write your prescription.</p>
+                <Button className="card-btn">Learn more</Button>
               </div>
               <div className="features__card">
                 <span className="card-icon">
@@ -63,20 +64,20 @@ const Home = ({ setPage }) => {
                 </svg>
                 </span>
                 <h4 className="card__title">Active ingredient prescribing</h4>
-                <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi deserunt, ducimus ipsum iusto harum voluptate iure earum mollitia, eos at accusantium.</p>
-                <button className="card-btn">Learn more</button>
+                <p className="card-text">Automatically adjust medication format based on active ingredient or brand only prescribing requirements.</p>
+                <Button className="card-btn">Learn more</Button>
               </div>
               <div className="features__card">
                 <span className="card-icon"><svg xmlns="http://www.w3.org/2000/svg" height="50px" viewBox="0 0 24 24" width="50px" fill="#31776f"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M15 7v12.97l-4.21-1.81-.79-.34-.79.34L5 19.97V7h10m4-6H8.99C7.89 1 7 1.9 7 3h10c1.1 0 2 .9 2 2v13l2 1V3c0-1.1-.9-2-2-2zm-4 4H5c-1.1 0-2 .9-2 2v16l7-3 7 3V7c0-1.1-.9-2-2-2z"/></svg></span>
                 <h4 className="card__title">Favourite scripts</h4>
-                <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi deserunt, ducimus ipsum iusto harum voluptate iure earum mollitia, eos at accusantium.</p>
-                <button className="card-btn">Learn more</button>
+                <p className="card-text">Save your most commonly written prescriptions, and instantly re-prescribe them as needed.</p>
+                <Button className="card-btn">Learn more</Button>
               </div>
               <div className="features__card">
                 <span className="card-icon"><svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="50px" viewBox="0 0 24 24" width="50px" fill="#31776f"><g><rect fill="none" height="24" width="24"/></g><g><g/><g><path d="M16.67,13.13C18.04,14.06,19,15.32,19,17v3h4v-3C23,14.82,19.43,13.53,16.67,13.13z"/><path d="M15,12c2.21,0,4-1.79,4-4c0-2.21-1.79-4-4-4c-0.47,0-0.91,0.1-1.33,0.24C14.5,5.27,15,6.58,15,8s-0.5,2.73-1.33,3.76 C14.09,11.9,14.53,12,15,12z"/><path d="M9,12c2.21,0,4-1.79,4-4c0-2.21-1.79-4-4-4S5,5.79,5,8C5,10.21,6.79,12,9,12z M9,6c1.1,0,2,0.9,2,2c0,1.1-0.9,2-2,2 S7,9.1,7,8C7,6.9,7.9,6,9,6z"/><path d="M9,13c-2.67,0-8,1.34-8,4v3h16v-3C17,14.34,11.67,13,9,13z M15,18H3l0-0.99C3.2,16.29,6.3,15,9,15s5.8,1.29,6,2V18z"/></g></g></svg></span>
                 <h4 className="card__title">Multiple prescribers</h4>
-                <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi deserunt, ducimus ipsum iusto harum voluptate iure earum mollitia, eos at accusantium.</p>
-                <button className="card-btn">Learn more</button>
+                <p className="card-text">Add prescriber details for any locations you are practicing, and select between any of them on a script-by-script basis.</p>
+                <Button className="card-btn">Learn more</Button>
               </div>
               <div className="features__card">
                 <span className="card-icon">
@@ -85,8 +86,8 @@ const Home = ({ setPage }) => {
                 </svg>
                 </span>
                 <h4 className="card__title">No patient data retention</h4>
-                <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi deserunt, ducimus ipsum iusto harum voluptate iure earum mollitia, eos at accusantium.</p>
-                <button className="card-btn">Learn more</button>
+                <p className="card-text">For privacy and security reasons, no patient information is kept or stored after a prescription is finished.</p>
+                <Button className="card-btn">Learn more</Button>
               </div>
             </div>
           </div>

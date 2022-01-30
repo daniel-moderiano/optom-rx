@@ -105,6 +105,17 @@ const StyledHome = styled.main`
         max-width: 300px;
         margin: 0.75rem;
 
+        h4 {
+          margin: 0;
+          padding: 0.25rem 0 1rem 0;
+          font-size: 1.35rem;
+          font-weight: 600;
+        }
+        
+        .button {
+          margin: 1.75rem auto 0 auto;
+        }
+
         img {
           width: 90px;
           height: 50px;
