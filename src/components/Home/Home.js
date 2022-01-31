@@ -2,6 +2,8 @@ import { StyledHome } from "./Home.styled";
 import { Helmet } from 'react-helmet-async';
 import formHalf from '../../assets/4k-form-half.jpg';
 import pbsPaper from '../../assets/pbs-paper.jpg';
+import johnCitizen from '../../assets/john-citizen.jpg'
+import johnCitizenCrop from '../../assets/john-citizen-crop.jpg'
 import pbsLogo from '../../assets/pbs-logo.svg'
 import { useEffect } from "react";
 import Button from '../utils/Button/Button'
@@ -23,18 +25,19 @@ const Home = ({ setPage }) => {
 
     <StyledHome className="Home">
       <div className="Home-container">
+
         <section className="Home__intro">
           <div className="content-container">
             <h2 className="Home__title">Professional therapeutic prescriptions</h2>
             <p className="subtitle">OptomRx lets you write therapeutic prescriptions online, with integrated PBS support and tools to supercharge efficiency.</p>
           </div>
-
         </section>
+
         <section className="Home__preview" aria-labelledby="description__title">
           <div className="content-container preview-container">
             <div className="description">
-              <h3 id="description__title" className="description__title">OptomRx</h3>
-              <p className="description__text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam harum impedit, aut asperiores nisi laudantium nulla sit, culpa eligendi facilis distinctio veniam ratione temporibus odio a laborum consectetur aperiam velit?</p>
+              <h3 id="description__title" className="description__title">Accessible for all Australian Optometrists</h3>
+              <p className="description__text">Corporate, independent, rural or metro - OptomRx's web app means you have access to professional computerised scripts anywhere.</p>
               <div className="description__btns">
                 <button>Read more</button>
                 <button>Sign up</button>
@@ -44,9 +47,11 @@ const Home = ({ setPage }) => {
               {/* Images of desktop and/or mobile here */}
               <img src={formHalf} alt="Screenshot of online form for creating new prescription" />
               {/* <img src={pbsPaper} alt="Blank PBS computerised prescription paper" /> */}
+              {/* <img src={johnCitizen} alt="Screenshot of online form for creating new prescription" /> */}
             </div>
           </div>
         </section>
+
         <section className="Home__features">
           <div className="content-container">
             <h3 className="features__title">Streamline prescription writing.</h3>
@@ -92,15 +97,26 @@ const Home = ({ setPage }) => {
               </div> */}
             </div>
           </div>
-          
         </section>
+
         {/* Possible a final seciton here with a call to action to sign up? */}
-        <section className="Home__intro">
-          <div className="content-container">
-            <h2 className="Home__title">Write computerised therpaeutic prescriptions with <strong>OptomRx</strong></h2>
-            <p className="subtitle">A free-to-use tool giving Australian optometrists the ability to create professional computerised prescriptions for any therapeutic medications, no matter where you're practicing.</p>
+  
+        <section className="Home__stationery" aria-labelledby="stationery__title">
+          <div className="content-container stationery-container">
+            <div className="stationery-description">
+              <h3 id="stationery__title" className="stationery__title">Move away from handwritten scripts</h3>
+              <p className="stationery__text">OptomRx uses computer generated PBS forms to create professional facing scripts for patients, consistent with GPs and other allied health providers. These forms can be ordered in bulk from <a target="_blank" rel="noreferrer" href="https://www.servicesaustralia.gov.au/pbs-and-rpbs-stationery-for-optometrists?context=22851">Services Australia<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="18px" fill="#263238"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg></a>.</p>
+              <div className="stationery__btns">
+                <button>Read more</button>
+                <button>Sign up</button>
+              </div>
+            </div>
+            <div className="stationery__screenshots">
+              <img src={johnCitizenCrop} alt="Printed PBS prescription on computerised PBS form" />
+            </div>
           </div>
         </section>
+
       </div>
     </StyledHome>
   </>)
