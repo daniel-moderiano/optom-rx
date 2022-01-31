@@ -13,13 +13,13 @@ const StyledHome = styled.main`
   .Home__title {
     font-weight: 700;
     font-size: 4rem;
-    margin: 0 0 2rem 0;
+    margin: 1rem 0 2rem 0;
     line-height: 4.5rem;
   }
 
   .subtitle {
     font-size: 1.3rem;
-    font-weight: 600;
+    font-weight: 500;
     color: #546E7A;
     max-width: 600px;
   }
@@ -39,6 +39,20 @@ const StyledHome = styled.main`
       display: flex;
       flex-direction: column;
       align-items: center;
+    }
+  }
+
+  .description__btns {
+    display: flex;
+    margin-top: 2rem;
+
+    .button {
+      width: 100%;
+      max-width: 140px;
+    }
+
+    .signup {
+      margin-right: 1rem;
     }
   }
 
@@ -90,7 +104,7 @@ const StyledHome = styled.main`
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    /* background-color: #F9FAFB; */
+    background-color: #F9FAFB;
 
     .features__title {
       font-size: 2.6rem;
@@ -116,13 +130,16 @@ const StyledHome = styled.main`
         max-width: 320px;
         margin: 0.75rem;
         background-color: #fff;
-        /* box-shadow: 0 6.4px 14.4px 0 rgb(0 0 0 / 13%), 0 1.2px 3.6px 0 rgb(0 0 0 / 11%); */
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px 0px;
         border: 1px solid #dee1e4;
         border-radius: 6px;
         padding: 2rem 1.5rem;
+        transition: ease-in-out 150ms;
 
         &:hover {
-          background-color: #F9FAFB;
+          /* background-color: #F9FAFB; */
+          border-color: rgba(49, 119, 111, 0.5);
+          box-shadow: rgba(49, 119, 111, 0.2) 0px 8px 24px 0px;
           cursor: pointer;
         }
 
