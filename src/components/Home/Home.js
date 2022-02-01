@@ -6,6 +6,7 @@ import pbsLogo from '../../assets/pbs-logo.svg'
 import { useEffect } from "react";
 import Button from '../utils/Button/Button';
 import PrivacyPolicy from "../Policies/PrivacyPolicy";
+import Terms from "../Policies/Terms";
 
 const Home = ({ setPage }) => {
   // Adjust homeHeader prop to true to adjust header styling specifically for this page
@@ -121,6 +122,7 @@ const Home = ({ setPage }) => {
 
         <section className="privacy">
           <PrivacyPolicy />
+          <Terms />
         </section>
 
       </div>

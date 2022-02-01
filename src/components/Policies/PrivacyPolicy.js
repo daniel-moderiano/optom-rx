@@ -130,10 +130,10 @@ const PrivacyPolicy = () => {
           Patient Information
         </h3>
         <p className="Privacy__paragraph">
-          When you write prescriptions with the Site, it is required that you enter Personal Information belonging to your patients (we refer to this as “Patient Information). This can include names, addresses, age, and Medicare details. We do not store, share, or save this Patient Information. We do not share or source Patient Information with or from third parties. 
+          When you write prescriptions with the Site, you will generally require Personal Information belonging to your patients (we refer to this as “Patient Information). This can include names, addresses, age, and Medicare details. Patient Information is entered into web forms on the Site, but does not leave your local device when forms are submitted (i.e., is not sent anywhere online). We do not store, share, or save this Patient Information. We do not share or source Patient Information with or from third parties. 
         </p>
         <p className="Privacy__paragraph">
-          While writing a prescription on the Site, Patient Information is used only to generate a printable template for use with a physical prescription form. Once a prescription has been finished, or any web page on the Site containing Patient Information is refreshed, all Patient Information is discarded from the Site. There is no method by which to save or persist Patient Information on the Site.
+          While writing a prescription on the Site, Patient Information is used only to generate a printable template for use with a physical prescription form. Once a prescription has been finished, or any web page on the Site containing Patient Information is refreshed, all Patient Information is discarded from the Site and your device. There is no method by which to save or recover Patient Information on the Site.
         </p>
       </section>
 
