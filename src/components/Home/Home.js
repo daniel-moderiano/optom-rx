@@ -1,6 +1,6 @@
 import { StyledHome } from "./Home.styled";
 import { Helmet } from 'react-helmet-async';
-import laptopMockup from '../../assets/laptop-mockup.png';
+import laptopMockup from '../../assets/macbook-mockup.png';
 import sampleRx from '../../assets/example-rx-noline.jpg'
 import pbsLogo from '../../assets/pbs-logo.svg'
 import { useEffect } from "react";

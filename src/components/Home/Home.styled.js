@@ -236,11 +236,12 @@ const StyledHome = styled.main`
   }
 
   .Home__action {
-    padding: 5rem 0 5rem 0;
+    padding: 5rem 0 6rem 0;
     text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
+    border-bottom: 1px solid #f1f1f1;
 
     .action-container {
       display: flex;

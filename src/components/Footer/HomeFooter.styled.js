@@ -12,7 +12,7 @@ const StyledHomeFooter = styled.footer`
   .HomeFooter__container {
     margin: 0 3rem;
     max-width: 1140px;
-    border-top: 1px solid #dee1e4;
+    /* border-top: 1px solid #dee1e4; */
     padding: 4rem 0;
     width: 100%;
 
