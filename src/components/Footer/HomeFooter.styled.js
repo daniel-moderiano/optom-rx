@@ -25,6 +25,13 @@ const StyledHomeFooter = styled.footer`
     }
   }
 
+  .footer-terms {
+    border-top: 1px solid #dee1e4;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
   .logo {
     width: 6rem;
 

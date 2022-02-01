@@ -1,10 +1,6 @@
 import { StyledHome } from "./Home.styled";
 import { Helmet } from 'react-helmet-async';
-import formHalf from '../../assets/4k-form-half.jpg';
-import pbsPaper from '../../assets/pbs-paper.jpg';
-import johnCitizen from '../../assets/john-citizen.jpg';
 import laptopMockup from '../../assets/laptop-mockup.png';
-import johnCitizenCrop from '../../assets/john-citizen-crop.jpg'
 import sampleRx from '../../assets/example-rx-noline.jpg'
 import pbsLogo from '../../assets/pbs-logo.svg'
 import { useEffect } from "react";
@@ -39,7 +35,8 @@ const Home = ({ setPage }) => {
               </div>
             </div>
             <div className="description__screenshots">
-            <img src={laptopMockup} alt="Screenshot of online form for creating new prescription" />
+            {/* <img src={laptopMockup} alt="Screenshot of online form for creating new prescription" />
+             */}
           </div>
             </div>          
         </section>
@@ -61,6 +58,24 @@ const Home = ({ setPage }) => {
               <img src={laptopMockup} alt="Screenshot of online form for creating new prescription" />
               {/* <img src={pbsPaper} alt="Blank PBS computerised prescription paper" /> */}
               {/* <img src={johnCitizen} alt="Screenshot of online form for creating new prescription" /> */}
+            </div>
+          </div>
+        </section>
+
+        {/* Possible a final seciton here with a call to action to sign up? */}
+  
+        <section className="Home__stationery" aria-labelledby="stationery__title">
+          <div className="content-container stationery-container">
+          <div className="stationery__screenshots">
+              <img src={sampleRx} alt="Printed PBS prescription on computerised PBS form" />
+            </div>
+            <div className="stationery-description">
+              <h3 id="stationery__title" className="stationery__title">Move away from handwritten scripts</h3>
+              <p className="stationery__text">OptomRx pairs with computer generated PBS forms to create professional facing scripts for patients, consistent with GPs and other allied health providers. These forms can be ordered in bulk from <a target="_blank" rel="noreferrer" href="https://www.servicesaustralia.gov.au/pbs-and-rpbs-stationery-for-optometrists?context=22851">Services Australia<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="18px" fill="#263238"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg></a>.</p>
+              <div className="description__btns">
+                <Button classLabel="signup">Get started</Button>
+                <Button design="ghost">Learn more</Button>
+              </div>
             </div>
           </div>
         </section>
@@ -98,35 +113,16 @@ const Home = ({ setPage }) => {
                 <p className="card-text">Add prescriber details for all locations you are practicing and seamlessly switch as needed.</p>
                 <Button className="card-btn">Learn more</Button>
               </div>
-              {/* <div className="features__card">
-                <span className="card-icon">
-                  <svg width="50px" height="50px" viewBox="0 0 24 24">
-                    <path fill="#31776f" d="M10 4A4 4 0 0 0 6 8A4 4 0 0 0 10 12A4 4 0 0 0 14 8A4 4 0 0 0 10 4M17.5 13C15 13 13 15 13 17.5C13 20 15 22 17.5 22C20 22 22 20 22 17.5C22 15 20 13 17.5 13M10 14C5.58 14 2 15.79 2 18V20H11.5A6.5 6.5 0 0 1 11 17.5A6.5 6.5 0 0 1 11.95 14.14C11.32 14.06 10.68 14 10 14M17.5 14.5C19.16 14.5 20.5 15.84 20.5 17.5C20.5 18.06 20.35 18.58 20.08 19L16 14.92C16.42 14.65 16.94 14.5 17.5 14.5M14.92 16L19 20.08C18.58 20.35 18.06 20.5 17.5 20.5C15.84 20.5 14.5 19.16 14.5 17.5C14.5 16.94 14.65 16.42 14.92 16Z" />
-                </svg>
-                </span>
-                <h4 className="card__title">No patient data retention</h4>
-                <p className="card-text">For privacy and security reasons, no patient information is kept or stored after a prescription is finished.</p>
-                <Button className="card-btn">Learn more</Button>
-              </div> */}
             </div>
           </div>
         </section>
 
-        {/* Possible a final seciton here with a call to action to sign up? */}
-  
-        <section className="Home__stationery" aria-labelledby="stationery__title">
-          <div className="content-container stationery-container">
-            <div className="stationery-description">
-              <h3 id="stationery__title" className="stationery__title">Move away from handwritten scripts</h3>
-              <p className="stationery__text">OptomRx pairs with computer generated PBS forms to create professional facing scripts for patients, consistent with GPs and other allied health providers. These forms can be ordered in bulk from <a target="_blank" rel="noreferrer" href="https://www.servicesaustralia.gov.au/pbs-and-rpbs-stationery-for-optometrists?context=22851">Services Australia<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="18px" fill="#263238"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg></a>.</p>
-              <div className="description__btns">
-                <Button classLabel="signup">Get started</Button>
-                <Button design="ghost">Learn more</Button>
-              </div>
-            </div>
-            <div className="stationery__screenshots">
-              <img src={sampleRx} alt="Printed PBS prescription on computerised PBS form" />
-            </div>
+         
+        <section className="Home__action" aria-labelledby="action__title">
+          <div className="content-container action-container">
+            <p className="subtitle">Try it for yourself</p>
+            <h3 id="action__title" className="action__title">OptomRx is free to use. Always.</h3>
+            <Button classLabel="signup">Sign up to OptomRx</Button>
           </div>
         </section>
 

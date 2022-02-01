@@ -28,7 +28,15 @@ const HomeFooter = () => {
           <a href="#">Link 4</a>
           <span className="divider">|</span>
         </section>
-        <p className="copyright">&copy; 2022 Daniel Moderiano</p>
+
+        <section className="footer-terms">
+          <div className="links">
+            <a href="#">Terms of Service</a>
+            <a href="#">Privacy Policy</a>
+          </div>
+          <p className="copyright">&copy; 2022 Daniel Moderiano.</p>
+        </section>
+        
       </div>
     </StyledHomeFooter>
   );
