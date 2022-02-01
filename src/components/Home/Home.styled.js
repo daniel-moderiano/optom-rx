@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 const StyledHome = styled.main`
   width: 100%;
+  font-size: 1.1rem;
 
   .content-container {
     max-width: 1600px;
@@ -147,6 +148,7 @@ const StyledHome = styled.main`
         border: 1px solid #dee1e4;
         border-radius: 6px;
         padding: 2rem 1.5rem;
+        font-size: 1rem;
         transition: ease-in-out 150ms;
 
         &:hover {
@@ -159,7 +161,7 @@ const StyledHome = styled.main`
         h4 {
           margin: 0;
           padding: 0.25rem 0 1rem 0;
-          font-size: 1.35rem;
+          font-size: 1.25rem;
           font-weight: 600;
         }
         
@@ -191,7 +193,7 @@ const StyledHome = styled.main`
     }
 
     .stationery-description {
-      margin-left: 4rem;
+      margin-left: 5rem;
       text-align: left;
       max-width: 500px;
       line-height: 1.5rem;

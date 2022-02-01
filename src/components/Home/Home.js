@@ -4,7 +4,8 @@ import laptopMockup from '../../assets/macbook-mockup.png';
 import sampleRx from '../../assets/example-rx-noline.jpg'
 import pbsLogo from '../../assets/pbs-logo.svg'
 import { useEffect } from "react";
-import Button from '../utils/Button/Button'
+import Button from '../utils/Button/Button';
+import PrivacyPolicy from "../Policies/PrivacyPolicy";
 
 const Home = ({ setPage }) => {
   // Adjust homeHeader prop to true to adjust header styling specifically for this page
@@ -80,7 +81,7 @@ const Home = ({ setPage }) => {
               <div className="features__card">
                 <span className="card-icon"><img src={pbsLogo} alt="PBS logo" /></span>
                 <h4 className="card__title">Real-time PBS data</h4>
-                <p className="card-text">Receive real-time, up-to-date PBS information on your selected medication as you write your prescription.</p>
+                <p className="card-text">Receive up-to-date PBS information on your selected medication as you write your prescription.</p>
                 <Button className="card-btn">Learn more</Button>
               </div>
               <div className="features__card">
@@ -116,6 +117,10 @@ const Home = ({ setPage }) => {
             <h3 id="action__title" className="action__title">OptomRx is free to use. Always.</h3>
             <Button classLabel="signup">Sign up to OptomRx</Button>
           </div>
+        </section>
+
+        <section className="privacy">
+          <PrivacyPolicy />
         </section>
 
       </div>
