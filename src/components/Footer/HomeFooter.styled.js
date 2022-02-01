@@ -5,15 +5,12 @@ const StyledHomeFooter = styled.footer`
   display: flex;
   align-items: center;
   justify-content: center;
-  /* background-color: var(--background); */
   background-color: #F9FAFB;
   background-color: #fff;
 
   .HomeFooter__container {
     margin: 0 3rem;
     max-width: 1140px;
-    /* border-top: 1px solid #dee1e4; */
-    padding: 4rem 0;
     width: 100%;
 
     .footer-secondary-navigation {
@@ -30,6 +27,19 @@ const StyledHomeFooter = styled.footer`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    height: 4.5rem;
+    font-size: 0.9rem;
+
+    a {
+      color: #263238;
+      text-decoration: none;
+      margin-right: 1.5rem;
+
+      &:hover {
+        text-decoration: underline #263238;
+
+      }
+    }
   }
 
   .logo {
@@ -43,9 +53,6 @@ const StyledHomeFooter = styled.footer`
       pointer-events: none;
     }
   }
-
-
-
 `
 
 export { StyledHomeFooter }
