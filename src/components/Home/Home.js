@@ -26,19 +26,11 @@ const Home = ({ setPage }) => {
 
         <section className="Home__intro">
           <div className="content-container">
-            <div className="description">
-              <h2 className="Home__title">Professional therapeutic prescriptions</h2>
-              <p className="subtitle">OptomRx lets you write therapeutic prescriptions online, with integrated PBS support and tools to supercharge efficiency.</p>
-              <div className="description__btns">
-                <Button classLabel="signup">Get started</Button>
-                <Button design="ghost">Learn more</Button>
-              </div>
-            </div>
-            <div className="description__screenshots">
-            {/* <img src={laptopMockup} alt="Screenshot of online form for creating new prescription" />
-             */}
-          </div>
-            </div>          
+            <h2 className="Home__title">Professional therapeutic prescriptions</h2>
+            <p className="subtitle">Create and manage therapeutic prescriptions online, with integrated PBS support and tools to supercharge efficiency.</p>
+            <Button classLabel="signup">Sign up to OptomRx</Button>
+          </div>          
+          
         </section>
 
 

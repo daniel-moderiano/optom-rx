@@ -13,7 +13,7 @@ const StyledHome = styled.main`
   .Home__title {
     font-weight: 700;
     font-size: 4rem;
-    margin: 1rem 0 2rem 0;
+    margin: 0rem 0 1.5rem 0;
     line-height: 4.5rem;
   }
 
@@ -21,32 +21,36 @@ const StyledHome = styled.main`
     font-size: 1.3rem;
     font-weight: 500;
     color: #546E7A;
-    max-width: 600px;
+    max-width: 700px;
   }
 
   .Home__intro {
-    text-align: left;
     display: flex;
     align-items: center;
     justify-content: center;
-    /* flex-direction: column; */
-    border-top: 1px solid #dee1e4;
-    margin: 0 2.75rem;
+    /* border-top: 1px solid #dee1e4; */
+    background-image: linear-gradient(to top, #ffffff 0%, #F3F4F7 100%);
     padding: 1rem 0 5rem 0;
 
     .content-container {
       display: flex;
-    align-items: center;
-    justify-content: center;
-    /* flex-direction: column; */
-      text-align: left;
-    }
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      max-width: 1200px;
 
-    img {
-      margin-top: 4rem;
-      width: 100%;
-      max-width: 700px;
-      height: auto;
+      p {
+        margin-bottom: 2rem;
+      }
+
+      .button {
+        padding: 0.5rem 1.8rem 0.7rem 1.8rem;
+        height: auto;
+        font-size: 1.15rem;
+        font-weight: 600;
+        letter-spacing: 0.02rem;
+      }
     }
   }
 
@@ -221,7 +225,7 @@ const StyledHome = styled.main`
     }
 
     .stationery__screenshots {
-      max-width: 600px;
+      max-width: 550px;
     }
 
     img {
@@ -249,6 +253,14 @@ const StyledHome = styled.main`
         font-weight: 600;
         line-height: 3rem;
         margin: 0.5rem 0 2rem 0;
+      }
+
+      .button {
+        padding: 0.5rem 1.8rem 0.7rem 1.8rem;
+        height: auto;
+        font-size: 1.15rem;
+        font-weight: 600;
+        letter-spacing: 0.02rem;
       }
     }
   }

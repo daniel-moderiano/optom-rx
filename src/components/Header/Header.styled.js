@@ -13,7 +13,8 @@ const StyledHeader = styled.header`
   flex-shrink: 0;
 
   &.home-header {
-    background-color: #fff;
+    background-color: #F3F4F7;
+    /* background-image: linear-gradient(to top, #85c27f30 0%, #85c27f30 100%); */
   }
 
   h1 {
