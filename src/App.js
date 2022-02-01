@@ -23,6 +23,8 @@ import { StyledApp } from "./App.styled";
 import Home from './components/Home/Home';
 import AppFooter from './components/Footer/AppFooter';
 import HomeFooter from './components/Footer/HomeFooter';
+import PrivacyPolicy from "./components/Policies/PrivacyPolicy";
+import Terms from "./components/Policies/Terms";
 
 
 const App = () => {
@@ -170,6 +172,11 @@ const App = () => {
               {user && <Dashboard setToast={setToastParams} setPage={setCurrentPage} firstSignIn={firstSignIn} setFirstSignIn={setFirstSignIn} resetData={resetAllData}/>}
               </>
             } />
+
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+
+            <Route path="/terms-of-service" element={<Terms />} />
+
             <Route path="/dashboard" element={
               <>
               {!user && <Navigate to="/login" />}

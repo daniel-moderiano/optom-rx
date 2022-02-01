@@ -207,7 +207,7 @@ const Terms = () => {
         </p>
         <p className="Terms__paragraph">
           These Terms of Service are effective unless and until terminated by either you or us. You may terminate these Terms of Service at any time by notifying us that you no longer wish to use our Services, or when you cease using our site.
-        </p>
+        </p> 
         <p className="Terms__paragraph">
           If in our sole judgment you fail, or we suspect that you have failed, to comply with any term or provision of these Terms of Service, we also may terminate this agreement at any time without notice and you will remain liable for all amounts due up to and including the date of termination; and/or accordingly may deny you access to our Services (or any part thereof).
         </p>

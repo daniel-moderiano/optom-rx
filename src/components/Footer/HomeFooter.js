@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { StyledHomeFooter } from "./HomeFooter.styled";
 
 const HomeFooter = () => {
@@ -50,8 +51,8 @@ const HomeFooter = () => {
       <div className="footer-bottom">
         <div className="bottom-container">
           <div className="links">
-            <a href="#">Terms of Service</a>
-            <a href="#">Privacy Policy</a>
+            <Link to="/terms-of-service">Terms of Service</Link>
+            <Link to="/privacy-policy">Privacy Policy</Link>
           </div>
           <p className="copyright">&copy; 2022 Daniel Moderiano.</p>
         </div>
