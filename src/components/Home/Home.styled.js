@@ -4,7 +4,7 @@ const StyledHome = styled.main`
   width: 100%;
 
   .content-container {
-    max-width: 1300px;
+    max-width: 1600px;
     margin: 0 1rem;
     text-align: center;
     padding: 1rem;
@@ -25,20 +25,28 @@ const StyledHome = styled.main`
   }
 
   .Home__intro {
-    text-align: center;
+    text-align: left;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
+    /* flex-direction: column; */
     border-top: 1px solid #dee1e4;
     margin: 0 2.75rem;
     padding: 1rem 0 5rem 0;
 
     .content-container {
-      max-width: 800px;
       display: flex;
-      flex-direction: column;
-      align-items: center;
+    align-items: center;
+    justify-content: center;
+    /* flex-direction: column; */
+      text-align: left;
+    }
+
+    img {
+      margin-top: 4rem;
+      width: 100%;
+      max-width: 700px;
+      height: auto;
     }
   }
 
@@ -58,7 +66,7 @@ const StyledHome = styled.main`
 
   
   .Home__preview {
-    padding: 3rem 0 5rem 0;
+    padding: 3rem 0 6rem 0;
     text-align: center;
     display: flex;
     align-items: center;
@@ -73,32 +81,33 @@ const StyledHome = styled.main`
     }
 
     .description {
-      margin-right: 2rem;
+      margin-right: 4rem;
       text-align: left;
+      max-width: 400px;
+      line-height: 1.5rem;
 
       h3 {
-        font-size: 2.6rem;
+        font-size: 2.7rem;
         font-weight: 600;
         line-height: 3rem;
+        margin: 0 0 2rem 0;
       }
     }
 
     .description__screenshots {
-      max-width: 500px;
+      max-width: 700px;
     }
 
     img {
       width: 100%;
-      
       height: auto;
-      box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+      /* box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px; */
       /* border-radius: 6px; */
     }
   }
 
   .Home__features {
     padding: 5rem 0 5rem 0;
-
     text-align: center;
     display: flex;
     align-items: center;
@@ -163,7 +172,7 @@ const StyledHome = styled.main`
   }
 
   .Home__stationery {
-    padding: 3rem 0 5rem 0;
+    padding: 6rem 0 5rem 0;
     text-align: center;
     display: flex;
     align-items: center;
@@ -178,14 +187,16 @@ const StyledHome = styled.main`
     }
 
     .stationery-description {
-      margin-right: 2rem;
+      margin-right: 4rem;
       text-align: left;
-      max-width: 400px;
+      max-width: 500px;
+      line-height: 1.5rem;
 
       h3 {
-        font-size: 2.6rem;
+        font-size: 2.7rem;
         font-weight: 600;
         line-height: 3rem;
+        margin: 0 0 2rem 0;
       }
 
       a {
@@ -210,7 +221,7 @@ const StyledHome = styled.main`
     }
 
     .stationery__screenshots {
-      max-width: 300px;
+      max-width: 600px;
     }
 
     img {

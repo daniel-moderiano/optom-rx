@@ -2,8 +2,10 @@ import { StyledHome } from "./Home.styled";
 import { Helmet } from 'react-helmet-async';
 import formHalf from '../../assets/4k-form-half.jpg';
 import pbsPaper from '../../assets/pbs-paper.jpg';
-import johnCitizen from '../../assets/john-citizen.jpg'
+import johnCitizen from '../../assets/john-citizen.jpg';
+import laptopMockup from '../../assets/laptop-mockup.png';
 import johnCitizenCrop from '../../assets/john-citizen-crop.jpg'
+import sampleRx from '../../assets/example-rx-noline.jpg'
 import pbsLogo from '../../assets/pbs-logo.svg'
 import { useEffect } from "react";
 import Button from '../utils/Button/Button'
@@ -28,10 +30,20 @@ const Home = ({ setPage }) => {
 
         <section className="Home__intro">
           <div className="content-container">
-            <h2 className="Home__title">Professional therapeutic prescriptions</h2>
-            <p className="subtitle">OptomRx lets you write therapeutic prescriptions online, with integrated PBS support and tools to supercharge efficiency.</p>
+            <div className="description">
+              <h2 className="Home__title">Professional therapeutic prescriptions</h2>
+              <p className="subtitle">OptomRx lets you write therapeutic prescriptions online, with integrated PBS support and tools to supercharge efficiency.</p>
+              <div className="description__btns">
+                <Button classLabel="signup">Get started</Button>
+                <Button design="ghost">Learn more</Button>
+              </div>
+            </div>
+            <div className="description__screenshots">
+            <img src={laptopMockup} alt="Screenshot of online form for creating new prescription" />
           </div>
+            </div>          
         </section>
+
 
         <section className="Home__preview" aria-labelledby="description__title">
           <div className="content-container preview-container">
@@ -45,7 +57,8 @@ const Home = ({ setPage }) => {
             </div>
             <div className="description__screenshots">
               {/* Images of desktop and/or mobile here */}
-              <img src={formHalf} alt="Screenshot of online form for creating new prescription" />
+              {/* <img src={formHalf} alt="Screenshot of online form for creating new prescription" /> */}
+              <img src={laptopMockup} alt="Screenshot of online form for creating new prescription" />
               {/* <img src={pbsPaper} alt="Blank PBS computerised prescription paper" /> */}
               {/* <img src={johnCitizen} alt="Screenshot of online form for creating new prescription" /> */}
             </div>
@@ -112,7 +125,7 @@ const Home = ({ setPage }) => {
               </div>
             </div>
             <div className="stationery__screenshots">
-              <img src={johnCitizenCrop} alt="Printed PBS prescription on computerised PBS form" />
+              <img src={sampleRx} alt="Printed PBS prescription on computerised PBS form" />
             </div>
           </div>
         </section>
