@@ -241,7 +241,6 @@ const StyledHome = styled.main`
     display: flex;
     align-items: center;
     justify-content: center;
-    border-bottom: 1px solid #f1f1f1;
 
     .action-container {
       display: flex;
