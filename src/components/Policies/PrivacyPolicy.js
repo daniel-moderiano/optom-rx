@@ -30,18 +30,18 @@ const PrivacyPolicy = () => {
         </p>
         <p className="Privacy__paragraph">
           We collect Device Information using the following technologies:
-          <ul className="Privacy__list">
-            <li className="Privacy__list-item">
-              “Cookies” are data files that are placed on your device or computer and often include an anonymous unique identifier. Follow the link provided for more <a href=" https://www.allaboutcookies.org">information about cookies, and how to disable cookies.</a> 
-            </li>
-            <li className="Privacy__list-item">
-              “Log files” track actions occurring on the Site, and collect data including your IP address, browser type, Internet service provider, referring/exit pages, and date/time stamps.
-            </li>
-            <li className="Privacy__list-item">
-              “Web beacons,” “tags,” and “pixels” are electronic files used to record information about how you browse the Site.
-            </li>
-          </ul>
         </p>
+        <ul className="Privacy__list">
+          <li className="Privacy__list-item">
+            “Cookies” are data files that are placed on your device or computer and often include an anonymous unique identifier. Follow the link provided for more <a href=" https://www.allaboutcookies.org">information about cookies, and how to disable cookies.</a> 
+          </li>
+          <li className="Privacy__list-item">
+            “Log files” track actions occurring on the Site, and collect data including your IP address, browser type, Internet service provider, referring/exit pages, and date/time stamps.
+          </li>
+          <li className="Privacy__list-item">
+            “Web beacons,” “tags,” and “pixels” are electronic files used to record information about how you browse the Site.
+          </li>
+        </ul>
         <p className="Privacy__paragraph">
           Additionally, when you create and account, or add prescriber details for the Site, we collect certain information from you, including your name, email address, prescriber number, and location of practice.  We refer to this information as “User Information.”
         </p>
@@ -133,7 +133,7 @@ const PrivacyPolicy = () => {
           When you write prescriptions with the Site, you will generally require Personal Information belonging to your patients (we refer to this as “Patient Information). This can include names, addresses, age, and Medicare details. Patient Information is entered into web forms on the Site, but does not leave your local device when forms are submitted (i.e., is not sent anywhere online). We do not store, share, or save this Patient Information. We do not share or source Patient Information with or from third parties. 
         </p>
         <p className="Privacy__paragraph">
-          While writing a prescription on the Site, Patient Information is used only to generate a printable template for use with a physical prescription form. Once a prescription has been finished, or any web page on the Site containing Patient Information is refreshed, all Patient Information is discarded from the Site and your device. There is no method by which to save or recover Patient Information on the Site.
+          While writing a prescription on the Site, Patient Information is used only to generate a printable template for use with a physical prescription form. Once a prescription has been finished, or any web page on the Site is refreshed, any and all Patient Information is discarded from the Site. There is no method by which to save or recover Patient Information through the Site.
         </p>
       </section>
 

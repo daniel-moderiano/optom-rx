@@ -4,7 +4,7 @@ import GlobalStyles from "./components/utils/globalStyles";
 import RxForm from './components/RxForm/RxForm';
 import RxTemplate from './components/RxTemplate/RxTemplate'
 import { useState, useEffect } from "react";
-import { Route, useNavigate, Routes, Navigate } from "react-router";
+import { Route, useNavigate, Routes, Navigate, useLocation } from "react-router";
 import Signup from "./components/Signup/Signup";
 import Login from "./components/Login/Login";
 import { useAuthContext } from './hooks/useAuthContext';
@@ -64,7 +64,14 @@ const App = () => {
   const [currentPage, setCurrentPage] = useState(null);
   const [firstSignIn, setFirstSignIn] = useState(false);
 
-  const [homeHeader, setHomeHeader] = useState(false);
+  const { pathname } = useLocation();
+
+  // Ensure the window is scrolled to the top when changing any routes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    console.log('Run scroll')
+  }, [pathname]);
+
 
   // Primarily a UI-based function. Data will always be reset for new Rx within the Rx form, but resetting data here on click of any link generating a new Rx avoid the flash of text on initial render containing the old data. Bad look.
   const resetAllData = () => {
@@ -163,7 +170,7 @@ const App = () => {
     <StyledApp className="App">
       <GlobalStyles />
       {authIsReady && (<> 
-        <Header resetData={resetAllData} currentPage={currentPage} setPage={setCurrentPage} homeHeader={homeHeader}/>
+        <Header resetData={resetAllData} currentPage={currentPage} setPage={setCurrentPage} />
 
         <Main currentPage={currentPage}>
           <Routes>
