@@ -31,7 +31,7 @@ import Features from "./components/Features/Features";
 const App = () => {
   // Can user the user state to conditionally render or redirect routes (logged in vs out for example)
   const { user, authIsReady } = useAuthContext();
-
+  const { pathname } = useLocation();
   const ausDate = new Date().toLocaleString("en-CA", { timeZone: "Australia/Adelaide" }).substring(0, 10);
 
   // Used for toast alerts, can pass set function to components that require toast alerts
@@ -64,12 +64,9 @@ const App = () => {
   const [currentPage, setCurrentPage] = useState(null);
   const [firstSignIn, setFirstSignIn] = useState(false);
 
-  const { pathname } = useLocation();
-
   // Ensure the window is scrolled to the top when changing any routes
   useEffect(() => {
     window.scrollTo(0, 0);
-    console.log('Run scroll')
   }, [pathname]);
 
 
@@ -165,7 +162,6 @@ const App = () => {
   };
 
   
-
   return (
     <StyledApp className="App">
       <GlobalStyles />

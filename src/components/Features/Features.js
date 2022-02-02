@@ -13,7 +13,7 @@ const Features = ({ setPage }) => {
     setPage('features');
   }, [setPage]);
 
-  const ready = false;
+  const ready = true;
 
   return (
     <StyledFeatures>

@@ -104,7 +104,6 @@ const Favourites = ({ user, setToast }) => {
 
         {favourites && <>
           {favourites.length > 0 ? (<>
-            <div className="list-header">Favourites</div>
             <ul className='fav-list'>
               <li className='first-list-item'><span>Script name</span><span className='actions-span'>Actions</span></li>
               {favourites.map((fav) => (

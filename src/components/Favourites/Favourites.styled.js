@@ -8,11 +8,10 @@ const StyledFavourites = styled.div`
   flex-direction: column;
   
   .Favourites__title {
-    margin: -0.75rem 0 0 0;
+    margin: 0;
     font-size: 1.6rem;
     font-weight: 300;
     color: var(--title-color);
-    display: none;
   }
 
   
@@ -58,18 +57,6 @@ const StyledFavourites = styled.div`
     }
 
     
-    .fav-item--none {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 7rem;
-      font-size: 0.9rem;
-      color: #5A6572;
-
-      &:hover {
-        background-color: #FFFFFF;
-      }
-    }
 
     .first-list-item {
       border: none;
@@ -164,7 +151,35 @@ const StyledFavourites = styled.div`
         }
       }
     }
+
+    
+
+    
   }
+
+  .fav-list--none {
+
+    box-shadow: none;
+      .list-header {
+        display: none;
+      }
+      .fav-item--none {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 7rem;
+        font-size: 0.9rem;
+        color: #5A6572;
+        box-shadow: none;
+        border: 1px dashed rgba(0, 0, 0, 0.1);
+        border-radius: 6px; 
+
+      &:hover {
+        background-color: #FFFFFF;
+      }
+    }
+      
+    }
 
   .Modal {
     .favourite-display {
