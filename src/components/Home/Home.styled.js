@@ -13,9 +13,9 @@ const StyledHome = styled.main`
 
   .Home__title {
     font-weight: 700;
-    font-size: 4rem;
+    font-size: 3.5rem;
     margin: 0rem 0 1.5rem 0;
-    line-height: 4.5rem;
+    line-height: 4rem;
   }
 
   .subtitle {
@@ -290,6 +290,12 @@ const StyledHome = styled.main`
 
   /* Lagre screens */
   @media (min-width: 1000px) {
+    .Home__title {
+      font-size: 4rem;
+      margin: 0rem 0 1.5rem 0;
+      line-height: 4.5rem;
+    }
+
     .Home__preview {
       .description {
         margin-right: 4rem;
@@ -305,8 +311,29 @@ const StyledHome = styled.main`
 
   /* Mobile/tablet breakpoint */
   @media (max-width: 800px) {
+    .Home__title {
+      font-size: 3rem;
+      margin: 0rem 0 1.5rem 0;
+      line-height: 3.5rem;
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+    }
+
     .preview-container {
       flex-direction: column;
+
+      .description {
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+
+        .description__btns {
+          margin-right: 0;
+          justify-content: center;
+        }
+      }
 
       .description__screenshots {
         margin-top: 3rem;
@@ -317,13 +344,74 @@ const StyledHome = styled.main`
     .stationery-container {
       flex-direction: column-reverse;
 
+      .stationery-description {
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        margin-left: 0;
+
+        .stationery__btns {
+          margin-right: 0;
+          justify-content: center;
+        }
+      }
+
       .stationery__screenshots {
         margin-top: 3rem;
         max-width: 500px;
       }
     }
+  }
 
-    
+  /* Smaller mobile screens */
+  @media (max-width: 430px) {
+    .Home__title {
+      font-size: 2.5rem;
+      margin: 0rem 0 1.5rem 0;
+      line-height: 2.75rem;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+    }
+
+    .preview-container {
+      .description {
+        .description__btns {
+          margin-right: 0;
+          justify-content: center;
+          flex-direction: column;
+          align-items: center;
+
+          .button {
+            max-width: 200px;
+          }
+
+          .signup {
+            margin: 0 0 1rem 0;
+          }
+        }
+      }
+    }
+
+    .stationery-container {
+      .stationery-description {
+        .stationery__btns {
+          margin-right: 0;
+          justify-content: center;
+          flex-direction: column;
+          align-items: center;
+
+          .signup {
+            margin: 0 0 1rem 0;
+          }
+
+          .button {
+            max-width: 200px;
+          }
+        }
+      }
+    }
   }
 `
 
