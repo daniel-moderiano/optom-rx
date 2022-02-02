@@ -340,6 +340,11 @@ width: 100%;
       height: auto;
       box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
     }
+
+    .mobile {
+      display: none;
+      max-width: 300px;
+    }
   }
 
   .Features__lemi {
@@ -459,93 +464,17 @@ width: 100%;
       line-height: 1.7rem;
     }
 
-    .preview-container {
-      flex-direction: column;
-
-      .description {
-        text-align: center;
-        justify-content: center;
-        align-items: center;
-        max-width: 550px;
-
-        .description__title {
-          font-size: 2.5rem;
-          line-height: 2.75rem;
-        }
-
-        .description__btns {
-          margin-right: 0;
-          justify-content: center;
-        }
-      }
-
-      .description__screenshots {
-        margin-top: 3rem;
-        max-width: 500px;
+    .Features__prescribers {
+      .mobile {
+        display: block;
       }
     }
 
-    .Features__features {
-      .content-container {
-
-        .features__cards {
-          margin-top: 2rem;
-        }
-        .features__title {
-          font-size: 2.5rem;
-          line-height: 2.75rem;
-        }
-
-        .features__subtitle {
-          font-size: 1.2rem;
-          max-width: 500px;
-          line-height: 1.7rem;
-        }
-      }
+    .desktop {
+      display: none;
     }
 
-    .stationery-container {
-      flex-direction: column-reverse;
 
-      .stationery-description {
-        text-align: center;
-        justify-content: center;
-        align-items: center;
-        margin-left: 0;
-
-        .stationery__title {
-          font-size: 2.5rem;
-          line-height: 2.75rem;
-        }
-
-        .stationery__btns {
-          margin-right: 0;
-          justify-content: center;
-        }
-      }
-
-      .stationery__screenshots {
-        margin-top: 3rem;
-        max-width: 500px;
-      }
-    }
-
-    .Features__action {
-      .content-container {
-        .action__title {
-          font-size: 2.5rem;
-          line-height: 2.75rem;
-        }
-
-        .button {
-          padding: 0.4rem 1.6rem 0.6rem 1.6rem;
-          height: auto;
-          font-size: 1.1rem;
-          font-weight: 500;
-          letter-spacing: 0.01rem;
-        }
-      }
-    }
   }
 
   /* Smaller mobile screens */

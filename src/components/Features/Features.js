@@ -9,6 +9,7 @@ import authority from '../../assets/authority.png';
 import indications from '../../assets/indications.png';
 import quantityRepeats from '../../assets/quantityRepeats.png';
 import prescribers from '../../assets/prescribers.png';
+import prescribersMobile from '../../assets/prescribers-mobile.png';
 
 
 
@@ -106,7 +107,8 @@ const Features = ({ setPage }) => {
               <p className="prescribers__text">Whether you work in a single practice, or locum all across Australia - OptomRx supports as many prescriber profiles as you need. Simply select whichever prescriber details you wish to use when you write a prescription. Simplify things further with default selection for your most common practice location.</p>
             </div>
             <div className="prescribers__screenshots">
-              <img src={prescribers} alt="Online table displaying several sets of prescriber details" />
+              <img className="desktop" src={prescribers} alt="Online table displaying several sets of prescriber details" />
+              <img className="mobile" src={prescribersMobile} alt="Online cards displaying several sets of prescriber details" />
             </div>
           </div>
         </section>
