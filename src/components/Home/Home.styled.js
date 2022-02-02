@@ -311,6 +311,9 @@ const StyledHome = styled.main`
 
   /* Mobile/tablet breakpoint */
   @media (max-width: 800px) {
+    font-size: 1.05rem;
+    line-height: 1.4rem;
+
     .Home__title {
       font-size: 3rem;
       margin: 0rem 0 1.5rem 0;
@@ -319,6 +322,12 @@ const StyledHome = styled.main`
 
     .subtitle {
       font-size: 1.2rem;
+      max-width: 500px;
+      line-height: 1.7rem;
+    }
+
+    .description__title, .action__title, .features__title, .stationery__title {
+      font-size: 1rem;
     }
 
     .preview-container {
@@ -329,6 +338,11 @@ const StyledHome = styled.main`
         justify-content: center;
         align-items: center;
 
+        .description__title {
+          font-size: 2.5rem;
+          line-height: 2.75rem;
+        }
+
         .description__btns {
           margin-right: 0;
           justify-content: center;
@@ -338,6 +352,16 @@ const StyledHome = styled.main`
       .description__screenshots {
         margin-top: 3rem;
         max-width: 500px;
+      }
+    }
+
+    .Home__features {
+      .content-container {
+        .features__subtitle {
+          font-size: 1.2rem;
+          max-width: 500px;
+          line-height: 1.7rem;
+        }
       }
     }
 
@@ -365,6 +389,9 @@ const StyledHome = styled.main`
 
   /* Smaller mobile screens */
   @media (max-width: 430px) {
+    font-size: 1rem;
+    line-height: 1.4rem;
+
     .Home__title {
       font-size: 2.5rem;
       margin: 0rem 0 1.5rem 0;
@@ -373,6 +400,42 @@ const StyledHome = styled.main`
 
     .subtitle {
       font-size: 1.1rem;
+      max-width: 300px;
+      line-height: 1.6rem;
+    }
+
+    .Home__features {
+      .content-container {
+        .features__subtitle {
+          font-size: 1.1rem;
+          max-width: 300px;
+          line-height: 1.6rem;
+        }
+      }
+    }
+
+    .Home__intro {
+      .content-container {
+        .button {
+          padding: 0.4rem 1.6rem 0.6rem 1.6rem;
+          height: auto;
+          font-size: 1.1rem;
+          font-weight: 500;
+          letter-spacing: 0.01rem;
+        }
+      }
+    }
+
+    .Home__action {
+      .content-container {
+        .button {
+          padding: 0.4rem 1.6rem 0.6rem 1.6rem;
+          height: auto;
+          font-size: 1.1rem;
+          font-weight: 500;
+          letter-spacing: 0.01rem;
+        }
+      }
     }
 
     .preview-container {
