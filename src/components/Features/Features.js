@@ -10,6 +10,7 @@ import indications from '../../assets/indications.png';
 import quantityRepeats from '../../assets/quantityRepeats.png';
 import prescribers from '../../assets/prescribers.png';
 import prescribersMobile from '../../assets/prescribers-mobile.png';
+import favourites from '../../assets/favourites.png';
 
 
 
@@ -83,23 +84,6 @@ const Features = ({ setPage }) => {
           </div>
         </section>
 
-        <section className="Features__preview" aria-labelledby="description__title">
-          <div className="content-container preview-container">
-            <div className="description">
-              <h3 id="description__title" className="description__title">Instant re-prescribe</h3>
-              <p className="description__text">Corporate, independent, rural or metro - OptomRx's web app means you have access to professional computerised scripts anywhere.</p>
-              <div className="description__btns">
-                <Button classLabel="signup">Get started</Button>
-                <Button design="ghost">Learn more</Button>
-              </div>
-            </div>
-            <div className="description__screenshots">
-              <img src={laptopMockup} alt="Screenshot of online form for creating new prescription" />
-            </div>
-          </div>
-        </section>
-
-        {/* Possible a final seciton here with a call to action to sign up? */}
         <section className="Features__prescribers" aria-labelledby="prescribers__title">
           <div className="content-container prescribers-container">
             <div className="prescribers-description">
@@ -113,20 +97,30 @@ const Features = ({ setPage }) => {
           </div>
         </section>
 
+        <section className="Features__represcribe" aria-labelledby="represcribe__title">
+          <div className="content-container represcribe-container">
+            <div className="represcribe__description">
+              <h3 id="represcribe__title" className="represcribe__title">Instant re-prescribe</h3>
+              <p className="represcribe__text">In practice, you'll be reaching for the same scripts over and over; why waste time re-writing the same script every time? With OptomRx, you are able to save any script as a 'favourite'.</p>
+              <p className="represcribe__text">These favourites contain only medication details, e.g. ingredient, quantity, repeats, dosage, etc. (never patient data). You can re-prescribe these favourites with a single click. Just add patient details, and the script is done. Quick and easy. </p>
+            </div>
+            <div className="represcribe__screenshots">
+              <img src={favourites} alt="Online dashboard containing favourite scripts in table layout" />
+            </div>
+          </div>
+        </section>
 
-        <section className="Features__preview" aria-labelledby="description__title">
-          <div className="content-container preview-container">
-            <div className="description">
-              <h3 id="description__title" className="description__title">No patient data retention</h3>
-              <p className="description__text">Corporate, independent, rural or metro - OptomRx's web app means you have access to professional computerised scripts anywhere.</p>
-              <div className="description__btns">
-                <Button classLabel="signup">Get started</Button>
-                <Button design="ghost">Learn more</Button>
-              </div>
+
+
+        <section className="Features__data" aria-labelledby="data__title">
+          <div className="content-container data-container">
+            <div className="data__description">
+              <h3 id="data__title" className="data__title">No patient data retention</h3>
+              <p className="data__text">Corporate, independent, rural or metro - OptomRx's web app means you have access to professional computerised scripts anywhere.</p>
             </div>
-            <div className="description__screenshots">
+            {/* <div className="data__screenshots">
               <img src={laptopMockup} alt="Screenshot of online form for creating new prescription" />
-            </div>
+            </div> */}
           </div>
         </section>
 
