@@ -3,12 +3,13 @@ import styled from "styled-components";
 const StyledSignup = styled.div`
   /* The overall page styling, NOT the login form/container itself */
   height: 100%;
+  min-height: 100vh;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  margin-bottom: 4rem;
+
 
   .Signup__container {
     background-color: #FFFFFF;
@@ -19,6 +20,7 @@ const StyledSignup = styled.div`
     display: flex;
     align-items: flex-end;
     flex-direction: column;
+    margin-bottom: 10rem;
   }
 
   .Signup__title {
