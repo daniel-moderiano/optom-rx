@@ -11,7 +11,7 @@ const StyledMain = styled.main`
 
   &.home-main {
     color: #263238;
-    background-color: #fff;
+    /* background-color: #fff; */
     width: 100%;
     padding: 0;
   }

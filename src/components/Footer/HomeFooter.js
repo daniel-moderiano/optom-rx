@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { StyledHomeFooter } from "./HomeFooter.styled";
 
-const HomeFooter = () => {
+const HomeFooter = ({ currentPage }) => {
   return (
     <StyledHomeFooter className="HomeFooter">
       <div className="footer-top">
@@ -26,8 +26,9 @@ const HomeFooter = () => {
             <div className="column">
               <h4 className="footer-title">Contact us</h4>
               <ul>
-                <li><a href="#">Open Source</a></li>
-                <li><a href="#">About</a></li>
+                <li><Link to="/terms-of-service">Terms of Service</Link></li>
+                <li><Link to="/privacy-policy">Privacy Policy</Link></li>
+                
               </ul>
             </div>
           </div>
@@ -51,7 +52,7 @@ const HomeFooter = () => {
       <div className="footer-bottom">
         <div className="bottom-container">
           <div className="links">
-            <Link to="/terms-of-service">Terms of Service</Link>
+            <Link className="terms-link" to="/terms-of-service">Terms of Service</Link>
             <Link to="/privacy-policy">Privacy Policy</Link>
           </div>
           <p className="copyright">&copy; 2022 Daniel Moderiano.</p>

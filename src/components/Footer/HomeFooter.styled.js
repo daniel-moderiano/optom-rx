@@ -7,8 +7,8 @@ const StyledHomeFooter = styled.footer`
   justify-content: center;
   flex-direction: column;
   background-color: #fff;
+  /* background-color: var(--background); */
 
- 
 
   .footer-top {
     width: 100%;
@@ -25,11 +25,19 @@ const StyledHomeFooter = styled.footer`
       display: flex;
       align-items: center;
       justify-content: space-between;
+/* 
+      .logo-container {
+        display: flex;
+        align-items: flex-end;
+        flex-direction: column;
+        font-size: 0.9rem;
+      } */
 
       .logo {
         width: 6rem;
-        /* margin-right: 1rem; */
+        margin-left: 1rem;
         padding-top: 0.5rem;
+        /* margin-bottom: 0.25rem; */
 
         .cls-1 {
           fill: var(--primary-color);
@@ -83,27 +91,64 @@ const StyledHomeFooter = styled.footer`
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 4.5rem;
+    /* height: 4.5rem; */
     font-size: 0.9rem;
     width: 100%;
 
     .bottom-container {
       width: 100%;
       max-width: 1140px;
-      padding: 0 2rem;
+      padding: 1.5rem 2rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
 
-    a {
-      color: #263238;
-      text-decoration: none;
-      margin-right: 1.5rem;
+    .links {
+      .terms-link {
+        margin-right: 1.5rem;
+      }
 
-      &:hover {
-        text-decoration: underline #263238;
+      a {
+        color: #263238;
+        text-decoration: none;
+        
 
+        &:hover {
+          text-decoration: underline #263238;
+
+        }
+      }
+    }
+  }
+
+  /* Mobile breakpoint */
+  @media (max-width: 550px) {
+    .footer-top {
+      padding: 2rem 0 1.5rem 0;
+      .top-container {
+        flex-direction: column;
+
+        .footer-secondary-nav {
+          justify-items: center;
+          text-align: center;
+        }
+
+        .logo {
+          margin-top: 1rem;
+        }
+
+        .column {
+          margin-bottom: 1rem;
+        }
+      }
+    }
+
+    .bottom-container {
+      flex-direction: column;
+
+      .links {
+        padding-bottom: 0.75rem;
       }
     }
   }

@@ -3,12 +3,13 @@ import styled from "styled-components";
 const StyledLogin = styled.div`
 /* The overall page styling, NOT the login form/container itself */
   height: 100%;
+  min-height: 100vh;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  margin-bottom: 4rem;
+  /* margin-bottom: 4rem; */
 
   /* The actual white space around the form */
   .Login__container {
@@ -20,6 +21,7 @@ const StyledLogin = styled.div`
     display: flex;
     align-items: flex-end;
     flex-direction: column;
+    margin-bottom: 10rem;
   }
 
   .Login__title {

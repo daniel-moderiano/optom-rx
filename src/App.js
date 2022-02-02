@@ -260,8 +260,8 @@ const App = () => {
 
           </Routes>
         </Main>
-        {user && <AppFooter />}
-        {!user && <HomeFooter />}
+        {user && <AppFooter currentPage={currentPage}/>}
+        {!user && <HomeFooter currentPage={currentPage}/>}
       </>)}
       <Toast params={toastParams} />
      
