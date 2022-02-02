@@ -19,6 +19,7 @@ const Nav = ({ currentPage, resetData }) => {
   const ariaScripts = currentPage === 'scripts' ? { "aria-current": "page" } : {};
   const ariaSettings = currentPage === 'settings' ? { "aria-current": "page" } : {};
   const ariaPrescribers = currentPage === 'prescribers' ? { "aria-current": "page" } : {};
+  const ariaFeatures = currentPage === 'features' ? { "aria-current": "page" } : {};
 
   // Shows or hides the Nav menu on mobile
   const toggleNav = () => {
@@ -37,11 +38,15 @@ const Nav = ({ currentPage, resetData }) => {
       <ul className={`${showNav ? "Nav__list active" : "Nav__list"}`} role="menubar">
         {!user && <>
           <li className="Nav__list-item" role="menuitem">
-            <Link onClick={closeNav} className="Nav__link Nav__link--std Nav__link--login" to="/login"  {...ariaLogin}>Login</Link>
+            <Link onClick={closeNav} className="Nav__link Nav__link--std Nav__link--homepage" to="/features" {...ariaFeatures}>Features</Link>
           </li>
           <li className="Nav__list-item" role="menuitem">
-            <Link onClick={closeNav} className="Nav__link Nav__link--std Nav__link--signup" to="/signup" {...ariaSignup}>Sign up</Link>
+            <Link onClick={closeNav} className="Nav__link Nav__link--std Nav__link--homepage" to="/login"  {...ariaLogin}>Login</Link>
           </li>
+          <li className="Nav__list-item" role="menuitem">
+            <Link onClick={closeNav} className="Nav__link Nav__link--std Nav__link--homepage" to="/signup" {...ariaSignup}>Sign up</Link>
+          </li>
+          
           </>
         }
       

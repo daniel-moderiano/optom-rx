@@ -113,7 +113,7 @@ const StyledNav = styled.nav`
         }
       }
 
-      .Nav__link--login, .Nav__link--signup {
+      .Nav__link--homepage {
         &:before,
         &:after {
           background-color: var(--primary-color);

@@ -25,6 +25,7 @@ import AppFooter from './components/Footer/AppFooter';
 import HomeFooter from './components/Footer/HomeFooter';
 import PrivacyPolicy from "./components/Policies/PrivacyPolicy";
 import Terms from "./components/Policies/Terms";
+import Features from "./components/Features/Features";
 
 
 const App = () => {
@@ -176,6 +177,8 @@ const App = () => {
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
 
             <Route path="/terms-of-service" element={<Terms />} />
+
+            <Route path="/features" element={<Features setPage={setCurrentPage}/>} />
 
             <Route path="/dashboard" element={
               <>
