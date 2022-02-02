@@ -8,26 +8,26 @@ const HomeFooter = ({ currentPage }) => {
         <div className="top-container">
         <div className="footer-secondary-nav">
             <div className="column">
+              <h4 className="footer-title">Service</h4>
+              <ul>
+                <li><a href="#">Features</a></li>
+                <li><a href="#">Examples</a></li>
+              </ul>
+            </div>
+
+            <div className="column">
               <h4 className="footer-title">Resources</h4>
               <ul>
-                <li><a href="#">Platform</a></li>
-                <li><a href="#">Users</a></li>
+                <li><a href="#">FAQs</a></li>
+                <li><a href="#">Release Notes</a></li>
               </ul>
             </div>
 
             <div className="column">
-              <h4 className="footer-title">Learn</h4>
+              <h4 className="footer-title">Project</h4>
               <ul>
-                <li><a href="#">Community</a></li>
-                <li><a href="#">Docs</a></li>
-              </ul>
-            </div>
-
-            <div className="column">
-              <h4 className="footer-title">Contact us</h4>
-              <ul>
-                <li><Link to="/terms-of-service">Terms of Service</Link></li>
-                <li><Link to="/privacy-policy">Privacy Policy</Link></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Open Source</a></li>
                 
               </ul>
             </div>
