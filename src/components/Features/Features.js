@@ -8,6 +8,7 @@ import lemi from '../../assets/lemi-lmbc.png';
 import authority from '../../assets/authority.png';
 import indications from '../../assets/indications.png';
 import quantityRepeats from '../../assets/quantityRepeats.png';
+import prescribers from '../../assets/prescribers.png';
 
 
 
@@ -98,18 +99,14 @@ const Features = ({ setPage }) => {
         </section>
 
         {/* Possible a final seciton here with a call to action to sign up? */}
-        <section className="Features__stationery" aria-labelledby="stationery__title">
-          <div className="content-container stationery-container">
-          <div className="stationery__screenshots">
-              <img src={sampleRx} alt="Printed PBS prescription on computerised PBS form" />
+        <section className="Features__prescribers" aria-labelledby="prescribers__title">
+          <div className="content-container prescribers-container">
+            <div className="prescribers-description">
+              <h3 id="prescribers__title" className="prescribers__title">Multiple prescribers</h3>
+              <p className="prescribers__text">Whether you work in a single practice, or locum all across Australia - OptomRx supports as many prescriber profiles as you need. Simply select whichever prescriber details you wish to use when you write a prescription. Simplify things further with default selection for your most common practice location.</p>
             </div>
-            <div className="stationery-description">
-              <h3 id="stationery__title" className="stationery__title">Multiple prescribers</h3>
-              <p className="stationery__text">OptomRx pairs with computer generated PBS forms to create professional facing scripts for patients, consistent with GPs and other allied health providers. These forms can be ordered in bulk from <a target="_blank" rel="noreferrer" href="https://www.servicesaustralia.gov.au/pbs-and-rpbs-stationery-for-optometrists?context=22851">Services Australia<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="18px" fill="#263238"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg></a>.</p>
-              <div className="stationery__btns">
-                <Button classLabel="signup">Get started</Button>
-                <Button design="ghost">Learn more</Button>
-              </div>
+            <div className="prescribers__screenshots">
+              <img src={prescribers} alt="Online table displaying several sets of prescriber details" />
             </div>
           </div>
         </section>

@@ -138,12 +138,12 @@ width: 100%;
 
     .authority {
       max-width: 450px;
-      margin: 0 0 0 2rem;
+      margin: 0 0 0 0rem;
     }
 
     .quantityRepeats {
       max-width: 385px;
-      margin: 0 1rem 0 0;
+      margin: 0 2rem 0 0;
     }
 
     img {
@@ -291,6 +291,48 @@ width: 100%;
 
     .stationery__screenshots {
       max-width: 550px;
+    }
+
+    img {
+      width: 100%;     
+      height: auto;
+      box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+    }
+  }
+
+  .Features__prescribers {
+    padding: 6rem 0 5rem 0;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #F9FAFB;
+
+    .prescribers-container {
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .prescribers-description {
+      /* margin-left: 3rem; */
+      text-align: center;
+      max-width: 800px;
+      line-height: 1.5rem;
+
+      h3 {
+        font-size: 2.7rem;
+        font-weight: 600;
+        line-height: 3rem;
+        margin: 0 0 1rem 0;
+      }
+    }
+
+    .prescribers__screenshots {
+      max-width: 800px;
+      margin: 2rem 0;
     }
 
     img {
