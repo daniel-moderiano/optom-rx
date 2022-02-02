@@ -254,7 +254,7 @@ const Terms = () => {
           Section 17 - Contact Information
         </h3>
         <p className="Terms__paragraph">
-          Questions about the Terms of Service should be sent to us at optomrx@outlook.com.
+          Questions about the Terms of Service should be sent to us at mail@optomrx.net.
         </p>
       </section>
 

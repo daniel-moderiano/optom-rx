@@ -153,8 +153,8 @@ const StyledHome = styled.main`
       width: 100%;
 
       .features__card {
-        max-width: 320px;
-        margin: 0.75rem;
+        max-width: 345px;
+        margin: 0.5rem;
         background-color: #fff;
         box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px 0px;
         border: 1px solid #dee1e4;
@@ -364,6 +364,7 @@ const StyledHome = styled.main`
         .features__cards {
           margin-top: 2rem;
         }
+
         .features__title {
           font-size: 2.5rem;
           line-height: 2.75rem;

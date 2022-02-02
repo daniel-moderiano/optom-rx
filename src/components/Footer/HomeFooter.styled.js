@@ -29,7 +29,7 @@ const StyledHomeFooter = styled.footer`
         align-items: flex-end;
         flex-direction: column;
         font-size: 0.9rem;
-        min-width: 170px;
+        min-width: 185px;
       }
 
       .logo {

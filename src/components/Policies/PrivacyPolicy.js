@@ -151,7 +151,7 @@ const PrivacyPolicy = () => {
           Contact Us
         </h3>
         <p className="Privacy__paragraph">
-          For more information about our privacy practices, if you have questions, or if you would like to make a complaint, please contact us by e-mail at optomrx@outlook.com.
+          For more information about our privacy practices, if you have questions, or if you would like to make a complaint, please contact us by e-mail at mail@optomrx.net.
         </p>
       </section>
     </StyledPolicy>

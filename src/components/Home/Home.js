@@ -97,7 +97,7 @@ const Home = ({ setPage }) => {
               <div className="features__card">
                 <span className="card-icon"> <svg xmlns="http://www.w3.org/2000/svg" className="icon arrow-icon" viewBox="0 0 512 512" width="50px" height="50px"><path d="M448 256L272 88v96C103.57 184 64 304.77 64 424c48.61-62.24 91.6-96 208-96v96z" fill="#31776f" stroke="31776f" strokeLinejoin="round" strokeWidth="10" /></svg></span>
                 <h4 className="card__title">Instant re-prescribe</h4>
-                <p className="card-text">Save your most frequently prescribed medicines as favourites to instantly re-prescribe them with a single click.</p>
+                <p className="card-text">Save your frequently prescribed medicines as favourites to instantly re-prescribe them with a single click.</p>
                 <Link to="/features" className="btn-primary button">Learn more</Link>
               </div>
               <div className="features__card">
