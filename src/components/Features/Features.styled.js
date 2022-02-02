@@ -96,7 +96,15 @@ width: 100%;
       font-size: 2.7rem;
       font-weight: 600;
       line-height: 3rem;
-      margin: 0 0 2rem 0;
+      margin: 0 0 1rem 0;
+    }
+
+    .pbs-subtitle {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #546E7A;
+      max-width: 700px;
+      margin: 0 1rem;
     }
 
     .pbs-container {

@@ -31,6 +31,7 @@ const Features = ({ setPage }) => {
 
         <section className="Features__pbs" aria-labelledby="description__title">
           <h3 id="description__title" className="description__title">Real-time PBS data</h3>
+          <p className="pbs-subtitle">Anytime you want to write a PBS script with OptomRx, you'll have access to these fantastic features.</p>
           <div className="content-container pbs-container indications-container">
             <div className="description">
               <h4 className="description__title">Instant PBS availability and indications</h4>
@@ -63,7 +64,6 @@ const Features = ({ setPage }) => {
           </div>
         </section>
 
-
         <section className="Features__lemi" aria-labelledby="lemi__title">
           <div className="content-container lemi-container">
           <div className="lemi__screenshots">
@@ -76,7 +76,7 @@ const Features = ({ setPage }) => {
                 <li>Those medicines listed in the List of Excluded Medicinal Items (LEMI); these items should be prescribed by brand only, and</li>
                 <li>Those medicines listed in the List of Medicines for Brand Consideration (LMBC); prescribers should consider including the brand name when prescribing these items.</li>
               </ul>
-              <p className="lemi__text">OptomRx takes the work out of checking which items belong to the LEMI or LMBC, and automatically adjusts your prescription to meet relevant guidelines. You can find out if any LEMI/LMBC adjustments have been made while writing any prescription with OptomRx.</p>
+              <p className="lemi__text">OptomRx takes the work out of checking which items belong to the LEMI or LMBC, and automatically adjusts your prescription to meet relevant guidelines. You can also find out if any LEMI/LMBC adjustments have been made while writing you scripts.</p>
             </div>
           </div>
         </section>
