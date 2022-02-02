@@ -11,26 +11,28 @@ const HomeFooter = () => {
               {/* <h4 className="footer-title">Web App</h4> */}
               <ul>
                 <li><a href="#">Features</a></li>
+                <li><a href="#">Release Notes</a></li>
                 <li><a href="#">Contribute</a></li>
-                <li><a href="#">Open Source</a></li>
+                
               </ul>
             </div>
 
             <div className="column">
               {/* <h4 className="footer-title">Resources</h4> */}
               <ul>
+                
+                <li><a href="#">About</a></li>
                 <li><a href="#">FAQ</a></li>
-                <li><a href="#">Release Notes</a></li>
-                <li><a href="#">Privacy</a></li>
+                <li><a href="#">Contact Us</a></li>
+                
               </ul>
             </div>
 
             <div className="column">
               {/* <h4 className="footer-title">Support</h4> */}
               <ul>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact Us</a></li>
-                <li><a href="#">Terms</a></li>
+                <li><Link to="terms-of-service">Terms</Link></li>
+                <li><Link to="privacy-policy">Privacy</Link></li>
               </ul>
             </div>
           </div>

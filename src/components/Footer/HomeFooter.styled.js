@@ -12,7 +12,7 @@ const StyledHomeFooter = styled.footer`
   .footer-top {
     width: 100%;
     border-top: 1px solid #F1F1F1;
-    padding: 2rem 0;
+    padding: 2rem 0 1.5rem 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -36,7 +36,7 @@ const StyledHomeFooter = styled.footer`
       .logo {
         width: 6rem;
         margin-left: 1rem;
-        padding-top: 0.5rem;
+        /* padding-top: 0.5rem; */
         /* margin-bottom: 0.25rem; */
 
         .cls-1 {

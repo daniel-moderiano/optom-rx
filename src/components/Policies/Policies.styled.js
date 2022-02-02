@@ -9,7 +9,7 @@ const StyledPolicy = styled.div`
   margin: 2rem 0.5rem 5rem 0.5rem;
   border: 1px solid #d0d7de;
   background-color: #fff;
-  padding: 4rem 7.5rem;
+  padding: 4rem 3.5rem;
   border-radius: 6px;
   box-shadow: var(--small-shadow);
 
@@ -54,7 +54,15 @@ const StyledPolicy = styled.div`
     }
   }
 
+  /* Large screens */
+  @media (min-width: 1000px) {
+    padding: 4rem 7.5rem;
+  }
+
+  /* Tablets and below */
   @media (max-width: 768px) {
+    padding: 3rem 2.5rem;
+
     .Privacy__heading {
       font-size: 2.5em;
     }
@@ -65,7 +73,10 @@ const StyledPolicy = styled.div`
     }
   }
 
+  /* Phone portrait screens */
   @media (max-width: 450px) {
+    padding: 3rem 1.5rem;
+
     .Privacy__heading {
       font-size: 2.1rem;
     }
@@ -75,8 +86,6 @@ const StyledPolicy = styled.div`
       margin: 1.25rem 0 1.25rem 0;
     }
   }
-
-
 `
 
 export { StyledPolicy }
