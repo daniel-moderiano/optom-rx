@@ -125,6 +125,13 @@ const StyledHome = styled.main`
     flex-direction: column;
     background-color: #F9FAFB;
 
+    .content-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
     .features__title {
       font-size: 2.6rem;
       font-weight: 600;
@@ -326,10 +333,6 @@ const StyledHome = styled.main`
       line-height: 1.7rem;
     }
 
-    .description__title, .action__title, .features__title, .stationery__title {
-      font-size: 1rem;
-    }
-
     .preview-container {
       flex-direction: column;
 
@@ -337,6 +340,7 @@ const StyledHome = styled.main`
         text-align: center;
         justify-content: center;
         align-items: center;
+        max-width: 550px;
 
         .description__title {
           font-size: 2.5rem;
@@ -357,6 +361,15 @@ const StyledHome = styled.main`
 
     .Home__features {
       .content-container {
+
+        .features__cards {
+          margin-top: 2rem;
+        }
+        .features__title {
+          font-size: 2.5rem;
+          line-height: 2.75rem;
+        }
+
         .features__subtitle {
           font-size: 1.2rem;
           max-width: 500px;
@@ -374,6 +387,11 @@ const StyledHome = styled.main`
         align-items: center;
         margin-left: 0;
 
+        .stationery__title {
+          font-size: 2.5rem;
+          line-height: 2.75rem;
+        }
+
         .stationery__btns {
           margin-right: 0;
           justify-content: center;
@@ -383,6 +401,23 @@ const StyledHome = styled.main`
       .stationery__screenshots {
         margin-top: 3rem;
         max-width: 500px;
+      }
+    }
+
+    .Home__action {
+      .content-container {
+        .action__title {
+          font-size: 2.5rem;
+          line-height: 2.75rem;
+        }
+
+        .button {
+          padding: 0.4rem 1.6rem 0.6rem 1.6rem;
+          height: auto;
+          font-size: 1.1rem;
+          font-weight: 500;
+          letter-spacing: 0.01rem;
+        }
       }
     }
   }
@@ -406,10 +441,31 @@ const StyledHome = styled.main`
 
     .Home__features {
       .content-container {
+
+        .features__title {
+          font-size: 2.1rem;
+          line-height: 2.5rem;
+        }
+
+        .features__card {
+          margin: 0.75rem 0;
+        }
+
         .features__subtitle {
           font-size: 1.1rem;
           max-width: 300px;
           line-height: 1.6rem;
+          margin: 0;
+        }
+      }
+    }
+
+    .Home__action {
+      .content-container {
+        .action__title {
+          font-size: 2.1rem;
+          line-height: 2.5rem;
+          margin-bottom: 1.25rem;
         }
       }
     }
@@ -426,25 +482,28 @@ const StyledHome = styled.main`
       }
     }
 
-    .Home__action {
-      .content-container {
-        .button {
-          padding: 0.4rem 1.6rem 0.6rem 1.6rem;
-          height: auto;
-          font-size: 1.1rem;
-          font-weight: 500;
-          letter-spacing: 0.01rem;
-        }
-      }
-    }
-
     .preview-container {
       .description {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .description__title {
+          font-size: 2.1rem;
+          line-height: 2.5rem;
+          margin-bottom: 1rem;
+        }
+
+        .description__text {
+          max-width: 300px;
+        }
+        
         .description__btns {
           margin-right: 0;
           justify-content: center;
           flex-direction: column;
           align-items: center;
+          width: 100%;
 
           .button {
             max-width: 200px;
@@ -459,11 +518,26 @@ const StyledHome = styled.main`
 
     .stationery-container {
       .stationery-description {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .stationery__title {
+          font-size: 2.1rem;
+          line-height: 2.5rem;
+          margin-bottom: 1rem;
+        }
+        
+        .stationery__text {
+          max-width: 300px;
+        }
+        
         .stationery__btns {
           margin-right: 0;
           justify-content: center;
           flex-direction: column;
           align-items: center;
+          width: 100%;
 
           .signup {
             margin: 0 0 1rem 0;
