@@ -1,15 +1,15 @@
+import { StyledPolicy } from "./Policies.styled";
 
 const PrivacyPolicy = () => {
   return (
-    <div className="Privacy">
+    <StyledPolicy className="Privacy">
       <h2 className="Privacy__heading">
         OptomRx Privacy Policy
       </h2>
 
+      <p className="Policy__date">Last Updated February 1st, 2022</p>
+
       <section className="Privacy__section">
-        <h3 className="Privacy__subheading">
-          Overview
-        </h3>
         <p className="Privacy__paragraph">
           OptomRx is committed to providing quality services to you and this policy outlines how your Personal Information is collected, used, and shared when you visit optomrx.net (the “Site”).
         </p>
@@ -17,7 +17,7 @@ const PrivacyPolicy = () => {
           We have adopted the Australian Privacy Principles (APPs) contained in the Privacy Act 1988 (Privacy Act). The APPs govern the way in which we collect, use, disclose, store, secure and dispose of your Personal Information.
         </p>
         <p className="Privacy__paragraph">
-          A copy of the Australian Privacy Principles may be obtained from the website of The Office of the Australian Information Commissioner at https://www.oaic.gov.au/privacy/australian-privacy-principles.
+          A copy of the <a href="https://www.oaic.gov.au/privacy/australian-privacy-principles.">Australian Privacy Principles</a> may be obtained from the website of The Office of the Australian Information Commissioner using the link provided.
         </p>
       </section>
 
@@ -32,7 +32,7 @@ const PrivacyPolicy = () => {
           We collect Device Information using the following technologies:
           <ul className="Privacy__list">
             <li className="Privacy__list-item">
-              “Cookies” are data files that are placed on your device or computer and often include an anonymous unique identifier. For more information about cookies, and how to disable cookies, visit http://www.allaboutcookies.org.
+              “Cookies” are data files that are placed on your device or computer and often include an anonymous unique identifier. Follow the link provided for more <a href=" https://www.allaboutcookies.org">information about cookies, and how to disable cookies.</a> 
             </li>
             <li className="Privacy__list-item">
               “Log files” track actions occurring on the Site, and collect data including your IP address, browser type, Internet service provider, referring/exit pages, and date/time stamps.
@@ -106,7 +106,7 @@ const PrivacyPolicy = () => {
           Disclosure of Personal Information
         </h3>
         <p className="Privacy__paragraph">
-          We share your Personal Information with third parties to help us use your Personal Information, as described above. We use Google Analytics to help us understand how our customers use the Site--you can read more about how Google uses your Personal Information here:  https://www.google.com/intl/en/policies/privacy/.  You can also opt-out of Google Analytics here:  https://tools.google.com/dlpage/gaoptout.
+          We share your Personal Information with third parties to help us use your Personal Information, as described above. We use Google Analytics to help us understand how our customers use the Site--you can read more about <a href="https://www.google.com/intl/en/policies/privacy/.">how Google uses your Personal Information</a>. You can also <a href="https://tools.google.com/dlpage/gaoptout">opt-out of Google Analytics.</a>  
         </p>
         <p className="Privacy__paragraph">
           We may also share your Personal Information to comply with applicable laws and regulations, to respond to a subpoena, search warrant or other lawful request for information we receive, or to otherwise protect our rights.
@@ -154,7 +154,7 @@ const PrivacyPolicy = () => {
           For more information about our privacy practices, if you have questions, or if you would like to make a complaint, please contact us by e-mail at optomrx@outlook.com.
         </p>
       </section>
-    </div>
+    </StyledPolicy>
   );
 };
 

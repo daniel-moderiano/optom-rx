@@ -1,15 +1,15 @@
+import { StyledPolicy } from "./Policies.styled";
 
 const Terms = () => {
   return (
-    <div className="Terms">
+    <StyledPolicy className="Terms">
       <h2 className="Terms__heading">
         OptomRx Terms of Service
       </h2>
 
+      <p className="Policy__date">Last Updated February 1st, 2022</p>
+
       <section className="Terms__section">
-        <h3 className="Terms__subheading">
-          Overview
-        </h3>
         <p className="Terms__paragraph">
           Thank you for choosing to use OptomRx. Throughout the following document, the terms “we”, “us” and “our” refer to OptomRx. This website, including all information, tools and services available from this site to you, the user, conditioned upon your acceptance of all terms, conditions, policies and notices stated here.
         </p>
@@ -258,7 +258,7 @@ const Terms = () => {
         </p>
       </section>
 
-    </div>
+    </StyledPolicy>
   );
 };
 
