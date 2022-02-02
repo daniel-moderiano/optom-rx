@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import { StyledHomeFooter } from "./HomeFooter.styled";
 
-const HomeFooter = () => {
+const HomeFooter = ({ currentPage }) => {
   return (
-    <StyledHomeFooter className="HomeFooter">
+    <StyledHomeFooter className="HomeFooter" currentPage={currentPage}>
       <div className="footer-top">
         <div className="top-container">
         <div className="footer-secondary-nav">
@@ -13,18 +13,15 @@ const HomeFooter = () => {
                 <li><a href="#">Features</a></li>
                 <li><a href="#">Release Notes</a></li>
                 <li><a href="#">Contribute</a></li>
-                
               </ul>
             </div>
 
             <div className="column">
               {/* <h4 className="footer-title">Resources</h4> */}
               <ul>
-                
                 <li><a href="#">About</a></li>
                 <li><a href="#">FAQ</a></li>
                 <li><a href="#">Contact Us</a></li>
-                
               </ul>
             </div>
 

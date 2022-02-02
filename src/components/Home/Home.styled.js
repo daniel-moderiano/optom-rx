@@ -168,7 +168,6 @@ const StyledHome = styled.main`
           /* background-color: #F9FAFB; */
           border-color: rgba(49, 119, 111, 0.5);
           box-shadow: rgba(49, 119, 111, 0.2) 0px 8px 24px 0px;
-          cursor: pointer;
         }
 
         h4 {
