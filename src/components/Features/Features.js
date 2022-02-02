@@ -33,8 +33,8 @@ const Features = ({ setPage }) => {
           <h3 id="description__title" className="description__title">Real-time PBS data</h3>
           <div className="content-container pbs-container indications-container">
             <div className="description">
-              <h4 className="description__title">Real-time PBS data</h4>
-              <p className="description__text">Corporate, independent, rural or metro - OptomRx's web app means you have access to professional computerised scripts anywhere.</p>
+              <h4 className="description__title">Instant PBS availability and indications</h4>
+              <p className="description__text">The moment you select a medication, OptomRx will show you whether it is eligible for PBS prescribing. If the medication is restricted or required authority, you can optionally view the indications for it's use under the PBS.</p>
             </div>
             <div className="description__screenshots indications">
               <img src={indications} alt="Online form indicating PBS availability and indications for use" />
@@ -46,16 +46,16 @@ const Features = ({ setPage }) => {
               <img src={quantityRepeats} alt="Online form indicating max quantity and repeats for a PBS medication" />
             </div>
             <div className="description">
-              <h4 className="description__title">Real-time PBS data</h4>
-              <p className="description__text">Corporate, independent, rural or metro - OptomRx's web app means you have access to professional computerised scripts anywhere.</p>
+              <h4 className="description__title">Avoid mistakes in prescribing</h4>
+              <p className="description__text">Every PBS medication has maximum allowable quantity and repeats. Using up-to-date PBS data, OptomRx shows you these values for any selected PBS medication, so you making any prescribing errors less likely.</p>
             </div>
            
           </div>
 
           <div className="content-container pbs-container authority-container">
             <div className="description">
-              <h4 className="description__title">Real-time PBS data</h4>
-              <p className="description__text">Corporate, independent, rural or metro - OptomRx's web app means you have access to professional computerised scripts anywhere.</p>
+              <h4 className="description__title">Save time for those less common authority scripts</h4>
+              <p className="description__text">Where a streamline authority code is available, it will be supplied for you, automatically. For those medications requiring manual authority codes, OptomRx will advise you where to apply for authority.</p>
             </div>
             <div className="description__screenshots authority">
               <img src={authority} alt="Online form indicating authority is required for a medication" />

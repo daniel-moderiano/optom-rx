@@ -102,7 +102,7 @@ width: 100%;
     .pbs-container {
       text-align: center;
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       justify-content: center;
       margin: 2rem 0;
     }
@@ -115,7 +115,7 @@ width: 100%;
       h4 {
         font-size: 1.8rem;
         font-weight: 500;
-        line-height: 3rem;
+        line-height: 2.5rem;
         margin: 0 0 1rem 0;
       }
     }
