@@ -86,7 +86,7 @@ const StyledHome = styled.main`
     }
 
     .description {
-      margin-right: 4rem;
+      /* margin-right: 1rem; */
       text-align: left;
       max-width: 400px;
       line-height: 1.5rem;
@@ -96,6 +96,11 @@ const StyledHome = styled.main`
         font-weight: 600;
         line-height: 3rem;
         margin: 0 0 2rem 0;
+      }
+
+      .description__btns {
+        /* max-width: 200px; */
+        margin-right: 2rem;
       }
     }
 
@@ -193,10 +198,25 @@ const StyledHome = styled.main`
     }
 
     .stationery-description {
-      margin-left: 5rem;
+      margin-left: 3rem;
       text-align: left;
-      max-width: 500px;
+      max-width: 550px;
       line-height: 1.5rem;
+
+      .stationery__btns {
+        display: flex;
+        margin-top: 2rem;
+        margin-right: 3.5rem;
+
+        .button {
+          width: 100%;
+          max-width: 140px;
+        }
+
+        .signup {
+          margin-right: 1rem;
+        }
+      }
 
       h3 {
         font-size: 2.7rem;
@@ -266,6 +286,44 @@ const StyledHome = styled.main`
         letter-spacing: 0.02rem;
       }
     }
+  }
+
+  /* Lagre screens */
+  @media (min-width: 1000px) {
+    .Home__preview {
+      .description {
+        margin-right: 4rem;
+      }
+    }
+
+    .Home__stationery {
+      .stationery-description {
+        margin-left: 5rem;
+      }
+    }
+  }
+
+  /* Mobile/tablet breakpoint */
+  @media (max-width: 800px) {
+    .preview-container {
+      flex-direction: column;
+
+      .description__screenshots {
+        margin-top: 3rem;
+        max-width: 500px;
+      }
+    }
+
+    .stationery-container {
+      flex-direction: column-reverse;
+
+      .stationery__screenshots {
+        margin-top: 3rem;
+        max-width: 500px;
+      }
+    }
+
+    
   }
 `
 

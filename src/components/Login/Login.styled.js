@@ -9,7 +9,6 @@ const StyledLogin = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  /* margin-bottom: 4rem; */
 
   /* The actual white space around the form */
   .Login__container {
