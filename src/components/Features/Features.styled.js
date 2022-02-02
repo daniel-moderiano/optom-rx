@@ -4,6 +4,12 @@ const StyledFeatures = styled.div`
 width: 100%;
   font-size: 1.1rem;
 
+  .example {
+    margin: 5rem;
+    width: 700px;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+  }
+
   .content-container {
     max-width: 1600px;
     margin: 0 1rem;
@@ -268,6 +274,54 @@ width: 100%;
       width: 100%;     
       height: auto;
       box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+    }
+  }
+
+  .Features__lemi {
+    padding: 6rem 0 5rem 0;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #F9FAFB;
+
+    .lemi-container {
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lemi__description {
+      margin-left: 3rem;
+      text-align: left;
+      max-width: 550px;
+      line-height: 1.5rem;
+
+      h3 {
+        font-size: 2.7rem;
+        font-weight: 600;
+        line-height: 3rem;
+        margin: 0 0 2rem 0;
+      }
+    }
+
+    .lemi__list {
+      list-style: numeric;
+      padding: 0 0 0 1rem;
+
+      li {
+        padding: 0.25rem 0 0.25rem 0.25rem;
+      }
+    }
+
+    .lemi__screenshots {
+      max-width: 550px;
+    }
+
+    img {
+      width: 100%;     
+      height: auto;
     }
   }
 
