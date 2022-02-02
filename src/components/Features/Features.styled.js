@@ -18,6 +18,12 @@ width: 100%;
     line-height: 4rem;
   }
 
+  .message {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-top: 2rem;
+  }
+
   .subtitle {
     font-size: 1.3rem;
     font-weight: 500;

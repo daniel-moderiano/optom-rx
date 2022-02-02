@@ -50,8 +50,7 @@ const StyledHome = styled.main`
         padding: 0.5rem 1.8rem 0.7rem 1.8rem;
         height: auto;
         font-size: 1.15rem;
-        font-weight: 600;
-        letter-spacing: 0.02rem;
+        letter-spacing: 0.01rem;
       }
     }
   }
@@ -179,6 +178,7 @@ const StyledHome = styled.main`
         
         .button {
           margin: 1.75rem auto 0 auto;
+          max-width: 130px;
         }
 
         img {
@@ -232,7 +232,7 @@ const StyledHome = styled.main`
         margin: 0 0 2rem 0;
       }
 
-      a {
+      .services-aus-link {
         color: var(--neutral);
         svg {
           height: 18px;
@@ -289,8 +289,7 @@ const StyledHome = styled.main`
         padding: 0.5rem 1.8rem 0.7rem 1.8rem;
         height: auto;
         font-size: 1.15rem;
-        font-weight: 600;
-        letter-spacing: 0.02rem;
+        letter-spacing: 0.01rem;
       }
     }
   }
@@ -412,11 +411,19 @@ const StyledHome = styled.main`
         }
 
         .button {
-          padding: 0.4rem 1.6rem 0.6rem 1.6rem;
+          padding: 0.5rem 1.6rem 0.6rem 1.6rem;
           height: auto;
           font-size: 1.1rem;
-          font-weight: 500;
-          letter-spacing: 0.01rem;
+        }
+      }
+    }
+
+    .Home__intro {
+      .content-container {
+        .button {
+          padding: 0.5rem 1.6rem 0.6rem 1.6rem;
+          height: auto;
+          font-size: 1.1rem;
         }
       }
     }
@@ -466,18 +473,6 @@ const StyledHome = styled.main`
           font-size: 2.1rem;
           line-height: 2.5rem;
           margin-bottom: 1.25rem;
-        }
-      }
-    }
-
-    .Home__intro {
-      .content-container {
-        .button {
-          padding: 0.4rem 1.6rem 0.6rem 1.6rem;
-          height: auto;
-          font-size: 1.1rem;
-          font-weight: 500;
-          letter-spacing: 0.01rem;
         }
       }
     }
