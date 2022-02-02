@@ -7,31 +7,31 @@ const StyledHomeFooter = styled.footer`
   justify-content: center;
   flex-direction: column;
   background-color: #fff;
-  /* background-color: var(--background); */
 
 
   .footer-top {
     width: 100%;
-    border-top: 1px solid #f1f1f1;
-    padding: 3rem 0;
+    border-top: 1px solid #F1F1F1;
+    padding: 2rem 0;
     display: flex;
     align-items: center;
     justify-content: center;
 
     .top-container {
       width: 100%;
-      max-width: 1140px;
+      max-width: 1000px;
       padding: 0 2rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
-/* 
+
       .logo-container {
         display: flex;
         align-items: flex-end;
         flex-direction: column;
         font-size: 0.9rem;
-      } */
+        min-width: 170px;
+      }
 
       .logo {
         width: 6rem;
@@ -52,10 +52,10 @@ const StyledHomeFooter = styled.footer`
         width: 100%;
         display: grid;
         max-width: 600px;
-        grid-template-columns: repeat(auto-fit, minmax(115px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
         align-content: center;
         justify-items: flex-start;
-        gap: 1rem;
+        gap: 0.5rem;
 
         h4 {
           margin: 0 0 1rem 0;
@@ -66,8 +66,11 @@ const StyledHomeFooter = styled.footer`
           padding: 0;
           list-style: none;
           
-          li:first-child {
+          /* li:first-child {
             padding: 0 0 1rem 0;
+          } */
+          li {
+            padding: 0 0 0.5rem 0;
           }
 
         }
@@ -97,7 +100,7 @@ const StyledHomeFooter = styled.footer`
 
     .bottom-container {
       width: 100%;
-      max-width: 1140px;
+      max-width: 1000px;
       padding: 1.5rem 2rem;
       display: flex;
       align-items: center;
@@ -123,7 +126,7 @@ const StyledHomeFooter = styled.footer`
   }
 
   /* Mobile breakpoint */
-  @media (max-width: 550px) {
+  @media (max-width: 600px) {
     .footer-top {
       padding: 2rem 0 1.5rem 0;
       .top-container {
@@ -134,8 +137,14 @@ const StyledHomeFooter = styled.footer`
           text-align: center;
         }
 
+        .logo-container {
+          justify-content: center;
+          align-items: center;
+        }
+
         .logo {
-          margin-top: 1rem;
+          margin-top: 0rem;
+          padding-bottom: 0.3rem;
         }
 
         .column {
@@ -144,13 +153,13 @@ const StyledHomeFooter = styled.footer`
       }
     }
 
-    .bottom-container {
+    /* .bottom-container {
       flex-direction: column;
 
       .links {
         padding-bottom: 0.75rem;
       }
-    }
+    } */
   }
 `
 

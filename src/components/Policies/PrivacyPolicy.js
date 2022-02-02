@@ -4,7 +4,7 @@ const PrivacyPolicy = () => {
   return (
     <StyledPolicy className="Privacy">
       <h2 className="Privacy__heading">
-        OptomRx Privacy Policy
+        Privacy Policy
       </h2>
 
       <p className="Policy__date">Last Updated February 1st, 2022</p>

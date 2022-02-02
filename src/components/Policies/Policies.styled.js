@@ -1,12 +1,17 @@
 import styled from "styled-components";
 
 const StyledPolicy = styled.div`
-  max-width: 800px;
+  max-width: 1140px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  margin: 2rem 1.5rem 5rem 1.5rem;
+  margin: 2rem 0.5rem 5rem 0.5rem;
+  border: 1px solid #d0d7de;
+  background-color: #fff;
+  padding: 4rem 7.5rem;
+  border-radius: 6px;
+  box-shadow: var(--small-shadow);
 
   h2 {
     width: 100%;

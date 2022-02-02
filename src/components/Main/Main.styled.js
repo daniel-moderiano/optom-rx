@@ -6,12 +6,14 @@ const StyledMain = styled.main`
   flex-direction: column;
   align-items: center;
   background-color: var(--background);
+
   width: 100%;
   padding: 0 0.5rem;
 
   &.home-main {
     color: #263238;
     /* background-color: #fff; */
+   
     width: 100%;
     padding: 0;
   }

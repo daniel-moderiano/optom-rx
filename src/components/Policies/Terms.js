@@ -4,7 +4,7 @@ const Terms = () => {
   return (
     <StyledPolicy className="Terms">
       <h2 className="Terms__heading">
-        OptomRx Terms of Service
+        Terms of Service
       </h2>
 
       <p className="Policy__date">Last Updated February 1st, 2022</p>

@@ -22,7 +22,7 @@ const Header = ({ currentPage, resetData, setPage }) => {
   }, [setPage])
 
   return (
-    <StyledHeader className={currentPage === 'homepage' ? 'header home-header' : 'header'} user={user} role="banner" aria-labelledby="optomrx-logo">
+    <StyledHeader className="header" user={user} role="banner" aria-labelledby="optomrx-logo">
         <h1 className="Header__title" onClick={handleLogoClick}>
           <div className="logo-container">
             {/* Using inline SVG for easier styling changes in CSS */}

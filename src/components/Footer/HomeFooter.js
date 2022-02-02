@@ -1,34 +1,36 @@
 import { Link } from "react-router-dom";
 import { StyledHomeFooter } from "./HomeFooter.styled";
 
-const HomeFooter = ({ currentPage }) => {
+const HomeFooter = () => {
   return (
     <StyledHomeFooter className="HomeFooter">
       <div className="footer-top">
         <div className="top-container">
         <div className="footer-secondary-nav">
             <div className="column">
-              <h4 className="footer-title">Service</h4>
+              {/* <h4 className="footer-title">Web App</h4> */}
               <ul>
                 <li><a href="#">Features</a></li>
-                <li><a href="#">Examples</a></li>
+                <li><a href="#">Contribute</a></li>
+                <li><a href="#">Open Source</a></li>
               </ul>
             </div>
 
             <div className="column">
-              <h4 className="footer-title">Resources</h4>
+              {/* <h4 className="footer-title">Resources</h4> */}
               <ul>
-                <li><a href="#">FAQs</a></li>
+                <li><a href="#">FAQ</a></li>
                 <li><a href="#">Release Notes</a></li>
+                <li><a href="#">Privacy</a></li>
               </ul>
             </div>
 
             <div className="column">
-              <h4 className="footer-title">Project</h4>
+              {/* <h4 className="footer-title">Support</h4> */}
               <ul>
                 <li><a href="#">About</a></li>
-                <li><a href="#">Open Source</a></li>
-                
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">Terms</a></li>
               </ul>
             </div>
           </div>
@@ -44,12 +46,13 @@ const HomeFooter = ({ currentPage }) => {
               <path className="cls-1" d="M91.28,13.94c0-1.91-.06-3.34-.17-5H93l.15,3.69h.09A7.26,7.26,0,0,1,100,8.48,6.32,6.32,0,0,1,106,13h.08a8.52,8.52,0,0,1,2.13-2.82,7.13,7.13,0,0,1,5-1.74c2,0,6.79,1.15,6.79,9V29.79h-2.06V17.72c0-4.68-1.81-7.47-5.43-7.47A6.05,6.05,0,0,0,107,14.39a6.42,6.42,0,0,0-.36,2.06V29.79h-2.06v-13c0-3.75-1.8-6.52-5.17-6.52-2.8,0-5,2.27-5.78,4.7a7,7,0,0,0-.31,2V29.79H91.28Z"/><g id="layer1"><g id="text2985">
               <path id="path2997" className="cls-1" d="M143.35,0c-.45,0-1.17,0-2.16,0q-4,.15-6.39.15-2.15,0-6-.17l-.17.15v1l.17.15a17.52,17.52,0,0,1,2.78.24,1.48,1.48,0,0,1,.77.37,1.88,1.88,0,0,1,.29.92c.07.46.1,1.49.12,3.08l0,4.09v9.7l0,4.42a20.14,20.14,0,0,1-.16,2.89,1.58,1.58,0,0,1-.36.85,1.94,1.94,0,0,1-.86.33,24.17,24.17,0,0,1-2.6.21l-.17.12v1.05l.17.17c3.56-.12,5.56-.17,6-.17s1.33,0,2.33,0l3.68.13.17-.17V28.58l-.17-.12a16.2,16.2,0,0,1-2.79-.25,1.57,1.57,0,0,1-.76-.38,2,2,0,0,1-.3-.92,30,30,0,0,1-.13-3.07l0-4.08v-9.7q0-7.4.32-7.86a13.64,13.64,0,0,1,4.14-.6,8,8,0,0,1,5,1.41,4.93,4.93,0,0,1,1.84,4.18A6,6,0,0,1,146.07,12a8.51,8.51,0,0,1-5.68,1.74c-.4,0-1,0-1.69-.07l-.21.66q3.76,4.29,7.37,9.31c2,2.76,3.43,4.72,4.39,5.91l.66,1.1-5.72,8c-1.46,2-2.45,3.38-2.95,4A4.59,4.59,0,0,1,141,43.91a5,5,0,0,1-1.89.26l-.17.17v1l.19.18c.88-.05,1.59-.08,2.12-.08s1.23,0,2.14.08q4.08-6.84,7.1-11L152,32.42l6.37,9.41c.71,1.22,1.49,2.46,2.32,3.7,1.44-.05,2.52-.08,3.23-.08.54,0,1.48,0,2.81.08l.17-.16v-1l-.17-.17A5.55,5.55,0,0,1,165,44a3,3,0,0,1-1-1c-.41-.54-.95-1.35-1.62-2.44l-7.84-11.31a.7.7,0,0,0-.08-.23L156,27l3.9-5.28c1.39-1.89,2.32-3.06,2.77-3.54a4.09,4.09,0,0,1,1.11-.89,6.17,6.17,0,0,1,1.75-.24l.17-.17V16l-.17-.19-2,.06-2.15-.06-8,11.74c-.32-.4-.76-1-1.45-1.95-1.11-1.44-2.14-2.82-3.1-4.11l-3-3.94c-1-1.34-1.72-2.28-2.12-2.83a13.38,13.38,0,0,0,5-1.82A8.12,8.12,0,0,0,151.49,10a7.13,7.13,0,0,0,.93-3.46,6.35,6.35,0,0,0-1.88-4.57C149.28.65,146.88,0,143.35,0Z"/></g></g></g></g>
             </svg>  
+            <p className="copyright">&copy; 2022 Daniel Moderiano.</p>
           </div>
-         
+          
         </div>        
       </div>
 
-      <div className="footer-bottom">
+      {/* <div className="footer-bottom">
         <div className="bottom-container">
           <div className="links">
             <Link className="terms-link" to="/terms-of-service">Terms of Service</Link>
@@ -57,7 +60,7 @@ const HomeFooter = ({ currentPage }) => {
           </div>
           <p className="copyright">&copy; 2022 Daniel Moderiano.</p>
         </div>
-      </div>
+      </div> */}
     </StyledHomeFooter>
   );
 };

@@ -12,11 +12,6 @@ const StyledHeader = styled.header`
   height: ${props => props.user ? '3.8rem' : '5.8rem'};
   flex-shrink: 0;
 
-  &.home-header {
-    background-color: #F3F4F7;
-    /* background-image: linear-gradient(to top, #85c27f30 0%, #85c27f30 100%); */
-  }
-
   h1 {
     margin: ${props => props.user ? '0.6rem 0 0.1rem 0' : '0.85rem 0 0 0'};
     width: 7rem;

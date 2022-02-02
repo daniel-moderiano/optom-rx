@@ -14,7 +14,7 @@ const StyledHome = styled.main`
   .Home__title {
     font-weight: 700;
     font-size: 3.5rem;
-    margin: 0rem 0 1.5rem 0;
+    margin: 0 0 1.5rem 0;
     line-height: 4rem;
   }
 
@@ -31,7 +31,8 @@ const StyledHome = styled.main`
     justify-content: center;
     /* border-top: 1px solid #dee1e4; */
     background-image: linear-gradient(to top, #ffffff 0%, #F3F4F7 100%);
-    padding: 1rem 0 5rem 0;
+    background-color: #fff;
+    padding: 2rem 0 5rem 0;
 
     .content-container {
       display: flex;
