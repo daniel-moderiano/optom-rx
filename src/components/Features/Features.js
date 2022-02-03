@@ -41,7 +41,7 @@ const Features = ({ setPage }) => {
           <div className="content-container pbs-container indications-container">
             <div className="description">
               <h4 className="description__title">Instant PBS availability and indications</h4>
-              <p className="description__text">The moment you select a medication, OptomRx will show you whether it is eligible for PBS prescribing. If the medication is restricted or required authority, you can optionally view the indications for it's use under the PBS.</p>
+              <p className="description__text">The moment you select a medication, OptomRx will show you whether it is eligible for PBS prescribing. If the medication is restricted or requires authority, you can optionally view the indications for it's use under the PBS.</p>
             </div>
             <div className="description__screenshots indications">
               <img src={indications} alt="Online form indicating PBS availability and indications for use" />
@@ -54,7 +54,7 @@ const Features = ({ setPage }) => {
             </div>
             <div className="description">
               <h4 className="description__title">Avoid mistakes in prescribing</h4>
-              <p className="description__text">Every PBS medication has maximum allowable quantity and repeats. Using up-to-date PBS data, OptomRx shows you these values for any selected PBS medication, so you making any prescribing errors less likely.</p>
+              <p className="description__text">Every PBS medication has maximum allowable quantity and repeats. Using up-to-date PBS data, OptomRx shows you these values for any selected PBS medication, making any prescribing errors less likely.</p>
             </div>
            
           </div>
@@ -62,7 +62,7 @@ const Features = ({ setPage }) => {
           <div className="content-container pbs-container authority-container">
             <div className="description">
               <h4 className="description__title">Save time for those less common authority scripts</h4>
-              <p className="description__text">Where a streamline authority code is available, it will be supplied for you, automatically. For those medications requiring manual authority codes, OptomRx will advise you where to apply for authority.</p>
+              <p className="description__text">When a streamline authority code is available, it will be supplied for you, automatically. For those medications requiring manual authority codes, OptomRx will advise you where to apply for authority.</p>
             </div>
             <div className="description__screenshots authority">
               <img src={authority} alt="Online form indicating authority is required for a medication" />
@@ -77,12 +77,8 @@ const Features = ({ setPage }) => {
             </div>
             <div className="lemi__description">
               <h3 id="lemi__title" className="lemi__title">Active ingredient prescribing</h3>
-              <p className="lemi__text">Guidelines exist for all prescribers in Australia regarding active ingredient prescribing, which is the default for prescriptions. Many ophthalmic medications however belong to the List of Excluded Medicinal Items (LEMI) or the List of Medicines for Brand Consideration (LMBC).</p>
-              {/* <ul className="lemi__list">
-                <li>Those medicines listed in the List of Excluded Medicinal Items (LEMI); these items should be prescribed by brand only, and</li>
-                <li>Those medicines listed in the List of Medicines for Brand Consideration (LMBC); prescribers should consider including the brand name when prescribing these items.</li>
-              </ul> */}
-              <p className="lemi__text">OptomRx takes the work out of checking which items belong to the LEMI or LMBC, and automatically adjusts your prescription to meet relevant guidelines. You can also find out if any LEMI/LMBC adjustments have been made while writing you scripts.</p>
+              <p className="lemi__text">Guidelines now exist for all prescribers in Australia, requiring active ingredient prescribing in many cases. Several ophthalmic medications however belong to the List of Excluded Medicinal Items (LEMI) or the List of Medicines for Brand Consideration (LMBC), where active ingredient prescribing may not apply.</p>
+              <p className="lemi__text">OptomRx identifies which items belong to the LEMI or LMBC, and automatically adjusts your prescriptions to meet relevant guidelines. You can find out if any LEMI/LMBC adjustments have been made while writing your scripts, and overwrite this if necessary.</p>
             </div>
           </div>
         </section>
@@ -91,7 +87,7 @@ const Features = ({ setPage }) => {
           <div className="content-container prescribers-container">
             <div className="prescribers-description">
               <h3 id="prescribers__title" className="prescribers__title">Multiple prescribers</h3>
-              <p className="prescribers__text">Whether you work in a single practice, or locum all across Australia - OptomRx supports as many prescriber profiles as you need. Simply select whichever prescriber details you wish to use when you write a prescription. Simplify things further with default selection for your most common practice location.</p>
+              <p className="prescribers__text">Whether you work in a single practice, or locum all across Australia - OptomRx supports as many prescriber profiles as you need. Prescriber profiles can be modified, added, or removed with ease. Simply select whichever prescriber details you wish to use when you write a prescription. Simplify things further with default selection for your most common practice location.</p>
             </div>
             <div className="prescribers__screenshots">
               <img className="desktop" src={prescribers} alt="Online table displaying several sets of prescriber details" />
@@ -105,7 +101,7 @@ const Features = ({ setPage }) => {
             <div className="represcribe__description">
               <h3 id="represcribe__title" className="represcribe__title">Instant re-prescribe</h3>
               <p className="represcribe__text">In practice, you'll be reaching for the same scripts over and over; why waste time re-writing the same script every time? With OptomRx, you are able to save any script as a 'favourite'.</p>
-              <p className="represcribe__text">These favourites contain only medication details, e.g. ingredient, quantity, repeats, dosage, etc. (never patient data). You can re-prescribe these favourites with a single click. Just add patient details, and the script is done. Quick and easy. </p>
+              <p className="represcribe__text">These favourites contain specific medication details, e.g. ingredient, quantity, repeats, dosage, etc. You can re-prescribe these favourites with a single click. Just add patient details, and the script is done. Quick and easy. </p>
             </div>
             <div className="represcribe__screenshots">
               <img src={favourites} alt="Online dashboard containing favourite scripts in table layout" />
