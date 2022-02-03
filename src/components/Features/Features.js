@@ -11,7 +11,8 @@ import quantityRepeats from '../../assets/quantityRepeats.png';
 import prescribers from '../../assets/prescribers.png';
 import prescribersMobile from '../../assets/prescribers-mobile.png';
 import favourites from '../../assets/favourites.png';
-
+import script from '../../assets/script.png';
+import { Link } from "react-router-dom";
 
 
 const Features = ({ setPage }) => {
@@ -110,17 +111,17 @@ const Features = ({ setPage }) => {
           </div>
         </section>
 
-
-
         <section className="Features__data" aria-labelledby="data__title">
           <div className="content-container data-container">
+            <div className="data__screenshots">
+              <img src={script} alt="Screenshot of online prescription" />
+            </div>
             <div className="data__description">
               <h3 id="data__title" className="data__title">No patient data retention</h3>
-              <p className="data__text">Corporate, independent, rural or metro - OptomRx's web app means you have access to professional computerised scripts anywhere.</p>
+              <p className="data__text"><strong>Patient information is never saved on OptomRx.</strong> When you save a script, only non-identifiable information regarding medication and PBS details are retained. For authority scripts, prescriber copies are provided in the printable template for your records.</p>
+              <p className="data__text">The decision to avoid patient data retention was made in the spirit of patient safety, and the vision of OptomRx as a prescription writing tool, not a prescription database.</p>
             </div>
-            {/* <div className="data__screenshots">
-              <img src={laptopMockup} alt="Screenshot of online form for creating new prescription" />
-            </div> */}
+          
           </div>
         </section>
 
@@ -128,7 +129,7 @@ const Features = ({ setPage }) => {
           <div className="content-container action-container">
             <p className="subtitle">Try it for yourself</p>
             <h3 id="action__title" className="action__title">OptomRx is free to use. Always.</h3>
-            <Button classLabel="signup">Sign up to OptomRx</Button>
+            <Link to="/signup" className="btn-primary button signup">Sign up to OptomRx</Link>
           </div>
         </section>
         </div>) : (
