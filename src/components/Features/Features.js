@@ -29,13 +29,15 @@ const Features = ({ setPage }) => {
         <section className="Features__intro">
           <div className="content-container">
             <h2 className="Features__title">Features</h2>
-            <p className="subtitle">Learn more about the unique features that make OptomRx first in class for writing therapeutic prescriptions.</p>
+            <p className="subtitle">Learn about the key features that make OptomRx the complete solution for writing therapeutic prescriptions.</p>
           </div>          
         </section>
 
         <section className="Features__pbs" aria-labelledby="description__title">
-          <h3 id="description__title" className="description__title">Real-time PBS data</h3>
-          <p className="pbs-subtitle">Anytime you want to write a PBS script with OptomRx, you'll have access to these fantastic features.</p>
+          {/* <div className="pbs-container content-container title-container"> */}
+              <h3 id="description__title" className="description__title">Real-time PBS data</h3>
+            <p className="pbs-subtitle">Anytime you want to write a PBS script with OptomRx, you'll have access to these fantastic features.</p>
+            {/* </div> */}
           <div className="content-container pbs-container indications-container">
             <div className="description">
               <h4 className="description__title">Instant PBS availability and indications</h4>
@@ -127,7 +129,7 @@ const Features = ({ setPage }) => {
 
         <section className="Features__action" aria-labelledby="action__title">
           <div className="content-container action-container">
-            <p className="subtitle">Try it for yourself</p>
+            <p className="action__subtitle">Try it for yourself</p>
             <h3 id="action__title" className="action__title">OptomRx is free to use. Always.</h3>
             <Link to="/signup" className="btn-primary button signup">Sign up to OptomRx</Link>
           </div>
