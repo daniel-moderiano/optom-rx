@@ -587,14 +587,14 @@ width: 100%;
 
     .subtitle {
       font-size: 1.1rem;
-      max-width: 300px;
+      max-width: 350px;
       line-height: 1.5rem;
     }
 
     .Features__pbs {
       .pbs-subtitle {
         margin-bottom: 1rem;
-        max-width: 332px;
+        max-width: 382px;
         line-height: 1.5rem;
         font-size: 1.05rem;
         margin: 0 0.5rem;
@@ -606,13 +606,13 @@ width: 100%;
         margin: 0;
         padding: 0 1.5rem;
         width: 100%;
-        max-width: 348px;
+        max-width: 398px;
       }
 
       .pbs-container {       
         margin: 0 0.5rem;
         .description {
-          max-width: 300px;
+          max-width: 350px;
 
           h4 {
             line-height: 2.1rem;
@@ -639,7 +639,7 @@ width: 100%;
         .lemi__description {
           text-align: left;
           margin: 0 0 2rem 0;
-          max-width: 300px;
+          max-width: 350px;
           h3 {
             font-size: 2.1rem;
             line-height: 2.5rem;
@@ -657,7 +657,7 @@ width: 100%;
         .represcribe__description {
           text-align: left;
           margin: 0 0 2rem 0;
-          max-width: 300px;
+          max-width: 350px;
           h3 {
             font-size: 2.1rem;
             line-height: 2.5rem;
@@ -675,7 +675,7 @@ width: 100%;
         .data__description {
           text-align: left;
           margin: 0 0 2rem 0;
-          max-width: 300px;
+          max-width: 350px;
           h3 {
             font-size: 2.1rem;
             line-height: 2.5rem;
@@ -689,7 +689,7 @@ width: 100%;
       .prescribers-container {
         .prescribers-description {
           margin: 0 0 1rem 0;
-          max-width: 300px;
+          max-width: 350px;
           text-align: left;
           h3 {
             font-size: 2.1rem;
