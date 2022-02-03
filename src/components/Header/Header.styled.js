@@ -7,7 +7,7 @@ const StyledHeader = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: ${props => props.user ? '0 1.5rem' : '1rem 3rem 1.5rem 3rem'};
+  padding: ${props => props.user ? '0 1.5rem' : '1rem 2rem 1.5rem 2rem'};
   width: 100%;
   height: ${props => props.user ? '3.8rem' : '5.8rem'};
   flex-shrink: 0;
@@ -32,6 +32,14 @@ const StyledHeader = styled.header`
   /* Avoid messing up the pirnted RxTemplate */
   @media print {
     display: none;
+  }
+
+  @media (min-width: 1600px) {
+    padding: ${props => props.user ? '0 1.5rem' : '1rem 5rem 1.5rem 5rem'};
+  }
+
+  @media (max-width: 768px) {
+    padding: ${props => props.user ? '0 1.5rem' : '1rem 1.5rem 1.5rem 1.5rem'};
   }
 `
 

@@ -575,6 +575,10 @@ width: 100%;
     font-size: 1rem;
     line-height: 1.4rem;
 
+    .content-container {
+      margin: 0 0.5rem;
+    }
+
     .Features__title {
       font-size: 2.5rem;
       margin: 0rem 0 1.5rem 0;
@@ -593,18 +597,20 @@ width: 100%;
         max-width: 332px;
         line-height: 1.5rem;
         font-size: 1.05rem;
+        margin: 0 0.5rem;
       }
 
       h3 {
         font-size: 2.1rem;
         line-height: 2.5rem;
         margin: 0;
-        padding: 0 2rem;
+        padding: 0 1.5rem;
         width: 100%;
-        max-width: 364px;
+        max-width: 348px;
       }
 
       .pbs-container {       
+        margin: 0 0.5rem;
         .description {
           max-width: 300px;
 
