@@ -44,7 +44,7 @@ width: 100%;
     /* border-top: 1px solid #dee1e4; */
     background-image: linear-gradient(to top, #ffffff 0%, #F3F4F7 100%);
     background-color: #fff;
-    padding: 2rem 0 5rem 0;
+    padding: 2rem 0 2rem 0;
 
     .content-container {
       display: flex;
@@ -84,13 +84,15 @@ width: 100%;
 
   
   .Features__pbs {
-    padding: 3rem 0 4.5rem 0;
+    padding: 3rem 0 4rem 0;
     text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     background-color: #FFFFFF;
+    /* border-top: 1px solid #dee1e4; */
+    
 
     h3 {
       font-size: 2.7rem;
@@ -152,13 +154,66 @@ width: 100%;
     }
   }
 
-  .Features__prescribers {
-    padding: 6rem 0 5rem 0;
+  .Features__lemi {
+    padding: 5rem 0 4.5rem 0;
     text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: #F9FAFB;
+
+    .lemi-container {
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lemi__description {
+      margin-left: 0.5rem;
+      text-align: left;
+      max-width: 450px;
+      line-height: 1.5rem;
+
+      h3 {
+        font-size: 2.7rem;
+        font-weight: 600;
+        line-height: 3rem;
+        margin: 0 0 2rem 0;
+      }
+
+      p {
+        margin: 1rem 0;
+      }
+    }
+
+    .lemi__list {
+      list-style: numeric;
+      padding: 0 0 0 1rem;
+
+      li {
+        padding: 0.25rem 0 0.25rem 0.25rem;
+      }
+    }
+
+    .lemi__screenshots {
+      max-width: 550px;
+    }
+
+    img {
+      width: 100%;     
+      height: auto;
+    }
+  }
+
+
+  .Features__prescribers {
+    padding: 4rem 0 3.5rem 0;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FFFFFF;
 
     .prescribers-container {
       text-align: center;
@@ -199,61 +254,13 @@ width: 100%;
     }
   }
 
-  .Features__lemi {
-    padding: 6rem 0 5rem 0;
+  .Features__represcribe {
+    padding: 5.5rem 0 4rem 0;
     text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: #F9FAFB;
-
-    .lemi-container {
-      text-align: center;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .lemi__description {
-      margin-left: 0.5rem;
-      text-align: left;
-      max-width: 450px;
-      line-height: 1.5rem;
-
-      h3 {
-        font-size: 2.7rem;
-        font-weight: 600;
-        line-height: 3rem;
-        margin: 0 0 2rem 0;
-      }
-    }
-
-    .lemi__list {
-      list-style: numeric;
-      padding: 0 0 0 1rem;
-
-      li {
-        padding: 0.25rem 0 0.25rem 0.25rem;
-      }
-    }
-
-    .lemi__screenshots {
-      max-width: 550px;
-    }
-
-    img {
-      width: 100%;     
-      height: auto;
-    }
-  }
-
-  .Features__represcribe {
-    padding: 6rem 0 5rem 0;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #FFFFFF;
 
     .represcribe-container {
       text-align: center;
@@ -292,7 +299,7 @@ width: 100%;
   }
 
   .Features__data {
-    padding: 6rem 0 5rem 0;
+    padding: 1rem 0 5rem 0;
     text-align: center;
     display: flex;
     align-items: center;
@@ -336,7 +343,7 @@ width: 100%;
   }
 
   .Features__action {
-    padding: 5rem 0 6rem 0;
+    padding: 4.5rem 0 6rem 0;
     text-align: center;
     display: flex;
     align-items: center;
@@ -442,7 +449,7 @@ width: 100%;
         .description {
           align-items: center;
           justify-content: center;
-          text-align: center;
+          text-align: left;
           max-width: 500px;
         }
 
@@ -484,7 +491,7 @@ width: 100%;
         align-items: center;
         justify-content: center;
         .represcribe__description {
-          text-align: center;
+          text-align: left;
           margin: 0 0 2rem 0;
           max-width: 600px;
           h3 {
@@ -501,7 +508,7 @@ width: 100%;
         align-items: center;
         justify-content: center;
         .data__description {
-          text-align: center;
+          text-align: left;
           margin: 0 0 2rem 0;
           max-width: 600px;
           h3 {
@@ -519,6 +526,7 @@ width: 100%;
         .prescribers-description {
           margin: 0 0 1rem 0;
           max-width: 600px;
+          text-align: left;
           h3 {
             font-size: 2.5rem;
             line-height: 2.75rem;
@@ -584,7 +592,7 @@ width: 100%;
     .Features__lemi {
       .lemi-container {
         flex-direction: column-reverse;
-        align-items: flex-start;
+        align-items: center;
         justify-content: center;
         .lemi__description {
           text-align: left;
@@ -605,7 +613,7 @@ width: 100%;
         align-items: center;
         justify-content: center;
         .represcribe__description {
-          text-align: center;
+          text-align: left;
           margin: 0 0 2rem 0;
           max-width: 300px;
           h3 {
@@ -623,7 +631,7 @@ width: 100%;
         align-items: center;
         justify-content: center;
         .data__description {
-          text-align: center;
+          text-align: left;
           margin: 0 0 2rem 0;
           max-width: 300px;
           h3 {
@@ -640,6 +648,7 @@ width: 100%;
         .prescribers-description {
           margin: 0 0 1rem 0;
           max-width: 300px;
+          text-align: left;
           h3 {
             font-size: 2.1rem;
             line-height: 2.5rem;

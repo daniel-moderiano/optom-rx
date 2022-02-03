@@ -75,11 +75,11 @@ const Features = ({ setPage }) => {
             </div>
             <div className="lemi__description">
               <h3 id="lemi__title" className="lemi__title">Active ingredient prescribing</h3>
-              <p className="lemi__text">Guidelines exist for all prescribers in Australia regarding active ingredient prescribing. Medications, by default, should be prescribed by active ingredient. There are two key exceptions:</p>
-              <ul className="lemi__list">
+              <p className="lemi__text">Guidelines exist for all prescribers in Australia regarding active ingredient prescribing, which is the default for prescriptions. Many ophthalmic medications however belong to the List of Excluded Medicinal Items (LEMI) or the List of Medicines for Brand Consideration (LMBC).</p>
+              {/* <ul className="lemi__list">
                 <li>Those medicines listed in the List of Excluded Medicinal Items (LEMI); these items should be prescribed by brand only, and</li>
                 <li>Those medicines listed in the List of Medicines for Brand Consideration (LMBC); prescribers should consider including the brand name when prescribing these items.</li>
-              </ul>
+              </ul> */}
               <p className="lemi__text">OptomRx takes the work out of checking which items belong to the LEMI or LMBC, and automatically adjusts your prescription to meet relevant guidelines. You can also find out if any LEMI/LMBC adjustments have been made while writing you scripts.</p>
             </div>
           </div>
