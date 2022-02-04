@@ -1,7 +1,19 @@
 import { StyledPolicy } from "./Policies.styled";
+import { Helmet } from "react-helmet-async";
+import { useEffect } from "react";
 
-const Terms = () => {
-  return (
+const Terms = ({ setPage }) => {
+  // Adjust current page for accessibility and styling
+  useEffect(() => {
+    setPage(null);
+  }, [setPage]);
+
+  return (<>
+    <Helmet>
+      <title>Terms of Service · OptomRx</title>
+      <meta name="description" content="A new way for optometrists to professionally create and manage therapeutic prescriptions online."/>
+      <link rel="canonical" href="/terms-of-service" />
+    </Helmet>
     <StyledPolicy className="Terms">
       <h2 className="Terms__heading">
         Terms of Service
@@ -259,7 +271,7 @@ const Terms = () => {
       </section>
 
     </StyledPolicy>
-  );
+  </>);
 };
 
 export default Terms;

@@ -177,9 +177,9 @@ const App = () => {
               </>
             } />
 
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy setPage={setCurrentPage}/>} />
 
-            <Route path="/terms-of-service" element={<Terms />} />
+            <Route path="/terms-of-service" element={<Terms setPage={setCurrentPage}/>} />
 
             <Route path="/features" element={<Features setPage={setCurrentPage}/>} />
 

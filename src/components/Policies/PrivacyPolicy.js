@@ -1,7 +1,19 @@
 import { StyledPolicy } from "./Policies.styled";
+import { Helmet } from "react-helmet-async";
+import { useEffect } from "react";
 
-const PrivacyPolicy = () => {
-  return (
+const PrivacyPolicy = ({ setPage }) => {
+  // Adjust current page for accessibility and styling
+  useEffect(() => {
+    setPage(null);
+  }, [setPage]);
+
+  return (<>
+    <Helmet>
+      <title>Privacy Policy · OptomRx</title>
+      <meta name="description" content="A new way for optometrists to professionally create and manage therapeutic prescriptions online."/>
+      <link rel="canonical" href="/privacy-policy" />
+    </Helmet>
     <StyledPolicy className="Privacy">
       <h2 className="Privacy__heading">
         Privacy Policy
@@ -155,7 +167,7 @@ const PrivacyPolicy = () => {
         </p>
       </section>
     </StyledPolicy>
-  );
+  </>);
 };
 
 export default PrivacyPolicy;
