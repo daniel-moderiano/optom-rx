@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useEffect } from "react";
 
-const Header = ({ currentPage, resetData, setPage }) => {
+const Header = ({ currentPage, resetData, setPage, setToast }) => {
   let navigate = useNavigate();
   const { user } = useAuthContext();
 
@@ -38,7 +38,7 @@ const Header = ({ currentPage, resetData, setPage }) => {
             </svg>  
           </div>
         </h1>     
-      <Nav user={user} currentPage={currentPage} resetData={resetData}/>
+      <Nav user={user} currentPage={currentPage} resetData={resetData} setToast={setToast}/>
     </StyledHeader>
   )
 }

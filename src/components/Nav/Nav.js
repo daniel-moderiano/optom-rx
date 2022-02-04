@@ -4,10 +4,12 @@ import { useLogout } from "../../hooks/useLogout";
 import { useState } from "react";
 import Hamburger from "../utils/Hamburger/Hamburger";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import { useImmediateToast } from "../../hooks/useImmediateToast";
 
-const Nav = ({ currentPage, resetData }) => {
+const Nav = ({ currentPage, resetData, setToast }) => {
   const { logout } = useLogout();
   const { user } = useAuthContext();
+  const { showSuccessToast, showErrorToast } = useImmediateToast();
 
   const [showNav, setShowNav] = useState(false);
   const [toggleHamburger, setToggleHamburger] = useState(false);
@@ -31,6 +33,17 @@ const Nav = ({ currentPage, resetData }) => {
   const closeNav = () => {
     setShowNav(false);
     setToggleHamburger(false);
+  }
+
+  // Combine the logout function with confirmation to the user of successful logout
+  const performLogout = async () => {
+    closeNav();
+    try {
+      logout();
+      showSuccessToast(setToast, 'Successfully logged out.')
+    } catch (error) {
+      showErrorToast(setToast, "An error occurred while logging out. Try again.")
+    }
   }
   
   return (
@@ -77,10 +90,7 @@ const Nav = ({ currentPage, resetData }) => {
           <li className="Nav__list-item" role="none"> 
             <button 
               className='Nav__link Nav__link--std'
-              onClick={() => {
-                closeNav();
-                logout();
-              }}
+              onClick={performLogout}
               role="menuitem"
               >Log out
             </button>

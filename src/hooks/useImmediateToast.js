@@ -1,6 +1,6 @@
 // Simple abstraction of code snippets that show success or error toasts when called
 
-export const useImmediateToast = (setToastFunc, type, message) => {
+export const useImmediateToast = () => {
   const showSuccessToast = (setToastFunc, message) => {
     setToastFunc((prevData) => ({
       ...prevData,
