@@ -40,7 +40,7 @@ const Home = ({ setPage }) => {
                 <Link to="/features" className="btn-ghost button">Learn more</Link>
               </div>
             </div>
-            <div className="preview__screenshots">
+            <div className="preview__screenshots Home__screenshots">
               <img src={laptopMockup} alt="Online form for creating new prescription" />
             </div>
           </div>
@@ -48,7 +48,7 @@ const Home = ({ setPage }) => {
   
         <section className="Home__stationery" aria-labelledby="stationery__title">
           <div className="content-container stationery-container">
-          <div className="stationery__screenshots">
+          <div className="stationery__screenshots Home__screenshots">
               <img src={sampleRx} alt="Printed PBS prescription on computerised PBS form" />
             </div>
             <div className="stationery__description description">
