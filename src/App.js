@@ -26,6 +26,11 @@ import PrivacyPolicy from "./components/Policies/PrivacyPolicy";
 import Terms from "./components/Policies/Terms";
 import Features from "./components/Features/Features";
 import { useGoogleAPI } from "./hooks/useGoogleAPI";
+import About from "./components/About/About";
+import Contribute from "./components/Contribute/Contribute";
+import FAQ from "./components/FAQ/FAQ";
+import ReleaseNotes from './components/ReleaseNotes/ReleaseNotes';
+import Contact from './components/Contact/Contact';
 
 
 const App = () => {
@@ -156,6 +161,16 @@ const App = () => {
             <Route path="/terms-of-service" element={<Terms setPage={setCurrentPage}/>} />
 
             <Route path="/features" element={<Features setPage={setCurrentPage}/>} />
+
+            <Route path="/faq" element={<FAQ setPage={setCurrentPage}/>} />
+
+            <Route path="/contribute" element={<Contribute setPage={setCurrentPage}/>} />
+
+            <Route path="/about" element={<About setPage={setCurrentPage}/>} />
+
+            <Route path="/release-notes" element={<ReleaseNotes setPage={setCurrentPage}/>} />
+
+            <Route path="/contact" element={<Contact setPage={setCurrentPage}/>} />
 
             <Route path="/dashboard" element={
               <>
