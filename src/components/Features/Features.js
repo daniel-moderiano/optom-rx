@@ -18,7 +18,12 @@ const Features = ({ setPage }) => {
     setPage('features');
   }, [setPage]);
 
-  return (
+  return (<>
+    <Helmet>
+      <title>Features · OptomRx</title>
+      <meta name="description" content="Discover some of the unique features that OptomRx has to offer, including  standout PBS support."/>
+      <link rel="canonical" href="/features" />
+    </Helmet>
     <StyledFeatures>
       <div className="Features-container">
         <section className="Features__intro">
@@ -124,7 +129,7 @@ const Features = ({ setPage }) => {
         
       </div>       
     </StyledFeatures>
-  );
+  </>);
 };
 
 export default Features;
