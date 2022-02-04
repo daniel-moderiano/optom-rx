@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import Dots from "../utils/Dots/Dots";
 import Button from '../utils/Button/Button'
 import PasswordContainer from "../utils/PasswordContainer/PasswordContainer";
+import { Helmet } from "react-helmet-async";
 
 const Signup = ({ setPage, setFirstSignIn }) => {
   const { error, isPending, signup } = useSignup();
@@ -94,7 +95,12 @@ const Signup = ({ setPage, setFirstSignIn }) => {
     });
   }
 
-  return (
+  return (<>
+    <Helmet>
+      <title>Sign up · OptomRx</title>
+      <meta name="description" content="A new way for optometrists to professionally create and manage therapeutic prescriptions online."/>
+      <link rel="canonical" href="/signup" />
+    </Helmet>
     <StyledSignup className="Signup">
       <div className="Signup__container">
         <h2 className="Signup__title">Sign up</h2>
@@ -172,7 +178,7 @@ const Signup = ({ setPage, setFirstSignIn }) => {
 
       </div>
     </StyledSignup>
-  )
+  </>)
 }
 
 export default Signup;

@@ -14,7 +14,7 @@ const Home = ({ setPage }) => {
 
   return (<>
     <Helmet>
-      <title>Online therapeutic prescriptions for Optometrists | OptomRx</title>
+      <title>Online therapeutic prescriptions for Optometrists · OptomRx</title>
       <meta name="description" content="Giving Australian optometrists the tools to professionally create and manage therapeutic prescriptions online, including PBS and authority scripts."/>
       <link rel="canonical" href="/" />
     </Helmet>
@@ -41,7 +41,7 @@ const Home = ({ setPage }) => {
               </div>
             </div>
             <div className="preview__screenshots Home__screenshots">
-              <img src={laptopMockup} alt="Online form for creating new prescription" />
+              <img src={laptopMockup} width="1600" height="931" alt="Online form for creating new prescription" />
             </div>
           </div>
         </section>
@@ -49,7 +49,7 @@ const Home = ({ setPage }) => {
         <section className="Home__stationery" aria-labelledby="stationery__title">
           <div className="content-container stationery-container">
           <div className="stationery__screenshots Home__screenshots">
-              <img src={sampleRx} alt="Printed PBS prescription on computerised PBS form" />
+              <img src={sampleRx} width="1904" height="1760" alt="Printed PBS prescription on computerised PBS form" />
             </div>
             <div className="stationery__description description">
               <h3 id="stationery__title" className="section__title">Move away from handwritten scripts</h3>

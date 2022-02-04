@@ -74,9 +74,9 @@ const Login = ({ setPage }) => {
     
   return (<>
     <Helmet>
-      <title>OptomRx - Log in</title>
+      <title>Log in · OptomRx</title>
       <meta name="description" content="A new tool that lets you write computerised therapeutic prescriptions no matter where you practice."/>
-      <link rel="canonical" href="/dashboard" />
+      <link rel="canonical" href="/login" />
     </Helmet>
     <StyledLogin className="Login">
       <div className="Login__container">

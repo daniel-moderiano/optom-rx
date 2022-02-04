@@ -1,4 +1,18 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
 Disallow:
-
+Sitemap: https://optomrx.net/
+Sitemap: https://optomrx.net/features
+Sitemap: https://optomrx.net/login
+Sitemap: https://optomrx.net/signup
+Sitemap: https://optomrx.net/privacy-policy
+Sitemap: https://optomrx.net/terms-of-service
+Sitemap: https://optomrx.net/dashboard
+Sitemap: https://optomrx.net/settings
+Sitemap: https://optomrx.net/new-prescription
+Sitemap: https://optomrx.net/review-prescription
+Sitemap: https://optomrx.net/prescribers
+Sitemap: https://optomrx.net/scripts
+Sitemap: https://optomrx.net/add-prescriber
+Sitemap: https://optomrx.net/edit-prescriber
+Sitemap: https://optomrx.net/reset-password
