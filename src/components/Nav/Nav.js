@@ -57,7 +57,8 @@ const Nav = ({ currentPage, resetData, setToast }) => {
             <Link onClick={closeNav} className="Nav__link Nav__link--std Nav__link--homepage" to="/login"  {...ariaLogin}>Log in</Link>
           </li>
           <li className="Nav__list-item" role="menuitem">
-            <Link onClick={closeNav} className="Nav__link Nav__link--std Nav__link--homepage Nav__link--signup" to="/signup" {...ariaSignup}>Sign up</Link>
+            {/* To style separately to log in btn, add class 'Nav__link--signup */}
+            <Link onClick={closeNav} className="Nav__link Nav__link--std Nav__link--homepage" to="/signup" {...ariaSignup}>Sign up</Link>
           </li>
           
           </>

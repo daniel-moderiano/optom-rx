@@ -140,13 +140,17 @@ const StyledNav = styled.nav`
       }
 
       .Nav__link--signup {
-        padding: 0.2rem 0.75rem 0.4rem 0.75rem;
-        border: 1px solid var(--primary-color);
+        padding: 0.15rem 0.7rem 0.35rem 0.7rem;
+        background-color: var(--primary-color);
+        color: #fff;
+        border: 1px solid transparent;
         height: auto;
         border-radius: 2px;
 
         &:hover {
-          background-color: var(--btn-positive-hover);
+          background-color: transparent;
+          border: 1px solid var(--primary-color);
+          color: var(--primary-color);
         }
 
         &:focus {
@@ -196,6 +200,7 @@ const StyledNav = styled.nav`
         .Nav__link--signup {
           border: none;
           padding: 0 0 5px 0;
+          background-color: transparent;
           
           &:before,
           &:after {
@@ -204,6 +209,7 @@ const StyledNav = styled.nav`
 
           &:hover {
             background-color: #fff;
+            border: none;
           }
         }
 

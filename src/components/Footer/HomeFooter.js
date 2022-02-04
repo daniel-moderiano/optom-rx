@@ -10,9 +10,9 @@ const HomeFooter = ({ currentPage }) => {
             <div className="column">
               {/* <h4 className="footer-title">Web App</h4> */}
               <ul>
-                <li><a href="#">Features</a></li>
-                <li><a href="#">Release Notes</a></li>
-                <li><a href="#">Contribute</a></li>
+                <li><Link to="/features"></Link></li>
+                <li><Link to="/release-notes"></Link></li>
+                <li><Link to="/contribute"></Link></li>
               </ul>
             </div>
 
@@ -21,7 +21,7 @@ const HomeFooter = ({ currentPage }) => {
               <ul>
                 <li><Link to="/about">About</Link></li>
                 <li><Link to="/faq">FAQ</Link></li>
-                <li><a href="#">Contact Us</a></li>
+                <li><Link to="/contact">Contact Us</Link></li>
               </ul>
             </div>
 
