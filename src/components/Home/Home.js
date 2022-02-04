@@ -4,7 +4,6 @@ import laptopMockup from '../../assets/macbook-mockup.png';
 import sampleRx from '../../assets/example-rx-noline.jpg'
 import pbsLogo from '../../assets/pbs-logo.svg'
 import { useEffect } from "react";
-import Button from '../utils/Button/Button';
 import { Link } from "react-router-dom";
 
 const Home = ({ setPage }) => {
@@ -20,8 +19,6 @@ const Home = ({ setPage }) => {
       <link rel="canonical" href="/dashboard" />
     </Helmet>
 
-
-
     <StyledHome className="Home">
       <div className="Home-container">
 
@@ -31,39 +28,31 @@ const Home = ({ setPage }) => {
             <p className="subtitle">Create and manage therapeutic prescriptions online, with integrated PBS support and tools to supercharge efficiency.</p>
             <Link to="/signup" className="btn-primary button signup">Sign up to OptomRx</Link>
           </div>          
-          
         </section>
 
-
-        <section className="Home__preview" aria-labelledby="description__title">
+        <section className="Home__preview" aria-labelledby="preview__title">
           <div className="content-container preview-container">
-            <div className="description">
-              <h3 id="description__title" className="description__title">Accessible for all Australian Optometrists</h3>
-              <p className="description__text">Corporate, independent, rural or metro - OptomRx's web app means you have access to professional computerised scripts anywhere.</p>
-              <div className="description__btns">
+            <div className="preview__description">
+              <h3 id="preview__title" className="section__title">Accessible for all Australian Optometrists</h3>
+              <p className="preview__text">Corporate, independent, rural or metro - OptomRx's web app means you have access to professional computerised scripts anywhere.</p>
+              <div className="preview__btns">
                 <Link to="/signup" className="btn-primary button signup">Get started</Link>
                 <Link to="/features" className="btn-ghost button">Learn more</Link>
               </div>
             </div>
-            <div className="description__screenshots">
-              {/* Images of desktop and/or mobile here */}
-              {/* <img src={formHalf} alt="Screenshot of online form for creating new prescription" /> */}
-              <img src={laptopMockup} alt="Screenshot of online form for creating new prescription" />
-              {/* <img src={pbsPaper} alt="Blank PBS computerised prescription paper" /> */}
-              {/* <img src={johnCitizen} alt="Screenshot of online form for creating new prescription" /> */}
+            <div className="preview__screenshots">
+              <img src={laptopMockup} alt="Online form for creating new prescription" />
             </div>
           </div>
         </section>
-
-        {/* Possible a final seciton here with a call to action to sign up? */}
   
         <section className="Home__stationery" aria-labelledby="stationery__title">
           <div className="content-container stationery-container">
           <div className="stationery__screenshots">
               <img src={sampleRx} alt="Printed PBS prescription on computerised PBS form" />
             </div>
-            <div className="stationery-description">
-              <h3 id="stationery__title" className="stationery__title">Move away from handwritten scripts</h3>
+            <div className="stationery__description">
+              <h3 id="stationery__title" className="section__title">Move away from handwritten scripts</h3>
               <p className="stationery__text">OptomRx pairs with computer generated PBS forms to create professional facing scripts for patients, consistent with GPs and other allied health providers. These forms can be ordered in bulk from <a className="services-aus-link" target="_blank" rel="noreferrer" href="https://www.servicesaustralia.gov.au/pbs-and-rpbs-stationery-for-optometrists?context=22851">Services Australia<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="18px" fill="#263238"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg></a>.</p>
               <div className="stationery__btns">
                 <Link to="/signup" className="btn-primary button signup">Get started</Link>
@@ -73,9 +62,9 @@ const Home = ({ setPage }) => {
           </div>
         </section>
 
-        <section className="Home__features">
+        <section className="Home__features" aria-labelledby="features__title">
           <div className="content-container">
-            <h3 className="features__title">Streamline prescription writing.</h3>
+            <h3 id="features__title" className="section__title">Streamline prescription writing</h3>
             <p className="features__subtitle">OptomRx provides unique tools to make writing prescriptions quick and easy.</p>
             <div className="features__cards">
               <div className="features__card">
@@ -113,8 +102,8 @@ const Home = ({ setPage }) => {
          
         <section className="Home__action" aria-labelledby="action__title">
           <div className="content-container action-container">
-            <p className="subtitle">Try it for yourself</p>
-            <h3 id="action__title" className="action__title">OptomRx is free to use. Always.</h3>
+            <p className="subtitle action__subtitle">Try it for yourself</p>
+            <h3 id="action__title" className="section__title">OptomRx is free to use. Always.</h3>
             <Link to="/signup" className="btn-primary button signup">Sign up to OptomRx</Link>
           </div>
         </section>

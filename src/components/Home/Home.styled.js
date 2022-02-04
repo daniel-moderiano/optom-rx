@@ -29,7 +29,6 @@ const StyledHome = styled.main`
     display: flex;
     align-items: center;
     justify-content: center;
-    /* border-top: 1px solid #dee1e4; */
     background-image: linear-gradient(to top, #ffffff 0%, #F3F4F7 100%);
     background-color: #fff;
     padding: 2rem 0 5rem 0;
@@ -55,7 +54,7 @@ const StyledHome = styled.main`
     }
   }
 
-  .description__btns {
+  .preview__btns {
     display: flex;
     margin-top: 2rem;
 
@@ -69,7 +68,13 @@ const StyledHome = styled.main`
     }
   }
 
-  
+  .section__title {
+    font-size: 2.7rem;
+    font-weight: 600;
+    line-height: 3rem;
+    margin: 0 0 2rem 0;
+  }
+
   .Home__preview {
     padding: 3rem 0 6rem 0;
     text-align: center;
@@ -85,34 +90,23 @@ const StyledHome = styled.main`
       justify-content: center;
     }
 
-    .description {
-      /* margin-right: 1rem; */
+    .preview__description {
       text-align: left;
       max-width: 400px;
       line-height: 1.5rem;
 
-      h3 {
-        font-size: 2.7rem;
-        font-weight: 600;
-        line-height: 3rem;
-        margin: 0 0 2rem 0;
-      }
-
-      .description__btns {
-        /* max-width: 200px; */
+      .preview__btns {
         margin-right: 2rem;
       }
     }
 
-    .description__screenshots {
+    .preview__screenshots {
       max-width: 700px;
     }
 
     img {
       width: 100%;
       height: auto;
-      /* box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px; */
-      /* border-radius: 6px; */
     }
   }
 
@@ -130,13 +124,6 @@ const StyledHome = styled.main`
       flex-direction: column;
       align-items: center;
       justify-content: center;
-    }
-
-    .features__title {
-      font-size: 2.6rem;
-      font-weight: 600;
-      line-height: 3rem;
-      margin: 0 0 1rem 0;
     }
 
     .features__subtitle {
@@ -204,7 +191,7 @@ const StyledHome = styled.main`
       justify-content: center;
     }
 
-    .stationery-description {
+    .stationery__description {
       margin-left: 3rem;
       text-align: left;
       max-width: 550px;
@@ -223,13 +210,6 @@ const StyledHome = styled.main`
         .signup {
           margin-right: 1rem;
         }
-      }
-
-      h3 {
-        font-size: 2.7rem;
-        font-weight: 600;
-        line-height: 3rem;
-        margin: 0 0 2rem 0;
       }
 
       .services-aus-link {
@@ -278,11 +258,8 @@ const StyledHome = styled.main`
       justify-content: center;
       flex-direction: column;
 
-      h3 {
-        font-size: 2.7rem;
-        font-weight: 600;
-        line-height: 3rem;
-        margin: 0.5rem 0 2rem 0;
+      .action__subtitle {
+        margin-bottom: 0.5rem;
       }
 
       .button {
@@ -303,13 +280,13 @@ const StyledHome = styled.main`
     }
 
     .Home__preview {
-      .description {
+      .preview__description {
         margin-right: 4rem;
       }
     }
 
     .Home__stationery {
-      .stationery-description {
+      .stationery__description {
         margin-left: 5rem;
       }
     }
@@ -332,27 +309,33 @@ const StyledHome = styled.main`
       line-height: 1.7rem;
     }
 
+    .section__title {
+      font-size: 2.5rem;
+      line-height: 2.75rem;
+      margin-bottom: 1.5rem;
+    }
+
     .preview-container {
       flex-direction: column;
 
-      .description {
+      .preview__description  {
         text-align: center;
         justify-content: center;
         align-items: center;
         max-width: 550px;
-
-        .description__title {
+/* 
+        .preview__title {
           font-size: 2.5rem;
           line-height: 2.75rem;
-        }
+        } */
 
-        .description__btns {
+        .preview__btns {
           margin-right: 0;
           justify-content: center;
         }
       }
 
-      .description__screenshots {
+      .preview__screenshots {
         margin-top: 3rem;
         max-width: 500px;
       }
@@ -360,14 +343,8 @@ const StyledHome = styled.main`
 
     .Home__features {
       .content-container {
-
         .features__cards {
           margin-top: 2rem;
-        }
-
-        .features__title {
-          font-size: 2.5rem;
-          line-height: 2.75rem;
         }
 
         .features__subtitle {
@@ -381,16 +358,11 @@ const StyledHome = styled.main`
     .stationery-container {
       flex-direction: column-reverse;
 
-      .stationery-description {
+      .stationery__description {
         text-align: center;
         justify-content: center;
         align-items: center;
         margin-left: 0;
-
-        .stationery__title {
-          font-size: 2.5rem;
-          line-height: 2.75rem;
-        }
 
         .stationery__btns {
           margin-right: 0;
@@ -406,10 +378,6 @@ const StyledHome = styled.main`
 
     .Home__action {
       .content-container {
-        .action__title {
-          font-size: 2.5rem;
-          line-height: 2.75rem;
-        }
 
         .button {
           padding: 0.5rem 1.6rem 0.6rem 1.6rem;
@@ -447,14 +415,14 @@ const StyledHome = styled.main`
       line-height: 1.6rem;
     }
 
+    .section__title {
+      font-size: 2.1rem;
+      line-height: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
     .Home__features {
       .content-container {
-
-        .features__title {
-          font-size: 2.1rem;
-          line-height: 2.5rem;
-        }
-
         .features__card {
           margin: 0.75rem 0;
         }
@@ -468,33 +436,17 @@ const StyledHome = styled.main`
       }
     }
 
-    .Home__action {
-      .content-container {
-        .action__title {
-          font-size: 2.1rem;
-          line-height: 2.5rem;
-          margin-bottom: 1.25rem;
-        }
-      }
-    }
-
     .preview-container {
-      .description {
+      .preview__description {
         display: flex;
         flex-direction: column;
         align-items: center;
 
-        .description__title {
-          font-size: 2.1rem;
-          line-height: 2.5rem;
-          margin-bottom: 1rem;
-        }
-
-        .description__text {
+        .preview__text {
           max-width: 300px;
         }
         
-        .description__btns {
+        .preview__btns {
           margin-right: 0;
           justify-content: center;
           flex-direction: column;
@@ -513,16 +465,10 @@ const StyledHome = styled.main`
     }
 
     .stationery-container {
-      .stationery-description {
+      .stationery__description {
         display: flex;
         flex-direction: column;
         align-items: center;
-
-        .stationery__title {
-          font-size: 2.1rem;
-          line-height: 2.5rem;
-          margin-bottom: 1rem;
-        }
         
         .stationery__text {
           max-width: 300px;
