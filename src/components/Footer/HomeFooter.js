@@ -19,8 +19,8 @@ const HomeFooter = ({ currentPage }) => {
             <div className="column">
               {/* <h4 className="footer-title">Resources</h4> */}
               <ul>
-                <li><a href="#">About</a></li>
-                <li><a href="#">FAQ</a></li>
+                <li><Link to="/about">About</Link></li>
+                <li><Link to="/faq">FAQ</Link></li>
                 <li><a href="#">Contact Us</a></li>
               </ul>
             </div>

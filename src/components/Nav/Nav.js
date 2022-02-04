@@ -36,7 +36,7 @@ const Nav = ({ currentPage, resetData, setToast }) => {
   }
 
   // Combine the logout function with confirmation to the user of successful logout
-  const performLogout = async () => {
+  const performLogout = () => {
     closeNav();
     try {
       logout();

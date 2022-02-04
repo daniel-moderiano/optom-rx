@@ -122,15 +122,17 @@ export const useRxFormValidation = (setAlertFunc, setFunc) => {
   // Although only a single field is being validated, the switch statement should remain in case more fields need to be added
   const miscDataValidation = useCallback((setAlertFunc) => {
     document.querySelector('.misc-form').addEventListener('focusout', (event) => {
-      const { name } = event.target
+      const { name, value } = event.target
       switch (true) {
         case name === 'date':
-          validateRequiredField(setAlertFunc, event.target);
+          if (value.trim() === "") {
+            negativeValidationUI(setAlertFunc, 'Please enter the current date', event.target);
+          }
           break;
         default:
           break;
       }
     });
-  }, [validateRequiredField]);
+  }, [negativeValidationUI]);
   return { patientDataValidation, drugDataValidation, miscDataValidation }
 }
