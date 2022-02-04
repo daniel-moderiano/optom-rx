@@ -79,7 +79,8 @@ const StyledHome = styled.main`
   }
 
   .Home__intro {
-    background-image: linear-gradient(to top, #ffffff 0%, #F3F4F7 100%);
+    /* background-image: linear-gradient(to top, #ffffff 0%, #F3F4F7 100%); */
+    background-color: #fff;
     padding: 2rem 0 5rem 0;
 
     .content-container {

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useEffect } from "react";
 
-const Header = ({ currentPage, resetData, setPage, setToast }) => {
+const Header = ({ currentPage, resetData, setPage, setToast, url }) => {
   let navigate = useNavigate();
   const { user } = useAuthContext();
 
@@ -22,7 +22,7 @@ const Header = ({ currentPage, resetData, setPage, setToast }) => {
   }, [setPage])
 
   return (
-    <StyledHeader className="header" user={user} role="banner" aria-labelledby="optomrx-logo">
+    <StyledHeader className={`header ${(url === '/login' || url === '/signup') && 'auth-header'}`} user={user} role="banner" aria-labelledby="optomrx-logo">
         <h1 className="Header__title" onClick={handleLogoClick}>
           <div className="logo-container">
             {/* Using inline SVG for easier styling changes in CSS */}

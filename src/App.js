@@ -34,7 +34,6 @@ const App = () => {
   const { pathname } = useLocation();
   const { loadGoogleAPI } = useGoogleAPI();
   const ausDate = new Date().toLocaleString("en-CA", { timeZone: "Australia/Adelaide" }).substring(0, 10);
-  
 
   // Used for toast alerts, can pass set function to components that require toast alerts
   const [toastParams, setToastParams] = useState({
@@ -107,7 +106,6 @@ const App = () => {
 
   // Only load google API services when the user is logged in
   useEffect(() => {
-    console.log('Call google effect');
     if (user) {
       loadGoogleAPI(googleLoaded, setGoogleLoaded);
     }
@@ -142,9 +140,9 @@ const App = () => {
     <StyledApp className="App">
       <GlobalStyles />
       {authIsReady && (<> 
-        <Header resetData={resetAllData} currentPage={currentPage} setPage={setCurrentPage} setToast={setToastParams}/>
+        <Header resetData={resetAllData} currentPage={currentPage} setPage={setCurrentPage} setToast={setToastParams} url={pathname}/>
 
-        <Main currentPage={currentPage}>
+        <Main currentPage={currentPage} user={user} url={pathname}>
           <Routes>
             <Route path="/" element={
               <>
@@ -242,8 +240,8 @@ const App = () => {
 
           </Routes>
         </Main>
-        {user && <AppFooter currentPage={currentPage}/>}
-        {!user && <HomeFooter currentPage={currentPage}/>}
+        {user && <AppFooter currentPage={currentPage} url={pathname}/>}
+        {!user && <HomeFooter currentPage={currentPage} url={pathname}/>}
       </>)}
       <Toast params={toastParams} />
      

@@ -6,12 +6,9 @@ const StyledPolicy = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  margin: 2rem 0.5rem 5rem 0.5rem;
-  border: 1px solid #d0d7de;
   background-color: #fff;
-  padding: 4rem 3.5rem;
+  padding: 3rem 3.5rem 5rem 3.5rem;
   border-radius: 6px;
-  box-shadow: var(--small-shadow);
 
   h2 {
     width: 100%;
@@ -56,14 +53,14 @@ const StyledPolicy = styled.div`
 
   /* Large screens */
   @media (min-width: 1000px) {
-    padding: 4rem 7.5rem;
+    padding: 3rem 7.5rem 5rem 7.5rem;
   }
 
   /* Tablets and below */
   @media (max-width: 768px) {
-    padding: 3rem 2.5rem;
+    padding: 3rem 2.5rem 5rem 2.5rem;
 
-    .Privacy__heading {
+    h2 {
       font-size: 2.5em;
     }
     h3 {
@@ -75,9 +72,9 @@ const StyledPolicy = styled.div`
 
   /* Phone portrait screens */
   @media (max-width: 450px) {
-    padding: 3rem 1.5rem;
+    padding: 2rem 1.5rem 4rem 1.5rem;
 
-    .Privacy__heading {
+    h2 {
       font-size: 2.1rem;
     }
     h3 {

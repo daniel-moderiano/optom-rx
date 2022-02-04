@@ -1,10 +1,8 @@
 // Load the Google places API and make clear to the app that google script is loaded, ready, and not to be re-added again
-
 import { useCallback } from "react";
 
 export const useGoogleAPI = () => {
   const loadGoogleAPI = useCallback((googleLoaded, setGoogleLoaded) => {
-    console.log('Run google func');
     // Check for the existence of the google maps API to judge whether it has loaded at any given time. Used where the onload script event won't re-fire (i.e. any other point from initial load)
     if (typeof google === 'undefined') {
       if (googleLoaded) {

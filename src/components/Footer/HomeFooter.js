@@ -1,18 +1,18 @@
 import { Link } from "react-router-dom";
 import { StyledHomeFooter } from "./HomeFooter.styled";
 
-const HomeFooter = ({ currentPage }) => {
+const HomeFooter = ({ url }) => {
   return (
-    <StyledHomeFooter className="HomeFooter" currentPage={currentPage}>
+    <StyledHomeFooter className="HomeFooter" url={url}>
       <div className="footer-top">
         <div className="top-container">
         <div className="footer-secondary-nav">
             <div className="column">
               {/* <h4 className="footer-title">Web App</h4> */}
               <ul>
-                <li><Link to="/features"></Link></li>
-                <li><Link to="/release-notes"></Link></li>
-                <li><Link to="/contribute"></Link></li>
+                <li><Link to="/features">Features</Link></li>
+                <li><Link to="/release-notes">Release Notes</Link></li>
+                <li><Link to="/contribute">Contribute</Link></li>
               </ul>
             </div>
 

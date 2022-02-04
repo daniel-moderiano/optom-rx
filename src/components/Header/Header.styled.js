@@ -3,7 +3,7 @@ import styled from "styled-components";
 const StyledHeader = styled.header`
 /* Using user prop to either show the logged in or logged out styling */
   color: #FFFFFF;
-  background-color: ${props => props.user ? 'var(--primary-color)' : 'var(--background)'};
+  background-color: ${props => props.user ? 'var(--primary-color)' : '#fff'};
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -11,6 +11,10 @@ const StyledHeader = styled.header`
   width: 100%;
   height: ${props => props.user ? '3.8rem' : '5.8rem'};
   flex-shrink: 0;
+
+  &.auth-header {
+    background-color: var(--background);
+  }
 
   h1 {
     margin: ${props => props.user ? '0.6rem 0 0.1rem 0' : '0.85rem 0 0 0'};

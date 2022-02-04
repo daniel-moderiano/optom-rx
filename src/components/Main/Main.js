@@ -1,8 +1,8 @@
 import { StyledMain } from "./Main.styled"
 
-const Main = ({ children, currentPage }) => {
+const Main = ({ children, user, url }) => {
   return (
-    <StyledMain className="Main" role="main" currentPage={currentPage}>
+    <StyledMain className="Main" role="main" user={user} url={url}>
       {children}
     </StyledMain>
   )

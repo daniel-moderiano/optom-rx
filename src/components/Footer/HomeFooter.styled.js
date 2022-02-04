@@ -6,11 +6,11 @@ const StyledHomeFooter = styled.footer`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background-color: ${props => (props.currentPage === 'homepage' || props.currentPage === 'features') ? '#fff' : 'var(--background)'};
+  background-color: ${props => (props.url === '/login' || props.url === '/signup') ? 'var(--background)' : '#fff'};
 
   .footer-top {
     width: 100%;
-    border-top: ${props => (props.currentPage === 'homepage' || props.currentPage === 'features') ? '1px solid #F1F1F1' : '1px solid #dee1e4'};
+    border-top: ${props => (props.url === '/login' || props.url === '/signup') ? '1px solid #dee1e4' : '1px solid #F1F1F1'};
     padding: 2rem 0 1.5rem 0;
     display: flex;
     align-items: center;
