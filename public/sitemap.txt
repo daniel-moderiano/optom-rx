@@ -13,3 +13,9 @@ https://optomrx.net/scripts
 https://optomrx.net/add-prescriber
 https://optomrx.net/edit-prescriber
 https://optomrx.net/reset-password
+https://optomrx.net/contact
+https://optomrx.net/release-notes
+https://optomrx.net/faq
+https://optomrx.net/about
+https://optomrx.net/contribute
+

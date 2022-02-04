@@ -105,7 +105,7 @@ const App = () => {
           ...prevData,
           visible: false, 
         }))
-      }, 4000);
+      }, 3500);
     }
   }, [toastParams.visible])
 

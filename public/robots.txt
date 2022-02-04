@@ -16,3 +16,9 @@ Sitemap: https://optomrx.net/scripts
 Sitemap: https://optomrx.net/add-prescriber
 Sitemap: https://optomrx.net/edit-prescriber
 Sitemap: https://optomrx.net/reset-password
+Sitemap: https://optomrx.net/contact
+Sitemap: https://optomrx.net/release-notes
+Sitemap: https://optomrx.net/faq
+Sitemap: https://optomrx.net/about
+Sitemap: https://optomrx.net/contribute
+
