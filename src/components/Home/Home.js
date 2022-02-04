@@ -16,7 +16,7 @@ const Home = ({ setPage }) => {
     <Helmet>
       <title>Online therapeutic prescriptions for Optometrists | OptomRx</title>
       <meta name="description" content="Giving Australian optometrists the tools to professionally create and manage therapeutic prescriptions online, including PBS and authority scripts."/>
-      <link rel="canonical" href="/dashboard" />
+      <link rel="canonical" href="/" />
     </Helmet>
 
     <StyledHome className="Home">

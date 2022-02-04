@@ -49,7 +49,6 @@ const Features = ({ setPage }) => {
               <h4 className="description__title">Avoid mistakes in prescribing</h4>
               <p className="description__text">Every PBS medication has maximum allowable quantity and repeats. Using up-to-date PBS data, OptomRx shows you these values for any selected PBS medication, making any prescribing errors less likely.</p>
             </div>
-           
           </div>
 
           <div className="content-container pbs-container authority-container">
@@ -112,7 +111,6 @@ const Features = ({ setPage }) => {
               <p className="data__text"><strong>Patient information is never saved on OptomRx.</strong> When you save a script, only non-identifiable information regarding medication and PBS details are retained. For authority scripts, prescriber copies are provided in the printable template for your records.</p>
               <p className="data__text">The decision to avoid patient data retention was made in the spirit of patient safety, and the vision of OptomRx as a prescription writing tool, not a prescription database.</p>
             </div>
-          
           </div>
         </section>
 
@@ -123,6 +121,7 @@ const Features = ({ setPage }) => {
             <Link to="/signup" className="btn-primary button signup">Sign up to OptomRx</Link>
           </div>
         </section>
+        
       </div>       
     </StyledFeatures>
   );
