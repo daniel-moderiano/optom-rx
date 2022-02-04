@@ -144,10 +144,10 @@ const StyledFormField = styled.div`
   .tickCircle {
     position: absolute;
     width: 22px;
-    top: 39px;
+    top: 32px;
     right: 10px;
     background-color: #fff;
-    padding-left: 0.3rem;
+    padding: 0.45rem 0 0.4rem 0.3rem;
     animation-name: fadeIn;
     animation-timing-function: ease;
     animation-duration: 100ms;
