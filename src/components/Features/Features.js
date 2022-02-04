@@ -74,8 +74,7 @@ const Features = ({ setPage }) => {
         <section className="Features__lemi" aria-labelledby="lemi__title">
           <div className="content-container lemi-container">
           <div className="lemi__screenshots">
-              {/* <img src={lemi} alt="Front cover of LEMI and LMBC guides for active ingredient prescribing" /> */}
-              <img src={lemiOptimised} alt="Front cover of LEMI and LMBC guides for active ingredient prescribing" />
+              <img src={lemiOptimised} loading="lazy" alt="Front cover of LEMI and LMBC guides for active ingredient prescribing" />
             </div>
             <div className="lemi__description description">
               <h3 id="lemi__title" className="section__title">Active ingredient prescribing</h3>
@@ -92,8 +91,8 @@ const Features = ({ setPage }) => {
               <p className="prescribers__text">Whether you work in a single practice, or locum all across Australia - OptomRx supports as many prescriber profiles as you need. Prescriber profiles can be modified, added, or removed with ease. Simply select whichever prescriber details you wish to use when you write a prescription. Simplify things further with default selection for your most common practice location.</p>
             </div>
             <div className="prescribers__screenshots">
-              <img className="desktop" src={prescribersOptimised} alt="Online table displaying several sets of prescriber details" />
-              <img className="mobile" src={prescribersMobileOptimised} alt="Online cards displaying several sets of prescriber details" />
+              <img className="desktop" loading="lazy" src={prescribersOptimised} alt="Online table displaying several sets of prescriber details" />
+              <img className="mobile" loading="lazy" src={prescribersMobileOptimised} alt="Online cards displaying several sets of prescriber details" />
             </div>
           </div>
         </section>
@@ -106,7 +105,7 @@ const Features = ({ setPage }) => {
               <p className="represcribe__text">These favourites contain specific medication details, e.g. ingredient, quantity, repeats, dosage, etc. You can re-prescribe these favourites with a single click. Just add patient details, and the script is done. Quick and easy. </p>
             </div>
             <div className="represcribe__screenshots">
-              <img src={favouritesOptimised} alt="Online dashboard containing favourite scripts in table layout" />
+              <img src={favouritesOptimised} loading="lazy" alt="Online dashboard containing favourite scripts in table layout" />
             </div>
           </div>
         </section>
@@ -114,7 +113,7 @@ const Features = ({ setPage }) => {
         <section className="Features__data" aria-labelledby="data__title">
           <div className="content-container data-container">
             <div className="data__screenshots">
-              <img src={scriptOptimised} alt="Screenshot of online prescription" />
+              <img src={scriptOptimised} loading="lazy" alt="Screenshot of online prescription" />
             </div>
             <div className="data__description description">
               <h3 id="data__title" className="section__title">No patient data retention</h3>
@@ -127,7 +126,7 @@ const Features = ({ setPage }) => {
         <section className="Features__action" aria-labelledby="action__title">
           <div className="content-container action-container">
             <p className="subtitle action__subtitle">Try it for yourself</p>
-            <h3 id="action__title" className="section__title">OptomRx is free to use.</h3>
+            <h3 id="action__title" className="section__title">OptomRx is free to use</h3>
             <Link to="/signup" className="btn-primary button signup">Sign up to OptomRx</Link>
           </div>
         </section>

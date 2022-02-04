@@ -102,7 +102,7 @@ const Home = ({ setPage }) => {
         <section className="Home__action" aria-labelledby="action__title">
           <div className="content-container action-container">
             <p className="subtitle action__subtitle">Try it for yourself</p>
-            <h3 id="action__title" className="section__title">OptomRx is free to use.</h3>
+            <h3 id="action__title" className="section__title">OptomRx is free to use</h3>
             <Link to="/signup" className="btn-primary button signup">Sign up to OptomRx</Link>
           </div>
         </section>
