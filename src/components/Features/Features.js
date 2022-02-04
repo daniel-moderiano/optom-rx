@@ -1,9 +1,6 @@
 import { StyledFeatures } from "./Features.styled";
 import { useEffect } from "react";
-import Button from '../utils/Button/Button';
 import { Helmet } from 'react-helmet-async';
-import laptopMockup from '../../assets/macbook-mockup.png';
-import sampleRx from '../../assets/example-rx-noline.jpg'
 import lemi from '../../assets/lemi-lmbc.png';
 import authority from '../../assets/authority.png';
 import indications from '../../assets/indications.png';
@@ -34,10 +31,8 @@ const Features = ({ setPage }) => {
         </section>
 
         <section className="Features__pbs" aria-labelledby="description__title">
-          {/* <div className="pbs-container content-container title-container"> */}
-              <h3 id="description__title" className="description__title">Real-time PBS data</h3>
-            <p className="pbs-subtitle">Anytime you want to write a PBS script with OptomRx, you'll have access to these fantastic features.</p>
-            {/* </div> */}
+          <h3 id="description__title" className="description__title">Real-time PBS data</h3>
+          <p className="pbs-subtitle">Anytime you want to write a PBS script with OptomRx, you'll have access to these fantastic features.</p>
           <div className="content-container pbs-container indications-container">
             <div className="description">
               <h4 className="description__title">Instant PBS availability and indications</h4>
@@ -76,7 +71,7 @@ const Features = ({ setPage }) => {
               <img src={lemi} alt="Front cover of LEMI and LMBC guides for active ingredient prescribing" />
             </div>
             <div className="lemi__description">
-              <h3 id="lemi__title" className="lemi__title">Active ingredient prescribing</h3>
+              <h3 id="lemi__title" className="section__title">Active ingredient prescribing</h3>
               <p className="lemi__text">Guidelines now exist for all prescribers in Australia, requiring active ingredient prescribing in many cases. Several ophthalmic medications however belong to the List of Excluded Medicinal Items (LEMI) or the List of Medicines for Brand Consideration (LMBC), where active ingredient prescribing may not apply.</p>
               <p className="lemi__text">OptomRx identifies which items belong to the LEMI or LMBC, and automatically adjusts your prescriptions to meet relevant guidelines. You can find out if any LEMI/LMBC adjustments have been made while writing your scripts, and overwrite this if necessary.</p>
             </div>
@@ -86,7 +81,7 @@ const Features = ({ setPage }) => {
         <section className="Features__prescribers" aria-labelledby="prescribers__title">
           <div className="content-container prescribers-container">
             <div className="prescribers-description">
-              <h3 id="prescribers__title" className="prescribers__title">Multiple prescribers</h3>
+              <h3 id="prescribers__title" className="section__title">Multiple prescribers</h3>
               <p className="prescribers__text">Whether you work in a single practice, or locum all across Australia - OptomRx supports as many prescriber profiles as you need. Prescriber profiles can be modified, added, or removed with ease. Simply select whichever prescriber details you wish to use when you write a prescription. Simplify things further with default selection for your most common practice location.</p>
             </div>
             <div className="prescribers__screenshots">
@@ -99,7 +94,7 @@ const Features = ({ setPage }) => {
         <section className="Features__represcribe" aria-labelledby="represcribe__title">
           <div className="content-container represcribe-container">
             <div className="represcribe__description">
-              <h3 id="represcribe__title" className="represcribe__title">Instant re-prescribe</h3>
+              <h3 id="represcribe__title" className="section__title">Instant re-prescribe</h3>
               <p className="represcribe__text">In practice, you'll be reaching for the same scripts over and over; why waste time re-writing the same script every time? With OptomRx, you are able to save any script as a 'favourite'.</p>
               <p className="represcribe__text">These favourites contain specific medication details, e.g. ingredient, quantity, repeats, dosage, etc. You can re-prescribe these favourites with a single click. Just add patient details, and the script is done. Quick and easy. </p>
             </div>
@@ -115,7 +110,7 @@ const Features = ({ setPage }) => {
               <img src={script} alt="Screenshot of online prescription" />
             </div>
             <div className="data__description">
-              <h3 id="data__title" className="data__title">No patient data retention</h3>
+              <h3 id="data__title" className="section__title">No patient data retention</h3>
               <p className="data__text"><strong>Patient information is never saved on OptomRx.</strong> When you save a script, only non-identifiable information regarding medication and PBS details are retained. For authority scripts, prescriber copies are provided in the printable template for your records.</p>
               <p className="data__text">The decision to avoid patient data retention was made in the spirit of patient safety, and the vision of OptomRx as a prescription writing tool, not a prescription database.</p>
             </div>
@@ -125,8 +120,8 @@ const Features = ({ setPage }) => {
 
         <section className="Features__action" aria-labelledby="action__title">
           <div className="content-container action-container">
-            <p className="action__subtitle">Try it for yourself</p>
-            <h3 id="action__title" className="action__title">OptomRx is free to use. Always.</h3>
+            <p className="subtitle action__subtitle">Try it for yourself</p>
+            <h3 id="action__title" className="section__title">OptomRx is free to use. Always.</h3>
             <Link to="/signup" className="btn-primary button signup">Sign up to OptomRx</Link>
           </div>
         </section>

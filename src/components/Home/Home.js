@@ -31,7 +31,7 @@ const Home = ({ setPage }) => {
         </section>
 
         <section className="Home__preview" aria-labelledby="preview__title">
-          <div className="content-container preview-container">
+          <div className="content-container">
             <div className="preview__description description">
               <h3 id="preview__title" className="section__title">Accessible for all Australian Optometrists</h3>
               <p className="preview__text Home__text">Corporate, independent, rural or metro - OptomRx's web app means you have access to professional computerised scripts anywhere.</p>

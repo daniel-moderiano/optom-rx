@@ -4,6 +4,12 @@ const StyledFeatures = styled.div`
 width: 100%;
   font-size: 1.1rem;
 
+  section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .example {
     margin: 5rem;
     width: 700px;
@@ -25,6 +31,7 @@ width: 100%;
     width: 100%;
   }
 
+
   .message {
     text-align: center;
     font-size: 2.5rem;
@@ -40,11 +47,21 @@ width: 100%;
     padding-bottom: 3rem;
   }
 
+  .section__title {
+    font-size: 2.7rem;
+    font-weight: 600;
+    line-height: 3rem;
+    margin: 0 0 2rem 0;
+  }
+
+  .signup {
+    padding: 0.5rem 1.8rem 0.7rem 1.8rem;
+    height: auto;
+    font-size: 1.15rem;
+    letter-spacing: 0.01rem;
+  }
+
   .Features__intro {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    /* border-top: 1px solid #dee1e4; */
     background-image: linear-gradient(to top, #ffffff 0%, #F3F4F7 100%);
     background-color: #fff;
     padding: 2rem 0 0 0;
@@ -55,7 +72,6 @@ width: 100%;
       justify-content: center;
       flex-direction: column;
       text-align: left;
-      /* max-width: 932px; */
 
       p {
         margin-bottom: 2rem;
@@ -66,12 +82,8 @@ width: 100%;
   .Features__pbs {
     padding: 1rem 0 4rem 0;
     text-align: left;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     flex-direction: column;
     background-color: #FFFFFF;
-    /* border-top: 1px solid #dee1e4; */
 
     h3 {
       font-size: 2.7rem;
@@ -141,9 +153,6 @@ width: 100%;
   .Features__lemi {
     padding: 5rem 0 4.5rem 0;
     text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     background-color: #F9FAFB;
 
     .lemi-container {
@@ -158,13 +167,6 @@ width: 100%;
       text-align: left;
       max-width: 450px;
       line-height: 1.5rem;
-
-      h3 {
-        font-size: 2.7rem;
-        font-weight: 600;
-        line-height: 3rem;
-        margin: 0 0 2rem 0;
-      }
 
       p {
         margin: 1rem 0;
@@ -193,9 +195,6 @@ width: 100%;
   .Features__prescribers {
     padding: 4rem 0 3.5rem 0;
     text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     background-color: #FFFFFF;
 
     .prescribers-container {
@@ -207,17 +206,9 @@ width: 100%;
     }
 
     .prescribers-description {
-      /* margin-left: 3rem; */
       text-align: left;
       max-width: 880px;
       line-height: 1.5rem;
-
-      h3 {
-        font-size: 2.7rem;
-        font-weight: 600;
-        line-height: 3rem;
-        margin: 0 0 1rem 0;
-      }
     }
 
     .prescribers__screenshots {
@@ -240,9 +231,6 @@ width: 100%;
   .Features__represcribe {
     padding: 5.5rem 0 4rem 0;
     text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     background-color: #F9FAFB;
 
     .represcribe-container {
@@ -257,13 +245,6 @@ width: 100%;
       text-align: left;
       max-width: 400px;
       line-height: 1.5rem;
-
-      h3 {
-        font-size: 2.7rem;
-        font-weight: 600;
-        line-height: 3rem;
-        margin: 0 0 2rem 0;
-      }
 
       p {
         margin: 1rem 0;
@@ -284,9 +265,6 @@ width: 100%;
   .Features__data {
     padding: 1rem 0 5.5rem 0;
     text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     background-color: #F9FAFB;
 
     .data-container {
@@ -301,13 +279,6 @@ width: 100%;
       text-align: left;
       max-width: 390px;
       line-height: 1.5rem;
-
-      h3 {
-        font-size: 2.7rem;
-        font-weight: 600;
-        line-height: 3rem;
-        margin: 0 0 2rem 0;
-      }
 
       .data__text {
         margin: 1rem 0;
@@ -328,9 +299,6 @@ width: 100%;
   .Features__action {
     padding: 4.5rem 0 6rem 0;
     text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     background-color: #fff;
 
     .action-container {
@@ -339,30 +307,15 @@ width: 100%;
       justify-content: center;
       flex-direction: column;
 
-      .action__title {
-        font-size: 2.7rem;
-        font-weight: 600;
-        line-height: 3rem;
-        margin: 0.5rem 0 2rem 0;
-        text-align: center;
-      }
-
       .action__subtitle {
         font-size: 1.3rem;
         font-weight: 500;
         color: #546E7A;
         max-width: 700px;
       }
-
-      .button {
-        padding: 0.5rem 1.8rem 0.7rem 1.8rem;
-        height: auto;
-        font-size: 1.15rem;
-        font-weight: 500;
-        letter-spacing: 0.02rem;
-      }
     }
   }
+
 
   /* Lagre screens */
   @media (min-width: 1000px) {
@@ -399,20 +352,16 @@ width: 100%;
     font-size: 1.05rem;
     line-height: 1.4rem;
 
-    
-    .Features__action {
-      .content-container {
-        .action__title {
-          font-size: 2.5rem;
-          line-height: 2.75rem;
-        }
+    .section__title {
+      font-size: 2.5rem;
+      line-height: 2.75rem;
+      margin-bottom: 1.5rem;
+    }
 
-        .button {
-          padding: 0.5rem 1.6rem 0.6rem 1.6rem;
-          height: auto;
-          font-size: 1.1rem;
-        }
-      }
+    .signup {
+      padding: 0.5rem 1.6rem 0.6rem 1.6rem;
+      height: auto;
+      font-size: 1.1rem;
     }
 
     .Features__title {
@@ -483,10 +432,6 @@ width: 100%;
           text-align: left;
           margin: 0 0 2rem 0;
           max-width: 600px;
-          h3 {
-            font-size: 2.5rem;
-            line-height: 2.75rem;
-          }
         }
       }
     }
@@ -499,10 +444,6 @@ width: 100%;
           margin: 0 0 1rem 0;
           max-width: 600px;
           text-align: left;
-          h3 {
-            font-size: 2.5rem;
-            line-height: 2.75rem;
-          }
         }
       }
       .mobile {
@@ -521,10 +462,6 @@ width: 100%;
           text-align: left;
           margin: 0 0 2rem 0;
           max-width: 600px;
-          h3 {
-            font-size: 2.5rem;
-            line-height: 2.75rem;
-          }
         }
       }
     }
@@ -539,10 +476,6 @@ width: 100%;
           text-align: left;
           margin: 0 0 2rem 0;
           max-width: 600px;
-          h3 {
-            font-size: 2.5rem;
-            line-height: 2.75rem;
-          }
         }
       }
     }
@@ -556,11 +489,6 @@ width: 100%;
     .Features__action {
       padding-top: 4rem;
       .action-container {
-        .action__title {
-          font-size: 2.5rem;
-          line-height: 2.75rem;
-        }
-
         .action__subtitle {
           font-size: 1.2rem;
           max-width: 500px;
@@ -589,6 +517,12 @@ width: 100%;
       font-size: 1.1rem;
       max-width: 350px;
       line-height: 1.5rem;
+    }
+
+    .section__title {
+      font-size: 2.1rem;
+      line-height: 2.5rem;
+      margin-bottom: 1rem;
     }
 
     .Features__pbs {
@@ -640,11 +574,6 @@ width: 100%;
           text-align: left;
           margin: 0 0 2rem 0;
           max-width: 350px;
-          h3 {
-            font-size: 2.1rem;
-            line-height: 2.5rem;
-            margin-bottom: 1rem;
-          }
         }
       }
     }
@@ -658,11 +587,6 @@ width: 100%;
           text-align: left;
           margin: 0 0 2rem 0;
           max-width: 350px;
-          h3 {
-            font-size: 2.1rem;
-            line-height: 2.5rem;
-            margin-bottom: 1rem;
-          }
         }
       }
     }
@@ -676,11 +600,6 @@ width: 100%;
           text-align: left;
           margin: 0 0 2rem 0;
           max-width: 350px;
-          h3 {
-            font-size: 2.1rem;
-            line-height: 2.5rem;
-            margin-bottom: 1rem;
-          }
         }
       }
     }
@@ -691,23 +610,12 @@ width: 100%;
           margin: 0 0 1rem 0;
           max-width: 350px;
           text-align: left;
-          h3 {
-            font-size: 2.1rem;
-            line-height: 2.5rem;
-            margin-bottom: 1rem;
-          }
         }
       }
     }
 
     .Features__action {
       .action-container {
-        .action__title {
-          font-size: 2.1rem;
-          line-height: 2.5rem;
-          margin-bottom: 1.25rem;
-        }
-
         .action__subtitle {
           font-size: 1.1rem;
           max-width: 300px;
