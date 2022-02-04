@@ -220,7 +220,7 @@ const App = () => {
 
             <Route path="/review-prescription" element={
               <>
-              {user && <RxTemplate data={data} setToast={setToastParams} setPage={setCurrentPage}/>}
+              {user && <RxTemplate data={data} setToast={setToastParams} setPage={setCurrentPage} resetData={resetAllData}/>}
               {!user && <Navigate to="/login"/>}
               </>
             }/>

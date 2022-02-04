@@ -9,6 +9,7 @@ import { useEffect } from 'react';
 import ContentContainer from '../utils/ContentContainer/ContentContainer'
 import PageHeader from '../utils/PageHeader/PageHeader';
 import { useConditionalToast } from '../../hooks/useConditionalToast';
+import { Helmet } from 'react-helmet-async';
 
 const Prescribers = ({ setToast, setPage }) => {
   const { user } = useAuthContext();
@@ -29,7 +30,12 @@ const Prescribers = ({ setToast, setPage }) => {
     }
   }, [error])
 
-  return (
+  return (<>
+    <Helmet>
+      <title>Prescribers · OptomRx</title>
+      <meta name="description" content="Add, edit, or delete prescriber profiles. Use these profiles as needed when you create new scripts."/>
+      <link rel="canonical" href="/prescribers" />
+    </Helmet>
     <ContentContainer earlyPadding={true}>
       <StyledPrescribers className="Prescribers">
         <PageHeader title="Prescribers" description="Add and modify prescriber details for your prescriptions"/>
@@ -62,7 +68,7 @@ const Prescribers = ({ setToast, setPage }) => {
         </div>
       </StyledPrescribers>
     </ContentContainer>
-  )
+  </>)
 }
 
 export default Prescribers;

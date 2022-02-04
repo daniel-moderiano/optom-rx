@@ -7,6 +7,7 @@ import { StyledEditPrescriber } from "./EditPrescriber.styled";
 import ContentContainer from '../utils/ContentContainer/ContentContainer';
 import PageHeader from '../utils/PageHeader/PageHeader';
 import { useImmediateToast } from '../../hooks/useImmediateToast';
+import { Helmet } from "react-helmet-async";
 
 const EditPrescriber = ({ googleLoaded, setToast, setPage }) => {
   const { id } = useParams();
@@ -71,7 +72,11 @@ const EditPrescriber = ({ googleLoaded, setToast, setPage }) => {
     navigate('/prescribers');
   }
 
-  return (
+  return (<>
+    <Helmet>
+      <title>Edit prescriber · OptomRx</title>
+      <meta name="description" content="Edit prescriber details for the selected prescriber profile."/>
+    </Helmet>
     <ContentContainer>
       <StyledEditPrescriber>
         <PageHeader title="Edit prescriber" description="Prescriber details will appear on your prescriptions"/>        
@@ -89,7 +94,7 @@ const EditPrescriber = ({ googleLoaded, setToast, setPage }) => {
         </div>
       </StyledEditPrescriber>
     </ContentContainer>
-  )
+  </>)
 }
 
 export default EditPrescriber

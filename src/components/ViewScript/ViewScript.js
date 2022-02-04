@@ -13,7 +13,8 @@ import Button from '../utils/Button/Button'
 import './ViewScript.css';
 import { useFormatting } from '../../hooks/useFormatting';
 import Spinner from "../utils/Spinner/Spinner";
-import { useImmediateToast } from '../../hooks/useImmediateToast'
+import { useImmediateToast } from '../../hooks/useImmediateToast';
+import { Helmet } from "react-helmet-async";
 
 const ViewScript = ({ setToast, resetData, setPage }) => {
   const { user } = useAuthContext();
@@ -69,6 +70,10 @@ const ViewScript = ({ setToast, resetData, setPage }) => {
   }
 
   return (<>
+    <Helmet>
+      <title>View script · OptomRx</title>
+      <meta name="description" content="View medication and PBS details for the selected script. Patient data is not retained."/>
+    </Helmet>
     <ContentContainer>
       <StyledViewScript>
         <PageHeader title={`Script #${id}`} />

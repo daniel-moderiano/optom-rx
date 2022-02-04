@@ -8,6 +8,7 @@ import { StyledAddPrescriber } from "./AddPrescriber.styled";
 import ContentContainer from '../utils/ContentContainer/ContentContainer';
 import PageHeader from '../utils/PageHeader/PageHeader';
 import { useImmediateToast } from '../../hooks/useImmediateToast';
+import { Helmet } from "react-helmet-async";
 
 const AddPrescriber = ({ googleLoaded, setToast, setPage }) => {
   const { user } = useAuthContext();
@@ -65,7 +66,12 @@ const AddPrescriber = ({ googleLoaded, setToast, setPage }) => {
     navigate('/prescribers');
   }
 
-  return (
+  return (<>
+    <Helmet>
+      <title>Add prescriber · OptomRx</title>
+      <meta name="description" content="Add a new prescriber profile for use with your prescriptions."/>
+      <link rel="canonical" href="/add-prescriber" />
+    </Helmet>
     <ContentContainer>
       <StyledAddPrescriber>
         <PageHeader title="Add prescriber" description="Prescriber details will appear on your prescriptions"/>
@@ -83,7 +89,7 @@ const AddPrescriber = ({ googleLoaded, setToast, setPage }) => {
         </div>
       </StyledAddPrescriber>
     </ContentContainer>
-  )
+  </>)
 }
 
 export default AddPrescriber;

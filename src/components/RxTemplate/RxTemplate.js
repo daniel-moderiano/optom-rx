@@ -13,8 +13,9 @@ import PageHeader from '../utils/PageHeader/PageHeader';
 import Button from '../utils/Button/Button';
 import { useFormatting } from "../../hooks/useFormatting";
 import { useImmediateToast } from '../../hooks/useImmediateToast';
+import { Helmet } from "react-helmet-async";
 
-const RxTemplate = ({ data, setToast, setPage }) => {
+const RxTemplate = ({ data, setToast, setPage, resetData }) => {
   // Deconstructing data for cleanliness of code and easier-to-understand operations
   const { drugData, patientData, prescriberData, miscData } = data;
   const { formatDrug, formatDate, formatPhoneNumber, formatMedicareNumber, formatPrescriberAddress } = useFormatting();
@@ -50,14 +51,22 @@ const RxTemplate = ({ data, setToast, setPage }) => {
 
       setIsPending(false);
       showSuccessToast(setToast, 'Prescription saved');
+      resetData();
       navigate('/');
     } catch (error) {
       setIsPending(false);
       showErrorToast(setToast, 'An error occurred while saving the script');
+    } finally {
+      
     }
   };
 
-  return (
+  return (<>
+    <Helmet>
+      <title>Review prescription · OptomRx</title>
+      <meta name="description" content="Review your prescription before printing. Make changes as needed, and save once complete."/>
+      <link rel="canonical" href="/review-prescription" />
+    </Helmet>
     <StyledRxTemplate className="RxTemplate">
       <PageHeader title="Review your prescription" />
 
@@ -491,7 +500,7 @@ const RxTemplate = ({ data, setToast, setPage }) => {
       </> : <h3 className="RxTemplate__subtitle">We couldn't find any prescription data, please write a new prescription and try again.</h3>}
 
     </StyledRxTemplate>
-  );
+  </>);
 };
 
 export default RxTemplate;

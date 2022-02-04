@@ -17,6 +17,7 @@ import AuthorityDetails from "../AuthorityDetails/AuthorityDetails";
 import { useConditionalToast } from "../../hooks/useConditionalToast";
 import { useNewRx } from "../../hooks/useNewRx";
 import { useRxFormValidation } from "../../hooks/useRxFormValidation";
+import { Helmet } from "react-helmet-async";
 
 // Multiple items are not permitted to be prescribed on the same form; each must use an individual form (applies to optometrists only)
 
@@ -519,7 +520,12 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
   }, [pbsInfo, drugData.pbsRx, drugData.maxQuantity, drugData.maxRepeats, showTooltip, handleLEMIInfo])
 
 
-  return (
+  return (<>
+    <Helmet>
+      <title>New prescription · OptomRx</title>
+      <meta name="description" content="Write a new prescription, with a suite of tools to streamline the process."/>
+      <link rel="canonical" href="/new-prescription" />
+    </Helmet>
     <ContentContainer>
       <PageHeader title="New prescription" description="Complete all sections required for your prescription" />
       <StyledRxForm
@@ -582,7 +588,7 @@ const RxForm = ({ handleSubmit, googleLoaded, existingData, setPage, setToast })
 
       </StyledRxForm>
     </ContentContainer>
-  )
+  </>)
 }
 
 export default RxForm

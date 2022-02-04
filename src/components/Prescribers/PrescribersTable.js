@@ -142,7 +142,7 @@ const PrescribersTable = ({ data, rowsPerPage, setToast, user }) => {
                     {isPending ? (
                       'Updating...'
                       ) : (
-                      `${prescriber.default ? 'Remove default' : 'Make default'}`
+                      `${prescriber.default ? 'Remove default' : 'Set as default'}`
                     )}
                   </button>
                 </div>

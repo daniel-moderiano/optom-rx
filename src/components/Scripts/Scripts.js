@@ -7,6 +7,7 @@ import ContentContainer from '../utils/ContentContainer/ContentContainer';
 import PageHeader from '../utils/PageHeader/PageHeader';
 import { useUserData } from '../../hooks/useUserData';
 import { useConditionalToast } from '../../hooks/useConditionalToast';
+import { Helmet } from 'react-helmet-async';
 
 const Scripts = ({ setToast, setPage }) => {
   const { user } = useAuthContext();
@@ -21,7 +22,12 @@ const Scripts = ({ setToast, setPage }) => {
   // This will fire an error alert if the fetch fails. 
   useConditionalToast(error, setToast, 'An error occurred while loading scripts');
 
-  return (
+  return (<>
+    <Helmet>
+      <title>Scripts · OptomRx</title>
+      <meta name="description" content="View all the prescriptions you have written. Saved scripts contain all medication details for that script, but no patient data."/>
+      <link rel="canonical" href="/dashboard" />
+    </Helmet>
     <ContentContainer earlyPadding={true}>
       <StyledScripts className="Scripts" >
         <PageHeader title="Scripts" description="Review previous prescriptions you have written" />
@@ -71,7 +77,7 @@ const Scripts = ({ setToast, setPage }) => {
         
       </StyledScripts>
     </ContentContainer>
-  )
+  </>)
 }
 
 export default Scripts;

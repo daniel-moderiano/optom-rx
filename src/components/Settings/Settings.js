@@ -8,6 +8,7 @@ import ChangeEmail from "./ChangeEmail";
 import { useEffect } from "react";
 import ChangePassword from "./ChangePassword";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import { Helmet } from "react-helmet-async";
 
 const Settings = ({ setToast, setPage }) => {
   const { user } = useAuthContext();
@@ -24,7 +25,12 @@ const Settings = ({ setToast, setPage }) => {
     await reauthenticateWithCredential(user, credential);
   }
 
-  return (
+  return (<>
+    <Helmet>
+      <title>Settings · OptomRx</title>
+      <meta name="description" content="Adjust your basic profile details, verify your email, or delete your account."/>
+      <link rel="canonical" href="/settings" />
+    </Helmet>
     <ContentContainer>
       <StyledSettings className="Settings">
       <PageHeader title="Settings" description="Adjust basic profile and account settings"/>
@@ -41,7 +47,7 @@ const Settings = ({ setToast, setPage }) => {
         </div>
       </StyledSettings>
     </ContentContainer>
-  )
+  </>)
 }
 
 export default Settings;
