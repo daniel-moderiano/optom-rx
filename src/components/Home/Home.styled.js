@@ -25,6 +25,13 @@ const StyledHome = styled.main`
     max-width: 700px;
   }
 
+  .signup {
+    padding: 0.5rem 1.8rem 0.7rem 1.8rem;
+    height: auto;
+    font-size: 1.15rem;
+    letter-spacing: 0.01rem;
+  }
+
   .Home__intro {
     display: flex;
     align-items: center;
@@ -38,23 +45,15 @@ const StyledHome = styled.main`
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      text-align: center;
       max-width: 1200px;
 
       p {
         margin-bottom: 2rem;
       }
-
-      .button {
-        padding: 0.5rem 1.8rem 0.7rem 1.8rem;
-        height: auto;
-        font-size: 1.15rem;
-        letter-spacing: 0.01rem;
-      }
     }
   }
 
-  .preview__btns {
+  .home__btns {
     display: flex;
     margin-top: 2rem;
 
@@ -63,7 +62,7 @@ const StyledHome = styled.main`
       max-width: 140px;
     }
 
-    .signup {
+    .get-started {
       margin-right: 1rem;
     }
   }
@@ -261,13 +260,6 @@ const StyledHome = styled.main`
       .action__subtitle {
         margin-bottom: 0.5rem;
       }
-
-      .button {
-        padding: 0.5rem 1.8rem 0.7rem 1.8rem;
-        height: auto;
-        font-size: 1.15rem;
-        letter-spacing: 0.01rem;
-      }
     }
   }
 
@@ -313,6 +305,12 @@ const StyledHome = styled.main`
       font-size: 2.5rem;
       line-height: 2.75rem;
       margin-bottom: 1.5rem;
+    }
+
+    .signup {
+      padding: 0.5rem 1.6rem 0.6rem 1.6rem;
+      height: auto;
+      font-size: 1.1rem;
     }
 
     .preview-container {
@@ -373,27 +371,6 @@ const StyledHome = styled.main`
       .stationery__screenshots {
         margin-top: 3rem;
         max-width: 500px;
-      }
-    }
-
-    .Home__action {
-      .content-container {
-
-        .button {
-          padding: 0.5rem 1.6rem 0.6rem 1.6rem;
-          height: auto;
-          font-size: 1.1rem;
-        }
-      }
-    }
-
-    .Home__intro {
-      .content-container {
-        .button {
-          padding: 0.5rem 1.6rem 0.6rem 1.6rem;
-          height: auto;
-          font-size: 1.1rem;
-        }
       }
     }
   }

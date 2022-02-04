@@ -35,8 +35,8 @@ const Home = ({ setPage }) => {
             <div className="preview__description">
               <h3 id="preview__title" className="section__title">Accessible for all Australian Optometrists</h3>
               <p className="preview__text">Corporate, independent, rural or metro - OptomRx's web app means you have access to professional computerised scripts anywhere.</p>
-              <div className="preview__btns">
-                <Link to="/signup" className="btn-primary button signup">Get started</Link>
+              <div className="preview__btns home__btns">
+                <Link to="/signup" className="btn-primary button get-started">Get started</Link>
                 <Link to="/features" className="btn-ghost button">Learn more</Link>
               </div>
             </div>
@@ -54,8 +54,8 @@ const Home = ({ setPage }) => {
             <div className="stationery__description">
               <h3 id="stationery__title" className="section__title">Move away from handwritten scripts</h3>
               <p className="stationery__text">OptomRx pairs with computer generated PBS forms to create professional facing scripts for patients, consistent with GPs and other allied health providers. These forms can be ordered in bulk from <a className="services-aus-link" target="_blank" rel="noreferrer" href="https://www.servicesaustralia.gov.au/pbs-and-rpbs-stationery-for-optometrists?context=22851">Services Australia<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="18px" fill="#263238"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg></a>.</p>
-              <div className="stationery__btns">
-                <Link to="/signup" className="btn-primary button signup">Get started</Link>
+              <div className="stationery__btns home__btns">
+                <Link to="/signup" className="btn-primary button get-started">Get started</Link>
                 <Link to="/features" className="btn-ghost button">Learn more</Link>
               </div>
             </div>
