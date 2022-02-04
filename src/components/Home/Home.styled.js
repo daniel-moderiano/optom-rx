@@ -17,12 +17,46 @@ const StyledHome = styled.main`
     margin: 0 0 1.5rem 0;
     line-height: 4rem;
   }
+ 
+  .section__title {
+    font-size: 2.7rem;
+    font-weight: 600;
+    line-height: 3rem;
+    margin: 0 0 2rem 0;
+  }
 
   .subtitle {
     font-size: 1.3rem;
     font-weight: 500;
     color: #546E7A;
-    max-width: 700px;
+    max-width: 720px;
+  }
+
+  .description {
+    text-align: left;
+    line-height: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .Home__btns {
+    display: flex;
+    margin-top: 2rem;
+
+    .button {
+      width: 100%;
+      max-width: 140px;
+      min-width: 120px;
+    }
+
+    .get-started {
+      margin-right: 1rem;
+    }
+  }
+
+  .Home__text {
+
   }
 
   .signup {
@@ -53,27 +87,6 @@ const StyledHome = styled.main`
     }
   }
 
-  .home__btns {
-    display: flex;
-    margin-top: 2rem;
-
-    .button {
-      width: 100%;
-      max-width: 140px;
-    }
-
-    .get-started {
-      margin-right: 1rem;
-    }
-  }
-
-  .section__title {
-    font-size: 2.7rem;
-    font-weight: 600;
-    line-height: 3rem;
-    margin: 0 0 2rem 0;
-  }
-
   .Home__preview {
     padding: 3rem 0 6rem 0;
     text-align: center;
@@ -90,12 +103,10 @@ const StyledHome = styled.main`
     }
 
     .preview__description {
-      text-align: left;
-      max-width: 400px;
-      line-height: 1.5rem;
+      max-width: 420px;
 
       .preview__btns {
-        margin-right: 2rem;
+        margin-right: 1rem;
       }
     }
 
@@ -123,12 +134,6 @@ const StyledHome = styled.main`
       flex-direction: column;
       align-items: center;
       justify-content: center;
-    }
-
-    .features__subtitle {
-      font-size: 1.3rem;
-      font-weight: 400;
-      color: #546E7A;
     }
 
     .features__cards {
@@ -192,23 +197,11 @@ const StyledHome = styled.main`
 
     .stationery__description {
       margin-left: 3rem;
-      text-align: left;
       max-width: 550px;
-      line-height: 1.5rem;
 
+      /* Causes btns to shrink in a similar fashion to those in the section above */
       .stationery__btns {
-        display: flex;
-        margin-top: 2rem;
         margin-right: 3.5rem;
-
-        .button {
-          width: 100%;
-          max-width: 140px;
-        }
-
-        .signup {
-          margin-right: 1rem;
-        }
       }
 
       .services-aus-link {
@@ -273,7 +266,7 @@ const StyledHome = styled.main`
 
     .Home__preview {
       .preview__description {
-        margin-right: 4rem;
+        margin-right: 2rem;
       }
     }
 
@@ -307,6 +300,11 @@ const StyledHome = styled.main`
       margin-bottom: 1.5rem;
     }
 
+    .description {
+      text-align: center;
+      align-items: center;
+    }
+
     .signup {
       padding: 0.5rem 1.6rem 0.6rem 1.6rem;
       height: auto;
@@ -317,15 +315,7 @@ const StyledHome = styled.main`
       flex-direction: column;
 
       .preview__description  {
-        text-align: center;
-        justify-content: center;
-        align-items: center;
         max-width: 550px;
-/* 
-        .preview__title {
-          font-size: 2.5rem;
-          line-height: 2.75rem;
-        } */
 
         .preview__btns {
           margin-right: 0;
@@ -344,12 +334,6 @@ const StyledHome = styled.main`
         .features__cards {
           margin-top: 2rem;
         }
-
-        .features__subtitle {
-          font-size: 1.2rem;
-          max-width: 500px;
-          line-height: 1.7rem;
-        }
       }
     }
 
@@ -357,9 +341,6 @@ const StyledHome = styled.main`
       flex-direction: column-reverse;
 
       .stationery__description {
-        text-align: center;
-        justify-content: center;
-        align-items: center;
         margin-left: 0;
 
         .stationery__btns {
@@ -398,73 +379,30 @@ const StyledHome = styled.main`
       margin-bottom: 1rem;
     }
 
+    .Home__btns {
+      margin-right: 0;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+
+      .button {
+        max-width: 200px;
+      }
+
+      .get-started {
+        margin: 0 0 1rem 0;
+      }
+    }
+
+    .Home__text {
+      max-width: 320px;
+    }
+
     .Home__features {
       .content-container {
         .features__card {
           margin: 0.75rem 0;
-        }
-
-        .features__subtitle {
-          font-size: 1.1rem;
-          max-width: 300px;
-          line-height: 1.6rem;
-          margin: 0;
-        }
-      }
-    }
-
-    .preview-container {
-      .preview__description {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
-        .preview__text {
-          max-width: 300px;
-        }
-        
-        .preview__btns {
-          margin-right: 0;
-          justify-content: center;
-          flex-direction: column;
-          align-items: center;
-          width: 100%;
-
-          .button {
-            max-width: 200px;
-          }
-
-          .signup {
-            margin: 0 0 1rem 0;
-          }
-        }
-      }
-    }
-
-    .stationery-container {
-      .stationery__description {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        
-        .stationery__text {
-          max-width: 300px;
-        }
-        
-        .stationery__btns {
-          margin-right: 0;
-          justify-content: center;
-          flex-direction: column;
-          align-items: center;
-          width: 100%;
-
-          .signup {
-            margin: 0 0 1rem 0;
-          }
-
-          .button {
-            max-width: 200px;
-          }
         }
       }
     }
