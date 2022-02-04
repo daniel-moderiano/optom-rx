@@ -41,10 +41,10 @@ const Nav = ({ currentPage, resetData }) => {
             <Link onClick={closeNav} className="Nav__link Nav__link--std Nav__link--homepage" to="/features" {...ariaFeatures}>Features</Link>
           </li>
           <li className="Nav__list-item" role="menuitem">
-            <Link onClick={closeNav} className="Nav__link Nav__link--std Nav__link--homepage" to="/login"  {...ariaLogin}>Login</Link>
+            <Link onClick={closeNav} className="Nav__link Nav__link--std Nav__link--homepage" to="/login"  {...ariaLogin}>Log in</Link>
           </li>
           <li className="Nav__list-item" role="menuitem">
-            <Link onClick={closeNav} className="Nav__link Nav__link--std Nav__link--homepage" to="/signup" {...ariaSignup}>Sign up</Link>
+            <Link onClick={closeNav} className="Nav__link Nav__link--std Nav__link--homepage Nav__link--signup" to="/signup" {...ariaSignup}>Sign up</Link>
           </li>
           
           </>

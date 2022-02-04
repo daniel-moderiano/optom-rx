@@ -140,8 +140,32 @@ const StyledNav = styled.nav`
       }
 
       .Nav__link--signup {
-        text-decoration: none;
-        color: ${props => props.user ? '#FFF' : 'var(--primary-color)'};
+        padding: 0.2rem 0.75rem 0.4rem 0.75rem;
+        border: 1px solid var(--primary-color);
+        height: auto;
+        border-radius: 2px;
+
+        &:hover {
+          background-color: var(--btn-positive-hover);
+        }
+
+        &:focus {
+          outline: 2px solid #104362;
+          outline-offset: 1px;
+        }
+
+        &:focus:not(:focus-visible) {
+          outline: none
+        }
+
+        &:focus-visible {
+          outline: 0.1rem solid var(--primary-color);
+          outline-offset: 2px;
+        }
+        &:before,
+        &:after {
+          display: none;
+        }
       }
     }
   }
@@ -168,6 +192,20 @@ const StyledNav = styled.nav`
 
       .Nav__list-item {
         padding: 1.1rem 0;
+
+        .Nav__link--signup {
+          border: none;
+          padding: 0 0 5px 0;
+          
+          &:before,
+          &:after {
+            display: block;
+          }
+
+          &:hover {
+            background-color: #fff;
+          }
+        }
 
         .Nav__link {
           color: var(--primary-color);
