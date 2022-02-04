@@ -11,7 +11,6 @@ const Terms = ({ setPage }) => {
   return (<>
     <Helmet>
       <title>Terms of Service · OptomRx</title>
-      <meta name="description" content="A new way for optometrists to professionally create and manage therapeutic prescriptions online."/>
       <link rel="canonical" href="/terms-of-service" />
     </Helmet>
     <StyledPolicy className="Terms">

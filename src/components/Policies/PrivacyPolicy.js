@@ -11,7 +11,6 @@ const PrivacyPolicy = ({ setPage }) => {
   return (<>
     <Helmet>
       <title>Privacy Policy · OptomRx</title>
-      <meta name="description" content="A new way for optometrists to professionally create and manage therapeutic prescriptions online."/>
       <link rel="canonical" href="/privacy-policy" />
     </Helmet>
     <StyledPolicy className="Privacy">

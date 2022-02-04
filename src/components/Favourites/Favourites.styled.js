@@ -3,7 +3,7 @@ import styled from "styled-components";
 const StyledFavourites = styled.div`
   margin-top: 3rem;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   flex-direction: column;
   
@@ -12,6 +12,8 @@ const StyledFavourites = styled.div`
     font-size: 1.6rem;
     font-weight: 300;
     color: var(--title-color);
+    width: 100%;
+    text-align: left;
   }
 
   

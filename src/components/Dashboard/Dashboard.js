@@ -29,10 +29,9 @@ const Dashboard = ({ setToast, setPage, firstSignIn, setFirstSignIn, resetData }
     }
   }, [firstSignIn, setFirstSignIn, user])
 
- 
   return (<>
     <Helmet>
-      <title>Dashboard</title>
+      <title>Dashboard · OptomRx</title>
       <meta name="description" content="Choose a favourite script to quickly write a prescription, or start fresh with a blank prescription."/>
       <link rel="canonical" href="/dashboard" />
     </Helmet>
