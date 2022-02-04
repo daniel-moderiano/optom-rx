@@ -29,7 +29,7 @@ const Features = ({ setPage }) => {
         </section>
 
         <section className="Features__pbs" aria-labelledby="description__title">
-          <h3 id="description__title" className="description__title">Real-time PBS data</h3>
+          <h3 id="description__title" className="section__title">Real-time PBS data</h3>
           <p className="pbs-subtitle">Anytime you want to write a PBS script with OptomRx, you'll have access to these fantastic features.</p>
           <div className="content-container pbs-container indications-container">
             <div className="description">

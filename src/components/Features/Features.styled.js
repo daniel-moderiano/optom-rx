@@ -8,6 +8,7 @@ const StyledFeatures = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
   }
 
   .content-container {
@@ -39,8 +40,6 @@ const StyledFeatures = styled.div`
     font-size: 1.3rem;
     font-weight: 500;
     color: #546E7A;
-    border-bottom: 1px solid #dee1e4;
-    padding-bottom: 3rem;
   }
 
   .signup {
@@ -55,6 +54,12 @@ const StyledFeatures = styled.div`
     line-height: 1.5rem;
   }
 
+  img {
+    height: auto;
+    width: 100%;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+  }
+
   .Features__intro {
     background-image: linear-gradient(to top, #ffffff 0%, #F3F4F7 100%);
     background-color: #fff;
@@ -65,21 +70,19 @@ const StyledFeatures = styled.div`
       text-align: left;
 
       p {
-        margin-bottom: 2rem;
+        padding-bottom: 2rem;
+        border-bottom: 1px solid #dee1e4;
       }
     }
   }
 
   .Features__pbs {
-    padding: 1rem 0 4rem 0;
+    padding: 3rem 0 4rem 0;
     text-align: left;
     flex-direction: column;
     background-color: #FFFFFF;
 
     h3 {
-      font-size: 2.7rem;
-      font-weight: 600;
-      line-height: 3rem;
       margin: 0 1rem;
       padding: 0 1rem;
     }
@@ -93,7 +96,6 @@ const StyledFeatures = styled.div`
       text-align: center;
     }
 
-
     .pbs-container {
       margin: 2rem 1rem;
     }
@@ -105,9 +107,7 @@ const StyledFeatures = styled.div`
     }
 
     .description {
-      text-align: left;
       max-width: 400px;
-      line-height: 1.5rem;
 
       h4 {
         font-size: 1.8rem;
@@ -123,7 +123,6 @@ const StyledFeatures = styled.div`
 
     .authority {
       max-width: 450px;
-      margin: 0 0 0 0rem;
     }
 
     .quantityRepeats {
@@ -132,14 +131,12 @@ const StyledFeatures = styled.div`
     }
 
     img {
-      width: 100%;
-      height: auto;
+      box-shadow: none;
     }
   }
 
   .Features__lemi {
     padding: 5rem 0 4.5rem 0;
-    text-align: center;
     background-color: #F9FAFB;
 
     .lemi__description {
@@ -151,28 +148,17 @@ const StyledFeatures = styled.div`
       }
     }
 
-    .lemi__list {
-      list-style: numeric;
-      padding: 0 0 0 1rem;
-
-      li {
-        padding: 0.25rem 0 0.25rem 0.25rem;
-      }
-    }
-
     .lemi__screenshots {
       max-width: 550px;
-    }
 
-    img {
-      width: 100%;     
-      height: auto;
+      img {
+        box-shadow: none;
+      }
     }
   }
 
   .Features__prescribers {
     padding: 4rem 0 3.5rem 0;
-    text-align: center;
     background-color: #FFFFFF;
 
     .prescribers-container {
@@ -188,12 +174,6 @@ const StyledFeatures = styled.div`
       margin: 2rem 0;
     }
 
-    img {
-      width: 100%;     
-      height: auto;
-      box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
-    }
-
     .mobile {
       display: none;
       max-width: 300px;
@@ -202,7 +182,6 @@ const StyledFeatures = styled.div`
 
   .Features__represcribe {
     padding: 5.5rem 0 4rem 0;
-    text-align: center;
     background-color: #F9FAFB;
 
     .represcribe__description {
@@ -217,17 +196,10 @@ const StyledFeatures = styled.div`
     .represcribe__screenshots {
       max-width: 500px;
     }
-
-    img {
-      width: 100%;     
-      height: auto;
-      box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
-    }
   }
 
   .Features__data {
     padding: 1rem 0 5.5rem 0;
-    text-align: center;
     background-color: #F9FAFB;
 
     .data__description {
@@ -242,27 +214,17 @@ const StyledFeatures = styled.div`
     .data__screenshots {
       max-width: 550px;
     }
-
-    img {
-      width: 100%;     
-      height: auto;
-      box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
-    }
   }
 
   .Features__action {
-    padding: 4.5rem 0 6rem 0;
-    text-align: center;
+    padding: 4rem 0 6rem 0;
     background-color: #fff;
 
     .action-container {
       flex-direction: column;
 
       .action__subtitle {
-        font-size: 1.3rem;
-        font-weight: 500;
-        color: #546E7A;
-        max-width: 700px;
+        margin-bottom: 0.5rem;
       }
     }
   }
@@ -329,8 +291,9 @@ const StyledFeatures = styled.div`
     }
 
     .Features__pbs {
-      padding-bottom: 2rem;
+      padding-bottom: 3rem;
       padding-top: 0;
+
       .pbs-subtitle {
         margin-bottom: 1rem;
         max-width: 632px;
@@ -338,12 +301,9 @@ const StyledFeatures = styled.div`
       }
 
       h3 {
-        font-size: 2.5rem;
-        line-height: 2.75rem;
         text-align: left;
         margin: 0;
-        padding: 0 2rem;
-        width: 100%;
+        padding: 2rem 2rem 0 2rem;
         max-width: 664px;
       }
 
@@ -352,9 +312,6 @@ const StyledFeatures = styled.div`
         margin-top: 0;
        
         .description {
-          align-items: center;
-          justify-content: center;
-          text-align: left;
           max-width: 600px;
         }
 
@@ -365,22 +322,15 @@ const StyledFeatures = styled.div`
 
       .quantityRepeats-container {
         flex-direction: column-reverse;
-        
-        h3 {
-            font-size: 2.5rem;
-            line-height: 2.75rem;
-          }
       }
     }
 
     .Features__lemi {
-      padding-top: 3rem;
+      padding-top: 2.5rem;
       padding-bottom: 3rem;
       .lemi-container {
         flex-direction: column-reverse;
-        align-items: flex-start;
         .lemi__description {
-          text-align: left;
           margin: 0 0 2rem 0;
           max-width: 600px;
         }
@@ -389,7 +339,7 @@ const StyledFeatures = styled.div`
 
     .Features__prescribers {
       padding-top: 2.75rem;
-      padding-bottom: 2.5rem;
+      padding-bottom: 2.25rem;
       .prescribers-container {
         .prescribers__description {
           margin: 0 0 1rem 0;
@@ -401,7 +351,6 @@ const StyledFeatures = styled.div`
         display: block;
       }
     }
-
 
     .Features__represcribe {
       padding-top: 3rem;
@@ -427,21 +376,8 @@ const StyledFeatures = styled.div`
       }
     }
 
- 
-
     .desktop {
       display: none;
-    }
-
-    .Features__action {
-      padding-top: 4rem;
-      .action-container {
-        .action__subtitle {
-          font-size: 1.2rem;
-          max-width: 500px;
-          line-height: 1.7rem;
-        }
-      }
     }
   }
 
@@ -454,8 +390,14 @@ const StyledFeatures = styled.div`
       margin: 0 0.5rem;
     }
 
+    .section__title {
+      font-size: 2.1rem;
+      line-height: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
     .Features__title {
-      font-size: 2.5rem;
+      font-size: 2.7rem;
       margin: 0rem 0 1.5rem 0;
       line-height: 2.75rem;
     }
@@ -466,27 +408,16 @@ const StyledFeatures = styled.div`
       line-height: 1.5rem;
     }
 
-    .section__title {
-      font-size: 2.1rem;
-      line-height: 2.5rem;
-      margin-bottom: 1rem;
-    }
-
     .Features__pbs {
       .pbs-subtitle {
-        margin-bottom: 1rem;
         max-width: 382px;
-        line-height: 1.5rem;
         font-size: 1.05rem;
         margin: 0 0.5rem;
       }
 
       h3 {
-        font-size: 2.1rem;
-        line-height: 2.5rem;
         margin: 0;
-        padding: 0 1.5rem;
-        width: 100%;
+        padding: 2rem 1.5rem 0 1.5rem;
         max-width: 398px;
       }
 
@@ -502,71 +433,6 @@ const StyledFeatures = styled.div`
 
         .authority, .indications, .quantityRepeats {
           margin: 2rem 0 0 0;
-        }
-      }
-
-      .quantityRepeats-container {
-        flex-direction: column-reverse;
-        align-items: center;
-        justify-content: center;
-      }
-    }
-
-    .Features__lemi {
-      .lemi-container {
-        flex-direction: column-reverse;
-        align-items: center;
-        justify-content: center;
-        .lemi__description {
-          text-align: left;
-          margin: 0 0 2rem 0;
-          max-width: 350px;
-        }
-      }
-    }
-    
-    .Features__represcribe {
-      .represcribe-container {
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        .represcribe__description {
-          text-align: left;
-          margin: 0 0 2rem 0;
-          max-width: 350px;
-        }
-      }
-    }
-
-    .Features__data {
-      .data-container {
-        flex-direction: column-reverse;
-        align-items: center;
-        justify-content: center;
-        .data__description {
-          text-align: left;
-          margin: 0 0 2rem 0;
-          max-width: 350px;
-        }
-      }
-    }
-
-    .Features__prescribers {
-      .prescribers-container {
-        .prescribers__description {
-          margin: 0 0 1rem 0;
-          max-width: 350px;
-          text-align: left;
-        }
-      }
-    }
-
-    .Features__action {
-      .action-container {
-        .action__subtitle {
-          font-size: 1.1rem;
-          max-width: 300px;
-          line-height: 1.6rem;
         }
       }
     }
