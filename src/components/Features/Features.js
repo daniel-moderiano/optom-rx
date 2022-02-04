@@ -18,11 +18,9 @@ const Features = ({ setPage }) => {
     setPage('features');
   }, [setPage]);
 
-  const ready = true;
-
   return (
     <StyledFeatures>
-      {ready ? (<div className="Features-container">
+      <div className="Features-container">
         <section className="Features__intro">
           <div className="content-container">
             <h2 className="Features__title">Features</h2>
@@ -70,7 +68,7 @@ const Features = ({ setPage }) => {
           <div className="lemi__screenshots">
               <img src={lemi} alt="Front cover of LEMI and LMBC guides for active ingredient prescribing" />
             </div>
-            <div className="lemi__description">
+            <div className="lemi__description description">
               <h3 id="lemi__title" className="section__title">Active ingredient prescribing</h3>
               <p className="lemi__text">Guidelines now exist for all prescribers in Australia, requiring active ingredient prescribing in many cases. Several ophthalmic medications however belong to the List of Excluded Medicinal Items (LEMI) or the List of Medicines for Brand Consideration (LMBC), where active ingredient prescribing may not apply.</p>
               <p className="lemi__text">OptomRx identifies which items belong to the LEMI or LMBC, and automatically adjusts your prescriptions to meet relevant guidelines. You can find out if any LEMI/LMBC adjustments have been made while writing your scripts, and overwrite this if necessary.</p>
@@ -80,7 +78,7 @@ const Features = ({ setPage }) => {
 
         <section className="Features__prescribers" aria-labelledby="prescribers__title">
           <div className="content-container prescribers-container">
-            <div className="prescribers-description">
+            <div className="prescribers__description description">
               <h3 id="prescribers__title" className="section__title">Multiple prescribers</h3>
               <p className="prescribers__text">Whether you work in a single practice, or locum all across Australia - OptomRx supports as many prescriber profiles as you need. Prescriber profiles can be modified, added, or removed with ease. Simply select whichever prescriber details you wish to use when you write a prescription. Simplify things further with default selection for your most common practice location.</p>
             </div>
@@ -93,7 +91,7 @@ const Features = ({ setPage }) => {
 
         <section className="Features__represcribe" aria-labelledby="represcribe__title">
           <div className="content-container represcribe-container">
-            <div className="represcribe__description">
+            <div className="represcribe__description description">
               <h3 id="represcribe__title" className="section__title">Instant re-prescribe</h3>
               <p className="represcribe__text">In practice, you'll be reaching for the same scripts over and over; why waste time re-writing the same script every time? With OptomRx, you are able to save any script as a 'favourite'.</p>
               <p className="represcribe__text">These favourites contain specific medication details, e.g. ingredient, quantity, repeats, dosage, etc. You can re-prescribe these favourites with a single click. Just add patient details, and the script is done. Quick and easy. </p>
@@ -109,7 +107,7 @@ const Features = ({ setPage }) => {
             <div className="data__screenshots">
               <img src={script} alt="Screenshot of online prescription" />
             </div>
-            <div className="data__description">
+            <div className="data__description description">
               <h3 id="data__title" className="section__title">No patient data retention</h3>
               <p className="data__text"><strong>Patient information is never saved on OptomRx.</strong> When you save a script, only non-identifiable information regarding medication and PBS details are retained. For authority scripts, prescriber copies are provided in the printable template for your records.</p>
               <p className="data__text">The decision to avoid patient data retention was made in the spirit of patient safety, and the vision of OptomRx as a prescription writing tool, not a prescription database.</p>
@@ -125,11 +123,7 @@ const Features = ({ setPage }) => {
             <Link to="/signup" className="btn-primary button signup">Sign up to OptomRx</Link>
           </div>
         </section>
-        </div>) : (
-          <div className="message">Coming soon!</div>
-        )}
-
-       
+      </div>       
     </StyledFeatures>
   );
 };

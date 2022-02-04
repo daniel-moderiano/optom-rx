@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const StyledFeatures = styled.div`
-width: 100%;
+  width: 100%;
   font-size: 1.1rem;
 
   section {
@@ -10,17 +10,21 @@ width: 100%;
     justify-content: center;
   }
 
-  .example {
-    margin: 5rem;
-    width: 700px;
-    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
-  }
-
   .content-container {
     max-width: 1600px;
     margin: 0 1rem;
-    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
     padding: 1rem;
+  }
+
+  .section__title {
+    font-size: 2.7rem;
+    font-weight: 600;
+    line-height: 3rem;
+    margin: 0 0 2rem 0;
   }
 
   .Features__title {
@@ -31,27 +35,12 @@ width: 100%;
     width: 100%;
   }
 
-
-  .message {
-    text-align: center;
-    font-size: 2.5rem;
-    margin-top: 2rem;
-  }
-
   .subtitle {
     font-size: 1.3rem;
     font-weight: 500;
     color: #546E7A;
-    /* max-width: 700px; */
     border-bottom: 1px solid #dee1e4;
     padding-bottom: 3rem;
-  }
-
-  .section__title {
-    font-size: 2.7rem;
-    font-weight: 600;
-    line-height: 3rem;
-    margin: 0 0 2rem 0;
   }
 
   .signup {
@@ -61,15 +50,17 @@ width: 100%;
     letter-spacing: 0.01rem;
   }
 
+  .description {
+    text-align: left;
+    line-height: 1.5rem;
+  }
+
   .Features__intro {
     background-image: linear-gradient(to top, #ffffff 0%, #F3F4F7 100%);
     background-color: #fff;
     padding: 2rem 0 0 0;
 
     .content-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
       flex-direction: column;
       text-align: left;
 
@@ -104,10 +95,6 @@ width: 100%;
 
 
     .pbs-container {
-      text-align: center;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       margin: 2rem 1rem;
     }
 
@@ -155,18 +142,9 @@ width: 100%;
     text-align: center;
     background-color: #F9FAFB;
 
-    .lemi-container {
-      text-align: center;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
     .lemi__description {
       margin-left: 0.5rem;
-      text-align: left;
       max-width: 450px;
-      line-height: 1.5rem;
 
       p {
         margin: 1rem 0;
@@ -198,17 +176,11 @@ width: 100%;
     background-color: #FFFFFF;
 
     .prescribers-container {
-      text-align: center;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       flex-direction: column;
     }
 
-    .prescribers-description {
-      text-align: left;
+    .prescribers__description {
       max-width: 880px;
-      line-height: 1.5rem;
     }
 
     .prescribers__screenshots {
@@ -233,18 +205,9 @@ width: 100%;
     text-align: center;
     background-color: #F9FAFB;
 
-    .represcribe-container {
-      text-align: center;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
     .represcribe__description {
       margin-right: 1rem;
-      text-align: left;
       max-width: 400px;
-      line-height: 1.5rem;
 
       p {
         margin: 1rem 0;
@@ -267,18 +230,9 @@ width: 100%;
     text-align: center;
     background-color: #F9FAFB;
 
-    .data-container {
-      text-align: center;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
     .data__description {
       margin-left: 2rem;
-      text-align: left;
       max-width: 390px;
-      line-height: 1.5rem;
 
       .data__text {
         margin: 1rem 0;
@@ -302,9 +256,6 @@ width: 100%;
     background-color: #fff;
 
     .action-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
       flex-direction: column;
 
       .action__subtitle {
@@ -356,6 +307,7 @@ width: 100%;
       font-size: 2.5rem;
       line-height: 2.75rem;
       margin-bottom: 1.5rem;
+      width: 100%;
     }
 
     .signup {
@@ -427,7 +379,6 @@ width: 100%;
       .lemi-container {
         flex-direction: column-reverse;
         align-items: flex-start;
-        justify-content: center;
         .lemi__description {
           text-align: left;
           margin: 0 0 2rem 0;
@@ -440,7 +391,7 @@ width: 100%;
       padding-top: 2.75rem;
       padding-bottom: 2.5rem;
       .prescribers-container {
-        .prescribers-description {
+        .prescribers__description {
           margin: 0 0 1rem 0;
           max-width: 600px;
           text-align: left;
@@ -456,8 +407,6 @@ width: 100%;
       padding-top: 3rem;
       .represcribe-container {
         flex-direction: column;
-        align-items: center;
-        justify-content: center;
         .represcribe__description {
           text-align: left;
           margin: 0 0 2rem 0;
@@ -470,8 +419,6 @@ width: 100%;
       padding-bottom: 4rem;
       .data-container {
         flex-direction: column-reverse;
-        align-items: center;
-        justify-content: center;
         .data__description {
           text-align: left;
           margin: 0 0 2rem 0;
@@ -606,7 +553,7 @@ width: 100%;
 
     .Features__prescribers {
       .prescribers-container {
-        .prescribers-description {
+        .prescribers__description {
           margin: 0 0 1rem 0;
           max-width: 350px;
           text-align: left;
