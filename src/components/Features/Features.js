@@ -1,14 +1,18 @@
 import { StyledFeatures } from "./Features.styled";
 import { useEffect } from "react";
 import { Helmet } from 'react-helmet-async';
-import lemi from '../../assets/lemi-lmbc.png';
-import authority from '../../assets/authority.png';
-import indications from '../../assets/indications.png';
-import quantityRepeats from '../../assets/quantityRepeats.png';
-import prescribers from '../../assets/prescribers.png';
-import prescribersMobile from '../../assets/prescribers-mobile.png';
-import favourites from '../../assets/favourites.png';
-import script from '../../assets/script.png';
+import lemiOptimised from '../../assets/optimised/lemi-lmbc.png';
+
+import authorityOptimised from '../../assets/optimised/authority.png';
+import indicationsOptimised from '../../assets/optimised/indications.png';
+
+import quantityRepeatsOptimised from '../../assets/optimised/quantityRepeats.png';
+
+
+import prescribersOptimised from '../../assets/optimised/prescribers.png';
+import prescribersMobileOptimised from '../../assets/optimised/prescribers-mobile.png';
+import favouritesOptimised from '../../assets/optimised/favourites.png';
+import scriptOptimised from '../../assets/optimised/script.png';
 import { Link } from "react-router-dom";
 
 
@@ -42,13 +46,13 @@ const Features = ({ setPage }) => {
               <p className="description__text">The moment you select a medication, OptomRx will show you whether it is eligible for PBS prescribing. If the medication is restricted or requires authority, you can optionally view the indications for it's use under the PBS.</p>
             </div>
             <div className="description__screenshots indications">
-              <img src={indications} alt="Online form indicating PBS availability and indications for use" />
+              <img src={indicationsOptimised} alt="Online form indicating PBS availability and indications for use" />
             </div>
           </div>
 
           <div className="content-container pbs-container quantityRepeats-container">
           <div className="description__screenshots quantityRepeats">
-              <img src={quantityRepeats} alt="Online form indicating max quantity and repeats for a PBS medication" />
+              <img src={quantityRepeatsOptimised} alt="Online form indicating max quantity and repeats for a PBS medication" />
             </div>
             <div className="description">
               <h4 className="description__title">Avoid mistakes in prescribing</h4>
@@ -62,7 +66,7 @@ const Features = ({ setPage }) => {
               <p className="description__text">When a streamline authority code is available, it will be supplied for you, automatically. For those medications requiring manual authority codes, OptomRx will advise you where to apply for authority.</p>
             </div>
             <div className="description__screenshots authority">
-              <img src={authority} alt="Online form indicating authority is required for a medication" />
+              <img src={authorityOptimised} alt="Online form indicating authority is required for a medication" />
             </div>
           </div>
         </section>
@@ -70,7 +74,8 @@ const Features = ({ setPage }) => {
         <section className="Features__lemi" aria-labelledby="lemi__title">
           <div className="content-container lemi-container">
           <div className="lemi__screenshots">
-              <img src={lemi} alt="Front cover of LEMI and LMBC guides for active ingredient prescribing" />
+              {/* <img src={lemi} alt="Front cover of LEMI and LMBC guides for active ingredient prescribing" /> */}
+              <img src={lemiOptimised} alt="Front cover of LEMI and LMBC guides for active ingredient prescribing" />
             </div>
             <div className="lemi__description description">
               <h3 id="lemi__title" className="section__title">Active ingredient prescribing</h3>
@@ -87,8 +92,8 @@ const Features = ({ setPage }) => {
               <p className="prescribers__text">Whether you work in a single practice, or locum all across Australia - OptomRx supports as many prescriber profiles as you need. Prescriber profiles can be modified, added, or removed with ease. Simply select whichever prescriber details you wish to use when you write a prescription. Simplify things further with default selection for your most common practice location.</p>
             </div>
             <div className="prescribers__screenshots">
-              <img className="desktop" src={prescribers} alt="Online table displaying several sets of prescriber details" />
-              <img className="mobile" src={prescribersMobile} alt="Online cards displaying several sets of prescriber details" />
+              <img className="desktop" src={prescribersOptimised} alt="Online table displaying several sets of prescriber details" />
+              <img className="mobile" src={prescribersMobileOptimised} alt="Online cards displaying several sets of prescriber details" />
             </div>
           </div>
         </section>
@@ -101,7 +106,7 @@ const Features = ({ setPage }) => {
               <p className="represcribe__text">These favourites contain specific medication details, e.g. ingredient, quantity, repeats, dosage, etc. You can re-prescribe these favourites with a single click. Just add patient details, and the script is done. Quick and easy. </p>
             </div>
             <div className="represcribe__screenshots">
-              <img src={favourites} alt="Online dashboard containing favourite scripts in table layout" />
+              <img src={favouritesOptimised} alt="Online dashboard containing favourite scripts in table layout" />
             </div>
           </div>
         </section>
@@ -109,7 +114,7 @@ const Features = ({ setPage }) => {
         <section className="Features__data" aria-labelledby="data__title">
           <div className="content-container data-container">
             <div className="data__screenshots">
-              <img src={script} alt="Screenshot of online prescription" />
+              <img src={scriptOptimised} alt="Screenshot of online prescription" />
             </div>
             <div className="data__description description">
               <h3 id="data__title" className="section__title">No patient data retention</h3>

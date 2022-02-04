@@ -118,11 +118,11 @@ const StyledFeatures = styled.div`
     }
 
     .description__screenshots {
-      max-width: 500px;
+      max-width: 480px;
     }
 
     .authority {
-      max-width: 450px;
+      max-width: 420px;
     }
 
     .quantityRepeats {
@@ -149,7 +149,7 @@ const StyledFeatures = styled.div`
     }
 
     .lemi__screenshots {
-      max-width: 550px;
+      max-width: 500px;
 
       img {
         box-shadow: none;
@@ -194,7 +194,7 @@ const StyledFeatures = styled.div`
     }
 
     .represcribe__screenshots {
-      max-width: 500px;
+      max-width: 450px;
     }
   }
 
@@ -212,7 +212,7 @@ const StyledFeatures = styled.div`
     }
 
     .data__screenshots {
-      max-width: 550px;
+      max-width: 480px;
     }
   }
 
