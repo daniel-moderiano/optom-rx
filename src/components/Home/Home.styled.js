@@ -164,7 +164,7 @@ const StyledHome = styled.main`
 
     .stationery__description {
       margin-left: 3rem;
-      max-width: 550px;
+      max-width: 450px;
     }
 
     /* Causes btns to shrink in a similar fashion to those in the section above */

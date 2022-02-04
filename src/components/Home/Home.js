@@ -1,7 +1,7 @@
 import { StyledHome } from "./Home.styled";
 import { Helmet } from 'react-helmet-async';
-import laptopMockup from '../../assets/macbook-mockup.png';
-import sampleRx from '../../assets/example-rx-noline.jpg'
+import sampleRxOptimised from '../../assets/optimised/printed-rx.jpg'
+import laptopOptimised from '../../assets/optimised/macbook-mockup.png'
 import pbsLogo from '../../assets/pbs-logo.svg'
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -41,7 +41,7 @@ const Home = ({ setPage }) => {
               </div>
             </div>
             <div className="preview__screenshots Home__screenshots">
-              <img src={laptopMockup} width="1600" height="931" alt="Online form for creating new prescription" />
+              <img src={laptopOptimised} alt="Online form for creating new prescription" />
             </div>
           </div>
         </section>
@@ -49,7 +49,7 @@ const Home = ({ setPage }) => {
         <section className="Home__stationery" aria-labelledby="stationery__title">
           <div className="content-container stationery-container">
           <div className="stationery__screenshots Home__screenshots">
-              <img src={sampleRx} width="1904" height="1760" alt="Printed PBS prescription on computerised PBS form" />
+              <img src={sampleRxOptimised} alt="Printed PBS prescription on computerised PBS form" />
             </div>
             <div className="stationery__description description">
               <h3 id="stationery__title" className="section__title">Move away from handwritten scripts</h3>
@@ -99,7 +99,6 @@ const Home = ({ setPage }) => {
           </div>
         </section>
 
-         
         <section className="Home__action" aria-labelledby="action__title">
           <div className="content-container action-container">
             <p className="subtitle action__subtitle">Try it for yourself</p>
