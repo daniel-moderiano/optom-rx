@@ -6,7 +6,7 @@ const StyledFavourites = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  
+
   .Favourites__title {
     margin: 0;
     font-size: 1.6rem;
@@ -16,9 +16,7 @@ const StyledFavourites = styled.div`
     text-align: left;
   }
 
-  
   .list-header {
-    /* background-color: #F9FAFB; */
     text-align: right;
     background-color: white;
     padding: 1rem 1.5rem 1rem 0rem;
@@ -41,7 +39,6 @@ const StyledFavourites = styled.div`
     box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
 
     .list-header {
-      /* background-color: #F9FAFB; */
       text-align: right;
       background-color: white;
       padding: 1rem 1.5rem 1.1rem 0rem;

@@ -4,7 +4,7 @@ import PageHeader from "../../utils/PageHeader/PageHeader";
 const PrescribersExtract = () => {
   return (
     <StyledPrescribersExtract aria-hidden={true}>
-      <div class="sc-jRQBWg kTHpMp ContentContainer">
+
         <div class="sc-hGPBjI cwdyBG Prescribers">
           <PageHeader title="Prescribers" description="Add and modify prescriber details for your prescriptions"/>
 
@@ -69,7 +69,7 @@ const PrescribersExtract = () => {
             </div>
           </div>
         </div>
-      </div>
+
     </StyledPrescribersExtract>
   );
 };

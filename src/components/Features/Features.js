@@ -15,6 +15,7 @@ import FormField from "../FormField/FormField";
 import QuantityExtract from "./AppExtracts/QuantityExtract";
 import AuthorityExtract from "./AppExtracts/AuthorityExtract";
 import PrescribersExtract from "./AppExtracts/PrescribersExtract";
+import DashboardExtract from "./AppExtracts/DashboardExtract";
 
 
 const Features = ({ setPage }) => {
@@ -119,8 +120,11 @@ const Features = ({ setPage }) => {
               <p className="represcribe__text">In practice, you'll be reaching for the same scripts over and over; why waste time re-writing the same script every time? With OptomRx, you are able to save any script as a 'favourite'.</p>
               <p className="represcribe__text">These favourites contain specific medication details, e.g. ingredient, quantity, repeats, dosage, etc. You can re-prescribe these favourites with a single click. Just add patient details, and the script is done. Quick and easy. </p>
             </div>
-            <div className="represcribe__screenshots">
+            {/* <div className="represcribe__screenshots">
               <img src={favouritesOptimised} loading="lazy" alt="Online dashboard containing favourite scripts in table layout" />
+            </div> */}
+            <div className="indicationsDOMBox">
+              <DashboardExtract />
             </div>
           </div>
         </section>
