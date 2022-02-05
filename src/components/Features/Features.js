@@ -2,18 +2,16 @@ import { StyledFeatures } from "./Features.styled";
 import { useEffect } from "react";
 import { Helmet } from 'react-helmet-async';
 import lemiOptimised from '../../assets/optimised/lemi-lmbc.png';
-
 import authorityOptimised from '../../assets/optimised/authority.png';
 import indicationsOptimised from '../../assets/optimised/indications.png';
-
 import quantityRepeatsOptimised from '../../assets/optimised/quantityRepeats.png';
-
-
 import prescribersOptimised from '../../assets/optimised/prescribers.png';
 import prescribersMobileOptimised from '../../assets/optimised/prescribers-mobile.png';
 import favouritesOptimised from '../../assets/optimised/favourites.png';
 import scriptOptimised from '../../assets/optimised/script.png';
 import { Link } from "react-router-dom";
+import IndicationsExtract from "./AppExtracts/IndicationsExtract";
+import FormField from "../FormField/FormField";
 
 
 const Features = ({ setPage }) => {
@@ -45,8 +43,20 @@ const Features = ({ setPage }) => {
               <h4 className="description__title">Instant PBS availability and indications</h4>
               <p className="description__text">The moment you select a medication, OptomRx will show you whether it is eligible for PBS prescribing. If the medication is restricted or requires authority, you can optionally view the indications for it's use under the PBS.</p>
             </div>
-            <div className="description__screenshots indications">
+            {/* <div className="description__screenshots indications">
               <img src={indicationsOptimised} alt="Online form indicating PBS availability and indications for use" />
+              
+            </div> */}
+            <div className="indicationsDOMBox">
+              <FormField
+                fieldType="checkbox"
+                name="pbsRx"
+                label="PBS prescription"
+                checked={true}
+                className="checkbox pbsRx"
+                alert={{ message: 'This item is available on the PBS (authority required)', type: 'neutral' }}
+              />
+              <IndicationsExtract />
             </div>
           </div>
 

@@ -106,6 +106,11 @@ const StyledFeatures = styled.div`
       justify-content: center;
     }
 
+    .indicationsDOMBox {
+      text-align: left;
+      margin-left: 3rem;
+    }
+
     .description {
       max-width: 400px;
 

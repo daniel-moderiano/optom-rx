@@ -4,11 +4,10 @@ import { useEffect, useState } from "react";
 const Indications = ({ indicationsData }) => {
   const [expandIndication, setExpandIndication] = useState(false);
   const [indicationHTML, setIndicationHTML] = useState('');
-
+  
   // When the indication data for a drug changes in the Rx form, convert the raw PBS text describing indications for a medication, format it to UI freindly format, and update the indication HTML state with the formatted result
   useEffect(() => {
     let indicationStr = indicationsData;
-
     // One or two medications use the term 'treatment criteria' instead of 'clinical criteria'. There is no real world implications of the difference, so clinical criteria is set as the standard here
     if (indicationStr.includes('Treatment criteria')) {
       indicationStr = indicationStr.replace('Treatment criteria', 'Clinical criteria');
