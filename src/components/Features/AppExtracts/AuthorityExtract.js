@@ -4,7 +4,7 @@ import checkbox from '../../../assets/checkbox.png';
 
 const AuthorityExtract = () => {
   return (
-    <StyledAuthorityExtract>
+    <StyledAuthorityExtract aria-hidden={true}>
 
       <div className="Input">
         <div className="container-checkbox">

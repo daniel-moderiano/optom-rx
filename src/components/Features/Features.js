@@ -14,6 +14,7 @@ import IndicationsExtract from "./AppExtracts/IndicationsExtract";
 import FormField from "../FormField/FormField";
 import QuantityExtract from "./AppExtracts/QuantityExtract";
 import AuthorityExtract from "./AppExtracts/AuthorityExtract";
+import PrescribersExtract from "./AppExtracts/PrescribersExtract";
 
 
 const Features = ({ setPage }) => {
@@ -100,9 +101,13 @@ const Features = ({ setPage }) => {
               <h3 id="prescribers__title" className="section__title">Multiple prescribers</h3>
               <p className="prescribers__text">Whether you work in a single practice, or locum all across Australia - OptomRx supports as many prescriber profiles as you need. Prescriber profiles can be modified, added, or removed with ease. Simply select whichever prescriber details you wish to use when you write a prescription. Simplify things further with default selection for your most common practice location.</p>
             </div>
-            <div className="prescribers__screenshots">
+            {/* <div className="prescribers__screenshots">
               <img className="desktop" loading="lazy" src={prescribersOptimised} alt="Online table displaying several sets of prescriber details" />
               <img className="mobile" loading="lazy" src={prescribersMobileOptimised} alt="Online cards displaying several sets of prescriber details" />
+
+            </div> */}
+            <div className="indicationsDOMBox">
+              <PrescribersExtract />
             </div>
           </div>
         </section>
