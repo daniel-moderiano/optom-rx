@@ -48,14 +48,6 @@ const Features = ({ setPage }) => {
               
             </div> */}
             <div className="indicationsDOMBox">
-              <FormField
-                fieldType="checkbox"
-                name="pbsRx"
-                label="PBS prescription"
-                checked={true}
-                className="checkbox pbsRx"
-                alert={{ message: 'This item is available on the PBS (authority required)', type: 'neutral' }}
-              />
               <IndicationsExtract />
             </div>
           </div>
