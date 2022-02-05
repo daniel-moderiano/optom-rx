@@ -12,6 +12,8 @@ import scriptOptimised from '../../assets/optimised/script.png';
 import { Link } from "react-router-dom";
 import IndicationsExtract from "./AppExtracts/IndicationsExtract";
 import FormField from "../FormField/FormField";
+import QuantityExtract from "./AppExtracts/QuantityExtract";
+import AuthorityExtract from "./AppExtracts/AuthorityExtract";
 
 
 const Features = ({ setPage }) => {
@@ -53,8 +55,11 @@ const Features = ({ setPage }) => {
           </div>
 
           <div className="content-container pbs-container quantityRepeats-container">
-          <div className="description__screenshots quantityRepeats">
+            {/* <div className="description__screenshots quantityRepeats">
               <img src={quantityRepeatsOptimised} alt="Online form indicating max quantity and repeats for a PBS medication" />
+            </div> */}
+            <div className="indicationsDOMBox">
+              <QuantityExtract />
             </div>
             <div className="description">
               <h4 className="description__title">Avoid mistakes in prescribing</h4>
@@ -67,8 +72,11 @@ const Features = ({ setPage }) => {
               <h4 className="description__title">Save time for those less common authority scripts</h4>
               <p className="description__text">When a streamline authority code is available, it will be supplied for you, automatically. For those medications requiring manual authority codes, OptomRx will advise you where to apply for authority.</p>
             </div>
-            <div className="description__screenshots authority">
+            {/* <div className="description__screenshots authority">
               <img src={authorityOptimised} alt="Online form indicating authority is required for a medication" />
+            </div> */}
+            <div className="indicationsDOMBox">
+              <AuthorityExtract />
             </div>
           </div>
         </section>

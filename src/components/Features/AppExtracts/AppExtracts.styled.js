@@ -3,7 +3,6 @@ import styled from "styled-components";
 const StyledIndicationsExtract = styled.div`
   background-color: #ffffff;
   border-radius: 6px;
-
   padding: 2rem 2rem 2rem 2rem;
 
   .Indications {
@@ -49,7 +48,6 @@ const StyledIndicationsExtract = styled.div`
     .container {
       display: flex;
       align-items: center;
-
     }
 
     .checkbox {
@@ -65,4 +63,85 @@ const StyledIndicationsExtract = styled.div`
   }
 `
 
-export { StyledIndicationsExtract }
+const StyledQuantityExtract = styled.div`
+  .Input {
+    margin-bottom: 1.25rem;
+    width: 26rem;
+
+    .input {
+      margin-top: 0.5rem;
+      width: 5rem;
+      position: relative;
+      pointer-events: none;
+      padding: 0.52rem 0.85rem 0.6rem 0.85rem;   
+      border-radius: 4px;
+      font-size: 1rem;
+      font-family: var(--font-stack-segoe);
+      background-color: #fff;
+      transition: border-color 150ms ease-in-out;
+      border: 1px solid var(--success);
+    }
+
+    .label-text {
+      font-size: 0.9rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tickCircle {
+      position: absolute;
+      width: 22px;
+      top: 0.27rem;
+      right: 10px;
+      background-color: #fff;
+      padding: 0.45rem 0 0.4rem 0.3rem;
+      animation-name: fadeIn;
+      animation-timing-function: ease;
+      animation-duration: 100ms;
+    }
+  }
+}
+`
+
+const StyledAuthorityExtract = styled.div`
+  .Input {
+    margin-bottom: 1.25rem;
+    width: 26rem;
+
+    .input {
+      margin-top: 0.5rem;
+      position: relative;
+      pointer-events: none;
+      padding: 0.52rem 0.85rem 0.6rem 0.85rem;   
+      border-radius: 4px;
+      font-size: 1rem;
+      font-family: var(--font-stack-segoe);
+      background-color: #fff;
+      transition: border-color 150ms ease-in-out;
+      border: 1px solid rgb(144, 147, 150);
+    }
+
+    .checkbox {
+      width: 16px;
+      margin-right: 0.5rem;
+    }
+
+    .container-checkbox {
+      display: flex;
+      align-items: center;
+    }
+
+    .label-text {
+      font-size: 0.9rem;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  .AuthNumber {
+    font-size: 0.9rem;
+    margin-bottom: 1.25rem;
+  }
+`
+
+export { StyledIndicationsExtract, StyledQuantityExtract, StyledAuthorityExtract }
