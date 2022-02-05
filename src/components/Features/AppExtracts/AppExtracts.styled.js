@@ -662,7 +662,107 @@ const StyledDashboardExtract = styled.div`
 `
 
 const StyledScriptExtract = styled.div`
-  
+  text-align: left;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+  padding: 2.5rem 3rem 2rem 3rem;
+  background-color: #fff;
+
+  .Script {
+    position: relative;
+
+    .PrescriberForm__btns {
+      margin: 2rem 0 0rem 0;
+      display: flex;
+      align-items: center;
+      width: 100%;
+
+      .fav-btn, .re-prescribe {
+        box-sizing: border-box;
+        font-size: 1rem;
+        font-family: var(--font-stack-segoe);
+        box-sizing: border-box;
+        padding: 0.45rem 16px 10px 16px;
+        border-radius: 2px;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 2.4rem;
+        border: 1px solid transparent;
+        background-color: var(--primary-color);
+        color: rgb(255, 255, 255);
+      }
+
+      span {
+        padding: 8px 16px 10px 4px;
+      }
+
+      .icon {
+        margin-right: 0.2rem;
+        margin-left: 13px;
+        width: 24px;
+      }
+
+      .star-icon {
+        margin-top: -0.1rem;
+        margin-left: 13px;
+      }
+      
+      .re-prescribe {
+        padding: 0;
+        margin-right: 1.5rem;
+      }
+      
+      .fav-btn {
+        padding: 0;
+      }
+    }
+
+    .Script__info {
+      width: 100%;
+      box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+      
+      .Script__title {
+        background-color: #F9FAFB;
+        padding: 0.75rem 0.75rem;
+        font-size: 1.2rem;
+        font-family: var(--font-stack-segoe);
+        font-weight: 400;
+        color: #48515B;
+        border-top: none;
+      }
+
+      .Script__info--section {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.9rem;
+        color: #48515B;
+      }
+
+      .Script__medication, .Script__pbs {
+        padding-bottom: 0.5rem;
+      }
+    }
+
+    /* Portrait phones */
+    @media (max-width: 470px) { 
+      .PrescriberForm__btns {
+        flex-direction: column;
+
+        .re-prescribe, .fav-btn {
+          width: 90%;
+          min-width: 80px;
+        }
+
+        .re-prescribe {
+          width: 90%;
+          margin: 0 0 1.5rem 0;
+        }
+      }
+    }
+  }
 `
 
 export { StyledIndicationsExtract, StyledQuantityExtract, StyledAuthorityExtract, StyledPrescribersExtract, StyledDashboardExtract, StyledScriptExtract }

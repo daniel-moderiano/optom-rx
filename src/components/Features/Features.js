@@ -16,6 +16,7 @@ import QuantityExtract from "./AppExtracts/QuantityExtract";
 import AuthorityExtract from "./AppExtracts/AuthorityExtract";
 import PrescribersExtract from "./AppExtracts/PrescribersExtract";
 import DashboardExtract from "./AppExtracts/DashboardExtract";
+import ScriptExtract from "./AppExtracts/ScriptExtract";
 
 
 const Features = ({ setPage }) => {
@@ -131,8 +132,11 @@ const Features = ({ setPage }) => {
 
         <section className="Features__data" aria-labelledby="data__title">
           <div className="content-container data-container">
-            <div className="data__screenshots">
+            {/* <div className="data__screenshots">
               <img src={scriptOptimised} loading="lazy" alt="Screenshot of online prescription" />
+            </div> */}
+            <div className="indicationsDOMBox">
+              <ScriptExtract />
             </div>
             <div className="data__description description">
               <h3 id="data__title" className="section__title">No patient data retention</h3>
