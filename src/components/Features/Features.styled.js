@@ -126,8 +126,10 @@ const StyledFeatures = styled.div`
     } */
 
     .indicationsDOMBox {
-      margin-left: 2rem;
+      margin-left: 3rem;
+      margin-top: 1rem;
       max-width: 430px;
+      width: 100%;
     }
 
     .quantityDOMBox {
@@ -317,9 +319,18 @@ const StyledFeatures = styled.div`
           max-width: 600px;
         }
 
-        .authority, .indications, .quantityRepeats {
-          margin-top: 3rem;
+        .pbsDOMBox {
+          margin: 1rem 0 0 0;
         }
+
+        .indicationsDOMBox {
+          margin-top: 2rem;
+          margin-bottom: 1.5rem;
+        }
+      }
+
+      .quantityRepeats-container {
+        flex-direction: column-reverse;
       }
     }
 

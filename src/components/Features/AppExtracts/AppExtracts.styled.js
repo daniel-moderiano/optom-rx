@@ -3,7 +3,7 @@ import styled from "styled-components";
 const StyledIndicationsExtract = styled.div`
   background-color: #ffffff;
   border-radius: 6px;
-  padding: 1rem;
+  /* padding: 1rem; */
 
   .Indications {
     box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px, rgba(0, 0, 0, 0.05) 0px 0px 1px 0px;

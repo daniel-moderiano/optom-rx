@@ -39,14 +39,12 @@ const Features = ({ setPage }) => {
               <h4 className="description__title">Instant PBS availability and indications</h4>
               <p className="description__text">The moment you select a medication, OptomRx will show you whether it is eligible for PBS prescribing. If the medication is restricted or requires authority, you can optionally view the indications for it's use under the PBS.</p>
             </div>
-
             <div className="indicationsDOMBox pbsDOMBox">
               <IndicationsExtract />
             </div>
           </div>
 
           <div className="content-container pbs-container quantityRepeats-container">
-
             <div className="quantityDOMBox pbsDOMBox">
               <QuantityExtract />
             </div>
