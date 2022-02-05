@@ -77,7 +77,7 @@ const StyledFeatures = styled.div`
   }
 
   .Features__pbs {
-    padding: 3rem 0 4rem 0;
+    padding: 3rem 0 3.5rem 0;
     text-align: left;
     flex-direction: column;
     background-color: #FFFFFF;
@@ -124,6 +124,20 @@ const StyledFeatures = styled.div`
         opacity: 100%;
       }
     } */
+
+    .indicationsDOMBox {
+      margin-left: 2rem;
+      max-width: 430px;
+    }
+
+    .quantityDOMBox {
+      margin-right: 3rem;
+    }
+
+    .authorityDOMBox {
+      max-width: 400px;
+      margin-left: 2rem;
+    }
 
     .description {
       max-width: 400px;

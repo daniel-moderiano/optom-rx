@@ -18,7 +18,7 @@ const QuantityExtract = () => {
         </div>
       </div>
 
-      <div className="Input">
+      <div className="Input repeatsInput">
         <div className="container">
           <span className="label-text">Repeats</span>
             <div className="input">

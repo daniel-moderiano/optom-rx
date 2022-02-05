@@ -3,7 +3,7 @@ import styled from "styled-components";
 const StyledIndicationsExtract = styled.div`
   background-color: #ffffff;
   border-radius: 6px;
-  padding: 2rem 2rem 2rem 2rem;
+  padding: 1rem;
 
   .Indications {
     box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px, rgba(0, 0, 0, 0.05) 0px 0px 1px 0px;
@@ -64,9 +64,11 @@ const StyledIndicationsExtract = styled.div`
 `
 
 const StyledQuantityExtract = styled.div`
+  padding-bottom: 1rem;
+
   .Input {
-    margin-bottom: 1.25rem;
-    width: 26rem;
+    margin-top: 1.25rem;
+    max-width: 18rem;
 
     .input {
       margin-top: 0.5rem;
@@ -104,9 +106,11 @@ const StyledQuantityExtract = styled.div`
 `
 
 const StyledAuthorityExtract = styled.div`
+  padding-bottom: 1rem;
+
   .Input {
-    margin-bottom: 1.25rem;
-    width: 26rem;
+    margin-top: 1.25rem;
+    max-width: 26rem;
 
     .input {
       margin-top: 0.5rem;
@@ -140,7 +144,7 @@ const StyledAuthorityExtract = styled.div`
 
   .AuthNumber {
     font-size: 0.9rem;
-    margin-bottom: 1.25rem;
+    margin-top: 1.25rem;
   }
 `
 
