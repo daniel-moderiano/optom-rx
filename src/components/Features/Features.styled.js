@@ -106,10 +106,24 @@ const StyledFeatures = styled.div`
       justify-content: center;
     }
 
-    .indicationsDOMBox {
+    .pbsDOMBox {
       text-align: left;
-      margin-left: 3rem;
+      /* margin-left: 3rem; */
+      /* animation-duration: 350ms;
+      animation-name: fadeIn;
+      animation-timing-function: ease-out; */
     }
+
+    /* @keyframes fadeIn {
+      0% {
+        transform: translateY(-4rem);
+        opacity: 10%;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 100%;
+      }
+    } */
 
     .description {
       max-width: 400px;
@@ -120,19 +134,6 @@ const StyledFeatures = styled.div`
         line-height: 2.5rem;
         margin: 0 0 1rem 0;
       }
-    }
-
-    .description__screenshots {
-      max-width: 480px;
-    }
-
-    .authority {
-      max-width: 420px;
-    }
-
-    .quantityRepeats {
-      max-width: 385px;
-      margin: 0 2rem 0 0;
     }
 
     img {
@@ -173,16 +174,6 @@ const StyledFeatures = styled.div`
     .prescribers__description {
       max-width: 880px;
     }
-
-    .prescribers__screenshots {
-      max-width: 880px;
-      margin: 2rem 0;
-    }
-
-    .mobile {
-      display: none;
-      max-width: 300px;
-    }
   }
 
   .Features__represcribe {
@@ -197,10 +188,6 @@ const StyledFeatures = styled.div`
         margin: 1rem 0;
       }
     }
-
-    .represcribe__screenshots {
-      max-width: 450px;
-    }
   }
 
   .Features__data {
@@ -214,10 +201,6 @@ const StyledFeatures = styled.div`
       .data__text {
         margin: 1rem 0;
       }
-    }
-
-    .data__screenshots {
-      max-width: 480px;
     }
   }
 
@@ -324,10 +307,6 @@ const StyledFeatures = styled.div`
           margin-top: 3rem;
         }
       }
-
-      .quantityRepeats-container {
-        flex-direction: column-reverse;
-      }
     }
 
     .Features__lemi {
@@ -351,9 +330,6 @@ const StyledFeatures = styled.div`
           max-width: 600px;
           text-align: left;
         }
-      }
-      .mobile {
-        display: block;
       }
     }
 
@@ -379,10 +355,6 @@ const StyledFeatures = styled.div`
           max-width: 600px;
         }
       }
-    }
-
-    .desktop {
-      display: none;
     }
   }
 
@@ -434,10 +406,6 @@ const StyledFeatures = styled.div`
           h4 {
             line-height: 2.1rem;
           }
-        }
-
-        .authority, .indications, .quantityRepeats {
-          margin: 2rem 0 0 0;
         }
       }
     }

@@ -2,22 +2,13 @@ import { StyledFeatures } from "./Features.styled";
 import { useEffect } from "react";
 import { Helmet } from 'react-helmet-async';
 import lemiOptimised from '../../assets/optimised/lemi-lmbc.png';
-import authorityOptimised from '../../assets/optimised/authority.png';
-import indicationsOptimised from '../../assets/optimised/indications.png';
-import quantityRepeatsOptimised from '../../assets/optimised/quantityRepeats.png';
-import prescribersOptimised from '../../assets/optimised/prescribers.png';
-import prescribersMobileOptimised from '../../assets/optimised/prescribers-mobile.png';
-import favouritesOptimised from '../../assets/optimised/favourites.png';
-import scriptOptimised from '../../assets/optimised/script.png';
 import { Link } from "react-router-dom";
 import IndicationsExtract from "./AppExtracts/IndicationsExtract";
-import FormField from "../FormField/FormField";
 import QuantityExtract from "./AppExtracts/QuantityExtract";
 import AuthorityExtract from "./AppExtracts/AuthorityExtract";
 import PrescribersExtract from "./AppExtracts/PrescribersExtract";
 import DashboardExtract from "./AppExtracts/DashboardExtract";
 import ScriptExtract from "./AppExtracts/ScriptExtract";
-
 
 const Features = ({ setPage }) => {
   // Adjust current page for accessibility and styling
@@ -48,20 +39,15 @@ const Features = ({ setPage }) => {
               <h4 className="description__title">Instant PBS availability and indications</h4>
               <p className="description__text">The moment you select a medication, OptomRx will show you whether it is eligible for PBS prescribing. If the medication is restricted or requires authority, you can optionally view the indications for it's use under the PBS.</p>
             </div>
-            {/* <div className="description__screenshots indications">
-              <img src={indicationsOptimised} alt="Online form indicating PBS availability and indications for use" />
-              
-            </div> */}
-            <div className="indicationsDOMBox">
+
+            <div className="indicationsDOMBox pbsDOMBox">
               <IndicationsExtract />
             </div>
           </div>
 
           <div className="content-container pbs-container quantityRepeats-container">
-            {/* <div className="description__screenshots quantityRepeats">
-              <img src={quantityRepeatsOptimised} alt="Online form indicating max quantity and repeats for a PBS medication" />
-            </div> */}
-            <div className="indicationsDOMBox">
+
+            <div className="quantityDOMBox pbsDOMBox">
               <QuantityExtract />
             </div>
             <div className="description">
@@ -75,10 +61,7 @@ const Features = ({ setPage }) => {
               <h4 className="description__title">Save time for those less common authority scripts</h4>
               <p className="description__text">When a streamline authority code is available, it will be supplied for you, automatically. For those medications requiring manual authority codes, OptomRx will advise you where to apply for authority.</p>
             </div>
-            {/* <div className="description__screenshots authority">
-              <img src={authorityOptimised} alt="Online form indicating authority is required for a medication" />
-            </div> */}
-            <div className="indicationsDOMBox">
+            <div className="authorityDOMBox pbsDOMBox">
               <AuthorityExtract />
             </div>
           </div>
@@ -103,12 +86,7 @@ const Features = ({ setPage }) => {
               <h3 id="prescribers__title" className="section__title">Multiple prescribers</h3>
               <p className="prescribers__text">Whether you work in a single practice, or locum all across Australia - OptomRx supports as many prescriber profiles as you need. Prescriber profiles can be modified, added, or removed with ease. Simply select whichever prescriber details you wish to use when you write a prescription. Simplify things further with default selection for your most common practice location.</p>
             </div>
-            {/* <div className="prescribers__screenshots">
-              <img className="desktop" loading="lazy" src={prescribersOptimised} alt="Online table displaying several sets of prescriber details" />
-              <img className="mobile" loading="lazy" src={prescribersMobileOptimised} alt="Online cards displaying several sets of prescriber details" />
-
-            </div> */}
-            <div className="indicationsDOMBox">
+            <div className="prescribersDOMBox">
               <PrescribersExtract />
             </div>
           </div>
@@ -121,10 +99,7 @@ const Features = ({ setPage }) => {
               <p className="represcribe__text">In practice, you'll be reaching for the same scripts over and over; why waste time re-writing the same script every time? With OptomRx, you are able to save any script as a 'favourite'.</p>
               <p className="represcribe__text">These favourites contain specific medication details, e.g. ingredient, quantity, repeats, dosage, etc. You can re-prescribe these favourites with a single click. Just add patient details, and the script is done. Quick and easy. </p>
             </div>
-            {/* <div className="represcribe__screenshots">
-              <img src={favouritesOptimised} loading="lazy" alt="Online dashboard containing favourite scripts in table layout" />
-            </div> */}
-            <div className="indicationsDOMBox">
+            <div className="represcribeDOMBox">
               <DashboardExtract />
             </div>
           </div>
@@ -132,10 +107,7 @@ const Features = ({ setPage }) => {
 
         <section className="Features__data" aria-labelledby="data__title">
           <div className="content-container data-container">
-            {/* <div className="data__screenshots">
-              <img src={scriptOptimised} loading="lazy" alt="Screenshot of online prescription" />
-            </div> */}
-            <div className="indicationsDOMBox">
+            <div className="dataDOMBox">
               <ScriptExtract />
             </div>
             <div className="data__description description">
