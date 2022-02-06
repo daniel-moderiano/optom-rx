@@ -20,19 +20,6 @@ const DashboardExtract = () => {
               <li class="fav-item">
                 <div class="item-name">
                   <span class="cell-title">Script name</span>
-                  <span class="item-content">Pred forte QID (PBS script)</span>
-                </div>
-                <div class="actions">
-                  <span class="cell-title">Actions</span>
-                  <div class="btns">
-                    <div class="prescribe">Prescribe</div>
-                    <div class="delete-btn">Delete</div>
-                  </div>
-                </div>
-              </li>
-              <li class="fav-item">
-                <div class="item-name">
-                  <span class="cell-title">Script name</span>
                   <span class="item-content">Hylo-Fresh PRN (PBS script)</span>
                 </div>
                 <div class="actions">

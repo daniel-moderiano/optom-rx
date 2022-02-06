@@ -205,6 +205,11 @@ const StyledFeatures = styled.div`
         margin: 1rem 0;
       }
     }
+
+    .represcribeDOMBox {
+      width: 100%;
+      min-width: 385px;
+    }
   }
 
   .Features__data {
@@ -259,6 +264,10 @@ const StyledFeatures = styled.div`
       .represcribe__description {
         margin-right: 3rem;
         max-width: 500px;
+      }
+
+      .represcribeDOMBox {
+        min-width: 500px;
       }
     }
 
@@ -425,10 +434,15 @@ const StyledFeatures = styled.div`
         margin-left: 3rem;
         max-width: 500px;
       }
-
       .dataDOMBox {
         min-width: 0;
+      }
+    }
 
+    .Features__represcribe {
+      .represcribeDOMBox {
+        width: 100%;
+        min-width: 0;
       }
     }
 
