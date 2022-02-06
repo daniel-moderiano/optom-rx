@@ -190,6 +190,11 @@ const StyledFeatures = styled.div`
     .prescribers__description {
       max-width: 880px;
     }
+
+    .prescribersDOMBox {
+      margin-top: 2rem;
+      width: 100%;
+    }
   }
 
   .Features__represcribe {

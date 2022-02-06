@@ -17,6 +17,7 @@ const DashboardExtract = () => {
                 <span>Script name</span>
                 <span class="actions-span">Actions</span>
               </li>
+
               <li class="fav-item">
                 <div class="item-name">
                   <span class="cell-title">Script name</span>

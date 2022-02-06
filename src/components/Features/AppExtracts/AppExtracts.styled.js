@@ -151,7 +151,16 @@ const StyledAuthorityExtract = styled.div`
 const StyledPrescribersExtract = styled.div`
   text-align: left;
   box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
-  padding: 2.75rem 4rem 2rem 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .Prescribers {
+    width: 100%;
+    height: 100%;
+    transform: scale(0.85);
+    margin-bottom: -0.5rem;
+  }
 
   .Prescribers__container {
     display: flex;
@@ -416,12 +425,31 @@ const StyledPrescribersExtract = styled.div`
       }
     }
   } 
+
+  @media(max-width: 700px) {
+    .Prescribers {
+      margin-top: -2rem;
+    }
+
+    .TableFooter {
+      margin-bottom: -2rem;
+    }
+  }
+
+  @media(max-width: 700px) {
+    .Prescribers {
+      margin-top: -2.5rem;
+    }
+
+    .TableFooter {
+      margin-bottom: -2.5rem;
+    }
+  }
 `
 
 const StyledDashboardExtract = styled.div`
   text-align: left;
   box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
-  /* padding: 2.5rem 3rem 2rem 3rem; */
   background-color: #fff;
   display: flex;
   align-items: center;
@@ -590,7 +618,7 @@ const StyledDashboardExtract = styled.div`
       }
 
 
-      margin-bottom: -4rem;
+      margin-bottom: -4.5rem;
 
 
       .list-header {
@@ -681,7 +709,7 @@ const StyledDashboardExtract = styled.div`
 
   @media (max-width: 550px) {
     .Dashboard {
-      margin-top: -1.5rem;
+      margin-top: -1.75rem;
     }
   }
 `
@@ -780,6 +808,7 @@ const StyledScriptExtract = styled.div`
     @media (max-width: 470px) { 
       .PrescriberForm__btns {
         flex-direction: column;
+        margin-bottom: -0.5rem;
 
         .re-prescribe, .fav-btn {
           width: 90%;
@@ -791,6 +820,12 @@ const StyledScriptExtract = styled.div`
           margin: 0 0 1.5rem 0;
         }
       }
+    }
+  }
+
+  @media (max-width: 470px) { 
+    .Script {
+      margin-top: -0.75rem;
     }
   }
 `
