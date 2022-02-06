@@ -199,6 +199,7 @@ const StyledFeatures = styled.div`
     .represcribe__description {
       margin-right: 1rem;
       max-width: 400px;
+      width: 100%;
 
       p {
         margin: 1rem 0;
@@ -217,6 +218,11 @@ const StyledFeatures = styled.div`
       .data__text {
         margin: 1rem 0;
       }
+    }
+
+    .dataDOMBox {
+      width: 100%;
+      min-width: 385px;
     }
   }
 
@@ -251,15 +257,19 @@ const StyledFeatures = styled.div`
 
     .Features__represcribe {
       .represcribe__description {
-        margin-right: 4rem;
+        margin-right: 3rem;
         max-width: 500px;
       }
     }
 
     .Features__data {
       .data__description {
-        margin-left: 4rem;
+        margin-left: 3rem;
         max-width: 500px;
+      }
+
+      .dataDOMBox {
+        min-width: 500px;
       }
     }
   }
@@ -384,7 +394,7 @@ const StyledFeatures = styled.div`
   }
 
   /* Smaller mobile screens */
-  @media (max-width: 430px) {
+  @media (max-width: 460px) {
     font-size: 1rem;
     line-height: 1.4rem;
 
@@ -408,6 +418,18 @@ const StyledFeatures = styled.div`
       font-size: 1.1rem;
       max-width: 350px;
       line-height: 1.5rem;
+    }
+
+    .Features__data {
+      .data__description {
+        margin-left: 3rem;
+        max-width: 500px;
+      }
+
+      .dataDOMBox {
+        min-width: 0;
+
+      }
     }
 
     .Features__pbs {

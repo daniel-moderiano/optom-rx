@@ -668,10 +668,16 @@ const StyledDashboardExtract = styled.div`
 const StyledScriptExtract = styled.div`
   text-align: left;
   box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
-  padding: 2.5rem 3rem 2rem 3rem;
+  /* padding: 0 0.75rem; */
   background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   .Script {
+    width: 100%;
+    height: 100%;
+    transform: scale(0.85);
     position: relative;
 
     .PrescriberForm__btns {
@@ -752,6 +758,10 @@ const StyledScriptExtract = styled.div`
 
     /* Portrait phones */
     @media (max-width: 470px) { 
+      /* margin: 0 -1rem; */
+      /* transform: scale(0.8); */
+
+
       .PrescriberForm__btns {
         flex-direction: column;
 
