@@ -319,7 +319,7 @@ const StyledFeatures = styled.div`
     }
 
     .Features__pbs {
-      padding-bottom: 3rem;
+      padding-bottom: 2rem;
       padding-top: 0;
 
       .pbs-subtitle {
@@ -372,7 +372,7 @@ const StyledFeatures = styled.div`
 
     .Features__prescribers {
       padding-top: 2.75rem;
-      padding-bottom: 2.25rem;
+      padding-bottom: 4rem;
       .prescribers-container {
         .prescribers__description {
           margin: 0 0 1rem 0;

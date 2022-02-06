@@ -33,7 +33,7 @@ const PrescribersExtract = () => {
                     </div>
                   </td>
                 </tr>
-                <tr role="row" class="tableRowItems">
+                <tr role="row" class="tableRowItems middleRow">
                   <td role="cell" data-title="Name" class="tableCell">Andrew Practitioner</td>
                   <td role="cell" data-title="Location" class="tableCell">All Eyes Optometry, Adelaide</td>
                   <td role="cell" data-title="Actions" class="tableCell actions-cell">

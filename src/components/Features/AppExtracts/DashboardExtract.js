@@ -18,7 +18,7 @@ const DashboardExtract = () => {
                 <span class="actions-span">Actions</span>
               </li>
 
-              <li class="fav-item">
+              <li class="fav-item first-fav">
                 <div class="item-name">
                   <span class="cell-title">Script name</span>
                   <span class="item-content">Hylo-Fresh PRN (PBS script)</span>

@@ -438,11 +438,25 @@ const StyledPrescribersExtract = styled.div`
 
   @media(max-width: 700px) {
     .Prescribers {
-      margin-top: -2.5rem;
+      margin-top: -1rem;
+
+      .middleRow {
+        display: none;
+      }
     }
 
     .TableFooter {
-      margin-bottom: -2.5rem;
+      margin-bottom: -1rem;
+    }
+  }
+
+  @media(max-width: 450px) {
+    .Prescribers {
+      margin-top: -2.85rem;
+      transform: scale(0.78);
+    }
+    .TableFooter {
+      margin-bottom: -3.65rem;
     }
   }
 `
@@ -616,10 +630,7 @@ const StyledDashboardExtract = styled.div`
         display: block;
         margin-top: 0.5rem;
       }
-
-
       margin-bottom: -4.5rem;
-
 
       .list-header {
           display: none;
@@ -704,12 +715,24 @@ const StyledDashboardExtract = styled.div`
       .Favourites__title {
         font-size: 1.4rem;
       }
+
+      .fav-list {
+        .first-fav {
+          display: none;
+        }
+      }
     }
   }
 
   @media (max-width: 550px) {
     .Dashboard {
       margin-top: -1.75rem;
+    }
+  }
+
+  @media (max-width: 475px) {
+    .Dashboard {
+      transform: scale(0.8);
     }
   }
 `
@@ -807,8 +830,8 @@ const StyledScriptExtract = styled.div`
     /* Portrait phones */
     @media (max-width: 470px) { 
       .PrescriberForm__btns {
+        display: none;
         flex-direction: column;
-        margin-bottom: -0.5rem;
 
         .re-prescribe, .fav-btn {
           width: 90%;
@@ -826,6 +849,12 @@ const StyledScriptExtract = styled.div`
   @media (max-width: 470px) { 
     .Script {
       margin-top: -0.75rem;
+
+      .Script__info {
+        .Script__pbs {
+          padding-bottom: 0;
+        }
+      }
     }
   }
 `
