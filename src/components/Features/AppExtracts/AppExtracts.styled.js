@@ -140,6 +140,10 @@ const StyledAuthorityExtract = styled.div`
       display: flex;
       flex-direction: column;
     }
+
+    .alert-container {
+      width: 100%;
+    }
   }
 
   .AuthNumber {
@@ -170,7 +174,7 @@ const StyledPrescribersExtract = styled.div`
   }
 
   .Prescribers__add-btn {
-    max-width: 175px;
+    max-width: 182px;
     margin-top: 1.85rem;
     box-sizing: border-box;
     font-size: 1rem;
@@ -452,7 +456,7 @@ const StyledPrescribersExtract = styled.div`
 
   @media(max-width: 450px) {
     .Prescribers {
-      margin-top: -2.85rem;
+      margin-top: -2.7rem;
       transform: scale(0.78);
     }
     .TableFooter {
@@ -726,7 +730,7 @@ const StyledDashboardExtract = styled.div`
 
   @media (max-width: 550px) {
     .Dashboard {
-      margin-top: -1.75rem;
+      margin-top: -1.65rem;
     }
   }
 
@@ -848,7 +852,7 @@ const StyledScriptExtract = styled.div`
 
   @media (max-width: 470px) { 
     .Script {
-      margin-top: -0.75rem;
+      margin-top: -0.35rem;
 
       .Script__info {
         .Script__pbs {
