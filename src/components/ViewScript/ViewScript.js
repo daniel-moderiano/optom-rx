@@ -126,7 +126,7 @@ const ViewScript = ({ setToast, resetData, setPage }) => {
         )}
 
         {showModal && <Modal title="Add to favourites" closeModal={() => setShowModal(false)}>
-          <form>
+          <form onSubmit={(event) => {event.preventDefault(); addToFavourites(scriptData)}}>
             <FormField
               fieldType="text"
               name="customName"
@@ -142,7 +142,7 @@ const ViewScript = ({ setToast, resetData, setPage }) => {
             />
             <div className="Modal__buttons">
               <Button classLabel="cancel" design="secondary" handleClick={() => setShowModal(false)}>Cancel</Button>
-              <Button handleClick={() => addToFavourites(scriptData)}>
+              <Button type="submit">
                 {favPending ? (
                   <Dots color="white" />
                 ) : (
