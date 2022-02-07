@@ -26,9 +26,10 @@
 
 [OptomRx](https://optomrx.net) is a new web app for Australian optometrists to create and manage professional therapeutic prescriptions online. It supports the full suite of PBS and non-PBS medications available to therapeutically endorsed optometrists.  
 
-<br />
-
 <img src="src/assets/readme-dash.png" alt="Logo" width="100%">
+
+
+OptomRx is designed for use with official PBS computerised forms for optometrists. These forms can be ordered in bulk, at no charge from [Services Australia](https://www.servicesaustralia.gov.au/pbs-and-rpbs-stationery-for-optometrists?context=22851).
 
 ### Features
 
@@ -46,7 +47,31 @@
 
 ## Usage
 
-OptomRx is designed for use with official PBS stationery for optometrists, specfically the computer-generated PBS forms. These forms can be ordered in bulk, at no charge from [Services Australia](https://www.servicesaustralia.gov.au/pbs-and-rpbs-stationery-for-optometrists?context=22851).
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. 
+
+### Requirements
+
+A valid Google Places API key is required for Google's autocomplete functionality.
+
+### Installing
+
+First, clone the repository
+
+```
+git clone git@github.com:daniel-moderiano/optom-rx.git
+```
+
+Inside the root directoy, install all dependencies with npm
+
+```
+npm install
+```
+
+Finally, use the following to spin up the project on a development server
+
+```
+npm start
+```
 
 
 ## License
