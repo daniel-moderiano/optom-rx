@@ -19,7 +19,7 @@
   </p>
 </div>
 
-  <br />
+
 
 
 ## About the project
