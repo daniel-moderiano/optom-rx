@@ -108,12 +108,8 @@ const StyledFeatures = styled.div`
 
     .pbsDOMBox {
       text-align: left;
-      /* box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px; */
-      /* box-shadow: 0 6.4px 14.4px 0 rgb(0 0 0 / 13%), 0 1.2px 3.6px 0 rgb(0 0 0 / 11%); */
-      /* box-shadow: rgba(149, 157, 165, 0.3) 0px 12px 48px 0px; */
-      
+      /* box-shadow: rgba(27, 31, 35, 0.04) 0px 1px 0px, rgba(255, 255, 255, 0.25) 0px 1px 0px inset; */
       border-radius: 6px;
-      /* margin-left: 3rem; */
       /* animation-duration: 350ms;
       animation-name: fadeIn;
       animation-timing-function: ease-out; */
@@ -503,18 +499,22 @@ const StyledFeatures = styled.div`
         }
 
         .indicationsDOMBox {
-          /* padding: 1rem 1.25rem; */
+          transform: scale(0.95);
           min-width: 0;
+          margin-top: 1.5rem;
         }
 
         .quantityDOMBox {
-          /* padding: 0 1.25rem 0.35rem 1.25rem; */
-          min-width: 0;
+          transform: scale(0.95);
+          /* min-width: 285px; */
+          margin-top: 0.25rem;
+
         }
 
         .authorityDOMBox {
-          /* padding: 0 1.25rem; */
+          transform: scale(0.95);
           min-width: 0;
+          margin-top: 0.5rem;
         }
       }
     }

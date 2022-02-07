@@ -60,6 +60,12 @@ const StyledIndicationsExtract = styled.div`
       display: flex;
       flex-direction: column;
     }
+
+    .alert-container {
+      svg {
+        margin-top: 0.15rem;
+      }
+    }
   }
 `
 
@@ -100,6 +106,24 @@ const StyledQuantityExtract = styled.div`
       animation-name: fadeIn;
       animation-timing-function: ease;
       animation-duration: 100ms;
+    }
+
+    .alert-container {
+      width: 100%;
+      min-width: 320px;
+      svg {
+        margin-top: 0.15rem;
+      }
+    }
+  }
+
+  @media (max-width: 350px) {
+    margin-left: 0;
+    .Input {
+      .alert-container {
+        width: 100%;
+        min-width: 0;
+      }
     }
   }
 }
@@ -143,6 +167,9 @@ const StyledAuthorityExtract = styled.div`
 
     .alert-container {
       width: 100%;
+      svg {
+        margin-top: 0.15rem;
+      }
     }
   }
 
@@ -428,17 +455,15 @@ const StyledPrescribersExtract = styled.div`
         margin: 0;
       }
     }
-  } 
 
-  @media(max-width: 700px) {
     .Prescribers {
-      margin-top: -2rem;
+      margin-top: -2.65rem;
+      transform: scale(0.78);
     }
-
     .TableFooter {
-      margin-bottom: -2rem;
+      margin-bottom: -3.65rem;
     }
-  }
+  } 
 
   @media(max-width: 700px) {
     .Prescribers {
@@ -456,13 +481,14 @@ const StyledPrescribersExtract = styled.div`
 
   @media(max-width: 450px) {
     .Prescribers {
-      margin-top: -2.6rem;
+      margin-top: -2.5rem;
       transform: scale(0.78);
     }
     .TableFooter {
-      margin-bottom: -3.65rem;
+      margin-bottom: -3.6rem;
     }
   }
+
 `
 
 const StyledDashboardExtract = styled.div`
