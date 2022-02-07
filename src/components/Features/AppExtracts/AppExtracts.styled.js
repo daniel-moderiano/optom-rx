@@ -174,7 +174,7 @@ const StyledPrescribersExtract = styled.div`
   }
 
   .Prescribers__add-btn {
-    max-width: 182px;
+    max-width: 190px;
     margin-top: 1.85rem;
     box-sizing: border-box;
     font-size: 1rem;
@@ -456,7 +456,7 @@ const StyledPrescribersExtract = styled.div`
 
   @media(max-width: 450px) {
     .Prescribers {
-      margin-top: -2.7rem;
+      margin-top: -2.6rem;
       transform: scale(0.78);
     }
     .TableFooter {
@@ -730,7 +730,7 @@ const StyledDashboardExtract = styled.div`
 
   @media (max-width: 550px) {
     .Dashboard {
-      margin-top: -1.65rem;
+      margin-top: -1.55rem;
     }
   }
 
@@ -852,7 +852,7 @@ const StyledScriptExtract = styled.div`
 
   @media (max-width: 470px) { 
     .Script {
-      margin-top: -0.35rem;
+      margin-top: -0.25rem;
 
       .Script__info {
         .Script__pbs {
