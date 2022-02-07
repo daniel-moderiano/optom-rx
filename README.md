@@ -89,4 +89,4 @@ The following resources were a great help throughout the development of OptomRx.
 * [Web accessibility tutorials](https://www.w3.org/WAI/tutorials/)
 * [The Net Ninja](https://www.youtube.com/channel/UCW5YeuERMmlnqo4oq8vwUpg)
 
-Finally, a special thanks to **Sarah Smoker** for her invaluable design and UI/UX ideas, and endless QA testing.
+Finally, a special thanks to Sarah Smoker for her invaluable design and UI/UX ideas, and endless QA testing.
