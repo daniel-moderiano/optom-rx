@@ -8,7 +8,7 @@
   <br /> 
   
   <p align="center">
-    Online therapeutic prescriptions for optometrists
+    Online therapeutic prescriptions for Australian optometrists
     <br />
     <a href="https://optomrx.net"><strong>Visit the website »</strong></a>
     <br />
