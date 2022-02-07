@@ -497,6 +497,7 @@ const StyledDashboardExtract = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0.5rem 0.25rem;
 
   .Dashboard {
     width: 100%;
@@ -760,6 +761,7 @@ const StyledDashboardExtract = styled.div`
   }
 
   @media (max-width: 475px) {
+    padding: 0;
     .Dashboard {
       transform: scale(0.8);
     }
