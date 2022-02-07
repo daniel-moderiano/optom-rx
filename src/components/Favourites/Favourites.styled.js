@@ -157,7 +157,6 @@ const StyledFavourites = styled.div`
   }
 
   .fav-list--none {
-
     box-shadow: none;
       .list-header {
         display: none;
@@ -166,12 +165,14 @@ const StyledFavourites = styled.div`
         display: flex;
         align-items: center;
         justify-content: center;
+        text-align: center;
         height: 7rem;
         font-size: 0.9rem;
         color: #5A6572;
         box-shadow: none;
         border: 1px dashed rgba(0, 0, 0, 0.1);
         border-radius: 6px; 
+        padding: 1rem;
 
       &:hover {
         background-color: #FFFFFF;
@@ -301,6 +302,7 @@ const StyledFavourites = styled.div`
         box-shadow: none;
         border: 1px dashed rgba(0, 0, 0, 0.1);
         border-radius: 6px; 
+        padding: 1rem;
 
         &:hover {
           background-color: #FFFFFF;

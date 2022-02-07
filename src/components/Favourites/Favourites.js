@@ -133,7 +133,7 @@ const Favourites = ({ user, setToast }) => {
           </>) : (
             <ul className='fav-list fav-list--none'>
               <div className="list-header">Favourites</div>
-              <li className="fav-item fav-item--none">No favourites added yet</li>
+              <li className="fav-item fav-item--none">Favourites can be added by clicking on an individual script in the 'Scripts" page</li>
             </ul>   
           )}
         </>}  
