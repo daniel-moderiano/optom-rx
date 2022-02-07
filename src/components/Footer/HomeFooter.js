@@ -11,8 +11,9 @@ const HomeFooter = ({ url }) => {
               {/* <h4 className="footer-title">Web App</h4> */}
               <ul>
                 <li><Link to="/features">Features</Link></li>
-                <li><Link to="/release-notes">Release Notes</Link></li>
-                <li><Link to="/contribute">Contribute</Link></li>
+                {/* <li><Link to="/release-notes">Release Notes</Link></li> */}
+                {/* <li><Link to="/contribute">Contribute</Link></li> */}
+                <li><Link to="/faq">FAQ</Link></li>
               </ul>
             </div>
 
@@ -20,7 +21,7 @@ const HomeFooter = ({ url }) => {
               {/* <h4 className="footer-title">Resources</h4> */}
               <ul>
                 <li><Link to="/about">About</Link></li>
-                <li><Link to="/faq">FAQ</Link></li>
+                {/* <li><Link to="/faq">FAQ</Link></li> */}
                 <li><Link to="/contact">Contact Us</Link></li>
               </ul>
             </div>
