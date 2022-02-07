@@ -61,7 +61,6 @@ const StyledFeatures = styled.div`
   }
 
   .Features__intro {
-    /* background-image: linear-gradient(to top, #ffffff 0%, #F3F4F7 100%); */
     background-color: #fff;
     padding: 2rem 0 0 0;
 
@@ -108,42 +107,23 @@ const StyledFeatures = styled.div`
 
     .pbsDOMBox {
       text-align: left;
-      /* box-shadow: rgba(27, 31, 35, 0.04) 0px 1px 0px, rgba(255, 255, 255, 0.25) 0px 1px 0px inset; */
-      border-radius: 6px;
-      /* animation-duration: 350ms;
-      animation-name: fadeIn;
-      animation-timing-function: ease-out; */
     }
-
-    /* @keyframes fadeIn {
-      0% {
-        transform: translateY(-4rem);
-        opacity: 10%;
-      }
-      100% {
-        transform: translateY(0);
-        opacity: 100%;
-      }
-    } */
 
     .indicationsDOMBox {
       margin-left: 3rem;
       margin-top: 1rem;
       max-width: 430px;
       width: 100%;
-      /* padding: 1.5rem 2rem; */
     }
 
     .quantityDOMBox {
       margin-right: 3rem;
-      /* padding: 0.3rem 2rem 1rem 2rem; */
     }
 
     .authorityDOMBox {
       max-width: 400px;
       min-width: 350px;
       margin-left: 2rem;
-      /* padding: 0.3rem 2rem 0.75rem 2rem; */
     }
 
     .description {
@@ -355,7 +335,6 @@ const StyledFeatures = styled.div`
         .pbsDOMBox {
           margin: 1rem 0 0 0;
         }
-
       
         .indicationsDOMBox {
           margin-top: 2rem;
@@ -368,7 +347,6 @@ const StyledFeatures = styled.div`
 
         .authorityDOMBox {
           margin-top: 1rem;
-          /* margin-bottom: 1.5rem; */
         }
       }
 
@@ -506,9 +484,7 @@ const StyledFeatures = styled.div`
 
         .quantityDOMBox {
           transform: scale(0.95);
-          /* min-width: 285px; */
           margin-top: 0.25rem;
-
         }
 
         .authorityDOMBox {
