@@ -69,7 +69,6 @@ const MedicationDetails = ({ data, setData, alerts, setAlerts, fetchDrug, showTo
       className="repeats-field form-field"
       required
     />
-
   </>);
 };
 

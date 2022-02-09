@@ -84,7 +84,7 @@ const Indications = ({ indicationsData }) => {
   }, [indicationsData]);
 
   return (
-    <StyledIndications className="Indications">
+    <StyledIndications className="Indications" data-testid="Indications">
       <div className="Indications__btn collapsible" onClick={() => setExpandIndication((prevState) => !prevState)}>
         <button type="button" onClick={(event) => {
             event.stopPropagation();

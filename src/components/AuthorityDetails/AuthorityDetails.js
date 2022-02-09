@@ -20,7 +20,7 @@ const AuthorityDetails = ({ drugData, setDrugData, drugAlerts, miscData, setMisc
     {(drugData.authRequired && drugData.pbsRx) && <>
       <div className="numbers" data-testid="numbers">
         {/* drugData.authRequired should be auto-selected once PBS integration is complete, but should also have an option to set manually */}
-        {drugData.authRequired && <div className="authRxNo" data-testid="authRxNo">Authority script number: {numbersLoading ? 'Loading...' : miscData.authRxNumber}</div>}
+        {drugData.authRequired && <div className="authRxNo">Authority script number: {numbersLoading ? 'Loading...' : miscData.authRxNumber}</div>}
       </div>
 
       <FormField
