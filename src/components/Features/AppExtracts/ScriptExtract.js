@@ -3,7 +3,7 @@ import PageHeader from "../../utils/PageHeader/PageHeader";
 
 const ScriptExtract = () => {
   return (
-    <StyledScriptExtract>
+    <StyledScriptExtract aria-hidden={true}>
       <div class="sc-giYglK kquWbv Script">
         <PageHeader title="Script #00001234" />
 
