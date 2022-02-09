@@ -1,6 +1,10 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import AddressAutocomplete from "./AddressAutocomplete";
 
+// Mock data and functions - all empty/blank mocks
+const setData = () => {};
+const setAlerts = () => {};
+const handleChange = () => {};
 const alerts = {
   fullName: {},
   streetAddress: {},
@@ -11,16 +15,13 @@ const alerts = {
   prescriberNumber: {},
 };
 
-const setData = () => {};
-const setAlerts = () => {};
-const handleChange = () => {};
-
 // Prevent errors from clogging the console
 beforeAll(() => {
   jest.spyOn(console, 'error').mockImplementation(jest.fn());
 });
 
-describe('Field expansion tests', () => {
+describe('General tests', () => {
+  // Avoid rewriting before every single test
   beforeEach(() => {
     render(<AddressAutocomplete 
       data={{}}
@@ -54,5 +55,4 @@ describe('Field expansion tests', () => {
     fireEvent.change(suburbInput, { target: { value: 'Wynn vale' } })
     expect(suburbInput.value).toBe('Wynn vale');
   });
-
 });

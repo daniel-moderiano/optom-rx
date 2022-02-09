@@ -18,7 +18,7 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
   // Toggle the checkboxes in the form on enter keypress, but don't submit the form
   const changeOnEnter = (event, setFunc, data) => {
     // If the enter key is pressed
-    if (event.keyCode === 13) {
+    if (event.key === 'Enter') {
       event.preventDefault();
       toggle(setFunc, data, event.target.name);
     }
