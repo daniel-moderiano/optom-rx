@@ -48,19 +48,8 @@ const HomeFooter = ({ url }) => {
             </svg>  
             <p className="copyright">&copy; 2022 Daniel Moderiano.</p>
           </div>
-          
         </div>        
       </div>
-
-      {/* <div className="footer-bottom">
-        <div className="bottom-container">
-          <div className="links">
-            <Link className="terms-link" to="/terms-of-service">Terms of Service</Link>
-            <Link to="/privacy-policy">Privacy Policy</Link>
-          </div>
-          <p className="copyright">&copy; 2022 Daniel Moderiano.</p>
-        </div>
-      </div> */}
     </StyledHomeFooter>
   );
 };

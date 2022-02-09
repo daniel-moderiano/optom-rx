@@ -92,7 +92,7 @@ const Indications = ({ indicationsData }) => {
           }}
         >Restricted benefit:</button>
       </div>
-      <div className={`Indications__content ${expandIndication ? 'expand' : 'collapse'}`} dangerouslySetInnerHTML={{ __html: indicationHTML }}></div>
+      <div data-testid="indications-content" className={`Indications__content ${expandIndication ? 'expand' : 'collapse'}`} dangerouslySetInnerHTML={{ __html: indicationHTML }}></div>
     </StyledIndications>
   );
 };

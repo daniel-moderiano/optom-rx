@@ -47,12 +47,4 @@ describe('General tests', () => {
     const hiddenField = screen.queryByRole('textbox', { name: 'Suburb' });
     expect(hiddenField).not.toBeInTheDocument();
   });
-
-  test('Controlled inputs work correctly with user input', () => {
-    const expandBtn = screen.getByRole('button', { name: 'Enter manually' });
-    fireEvent.click(expandBtn);
-    const suburbInput = screen.getByRole('textbox', { name: 'Suburb' });
-    fireEvent.change(suburbInput, { target: { value: 'Wynn vale' } })
-    expect(suburbInput.value).toBe('Wynn vale');
-  });
 });

@@ -52,14 +52,6 @@ describe('General tests', () => {
     expect(hiddenField).not.toBeInTheDocument();
   });
 
-  test('Controlled text inputs work correctly with user input', () => {
-    const expandBtn = screen.getByRole('button', { name: 'Enter manually' });
-    fireEvent.click(expandBtn);
-    const brandInput = screen.getByRole('textbox', { name: 'Brand name' });
-    fireEvent.change(brandInput, { target: { value: 'Pred forte' } })
-    expect(brandInput.value).toBe('Pred forte');
-  });
-
   test('Controlled checkbox inputs call toggle function on click', () => {
     const expandBtn = screen.getByRole('button', { name: 'Enter manually' });
     fireEvent.click(expandBtn);
