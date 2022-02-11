@@ -10,28 +10,11 @@ beforeAll(() => {
 
 const setData = () => {}
 
-// let mockResponse = {
-//   documents: ['prescriber 1'],
-//   isPending: false,
-//   error: null,
-// };
-
 let mockResponse;
 
 jest.mock("../../hooks/useCollection", () => ({
   useCollection: () => ({ ...mockResponse })
 }));
-
-// beforeEach(() => {
-//   render(
-//     <BrowserRouter>
-//       <AuthContext.Provider value={{ user: { uid: '1' } }}>
-//         <PrescriberDetails setData={setData}/>
-//       </AuthContext.Provider>
-//     </BrowserRouter>
-//   )
-// })
-
 
 test('React select is rendered when prescribers are fetched', () => {
   mockResponse = {

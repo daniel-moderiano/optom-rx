@@ -169,6 +169,7 @@ const StyledRxTemplate = styled.div`
     box-shadow: 0;
     width: auto;
     max-width: none;
+    color: #000;
 
     .ui-container, .ui-description {
       display: none;
