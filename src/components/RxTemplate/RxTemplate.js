@@ -14,6 +14,7 @@ import Button from '../utils/Button/Button';
 import { useFormatting } from "../../hooks/useFormatting";
 import { useImmediateToast } from '../../hooks/useImmediateToast';
 import { Helmet } from "react-helmet-async";
+import { DateTime } from "luxon";
 
 const RxTemplate = ({ data, setToast, setPage, resetData }) => {
   // Deconstructing data for cleanliness of code and easier-to-understand operations
@@ -23,7 +24,9 @@ const RxTemplate = ({ data, setToast, setPage, resetData }) => {
   const { user } = useAuthContext();
   const { showSuccessToast, showErrorToast } = useImmediateToast();
 
-  const [isPending, setIsPending] = useState(false)
+  const [isPending, setIsPending] = useState(false);
+
+  const dateTimePrescribed = DateTime.now().toLocaleString(DateTime.DATETIME_MED);
 
   // Adjust current page for accessibility and styling
   useEffect(() => {
@@ -39,6 +42,7 @@ const RxTemplate = ({ data, setToast, setPage, resetData }) => {
         ...data.drugData,
         ...data.miscData,
         favourite: false,
+        dateTime: dateTimePrescribed,
       });
 
       // Add script data to the current user's saved scripts. This operation should only be called once per script!
@@ -46,6 +50,7 @@ const RxTemplate = ({ data, setToast, setPage, resetData }) => {
         scripts: arrayUnion({
           ...data.drugData,
           ...data.miscData,
+          dateTime: dateTimePrescribed,
         })
       });
 

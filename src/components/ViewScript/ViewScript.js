@@ -99,7 +99,11 @@ const ViewScript = ({ setToast, resetData, setPage }) => {
                   <div className="Script__info--section Script__authNum">Authority Rx No: {scriptData.authRxNumber}</div>
                   <div className="Script__info--section Script__indications">Clinical justification for use of item: {scriptData.justification}</div>
                 </div>}
-                <div className="Script__info--section Script__date">Date prescribed: {formatDate(scriptData.date)}</div>
+                {scriptData.dateTime ? (
+                  <div className="Script__info--section Script__date">Prescribed: {scriptData.dateTime}</div>
+                ) : (
+                  <div className="Script__info--section Script__date">Date prescribed: {formatDate(scriptData.date)}</div>
+                )}         
               </div>
             </div>
 
