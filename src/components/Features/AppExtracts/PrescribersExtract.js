@@ -48,7 +48,7 @@ const PrescribersExtract = () => {
                 </tr>
                 <tr role="row" class="tableRowItems">
                   <td role="cell" data-title="Name" class="tableCell">Andrew Practitioner</td>
-                  <td role="cell" data-title="Location" class="tableCell">Flinders Health toGo, Bedford Park</td>
+                  <td role="cell" data-title="Location" class="tableCell">Flinders Health2GO, Bedford Park</td>
                   <td role="cell" data-title="Actions" class="tableCell actions-cell">
                     <div class="btns">
                       <div class="non-default">

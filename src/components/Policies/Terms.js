@@ -1,6 +1,7 @@
 import { StyledPolicy } from "./Policies.styled";
 import { Helmet } from "react-helmet-async";
 import { useEffect } from "react";
+import { Link } from 'react-router-dom';
 
 const Terms = ({ setPage }) => {
   // Adjust current page for accessibility and styling
@@ -139,7 +140,7 @@ const Terms = ({ setPage }) => {
           Section 7 - Personal Information
         </h3>
         <p className="Terms__paragraph">
-          Your submission of personal information through the website is governed by our Privacy Policy. To view our Privacy Policy.
+          Your submission of personal information through the website is governed by our Privacy Policy. Read through our <Link to="/privacy-policy">Privacy Policy</Link> for more information.
         </p>
       </section>
 
