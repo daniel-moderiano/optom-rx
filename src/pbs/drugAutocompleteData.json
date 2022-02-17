@@ -840,6 +840,33 @@
       "tpuu-or-mpp-pt": "soy lecithin 1% + tocopherol 0.002% + vitamin A palmitate 0.025% spray, 100 actuations"
   },
   {
+    "item-code": "",
+    "brand-name": [
+      "Generic"
+    ],
+    "mp-pt": "atropine",
+    "tpuu-or-mpp-pt": "atropine sulphate monohydrate 0.01% eye drops",
+    "compounded": "true"
+  },
+  {
+    "item-code": "",
+    "brand-name": [
+      "Generic"
+    ],
+    "mp-pt": "atropine",
+    "tpuu-or-mpp-pt": "atropine sulphate monohydrate 0.025% eye drops",
+    "compounded": "true"
+  },
+  {
+    "item-code": "",
+    "brand-name": [
+      "Generic"
+    ],
+    "mp-pt": "atropine",
+    "tpuu-or-mpp-pt": "atropine sulphate monohydrate 0.05% eye drops",
+    "compounded": "true"
+  },
+  {
       "item-code": "",
       "brand-name": [
           "Atropt"

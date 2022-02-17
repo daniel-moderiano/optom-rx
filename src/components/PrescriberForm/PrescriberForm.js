@@ -20,7 +20,10 @@ const PrescriberForm = ({ data, setData, googleLoaded, handleSubmit, handleCance
     suburb: {},
     postcode: {},
     state: {},
-    phoneNumber: {},
+    phoneNumber: {
+      type: 'helper',
+      message: 'Include area code if applicable, but no spaces'
+    },
     prescriberNumber: {},
   });
 

@@ -1,6 +1,24 @@
 [
   {
     "item-code": "",
+    "brand-name": [],
+    "mp-pt": "atropine",
+    "tpuu-or-mpp-pt": "atropine sulphate monohydrate 0.01% eye drops"
+  },
+  {
+    "item-code": "",
+    "brand-name": [],
+    "mp-pt": "atropine",
+    "tpuu-or-mpp-pt": "atropine sulphate monohydrate 0.025% eye drops"
+  },
+  {
+    "item-code": "",
+    "brand-name": [],
+    "mp-pt": "atropine",
+    "tpuu-or-mpp-pt": "atropine sulphate monohydrate 0.05% eye drops"
+  },
+  {
+    "item-code": "",
     "brand-name": [
       "Atropt"
     ],

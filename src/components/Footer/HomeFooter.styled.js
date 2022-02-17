@@ -30,13 +30,27 @@ const StyledHomeFooter = styled.footer`
         flex-direction: column;
         font-size: 0.9rem;
         min-width: 185px;
+        text-align: right;
+
+        .copyright {
+          margin-bottom: 0.4rem;
+        }
+
+        a {
+          color: #263238;
+          font-size: 0.9rem;
+          
+
+          &:hover {
+            text-decoration: none;
+          }
+        }
       }
 
       .logo {
         width: 6rem;
         margin-left: 1rem;
-        /* padding-top: 0.5rem; */
-        /* margin-bottom: 0.25rem; */
+        margin-bottom: 0.25rem;
 
         .cls-1 {
           fill: var(--primary-color);
@@ -127,7 +141,7 @@ const StyledHomeFooter = styled.footer`
   /* Mobile breakpoint */
   @media (max-width: 600px) {
     .footer-top {
-      padding: 2rem 0 1.5rem 0;
+      padding: 2rem 0 2rem 0;
       .top-container {
         flex-direction: column;
 

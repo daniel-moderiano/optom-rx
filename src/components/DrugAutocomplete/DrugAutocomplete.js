@@ -60,12 +60,20 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
   // All child spans have pointer events set to none, so the parent item element will ALWAYS capture the even here
   const clickSuggestion = useCallback((event) => {
     const { dataset } = event.target;
+    let toBeCompounded = false;
+    // Check if the drug requires compounding (atropine only at this stage)
+    console.log(dataset);
+    if (dataset.compounded) {
+      toBeCompounded = true;
+      console.log(toBeCompounded);
+    }
     // Set state on click - do NOT set input.value as this will not work as intended. Always adjust state and have input.value set to state
     setData((prevData) => ({
       ...prevData,
       activeIngredient: dataset.activeIngredient,
       brandName: dataset.brandName,
       itemCode: dataset.code,
+      compounded: toBeCompounded,
       verified: true,
     }));
     removeList();
@@ -181,6 +189,7 @@ const DrugAutocomplete = ({ data, setData, handleChange, toggle, alerts, setAler
       item.dataset.code = match['item-code'];
       item.dataset.activeIngredient = match['tpuu-or-mpp-pt'];
       item.dataset.brandName = match['brand-name'];
+      if (match['compounded']) { item.dataset.compounded = true; }
       item.classList.add('item');
       item.classList.add('item-click');
       itemsList.appendChild(item);  
