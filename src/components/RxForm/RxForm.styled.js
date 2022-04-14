@@ -125,7 +125,7 @@ const StyledRxForm = styled.form`
     }
 
     .add-new-btn {
-      width: 170px;
+      width: 180px;
     }
 
     .scriptNo {
