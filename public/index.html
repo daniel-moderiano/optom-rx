@@ -11,6 +11,8 @@
         frame-src *.google.com;
         object-src 'self'; 
         connect-src 'self' https://*.googleapis.com *.google.com https://*.gstatic.com  data: blob:;
+        base-uri 'self';
+        form-action 'none';
       "
     >
     <meta charset="UTF-8">
