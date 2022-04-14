@@ -32,7 +32,7 @@ import Contact from './components/Contact/Contact';
 
 
 const App = () => {
-  // Can user the user state to conditionally render or redirect routes (logged in vs out for example)
+  // Can use the user state to conditionally render or redirect routes (logged in vs out for example)
   const { user, authIsReady } = useAuthContext();
   const { pathname } = useLocation();
   const { loadGoogleAPI } = useGoogleAPI();

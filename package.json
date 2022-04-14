@@ -23,8 +23,8 @@
   },
   "scripts": {
     "analyze": "source-map-explorer 'build/static/js/*.js'",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "(SET INLINE_RUNTIME_CHUNK=false) && react-scripts start",
+    "build": "(SET INLINE_RUNTIME_CHUNK=false) && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
