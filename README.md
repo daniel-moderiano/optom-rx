@@ -24,7 +24,7 @@
 
 ## About the project
 
-[OptomRx](https://optomrx.net) is a new web app for Australian optometrists to create and manage professional therapeutic prescriptions online. It supports the full suite of PBS and non-PBS medications available to therapeutically endorsed optometrists.  
+[OptomRx](https://optomrx.net) is a industry-first web app for Australian optometrists to create and manage professional therapeutic prescriptions online. It supports the full suite of PBS and non-PBS medications available to therapeutically endorsed optometrists.  
 
 <img src="src/assets/readme-dash.png" alt="Logo" width="100%">
 
