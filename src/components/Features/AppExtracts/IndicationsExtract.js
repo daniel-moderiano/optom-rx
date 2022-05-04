@@ -14,16 +14,16 @@ const IndicationsExtract = () => {
       </div>
 
       <div className="Indications">
-        <div class="Indications__btn collapsible">
+        <div className="Indications__btn collapsible">
             Restricted benefit:
           </div>
-          <div class="Indications__content expand">
-            <div class="Indication">
-              <div class="Indication__main">Severe dry eye syndrome</div>
-              <div class="Indication__extra">
-              <div class="Indication__clinical">Clinical criteria:</div>
-              <ul class="Indication__list">
-                <li class="Indication__list-item">Patient must be sensitive to preservatives in multi-dose eye drops</li>
+          <div className="Indications__content expand">
+            <div className="Indication">
+              <div className="Indication__main">Severe dry eye syndrome</div>
+              <div className="Indication__extra">
+              <div className="Indication__clinical">Clinical criteria:</div>
+              <ul className="Indication__list">
+                <li className="Indication__list-item">Patient must be sensitive to preservatives in multi-dose eye drops</li>
               </ul>
             </div>
             </div>
