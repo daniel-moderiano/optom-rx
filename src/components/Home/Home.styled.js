@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const StyledHome = styled.main`
+const StyledHome = styled.div`
   width: 100%;
   font-size: 1.1rem;
 

@@ -20,7 +20,7 @@ const Home = ({ setPage }) => {
     </Helmet>
 
     <StyledHome className="Home">
-      <div className="Home-container">
+    
 
         <section className="Home__intro">
           <div className="content-container">
@@ -106,7 +106,7 @@ const Home = ({ setPage }) => {
             <Link to="/signup" className="btn-primary button signup">Sign up to OptomRx</Link>
           </div>
         </section>
-      </div>
+
     </StyledHome>
   </>)
 }
