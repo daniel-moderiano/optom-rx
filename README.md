@@ -73,7 +73,6 @@ Finally, use the following to spin up the project on a development server
 npm start
 ```
 
-
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/daniel-moderiano/optom-rx/blob/main/LICENSE) file for details.  
