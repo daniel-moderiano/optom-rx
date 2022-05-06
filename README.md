@@ -63,7 +63,7 @@ First, clone the repository
 git clone git@github.com:daniel-moderiano/optom-rx.git
 ```
 
-Inside the root directoy, install all dependencies with npm
+Inside the root directory, install all dependencies with npm
 
 ```
 npm install
