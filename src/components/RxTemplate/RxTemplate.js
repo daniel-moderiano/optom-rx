@@ -26,7 +26,7 @@ const RxTemplate = ({ data, setToast, setPage, resetData }) => {
   const { showSuccessToast, showErrorToast } = useImmediateToast();
 
   const [isPending, setIsPending] = useState(false);
-  const [includePrescriberCopy, setIncludePrescriberCopy] = useState(true);
+  const [includePrescriberCopy, setIncludePrescriberCopy] = useState(false);
 
   const dateTimePrescribed = DateTime.now().toLocaleString(DateTime.DATETIME_MED);
 
@@ -48,6 +48,13 @@ const RxTemplate = ({ data, setToast, setPage, resetData }) => {
   useEffect(() => {
     setPage(null);
   }, [setPage])
+
+  // Default to include prescriber copies for all PBS scripts
+  useEffect(() => {
+    if (drugData.pbsRx) {
+      setIncludePrescriberCopy(true)
+    }
+  }, [drugData.pbsRx])
 
   // Used when the user clicks the 'save and finish' btn. Scripts will not be saved by default otherwise
   const saveRx = async () => {
