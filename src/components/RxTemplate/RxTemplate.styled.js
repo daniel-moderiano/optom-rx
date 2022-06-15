@@ -60,6 +60,16 @@ const StyledRxTemplate = styled.div`
     .ui-auth, .ui-justification {
       padding-top: 0.5rem;
     }
+
+    /* Styling for the 'include prescriber copy' checkbox */
+    .checkbox {
+      margin: 0.25rem 0;
+      padding: 0;
+      .label-text {
+        margin-top: -0.15rem;
+        font-weight: 600;
+      }
+    }
   }
 
   .RxTemplate__btns {

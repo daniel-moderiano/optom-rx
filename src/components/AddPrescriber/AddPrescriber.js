@@ -1,3 +1,4 @@
+/*global google*/
 import { useNavigate } from "react-router-dom";
 import { addDoc, collection } from "firebase/firestore";
 import { useState, useEffect } from "react";
@@ -36,10 +37,10 @@ const AddPrescriber = ({ googleLoaded, setToast, setPage }) => {
     setPage(null);
   }, [setPage])
 
-  
+
   // Used when the user submits the form - saves a new prescriber referenced by their user ID
   const handleSubmit = async (event) => {
-    event.preventDefault(); 
+    event.preventDefault();
     setIsPending(true);
 
     try {
@@ -59,7 +60,7 @@ const AddPrescriber = ({ googleLoaded, setToast, setPage }) => {
       setIsPending(false);
       // Throw error toast on screen, no further rendering is required, nor any specific error handling
       showErrorToast(setToast, 'An error occurred while adding prescriber')
-    }     
+    }
   };
 
   const cancelEdit = () => {
@@ -69,16 +70,16 @@ const AddPrescriber = ({ googleLoaded, setToast, setPage }) => {
   return (<>
     <Helmet>
       <title>Add prescriber · OptomRx</title>
-      <meta name="description" content="Add a new prescriber profile for use with your prescriptions."/>
+      <meta name="description" content="Add a new prescriber profile for use with your prescriptions." />
       <link rel="canonical" href="/add-prescriber" />
     </Helmet>
     <ContentContainer>
       <StyledAddPrescriber>
-        <PageHeader title="Add prescriber" description="Prescriber details will appear on your prescriptions"/>
+        <PageHeader title="Add prescriber" description="Prescriber details will appear on your prescriptions" />
         <div className="form-container">
           <span className="form-title">Prescriber details</span>
-          <PrescriberForm 
-            googleLoaded={googleLoaded} 
+          <PrescriberForm
+            googleLoaded={googleLoaded}
             data={prescriberData}
             setData={setPrescriberData}
             handleSubmit={handleSubmit}
