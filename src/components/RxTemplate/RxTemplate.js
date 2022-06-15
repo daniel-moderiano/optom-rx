@@ -15,6 +15,7 @@ import { useFormatting } from "../../hooks/useFormatting";
 import { useImmediateToast } from '../../hooks/useImmediateToast';
 import { Helmet } from "react-helmet-async";
 import { DateTime } from "luxon";
+import FormField from '../FormField/FormField';
 
 const RxTemplate = ({ data, setToast, setPage, resetData }) => {
   // Deconstructing data for cleanliness of code and easier-to-understand operations
@@ -25,8 +26,23 @@ const RxTemplate = ({ data, setToast, setPage, resetData }) => {
   const { showSuccessToast, showErrorToast } = useImmediateToast();
 
   const [isPending, setIsPending] = useState(false);
+  const [includePrescriberCopy, setIncludePrescriberCopy] = useState(false);
 
   const dateTimePrescribed = DateTime.now().toLocaleString(DateTime.DATETIME_MED);
+
+  // Handle any input controlling boolean data, typically checkboxes
+  const toggleIncludePrescriber = () => {
+    setIncludePrescriberCopy((prevState) => !prevState)
+  };
+
+  // Ensure that pressing the enter key on checkboxes functions as expected without submitting any forms
+  const handleEnterKeyOnCheckbox = (event) => {
+    // If the enter key is pressed
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      toggleIncludePrescriber();
+    }
+  }
 
   // Adjust current page for accessibility and styling
   useEffect(() => {
@@ -61,15 +77,13 @@ const RxTemplate = ({ data, setToast, setPage, resetData }) => {
     } catch (error) {
       setIsPending(false);
       showErrorToast(setToast, 'An error occurred while saving the script');
-    } finally {
-      
     }
   };
 
   return (<>
     <Helmet>
       <title>Review prescription · OptomRx</title>
-      <meta name="description" content="Review your prescription before printing. Make changes as needed, and save once complete."/>
+      <meta name="description" content="Review your prescription before printing. Make changes as needed, and save once complete." />
       <link rel="canonical" href="/review-prescription" />
     </Helmet>
     <StyledRxTemplate className="RxTemplate">
@@ -149,6 +163,18 @@ const RxTemplate = ({ data, setToast, setPage, resetData }) => {
                 <div className="ui-justification">{`Clinical justification for use of item: ${miscData.justification === "" ? 'None provided' : miscData.justification}`}</div>
               </div>
             </div>)}
+            <div className="include-prescriber ui-info">
+              <FormField
+                fieldType="checkbox"
+                name="includePrescriber"
+                label="Include prescriber copy"
+                onChange={toggleIncludePrescriber}
+                //! Prescriber copy MUST be included on authority PBS scripts
+                checked={includePrescriberCopy || drugData.authRequired}
+                className="checkbox"
+                enterFunc={handleEnterKeyOnCheckbox}
+              />
+            </div>
           </section>
         </div>
 
@@ -323,7 +349,7 @@ const RxTemplate = ({ data, setToast, setPage, resetData }) => {
         </div>
 
         <div className="lower-containers">
-          {drugData.authRequired && <div className="bottom-container--left">
+          {(includePrescriberCopy) && <div className="bottom-container--left">
             <span className="doctor-copy">--Prescriber's Copy--</span>
             <section className="prescriber-upper">
               <div className="container">

@@ -39,19 +39,19 @@ const PrescriberForm = ({ data, setData, googleLoaded, handleSubmit, handleCance
         case name === 'streetAddress':
           validateRequiredField(setPrescriberAlerts, event.target);
           break;
-        
+
         case name === 'suburb':
           validateRequiredField(setPrescriberAlerts, event.target);
           break;
-  
+
         case name === 'state':
           setData((prevData) => ({
-            ...prevData, 
-            [name]: abbreviateStateName(value), 
+            ...prevData,
+            [name]: abbreviateStateName(value),
           }));
           validateRequiredField(setPrescriberAlerts, event.target);
           break;
-  
+
         case name === 'postcode':
           validateRequiredField(setPrescriberAlerts, event.target);
           break;
@@ -75,11 +75,11 @@ const PrescriberForm = ({ data, setData, googleLoaded, handleSubmit, handleCance
             positiveValidationUI(setPrescriberAlerts, event.target);
           }
           break;
-      
+
         default:
           break;
       }
-    });    
+    });
   }, [setData, negativeValidationUI, positiveValidationUI, validateRequiredField, abbreviateStateName]);
 
   // Ensure form is validated with no empty required fields before calling form submission function
@@ -115,109 +115,109 @@ const PrescriberForm = ({ data, setData, googleLoaded, handleSubmit, handleCance
 
   return (
     // Legal requirements include the prescriber's name, address, contact details, and prescriber number
-      <StyledPrescriberForm className="PrescriberForm" autoComplete="off" noValidate onSubmit={(event) => {
-        event.preventDefault(); 
-        if (checkFormValidation()) {
-          handleSubmit(event);
-        }
-      }}>
-        <div className="fields">
-          {formPending && <LoadOverlay />}
+    <StyledPrescriberForm className="PrescriberForm" autoComplete="off" noValidate onSubmit={(event) => {
+      event.preventDefault();
+      if (checkFormValidation()) {
+        handleSubmit(event);
+      }
+    }}>
+      <div className="fields">
+        {formPending && <LoadOverlay />}
 
-          <FormField 
-            fieldType="text" 
-            name="fullName"
-            label="Full name" 
-            value={data.fullName} 
-            onChange={(event) => handleChange(event, setData)} 
-            alert={prescriberAlerts.fullName}
-            required
-          />    
+        <FormField
+          fieldType="text"
+          name="fullName"
+          label="Full name"
+          value={data.fullName}
+          onChange={(event) => handleChange(event, setData)}
+          alert={prescriberAlerts.fullName}
+          required
+        />
 
-          <FormField 
-            fieldType="checkbox" 
-            name="prefix"
-            label="Include 'Dr' in prescriber name" 
-            onChange={() => toggleBooleanState(setData, data, 'prefix')}
-            checked={data.prefix}
-            className="checkbox prefix-field"
-            enterFunc={(event) => handleEnterKeyOnCheckbox(event, setData, data)}
-          />  
+        <FormField
+          fieldType="checkbox"
+          name="prefix"
+          label="Include 'Dr' in prescriber name"
+          onChange={() => toggleBooleanState(setData, data, 'prefix')}
+          checked={data.prefix}
+          className="checkbox prefix-field"
+          enterFunc={(event) => handleEnterKeyOnCheckbox(event, setData, data)}
+        />
 
-          <FormField 
-            fieldType="text" 
-            name="qualifications"
-            label="Abbreviated qualifications (optional)" 
-            placeholder="e.g. BMedSci(VisSc), MOpt"
-            value={data.qualifications} 
-            onChange={(event) => handleChange(event, setData)} 
-            maxlength="40"
-          />
+        <FormField
+          fieldType="text"
+          name="qualifications"
+          label="Abbreviated qualifications (optional)"
+          placeholder="e.g. BMedSci(VisSc), MOpt"
+          value={data.qualifications}
+          onChange={(event) => handleChange(event, setData)}
+          maxlength="40"
+        />
 
-          {/* Practice name is only used for display purposes to quickly identify the prescriber to the user */}
-          <FormField 
-            name="practiceName"
-            label="Practice name (optional)" 
-            value={data.practiceName} 
-            onChange={(event) => handleChange(event, setData)} 
-          />
+        {/* Practice name is only used for display purposes to quickly identify the prescriber to the user */}
+        <FormField
+          name="practiceName"
+          label="Practice name (optional)"
+          value={data.practiceName}
+          onChange={(event) => handleChange(event, setData)}
+        />
 
-          <AddressAutocomplete 
-            data={data}
-            setData={setData}
-            handleChange={(event) => handleChange(event, setData)}
-            prescriber={true}   
-            alerts={prescriberAlerts}
-            setAlerts={setPrescriberAlerts} 
-            googleLoaded={googleLoaded}
-          />
+        <AddressAutocomplete
+          data={data}
+          setData={setData}
+          handleChange={(event) => handleChange(event, setData)}
+          prescriber={true}
+          alerts={prescriberAlerts}
+          setAlerts={setPrescriberAlerts}
+          googleLoaded={googleLoaded}
+        />
 
-          <FormField 
-            fieldType="text" 
-            name="phoneNumber"
-            label="Phone number" 
-            value={data.phoneNumber} 
-            onChange={(event) => handleChange(event, setData)} 
-            alert={prescriberAlerts.phoneNumber}
-            id="phoneNumber"
-            maxlength="10"
-            className="phoneNo-field form-field"
-            required
-          />
+        <FormField
+          fieldType="text"
+          name="phoneNumber"
+          label="Phone number"
+          value={data.phoneNumber}
+          onChange={(event) => handleChange(event, setData)}
+          alert={prescriberAlerts.phoneNumber}
+          id="phoneNumber"
+          maxlength="10"
+          className="phoneNo-field form-field"
+          required
+        />
 
-          <FormField 
-            fieldType="text" 
-            name="prescriberNumber"
-            label="Prescriber number" 
-            value={data.prescriberNumber} 
-            onChange={(event) => handleChange(event, setData)} 
-            alert={prescriberAlerts.prescriberNumber}
-            maxlength="7"
-            className="prescriberNo-field form-field"
-            required
-          />
-        </div>
-       
-        <div className="PrescriberForm__btns">
-          <Button classLabel="submit" type="submit">
-            {pending ? (
-              <Dots color="white" />
-              ) : (
-              `${submitBtnLabel}`
-            )}
-          </Button>
+        <FormField
+          fieldType="text"
+          name="prescriberNumber"
+          label="Prescriber number"
+          value={data.prescriberNumber}
+          onChange={(event) => handleChange(event, setData)}
+          alert={prescriberAlerts.prescriberNumber}
+          maxlength="7"
+          className="prescriberNo-field form-field"
+          required
+        />
+      </div>
 
-          <Button 
-            design="secondary" 
-            handleClick={(event) => {
-              event.preventDefault(); 
-              handleCancel();
-            }}>
-            Cancel
-          </Button>
-        </div>
-      </StyledPrescriberForm>
-    )
+      <div className="PrescriberForm__btns">
+        <Button classLabel="submit" type="submit">
+          {pending ? (
+            <Dots color="white" />
+          ) : (
+            `${submitBtnLabel}`
+          )}
+        </Button>
+
+        <Button
+          design="secondary"
+          handleClick={(event) => {
+            event.preventDefault();
+            handleCancel();
+          }}>
+          Cancel
+        </Button>
+      </div>
+    </StyledPrescriberForm>
+  )
 }
 
 export default PrescriberForm;
