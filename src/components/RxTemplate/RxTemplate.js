@@ -26,7 +26,7 @@ const RxTemplate = ({ data, setToast, setPage, resetData }) => {
   const { showSuccessToast, showErrorToast } = useImmediateToast();
 
   const [isPending, setIsPending] = useState(false);
-  const [includePrescriberCopy, setIncludePrescriberCopy] = useState(false);
+  const [includePrescriberCopy, setIncludePrescriberCopy] = useState(true);
 
   const dateTimePrescribed = DateTime.now().toLocaleString(DateTime.DATETIME_MED);
 

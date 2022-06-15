@@ -67,6 +67,7 @@ const StyledRxTemplate = styled.div`
       padding: 0;
       .label-text {
         margin-top: -0.15rem;
+        font-weight: 600;
       }
     }
   }
