@@ -45,6 +45,8 @@ OptomRx is designed for use with official PBS computerised forms for optometrist
 * [Firebase](https://maven.apache.org/) - Back-end as a service (authentication, database, and hosting)
 * [Styled components](https://styled-components.com/) - App-wide custom styling
 
+
+
 ## Usage
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. 
@@ -61,7 +63,7 @@ First, clone the repository
 git clone git@github.com:daniel-moderiano/optom-rx.git
 ```
 
-Inside the root directoy, install all dependencies with npm
+Inside the root directory, install all dependencies with npm
 
 ```
 npm install
@@ -72,7 +74,6 @@ Finally, use the following to spin up the project on a development server
 ```
 npm start
 ```
-
 
 ## License
 
