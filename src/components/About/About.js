@@ -29,7 +29,7 @@ const About = () => {
       <section className="About__section">
         <h3>Development</h3>
         <p>OptomRx was developed largely by me - Daniel Moderiano. I am an Australian Optometrist, and Web Developer. You can find out more about my optometry work on my <a href="https://www.linkedin.com/in/danielmoderiano/">LinkedIn profile</a>, and more about my web development work on my <a href="https://www.danielmoderiano.com/">personal portfolio</a>. I am currently the sole maintainer, and main contributor of the project.</p>
-        <p>The development process was not possible however, without the help of many of my optometry colleagues, who provided real-world feedback and suggestions for improvements. A special mention also goes to Sarah Smoker, a dispensing colleague, who delivered much of the design inspiration for OptomRx, as well as endless QA testing and revisions of every feature.</p>
+        <p>The development process was not possible however, without the help of many of my optometry colleagues, who provided real-world feedback and suggestions for improvements. A special mention also goes to <a href="https://www.linkedin.com/in/sarah-smoker-538b74242/">Sarah Smoker</a>, a dispensing colleague, who delivered much of the design inspiration for OptomRx, as well as endless QA testing and revisions of every feature.</p>
       </section>
 
       <section className="About__section">
