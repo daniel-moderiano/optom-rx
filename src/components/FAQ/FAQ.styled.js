@@ -40,7 +40,7 @@ h3 {
 }
 
 ul {
-  padding: 0 0 0 1rem;
+  padding: 0;
   li {
     padding: 0.25rem 0;
   }
