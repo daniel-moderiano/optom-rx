@@ -114,6 +114,90 @@ const FAQ = () => {
           </p>
         </article>
 
+        <article className="FAQ__response">
+          <h3 id="Q6" className="FAQ__question-title">
+            How is patient information handled in OptomRx?
+          </h3>
+          <p className="FAQ__paragraph">
+            Patient information <strong>never</strong> leaves the computer you are writing the prescription on, nor does it persist once you've finished writing a script. What exactly does this mean? It means that patient information is:
+            <ul>
+              <li>Never saved on a server or on even on your computer</li>
+              <li>Never sent across the internet to another computer</li>
+              <li>No longer accessible once you've finished writing a script</li>
+            </ul>
+          </p>
+          <p>OptomRx was never created with the intention of being a patient database, but instead a simple tool for writing prescriptions. For this reason, the control of patient information is always with the user and not with OptomRx.</p>
+        </article>
+
+        <article className="FAQ__response">
+          <h3 id="Q8" className="FAQ__question-title">
+            How can I find a script that I've written for a certain patient?
+          </h3>
+          <p className="FAQ__paragraph">
+            Because patient data is not attached to saved scripts, it is impossible to link a previous script with a patient using OptomRx. You might however add the Script ID from an OptomRx script to the patient's clinical record, creating a path back to their script on OptomRx. Alternatively, you might compare the date and time the patient was seen with any script you wrote at that time on OptomRx to try and connect them that way. But you cannot look up a patient via OptomRx.
+          </p>
+
+        </article>
+
+
+        <article className="FAQ__response">
+          <h3 id="Q7" className="FAQ__question-title">
+            How do I keep records of scripts I've written for auditing purposes?
+          </h3>
+          <p className="FAQ__paragraph">
+            All scripts on OptomRx will optionally include a physical prescriber copy in the bottom-left tear-off section of the PBS script paper. These prescriber copies will include necessary PBS authority details for those scripts. You can keep these copies for your records as needed.
+          </p>
+        </article>
+
+        <article className="FAQ__response">
+          <h3 id="Q9" className="FAQ__question-title">
+            Can I use OptomRx to write non-optometric prescriptions?
+          </h3>
+          <p className="FAQ__paragraph">
+            You can write any script you wish using OptomRx, however OptomRx does not provide any support for non-optometric items, as this is not the intended use of the app.
+          </p>
+
+        </article>
+
+
+        <article className="FAQ__response">
+          <h3 id="Q10" className="FAQ__question-title">
+            Do I have to be an optometrist to use OptomRx?
+          </h3>
+          <p className="FAQ__paragraph">
+            Anyone can sign up for, and use OptomRx. However, without a valid prescriber number, you cannot write any legally dispensable scripts. Other health professionals may write custom scripts using OptomRx, but be aware OptomRx will automatically tick the 'Optometrist' box on PBS forms.
+          </p>
+
+        </article>
+
+        <article className="FAQ__response">
+          <h3 id="Q11" className="FAQ__question-title">
+            I would like a feature added/change to OptomRx - where can I request this?
+          </h3>
+          <p className="FAQ__paragraph">
+
+          </p>
+        </article>
+
+        <article className="FAQ__response">
+          <h3 id="Q12" className="FAQ__question-title">
+            Who made OptomRx?
+          </h3>
+          <p className="FAQ__paragraph">
+
+          </p>
+        </article>
+
+        <article className="FAQ__response">
+          <h3 id="Q13" className="FAQ__question-title">
+            How can I support OptomRx?
+          </h3>
+          <p className="FAQ__paragraph">
+
+          </p>
+        </article>
+
+
 
       </div>
     </StyledFAQ>

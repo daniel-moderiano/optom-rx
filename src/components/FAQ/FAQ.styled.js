@@ -40,7 +40,7 @@ h3 {
 }
 
 ul {
-  padding: 0;
+  padding: 0 0 0 1rem;
   li {
     padding: 0.25rem 0;
   }
@@ -52,6 +52,7 @@ article {
 
 .FAQ__list {
   list-style: none;
+  padding: 0;
 }
 
 /* Large screens */
