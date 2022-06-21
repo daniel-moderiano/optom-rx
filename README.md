@@ -13,9 +13,9 @@
     <a href="https://optomrx.net"><strong>Visit the website »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/daniel-moderiano/optom-rx/issues">Report Bug</a>
+    <a href="https://github.com/daniel-moderiano/optom-rx/issues/new?assignees=&labels=&template=bug_report.md&title=">Report Bug</a>
     ·
-    <a href="https://github.com/daniel-moderiano/optom-rx/issues">Request Feature</a>
+    <a href="https://github.com/daniel-moderiano/optom-rx/issues/new?assignees=&labels=&template=feature_request.md&title=">Request Feature</a>
   </p>
 </div>
 
