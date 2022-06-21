@@ -15,7 +15,7 @@ const FAQ = () => {
 
       <div className="FAQ__section">
         <p className="FAQ__paragraph">
-          OptomRx is committed to providing quality services to you and this policy outlines how your Personal Information is collected, used, and shared when you visit optomrx.net (the “Site”).
+          Find some common questions regarding OptomRx below. This is not an exhaustive list, and if you have a more specific question, please <a href="/contact">get in touch</a>.
         </p>
         <ul className="FAQ__list">
           <li className="FAQ__list-item">
@@ -65,12 +65,56 @@ const FAQ = () => {
 
         <article className="FAQ__response">
           <h3 id="Q1" className="FAQ__question-title">
-            Why do we collect Personal Information?
+            What is OptomRx exactly?
           </h3>
           <p className="FAQ__paragraph">
-            We collect your Personal Information for the primary purpose of providing our services to you. We may also use your Personal Information for secondary purposes closely related to the primary purpose, in circumstances where you would reasonably expect such use or disclosure.
+            OptomRx is a web app that you can use to write computerised therapeutic prescriptions for your patients, rather than handwriting them. It is intended to replace the old script pads and make the prescription-writing process faster, easier, more accurate, and more professional.
           </p>
         </article>
+
+        <article className="FAQ__response">
+          <h3 id="Q2" className="FAQ__question-title">
+            Why can't I just keep handwriting my scripts?
+          </h3>
+          <p className="FAQ__paragraph">
+            There is no need for you to toss your script pad away if you're happy handwriting scripts (in fact, I'd suggest you keep one handy as backup even if you do use OptomRx). The primary goal of OptomRx is to minimise the time you spend writing therapeutic scripts, and remove the annoyances and guesswork involved with PBS scripts and their various requirements.
+          </p>
+        </article>
+
+        <article className="FAQ__response">
+          <h3 id="Q3" className="FAQ__question-title">
+            Is OptomRx free to use?
+          </h3>
+          <p className="FAQ__paragraph">
+            Yes! OptomRx is completely free to use. If you'd like to financially support the project, you can <a href="https://www.buymeacoffee.com/optomrx">buy me a coffee</a>. But rest assured, this is not another paid subscription you have to add to the list.
+          </p>
+        </article>
+
+        <article className="FAQ__response">
+          <h3 id="Q4" className="FAQ__question-title">
+            How do I get started with OptomRx?
+          </h3>
+          <p className="FAQ__paragraph">
+            Getting started is simple - first <a href="/signup">create a new account</a>, then navigate to the "Prescribers" page. From here you can enter your prescriber details for any practices you work with; these will appear at the top of your scripts as per normal. Once your prescriber details are saved, you can start writing scripts!
+          </p>
+          <p className="FAQ__paragraph">
+            I also strongly recommend new users to write some "fake" scripts using a fake name (or your own name) for their most commonly used medications. This will let you save these scripts as favourites (but won't save your fake patient details) so you can re-prescribe these common medications with one click.
+          </p>
+        </article>
+
+        <article className="FAQ__response">
+          <h3 id="Q5" className="FAQ__question-title">
+            Can I use OptomRx anywhere I work?
+          </h3>
+          <p className="FAQ__paragraph">
+            Absolutely. One of the best features of OptomRx is the ability to add multiple prescriber details to your account. By creating a prescriber for every one of your practices, you can simply select the current practice you're working in when prescribing from that practice.
+          </p>
+          <p className="FAQ__paragraph">
+            Bear in mind though - you will need computerised PBS forms for your prescriptions, so make sure you've got some on you, or stock each practice you're working in with a few! These can be ordered in bulk from <a href="https://www.servicesaustralia.gov.au/pbs-and-rpbs-stationery-for-optometrists?context=22851">Services Australia</a>.
+          </p>
+        </article>
+
+
       </div>
     </StyledFAQ>
   </>);

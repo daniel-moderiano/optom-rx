@@ -46,6 +46,10 @@ ul {
   }
 }
 
+article {
+  padding-bottom: 1rem;
+}
+
 .FAQ__list {
   list-style: none;
 }
