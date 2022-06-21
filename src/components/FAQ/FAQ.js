@@ -14,9 +14,7 @@ const FAQ = () => {
       </h2>
 
       <div className="FAQ__section">
-        <p className="FAQ__paragraph">
-          Find some common questions regarding OptomRx below. This is not an exhaustive list, and if you have a more specific question, please <a href="/contact">get in touch</a>.
-        </p>
+
         <ul className="FAQ__list">
           <li className="FAQ__list-item">
             <a href="#Q1" className="FAQ__link">What is OptomRx exactly?</a>
@@ -52,10 +50,7 @@ const FAQ = () => {
             <a href="#Q11" className="FAQ__link">I would like a feature added/change to OptomRx - where can I request this?</a>
           </li>
           <li className="FAQ__list-item">
-            <a href="#Q12" className="FAQ__link">Who made OptomRx?</a>
-          </li>
-          <li className="FAQ__list-item">
-            <a href="#Q13" className="FAQ__link">How can I support OptomRx?</a>
+            <a href="#Q12" className="FAQ__link">How can I support OptomRx?</a>
           </li>
 
         </ul>
@@ -77,7 +72,7 @@ const FAQ = () => {
             Why can't I just keep handwriting my scripts?
           </h3>
           <p className="FAQ__paragraph">
-            There is no need for you to toss your script pad away if you're happy handwriting scripts (in fact, I'd suggest you keep one handy as backup even if you do use OptomRx). The primary goal of OptomRx is to minimise the time you spend writing therapeutic scripts, and remove the annoyances and guesswork involved with PBS scripts and their various requirements.
+            There is no need for you to toss your script pad away if you're happy handwriting scripts (in fact, it's a good idea to keep one handy as backup even if you do use OptomRx). The primary goal of OptomRx is to minimise the time you spend writing therapeutic scripts, and remove the annoyances and guesswork involved with PBS scripts and their various requirements.
           </p>
         </article>
 
@@ -98,7 +93,7 @@ const FAQ = () => {
             Getting started is simple - first <a href="/signup">create a new account</a>, then navigate to the "Prescribers" page. From here you can enter your prescriber details for any practices you work with; these will appear at the top of your scripts as per normal. Once your prescriber details are saved, you can start writing scripts!
           </p>
           <p className="FAQ__paragraph">
-            I also strongly recommend new users to write some "fake" scripts using a fake name (or your own name) for their most commonly used medications. This will let you save these scripts as favourites (but won't save your fake patient details) so you can re-prescribe these common medications with one click.
+            It is also strongly recommended that new users to write some "fake" scripts using a fake name (or your own name) for their most commonly used medications. This will let you save these scripts as favourites (but won't save your fake patient details) so you can re-prescribe these common medications with one click.
           </p>
         </article>
 
@@ -175,25 +170,16 @@ const FAQ = () => {
             I would like a feature added/change to OptomRx - where can I request this?
           </h3>
           <p className="FAQ__paragraph">
-
+            You can <a href="https://github.com/daniel-moderiano/optom-rx/issues/new?assignees=&labels=&template=bug_report.md&title=">report a bug</a> or <a href="https://github.com/daniel-moderiano/optom-rx/issues/new?assignees=&labels=&template=feature_request.md&title=">request a feature</a> using the GitHub links provided. There are templates to help you explain the bug or feature in detail. This is the preferred method. Alternatively you can <a href="/contact">get in touch directly</a>.
           </p>
         </article>
 
         <article className="FAQ__response">
           <h3 id="Q12" className="FAQ__question-title">
-            Who made OptomRx?
-          </h3>
-          <p className="FAQ__paragraph">
-
-          </p>
-        </article>
-
-        <article className="FAQ__response">
-          <h3 id="Q13" className="FAQ__question-title">
             How can I support OptomRx?
           </h3>
           <p className="FAQ__paragraph">
-
+            If you'd like to financially support the project, you can <a href="https://www.buymeacoffee.com/optomrx">buy me a coffee</a>. This directly helps pay for costs associated with hosting OptomRx on an ongoing basis. Alternatively, you can <a href="https://github.com/daniel-moderiano/optom-rx">contribute</a> to the open-source development of OptomRx. Even something as simple as a minor bug report helps immensely.
           </p>
         </article>
 
