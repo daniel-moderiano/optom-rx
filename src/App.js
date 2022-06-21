@@ -40,11 +40,11 @@ const App = () => {
 
   // Used for toast alerts, can pass set function to components that require toast alerts
   const [toastParams, setToastParams] = useState({
-    visible: false, 
+    visible: false,
     type: '',
     message: '',
   });
-  
+
   const [data, setData] = useState({
     drugData: {
       substitutePermitted: true,
@@ -101,7 +101,7 @@ const App = () => {
         // Only visibility is changed to preverse styling and message as toast fades out
         setToastParams((prevData) => ({
           ...prevData,
-          visible: false, 
+          visible: false,
         }))
       }, 3000);
     }
@@ -113,7 +113,7 @@ const App = () => {
       loadGoogleAPI(googleLoaded, setGoogleLoaded);
     }
   }, [googleLoaded, loadGoogleAPI, user])
- 
+
 
   // Combine all the data from the RxForm component
   const handleSubmit = (drugData, patientData, prescriberData, miscData, pbsData) => {
@@ -138,122 +138,120 @@ const App = () => {
     navigate('/review-prescription');
   };
 
-  
+
   return (
     <StyledApp className="App">
       <GlobalStyles />
-      {authIsReady && (<> 
-        <Header resetData={resetAllData} currentPage={currentPage} setPage={setCurrentPage} setToast={setToastParams} url={pathname}/>
+      {authIsReady && (<>
+        <Header resetData={resetAllData} currentPage={currentPage} setPage={setCurrentPage} setToast={setToastParams} url={pathname} />
 
         <Main currentPage={currentPage} user={user} url={pathname}>
           <Routes>
             <Route path="/" element={
               <>
-              {!user && <Home setPage={setCurrentPage}/>}
-              {user && <Dashboard setToast={setToastParams} setPage={setCurrentPage} firstSignIn={firstSignIn} setFirstSignIn={setFirstSignIn} resetData={resetAllData}/>}
+                {!user && <Home setPage={setCurrentPage} />}
+                {user && <Dashboard setToast={setToastParams} setPage={setCurrentPage} firstSignIn={firstSignIn} setFirstSignIn={setFirstSignIn} resetData={resetAllData} />}
               </>
             } />
 
-            <Route path="/privacy-policy" element={<PrivacyPolicy setPage={setCurrentPage}/>} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy setPage={setCurrentPage} />} />
 
-            <Route path="/terms-of-service" element={<Terms setPage={setCurrentPage}/>} />
+            <Route path="/terms-of-service" element={<Terms setPage={setCurrentPage} />} />
 
-            <Route path="/features" element={<Features setPage={setCurrentPage}/>} />
+            <Route path="/features" element={<Features setPage={setCurrentPage} />} />
 
-            <Route path="/faq" element={<FAQ setPage={setCurrentPage}/>} />
+            <Route path="/faq" element={<FAQ setPage={setCurrentPage} />} />
 
-            <Route path="/about" element={<About setPage={setCurrentPage}/>} />
-
-            <Route path="/contact" element={<Contact setPage={setCurrentPage}/>} />
+            <Route path="/about" element={<About setPage={setCurrentPage} />} />
 
             <Route path="/dashboard" element={
               <>
-              {!user && <Navigate to="/login" />}
-              {user && <Dashboard setToast={setToastParams} setPage={setCurrentPage} firstSignIn={firstSignIn} setFirstSignIn={setFirstSignIn} resetData={resetAllData}/>}
+                {!user && <Navigate to="/login" />}
+                {user && <Dashboard setToast={setToastParams} setPage={setCurrentPage} firstSignIn={firstSignIn} setFirstSignIn={setFirstSignIn} resetData={resetAllData} />}
               </>
-            } />       
+            } />
 
             <Route path="/settings" element={
               <>
-              {!user && <Navigate to="/login" />}
-              {user && <Settings setToast={setToastParams} setPage={setCurrentPage} />}
+                {!user && <Navigate to="/login" />}
+                {user && <Settings setToast={setToastParams} setPage={setCurrentPage} />}
               </>
             } />
 
             <Route path="/new-prescription" element={
               <>
-              {!user && <Navigate to="/login"/>}
-              {user && <RxForm handleSubmit={handleSubmit} googleLoaded={googleLoaded} existingData={data} setPage={setCurrentPage} setToast={setToastParams}/> }
+                {!user && <Navigate to="/login" />}
+                {user && <RxForm handleSubmit={handleSubmit} googleLoaded={googleLoaded} existingData={data} setPage={setCurrentPage} setToast={setToastParams} />}
               </>
-            }/>
+            } />
 
             <Route path="/signup" element={
               <>
-              {!user && <Signup setPage={setCurrentPage} setFirstSignIn={setFirstSignIn}/>}
-              {user && <Navigate to="/dashboard" />}
+                {!user && <Signup setPage={setCurrentPage} setFirstSignIn={setFirstSignIn} />}
+                {user && <Navigate to="/dashboard" />}
               </>
-            }/>
-              
+            } />
+
             <Route path="/login" element={
               <>
-              {!user && <Login setPage={setCurrentPage}/>}
-              {user && <Navigate to="/dashboard" />}
+                {!user && <Login setPage={setCurrentPage} />}
+                {user && <Navigate to="/dashboard" />}
               </>
-            }/>
+            } />
 
             <Route path="/review-prescription" element={
               <>
-              {user && <RxTemplate data={data} setToast={setToastParams} setPage={setCurrentPage} resetData={resetAllData}/>}
-              {!user && <Navigate to="/login"/>}
+                {user && <RxTemplate data={data} setToast={setToastParams} setPage={setCurrentPage} resetData={resetAllData} />}
+                {!user && <Navigate to="/login" />}
               </>
-            }/>
+            } />
 
             <Route path="/edit-prescriber/:id" element={
               <>
-              {user && <EditPrescriber googleLoaded={googleLoaded} setToast={setToastParams} setPage={setCurrentPage}/>}
-              {!user && <Navigate to="/login"/>}
+                {user && <EditPrescriber googleLoaded={googleLoaded} setToast={setToastParams} setPage={setCurrentPage} />}
+                {!user && <Navigate to="/login" />}
               </>
-            }/>
+            } />
 
             <Route path="/add-prescriber" element={
               <>
-              {user && <AddPrescriber googleLoaded={googleLoaded} setToast={setToastParams} setPage={setCurrentPage}/>}
-              {!user && <Navigate to="/login"/>}
+                {user && <AddPrescriber googleLoaded={googleLoaded} setToast={setToastParams} setPage={setCurrentPage} />}
+                {!user && <Navigate to="/login" />}
               </>
-            }/>
+            } />
 
             <Route path="/prescribers" element={
               <>
-              {user && <Prescribers googleLoaded={googleLoaded} setToast={setToastParams} setPage={setCurrentPage}/>}
-              {!user && <Navigate to="/login" />}
+                {user && <Prescribers googleLoaded={googleLoaded} setToast={setToastParams} setPage={setCurrentPage} />}
+                {!user && <Navigate to="/login" />}
               </>
-            }/> 
+            } />
 
             <Route path="/scripts" element={
               <>
-              {user && <Scripts setToast={setToastParams} setPage={setCurrentPage}/>}
-              {!user && <Navigate to="/login" />}
+                {user && <Scripts setToast={setToastParams} setPage={setCurrentPage} />}
+                {!user && <Navigate to="/login" />}
               </>
-            }/> 
+            } />
 
             <Route path="/scripts/:id" element={
               <>
-              {user && <ViewScript setToast={setToastParams} resetData={resetAllData} setPage={setCurrentPage}/>}
-              {!user && <Navigate to="/login"/>}
+                {user && <ViewScript setToast={setToastParams} resetData={resetAllData} setPage={setCurrentPage} />}
+                {!user && <Navigate to="/login" />}
               </>
-            }/>
+            } />
 
             <Route path="/reset-password" element={
-              <ResetPassword setToast={setToastParams} setPage={setCurrentPage}/>
-            }/>
+              <ResetPassword setToast={setToastParams} setPage={setCurrentPage} />
+            } />
 
           </Routes>
         </Main>
-        {user && <AppFooter currentPage={currentPage} url={pathname}/>}
-        {!user && <HomeFooter currentPage={currentPage} url={pathname}/>}
+        {user && <AppFooter currentPage={currentPage} url={pathname} />}
+        {!user && <HomeFooter currentPage={currentPage} url={pathname} />}
       </>)}
       <Toast params={toastParams} />
-     
+
     </StyledApp>
   )
 }
