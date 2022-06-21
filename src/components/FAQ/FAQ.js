@@ -170,7 +170,7 @@ const FAQ = () => {
             I would like a feature added/change to OptomRx - where can I request this?
           </h3>
           <p className="FAQ__paragraph">
-            You can <a href="https://github.com/daniel-moderiano/optom-rx/issues/new?assignees=&labels=&template=bug_report.md&title=">report a bug</a> or <a href="https://github.com/daniel-moderiano/optom-rx/issues/new?assignees=&labels=&template=feature_request.md&title=">request a feature</a> using the GitHub links provided. There are templates to help you explain the bug or feature in detail. This is the preferred method. Alternatively you can <a href="/contact">get in touch directly</a>.
+            You can <a href="https://github.com/daniel-moderiano/optom-rx/issues/new?assignees=&labels=&template=bug_report.md&title=">report a bug</a> or <a href="https://github.com/daniel-moderiano/optom-rx/issues/new?assignees=&labels=&template=feature_request.md&title=">request a feature</a> using the GitHub links provided. There are templates to help you explain the bug or feature in detail. This is the preferred method. Alternatively you can <a href="mailto:mail@optomrx.net">email directly</a>.
           </p>
         </article>
 

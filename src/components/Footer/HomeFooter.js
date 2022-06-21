@@ -21,16 +21,18 @@ const HomeFooter = ({ url }) => {
               {/* <h4 className="footer-title">Resources</h4> */}
               <ul>
                 <li><Link to="/about">About</Link></li>
-                {/* <li><Link to="/faq">FAQ</Link></li> */}
-                <li><Link to="/contact">Contact Us</Link></li>
+                <li><Link to="terms-of-service">Terms</Link></li>
+
               </ul>
             </div>
 
             <div className="column">
               {/* <h4 className="footer-title">Support</h4> */}
               <ul>
-                <li><Link to="terms-of-service">Terms</Link></li>
                 <li><Link to="privacy-policy">Privacy</Link></li>
+                {/* <li><Link to="/faq">FAQ</Link></li> */}
+                {/* <li><Link to="/contact">Contact Us</Link></li> */}
+
               </ul>
             </div>
           </div>
