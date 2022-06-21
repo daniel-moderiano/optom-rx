@@ -75,6 +75,8 @@ Finally, use the following to spin up the project on a development server
 npm start
 ```
 
+*Occasionally issues arise with the Content-Security-Policy when saving new styling or other content, and this can prevent the site from functioning correctly without page refresh. This can be solved by refreshing the page, or by temporarily commenting out the CSP in the `public/index.html` file. This must be reset to normal before pushing new changes however.*
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/daniel-moderiano/optom-rx/blob/main/LICENSE) file for details.  
