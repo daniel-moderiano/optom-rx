@@ -58,7 +58,7 @@ const Scripts = ({ setToast, setPage }) => {
           {scripts && <>
             {scripts.length > 0 ? (
               <>
-                <ScriptsTable data={JSON.parse(JSON.stringify(scripts)).reverse()} rowsPerPage={15} />
+                {/* <ScriptsTable data={JSON.parse(JSON.stringify(scripts)).reverse()} rowsPerPage={15} /> */}
                 <ScriptsTable data={testScripts} rowsPerPage={15} />
               </>
             ) : (

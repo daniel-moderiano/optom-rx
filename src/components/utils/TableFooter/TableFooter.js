@@ -2,6 +2,46 @@
 
 import { useEffect } from "react";
 import { StyledTableFooter } from "./TableFooter.styled";
+import ReactPaginate from "react-paginate";
+import styled from "styled-components";
+
+const MyPaginate = styled(ReactPaginate).attrs({
+  // You can redifine classes here, if you want.
+  activeClassName: 'active', // default to "disabled"
+})`
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  list-style-type: none;
+  padding: 0 5rem;
+
+  li a {
+    border-radius: 7px;
+    padding: 0.1rem 1rem;
+    border: gray 1px solid;
+    cursor: pointer;
+  }
+  li.previous a,
+  li.next a,
+  li.break a {
+    border-color: transparent;
+  }
+  li.active a {
+    background-color: #0366d6;
+    border-color: transparent;
+    color: white;
+    min-width: 32px;
+  }
+  li.disabled a {
+    color: grey;
+  }
+  li.disable,
+  li.disabled a {
+    cursor: default;
+  }
+`;
+
 
 // The table footer will control the display of page buttons, which is dependent on the props passed
 // ! As the number of pages increases, this component grows and grows in width. Not a scalable solution 
@@ -28,12 +68,17 @@ const TableFooter = ({ pages, setPage, page, slice }) => {
     }
   }
 
+  useEffect(() => {
+    console.log(`Current page is ${page}`);
+  })
+
+
+  // A page limit of 6 is chosen because this will span the full length of the smallest mobile screen. 
+
   return (
     <StyledTableFooter className="TableFooter">
-      <button className="arrow arrow-left" onClick={decrementPage}>&laquo;</button>
-      {/* For each page, create a page button numbered by index */}
+      {/* <button className="arrow arrow-left" onClick={decrementPage}>&laquo;</button>
       {pages.map((pageNum, index) => (
-        // OnClick function allows setting of active class + displaying relevant data slice
         <button
           key={index}
           className={`button ${page === pageNum ? 'activeButton' : 'inactiveButton'
@@ -43,9 +88,20 @@ const TableFooter = ({ pages, setPage, page, slice }) => {
           {pageNum}
         </button>
       ))}
-      <button className="arrow arrow-right" onClick={incrementPage}>&raquo;</button>
+      <button className="arrow arrow-right" onClick={incrementPage}>&raquo;</button> */}
+      <MyPaginate
+        breakLabel="..."
+        nextLabel="next >"
+        onPageChange={(event) => setPage(event.selected)}
+        pageRangeDisplayed={3}
+        marginPagesDisplayed={2}
+        pageCount={pages.length}
+        previousLabel="< previous"
+        renderOnZeroPageCount={null}
+      />
     </StyledTableFooter>
-  );
+  )
+
 };
 
 export default TableFooter;
