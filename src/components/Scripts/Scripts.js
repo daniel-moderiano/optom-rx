@@ -25,17 +25,17 @@ const Scripts = ({ setToast, setPage }) => {
   return (<>
     <Helmet>
       <title>Scripts · OptomRx</title>
-      <meta name="description" content="View all the prescriptions you have written. Saved scripts contain all medication details for that script, but no patient data."/>
+      <meta name="description" content="View all the prescriptions you have written. Saved scripts contain all medication details for that script, but no patient data." />
       <link rel="canonical" href="/dashboard" />
     </Helmet>
     <ContentContainer earlyPadding={true}>
       <StyledScripts className="Scripts" >
         <PageHeader title="Scripts" description="Review previous prescriptions you have written" />
-        
+
         <div className="Scripts__container">
           {isPending && <Spinner />}
 
-        {/* Present an empty table if scripts can't be fetched, or none exist (below) */}
+          {/* Present an empty table if scripts can't be fetched, or none exist (below) */}
           {error &&
             <table className="table table-none">
               <thead className="tableRowHeader">
@@ -55,7 +55,9 @@ const Scripts = ({ setToast, setPage }) => {
 
           {scripts && <>
             {scripts.length > 0 ? (
-              <ScriptsTable data={JSON.parse(JSON.stringify(scripts)).reverse()} rowsPerPage={15}/>            
+              <>
+                <ScriptsTable scripts={JSON.parse(JSON.stringify(scripts)).reverse()} scriptsPerPage={15} />
+              </>
             ) : (
               <table className="table table-none">
                 <thead className="tableRowHeader">
@@ -72,12 +74,13 @@ const Scripts = ({ setToast, setPage }) => {
                 </tbody>
               </table>
             )}
-          </>}  
+          </>}
         </div>
-        
+
       </StyledScripts>
     </ContentContainer>
   </>)
 }
 
 export default Scripts;
+

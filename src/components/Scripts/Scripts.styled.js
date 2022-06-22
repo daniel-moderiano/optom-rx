@@ -93,6 +93,14 @@ const StyledScripts = styled.div`
     }
   }
 
+  .pagination {
+    padding-top: 0.8rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
   .Spinner {
     margin-top: 2rem;
   }
@@ -166,7 +174,7 @@ const StyledScripts = styled.div`
       }
     }
 
-    .TableFooter {
+    .pagination {
       justify-content: center;
     }
   }
