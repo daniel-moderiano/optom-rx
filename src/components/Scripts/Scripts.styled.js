@@ -10,14 +10,6 @@ const StyledScripts = styled.div`
     flex-direction: column;
   }
 
-  .pagination {
-    padding-top: 0.8rem;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-  }
-
   .table, .data-table {
     width: 100%;
     border-collapse: separate;
@@ -99,6 +91,14 @@ const StyledScripts = styled.div`
     .tableHeader {
       font-size: 0;
     }
+  }
+
+  .pagination {
+    padding-top: 0.8rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
   }
 
   .Spinner {

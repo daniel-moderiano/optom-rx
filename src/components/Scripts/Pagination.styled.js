@@ -11,10 +11,6 @@ export const StyledPaginate = styled(ReactPaginate).attrs({
   list-style-type: none;
   padding: 0;
 
-  ul {
-    border: 1px solid black;
-  }
-
   li a {
     font-family: var(--font-stack-segoe);
     font-size: 0.85rem;
@@ -47,10 +43,6 @@ export const StyledPaginate = styled(ReactPaginate).attrs({
     border: none;
     font-size: 1rem;
     padding: 0 9px 4px 9px; 
-    &:focus {
-      outline: 2px solid #104362;
-      outline-offset: 1px;
-    }
   }
 
   li.active a {

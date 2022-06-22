@@ -8,7 +8,6 @@ import PageHeader from '../utils/PageHeader/PageHeader';
 import { useUserData } from '../../hooks/useUserData';
 import { useConditionalToast } from '../../hooks/useConditionalToast';
 import { Helmet } from 'react-helmet-async';
-import testScripts from './testScripts';
 
 const Scripts = ({ setToast, setPage }) => {
   const { user } = useAuthContext();
@@ -19,7 +18,6 @@ const Scripts = ({ setToast, setPage }) => {
   useEffect(() => {
     setPage('scripts');
   }, [setPage]);
-
 
   // This will fire an error alert if the fetch fails. 
   useConditionalToast(error, setToast, 'An error occurred while loading scripts');
@@ -58,8 +56,7 @@ const Scripts = ({ setToast, setPage }) => {
           {scripts && <>
             {scripts.length > 0 ? (
               <>
-                {/* <ScriptsTable scripts={JSON.parse(JSON.stringify(scripts)).reverse()} scriptsPerPage={15} /> */}
-                <ScriptsTable scripts={testScripts} scriptsPerPage={15} />
+                <ScriptsTable scripts={JSON.parse(JSON.stringify(scripts)).reverse()} scriptsPerPage={15} />
               </>
             ) : (
               <table className="table table-none">
