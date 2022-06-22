@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { StyledTableFooter } from "./TableFooter.styled";
 import ReactPaginate from "react-paginate";
 import styled from "styled-components";
+import { PaginatedItems } from "../../Scripts/Pagination";
 
 const MyPaginate = styled(ReactPaginate).attrs({
   // You can redifine classes here, if you want.
@@ -98,6 +99,11 @@ const TableFooter = ({ pages, setPage, page, slice }) => {
     console.log(`Current page is ${page}`);
   })
 
+  const handlePageClick = (event) => {
+    console.log(event.selected);
+    setPage(event.selected)
+  }
+
 
   // A page limit of 6 is chosen because this will span the full length of the smallest mobile screen. 
 
@@ -118,13 +124,14 @@ const TableFooter = ({ pages, setPage, page, slice }) => {
       <MyPaginate
         breakLabel="..."
         nextLabel="&raquo;"
-        onPageChange={(event) => setPage(event.selected)}
-        pageRangeDisplayed={3}
-        marginPagesDisplayed={2}
-        pageCount={pages.length}
         previousLabel="&laquo;"
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={3}
+        marginPagesDisplayed={1}
+        pageCount={pages.length}
         renderOnZeroPageCount={null}
       />
+      <PaginatedItems itemsPerPage={4} />
     </StyledTableFooter>
   )
 
