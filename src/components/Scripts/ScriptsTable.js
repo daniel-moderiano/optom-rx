@@ -1,43 +1,38 @@
-// Code created using guide by Franciso Mendes @ https://dev.to/franciscomendes10866/how-to-create-a-table-with-pagination-in-react-4lpd
-
 import { useState, useEffect } from "react";
-import useTable from "../../hooks/useTable";
-import TableFooter from "../utils/TableFooter/TableFooter";
 import { Link } from "react-router-dom";
 import { useFormatting } from '../../hooks/useFormatting';
-import ReactPaginate from "react-paginate";
 import { StyledPaginate } from "./Pagination.styled";
 
-const ScriptsTable = ({ data: items, itemsPerPage }) => {
+const ScriptsTable = ({ scripts, scriptsPerPage }) => {
   const { formatDrug } = useFormatting();
 
-  // Initialise empty list of currentItems 
-  const [currentItems, setCurrentItems] = useState([]);
+  // Initialise empty list of current scripts
+  const [currentScripts, setCurrentScripts] = useState([]);
 
-  // Keeps track of the total pages required. Will be dynamically set based on teh total size of the items and items per page
+  // Indicates total number of pages required to display all data
   const [pageCount, setPageCount] = useState(0);
 
   // Initialise the slice of items at the beginning (index 0)
-  const [itemsSliceStart, setItemsSliceStart] = useState(0);
+  const [scriptsSliceStart, setScriptsSliceStart] = useState(0);
 
+  // Dynamically adjust current items to be displayed when user changes pages
   useEffect(() => {
     // Calculate the end index of the items slice required for this page
-    const itemsSliceEnd = itemsSliceStart + itemsPerPage;
+    const scriptsSliceEnd = scriptsSliceStart + scriptsPerPage;
 
     // Slice the items array using the calculated start and end points. This becomes the currently displayed items
-    setCurrentItems(items.slice(itemsSliceStart, itemsSliceEnd));
+    setCurrentScripts(scripts.slice(scriptsSliceStart, scriptsSliceEnd));
 
     // Calculate the total pages required to display all the items (to the nearest whole integer)
-    setPageCount(Math.ceil(items.length / itemsPerPage));
-  }, [itemsSliceStart, itemsPerPage, items]);
+    setPageCount(Math.ceil(scripts.length / scriptsPerPage));
+  }, [scriptsSliceStart, scriptsPerPage, scripts]);
 
   // Invoke when user click to request another page.
   const handlePageClick = (event) => {
     // Adjust the new index to slice the data at for the newly selected page
-    const newDataSliceStart = (event.selected * itemsPerPage) % items.length;
-    setItemsSliceStart(newDataSliceStart);
+    const newDataSliceStart = (event.selected * scriptsPerPage) % scripts.length;
+    setScriptsSliceStart(newDataSliceStart);
   };
-
 
   return (
     <>
@@ -51,7 +46,7 @@ const ScriptsTable = ({ data: items, itemsPerPage }) => {
         </thead>
         <tbody>
           {/* Switch key back to key={script.scriptID} once testing is complete */}
-          {currentItems.map((script, index) => (
+          {currentScripts.map((script, index) => (
             <tr role="row" className="tableRowItems" key={index}>
               <td role="cell" data-title="Script ID" className="tableCell">
                 <Link to={`/scripts/${script.scriptID}`} state={{ ...script }}>{script.scriptID}</Link>
@@ -72,7 +67,6 @@ const ScriptsTable = ({ data: items, itemsPerPage }) => {
         pageCount={pageCount}
         renderOnZeroPageCount={null}
       />
-      {/* <TableFooter pages={range} slice={dataSlice} setPage={setPage} page={page} /> */}
     </>
   );
 };
