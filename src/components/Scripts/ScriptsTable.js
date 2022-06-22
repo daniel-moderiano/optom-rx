@@ -6,13 +6,9 @@ import TableFooter from "../utils/TableFooter/TableFooter";
 import { Link } from "react-router-dom";
 import { useFormatting } from '../../hooks/useFormatting';
 import ReactPaginate from "react-paginate";
+import { StyledPaginate } from "./Pagination.styled";
 
 const ScriptsTable = ({ data: items, itemsPerPage }) => {
-  // Start on page 1
-  const [page, setPage] = useState(1);
-  // Gather the data slices for each page and the range of pages needed 
-  // const { dataSlice, range } = useTable(data, page, rowsPerPage);
-
   const { formatDrug } = useFormatting();
 
   // Initialise empty list of currentItems 
@@ -66,13 +62,14 @@ const ScriptsTable = ({ data: items, itemsPerPage }) => {
           ))}
         </tbody>
       </table>
-      <ReactPaginate
+      <StyledPaginate
         breakLabel="..."
-        nextLabel="next >"
+        nextLabel="&raquo;"
+        previousLabel="&laquo;"
         onPageChange={handlePageClick}
-        pageRangeDisplayed={5}
+        pageRangeDisplayed={3}
+        marginPagesDisplayed={1}
         pageCount={pageCount}
-        previousLabel="< previous"
         renderOnZeroPageCount={null}
       />
       {/* <TableFooter pages={range} slice={dataSlice} setPage={setPage} page={page} /> */}

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import testScripts from './testScripts';
+import { StyledPaginate } from './Pagination.styled';
 
 // Example items, to simulate fetching from another resources.
 // const items = testScripts;
@@ -50,7 +51,7 @@ export function PaginatedItems({ itemsPerPage }) {
   return (
     <>
       <Items currentItems={currentItems} />
-      <ReactPaginate
+      <StyledPaginate
         breakLabel="..."
         nextLabel="next >"
         onPageChange={handlePageClick}
