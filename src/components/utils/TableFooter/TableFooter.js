@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { StyledTableFooter } from "./TableFooter.styled";
 
 // The table footer will control the display of page buttons, which is dependent on the props passed
-// ! If the number of pages icnrease, this component grows and grows in width. Not a scalable solution 
+// ! As the number of pages increases, this component grows and grows in width. Not a scalable solution 
 const TableFooter = ({ pages, setPage, page, slice }) => {
   // If the current page contains only one element and it is deleted, move to the previous page
   useEffect(() => {
@@ -18,7 +18,7 @@ const TableFooter = ({ pages, setPage, page, slice }) => {
     // If not already on the last page, increment
     if (page !== pages.length) {
       setPage(page + 1)
-    } 
+    }
   }
 
   const decrementPage = () => {
@@ -36,9 +36,8 @@ const TableFooter = ({ pages, setPage, page, slice }) => {
         // OnClick function allows setting of active class + displaying relevant data slice
         <button
           key={index}
-          className={`button ${
-            page === pageNum ? 'activeButton' : 'inactiveButton'
-          }`}
+          className={`button ${page === pageNum ? 'activeButton' : 'inactiveButton'
+            }`}
           onClick={() => setPage(pageNum)}
         >
           {pageNum}

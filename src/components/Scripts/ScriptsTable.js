@@ -25,17 +25,18 @@ const ScriptsTable = ({ data, rowsPerPage }) => {
           </tr>
         </thead>
         <tbody>
-          {dataSlice.map((script) => (
-            <tr role="row" className="tableRowItems" key={script.scriptID}>
+          {/* Switch key back to key={script.scriptID} once testing is complete */}
+          {dataSlice.map((script, index) => (
+            <tr role="row" className="tableRowItems" key={index}>
               <td role="cell" data-title="Script ID" className="tableCell">
-                <Link to={`/scripts/${script.scriptID}`} state={ {...script} }>{script.scriptID}</Link>
+                <Link to={`/scripts/${script.scriptID}`} state={{ ...script }}>{script.scriptID}</Link>
               </td>
               <td role="cell" data-title="Medication" className="tableCell">{formatDrug(script)}</td>
               <td role="cell" data-title="Date prescribed" className="tableCell">{script.date}</td>
             </tr>
           ))}
         </tbody>
-      </table>     
+      </table>
       <TableFooter pages={range} slice={dataSlice} setPage={setPage} page={page} />
     </>
   );
