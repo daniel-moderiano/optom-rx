@@ -9,6 +9,11 @@ export const StyledPaginate = styled(ReactPaginate).attrs({
   flex-direction: row;
   justify-content: space-between;
   list-style-type: none;
+  padding: 0;
+
+  ul {
+    border: 1px solid black;
+  }
 
   li a {
     font-family: var(--font-stack-segoe);

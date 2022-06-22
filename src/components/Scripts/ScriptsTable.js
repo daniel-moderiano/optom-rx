@@ -57,16 +57,19 @@ const ScriptsTable = ({ scripts, scriptsPerPage }) => {
           ))}
         </tbody>
       </table>
-      <StyledPaginate
-        breakLabel="..."
-        nextLabel="&raquo;"
-        previousLabel="&laquo;"
-        onPageChange={handlePageClick}
-        pageRangeDisplayed={3}
-        marginPagesDisplayed={1}
-        pageCount={pageCount}
-        renderOnZeroPageCount={null}
-      />
+
+      <div className="pagination">
+        <StyledPaginate
+          breakLabel="..."
+          nextLabel="&raquo;"
+          previousLabel="&laquo;"
+          onPageChange={handlePageClick}
+          pageRangeDisplayed={3}
+          marginPagesDisplayed={1}
+          pageCount={pageCount}
+          renderOnZeroPageCount={null}
+        />
+      </div>
     </>
   );
 };
