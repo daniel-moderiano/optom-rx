@@ -2,73 +2,6 @@
 
 import { useEffect } from "react";
 import { StyledTableFooter } from "./TableFooter.styled";
-import ReactPaginate from "react-paginate";
-import styled from "styled-components";
-import { PaginatedItems } from "../../Scripts/Pagination";
-
-const MyPaginate = styled(ReactPaginate).attrs({
-  // You can redifine classes here, if you want.
-  activeClassName: 'active', // default to "disabled"
-})`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  list-style-type: none;
-  /* padding: 0 5rem; */
-
-  li a {
-    font-family: var(--font-stack-segoe);
-    font-size: 0.85rem;
-    border: none;
-    padding: 3px 10px 5px 10px;
-    margin: 2px;
-    border-radius: 8px;
-    cursor: pointer;
-
-    &:focus {
-      outline: 2px solid #104362;
-      outline-offset: 1px;
-    }
-
-    &:focus:not(:focus-visible) {
-      outline: none
-    }
-
-    &:focus-visible {
-      outline: 2px solid #104362;
-      outline-offset: 1px;
-    }
-  }
-
-  li.previous a,
-  li.next a,
-  li.break a
- {
-    background-color: #fff;
-    border: none;
-    font-size: 1rem;
-    padding: 0 9px 4px 9px; 
-    &:focus {
-      outline: 2px solid #104362;
-      outline-offset: 1px;
-    }
-  }
-
-  li.active a {
-    color: white;
-    background: #31776f;
-  }
-
-  li.disabled a {
-    color: grey;
-  }
-
-  li.disable,
-  li.disabled a {
-    cursor: default;
-  }
-`;
-
 
 // The table footer will control the display of page buttons, which is dependent on the props passed
 // ! As the number of pages increases, this component grows and grows in width. Not a scalable solution 
@@ -95,18 +28,6 @@ const TableFooter = ({ pages, setPage, page, slice }) => {
     }
   }
 
-  useEffect(() => {
-    console.log(`Current page is ${page}`);
-  })
-
-  const handlePageClick = (event) => {
-    console.log(event.selected);
-    setPage(event.selected)
-  }
-
-
-  // A page limit of 6 is chosen because this will span the full length of the smallest mobile screen. 
-
   return (
     <StyledTableFooter className="TableFooter">
       <button className="arrow arrow-left" onClick={decrementPage}>&laquo;</button>
@@ -121,17 +42,6 @@ const TableFooter = ({ pages, setPage, page, slice }) => {
         </button>
       ))}
       <button className="arrow arrow-right" onClick={incrementPage}>&raquo;</button>
-      <MyPaginate
-        breakLabel="..."
-        nextLabel="&raquo;"
-        previousLabel="&laquo;"
-        onPageChange={handlePageClick}
-        pageRangeDisplayed={3}
-        marginPagesDisplayed={1}
-        pageCount={pages.length}
-        renderOnZeroPageCount={null}
-      />
-      <PaginatedItems itemsPerPage={4} />
     </StyledTableFooter>
   )
 

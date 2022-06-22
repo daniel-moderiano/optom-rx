@@ -200,6 +200,14 @@ const StyledPrescribers = styled.div`
       }
     }    
   }
+
+  .pagination {
+    padding-top: 0.8rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
   
   /* Landscape phones/portrait tables. Converts table to card view */
   @media(max-width: 700px) {
@@ -265,6 +273,10 @@ const StyledPrescribers = styled.div`
     }
 
     .TableFooter {
+      justify-content: center;
+    }
+
+    .pagination {
       justify-content: center;
     }
   }
