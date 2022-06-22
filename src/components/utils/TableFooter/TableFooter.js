@@ -9,33 +9,59 @@ const MyPaginate = styled(ReactPaginate).attrs({
   // You can redifine classes here, if you want.
   activeClassName: 'active', // default to "disabled"
 })`
-  margin-bottom: 2rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   list-style-type: none;
-  padding: 0 5rem;
+  /* padding: 0 5rem; */
 
   li a {
-    border-radius: 7px;
-    padding: 0.1rem 1rem;
-    border: gray 1px solid;
+    font-family: var(--font-stack-segoe);
+    font-size: 0.85rem;
+    border: none;
+    padding: 3px 10px 5px 10px;
+    margin: 2px;
+    border-radius: 8px;
     cursor: pointer;
+
+    &:focus {
+      outline: 2px solid #104362;
+      outline-offset: 1px;
+    }
+
+    &:focus:not(:focus-visible) {
+      outline: none
+    }
+
+    &:focus-visible {
+      outline: 2px solid #104362;
+      outline-offset: 1px;
+    }
   }
+
   li.previous a,
   li.next a,
-  li.break a {
-    border-color: transparent;
+  li.break a
+ {
+    background-color: #fff;
+    border: none;
+    font-size: 1rem;
+    padding: 0 9px 4px 9px; 
+    &:focus {
+      outline: 2px solid #104362;
+      outline-offset: 1px;
+    }
   }
+
   li.active a {
-    background-color: #0366d6;
-    border-color: transparent;
     color: white;
-    min-width: 32px;
+    background: #31776f;
   }
+
   li.disabled a {
     color: grey;
   }
+
   li.disable,
   li.disabled a {
     cursor: default;
@@ -77,7 +103,7 @@ const TableFooter = ({ pages, setPage, page, slice }) => {
 
   return (
     <StyledTableFooter className="TableFooter">
-      {/* <button className="arrow arrow-left" onClick={decrementPage}>&laquo;</button>
+      <button className="arrow arrow-left" onClick={decrementPage}>&laquo;</button>
       {pages.map((pageNum, index) => (
         <button
           key={index}
@@ -88,15 +114,15 @@ const TableFooter = ({ pages, setPage, page, slice }) => {
           {pageNum}
         </button>
       ))}
-      <button className="arrow arrow-right" onClick={incrementPage}>&raquo;</button> */}
+      <button className="arrow arrow-right" onClick={incrementPage}>&raquo;</button>
       <MyPaginate
         breakLabel="..."
-        nextLabel="next >"
+        nextLabel="&raquo;"
         onPageChange={(event) => setPage(event.selected)}
         pageRangeDisplayed={3}
         marginPagesDisplayed={2}
         pageCount={pages.length}
-        previousLabel="< previous"
+        previousLabel="&laquo;"
         renderOnZeroPageCount={null}
       />
     </StyledTableFooter>
